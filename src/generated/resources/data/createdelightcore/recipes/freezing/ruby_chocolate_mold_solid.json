@@ -1,0 +1,13 @@
+{
+  "type": "ratatouille:freezing",
+  "ingredients": [
+    {
+      "item": "createdelightcore:ruby_chocolate_mold_filled"
+    }
+  ],
+  "results": [
+    {
+      "item": "createdelightcore:ruby_chocolate_mold_solid"
+    }
+  ]
+}

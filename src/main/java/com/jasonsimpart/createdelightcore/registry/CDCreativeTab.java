@@ -8,7 +8,7 @@ public class CDCreativeTab {
     public static final CreativeModeTab CREATE_DELIGHT_TAB = new CreativeModeTab("create_delight_tab") {
         @Override
         public @NotNull ItemStack makeIcon() {
-            return new ItemStack(CDItems.BLACK_CHOCOLATE_MOLD_FILLED.get());
+            return new ItemStack(CDItems.RUBY_CHOCOLATE_MOLD_SOLID.get());
         }
     };
 }
