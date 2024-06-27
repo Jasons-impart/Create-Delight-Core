@@ -10,5 +10,5 @@ public class CDCreativeTab {
         public @NotNull ItemStack makeIcon() {
             return new ItemStack(CDItems.RUBY_CHOCOLATE_MOLD_SOLID.get());
         }
-    };
+    }.setRecipeFolderName("create_delight");
 }
