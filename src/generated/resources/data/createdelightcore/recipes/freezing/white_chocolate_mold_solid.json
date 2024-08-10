@@ -1,0 +1,13 @@
+{
+  "type": "ratatouille:freezing",
+  "ingredients": [
+    {
+      "item": "createdelightcore:white_chocolate_mold_filled"
+    }
+  ],
+  "results": [
+    {
+      "item": "createdelightcore:white_chocolate_mold_solid"
+    }
+  ]
+}

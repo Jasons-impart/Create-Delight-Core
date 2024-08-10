@@ -31,12 +31,6 @@ public class CreateDelightCore
 
     }
 
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        var generator = event.getGenerator();
-        LOGGER.debug("Gathering data for Create Delight Core");
-        generator.addProvider(event.includeServer(), (DataProvider.Factory<FreezingRecipeGenerator>) FreezingRecipeGenerator::new);
-    }
 
 
 }

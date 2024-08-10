@@ -1,10 +1,13 @@
 package com.jasonsimpart.createdelightcore.data.recipe;
 
 import com.jasonsimpart.createdelightcore.register.CDItems;
-import com.simibubi.create.foundation.data.recipe.ProcessingRecipeGen;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import org.forsteri.ratatouille.data.recipe.ProcessingRecipeGen;
+import org.forsteri.ratatouille.data.recipe.RataouilleRecipeProvider;
 import org.forsteri.ratatouille.entry.CRRecipeTypes;
 
 public class FreezingRecipeGenerator extends ProcessingRecipeGen {
