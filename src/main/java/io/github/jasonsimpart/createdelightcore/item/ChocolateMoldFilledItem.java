@@ -1,4 +1,4 @@
-package com.jasonsimpart.createdelightcore.item;
+package io.github.jasonsimpart.createdelightcore.item;
 
 import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.core.BlockPos;

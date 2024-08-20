@@ -1,7 +1,7 @@
-package com.jasonsimpart.createdelightcore.register;
+package io.github.jasonsimpart.createdelightcore.register;
 
-import com.jasonsimpart.createdelightcore.CreateDelightCore;
-import com.jasonsimpart.createdelightcore.item.ChocolateMoldFilledItem;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.item.ChocolateMoldFilledItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -13,7 +13,7 @@ public class CDItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CreateDelightCore.MODID);
 
     private static Item.Properties properties() {
-        return new Item.Properties();//.tab(CDCreativeTab.CREATE_DELIGHT_TAB);
+        return new Item.Properties();
     }
 
     public static final RegistryObject<Item> BLACK_CHOCOLATE_MOLD_SOLID = ITEMS.register("black_chocolate_mold_solid", () -> new Item(properties()));

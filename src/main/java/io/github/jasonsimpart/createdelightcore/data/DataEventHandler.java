@@ -1,7 +1,7 @@
-package com.jasonsimpart.createdelightcore.data;
+package io.github.jasonsimpart.createdelightcore.data;
 
-import com.jasonsimpart.createdelightcore.CreateDelightCore;
-import com.jasonsimpart.createdelightcore.data.recipe.FreezingRecipeGenerator;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.data.recipe.FreezingRecipeGenerator;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

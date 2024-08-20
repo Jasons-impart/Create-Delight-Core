@@ -1,5 +1,6 @@
-package com.jasonsimpart.createdelightcore.register;
-import com.jasonsimpart.createdelightcore.CreateDelightCore;
+package io.github.jasonsimpart.createdelightcore.register;
+
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -9,9 +10,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class CDCreativeTab {
-
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateDelightCore.MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CreateDelightCore.MODID);
 
     public static final RegistryObject<CreativeModeTab> CREATE_DELIGHT_TAB = CREATIVE_MODE_TABS.register("create_delight_core",
             ()-> CreativeModeTab.builder().icon(()->new ItemStack(CDItems.BLACK_CHOCOLATE_MOLD_SOLID.get()))
