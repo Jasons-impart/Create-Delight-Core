@@ -1,8 +1,9 @@
 package io.github.jasonsimpart.createdelightcore;
 
 import com.mojang.logging.LogUtils;
-import io.github.jasonsimpart.createdelightcore.register.CDCreativeTab;
-import io.github.jasonsimpart.createdelightcore.register.CDItems;
+import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
+import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTab;
+import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -17,7 +18,9 @@ public class CreateDelightCore
     public CreateDelightCore()
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        CDCreativeTab.register(modEventBus);
-        CDItems.register(modEventBus);
+        CDItems.init();
+        CDCreativeTab.init();
+
+        CDCoreDatagen.init();
     }
 }

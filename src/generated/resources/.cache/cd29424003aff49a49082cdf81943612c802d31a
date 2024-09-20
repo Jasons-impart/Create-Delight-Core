@@ -1,0 +1,15 @@
+// 1.20.1	2024-09-20T00:16:01.9985348	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+d60b5008b42566f60e963882cc69aec27abcbbce assets/createdelightcore/lang/en_ud.json
+8ab9da1a078c05c0493a085011ab82e9ace8e61a assets/createdelightcore/lang/en_us.json
+4de1e21883d7de92d2c694c78e514a966963ae10 assets/createdelightcore/lang/zh_cn.json
+1a92ee9778130cfcce8409b6d5796cc2499fbe77 assets/createdelightcore/models/item/black_chocolate_mold_filled.json
+c5d6c59fb5f1e06a16e4ad57cd3408be91d0d8d5 assets/createdelightcore/models/item/black_chocolate_mold_solid.json
+369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
+af1e5b682ff1aa605c9d056c5470bc09030a82cd assets/createdelightcore/models/item/emerald_coin.json
+ed8f23145d5af428005316f052d84ac4cab99dcf assets/createdelightcore/models/item/gold_coin.json
+1d2cfc794c23651e546cfbc39d51924e8496a199 assets/createdelightcore/models/item/iron_coin.json
+b8a5cb0a0f9359f01665b840029aaa94de6214e4 assets/createdelightcore/models/item/netherite_coin.json
+b7dc9a23e40d4849c3c54e2ef25c33a50495582c assets/createdelightcore/models/item/ruby_chocolate_mold_filled.json
+f323c11085094c9643bd1bbae8bcc66b15e0e3bc assets/createdelightcore/models/item/ruby_chocolate_mold_solid.json
+0ed9a4fc3ca00d156ef2104444d6a560e6f27977 assets/createdelightcore/models/item/white_chocolate_mold_filled.json
+ff8f7b9dee9f3d250f38da89f80e11213410d4a2 assets/createdelightcore/models/item/white_chocolate_mold_solid.json

@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.data.recipe;
 
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import io.github.jasonsimpart.createdelightcore.register.CDItems;
+import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.data.PackOutput;
 import org.forsteri.ratatouille.data.recipe.ProcessingRecipeGen;
 import org.forsteri.ratatouille.entry.CRRecipeTypes;
