@@ -13,7 +13,10 @@
     "lunarian.SellEnchantedToolFactoryMixin",
     "lunarian.SellItemFactoryMixin",
     "lunarian.SellPotionHoldingItemFactoryMixin",
-    "lunarian.SellSuspiciousStewFactoryMixin"
+    "lunarian.SellSuspiciousStewFactoryMixin",
+    "IAF.EntitySirenMixin",
+    "IAF.EntityGorgonMixin",
+    "Minecraft.PlayerMixin"
   ],
   "client": [],
   "minVersion": "0.8"
