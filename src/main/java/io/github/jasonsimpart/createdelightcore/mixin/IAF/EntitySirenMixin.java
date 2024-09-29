@@ -20,7 +20,7 @@ public class EntitySirenMixin {
             var slotInventory = curiosInventory.getCurios().get("head");
             for(int i = 0; i < slotInventory.getSlots(); i++){
                 var item = slotInventory.getStacks().getStackInSlot(i).getItem();
-                if(item == IafItemRegistry.BLINDFOLD.get()){
+                if(item == IafItemRegistry.EARPLUGS.get()){
                     r.set(true);
                     break;
                 }
