@@ -19,11 +19,13 @@ public class EntityGorgonMixin {
         AtomicReference<Boolean> r = new AtomicReference<>(false);
         CuriosApi.getCuriosInventory(attackTarget).ifPresent(curiosInventory -> {
             var slotInventory = curiosInventory.getCurios().get("head");
-            for(int i = 0; i < slotInventory.getSlots(); i++){
-                var item = slotInventory.getStacks().getStackInSlot(i).getItem();
-                if(item == IafItemRegistry.BLINDFOLD.get()){
-                    r.set(true);
-                    break;
+            if(slotInventory != null) {
+                for (int i = 0; i < slotInventory.getSlots(); i++) {
+                    var item = slotInventory.getStacks().getStackInSlot(i).getItem();
+                    if (item == IafItemRegistry.BLINDFOLD.get()) {
+                        r.set(true);
+                        break;
+                    }
                 }
             }
         });
