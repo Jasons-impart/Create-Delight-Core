@@ -192,6 +192,8 @@ dependencies {
 
     implementation fg.deobf("curse.maven:citadel-331936:5633260")
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
+
+    implementation fg.deobf("curse.maven:create-liquid-fuel-840734:5217310")
 }
 
 mixin {
