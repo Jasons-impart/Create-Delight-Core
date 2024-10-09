@@ -21,10 +21,16 @@ public class ItemEntityEvent {
         return new Chunk(dimension, x >> 4, z >> 4);
     }
 
+    private static int lastRunTime = 0;
     @SubscribeEvent
     public static void serverTickEvent(TickEvent.ServerTickEvent event) {
         long preTime = 20 * 60 * 5;
         if(event.getServer().getTickCount() % preTime == 0) {
+            if(lastRunTime == event.getServer().getTickCount())
+            {
+                return;
+            }
+            lastRunTime = event.getServer().getTickCount();
             Map<Chunk, Integer> worldEntityCount = new HashMap<Chunk, Integer>();
             var loadedWorlds = event.getServer().getAllLevels();
             loadedWorlds.forEach(world -> {
