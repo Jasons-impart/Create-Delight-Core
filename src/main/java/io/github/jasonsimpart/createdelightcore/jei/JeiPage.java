@@ -46,10 +46,6 @@ public class JeiPage implements IModPlugin {
                 }
             }
         });
-
-        System.out.println("-------------");
-        System.out.println(superHeatFluids.size());
-
         registration.addRecipes(JeiCategoryBlazeBurnerSuperHeat.RECIPE_TYPE, superHeatFluids);
     }
 }
