@@ -30,17 +30,17 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Map;
 
 
-public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<Fluid> {
+public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(CreateDelightCore.MODID, "blaze_burner_super_heat");
     private final IJeiHelpers helpers;
 
-    public static final RecipeType<Fluid> RECIPE_TYPE = new RecipeType<>(UID, Fluid.class);
+    public static final RecipeType<BlazeBurnerRecipe> RECIPE_TYPE = new RecipeType<>(UID, BlazeBurnerRecipe.class);
     public JeiCategoryBlazeBurnerSuperHeat(IJeiHelpers helpers){
         this.helpers = helpers;
     }
 
     @Override
-    public RecipeType<Fluid> getRecipeType() {
+    public RecipeType<BlazeBurnerRecipe> getRecipeType() {
         return RECIPE_TYPE;
     }
 
@@ -51,7 +51,7 @@ public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<Fluid> {
 
     @Override
     public IDrawable getBackground() {
-            return new EmptyBackground(120, 25);
+            return new EmptyBackground(130, 45);
     }
 
     @Override
@@ -61,14 +61,19 @@ public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<Fluid> {
 
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder iRecipeLayoutBuilder, Fluid fluid, IFocusGroup iFocusGroup) {
-        iRecipeLayoutBuilder.addSlot(RecipeIngredientRole.INPUT, 70, 3).addItemStack(AllBlocks.BLAZE_BURNER.asStack());
-        iRecipeLayoutBuilder.addSlot(RecipeIngredientRole.INPUT, 90, 3).addFluidStack(fluid, 1000);
+    public void setRecipe(IRecipeLayoutBuilder iRecipeLayoutBuilder, BlazeBurnerRecipe fluid, IFocusGroup iFocusGroup) {
+        iRecipeLayoutBuilder.addSlot(RecipeIngredientRole.INPUT, 110, 3).addFluidStack(fluid.fluid, 1000);
+        iRecipeLayoutBuilder.addSlot(RecipeIngredientRole.INPUT, 110, 23).addItemStack(AllBlocks.BLAZE_BURNER.asStack());
+
     }
 
 
     @Override
-    public void draw(Fluid recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.SuperHeat"), 10, 7, 0xFFFFFF);
+    public void draw(BlazeBurnerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.burnTime", recipe.burnTime), 10, 7, 0xFFFFFF);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.amountConsumedPerTick", recipe.perTick), 10, 27, 0xFFFFFF);
+    }
+
+    public record BlazeBurnerRecipe(Fluid fluid, int burnTime, int perTick) {
     }
 }

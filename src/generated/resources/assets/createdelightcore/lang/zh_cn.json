@@ -20,5 +20,7 @@
   "item.createdelightcore.ruby_chocolate_mold_solid": "凝固的红宝石巧克力",
   "item.createdelightcore.white_chocolate_mold_filled": "盛满的白巧克力模具",
   "item.createdelightcore.white_chocolate_mold_solid": "凝固的白巧克力",
-  "itemGroup.createdelightcore.create_delight_core": "机械动力：悠然乐事"
+  "itemGroup.createdelightcore.create_delight_core": "机械动力：悠然乐事",
+  "jei.amountConsumedPerTick": "消耗速率 %s mB/tick",
+  "jei.burnTime": "燃烧时间 %s tick/mB"
 }

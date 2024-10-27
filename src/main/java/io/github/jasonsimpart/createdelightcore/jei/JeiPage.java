@@ -32,16 +32,17 @@ public class JeiPage implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        List<Fluid> superHeatFluids = new ArrayList<>();
-//        superHeatFluids.add(AllFluids.CHOCOLATE.get());
-//        superHeatFluids.add(Fluids.WATER.getSource());
+        List<JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe> superHeatFluids = new ArrayList<>();
+        //test
+        //superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(AllFluids.CHOCOLATE.get(), 20, 10));
+        //superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(Fluids.WATER.getSource(), 32, 16));
         BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, pair) -> {
             if(pair != null){
                 var a = pair.getSecond();
                 if(a != null){
                     Boolean b  = a.getSecond();
-                    if(b != null && b){
-                        superHeatFluids.add(fluid);
+                    if(b != null && b && a.getFirst() != null && a.getThird() != null){
+                        superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(fluid, a.getFirst(), a.getThird()));
                     }
                 }
             }
