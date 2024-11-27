@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:batch_freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:crying_obsidian"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:obsidian"
+    }
+  ]
+}

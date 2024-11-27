@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.data;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.data.recipe.CDProcessingRecipeGen;
 import io.github.jasonsimpart.createdelightcore.data.recipe.FreezingRecipeGenerator;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -13,5 +14,9 @@ public class CDCoreDatagenEvent {
         var generator = event.getGenerator();
         var output = generator.getPackOutput();
         generator.addProvider(event.includeServer(), new FreezingRecipeGenerator(output));
+
+        if (event.includeServer()) {
+            CDProcessingRecipeGen.registerAll(generator, output);
+        }
     }
 }

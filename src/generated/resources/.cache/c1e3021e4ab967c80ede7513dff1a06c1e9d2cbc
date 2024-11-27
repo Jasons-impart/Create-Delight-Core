@@ -1,4 +1,4 @@
-// 1.20.1	2024-09-20T00:16:01.9985348	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2024-11-27T16:00:38.9850258	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 d60b5008b42566f60e963882cc69aec27abcbbce assets/createdelightcore/lang/en_ud.json
 8ab9da1a078c05c0493a085011ab82e9ace8e61a assets/createdelightcore/lang/en_us.json
 4de1e21883d7de92d2c694c78e514a966963ae10 assets/createdelightcore/lang/zh_cn.json

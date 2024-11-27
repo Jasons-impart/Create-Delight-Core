@@ -170,16 +170,17 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar for Forge
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
-    // create
-    implementation fg.deobf("curse.maven:create-328085:4835191")
 
-    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    // create
+    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
+    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
+    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
     // farmer's delight
     implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     // ratatouille
-    implementation fg.deobf("curse.maven:create-ratatouille-983234:5364175")
+    implementation fg.deobf("curse.maven:create-ratatouille-983234:5882077")
 
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")

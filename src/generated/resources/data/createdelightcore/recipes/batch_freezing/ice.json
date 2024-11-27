@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:batch_freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:ice"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:packed_ice"
+    }
+  ]
+}

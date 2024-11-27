@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:batch_freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:snowball"
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:snow"
+    }
+  ]
+}

@@ -1,18 +1,11 @@
-package io.github.jasonsimpart.createdelightcore.jei;
+package io.github.jasonsimpart.createdelightcore.jei.category;
 
-import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
-import com.forsteri.createliquidfuel.util.Triplet;
-import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.compat.jei.EmptyBackground;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
-import com.simibubi.create.content.processing.burner.BlazeBurnerBlockItem;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -22,12 +15,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluid;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Map;
 
 
 public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe> {
