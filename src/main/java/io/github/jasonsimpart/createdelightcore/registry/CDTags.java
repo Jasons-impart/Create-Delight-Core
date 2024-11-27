@@ -123,6 +123,8 @@ public class CDTags {
 
     public enum AllItemTags {
 
+        FREEZABLE,
+
         ;
 
         public final TagKey<Item> tag;

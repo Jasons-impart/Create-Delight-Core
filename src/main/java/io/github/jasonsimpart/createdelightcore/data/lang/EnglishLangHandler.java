@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
 
@@ -20,5 +21,8 @@ public class EnglishLangHandler {
         coin(provider, CDItems.GOLD_COIN, "Gold Coin", "Gold");
         coin(provider, CDItems.EMERALD_COIN, "Emerald Coin", "Emerald");
         coin(provider, CDItems.NETHERITE_COIN, "Netherite Coin", "Netherite");
+
+        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
+        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
     }
 }

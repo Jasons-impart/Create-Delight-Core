@@ -18,14 +18,14 @@ import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import com.simibubi.create.foundation.config.ConfigBase.ConfigBool;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.Components;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.jei.category.CDProcessingViaFanCategory;
-import io.github.jasonsimpart.createdelightcore.jei.category.FanBatchFreezingCategory;
-import io.github.jasonsimpart.createdelightcore.recipe.BatchFreezingRecipe;
+import io.github.jasonsimpart.createdelightcore.jei.category.FanFreezingCategory;
+import io.github.jasonsimpart.createdelightcore.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -55,12 +55,12 @@ public class CDJEI implements IModPlugin {
     private void loadCategories() {
         allCategories.clear();
 
-        CreateRecipeCategory<?> batch_freezing = builder(BatchFreezingRecipe.class)
-                .addTypedRecipes(CDRecipeTypes.BATCH_FREEZING)
+        CreateRecipeCategory<?> fan_freezing = builder(FanFreezingRecipe.class)
+                .addTypedRecipes(CDRecipeTypes.FAN_FREEZING)
                 .catalystStack(CDProcessingViaFanCategory.getFan("fan_freezing"))
                 .doubleItemIcon(AllItems.PROPELLER.get(), Items.POWDER_SNOW_BUCKET)
                 .emptyBackground(178, 72)
-                .build("fan_batch_freezing", FanBatchFreezingCategory::new);
+                .build("fan_freezing", FanFreezingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {
@@ -243,7 +243,7 @@ public class CDJEI implements IModPlugin {
 
             CreateRecipeCategory.Info<T> info = new CreateRecipeCategory.Info<>(
                     new mezz.jei.api.recipe.RecipeType<>(Create.asResource(name), recipeClass),
-                    Lang.translateDirect("recipe." + name), background, icon, recipesSupplier, catalysts);
+                    Components.translatable(CreateDelightCore.MODID + ".recipe." + name), background, icon, recipesSupplier, catalysts);
             CreateRecipeCategory<T> category = factory.create(info);
             allCategories.add(category);
             return category;

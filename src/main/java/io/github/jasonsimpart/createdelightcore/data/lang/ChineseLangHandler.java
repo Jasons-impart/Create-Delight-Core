@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTab;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
@@ -33,6 +34,9 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD_COIN, "金币", "金");
         coin(provider, CDItems.EMERALD_COIN, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE_COIN, "下界合金币", "下界");
+
+        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
+        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,

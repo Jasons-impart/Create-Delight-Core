@@ -6,7 +6,7 @@ import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.Lang;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.recipe.BatchFreezingRecipe;
+import io.github.jasonsimpart.createdelightcore.recipe.FanFreezingRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum CDRecipeTypes implements IRecipeTypeInfo {
-    BATCH_FREEZING(BatchFreezingRecipe::new);
+    FAN_FREEZING(FanFreezingRecipe::new);
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;

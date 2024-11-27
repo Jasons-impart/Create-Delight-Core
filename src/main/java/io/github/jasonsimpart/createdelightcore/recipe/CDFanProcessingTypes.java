@@ -57,7 +57,7 @@ public class CDFanProcessingTypes {
     }
 
     public static class FreezingType implements FanProcessingType {
-        private static final BatchFreezingRecipe.BatchFreezingRecipeWrapper FREEZING_WRAPPER = new BatchFreezingRecipe.BatchFreezingRecipeWrapper();
+        private static final FanFreezingRecipe.FanFreezingRecipeWrapper FREEZING_WRAPPER = new FanFreezingRecipe.FanFreezingRecipeWrapper();
 
         @Override
         public boolean isValidAt(Level level, BlockPos pos) {
@@ -77,7 +77,7 @@ public class CDFanProcessingTypes {
         @Override
         public boolean canProcess(ItemStack stack, Level level) {
             FREEZING_WRAPPER.setItem(0, stack);
-            Optional<BatchFreezingRecipe> recipe = CDRecipeTypes.BATCH_FREEZING.find(FREEZING_WRAPPER, level);
+            Optional<FanFreezingRecipe> recipe = CDRecipeTypes.FAN_FREEZING.find(FREEZING_WRAPPER, level);
             return recipe.isPresent();
         }
 
@@ -85,8 +85,8 @@ public class CDFanProcessingTypes {
         @Nullable
         public List<ItemStack> process(ItemStack stack, Level level) {
             FREEZING_WRAPPER.setItem(0, stack);
-            Optional<BatchFreezingRecipe> recipe = CDRecipeTypes.BATCH_FREEZING.find(FREEZING_WRAPPER, level);
-            return recipe.map(BatchFreezingRecipe -> RecipeApplier.applyRecipeOn(level, stack, BatchFreezingRecipe)).orElse(null);
+            Optional<FanFreezingRecipe> recipe = CDRecipeTypes.FAN_FREEZING.find(FREEZING_WRAPPER, level);
+            return recipe.map(fanFreezingRecipe -> RecipeApplier.applyRecipeOn(level, stack, fanFreezingRecipe)).orElse(null);
         }
 
         @Override

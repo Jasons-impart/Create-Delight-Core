@@ -1,7 +1,7 @@
-// 1.20.1	2024-11-27T16:00:38.9850258	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
-d60b5008b42566f60e963882cc69aec27abcbbce assets/createdelightcore/lang/en_ud.json
-8ab9da1a078c05c0493a085011ab82e9ace8e61a assets/createdelightcore/lang/en_us.json
-4de1e21883d7de92d2c694c78e514a966963ae10 assets/createdelightcore/lang/zh_cn.json
+// 1.20.1	2024-11-27T19:05:39.5788255	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+aad8ca796c3d1c85984b1d530012f5eda08c47cb assets/createdelightcore/lang/en_ud.json
+34ff67680d3bc22667ec07a3a4886de291500a93 assets/createdelightcore/lang/en_us.json
+0cc3761002b16ff91fa4bf7f10edf0a64263d9f3 assets/createdelightcore/lang/zh_cn.json
 1a92ee9778130cfcce8409b6d5796cc2499fbe77 assets/createdelightcore/models/item/black_chocolate_mold_filled.json
 c5d6c59fb5f1e06a16e4ad57cd3408be91d0d8d5 assets/createdelightcore/models/item/black_chocolate_mold_solid.json
 369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
@@ -13,3 +13,6 @@ b7dc9a23e40d4849c3c54e2ef25c33a50495582c assets/createdelightcore/models/item/ru
 f323c11085094c9643bd1bbae8bcc66b15e0e3bc assets/createdelightcore/models/item/ruby_chocolate_mold_solid.json
 0ed9a4fc3ca00d156ef2104444d6a560e6f27977 assets/createdelightcore/models/item/white_chocolate_mold_filled.json
 ff8f7b9dee9f3d250f38da89f80e11213410d4a2 assets/createdelightcore/models/item/white_chocolate_mold_solid.json
+bc8701774f57ab000a8f0f1d390702175a6cdbb8 data/createdelightcore/tags/blocks/fan_processing_catalysts/freezing.json
+3f40e44b36575a2043f567d4f23aa1aa17d9d9e2 data/createdelightcore/tags/items/freezable.json
+6782ba67cdbab24fa84f8bb550cbc73711079762 data/create/tags/blocks/fan_transparent.json

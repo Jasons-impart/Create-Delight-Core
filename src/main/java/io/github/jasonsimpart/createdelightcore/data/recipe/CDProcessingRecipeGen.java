@@ -31,7 +31,7 @@ public abstract class CDProcessingRecipeGen extends CreateRecipeProvider {
     protected static final List<CDProcessingRecipeGen> GENERATORS = new ArrayList<>();
 
     public static void registerAll(DataGenerator gen, PackOutput output) {
-        GENERATORS.add(new BatchFreezingRecipeGen(output));
+        GENERATORS.add(new FanFreezingRecipeGen(output));
 
         gen.addProvider(true, new DataProvider() {
             @Override

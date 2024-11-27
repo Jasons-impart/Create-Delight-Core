@@ -13,6 +13,9 @@ public class CDCoreDatagenEvent {
     public static void gatherData(GatherDataEvent event) {
         var generator = event.getGenerator();
         var output = generator.getPackOutput();
+
+        CDRegistrateTags.addGenerators();
+
         generator.addProvider(event.includeServer(), new FreezingRecipeGenerator(output));
 
         if (event.includeServer()) {

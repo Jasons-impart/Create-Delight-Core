@@ -1,4 +1,6 @@
 {
+  "createdelightcore.recipe.fan_freezing": "批量冷冻",
+  "createdelightcore.recipe.fan_freezing.fan": "在细雪后放置鼓风机",
   "item.createdelightcore.black_chocolate_mold_filled": "盛满的黑巧克力模具",
   "item.createdelightcore.black_chocolate_mold_solid": "凝固的黑巧克力",
   "item.createdelightcore.copper_coin": "铜币",

@@ -7,13 +7,13 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.RecipeWrapper;
 
-public class BatchFreezingRecipe extends ProcessingRecipe<BatchFreezingRecipe.BatchFreezingRecipeWrapper> {
-    public BatchFreezingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
-        super(CDRecipeTypes.BATCH_FREEZING, params);
+public class FanFreezingRecipe extends ProcessingRecipe<FanFreezingRecipe.FanFreezingRecipeWrapper> {
+    public FanFreezingRecipe(ProcessingRecipeBuilder.ProcessingRecipeParams params) {
+        super(CDRecipeTypes.FAN_FREEZING, params);
     }
 
     @Override
-    public boolean matches(BatchFreezingRecipeWrapper inv, Level worldIn) {
+    public boolean matches(FanFreezingRecipeWrapper inv, Level worldIn) {
         if (inv.isEmpty())
             return false;
         return ingredients.get(0)
@@ -30,8 +30,8 @@ public class BatchFreezingRecipe extends ProcessingRecipe<BatchFreezingRecipe.Ba
         return 12;
     }
 
-    public static class BatchFreezingRecipeWrapper extends RecipeWrapper {
-        public BatchFreezingRecipeWrapper() {
+    public static class FanFreezingRecipeWrapper extends RecipeWrapper {
+        public FanFreezingRecipeWrapper() {
             super(new ItemStackHandler(1));
         }
     }

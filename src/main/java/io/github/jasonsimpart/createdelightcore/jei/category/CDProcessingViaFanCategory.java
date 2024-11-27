@@ -14,8 +14,9 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.processing.recipe.ProcessingOutput;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.simibubi.create.foundation.utility.Lang;
+import com.simibubi.create.foundation.utility.Components;
 
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -34,7 +35,7 @@ public abstract class CDProcessingViaFanCategory<T extends Recipe<?>> extends Cr
 
     public static Supplier<ItemStack> getFan(String name) {
         return () -> AllBlocks.ENCASED_FAN.asStack()
-                .setHoverName(Lang.translateDirect("recipe." + name + ".fan").withStyle(style -> style.withItalic(false)));
+                .setHoverName(Components.translatable(CreateDelightCore.MODID + ".recipe." + name + ".fan").withStyle(style -> style.withItalic(false)));
     }
 
     @Override
