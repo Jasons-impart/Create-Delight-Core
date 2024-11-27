@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:fan_freezing",
+  "ingredients": [
+    {
+      "item": "ratatouille:chocolate_mold_filled"
+    }
+  ],
+  "results": [
+    {
+      "item": "ratatouille:chocolate_mold_solid"
+    }
+  ]
+}
