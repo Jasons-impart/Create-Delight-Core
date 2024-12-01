@@ -1,2 +1,2 @@
-# Daybreak Core
-Mod for the modpack Daybreak.
+# Create Delight Core
+Mod for the mod pack Create Delight & Create Delight Remake.
