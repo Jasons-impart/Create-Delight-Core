@@ -8,14 +8,14 @@ import net.minecraft.world.item.ItemStack;
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 
 public class CDCreativeTab {
-    public static final RegistryEntry<CreativeModeTab> CREATE_DELIGHT_TAB = REGISTRATE.defaultCreativeTab("create_delight_core",
+    public static final RegistryEntry<CreativeModeTab> COIN = REGISTRATE.defaultCreativeTab("coin",
             builder -> builder
                     .displayItems((parameters, output) -> {
                         output.acceptAll(REGISTRATE.getAll(Registries.ITEM).stream()
                                 .map(entry -> new ItemStack(entry.get()))
                                 .toList());
                     })
-                    .icon(()->new ItemStack(CDItems.BLACK_CHOCOLATE_MOLD_SOLID.get()))
+                    .icon(()->new ItemStack(CDItems.GOLD_COIN.get()))
                     .build())
             .register();
 

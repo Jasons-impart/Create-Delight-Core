@@ -20,7 +20,7 @@ public class ChineseLangHandler {
     }
 
     public static void init(RegistrateCNLangProvider provider) {
-        provider.add(CDCreativeTab.CREATE_DELIGHT_TAB.get(), "机械动力：悠然乐事");
+        provider.add(CDCreativeTab.COIN.get(), "机械动力：悠然乐事 | 货币");
 
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");
