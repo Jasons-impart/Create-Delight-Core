@@ -1,7 +1,7 @@
-// 1.20.1	2024-11-27T19:05:39.5788255	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
-aad8ca796c3d1c85984b1d530012f5eda08c47cb assets/createdelightcore/lang/en_ud.json
-34ff67680d3bc22667ec07a3a4886de291500a93 assets/createdelightcore/lang/en_us.json
-0cc3761002b16ff91fa4bf7f10edf0a64263d9f3 assets/createdelightcore/lang/zh_cn.json
+// 1.20.1	2024-12-04T00:49:46.264122	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+55802badb5479ca2e5d32578a763b30bb7ee755c assets/createdelightcore/lang/en_ud.json
+9b505d74a70f17fe0cd92784ef24a5789e82f9cf assets/createdelightcore/lang/en_us.json
+71ec7c56256ab71c7fe17855e1735389c296daa0 assets/createdelightcore/lang/zh_cn.json
 1a92ee9778130cfcce8409b6d5796cc2499fbe77 assets/createdelightcore/models/item/black_chocolate_mold_filled.json
 c5d6c59fb5f1e06a16e4ad57cd3408be91d0d8d5 assets/createdelightcore/models/item/black_chocolate_mold_solid.json
 369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
