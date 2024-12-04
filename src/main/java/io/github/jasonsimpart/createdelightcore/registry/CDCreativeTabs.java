@@ -22,7 +22,7 @@ public class CDCreativeTabs {
     public static final RegistryObject<CreativeModeTab> COIN = CREATIVE_MODE_TABS.register("coin", () ->
             CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup."+ CreateDelightCore.MODID + ".coin"))
-                    .icon(() -> new ItemStack(CDItems.NETHERITE_COIN.get()))
+                    .icon(() -> new ItemStack(CDItems.GOLD_COIN.get()))
                     .displayItems((parameters, output) -> {})
                     .build());
 
