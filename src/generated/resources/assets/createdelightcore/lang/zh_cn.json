@@ -22,5 +22,6 @@
   "item.createdelightcore.ruby_chocolate_mold_solid": "凝固的红宝石巧克力",
   "item.createdelightcore.white_chocolate_mold_filled": "盛满的白巧克力模具",
   "item.createdelightcore.white_chocolate_mold_solid": "凝固的白巧克力",
-  "itemGroup.createdelightcore.coin": "机械动力：悠然乐事 | 货币"
+  "itemGroup.createdelightcore.coin": "机械动力：悠然乐事 | 货币",
+  "itemGroup.createdelightcore.misc": "机械动力：悠然乐事 | 杂项"
 }

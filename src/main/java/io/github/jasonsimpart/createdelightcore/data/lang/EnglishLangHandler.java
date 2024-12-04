@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
 
@@ -16,6 +17,9 @@ public class EnglishLangHandler {
     }
 
     public static void init(RegistrateLangProvider provider) {
+        provider.add(CDCreativeTabs.MISC.get(), "Create Delight | Misc");
+        provider.add(CDCreativeTabs.COIN.get(), "Create Delight | Coin");
+
         coin(provider, CDItems.IRON_COIN, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER_COIN, "Copper Coin", "Copper");
         coin(provider, CDItems.GOLD_COIN, "Gold Coin", "Gold");

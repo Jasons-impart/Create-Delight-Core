@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTab;
+import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -20,7 +20,8 @@ public class ChineseLangHandler {
     }
 
     public static void init(RegistrateCNLangProvider provider) {
-        provider.add(CDCreativeTab.COIN.get(), "机械动力：悠然乐事 | 货币");
+        provider.add(CDCreativeTabs.MISC.get(), "机械动力：悠然乐事 | 杂项");
+        provider.add(CDCreativeTabs.COIN.get(), "机械动力：悠然乐事 | 货币");
 
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");

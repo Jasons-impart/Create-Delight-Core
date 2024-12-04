@@ -3,7 +3,7 @@ package io.github.jasonsimpart.createdelightcore;
 import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
 import io.github.jasonsimpart.createdelightcore.recipe.CDFanProcessingTypes;
-import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTab;
+import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import io.github.jasonsimpart.createdelightcore.registry.CDTags;
@@ -24,7 +24,7 @@ public class CreateDelightCore {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
         CDItems.init();
-        CDCreativeTab.init();
+        CDCreativeTabs.register(modEventBus);
         CDRecipeTypes.register(modEventBus);
 
         CDTags.init();
