@@ -1,6 +1,8 @@
 {
+  "block.createdelightcore.molten_andesite": "ǝʇısǝpuⱯ uǝʇןoW",
   "createdelightcore.recipe.fan_freezing": "buızǝǝɹℲ ʞןnᗺ",
   "createdelightcore.recipe.fan_freezing.fan": "ʍouS pǝɹǝpʍoԀ puıɥǝq uɐℲ",
+  "fluid.createdelightcore.molten_andesite": "ǝʇısǝpuⱯ uǝʇןoW",
   "item.createdelightcore.black_chocolate_mold_filled": "pǝןןıℲ pןoW ǝʇɐןoɔoɥƆ ʞɔɐןᗺ",
   "item.createdelightcore.black_chocolate_mold_solid": "pıןoS pןoW ǝʇɐןoɔoɥƆ ʞɔɐןᗺ",
   "item.createdelightcore.copper_coin": "uıoƆ ɹǝddoƆ",
@@ -15,6 +17,7 @@
   "item.createdelightcore.iron_coin": "uıoƆ uoɹI",
   "item.createdelightcore.iron_coin.initial": "uoɹI",
   "item.createdelightcore.iron_coin.plural": "uıoƆ uoɹI",
+  "item.createdelightcore.molten_andesite_bucket": "ʇǝʞɔnᗺ ǝʇısǝpuⱯ uǝʇןoW",
   "item.createdelightcore.netherite_coin": "uıoƆ ǝʇıɹǝɥʇǝN",
   "item.createdelightcore.netherite_coin.initial": "ǝʇıɹǝɥʇǝN",
   "item.createdelightcore.netherite_coin.plural": "uıoƆ ǝʇıɹǝɥʇǝN",

@@ -1,6 +1,8 @@
 {
+  "block.createdelightcore.molten_andesite": "Molten Andesite",
   "createdelightcore.recipe.fan_freezing": "Bulk Freezing",
   "createdelightcore.recipe.fan_freezing.fan": "Fan behind Powdered Snow",
+  "fluid.createdelightcore.molten_andesite": "Molten Andesite",
   "item.createdelightcore.black_chocolate_mold_filled": "Black Chocolate Mold Filled",
   "item.createdelightcore.black_chocolate_mold_solid": "Black Chocolate Mold Solid",
   "item.createdelightcore.copper_coin": "Copper Coin",
@@ -15,6 +17,7 @@
   "item.createdelightcore.iron_coin": "Iron Coin",
   "item.createdelightcore.iron_coin.initial": "Iron",
   "item.createdelightcore.iron_coin.plural": "Iron Coin",
+  "item.createdelightcore.molten_andesite_bucket": "Molten Andesite Bucket",
   "item.createdelightcore.netherite_coin": "Netherite Coin",
   "item.createdelightcore.netherite_coin.initial": "Netherite",
   "item.createdelightcore.netherite_coin.plural": "Netherite Coin",
