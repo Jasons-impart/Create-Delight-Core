@@ -20,7 +20,39 @@ public class CDFluids {
 
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = createFluid("molten_andesite")
             .fluidProperties(properties -> properties
-                    .tickRate(15))
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_AZURE_NEODYMIUM = createFluid("molten_azure_neodymium")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SCARLET_NEODYMIUM = createFluid("molten_scarlet_neodymium")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_DESH = createFluid("molten_desh")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OSTRUM = createFluid("molten_ostrum")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CLAORITE = createFluid("molten_calorite")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_FIRE_STEEL = createFluid("molten_fire_steel")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ICE_STEEL = createFluid("molten_ice_steel")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
+            .register();
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LIGHTNING_STEEL = createFluid("molten_lightning_steel")
+            .fluidProperties(properties -> properties
+                    .tickRate(20))
             .register();
 
     public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {

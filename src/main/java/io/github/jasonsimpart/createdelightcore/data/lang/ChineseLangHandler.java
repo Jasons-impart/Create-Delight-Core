@@ -48,6 +48,14 @@ public class ChineseLangHandler {
         coin(provider, CDItems.NETHERITE_COIN, "下界合金币", "下界");
 
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
+        addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");
+        addFluid(provider, CDFluids.MOLTEN_SCARLET_NEODYMIUM, "熔融赤钕合金");
+        addFluid(provider, CDFluids.MOLTEN_DESH, "熔融戴斯");
+        addFluid(provider, CDFluids.MOLTEN_OSTRUM, "熔融紫金");
+        addFluid(provider, CDFluids.MOLTEN_CLAORITE, "熔融耐热金属");
+        addFluid(provider, CDFluids.MOLTEN_FIRE_STEEL, "熔融龙炎钢");
+        addFluid(provider, CDFluids.MOLTEN_ICE_STEEL, "熔融龙霜钢");
+        addFluid(provider, CDFluids.MOLTEN_LIGHTNING_STEEL, "熔融龙霆钢");
 
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

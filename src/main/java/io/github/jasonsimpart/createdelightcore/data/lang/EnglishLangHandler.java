@@ -1,8 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
+import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
 
