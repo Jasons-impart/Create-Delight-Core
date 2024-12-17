@@ -1,6 +1,8 @@
 {
+  "block.createdelightcore.molten_andesite": "熔融安山合金",
   "createdelightcore.recipe.fan_freezing": "批量冷冻",
   "createdelightcore.recipe.fan_freezing.fan": "在细雪后放置鼓风机",
+  "fluid.createdelightcore.molten_andesite": "熔融安山合金",
   "item.createdelightcore.black_chocolate_mold_filled": "盛满的黑巧克力模具",
   "item.createdelightcore.black_chocolate_mold_solid": "凝固的黑巧克力",
   "item.createdelightcore.copper_coin": "铜币",
@@ -15,6 +17,7 @@
   "item.createdelightcore.iron_coin": "铁币",
   "item.createdelightcore.iron_coin.initial": "铁",
   "item.createdelightcore.iron_coin.plural": "铁币",
+  "item.createdelightcore.molten_andesite_bucket": "熔融安山合金桶",
   "item.createdelightcore.netherite_coin": "下界合金币",
   "item.createdelightcore.netherite_coin.initial": "下界",
   "item.createdelightcore.netherite_coin.plural": "下界合金币",

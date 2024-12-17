@@ -1,8 +1,8 @@
-// 1.20.1	2024-12-17T11:38:45.0673359	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2024-12-17T23:20:23.5348976	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 8892b10e149c7c526ea464d923537fe91e313d55 assets/createdelightcore/blockstates/molten_andesite.json
 7f250b1b7890ecb65bdc1e9cec4c280efd72cb24 assets/createdelightcore/lang/en_ud.json
 e26b2b87d6dcada059be0ac7bc5a9979befb7edc assets/createdelightcore/lang/en_us.json
-25f2d1ecf0af0e159de33e18d0992b08d1e1f5f7 assets/createdelightcore/lang/zh_cn.json
+b6939246f43ba1898c381bf6fa617b6f99b11cef assets/createdelightcore/lang/zh_cn.json
 8dc5db5d096c76bc70b40de7a2156b632935597a assets/createdelightcore/models/block/molten_andesite.json
 1a92ee9778130cfcce8409b6d5796cc2499fbe77 assets/createdelightcore/models/item/black_chocolate_mold_filled.json
 c5d6c59fb5f1e06a16e4ad57cd3408be91d0d8d5 assets/createdelightcore/models/item/black_chocolate_mold_solid.json

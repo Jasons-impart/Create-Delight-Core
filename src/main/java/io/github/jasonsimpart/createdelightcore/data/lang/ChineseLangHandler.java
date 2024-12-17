@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
+import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
@@ -17,6 +18,15 @@ public class ChineseLangHandler {
         provider.add(id, name);
         provider.add(id + ".initial", initial);
         provider.add(id + ".plural", name);
+    }
+    private static void addFluid(RegistrateCNLangProvider provider, FluidEntry<?> fluid, String name) {
+        var namespace = fluid.getId().getNamespace();
+        var id = fluid.getId().getPath();
+        if (id.startsWith("flowing_"))
+            id = id.substring("flowing_".length());
+        provider.add("fluid." + namespace + "." + id, name);
+        provider.add("block." + namespace + "." + id, name);
+        provider.add(fluid.getBucket().get(), name + "桶");
     }
 
     public static void init(RegistrateCNLangProvider provider) {
@@ -36,6 +46,8 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD_COIN, "金币", "金");
         coin(provider, CDItems.EMERALD_COIN, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE_COIN, "下界合金币", "下界");
+
+        addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
 
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
