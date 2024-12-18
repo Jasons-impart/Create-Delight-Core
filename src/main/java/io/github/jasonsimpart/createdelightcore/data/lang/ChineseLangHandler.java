@@ -56,6 +56,8 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.MOLTEN_FIRE_STEEL, "熔融龙炎钢");
         addFluid(provider, CDFluids.MOLTEN_ICE_STEEL, "熔融龙霜钢");
         addFluid(provider, CDFluids.MOLTEN_LIGHTNING_STEEL, "熔融龙霆钢");
+        addFluid(provider, CDFluids.BANANA_ICE_CREAM, "香蕉冰淇淋");
+        addFluid(provider, CDFluids.ADZUKI_ICE_CREAM, "红豆冰淇淋");
 
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createdelightcore:block/molten_ostrum_still"
+    "particle": "createdelightcore:fluid/ostrum/still"
   }
 }

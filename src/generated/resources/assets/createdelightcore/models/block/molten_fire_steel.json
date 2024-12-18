@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createdelightcore:block/molten_fire_steel_still"
+    "particle": "createdelightcore:fluid/fire_steel/still"
   }
 }

@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createdelightcore:block/molten_andesite_still"
+    "particle": "createdelightcore:fluid/andesite/still"
   }
 }
