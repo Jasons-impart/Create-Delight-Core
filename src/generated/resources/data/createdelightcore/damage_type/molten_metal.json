@@ -1,0 +1,6 @@
+{
+  "effects": "burning",
+  "exhaustion": 0.0,
+  "message_id": "createdelightcore.molten_metal",
+  "scaling": "always"
+}
