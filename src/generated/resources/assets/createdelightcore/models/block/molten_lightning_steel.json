@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createdelightcore:fluid/lightning_steel/still"
+    "particle": "createdelightcore:block/fluid/lightning_steel/still"
   }
 }

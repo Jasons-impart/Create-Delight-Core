@@ -29,6 +29,11 @@ public class EnglishLangHandler {
         coin(provider, CDItems.EMERALD_COIN, "Emerald Coin", "Emerald");
         coin(provider, CDItems.NETHERITE_COIN, "Netherite Coin", "Netherite");
 
+        provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal", "%1$s became a part of the molten metal");
+        provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal.player", "%2$s thought that %1$s was a piece of unmelted metal");
+        provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s was frozen into a popsicle because of eating too much ice cream");
+        provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream.player", "%1$s was frozen into a popsicle because of eating too much ice cream");
+
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
     }

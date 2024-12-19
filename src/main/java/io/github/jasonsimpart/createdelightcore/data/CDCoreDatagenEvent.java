@@ -17,6 +17,7 @@ public class CDCoreDatagenEvent {
         CDRegistrateTags.addGenerators();
 
         generator.addProvider(event.includeServer(), new FreezingRecipeGenerator(output));
+        generator.addProvider(event.includeServer(), new CDCGenEntitiesProvider(output, event.getLookupProvider()));
 
         if (event.includeServer()) {
             CDProcessingRecipeGen.registerAll(generator, output);

@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "createdelightcore:fluid/banana/still"
+    "particle": "createdelightcore:block/fluid/banana/still"
   }
 }

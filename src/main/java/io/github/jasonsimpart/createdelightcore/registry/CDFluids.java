@@ -3,9 +3,9 @@ package io.github.jasonsimpart.createdelightcore.registry;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
-import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidType;
+import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -39,14 +39,14 @@ public class CDFluids {
 
 
     public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {
-        ResourceLocation STILL_RL = CreateDelightCore.id("fluid/" + name + "/still");
-        ResourceLocation FLOW_RL = CreateDelightCore.id("fluid/" + name + "/flowing");
+        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
         return REGISTRATE.fluid(name, STILL_RL, FLOW_RL);
     }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name) {
-        ResourceLocation STILL_RL = CreateDelightCore.id("fluid/" + name + "/still");
-        ResourceLocation FLOW_RL = CreateDelightCore.id("fluid/" + name + "/flowing");
+        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
         return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, MoltenFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
@@ -68,13 +68,13 @@ public class CDFluids {
     }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> iceCreamFluid(String name) {
-        ResourceLocation STILL_RL = CreateDelightCore.id("fluid/" + name + "/still");
-        ResourceLocation FLOW_RL = CreateDelightCore.id("fluid/" + name + "/flowing");
+        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
         return REGISTRATE.fluid(name + "_ice_cream", STILL_RL, FLOW_RL, IceCreamFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
-                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
-                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_POWDER_SNOW)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_POWDER_SNOW)
                         .canHydrate(false))
                 .fluidProperties(p -> p.levelDecreasePerBlock(2)
                         .tickRate(25)
