@@ -1,8 +1,16 @@
 {
   "values": [
+    "createdelightcore:flowing_adzuki_ice_cream",
+    "createdelightcore:adzuki_ice_cream",
     "createdelightcore:flowing_banana_ice_cream",
     "createdelightcore:banana_ice_cream",
-    "createdelightcore:flowing_adzuki_ice_cream",
-    "createdelightcore:adzuki_ice_cream"
+    "createdelightcore:flowing_chocolate_ice_cream",
+    "createdelightcore:chocolate_ice_cream",
+    "createdelightcore:flowing_mint_ice_cream",
+    "createdelightcore:mint_ice_cream",
+    "createdelightcore:flowing_strawberry_ice_cream",
+    "createdelightcore:strawberry_ice_cream",
+    "createdelightcore:flowing_vanilla_ice_cream",
+    "createdelightcore:vanilla_ice_cream"
   ]
 }

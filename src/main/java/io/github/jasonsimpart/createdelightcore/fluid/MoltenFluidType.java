@@ -3,7 +3,6 @@ package io.github.jasonsimpart.createdelightcore.fluid;
 import com.simibubi.create.AllFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDCDamageTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -49,9 +48,9 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
         double d1 = pos.getY();
         double d2 = pos.getZ();
         entity.setSecondsOnFire(15);
-        level.playLocalSound(d0, d1, d2, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.4F, 1.0F, false);
-        for (int i = 0; i < 5; ++i) {
-            level.addParticle(ParticleTypes.LAVA, entity.getX(), entity.getY(), entity.getZ(), 0.0D, 0.0D, 0.0D);
+        if(entity.fireImmune()){}
+        else {
+            level.playLocalSound(d0, d1, d2, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.3F, 3.0F, false);
         }
     }
 

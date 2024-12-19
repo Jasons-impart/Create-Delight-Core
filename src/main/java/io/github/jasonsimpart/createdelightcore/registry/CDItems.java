@@ -30,11 +30,11 @@ public class CDItems {
             .tab(MISC_TAB)
             .register();
 
-    public static final ItemEntry<Item> IRON_COIN = simpleItem("iron_coin", CDCreativeTabs.COIN.getKey(), Rarity.COMMON);
-    public static final ItemEntry<Item> COPPER_COIN = simpleItem("copper_coin", CDCreativeTabs.COIN.getKey(), Rarity.UNCOMMON);
-    public static final ItemEntry<Item> GOLD_COIN = simpleItem("gold_coin", CDCreativeTabs.COIN.getKey(), Rarity.RARE);
-    public static final ItemEntry<Item> EMERALD_COIN = simpleItem("emerald_coin", CDCreativeTabs.COIN.getKey(), Rarity.RARE);
-    public static final ItemEntry<Item> NETHERITE_COIN = simpleItem("netherite_coin", CDCreativeTabs.COIN.getKey(), Rarity.EPIC);
+    public static final ItemEntry<Item> IRON_COIN = coinItem("iron_coin", Rarity.COMMON);
+    public static final ItemEntry<Item> COPPER_COIN = coinItem("copper_coin", Rarity.UNCOMMON);
+    public static final ItemEntry<Item> GOLD_COIN = coinItem("gold_coin", Rarity.RARE);
+    public static final ItemEntry<Item> EMERALD_COIN = coinItem("emerald_coin", Rarity.RARE);
+    public static final ItemEntry<Item> NETHERITE_COIN = coinItem("netherite_coin", Rarity.EPIC);
 
     public static ItemEntry<Item> simpleItem(String name) {
         return simpleItem(name, MISC_TAB);
@@ -42,6 +42,16 @@ public class CDItems {
 
     public static ItemEntry<Item> simpleItem(String name, ResourceKey<CreativeModeTab> tab) {
         return simpleItem(name, tab, Rarity.COMMON);
+    }
+
+    public static ItemEntry<Item> coinItem(String name, Rarity rarity) {
+        return REGISTRATE.item(name, Item::new)
+                .properties(properties -> properties
+                        .rarity(rarity)
+                        .fireResistant()
+                )
+                .tab(CDCreativeTabs.COIN.getKey())
+                .register();
     }
 
     public static ItemEntry<Item> simpleItem(String name, ResourceKey<CreativeModeTab> tab, Rarity rarity) {

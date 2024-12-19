@@ -4,7 +4,8 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.fluid.FluidSource;
+import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidSource;
+import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidSource;
 import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidType;
 import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidType;
 import net.minecraft.resources.ResourceKey;
@@ -34,10 +35,12 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ICE_STEEL = moltenFluid("ice_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LIGHTNING_STEEL = moltenFluid("lightning_steel");
     // all ice cream
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> BANANA_ICE_CREAM = iceCreamFluid("banana");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> ADZUKI_ICE_CREAM = iceCreamFluid("adzuki");
-
-
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> BANANA_ICE_CREAM = iceCreamFluid("banana");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> CHOCOLATE_ICE_CREAM = iceCreamFluid("chocolate");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MINT_ICE_CREAM = iceCreamFluid("mint");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> STRAWBERRY_ICE_CREAM = iceCreamFluid("strawberry");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
 
     public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
@@ -51,7 +54,7 @@ public class CDFluids {
         return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, MoltenFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
-                        .lightLevel(10)
+                        .lightLevel(15)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
                         .canHydrate(false)
@@ -62,7 +65,7 @@ public class CDFluids {
                         .slopeFindDistance(3)
                         .explosionResistance((float) 100.0))
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
-                .source(FluidSource::new)
+                .source(MoltenFluidSource::new)
                 .bucket()
                 .build()
                 .register();
@@ -78,11 +81,11 @@ public class CDFluids {
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_POWDER_SNOW)
                         .canHydrate(false))
                 .fluidProperties(p -> p.levelDecreasePerBlock(2)
-                        .tickRate(25)
+                        .tickRate(20)
                         .slopeFindDistance(3)
                         .explosionResistance((float) 100.0))
                 .tag(forgeFluidTag(name + "_ice_cream"), forgeFluidTag("ice_cream"))
-                .source(ForgeFlowingFluid.Source::new)
+                .source(IceCreamFluidSource::new)
                 .bucket()
                 .build()
                 .register();

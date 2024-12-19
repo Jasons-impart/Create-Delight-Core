@@ -29,7 +29,7 @@ public class CDCreativeTabs {
     public static final RegistryObject<CreativeModeTab> Fluid = CREATIVE_MODE_TABS.register("fluid", () ->
             CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup."+ CreateDelightCore.MODID + ".fluid"))
-                    .icon(() -> new ItemStack(CDFluids.MOLTEN_ANDESITE.getBucket().get()))
+                    .icon(() -> new ItemStack(CDFluids.MOLTEN_ICE_STEEL.getBucket().get()))
                     .displayItems((parameters, output) -> {})
                     .build());
 
