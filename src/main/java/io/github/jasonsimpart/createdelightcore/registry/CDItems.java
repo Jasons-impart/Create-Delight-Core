@@ -7,27 +7,29 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
+import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 
 public class CDItems {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
+    public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
 
-    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid");
+    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED = REGISTRATE
             .item("black_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(BLACK_CHOCOLATE_MOLD_SOLID.get())))
-            .tab(MISC_TAB)
+            .tab(RATATOUILLE_TAB)
             .register();
-    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid");
+    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
     public static final ItemEntry<ChocolateMoldFilledItem> WHITE_CHOCOLATE_MOLD_FILLED = REGISTRATE
             .item("white_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(WHITE_CHOCOLATE_MOLD_SOLID.get())))
-            .tab(MISC_TAB)
+            .tab(RATATOUILLE_TAB)
             .register();
-    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid");
+    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid", RATATOUILLE_TAB);
     public static final ItemEntry<ChocolateMoldFilledItem> RUBY_CHOCOLATE_MOLD_FILLED = REGISTRATE
             .item("ruby_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(RUBY_CHOCOLATE_MOLD_SOLID.get())))
-            .tab(MISC_TAB)
+            .tab(RATATOUILLE_TAB)
             .register();
 
     public static final ItemEntry<Item> IRON_COIN = coinItem("iron_coin", Rarity.COMMON);
