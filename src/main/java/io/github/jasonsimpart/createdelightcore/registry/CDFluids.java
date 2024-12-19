@@ -4,6 +4,7 @@ import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.fluid.FluidSource;
 import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidType;
 import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidType;
 import net.minecraft.resources.ResourceKey;
@@ -61,7 +62,7 @@ public class CDFluids {
                         .slopeFindDistance(3)
                         .explosionResistance((float) 100.0))
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
-                .source(ForgeFlowingFluid.Source::new)
+                .source(FluidSource::new)
                 .bucket()
                 .build()
                 .register();
