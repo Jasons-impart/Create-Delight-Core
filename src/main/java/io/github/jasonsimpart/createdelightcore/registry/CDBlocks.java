@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.simibubi.create.AllBlocks;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
@@ -11,7 +12,7 @@ import net.minecraft.world.level.block.SoundType;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 
-public class CDBlocks {
+public class CDBlocks extends AllBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     //block
     public static final BlockEntry<Block> FRAGMENT_OF_BORDER;
@@ -24,7 +25,7 @@ public class CDBlocks {
                 .tab(MISC_TAB)
                 .build()
                 .properties(properties -> properties
-                        .lightLevel(lightLevel -> 15)
+                        .lightLevel(blockState -> 15)
                         .strength(10.0F)
                         .sound(SoundType.METAL)
                         .noLootTable()
