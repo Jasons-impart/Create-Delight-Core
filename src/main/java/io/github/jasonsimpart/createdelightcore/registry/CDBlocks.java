@@ -30,6 +30,7 @@ public class CDBlocks extends AllBlocks {
                         .sound(SoundType.METAL)
                         .noLootTable()
                 )
+                .addLayer(() -> RenderType::translucent)
                 .tag(BlockTags.NEEDS_IRON_TOOL)
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
