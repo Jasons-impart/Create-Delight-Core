@@ -22,6 +22,7 @@ public class CreateDelightCore {
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
         CDItems.init();
         CDFluids.init();
+        CDBlocks.init();
         CDCreativeTabs.register(modEventBus);
         CDRecipeTypes.register(modEventBus);
 

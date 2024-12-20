@@ -15,7 +15,7 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
-
+    // chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED = REGISTRATE
             .item("black_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(BLACK_CHOCOLATE_MOLD_SOLID.get())))
@@ -31,7 +31,7 @@ public class CDItems {
             .item("ruby_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(RUBY_CHOCOLATE_MOLD_SOLID.get())))
             .tab(RATATOUILLE_TAB)
             .register();
-
+    // coin
     public static final ItemEntry<Item> IRON_COIN = coinItem("iron_coin", Rarity.COMMON);
     public static final ItemEntry<Item> COPPER_COIN = coinItem("copper_coin", Rarity.UNCOMMON);
     public static final ItemEntry<Item> GOLD_COIN = coinItem("gold_coin", Rarity.RARE);
@@ -52,7 +52,7 @@ public class CDItems {
                         .rarity(rarity)
                         .fireResistant()
                 )
-                .tab(CDCreativeTabs.COIN.getKey())
+                .tab(COIN_TAB)
                 .register();
     }
 

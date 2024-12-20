@@ -1,7 +1,8 @@
-// 1.20.1	2024-12-20T00:15:02.1208596	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2024-12-20T15:54:11.094015	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 a6c94a8df04998e187169090857983a6b9e13aa2 assets/createdelightcore/blockstates/chocolate_ice_cream.json
+da077564d45c2c6911137b093ddc9a1662f13613 assets/createdelightcore/blockstates/fragment_of_border.json
 bee33a9f7d910fbb23c9d7c46d3fc3290aea3a5a assets/createdelightcore/blockstates/mint_ice_cream.json
 8892b10e149c7c526ea464d923537fe91e313d55 assets/createdelightcore/blockstates/molten_andesite.json
 840a241b5991c55b030e44876a37f7525e9ca414 assets/createdelightcore/blockstates/molten_azure_neodymium.json
@@ -14,12 +15,13 @@ fe0f008dcc8759e02b204a56c81e7535601680ba assets/createdelightcore/blockstates/mo
 606c1eda5c6777c056cebb03d219302b845e077c assets/createdelightcore/blockstates/molten_scarlet_neodymium.json
 4f1ca82a47cf29d77d70ddefe2cf0671e865b562 assets/createdelightcore/blockstates/strawberry_ice_cream.json
 a84bccf73c0d067f4304d529cf42a1ffc23f4c29 assets/createdelightcore/blockstates/vanilla_ice_cream.json
-47aa466f9215a330379060e3f8b6adad33fd255a assets/createdelightcore/lang/en_ud.json
-747a1adfe421ee5a95d2cba3776ef9b46c46ec12 assets/createdelightcore/lang/en_us.json
-b911528b9c6bf601a3c66dcb04db279efedf931d assets/createdelightcore/lang/zh_cn.json
+eb2cf4fab993c2edebc294ada3379af5cf858c6f assets/createdelightcore/lang/en_ud.json
+36076fd6b5a822ff36bcc09570217c7a3cced1dc assets/createdelightcore/lang/en_us.json
+97eb1b683c1fb996ea1f9922bc1e74a540e7149f assets/createdelightcore/lang/zh_cn.json
 89aa72b3b79069dc3db4660216f2bc469dfbb504 assets/createdelightcore/models/block/adzuki_ice_cream.json
 779e2d97d3581ddb53420d111bae0361208f5a7b assets/createdelightcore/models/block/banana_ice_cream.json
 0961a29e9e533174ac57c6bd0a3642c66b1b5f81 assets/createdelightcore/models/block/chocolate_ice_cream.json
+ebbc5721f8650d821e95c1a863ec91bb7ea6805a assets/createdelightcore/models/block/fragment_of_border.json
 4725b5b8da8677ea736b389d3065a07832e313e3 assets/createdelightcore/models/block/mint_ice_cream.json
 97597528811f81c3db51a7c19c31ec1ac1506f18 assets/createdelightcore/models/block/molten_andesite.json
 47ab291a19a0a1267778b37de90ab5e6739901d7 assets/createdelightcore/models/block/molten_azure_neodymium.json
@@ -39,6 +41,7 @@ c5d6c59fb5f1e06a16e4ad57cd3408be91d0d8d5 assets/createdelightcore/models/item/bl
 34dd0222c9605e747d3ee81ef1c51e1069e5af1a assets/createdelightcore/models/item/chocolate_ice_cream_bucket.json
 369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
 af1e5b682ff1aa605c9d056c5470bc09030a82cd assets/createdelightcore/models/item/emerald_coin.json
+0eeb95bc11a46e8cd55f51b5297d3c70774b724a assets/createdelightcore/models/item/fragment_of_border.json
 ed8f23145d5af428005316f052d84ac4cab99dcf assets/createdelightcore/models/item/gold_coin.json
 1d2cfc794c23651e546cfbc39d51924e8496a199 assets/createdelightcore/models/item/iron_coin.json
 f3bfc1958e8f5b192266a974056dae7c59cd8b91 assets/createdelightcore/models/item/mint_ice_cream_bucket.json
@@ -78,3 +81,5 @@ f8ee16ed9bf39fed964ea0553151d0b28f25196b data/forge/tags/fluids/molten_materials
 68906cbc050eae3d6c84e703f2281e76cf0e26a3 data/forge/tags/fluids/molten_scarlet_neodymium.json
 a93dba3e155f593a9f83adf3e4e398d140ebf9b5 data/forge/tags/fluids/strawberry_ice_cream.json
 891d9805938e5e089a7646a5f8a7617323b707a0 data/forge/tags/fluids/vanilla_ice_cream.json
+2b78bd25ab8c2bf4758d67b8f895e96b8e1dd6bc data/minecraft/tags/blocks/mineable/pickaxe.json
+2b78bd25ab8c2bf4758d67b8f895e96b8e1dd6bc data/minecraft/tags/blocks/needs_iron_tool.json

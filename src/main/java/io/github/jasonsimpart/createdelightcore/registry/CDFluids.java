@@ -21,9 +21,6 @@ import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.R
 public class CDFluids {
     public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.Fluid.getKey();
 
-    static {
-        REGISTRATE.defaultCreativeTab(CDFluids.FLUID_TAB);
-    }
     // all molten metal
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = moltenFluid("andesite");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_AZURE_NEODYMIUM = moltenFluid("azure_neodymium");
@@ -67,6 +64,7 @@ public class CDFluids {
                 .tag(forgeFluidTag("molten_" + name), forgeFluidTag("molten_materials"))
                 .source(MoltenFluidSource::new)
                 .bucket()
+                .tab(FLUID_TAB)
                 .build()
                 .register();
     }
@@ -87,6 +85,7 @@ public class CDFluids {
                 .tag(forgeFluidTag(name + "_ice_cream"), forgeFluidTag("ice_cream"))
                 .source(IceCreamFluidSource::new)
                 .bucket()
+                .tab(FLUID_TAB)
                 .build()
                 .register();
     }

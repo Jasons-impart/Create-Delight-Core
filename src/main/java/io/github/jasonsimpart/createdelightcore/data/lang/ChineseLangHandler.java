@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
@@ -41,6 +42,8 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.WHITE_CHOCOLATE_MOLD_SOLID, "凝固的白巧克力");
         provider.addItem(CDItems.RUBY_CHOCOLATE_MOLD_FILLED, "盛满的红宝石巧克力模具");
         provider.addItem(CDItems.RUBY_CHOCOLATE_MOLD_SOLID, "凝固的红宝石巧克力");
+        //block
+        provider.addBlock(CDBlocks.FRAGMENT_OF_BORDER, "边境碎片");
         //coin
         coin(provider, CDItems.IRON_COIN, "铁币", "铁");
         coin(provider, CDItems.COPPER_COIN, "铜币", "铜");

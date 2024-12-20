@@ -15,7 +15,7 @@ public class CDCreativeTabs {
     public static final RegistryObject<CreativeModeTab> MISC = CREATIVE_MODE_TABS.register("misc", () ->
             CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup."+ CreateDelightCore.MODID + ".misc"))
-                    .icon(() -> new ItemStack(CDItems.RUBY_CHOCOLATE_MOLD_SOLID.get()))
+                    .icon(() -> new ItemStack(CDBlocks.FRAGMENT_OF_BORDER.get()))
                     .displayItems((parameters, output) -> {})
                     .build());
 
