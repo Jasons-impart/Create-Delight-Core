@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.jei;
+package io.github.jasonsimpart.createdelightcore.compat.jei;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,8 +23,8 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.jei.category.CDProcessingViaFanCategory;
-import io.github.jasonsimpart.createdelightcore.jei.category.FanFreezingCategory;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
 import io.github.jasonsimpart.createdelightcore.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;

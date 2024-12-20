@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.jei.category;
+package io.github.jasonsimpart.createdelightcore.compat.jei.category;
 
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;

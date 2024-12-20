@@ -1,8 +1,8 @@
-package io.github.jasonsimpart.createdelightcore.jei;
+package io.github.jasonsimpart.createdelightcore.compat.jei;
 
 import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.jei.category.JeiCategoryBlazeBurnerSuperHeat;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerSuperHeat;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
