@@ -34,9 +34,7 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
     //entity move & hurt
     @Override
     public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-        Vec3 movement = entity.getDeltaMovement();
-        Vec3 newMovement = new Vec3(movement.x * 0.6d, movement.y, movement.z * 0.6d);
-        entity.setDeltaMovement(newMovement);
+        entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.6F, 1.0F, 0.6F));
         entity.hurt(CDCDamageTypes.moltenMetal(entity.level()), 4.0F);
         entity.setSecondsOnFire(15);
         return false;
