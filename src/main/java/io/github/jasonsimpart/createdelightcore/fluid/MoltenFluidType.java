@@ -34,7 +34,7 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
     //entity move & hurt
     @Override
     public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
-        entity.setDeltaMovement(entity.getDeltaMovement().scale(0.6));
+        entity.setDeltaMovement(entity.getDeltaMovement().multiply(0.6F, 1.0F, 0.6F));
         entity.hurt(CDCDamageTypes.moltenMetal(entity.level()), 4.0F);
         entity.setSecondsOnFire(15);
         return false;
@@ -42,15 +42,17 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
 
     @Override
     public void setItemMovement(ItemEntity entity) {
-        BlockPos pos = entity.getOnPos();
-        Level level = entity.level();
-        double d0 = pos.getX();
-        double d1 = pos.getY();
-        double d2 = pos.getZ();
-        entity.setSecondsOnFire(15);
-        if(entity.fireImmune()){}
-        else {
-            level.playLocalSound(d0, d1, d2, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.3F, 3.0F, false);
+        if(entity.fireImmune()){
+            Vec3 vec3 = entity.getDeltaMovement();
+            entity.setDeltaMovement(vec3.x * (double)0.99F, vec3.y + (double)(vec3.y < (double)0.06F ? 5.0E-4F : 0.0F), vec3.z * (double)0.99F);
+        } else {
+            BlockPos pos = entity.getOnPos();
+            Level level = entity.level();
+            double pX = pos.getX();
+            double pY = pos.getY();
+            double pZ = pos.getZ();
+            entity.setSecondsOnFire(15);
+            level.playLocalSound(pX, pY, pZ, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.3F, 3.0F, false);
         }
     }
 

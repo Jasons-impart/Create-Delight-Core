@@ -67,6 +67,8 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.MINT_ICE_CREAM, "薄荷冰淇淋");
         addFluid(provider, CDFluids.STRAWBERRY_ICE_CREAM, "草莓冰淇淋");
         addFluid(provider, CDFluids.VANILLA_ICE_CREAM, "原味冰淇淋");
+        //slime
+        addFluid(provider, CDFluids.SLIME, "粘液");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

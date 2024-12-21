@@ -1,17 +1,19 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.simibubi.create.content.fluids.potion.PotionFluid;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidSource;
-import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidSource;
-import io.github.jasonsimpart.createdelightcore.fluid.IceCreamFluidType;
-import io.github.jasonsimpart.createdelightcore.fluid.MoltenFluidType;
+import io.github.jasonsimpart.createdelightcore.fluid.*;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.WaterFluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
@@ -38,6 +40,9 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MINT_ICE_CREAM = iceCreamFluid("mint");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> STRAWBERRY_ICE_CREAM = iceCreamFluid("strawberry");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
+    // slime
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
+
 
     public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
@@ -81,7 +86,7 @@ public class CDFluids {
                 .fluidProperties(p -> p.levelDecreasePerBlock(2)
                         .tickRate(20)
                         .slopeFindDistance(3)
-                        .explosionResistance((float) 100.0))
+                        .explosionResistance((float) 50.0))
                 .tag(forgeFluidTag(name + "_ice_cream"), forgeFluidTag("ice_cream"))
                 .source(IceCreamFluidSource::new)
                 .bucket()
@@ -89,6 +94,28 @@ public class CDFluids {
                 .build()
                 .register();
     }
+
+    private static FluidEntry<ForgeFlowingFluid.Flowing> slimeFluid(String name) {
+        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
+        return REGISTRATE.fluid(name, STILL_RL, FLOW_RL, SlimeFluidType::new)
+                .renderType(RenderType::translucent)
+                .properties(b -> b.viscosity(2000)
+                        .density(1400)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_BREAK)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.SLIME_BLOCK_BREAK)
+                        .canHydrate(false))
+                .fluidProperties(p -> p.levelDecreasePerBlock(3)
+                        .tickRate(25)
+                        .slopeFindDistance(3)
+                        .explosionResistance((float) 50.0))
+                .source(ForgeFlowingFluid.Source::new)
+                .bucket()
+                .tab(FLUID_TAB)
+                .build()
+                .register();
+    }
+
 
     public static void init() {
 

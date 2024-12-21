@@ -1,30 +1,30 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
-import com.simibubi.create.AllBlocks;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 
-public class CDBlocks extends AllBlocks {
+public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     //block
-    public static final BlockEntry<Block> FRAGMENT_OF_BORDER;
+    public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER;
 
 
     static {
-        FRAGMENT_OF_BORDER = REGISTRATE.block("fragment_of_border", Block::new)
+        //noinspection removal
+        FRAGMENT_OF_BORDER = REGISTRATE.block("fragment_of_border", GlassBlock::new)
                 .item()
                 .properties(properties -> properties.rarity(Rarity.RARE))
                 .tab(MISC_TAB)
                 .build()
-                .properties(properties -> properties
+                .properties(properties -> BlockBehaviour.Properties.copy(Blocks.GLASS)
                         .lightLevel(blockState -> 15)
                         .strength(10.0F)
                         .sound(SoundType.METAL)

@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.jei.category;
+package io.github.jasonsimpart.createdelightcore.compat.jei.category;
 
 import java.util.List;
 import java.util.function.Supplier;

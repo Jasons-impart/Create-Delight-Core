@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.jei.category;
+package io.github.jasonsimpart.createdelightcore.compat.jei.category;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.EmptyBackground;
