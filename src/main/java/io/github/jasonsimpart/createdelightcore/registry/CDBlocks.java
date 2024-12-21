@@ -1,7 +1,5 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.decoration.palettes.WindowBlock;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
@@ -20,6 +18,7 @@ public class CDBlocks {
 
 
     static {
+        //noinspection removal
         FRAGMENT_OF_BORDER = REGISTRATE.block("fragment_of_border", GlassBlock::new)
                 .item()
                 .properties(properties -> properties.rarity(Rarity.RARE))
@@ -31,7 +30,7 @@ public class CDBlocks {
                         .sound(SoundType.METAL)
                         .noLootTable()
                 )
-                .addLayer(() -> RenderType::cutout)
+                .addLayer(() -> RenderType::translucent)
                 .tag(BlockTags.NEEDS_IRON_TOOL)
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
