@@ -2,7 +2,7 @@ package io.github.jasonsimpart.createdelightcore;
 
 import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
-import io.github.jasonsimpart.createdelightcore.recipe.CDFanProcessingTypes;
+import io.github.jasonsimpart.createdelightcore.content.recipe.CDFanProcessingTypes;
 import io.github.jasonsimpart.createdelightcore.registry.*;
 import io.github.jasonsimpart.createdelightcore.server.ItemEntityEvent;
 import net.minecraft.resources.ResourceLocation;

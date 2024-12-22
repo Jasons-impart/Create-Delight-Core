@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.recipe;
+package io.github.jasonsimpart.createdelightcore.content.recipe;
 
 import java.util.List;
 import java.util.Optional;

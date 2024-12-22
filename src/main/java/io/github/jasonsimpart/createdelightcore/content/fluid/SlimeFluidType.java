@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.fluid;
+package io.github.jasonsimpart.createdelightcore.content.fluid;
 
 import com.simibubi.create.content.fluids.potion.PotionFluid;
 import net.minecraft.resources.ResourceLocation;

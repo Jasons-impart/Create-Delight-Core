@@ -25,7 +25,7 @@ import com.simibubi.create.infrastructure.config.CRecipes;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
-import io.github.jasonsimpart.createdelightcore.recipe.FanFreezingRecipe;
+import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;

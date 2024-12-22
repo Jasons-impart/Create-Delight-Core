@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.fluid;
+package io.github.jasonsimpart.createdelightcore.content.fluid;
 
 import com.simibubi.create.AllFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDCDamageTypes;

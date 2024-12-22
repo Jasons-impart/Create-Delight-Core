@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
-import io.github.jasonsimpart.createdelightcore.item.ChocolateMoldFilledItem;
+import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
