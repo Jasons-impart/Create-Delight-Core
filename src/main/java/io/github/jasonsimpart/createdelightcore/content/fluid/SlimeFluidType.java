@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 
@@ -17,7 +18,7 @@ public class SlimeFluidType extends PotionFluid.PotionFluidType {
     public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
         Vec3 vec3 = entity.getDeltaMovement();
         if (vec3.y < -(double)0.4F) {
-            entity.setDeltaMovement(vec3.x, -0.8F * vec3.y, vec3.z);
+            entity.setDeltaMovement(0.8 * vec3.x, -0.8F * vec3.y, 0.8 * vec3.z);
         }
         return false;
     }
@@ -26,8 +27,20 @@ public class SlimeFluidType extends PotionFluid.PotionFluidType {
     public void setItemMovement(ItemEntity entity) {
         Vec3 vec3 = entity.getDeltaMovement();
         if (vec3.y < -(double)0.4F) {
-            entity.setDeltaMovement(vec3.x, -0.6F * vec3.y, vec3.z);
+            entity.setDeltaMovement(0.8 * vec3.x, -0.6F * vec3.y, 0.8 * vec3.z);
         }
+    }
+
+    @Override
+    public boolean supportsBoating(Boat boat) {
+        Vec3 vec3 = boat.getDeltaMovement();
+        if (vec3.y < -(double)0.4F) {
+            boat.setDeltaMovement(0.8 * vec3.x, -0.8F * vec3.y, 0.8 * vec3.z);
+        }
+        else {
+            boat.setDeltaMovement(0.8 * vec3.x, vec3.y, 0.8 * vec3.z);
+        }
+        return super.supportsBoating(boat);
     }
 
     public boolean canExtinguish(Entity entity) {

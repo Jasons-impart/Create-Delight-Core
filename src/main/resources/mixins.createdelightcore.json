@@ -6,6 +6,9 @@
   "mixins": [
     "AbstractVillagerMixin",
     "VillagerMixin",
+    "CA.EnergyNetWorkMixin",
+    "IAF.EntityGorgonMixin",
+    "IAF.EntitySirenMixin",
     "lunarian.BuyForOneEmeraldFactoryMixin",
     "lunarian.EnchantBookFactoryMixin",
     "lunarian.ProcessItemFactoryMixin",
@@ -14,8 +17,6 @@
     "lunarian.SellItemFactoryMixin",
     "lunarian.SellPotionHoldingItemFactoryMixin",
     "lunarian.SellSuspiciousStewFactoryMixin",
-    "IAF.EntitySirenMixin",
-    "IAF.EntityGorgonMixin",
     "Minecraft.PlayerMixin"
   ],
   "client": [],
