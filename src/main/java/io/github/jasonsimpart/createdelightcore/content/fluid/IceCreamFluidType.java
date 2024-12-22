@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fluids.FluidStack;
@@ -40,7 +41,6 @@ public class IceCreamFluidType extends AllFluids.TintedFluidType {
         entity.hurt(CDCDamageTypes.iceCream(entity.level()), 1.0F);
         return false;
     }
-
     @Override
     public void setItemMovement(ItemEntity entity) {
         Vec3 movement = entity.getDeltaMovement();
@@ -49,6 +49,10 @@ public class IceCreamFluidType extends AllFluids.TintedFluidType {
         entity.setDeltaMovement(newMovement);
     }
 
+    @Override
+    public boolean isVaporizedOnPlacement(Level level, BlockPos pos, FluidStack stack) {
+        return level.dimensionType().ultraWarm();
+    }
 
     public boolean canExtinguish(Entity entity) {
         return true;

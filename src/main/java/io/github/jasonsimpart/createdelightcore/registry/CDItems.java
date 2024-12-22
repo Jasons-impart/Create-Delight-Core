@@ -46,6 +46,14 @@ public class CDItems {
         return simpleItem(name, tab, Rarity.COMMON);
     }
 
+    public static ItemEntry<Item> simpleItem(String name, ResourceKey<CreativeModeTab> tab, Rarity rarity) {
+        return REGISTRATE.item(name, Item::new)
+                .properties(properties -> properties.rarity(rarity))
+                .tab(tab)
+                .register();
+    }
+
+
     public static ItemEntry<Item> coinItem(String name, Rarity rarity) {
         return REGISTRATE.item(name, Item::new)
                 .properties(properties -> properties
@@ -53,13 +61,6 @@ public class CDItems {
                         .fireResistant()
                 )
                 .tab(COIN_TAB)
-                .register();
-    }
-
-    public static ItemEntry<Item> simpleItem(String name, ResourceKey<CreativeModeTab> tab, Rarity rarity) {
-        return REGISTRATE.item(name, Item::new)
-                .properties(properties -> properties.rarity(rarity))
-                .tab(tab)
                 .register();
     }
 
