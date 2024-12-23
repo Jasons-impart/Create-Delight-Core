@@ -161,7 +161,6 @@ public class CDBlocks {
                 .properties(properties -> properties
                         .fireResistant()
                         .rarity(rarity))
-                .tab(COIN_TAB)
                 .build()
                 .properties(properties -> properties
                         .strength(0.3F)
