@@ -20,6 +20,6 @@ public abstract class EnchantBookFactoryMixin {
     @Inject(method = "getOffer", at = @At("RETURN"), cancellable = true)
     public void changeOffer(Entity entity, RandomSource random, CallbackInfoReturnable<MerchantOffer> cir) {
         var offer = cir.getReturnValue();
-        cir.setReturnValue(new MerchantOffer(new ItemStack(CDItems.COPPER_COIN, offer.getBaseCostA().getCount()), new ItemStack(Items.BOOK), offer.getResult(), 12, experience, 0.2f));
+        cir.setReturnValue(new MerchantOffer(new ItemStack(CDItems.COPPER, offer.getBaseCostA().getCount()), new ItemStack(Items.BOOK), offer.getResult(), 12, experience, 0.2f));
     }
 }

@@ -42,19 +42,33 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.WHITE_CHOCOLATE_MOLD_SOLID, "凝固的白巧克力");
         provider.addItem(CDItems.RUBY_CHOCOLATE_MOLD_FILLED, "盛满的红宝石巧克力模具");
         provider.addItem(CDItems.RUBY_CHOCOLATE_MOLD_SOLID, "凝固的红宝石巧克力");
+        //tin
+        provider.addItem(CDItems.RAW_TIN, "粗锡");
+        provider.addItem(CDItems.TIN_INGOT, "锡锭");
+        provider.addItem(CDItems.TIN_NUGGET, "锡粒");
+        //bronze
+        provider.addItem(CDItems.BRONZE_INGOT, "青铜锭");
+        provider.addItem(CDItems.BRONZE_NUGGET, "青铜粒");
+
         //block
         provider.addBlock(CDBlocks.FRAGMENT_OF_BORDER, "边境碎片");
+        provider.addBlock(CDBlocks.ELECTRUM, "琥珀金块");
+        provider.addBlock(CDBlocks.TIN_ORE, "锡矿石");
+        provider.addBlock(CDBlocks.DEEPSLATE_TIN_ORE, "深层锡矿石");
+        provider.addBlock(CDBlocks.RAW_TIN, "粗锡块");
+        provider.addBlock(CDBlocks.TIN, "锡块");
+        provider.addBlock(CDBlocks.BRONZE, "青铜块");
         //coin
-        coin(provider, CDItems.IRON_COIN, "铁币", "铁");
-        coin(provider, CDItems.COPPER_COIN, "铜币", "铜");
-        coin(provider, CDItems.GOLD_COIN, "金币", "金");
-        coin(provider, CDItems.EMERALD_COIN, "绿宝石币", "绿");
-        coin(provider, CDItems.NETHERITE_COIN, "下界合金币", "下界");
-        provider.addBlock(CDBlocks.IRON_COIN_PILE, "铁币堆");
-        provider.addBlock(CDBlocks.COPPER_COIN_PILE, "铜币堆");
-        provider.addBlock(CDBlocks.GOLD_COIN_PILE, "金币堆");
-        provider.addBlock(CDBlocks.EMERALD_COIN_PILE, "绿宝石币堆");
-        provider.addBlock(CDBlocks.NETHERITE_COIN_PILE, "下界合金币堆");
+        coin(provider, CDItems.IRON, "铁币", "铁");
+        coin(provider, CDItems.COPPER, "铜币", "铜");
+        coin(provider, CDItems.GOLD, "金币", "金");
+        coin(provider, CDItems.EMERALD, "绿宝石币", "绿");
+        coin(provider, CDItems.NETHERITE, "下界合金币", "下界");
+        provider.addBlock(CDBlocks.IRON, "铁币堆");
+        provider.addBlock(CDBlocks.COPPER, "铜币堆");
+        provider.addBlock(CDBlocks.GOLD, "金币堆");
+        provider.addBlock(CDBlocks.EMERALD, "绿宝石币堆");
+        provider.addBlock(CDBlocks.NETHERITE, "下界合金币堆");
         //molten fluid
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
         addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");

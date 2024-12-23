@@ -1,5 +1,10 @@
 {
   "values": [
+    "createdelightcore:electrum_block",
+    "createdelightcore:tin_ore",
+    "createdelightcore:raw_tin_block",
+    "createdelightcore:tin_block",
+    "createdelightcore:bronze_block",
     "createdelightcore:fragment_of_border"
   ]
 }

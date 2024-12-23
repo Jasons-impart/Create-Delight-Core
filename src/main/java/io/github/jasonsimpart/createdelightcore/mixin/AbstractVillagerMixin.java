@@ -32,11 +32,11 @@ public abstract class AbstractVillagerMixin {
             ItemStack itemB = offer.getCostB();
             ItemStack itemC = offer.getResult();
             if (itemA.is(Items.EMERALD))
-                itemA = new ItemStack(CDItems.COPPER_COIN, itemA.getCount());
+                itemA = new ItemStack(CDItems.COPPER, itemA.getCount());
             if (itemB.is(Items.EMERALD))
-                itemB = new ItemStack(CDItems.COPPER_COIN, itemB.getCount());
+                itemB = new ItemStack(CDItems.COPPER, itemB.getCount());
             if (itemC.is(Items.EMERALD))
-                itemC = new ItemStack(CDItems.COPPER_COIN, itemC.getCount());
+                itemC = new ItemStack(CDItems.COPPER, itemC.getCount());
             return new MerchantOffer(itemA, itemB, itemC, offer.getUses(), offer.getMaxUses(), offer.getXp(), offer.getPriceMultiplier(), offer.getDemand());
         }).toList());
     }
