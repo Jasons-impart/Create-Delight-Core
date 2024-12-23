@@ -1,9 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
-import com.github.alexthe666.iceandfire.misc.IafSoundRegistry;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import io.github.jasonsimpart.createdelightcore.content.block.CDCCoinPile;
+import io.github.jasonsimpart.createdelightcore.content.block.CoinPileBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -21,11 +20,11 @@ public class CDBlocks {
     //block
     public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER;
     //coin_pile
-    public static final BlockEntry<CDCCoinPile> IRON_COIN_PILE;
-    public static final BlockEntry<CDCCoinPile> COPPER_COIN_PILE;
-    public static final BlockEntry<CDCCoinPile> GOLD_COIN_PILE;
-    public static final BlockEntry<CDCCoinPile> EMERALD_COIN_PILE;
-    public static final BlockEntry<CDCCoinPile> NETHERITE_COIN_PILE;
+    public static final BlockEntry<CoinPileBlock> IRON_COIN_PILE;
+    public static final BlockEntry<CoinPileBlock> COPPER_COIN_PILE;
+    public static final BlockEntry<CoinPileBlock> GOLD_COIN_PILE;
+    public static final BlockEntry<CoinPileBlock> EMERALD_COIN_PILE;
+    public static final BlockEntry<CoinPileBlock> NETHERITE_COIN_PILE;
 
     static {
         //coin_pile
@@ -52,7 +51,6 @@ public class CDBlocks {
                 .register();
     }
 
-
     public static BlockEntry<Block> simpleBlock(String name, ResourceKey<CreativeModeTab> tab, Rarity rarity, float hardness, float resistance) {
         return REGISTRATE.block(name, Block::new)
                 .item()
@@ -67,8 +65,8 @@ public class CDBlocks {
                 .register();
     }
 
-    public static BlockEntry<CDCCoinPile> coinPileBlock(String name, Rarity rarity) {
-        return REGISTRATE.block(name, CDCCoinPile::new)
+    public static BlockEntry<CoinPileBlock> coinPileBlock(String name, Rarity rarity) {
+        return REGISTRATE.block(name, CoinPileBlock::new)
                 .item()
                 .properties(properties -> properties
                         .fireResistant()
@@ -76,8 +74,10 @@ public class CDBlocks {
                 .tab(COIN_TAB)
                 .build()
                 .properties(properties -> properties
-                        .strength(5.0F)
+                        .strength(0.3F)
                         .sound(IafBlockRegistry.SOUND_TYPE_GOLD)
+                        .forceSolidOff()
+                        .randomTicks()
                         .pushReaction(PushReaction.DESTROY)
                 )
                 .register();
