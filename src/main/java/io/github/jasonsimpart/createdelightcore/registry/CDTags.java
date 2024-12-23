@@ -172,9 +172,7 @@ public class CDTags {
 
     public enum AllFluidTags {
 
-        FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing")
-
-        ;
+        FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing");
 
         public final TagKey<Fluid> tag;
         public final boolean alwaysDatagen;

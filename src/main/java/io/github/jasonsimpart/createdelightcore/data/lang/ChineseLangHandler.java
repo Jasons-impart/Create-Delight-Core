@@ -50,6 +50,11 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD_COIN, "金币", "金");
         coin(provider, CDItems.EMERALD_COIN, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE_COIN, "下界合金币", "下界");
+        provider.addBlock(CDBlocks.IRON_COIN_PILE, "铁币堆");
+        provider.addBlock(CDBlocks.COPPER_COIN_PILE, "铜币堆");
+        provider.addBlock(CDBlocks.GOLD_COIN_PILE, "金币堆");
+        provider.addBlock(CDBlocks.EMERALD_COIN_PILE, "绿宝石币堆");
+        provider.addBlock(CDBlocks.NETHERITE_COIN_PILE, "下界合金币堆");
         //molten fluid
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
         addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");

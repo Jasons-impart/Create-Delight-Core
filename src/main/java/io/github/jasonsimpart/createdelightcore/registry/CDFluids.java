@@ -1,19 +1,15 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
-import com.simibubi.create.content.fluids.potion.PotionFluid;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.fluid.*;
+import io.github.jasonsimpart.createdelightcore.content.fluid.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.WaterFluid;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 
@@ -82,7 +78,8 @@ public class CDFluids {
                         .density(1400)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_POWDER_SNOW)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_POWDER_SNOW)
-                        .canHydrate(false))
+                        .canHydrate(false)
+                        .supportsBoating(true))
                 .fluidProperties(p -> p.levelDecreasePerBlock(2)
                         .tickRate(20)
                         .slopeFindDistance(3)
@@ -104,7 +101,8 @@ public class CDFluids {
                         .density(1400)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_BREAK)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.SLIME_BLOCK_BREAK)
-                        .canHydrate(false))
+                        .canHydrate(false)
+                        .supportsBoating(true))
                 .fluidProperties(p -> p.levelDecreasePerBlock(3)
                         .tickRate(25)
                         .slopeFindDistance(3)

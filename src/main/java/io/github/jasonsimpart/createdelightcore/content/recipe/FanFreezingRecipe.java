@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.recipe;
+package io.github.jasonsimpart.createdelightcore.content.recipe;
 
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;

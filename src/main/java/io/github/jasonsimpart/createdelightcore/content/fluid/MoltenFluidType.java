@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.fluid;
+package io.github.jasonsimpart.createdelightcore.content.fluid;
 
 import com.simibubi.create.AllFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDCDamageTypes;
@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
@@ -56,6 +57,11 @@ public class MoltenFluidType extends AllFluids.TintedFluidType {
         }
     }
 
+    @Override
+    public boolean supportsBoating(Boat boat) {
+        boat.setSecondsOnFire(10);
+        return super.supportsBoating(boat);
+    }
 
     public boolean canExtinguish(Entity entity) {
         return false;

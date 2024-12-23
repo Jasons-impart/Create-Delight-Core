@@ -197,6 +197,12 @@ dependencies {
     implementation fg.deobf("curse.maven:ice-and-fire-dragons-264231:5633453")
 
     implementation fg.deobf("curse.maven:create-liquid-fuel-840734:5217310")
+    // alex's caves
+    implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
+    // create addition
+    implementation fg.deobf("curse.maven:createaddition-439890:5658602")
+    // create utilities
+    implementation fg.deobf("curse.maven:createutilities-881586:5225304")
 }
 
 mixin {
