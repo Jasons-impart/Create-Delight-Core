@@ -8,6 +8,7 @@ import earth.terrarium.adastra.common.registry.ModBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import me.duquee.createutilities.blocks.CUBlocks;
 import net.minecraft.world.level.block.Blocks;
@@ -63,12 +64,12 @@ public class MoltenMetalFluidInteraction {
         event.enqueueWork(() -> addInteraction(COPPER.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(GOLD.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(ZINC.get().getFluidType()));
-//        event.enqueueWork(() -> addInteraction(TIN.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(TIN.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(SILVER.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(TUNGSTEN.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(BRASS.get().getFluidType()));
-//        event.enqueueWork(() -> addInteraction(BRONZE.get().getFluidType()));
-//        event.enqueueWork(() -> addInteraction(ELECTRUM.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(BRONZE.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(ELECTRUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(NETHERITE.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(VOID_STEEL.get().getFluidType()));
@@ -102,74 +103,17 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(COPPER.get().getFluidType(), Blocks.COPPER_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(GOLD.get().getFluidType(), Blocks.GOLD_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(ZINC.get().getFluidType(), AllBlocks.ZINC_BLOCK.get().defaultBlockState());
+            moltenMetalBlocks.put(TIN.get().getFluidType(), CDBlocks.TIN.getDefaultState());
             moltenMetalBlocks.put(SILVER.get().getFluidType(), IafBlockRegistry.SILVER_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(TUNGSTEN.get().getFluidType(), CMBlocks.TUNGSTEN_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(BRASS.get().getFluidType(), AllBlocks.BRASS_BLOCK.get().defaultBlockState());
+            moltenMetalBlocks.put(BRONZE.get().getFluidType(), CDBlocks.BRONZE.getDefaultState());
+            moltenMetalBlocks.put(ELECTRUM.get().getFluidType(), CDBlocks.ELECTRUM.getDefaultState());
             moltenMetalBlocks.put(NETHERITE.get().getFluidType(), Blocks.NETHERITE_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(STEEL.get().getFluidType(), CMBlocks.STEEL_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(VOID_STEEL.get().getFluidType(), CUBlocks.VOID_STEEL_BLOCK.get().defaultBlockState());
         }
 
         addMoltenMetalInteraction(fluidType, moltenMetalBlocks.get(fluidType));
-//        if (fluidType.equals(ANDESITE.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, AllBlocks.ANDESITE_ALLOY_BLOCK.getDefaultState());
-//        }
-//        else if (fluidType.equals(AZURE_NEODYMIUM.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, ACBlockRegistry.BLOCK_OF_AZURE_NEODYMIUM.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(SCARLET_NEODYMIUM.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, ACBlockRegistry.BLOCK_OF_SCARLET_NEODYMIUM.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(DESH.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, ModBlocks.DESH_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(OSTRUM.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, ModBlocks.OSTRUM_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(CLAORITE.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, ModBlocks.CALORITE_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(FIRE_STEEL.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, IafBlockRegistry.DRAGONSTEEL_FIRE_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(ICE_STEEL.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, IafBlockRegistry.DRAGONSTEEL_ICE_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(LIGHTNING_STEEL.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, IafBlockRegistry.DRAGONSTEEL_LIGHTNING_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(IRON.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, Blocks.IRON_BLOCK.defaultBlockState());
-//        }
-//        else if (fluidType.equals(COPPER.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, Blocks.COPPER_BLOCK.defaultBlockState());
-//        }
-//        else if (fluidType.equals(GOLD.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, Blocks.GOLD_BLOCK.defaultBlockState());
-//        }
-//        else if (fluidType.equals(ZINC.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, AllBlocks.ZINC_BLOCK.getDefaultState());
-//        }
-//        else if (fluidType.equals(SILVER.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, IafBlockRegistry.SILVER_BLOCK.get().defaultBlockState());
-//        }
-//        else if (fluidType.equals(TUNGSTEN.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, CMBlocks.TUNGSTEN_BLOCK.getDefaultState());
-//        }
-//        else if (fluidType.equals(BRASS.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, AllBlocks.BRASS_BLOCK.getDefaultState());
-//        }
-//        else if (fluidType.equals(NETHERITE.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, Blocks.NETHERITE_BLOCK.defaultBlockState());
-//        }
-//        else if (fluidType.equals(STEEL.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, CMBlocks.STEEL_BLOCK.getDefaultState());
-//        }
-//        else if (fluidType.equals(VOID_STEEL.get().getFluidType())) {
-//            addMoltenMetalInteraction(fluidType, CUBlocks.VOID_STEEL_BLOCK.getDefaultState());
-//        }
-//        else {
-//            throw new IllegalArgumentException("Unknown fluid type: " + fluidType);
-//        }
     }
 }

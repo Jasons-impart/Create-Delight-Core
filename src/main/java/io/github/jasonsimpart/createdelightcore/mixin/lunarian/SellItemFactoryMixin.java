@@ -23,6 +23,6 @@ public abstract class SellItemFactoryMixin {
     @Inject(method = "getOffer", at = @At("RETURN"), cancellable = true)
     public void changeOffer(Entity entity, RandomSource random, CallbackInfoReturnable<MerchantOffer> cir) {
         var offer = cir.getReturnValue();
-        cir.setReturnValue(new MerchantOffer(new ItemStack(CDItems.COPPER_COIN, offer.getBaseCostA().getCount()), offer.getResult(), maxUses, experience, multiplier));
+        cir.setReturnValue(new MerchantOffer(new ItemStack(CDItems.COPPER, offer.getBaseCostA().getCount()), offer.getResult(), maxUses, experience, multiplier));
     }
 }

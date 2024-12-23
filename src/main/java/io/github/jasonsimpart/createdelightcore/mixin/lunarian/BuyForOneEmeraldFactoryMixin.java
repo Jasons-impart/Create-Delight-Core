@@ -23,6 +23,6 @@ public abstract class BuyForOneEmeraldFactoryMixin {
     @Inject(method = "getOffer", at = @At("RETURN"), cancellable = true)
     public void changeOffer(Entity entity, RandomSource random, CallbackInfoReturnable<MerchantOffer> cir) {
         var offer = cir.getReturnValue();
-        cir.setReturnValue(new MerchantOffer(offer.getBaseCostA(), new ItemStack(CDItems.COPPER_COIN), maxUses, experience, multiplier));
+        cir.setReturnValue(new MerchantOffer(offer.getBaseCostA(), new ItemStack(CDItems.COPPER), maxUses, experience, multiplier));
     }
 }
