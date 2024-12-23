@@ -7,8 +7,8 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(EnergyNetwork.class)
 public abstract class EnergyNetWorkMixin {
-//    @ModifyArg(method = "getMaxBuff", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I"), index = 1)
-//    private int getMaxBuff(int maxBuff) {
-//        return (int) (maxBuff * 2.5F);
-//    }
+    @ModifyArg(method = "getMaxBuff", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I"), index = 1, remap = false)
+    private int getMaxBuff(int a){
+        return 1_000_000;
+    }
 }
