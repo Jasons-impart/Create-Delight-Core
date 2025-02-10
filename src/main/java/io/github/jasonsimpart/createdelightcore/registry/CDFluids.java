@@ -17,7 +17,7 @@ import static com.simibubi.create.AllTags.forgeFluidTag;
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 
 public class CDFluids {
-    public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.Fluid.getKey();
+    public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.FLUID.getKey();
 
     // all molten metal
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = moltenFluid("andesite");

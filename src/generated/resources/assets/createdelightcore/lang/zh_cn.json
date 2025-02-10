@@ -88,10 +88,16 @@
   "item.createdelightcore.strawberry_ice_cream_bucket": "草莓冰淇淋桶",
   "item.createdelightcore.tin_ingot": "锡锭",
   "item.createdelightcore.tin_nugget": "锡粒",
+  "item.createdelightcore.unfried_chicken_chip": "生炸鸡块",
+  "item.createdelightcore.unfried_shrimp": "生炸虾仁",
   "item.createdelightcore.vanilla_ice_cream_bucket": "原味冰淇淋桶",
   "item.createdelightcore.white_chocolate_mold_filled": "盛满的白巧克力模具",
   "item.createdelightcore.white_chocolate_mold_solid": "凝固的白巧克力",
   "itemGroup.createdelightcore.coin": "机械动力：悠然乐事 | 货币",
   "itemGroup.createdelightcore.fluid": "机械动力：悠然乐事 | 流体",
-  "itemGroup.createdelightcore.misc": "机械动力：悠然乐事 | 杂项"
+  "itemGroup.createdelightcore.food": "机械动力：悠然乐事 | 食物",
+  "itemGroup.createdelightcore.misc": "机械动力：悠然乐事 | 杂项",
+  "jei.createdelightcoreBlazeBurnerSuperHeat": "烈焰人加热配方",
+  "jei.createdelightcoreamountConsumedPerTick": "每次燃烧消耗%smB",
+  "jei.createdelightcoreburnTime": "燃烧%stick"
 }

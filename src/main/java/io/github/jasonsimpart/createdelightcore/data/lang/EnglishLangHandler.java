@@ -19,7 +19,7 @@ public class EnglishLangHandler {
     public static void init(RegistrateLangProvider provider) {
         provider.add(CDCreativeTabs.MISC.get(), "Create Delight | Misc");
         provider.add(CDCreativeTabs.COIN.get(), "Create Delight | Coin");
-        provider.add(CDCreativeTabs.Fluid.get(), "Create Delight | Fluid");
+        provider.add(CDCreativeTabs.FLUID.get(), "Create Delight | Fluid");
 
         coin(provider, CDItems.IRON, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER, "Copper Coin", "Copper");

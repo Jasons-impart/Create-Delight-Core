@@ -1,13 +1,20 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.simibubi.create.Create;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
+
+import java.util.function.Supplier;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
@@ -16,6 +23,10 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
+    public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+    // food
+    public static final ItemEntry<Item> UNFRIED_SHRIMP;
+    public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP;
     // chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
@@ -38,6 +49,9 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_NUGGET;
 
     static {
+        // food
+        UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
+        UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
@@ -60,6 +74,30 @@ public class CDItems {
         BRONZE_NUGGET = simpleNugget("bronze");
         // andesite
     }
+
+    public static ItemEntry<Item> simpleFood(String name, int nutrition, float saturation) {
+        return 	REGISTRATE.item(name, Item::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build()))
+                .tab(FOOD_TAB)
+                .register();
+    }
+
+    public static ItemEntry<Item> simpleRawFood(String name, int nutrition, float saturation) {
+        return 	REGISTRATE.item(name, Item::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .effect(new MobEffectInstance(MobEffects.HUNGER, 50, 0, false, false), 0.5f)
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build()))
+                .tab(FOOD_TAB)
+                .register();
+    }
+
 
     public static ItemEntry<Item> simpleItem(String name) {
         return simpleItem(name, MISC_TAB);

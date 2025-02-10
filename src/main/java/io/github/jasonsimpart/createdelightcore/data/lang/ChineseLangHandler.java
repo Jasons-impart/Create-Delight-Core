@@ -34,7 +34,11 @@ public class ChineseLangHandler {
         //creativetabs
         provider.add(CDCreativeTabs.MISC.get(), "机械动力：悠然乐事 | 杂项");
         provider.add(CDCreativeTabs.COIN.get(), "机械动力：悠然乐事 | 货币");
-        provider.add(CDCreativeTabs.Fluid.get(), "机械动力：悠然乐事 | 流体");
+        provider.add(CDCreativeTabs.FLUID.get(), "机械动力：悠然乐事 | 流体");
+        provider.add(CDCreativeTabs.FOOD.get(), "机械动力：悠然乐事 | 食物");
+        // food
+        provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
+        provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");
         // chocolate
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");
@@ -95,6 +99,10 @@ public class ChineseLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal.player", "%2$s以为%1$s是一块没有融化的金属");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream.player", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
+        //jei
+        provider.add("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat", "烈焰人加热配方");
+        provider.add("jei." + CreateDelightCore.MODID + "burnTime", "燃烧%stick");
+        provider.add("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", "每次燃烧消耗%smB");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,

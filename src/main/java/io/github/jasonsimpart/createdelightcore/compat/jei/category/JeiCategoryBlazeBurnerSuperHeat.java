@@ -35,7 +35,7 @@ public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<JeiCateg
 
     @Override
     public Component getTitle() {
-        return Component.translatable("jei.BlazeBurnerSuperHeat");
+        return Component.translatable("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat");
     }
 
     @Override
@@ -59,8 +59,8 @@ public class JeiCategoryBlazeBurnerSuperHeat implements IRecipeCategory<JeiCateg
 
     @Override
     public void draw(BlazeBurnerRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.burnTime", recipe.burnTime), 10, 7, 0xFFFFFF);
-        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei.amountConsumedPerTick", recipe.perTick), 10, 27, 0xFFFFFF);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei." + CreateDelightCore.MODID + "burnTime", recipe.burnTime), 10, 7, 0xFFFFFF);
+        guiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", recipe.perTick), 10, 27, 0xFFFFFF);
     }
 
     public record BlazeBurnerRecipe(Fluid fluid, int burnTime, int perTick) {
