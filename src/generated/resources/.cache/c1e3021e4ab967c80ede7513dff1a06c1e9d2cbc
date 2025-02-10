@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-10T19:04:40.8374049	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2025-02-10T19:17:40.9993073	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -27,8 +27,8 @@ f7c32322deac65095fe7b2a1bff53e9e650993c3 assets/createdelightcore/blockstates/ne
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 a84bccf73c0d067f4304d529cf42a1ffc23f4c29 assets/createdelightcore/blockstates/vanilla_ice_cream.json
-6b55dc7f87875cf40667909782801eeeddff531e assets/createdelightcore/lang/en_ud.json
-9271472f97f2334c4c11c6dc6dd4efa16e5bc782 assets/createdelightcore/lang/en_us.json
+4f6a4d88c33a670645a0a4f4d18aaff511372349 assets/createdelightcore/lang/en_ud.json
+5de6e8fd20bc6097a1fc99b5cd8246cf14d6da58 assets/createdelightcore/lang/en_us.json
 c0611fa075bfbfbd277f789a063821eab42850be assets/createdelightcore/lang/zh_cn.json
 89aa72b3b79069dc3db4660216f2bc469dfbb504 assets/createdelightcore/models/block/adzuki_ice_cream.json
 779e2d97d3581ddb53420d111bae0361208f5a7b assets/createdelightcore/models/block/banana_ice_cream.json

@@ -20,6 +20,7 @@ public class EnglishLangHandler {
         provider.add(CDCreativeTabs.MISC.get(), "Create Delight | Misc");
         provider.add(CDCreativeTabs.COIN.get(), "Create Delight | Coin");
         provider.add(CDCreativeTabs.FLUID.get(), "Create Delight | Fluid");
+        provider.add(CDCreativeTabs.FOOD.get(), "Create Delight | Food");
 
         coin(provider, CDItems.IRON, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER, "Copper Coin", "Copper");
@@ -34,5 +35,10 @@ public class EnglishLangHandler {
 
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
+        //jei
+        provider.add("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat", "Blaze Burner Heat Recipes");
+        provider.add("jei." + CreateDelightCore.MODID + "burnTime", "Burn Time: %s ticks");
+        provider.add("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", "Consumes %s mB per burn");
+
     }
 }

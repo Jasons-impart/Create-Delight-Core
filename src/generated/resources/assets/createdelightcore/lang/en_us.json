@@ -95,5 +95,9 @@
   "item.createdelightcore.white_chocolate_mold_solid": "White Chocolate Mold Solid",
   "itemGroup.createdelightcore.coin": "Create Delight | Coin",
   "itemGroup.createdelightcore.fluid": "Create Delight | Fluid",
-  "itemGroup.createdelightcore.misc": "Create Delight | Misc"
+  "itemGroup.createdelightcore.food": "Create Delight | Food",
+  "itemGroup.createdelightcore.misc": "Create Delight | Misc",
+  "jei.createdelightcoreBlazeBurnerSuperHeat": "Blaze Burner Heat Recipes",
+  "jei.createdelightcoreamountConsumedPerTick": "Consumes %s mB per burn",
+  "jei.createdelightcoreburnTime": "Burn Time: %s ticks"
 }

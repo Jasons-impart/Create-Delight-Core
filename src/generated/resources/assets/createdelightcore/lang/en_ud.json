@@ -95,5 +95,9 @@
   "item.createdelightcore.white_chocolate_mold_solid": "pıןoS pןoW ǝʇɐןoɔoɥƆ ǝʇıɥM",
   "itemGroup.createdelightcore.coin": "uıoƆ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "itemGroup.createdelightcore.fluid": "pınןℲ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
-  "itemGroup.createdelightcore.misc": "ɔsıW | ʇɥbıןǝᗡ ǝʇɐǝɹƆ"
+  "itemGroup.createdelightcore.food": "pooℲ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
+  "itemGroup.createdelightcore.misc": "ɔsıW | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
+  "jei.createdelightcoreBlazeBurnerSuperHeat": "sǝdıɔǝᴚ ʇɐǝH ɹǝuɹnᗺ ǝzɐןᗺ",
+  "jei.createdelightcoreamountConsumedPerTick": "uɹnq ɹǝd ᗺɯ %s sǝɯnsuoƆ",
+  "jei.createdelightcoreburnTime": "sʞɔıʇ %s :ǝɯı⟘ uɹnᗺ"
 }
