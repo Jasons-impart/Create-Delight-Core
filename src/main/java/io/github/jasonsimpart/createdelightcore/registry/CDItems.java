@@ -23,6 +23,11 @@ public class CDItems {
     // food
     public static final ItemEntry<Item> UNFRIED_SHRIMP;
     public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP;
+    public static final ItemEntry<Item> UNFRIED_CHICKEN_LEG;
+    public static final ItemEntry<Item> UNFRIED_TONKATSU;
+    public static final ItemEntry<Item> UNFRIED_FISH;
+    public static final ItemEntry<Item> UNFRIED_POTATO;
+    public static final ItemEntry<Item> UNFRIED_CALAMARI;
     // chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
@@ -48,6 +53,11 @@ public class CDItems {
         // food
         UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
         UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);
+        UNFRIED_CHICKEN_LEG = simpleRawFood("unfried_chicken_leg", 2, 0.3f);
+        UNFRIED_TONKATSU = simpleRawFood("unfried_tonkatsu", 4, 0.3f);
+        UNFRIED_FISH = simpleRawFood("unfried_fish", 3, 0.3f);
+        UNFRIED_POTATO = simpleRawFood("unfried_potato", 2, 0.3f);
+        UNFRIED_CALAMARI = simpleRawFood("unfried_calamari", 1, 0.3f);
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);

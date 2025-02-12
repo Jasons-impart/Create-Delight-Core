@@ -39,6 +39,11 @@ public class ChineseLangHandler {
         // food
         provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
         provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");
+        provider.addItem(CDItems.UNFRIED_CHICKEN_LEG, "生炸鸡腿");
+        provider.addItem(CDItems.UNFRIED_TONKATSU, "生炸猪排");
+        provider.addItem(CDItems.UNFRIED_FISH, "生炸鱼");
+        provider.addItem(CDItems.UNFRIED_POTATO, "生炸土豆");
+        provider.addItem(CDItems.UNFRIED_CALAMARI, "生炸鱿鱼圈");
         // chocolate
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");
@@ -91,7 +96,8 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.STRAWBERRY_ICE_CREAM, "草莓冰淇淋");
         addFluid(provider, CDFluids.VANILLA_ICE_CREAM, "原味冰淇淋");
         //slime
-        addFluid(provider, CDFluids.SLIME, "粘液");
+        addFluid(provider, CDFluids.SLIME, "黏液");
+        addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
