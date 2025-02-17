@@ -34,8 +34,8 @@ public class IceCreamFluidType extends AllFluids.TintedFluidType {
     @Override
     public boolean move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity) {
         Vec3 movement = entity.getDeltaMovement();
-        Vec3 vec3 = new Vec3(movement.x, 0.0d, movement.z);
-        Vec3 newMovement = new Vec3(vec3.x * 0.6d, 0.0d - (vec3.y < 0.12d ? 5.0E-3d : vec3.y), vec3.z * 0.6d);
+        Vec3 newMovement = movement.scale(0.6F);
+//        Vec3 newMovement = new Vec3(vec3.x * 0.6d, 0.0d - (vec3.y < 0.12d ? 5.0E-3d : vec3.y), vec3.z * 0.6d);
         entity.setDeltaMovement(newMovement);
         entity.setIsInPowderSnow(true);
         entity.setTicksFrozen(Math.min(entity.getTicksRequiredToFreeze(), entity.getTicksFrozen() + 5));
