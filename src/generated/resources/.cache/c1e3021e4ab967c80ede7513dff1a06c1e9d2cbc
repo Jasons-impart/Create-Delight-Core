@@ -1,4 +1,4 @@
-// 1.20.1	2025-02-12T21:14:21.7330761	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2025-02-13T09:02:47.6271009	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -114,7 +114,7 @@ c2589d561d4aa67226c6707101141d12ad9bc53c assets/createdelightcore/models/item/un
 ff8f7b9dee9f3d250f38da89f80e11213410d4a2 assets/createdelightcore/models/item/white_chocolate_mold_solid.json
 f283c26c1fa27c3896f154861bdabed5926c4b1f data/createdelightcore/loot_tables/blocks/bronze_block.json
 8faa3bf85f737cd2e3b810a6470038e426c93197 data/createdelightcore/loot_tables/blocks/copper_coin_pile.json
-abcf320ea730a143301fd6e67471eda777c0debe data/createdelightcore/loot_tables/blocks/deepslate_tin_ore.json
+d5b1a0d9424a0ad8e99c1bcdfb707f515a5d912c data/createdelightcore/loot_tables/blocks/deepslate_tin_ore.json
 54b1a001072cbc47b3de99804388fc719168ee36 data/createdelightcore/loot_tables/blocks/electrum_block.json
 26b32a377b7579bd73d874d27a6b5d9c84dde6ee data/createdelightcore/loot_tables/blocks/emerald_coin_pile.json
 45f65621a9dae8417d0555779d77e51823cfb22e data/createdelightcore/loot_tables/blocks/gold_coin_pile.json
@@ -122,7 +122,7 @@ ee0b943b177ec5092f048a073a717fd0f45cdd57 data/createdelightcore/loot_tables/bloc
 bffe254702651795a7b201181d59c10324459d50 data/createdelightcore/loot_tables/blocks/netherite_coin_pile.json
 7a92c1ccf4a875257e8945b9f4dcf8695c042def data/createdelightcore/loot_tables/blocks/raw_tin_block.json
 baed56a7aa667d36c36ae0300e2cdfd0305eddde data/createdelightcore/loot_tables/blocks/tin_block.json
-080abba4ea38565b95631840c6112cdbc6c11485 data/createdelightcore/loot_tables/blocks/tin_ore.json
+ae4d556745d594b487d476ea981d18a82bf45aec data/createdelightcore/loot_tables/blocks/tin_ore.json
 bc8701774f57ab000a8f0f1d390702175a6cdbb8 data/createdelightcore/tags/blocks/fan_processing_catalysts/freezing.json
 3f40e44b36575a2043f567d4f23aa1aa17d9d9e2 data/createdelightcore/tags/items/freezable.json
 6782ba67cdbab24fa84f8bb550cbc73711079762 data/create/tags/blocks/fan_transparent.json
@@ -172,5 +172,4 @@ d63de8049d2b5f7246ab0d5a0ef78fd6c50d2128 data/forge/tags/items/storage_blocks/el
 999fa53f930bb10a940e340831b5cdae6323ddbf data/forge/tags/items/storage_blocks/raw_tin.json
 c610159eee458eb6ba32c22e6e47b5fcd5986eeb data/forge/tags/items/storage_blocks/tin.json
 abd092104bbacaa3afdd6984f1cf86e2dd186b2d data/minecraft/tags/blocks/mineable/pickaxe.json
-5fe8800d999a46282d1527a10dc604bd6fba5d13 data/minecraft/tags/blocks/needs_diamond_tool.json
-e65c80fc1c3e7cd435abde9e2781013052fe2cac data/minecraft/tags/blocks/needs_iron_tool.json
+e99ef040de9830dc6d443c9587dce23c66824595 data/minecraft/tags/blocks/needs_iron_tool.json
