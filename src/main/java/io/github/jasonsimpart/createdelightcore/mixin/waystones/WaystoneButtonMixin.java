@@ -10,6 +10,7 @@ import net.blay09.mods.waystones.Waystones;
 import net.blay09.mods.waystones.api.IWaystone;
 import net.blay09.mods.waystones.client.gui.widget.WaystoneButton;
 import net.blay09.mods.waystones.config.WaystonesConfig;
+import net.blay09.mods.waystones.core.PlayerWaystoneManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -61,10 +62,11 @@ public class WaystoneButtonMixin extends Button {
     }
 
     // 额外判断isRender
-    @Inject(method = "<init>", at = @At("TAIL"), remap = false)
+    @Inject(method = "<init>", at = @At("TAIL"), remap = false, cancellable = true)
     private void WaystoneButton(int x, int y, IWaystone waystone, int xpLevelCost, OnPress pressable, CallbackInfo ci) {
 
         if (CDConfig.useMoneyTeleport) {
+            active = true;
             Player player = Minecraft.getInstance().player;
 
             if (player == null) {
@@ -84,6 +86,8 @@ public class WaystoneButtonMixin extends Button {
             if (CreateDelightCore$distance > 5) {
                 CreateDelightCore$isRender = true;
             }
+
+            ci.cancel();
         }
     }
 
@@ -129,7 +133,7 @@ public class WaystoneButtonMixin extends Button {
                     final List<Component> tooltip = new ArrayList<>();
 
                     // 判断余额与经验是否足以传送消耗
-                    boolean haveXpLevelRequirement = xpLevelCost > 0;
+                    boolean haveXpLevelRequirement = xpLevelCost > 0 && false;
                     boolean haveMoneyRequirement = CreateDelightCore$cost != 0;
                     boolean canXpLevelAfford = Objects.requireNonNull(mc.player).experienceLevel >= xpLevelCost || mc.player.getAbilities().instabuild;
 

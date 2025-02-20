@@ -23,8 +23,7 @@ public class CreateDelightCore {
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
-        if (CDConfig.useMoneyTeleport)
-            MinecraftForge.EVENT_BUS.register(new TeleportHandler());
+        MinecraftForge.EVENT_BUS.register(new TeleportHandler());
         CDItems.init();
         CDFluids.init();
         CDBlocks.init();

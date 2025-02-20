@@ -34,29 +34,30 @@ public class TeleportHandler {
      */
     @SubscribeEvent
     public void onWayStoneTeleport(WaystoneTeleportEvent.Pre event) {
-        Entity teleportedEntity = event.getContext().getEntity();
-        if (teleportedEntity instanceof Player player) {
 
-            // 判断是否处于创造模式
-            if (player.getAbilities().instabuild) {
-                return;
+        if (CDConfig.useMoneyTeleport) {
+
+            Entity teleportedEntity = event.getContext().getEntity();
+            if (teleportedEntity instanceof Player player) {
+                // 判断是否处于创造模式
+                if (player.getAbilities().instabuild) {
+                    return;
+                }
+                // 计算距离
+                IWaystone waystone = event.getContext().getTargetWaystone();
+
+                // 计算传送费用并判断余额是否足以支付传送费用
+                int teleportCostNumber = MoneyUtil.getTeleportCost(player, waystone);
+                MoneyValue moneyCost = MoneyUtil.baseCoinNumberToCoinValue(teleportCostNumber);
+                boolean canAfford = MoneyUtil.playerCanAfford(player, moneyCost);
+                // 执行消费或取消传送
+                if (canAfford) {
+                    MoneyAPI.API.GetPlayersMoneyHandler(player).extractMoney(moneyCost, false);
+                    event.setXpCost(0);
+                } else {
+                    event.setCanceled(true);
+                }
             }
-
-            // 计算距离
-            IWaystone waystone = event.getContext().getTargetWaystone();
-
-            // 计算传送费用并判断余额是否足以支付传送费用
-            int teleportCostNumber = MoneyUtil.getTeleportCost(player, waystone);
-            MoneyValue moneyCost = MoneyUtil.baseCoinNumberToCoinValue(teleportCostNumber);
-            boolean canAfford = MoneyUtil.playerCanAfford(player, moneyCost);
-            // 执行消费或取消传送
-            if (canAfford) {
-                MoneyAPI.API.GetPlayersMoneyHandler(player).extractMoney(moneyCost, false);
-            } else {
-                event.setCanceled(true);
-            }
-            moneyCost.getText();
-
         }
     }
 
