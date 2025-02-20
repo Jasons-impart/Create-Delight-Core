@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.server;
 
+import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -26,6 +27,8 @@ public class ItemEntityEvent {
     public static void serverTickEvent(TickEvent.ServerTickEvent event) {
         long preTime = 20 * 60 * 5;
         if(event.getServer().getTickCount() % preTime == 0) {
+            if (CDConfig.disableDropReport)
+                return;
             if(lastRunTime == event.getServer().getTickCount())
             {
                 return;
@@ -42,10 +45,12 @@ public class ItemEntityEvent {
 
                 collect.forEach(itemEntity -> {
                     Chunk chunk = worldToChunk(world.dimension().location().toString() , (int) itemEntity.getX(), (int) itemEntity.getZ());
+                    int count = CDConfig.ignoreStackCount ? 1 : itemEntity.getItem().getCount();
+
                     if(worldEntityCount.containsKey(chunk)) {
-                        worldEntityCount.put(chunk, worldEntityCount.get(chunk) + itemEntity.getItem().getCount());
+                        worldEntityCount.put(chunk, worldEntityCount.get(chunk) + count);
                     } else {
-                        worldEntityCount.put(chunk, itemEntity.getItem().getCount());
+                        worldEntityCount.put(chunk, count);
                     }
                     //System.out.println("item: " + itemEntity.getName().getString() + " x: " + itemEntity.getX() + " y: " + itemEntity.getY() + " z: " + itemEntity.getZ() + " stack: " + itemEntity.getItem().getCount());
                 });
@@ -53,7 +58,7 @@ public class ItemEntityEvent {
             final boolean[] isStart = {false};
             worldEntityCount.forEach((chunk, count) -> {
                 System.out.println("chunk: " + chunk.x + " " + chunk.z + " count: " + count);
-                if(count > 100 ){
+                if(count > CDConfig.itemThreshold){
                     if(!isStart[0])
                     {
                         isStart[0] = true;

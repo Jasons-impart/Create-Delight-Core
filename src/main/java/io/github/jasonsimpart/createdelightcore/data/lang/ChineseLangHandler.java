@@ -109,6 +109,9 @@ public class ChineseLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat", "烈焰人加热配方");
         provider.add("jei." + CreateDelightCore.MODID + "burnTime", "燃烧%stick");
         provider.add("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", "每次燃烧消耗%smB");
+        //waystone
+        provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
+        provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,

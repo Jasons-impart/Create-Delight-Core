@@ -17,7 +17,8 @@
     "lunarian.SellItemFactoryMixin",
     "lunarian.SellPotionHoldingItemFactoryMixin",
     "lunarian.SellSuspiciousStewFactoryMixin",
-    "Minecraft.PlayerMixin"
+    "Minecraft.PlayerMixin",
+    "waystones.WaystoneButtonMixin"
   ],
   "client": [],
   "minVersion": "0.8"

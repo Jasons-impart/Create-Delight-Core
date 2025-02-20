@@ -51,6 +51,8 @@
   "fluid.createdelightcore.slime": "Slime",
   "fluid.createdelightcore.strawberry_ice_cream": "Strawberry Ice Cream",
   "fluid.createdelightcore.vanilla_ice_cream": "Vanilla Ice Cream",
+  "gui.createdelightcore.free": "Free",
+  "gui.createdelightcore.need": "Need ",
   "item.createdelightcore.adzuki_ice_cream_bucket": "Adzuki Ice Cream Bucket",
   "item.createdelightcore.banana_ice_cream_bucket": "Banana Ice Cream Bucket",
   "item.createdelightcore.black_chocolate_mold_filled": "Black Chocolate Mold Filled",

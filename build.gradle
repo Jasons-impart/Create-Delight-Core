@@ -203,6 +203,13 @@ dependencies {
     implementation fg.deobf("curse.maven:createaddition-439890:5658602")
     // create utilities
     implementation fg.deobf("curse.maven:createutilities-881586:5225304")
+    // lightmans currency
+    implementation fg.deobf("curse.maven:lightmanscurrency-472521:6205400")
+    // waystones
+    implementation fg.deobf("curse.maven:balm-531761:6205942")
+    implementation fg.deobf("curse.maven:waystones-245755:6156671")
+
+
 }
 
 mixin {

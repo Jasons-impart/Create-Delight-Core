@@ -51,6 +51,8 @@
   "fluid.createdelightcore.slime": "黏液",
   "fluid.createdelightcore.strawberry_ice_cream": "草莓冰淇淋",
   "fluid.createdelightcore.vanilla_ice_cream": "原味冰淇淋",
+  "gui.createdelightcore.free": "免费",
+  "gui.createdelightcore.need": "需要：",
   "item.createdelightcore.adzuki_ice_cream_bucket": "红豆冰淇淋桶",
   "item.createdelightcore.banana_ice_cream_bucket": "香蕉冰淇淋桶",
   "item.createdelightcore.black_chocolate_mold_filled": "盛满的黑巧克力模具",
