@@ -38,6 +38,8 @@ public class CDBlocks {
         public static final BlockEntry<Block> TIN;
     //bronze
     public static final BlockEntry<Block> BRONZE;
+    //forged_steel
+    public static final BlockEntry<Block> FORGED_STEEL;
     //fragment_of_border
     public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER;
     //coin_pile
@@ -59,6 +61,8 @@ public class CDBlocks {
             TIN = simpleMetalBlock("tin", BlockTags.NEEDS_IRON_TOOL);
         //bronze
         BRONZE = simpleMetalBlock("bronze", BlockTags.NEEDS_IRON_TOOL);
+        //forged_steel
+        FORGED_STEEL = simpleMetalBlock("forged_steel", BlockTags.NEEDS_DIAMOND_TOOL);
         //fargment_of_border
         //noinspection removal
         FRAGMENT_OF_BORDER = REGISTRATE.block("fragment_of_border", GlassBlock::new)

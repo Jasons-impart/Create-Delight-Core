@@ -44,6 +44,7 @@ public class MoltenMetalFluidInteraction {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> TUNGSTEN = CMFluids.MOLTEN_TUNGSTEN;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> BRASS = CMFluids.MOLTEN_BRASS;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> BRONZE = CMFluids.MOLTEN_BRONZE;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> FORGED_STEEL = CDFluids.MOLTEN_FORGED_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> ELECTRUM = CMFluids.MOLTEN_ELECTRUM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NETHERITE = CMFluids.MOLTEN_NETHERITE;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> STEEL = CMFluids.MOLTEN_STEEL;
@@ -69,6 +70,7 @@ public class MoltenMetalFluidInteraction {
         event.enqueueWork(() -> addInteraction(TUNGSTEN.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(BRASS.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(BRONZE.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(FORGED_STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(ELECTRUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(NETHERITE.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(STEEL.get().getFluidType()));
@@ -108,6 +110,7 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(TUNGSTEN.get().getFluidType(), CMBlocks.TUNGSTEN_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(BRASS.get().getFluidType(), AllBlocks.BRASS_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(BRONZE.get().getFluidType(), CDBlocks.BRONZE.getDefaultState());
+            moltenMetalBlocks.put(FORGED_STEEL.get().getFluidType(), CDBlocks.FORGED_STEEL.getDefaultState());
             moltenMetalBlocks.put(ELECTRUM.get().getFluidType(), CDBlocks.ELECTRUM.getDefaultState());
             moltenMetalBlocks.put(NETHERITE.get().getFluidType(), Blocks.NETHERITE_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(STEEL.get().getFluidType(), CMBlocks.STEEL_BLOCK.get().defaultBlockState());

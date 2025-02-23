@@ -6,6 +6,7 @@
     "createdelightcore:raw_tin_block",
     "createdelightcore:tin_block",
     "createdelightcore:bronze_block",
+    "createdelightcore:forged_steel_block",
     "createdelightcore:fragment_of_border"
   ]
 }
