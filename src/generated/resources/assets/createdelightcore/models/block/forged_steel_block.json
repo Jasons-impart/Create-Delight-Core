@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "createdelightcore:block/forged_steel_block"
+  }
+}

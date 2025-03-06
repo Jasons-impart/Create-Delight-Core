@@ -17,6 +17,8 @@
     "createdelightcore:flowing_molten_ice_steel",
     "createdelightcore:molten_ice_steel",
     "createdelightcore:flowing_molten_lightning_steel",
-    "createdelightcore:molten_lightning_steel"
+    "createdelightcore:molten_lightning_steel",
+    "createdelightcore:flowing_molten_forged_steel",
+    "createdelightcore:molten_forged_steel"
   ]
 }

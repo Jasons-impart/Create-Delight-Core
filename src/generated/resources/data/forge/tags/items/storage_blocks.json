@@ -3,6 +3,7 @@
     "createdelightcore:electrum_block",
     "createdelightcore:raw_tin_block",
     "createdelightcore:tin_block",
-    "createdelightcore:bronze_block"
+    "createdelightcore:bronze_block",
+    "createdelightcore:forged_steel_block"
   ]
 }

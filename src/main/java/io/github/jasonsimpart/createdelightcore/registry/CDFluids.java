@@ -29,6 +29,7 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_FIRE_STEEL = moltenFluid("fire_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ICE_STEEL = moltenFluid("ice_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LIGHTNING_STEEL = moltenFluid("lightning_steel");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_FORGED_STEEL = moltenFluid("forged_steel");
     // all ice cream
     public static final FluidEntry<ForgeFlowingFluid.Flowing> ADZUKI_ICE_CREAM = iceCreamFluid("adzuki");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> BANANA_ICE_CREAM = iceCreamFluid("banana");
