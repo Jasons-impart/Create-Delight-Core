@@ -1,9 +1,15 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
+import com.simibubi.create.foundation.data.BuilderTransformers;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import io.github.jasonsimpart.createdelightcore.AllSpriteShifts;
 import io.github.jasonsimpart.createdelightcore.content.block.CoinPileBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
@@ -201,6 +207,13 @@ public class CDBlocks {
                 .register();
     }
 
+    //TODO: 修改为注册方块的轮子
+    public static final BlockEntry<CasingBlock> STEEL_CASING = REGISTRATE.block("steel_casing", CasingBlock::new)
+            .properties(p -> p.mapColor(MapColor.PODZOL))
+            .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(AllSpriteShifts.STEEL_CASING)))
+            .item()
+            .build()
+            .register();
     public static void init() {
     }
 }
