@@ -68,6 +68,9 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.TIN, "锡块");
         provider.addBlock(CDBlocks.BRONZE, "青铜块");
         provider.addBlock(CDBlocks.FORGED_STEEL, "锻造钢块");
+        //casing
+        provider.addBlock(CDBlocks.STEEL_CASING, "钢制机壳");
+        provider.addBlock(CDBlocks.FORGE_STEEL_CASING, "锻造钢机壳");
         //coin
         coin(provider, CDItems.IRON, "铁币", "铁");
         coin(provider, CDItems.COPPER, "铜币", "铜");

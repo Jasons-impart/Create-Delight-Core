@@ -1,15 +1,13 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
-import com.simibubi.create.foundation.data.BuilderTransformers;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import io.github.jasonsimpart.createdelightcore.AllSpriteShifts;
 import io.github.jasonsimpart.createdelightcore.content.block.CoinPileBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
@@ -54,6 +52,9 @@ public class CDBlocks {
     public static final BlockEntry<CoinPileBlock> GOLD;
     public static final BlockEntry<CoinPileBlock> EMERALD;
     public static final BlockEntry<CoinPileBlock> NETHERITE;
+    //casing
+    public static final BlockEntry<CasingBlock> STEEL_CASING;
+    public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING;
 
     static {
         //electrum
@@ -92,6 +93,9 @@ public class CDBlocks {
         GOLD = coinPileBlock("gold", Rarity.RARE);
         EMERALD = coinPileBlock("emerald", Rarity.RARE);
         NETHERITE = coinPileBlock("netherite", Rarity.EPIC);
+        //casing
+        STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
+        FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
@@ -207,13 +211,21 @@ public class CDBlocks {
                 .register();
     }
 
-    //TODO: 修改为注册方块的轮子
-    public static final BlockEntry<CasingBlock> STEEL_CASING = REGISTRATE.block("steel_casing", CasingBlock::new)
-            .properties(p -> p.mapColor(MapColor.PODZOL))
-            .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(AllSpriteShifts.STEEL_CASING)))
-            .item()
-            .build()
-            .register();
+    public static final BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
+        return REGISTRATE.block(name + "_casing", CasingBlock::new)
+                .item()
+                .properties(p -> p.rarity(rarity))
+                .tab(MISC_TAB)
+                .build()
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .sound(SoundType.METAL)
+                )
+                .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
+                .register();
+    }
+
+
     public static void init() {
     }
 }
