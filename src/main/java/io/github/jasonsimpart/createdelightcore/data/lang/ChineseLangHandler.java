@@ -32,10 +32,10 @@ public class ChineseLangHandler {
 
     public static void init(RegistrateCNLangProvider provider) {
         //creativetabs
-        provider.add(CDCreativeTabs.MISC.get(), "机械动力：悠然乐事 | 杂项");
-        provider.add(CDCreativeTabs.COIN.get(), "机械动力：悠然乐事 | 货币");
-        provider.add(CDCreativeTabs.FLUID.get(), "机械动力：悠然乐事 | 流体");
-        provider.add(CDCreativeTabs.FOOD.get(), "机械动力：悠然乐事 | 食物");
+        provider.add(CDCreativeTabs.MISC.get(), "齿轮盛宴 | 杂项");
+        provider.add(CDCreativeTabs.COIN.get(), "齿轮盛宴 | 货币");
+        provider.add(CDCreativeTabs.FLUID.get(), "齿轮盛宴 | 流体");
+        provider.add(CDCreativeTabs.FOOD.get(), "齿轮盛宴 | 食物");
         // food
         provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
         provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");

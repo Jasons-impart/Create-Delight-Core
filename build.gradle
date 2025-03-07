@@ -208,7 +208,8 @@ dependencies {
     // waystones
     implementation fg.deobf("curse.maven:balm-531761:6205942")
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
-
+    // create utilities
+    implementation fg.deobf("curse.maven:createutilities-881586:5225304")
 
 }
 
