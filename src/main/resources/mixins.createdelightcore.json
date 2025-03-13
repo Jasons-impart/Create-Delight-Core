@@ -7,6 +7,8 @@
     "AbstractVillagerMixin",
     "VillagerMixin",
     "CA.EnergyNetWorkMixin",
+    "Create.FluidDrainingBehaviourMixin",
+    "Create.FluidManipulationBehaviourAccessor",
     "CU.VoidBatteryMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
@@ -22,5 +24,8 @@
     "waystones.WaystoneButtonMixin"
   ],
   "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  },
   "minVersion": "0.8"
 }
