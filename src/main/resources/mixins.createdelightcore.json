@@ -7,8 +7,6 @@
     "AbstractVillagerMixin",
     "VillagerMixin",
     "CA.EnergyNetWorkMixin",
-    "Create.FluidDrainingBehaviourMixin",
-    "Create.FluidManipulationBehaviourAccessor",
     "CU.VoidBatteryMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
