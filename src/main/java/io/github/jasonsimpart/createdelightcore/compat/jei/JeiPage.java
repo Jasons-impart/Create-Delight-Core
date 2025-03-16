@@ -23,7 +23,7 @@ public class JeiPage implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerSuperHeat(registration.getJeiHelpers()));
-        registration.addRecipeCategories();
+        // registration.addRecipeCategories();
     }
 
     @Override
@@ -37,8 +37,8 @@ public class JeiPage implements IModPlugin {
                 var a = pair.getSecond();
                 if(a != null){
                     Boolean b  = a.getSecond();
-                    if(b != null && b && a.getFirst() != null && a.getThird() != null){
-                        superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(fluid, a.getFirst(), a.getThird()));
+                    if(b != null && a.getFirst() != null && a.getThird() != null){
+                        superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(fluid, a.getSecond(), a.getFirst(), a.getThird()));
                     }
                 }
             }
