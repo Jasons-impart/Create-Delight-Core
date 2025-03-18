@@ -113,7 +113,7 @@
   "itemGroup.createdelightcore.fluid": "齿轮盛宴 | 流体",
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
-  "jei.createdelightcoreBlazeBurnerSuperHeat": "烈焰人加热配方",
-  "jei.createdelightcoreamountConsumedPerTick": "每次燃烧消耗%smB",
-  "jei.createdelightcoreburnTime": "燃烧%stick"
+  "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
+  "jei.createdelightcore.amountConsume": "消耗%smB",
+  "jei.createdelightcore.burnTime": "燃烧%stick"
 }

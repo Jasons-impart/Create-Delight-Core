@@ -1,10 +1,12 @@
 package io.github.jasonsimpart.createdelightcore.compat.jei;
 
 import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
+import com.simibubi.create.AllBlocks;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerSuperHeat;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
@@ -17,32 +19,41 @@ import java.util.List;
 public class JeiPage implements IModPlugin {
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return CreateDelightCore.id("jei_plugin_superheat");
+        return CreateDelightCore.id("jei_plugin");
     }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new JeiCategoryBlazeBurnerSuperHeat(registration.getJeiHelpers()));
+        registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
         // registration.addRecipeCategories();
     }
 
     @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
+    }
+
+    @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        List<JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe> superHeatFluids = new ArrayList<>();
+        List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> heatFluids = new ArrayList<>();
         //test
-        //superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(AllFluids.CHOCOLATE.get(), 20, 10));
-        //superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(Fluids.WATER.getSource(), 32, 16));
-        BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, pair) -> {
-            if(pair != null){
-                var a = pair.getSecond();
-                if(a != null){
-                    Boolean b  = a.getSecond();
-                    if(b != null && a.getFirst() != null && a.getThird() != null){
-                        superHeatFluids.add(new JeiCategoryBlazeBurnerSuperHeat.BlazeBurnerRecipe(fluid, a.getSecond(), a.getFirst(), a.getThird()));
+        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(AllFluids.CHOCOLATE.get(), 20, 10));
+        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(Fluids.WATER.getSource(), 32, 16));
+        
+        BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, item) -> {
+            // item: <ResourceLocation, info: <burnTime: int, isSuperHeat: bool, amountConsume: int>>
+            if(item != null){
+                var info = item.getSecond();
+                if(info != null){
+                    Boolean isSuperHeat = info.getSecond();
+                    Integer burnTime = info.getFirst();
+                    Integer amountConsume = info.getThird();
+                    if(isSuperHeat != null && burnTime != null && amountConsume != null){
+                        heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(fluid, isSuperHeat, burnTime, amountConsume));
                     }
                 }
             }
         });
-        registration.addRecipes(JeiCategoryBlazeBurnerSuperHeat.RECIPE_TYPE, superHeatFluids);
+        registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, heatFluids);
     }
 }
