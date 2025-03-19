@@ -4,7 +4,6 @@ import com.mrh0.createaddition.index.CAItems;
 import com.mrh0.createaddition.util.ClientMinecraftWrapper;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.EmptyBackground;
-import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import com.simibubi.create.foundation.utility.Lang;
@@ -28,6 +27,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
+import io.github.jasonsimpart.createdelightcore.compat.jei.utils.AnimatedBlazeBurner;
 
 public class JeiCategoryBlazeBurnerFluid
         implements IRecipeCategory<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> {
