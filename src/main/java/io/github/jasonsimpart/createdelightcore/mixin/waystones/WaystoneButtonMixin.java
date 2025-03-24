@@ -1,27 +1,18 @@
 package io.github.jasonsimpart.createdelightcore.mixin.waystones;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.content.util.MoneyUtil;
-import io.github.lightman314.lightmanscurrency.api.money.value.MoneyValue;
 import io.github.lightman314.lightmanscurrency.api.money.value.builtin.CoinValue;
-import net.blay09.mods.waystones.Waystones;
 import net.blay09.mods.waystones.api.IWaystone;
 import net.blay09.mods.waystones.client.gui.widget.WaystoneButton;
-import net.blay09.mods.waystones.config.WaystonesConfig;
-import net.blay09.mods.waystones.core.PlayerWaystoneManager;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -72,10 +63,9 @@ public class WaystoneButtonMixin extends Button {
             if (player == null) {
                 return;
             }
-
             // 计算距离
             CreateDelightCore$distance = (int) player.position().distanceTo(waystone.getPos().getCenter());
-            CreateDelightCore$cost = MoneyUtil.getTeleportCost(player, waystone);
+            CreateDelightCore$cost = CDConfig.teleportCost * xpLevelCost;
             // 计算传送费用并判断余额是否足以支付传送费用
             CreateDelightCore$canAfford = MoneyUtil.playerCanAfford(player, MoneyUtil.baseCoinNumberToCoinValue(CreateDelightCore$cost));
             // 余额不足

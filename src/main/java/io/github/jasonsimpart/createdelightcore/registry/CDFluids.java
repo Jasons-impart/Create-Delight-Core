@@ -98,7 +98,7 @@ public class CDFluids {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
         return REGISTRATE.fluid(name, STILL_RL, FLOW_RL, SlimeFluidType::new)
-                .renderType(RenderType::translucent)
+//                .renderType(RenderType::translucent)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_BREAK)
