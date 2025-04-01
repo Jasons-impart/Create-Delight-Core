@@ -3,6 +3,7 @@
   "block.createdelightcore.banana_ice_cream": "香蕉冰淇淋",
   "block.createdelightcore.bronze_block": "青铜块",
   "block.createdelightcore.chocolate_ice_cream": "巧克力冰淇淋",
+  "block.createdelightcore.copper_coil_casing": "铜线圈机壳",
   "block.createdelightcore.copper_coin_pile": "铜币堆",
   "block.createdelightcore.deepslate_tin_ore": "深层锡矿石",
   "block.createdelightcore.electrum_block": "琥珀金块",
@@ -113,7 +114,7 @@
   "itemGroup.createdelightcore.fluid": "齿轮盛宴 | 流体",
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
-  "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
-  "jei.createdelightcore.amountConsume": "消耗%smB",
-  "jei.createdelightcore.burnTime": "燃烧%stick"
+  "jei.createdelightcoreBlazeBurnerSuperHeat": "烈焰人加热配方",
+  "jei.createdelightcoreamountConsumedPerTick": "每次燃烧消耗%smB",
+  "jei.createdelightcoreburnTime": "燃烧%stick"
 }

@@ -55,6 +55,7 @@ public class CDBlocks {
     //casing
     public static final BlockEntry<CasingBlock> STEEL_CASING;
     public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING;
+    public static final BlockEntry<CasingBlock> COPPER_COIL_CASING;
 
     static {
         //electrum
@@ -96,6 +97,7 @@ public class CDBlocks {
         //casing
         STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
         FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
+        COPPER_COIL_CASING = simpleCasingBlock("copper_coil", Rarity.COMMON, CDCSpriteShifts.COPPER_COIL_CASING);
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {

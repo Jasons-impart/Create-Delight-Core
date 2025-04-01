@@ -9,7 +9,7 @@ import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 public class CDCSpriteShifts {
     public static final CTSpriteShiftEntry STEEL_CASING = getCT(AllCTTypes.OMNIDIRECTIONAL, "steel_casing");
     public static final CTSpriteShiftEntry FORGE_STEEL_CASING = getCT(AllCTTypes.OMNIDIRECTIONAL, "forge_steel_casing");
-
+    public static final CTSpriteShiftEntry COPPER_COIL_CASING = getCT(AllCTTypes.OMNIDIRECTIONAL, "copper_coil_casing");
 
     private static CTSpriteShiftEntry getCT(CTType type, String blockTextureName, String connectedTextureName) {
         return CTSpriteShifter.getCT(type, CreateDelightCore.id("block/" + blockTextureName),

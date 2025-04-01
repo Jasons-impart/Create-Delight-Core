@@ -1,8 +1,9 @@
-// 1.20.1	2025-03-07T22:33:55.6549594	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2025-04-01T22:15:45.923153	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
 a6c94a8df04998e187169090857983a6b9e13aa2 assets/createdelightcore/blockstates/chocolate_ice_cream.json
+e50ba974caee53960855e5e874b2c964b628b264 assets/createdelightcore/blockstates/copper_coil_casing.json
 ee1784e2466fa57cf6416d1c08aed2d7444b4f12 assets/createdelightcore/blockstates/copper_coin_pile.json
 f0848c5356eebbeb15db75c917c57dea375329cc assets/createdelightcore/blockstates/deepslate_tin_ore.json
 c5b8f390bb2782907d1f3f728e409938e09f1930 assets/createdelightcore/blockstates/electrum_block.json
@@ -32,13 +33,14 @@ f7c32322deac65095fe7b2a1bff53e9e650993c3 assets/createdelightcore/blockstates/ne
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 a84bccf73c0d067f4304d529cf42a1ffc23f4c29 assets/createdelightcore/blockstates/vanilla_ice_cream.json
-2acab6c3f9632c8f5ee42bed3855004422fa98a7 assets/createdelightcore/lang/en_ud.json
-9a769b4f41673fc75fbd7e79cf4a3b5cd130d1af assets/createdelightcore/lang/en_us.json
-fb500f2cb99d9479575cf30930646d46cc997d9e assets/createdelightcore/lang/zh_cn.json
+fc12c89fd590cf656bf40ac8588542a2f60812fe assets/createdelightcore/lang/en_ud.json
+17d445054e4552612cde26bc819452aa50d3496e assets/createdelightcore/lang/en_us.json
+f1679abb620ac9693f3eba88b4824ff33e728304 assets/createdelightcore/lang/zh_cn.json
 89aa72b3b79069dc3db4660216f2bc469dfbb504 assets/createdelightcore/models/block/adzuki_ice_cream.json
 779e2d97d3581ddb53420d111bae0361208f5a7b assets/createdelightcore/models/block/banana_ice_cream.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
 0961a29e9e533174ac57c6bd0a3642c66b1b5f81 assets/createdelightcore/models/block/chocolate_ice_cream.json
+4205fb3d7cb08b0e2fc02f5cb2c99e1c89388249 assets/createdelightcore/models/block/copper_coil_casing.json
 944dd664042b870aa73769e70cccf4c9b8aca6b8 assets/createdelightcore/models/block/copper_coin_pile.json
 926b0edb6ea3ce071e51422d6e95f170c43af98d assets/createdelightcore/models/block/deepslate_tin_ore.json
 da9acd9e36cacb0714da7566c24d9fc7dce9d876 assets/createdelightcore/models/block/electrum_block.json
@@ -76,6 +78,7 @@ d1d84e01eac86f31dd6fcf87d67555b976ad8834 assets/createdelightcore/models/item/br
 af73221b929bed6ef454d3d636be1542a30a486d assets/createdelightcore/models/item/bronze_ingot.json
 1705144a7ec02daec71c8e55a9d70dfa43e6502a assets/createdelightcore/models/item/bronze_nugget.json
 34dd0222c9605e747d3ee81ef1c51e1069e5af1a assets/createdelightcore/models/item/chocolate_ice_cream_bucket.json
+4b2c74ce5973866f8995ae8c56eb8d3e64cae828 assets/createdelightcore/models/item/copper_coil_casing.json
 369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
 cbf18c93920d0d579a427a794c005be8b14fe1f5 assets/createdelightcore/models/item/copper_coin_pile.json
 bfe5907bacc8b0f52377b0098157801ab824f517 assets/createdelightcore/models/item/deepslate_tin_ore.json
@@ -125,6 +128,7 @@ c2589d561d4aa67226c6707101141d12ad9bc53c assets/createdelightcore/models/item/un
 0ed9a4fc3ca00d156ef2104444d6a560e6f27977 assets/createdelightcore/models/item/white_chocolate_mold_filled.json
 ff8f7b9dee9f3d250f38da89f80e11213410d4a2 assets/createdelightcore/models/item/white_chocolate_mold_solid.json
 f283c26c1fa27c3896f154861bdabed5926c4b1f data/createdelightcore/loot_tables/blocks/bronze_block.json
+898ec713ce634c3875a7eac17ba51ce3246e8d47 data/createdelightcore/loot_tables/blocks/copper_coil_casing.json
 8faa3bf85f737cd2e3b810a6470038e426c93197 data/createdelightcore/loot_tables/blocks/copper_coin_pile.json
 d5b1a0d9424a0ad8e99c1bcdfb707f515a5d912c data/createdelightcore/loot_tables/blocks/deepslate_tin_ore.json
 54b1a001072cbc47b3de99804388fc719168ee36 data/createdelightcore/loot_tables/blocks/electrum_block.json
