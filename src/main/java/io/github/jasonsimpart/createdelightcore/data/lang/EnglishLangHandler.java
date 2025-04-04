@@ -36,9 +36,8 @@ public class EnglishLangHandler {
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
         //jei
-        provider.add("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat", "Blaze Burner Heat Recipes");
-        provider.add("jei." + CreateDelightCore.MODID + "burnTime", "Burn Time: %s ticks");
-        provider.add("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", "Consumes %s mB per burn");
+        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
+        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "Need ");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "Free");

@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-04T20:45:26.2095163	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2025-04-04T23:38:11.3777958	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -35,9 +35,9 @@ c6c4c8d23c4c6e90245827caf6051656a2c6c9d9 assets/createdelightcore/blockstates/st
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 a84bccf73c0d067f4304d529cf42a1ffc23f4c29 assets/createdelightcore/blockstates/vanilla_ice_cream.json
-01d8adff20fe59fca731763bc94cdfa497a0b7db assets/createdelightcore/lang/en_ud.json
-82c0b2e61e2f07fcec804df152251da1c8bfee02 assets/createdelightcore/lang/en_us.json
-111bd617a88aece3192a3fbab07ed11d4148ca6a assets/createdelightcore/lang/zh_cn.json
+7914dad737966444fcd0a12f1063030bc64eb883 assets/createdelightcore/lang/en_ud.json
+c88f371c0e7b8c08331697d9e46627050254449a assets/createdelightcore/lang/en_us.json
+ebd072242dd13c20e46d986d8fe89064c37a7261 assets/createdelightcore/lang/zh_cn.json
 89aa72b3b79069dc3db4660216f2bc469dfbb504 assets/createdelightcore/models/block/adzuki_ice_cream.json
 779e2d97d3581ddb53420d111bae0361208f5a7b assets/createdelightcore/models/block/banana_ice_cream.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json

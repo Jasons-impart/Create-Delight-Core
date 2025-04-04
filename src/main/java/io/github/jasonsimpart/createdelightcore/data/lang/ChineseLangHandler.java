@@ -115,9 +115,8 @@ public class ChineseLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream.player", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
         //jei
-        provider.add("jei." + CreateDelightCore.MODID + "BlazeBurnerSuperHeat", "烈焰人加热配方");
-        provider.add("jei." + CreateDelightCore.MODID + "burnTime", "燃烧%stick");
-        provider.add("jei." + CreateDelightCore.MODID + "amountConsumedPerTick", "每次燃烧消耗%smB");
+        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
+        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
