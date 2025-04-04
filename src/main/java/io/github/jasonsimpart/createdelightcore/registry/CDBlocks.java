@@ -9,6 +9,7 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.block.CoinPileBlock;
+import io.github.jasonsimpart.createdelightcore.content.block.GlassCassing;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -56,6 +57,8 @@ public class CDBlocks {
     public static final BlockEntry<CasingBlock> STEEL_CASING;
     public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING;
     public static final BlockEntry<CasingBlock> COPPER_COIL_CASING;
+    public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING;
+    public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING;
 
     static {
         //electrum
@@ -98,6 +101,8 @@ public class CDBlocks {
         STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
         FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
         COPPER_COIL_CASING = simpleCasingBlock("copper_coil", Rarity.COMMON, CDCSpriteShifts.COPPER_COIL_CASING);
+        STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
+        STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
@@ -226,6 +231,24 @@ public class CDBlocks {
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
                 .register();
     }
+
+    public static final BlockEntry<GlassCassing> simpleGlassCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
+        //noinspection removal
+        return REGISTRATE.block(name + "_glass_casing", GlassCassing::new)
+                .item()
+                .properties(p -> p.rarity(rarity))
+                .tab(MISC_TAB)
+                .build()
+                .initialProperties(() -> Blocks.GLASS)
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .sound(SoundType.GLASS)
+                )
+                .addLayer(() -> RenderType::translucent)
+                .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
+                .register();
+    }
+
 
 
     public static void init() {

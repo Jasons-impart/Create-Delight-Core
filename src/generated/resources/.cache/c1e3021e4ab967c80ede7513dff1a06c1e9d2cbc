@@ -1,4 +1,4 @@
-// 1.20.1	2025-04-01T22:15:45.923153	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
+// 1.20.1	2025-04-04T12:07:13.8369089	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), generic_server_provider, Blockstates, Item models, Lang (en_us/en_ud), generic_client_provider, Lang (zh_cn)]
 884ef567afa173a012ac634e4ca8d06027c5ddc8 assets/createdelightcore/blockstates/adzuki_ice_cream.json
 93a0aee511e3d701c7441a3431ccebaaaddf9bfc assets/createdelightcore/blockstates/banana_ice_cream.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -29,13 +29,15 @@ f7c32322deac65095fe7b2a1bff53e9e650993c3 assets/createdelightcore/blockstates/ne
 26d134edc427ab0f2e17d7463a313a8645bcf7ed assets/createdelightcore/blockstates/raw_tin_block.json
 963336c2b41509a1bf7227894807f02d7725d74e assets/createdelightcore/blockstates/slime.json
 0dfbe8544c0f8accb33956de35f01f574cbf09ea assets/createdelightcore/blockstates/steel_casing.json
+42f3ea021cb64e538303ca7d172608a20d445e1c assets/createdelightcore/blockstates/steel_clear_glass_casing.json
+c6c4c8d23c4c6e90245827caf6051656a2c6c9d9 assets/createdelightcore/blockstates/steel_glass_casing.json
 4f1ca82a47cf29d77d70ddefe2cf0671e865b562 assets/createdelightcore/blockstates/strawberry_ice_cream.json
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 a84bccf73c0d067f4304d529cf42a1ffc23f4c29 assets/createdelightcore/blockstates/vanilla_ice_cream.json
-fc12c89fd590cf656bf40ac8588542a2f60812fe assets/createdelightcore/lang/en_ud.json
-17d445054e4552612cde26bc819452aa50d3496e assets/createdelightcore/lang/en_us.json
-f1679abb620ac9693f3eba88b4824ff33e728304 assets/createdelightcore/lang/zh_cn.json
+19c7bced16b4a48607dc028f913e2596dbd7121d assets/createdelightcore/lang/en_ud.json
+9d0993bff570224ee9cf66d60ec7127da1f1db2f assets/createdelightcore/lang/en_us.json
+a5780cf06b331d9edefa4c665f8cda06d220d8bc assets/createdelightcore/lang/zh_cn.json
 89aa72b3b79069dc3db4660216f2bc469dfbb504 assets/createdelightcore/models/block/adzuki_ice_cream.json
 779e2d97d3581ddb53420d111bae0361208f5a7b assets/createdelightcore/models/block/banana_ice_cream.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
@@ -66,6 +68,8 @@ ac2f640bb9215b92c56902bbc5322b31332dbc1a assets/createdelightcore/models/block/m
 cef7d795c570abd6ac083c816bc323a643e26997 assets/createdelightcore/models/block/raw_tin_block.json
 fd9008f46b5849d54c6bad6cc1024f83ee37dd77 assets/createdelightcore/models/block/slime.json
 e1eaf441a26a81f9e71c45de9b418cff42777231 assets/createdelightcore/models/block/steel_casing.json
+9b7a1a4c19aadfbe4c0dc6524aa51681f0d6e43b assets/createdelightcore/models/block/steel_clear_glass_casing.json
+e3795a59f20ce4b0100ae5636db507df93dcc6f0 assets/createdelightcore/models/block/steel_glass_casing.json
 054dba1c14b9bf5046860156abe06eda63c26988 assets/createdelightcore/models/block/strawberry_ice_cream.json
 9ed62fa07de24b99cfc8a8a97ce92ab739706d1b assets/createdelightcore/models/block/tin_block.json
 1156a1aa0f1a2a2eba98b568819d8b2e87ba02e6 assets/createdelightcore/models/block/tin_ore.json
@@ -112,6 +116,8 @@ b7dc9a23e40d4849c3c54e2ef25c33a50495582c assets/createdelightcore/models/item/ru
 f323c11085094c9643bd1bbae8bcc66b15e0e3bc assets/createdelightcore/models/item/ruby_chocolate_mold_solid.json
 3b08853d710c1eb90a8f45f8d38131c323c25bb5 assets/createdelightcore/models/item/slime_bucket.json
 50f0e7ed172400d353f169170af0b8f6b0d670ce assets/createdelightcore/models/item/steel_casing.json
+b6c02f6b3c6440b3b51e9abc921dadd8264c793b assets/createdelightcore/models/item/steel_clear_glass_casing.json
+1b6e6475e28b87a0f050e7af1a994040fdab1670 assets/createdelightcore/models/item/steel_glass_casing.json
 c9fed3283f6a3066d10cc87daa44d419c9c7b608 assets/createdelightcore/models/item/strawberry_ice_cream_bucket.json
 7f5af07086882559daa7b1809683d75a8392df03 assets/createdelightcore/models/item/tin_block.json
 caaaf1062e3cac9ec814d3ead4d45b7e4b8cf670 assets/createdelightcore/models/item/tin_ingot.json
@@ -140,6 +146,8 @@ ee0b943b177ec5092f048a073a717fd0f45cdd57 data/createdelightcore/loot_tables/bloc
 bffe254702651795a7b201181d59c10324459d50 data/createdelightcore/loot_tables/blocks/netherite_coin_pile.json
 7a92c1ccf4a875257e8945b9f4dcf8695c042def data/createdelightcore/loot_tables/blocks/raw_tin_block.json
 2254239d71cd365afac2a72bb3d911d00a084ba6 data/createdelightcore/loot_tables/blocks/steel_casing.json
+0d82edb98bb68e838a8ad77d2facdf55eff381d8 data/createdelightcore/loot_tables/blocks/steel_clear_glass_casing.json
+99694cee30271c613b838453cbe7607a0219a3ac data/createdelightcore/loot_tables/blocks/steel_glass_casing.json
 baed56a7aa667d36c36ae0300e2cdfd0305eddde data/createdelightcore/loot_tables/blocks/tin_block.json
 ae4d556745d594b487d476ea981d18a82bf45aec data/createdelightcore/loot_tables/blocks/tin_ore.json
 bc8701774f57ab000a8f0f1d390702175a6cdbb8 data/createdelightcore/tags/blocks/fan_processing_catalysts/freezing.json
