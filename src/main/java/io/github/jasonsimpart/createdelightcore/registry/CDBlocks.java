@@ -56,9 +56,10 @@ public class CDBlocks {
     //casing
     public static final BlockEntry<CasingBlock> STEEL_CASING;
     public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING;
-    public static final BlockEntry<CasingBlock> COPPER_COIL_CASING;
     public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING;
     public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING;
+    //coil
+    public static final BlockEntry<CasingBlock> COPPER_COIL;
 
     static {
         //electrum
@@ -100,9 +101,20 @@ public class CDBlocks {
         //casing
         STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
         FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
-        COPPER_COIL_CASING = simpleCasingBlock("copper_coil", Rarity.COMMON, CDCSpriteShifts.COPPER_COIL_CASING);
         STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
         STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
+        //coil
+        COPPER_COIL = REGISTRATE.block("copper_coil", CasingBlock::new)
+                .item()
+                .properties(p -> p.rarity(Rarity.COMMON))
+                .tab(MISC_TAB)
+                .build()
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .sound(SoundType.COPPER)
+                )
+                .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
+                .register();
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
@@ -218,7 +230,7 @@ public class CDBlocks {
                 .register();
     }
 
-    public static final BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
+    public static BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
         return REGISTRATE.block(name + "_casing", CasingBlock::new)
                 .item()
                 .properties(p -> p.rarity(rarity))
@@ -232,7 +244,7 @@ public class CDBlocks {
                 .register();
     }
 
-    public static final BlockEntry<GlassCassing> simpleGlassCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
+    public static BlockEntry<GlassCassing> simpleGlassCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
         //noinspection removal
         return REGISTRATE.block(name + "_glass_casing", GlassCassing::new)
                 .item()

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createdelightcore:copper_coil_casing"
+          "name": "createdelightcore:copper_coil"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "createdelightcore:blocks/copper_coil_casing"
+  "random_sequence": "createdelightcore:blocks/copper_coil"
 }
