@@ -11,6 +11,10 @@
     "createdelightcore:flowing_strawberry_ice_cream",
     "createdelightcore:strawberry_ice_cream",
     "createdelightcore:flowing_vanilla_ice_cream",
-    "createdelightcore:vanilla_ice_cream"
+    "createdelightcore:vanilla_ice_cream",
+    "createdelightcore:flowing_lime_ice_cream",
+    "createdelightcore:lime_ice_cream",
+    "createdelightcore:flowing_pomegranate_ice_cream",
+    "createdelightcore:pomegranate_ice_cream"
   ]
 }

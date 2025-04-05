@@ -5,7 +5,6 @@ import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.fluid.*;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -37,6 +36,8 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MINT_ICE_CREAM = iceCreamFluid("mint");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> STRAWBERRY_ICE_CREAM = iceCreamFluid("strawberry");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> LIME_ICE_CREAM = iceCreamFluid("lime");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> POMEGRANATE_ICE_CREAM = iceCreamFluid("pomegranate");
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");

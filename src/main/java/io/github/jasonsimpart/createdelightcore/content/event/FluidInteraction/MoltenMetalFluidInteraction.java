@@ -3,7 +3,6 @@ package io.github.jasonsimpart.createdelightcore.content.event.FluidInteraction;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.decoration.palettes.AllPaletteBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import earth.terrarium.adastra.common.registry.ModBlocks;
@@ -88,6 +87,8 @@ public class MoltenMetalFluidInteraction {
         FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.MINT_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
         FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.STRAWBERRY_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
         FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.VANILLA_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
+        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.LIME_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource()? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
+        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.POMEGRANATE_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource()? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
     }
 
     private static final Map<FluidType, BlockState> moltenMetalBlocks = new HashMap<>();
