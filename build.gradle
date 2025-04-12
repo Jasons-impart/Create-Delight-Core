@@ -211,13 +211,17 @@ dependencies {
     // create utilities
     implementation fg.deobf("curse.maven:createutilities-881586:5225304")
 
+    // EclipticSeasons
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6399040")
+    // quality foods
+    implementation fg.deobf("curse.maven:quality_food-973932:6216348")
+
 }
 
 mixin {
     // MixinGradle Settings
     add sourceSets.main, 'mixins.createdelightcore.refmap.json'
     config 'mixins.createdelightcore.json'
-
     debug.verbose = true
     debug.export = true
 }

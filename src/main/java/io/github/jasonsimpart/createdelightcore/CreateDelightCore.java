@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 @Mod(CreateDelightCore.MODID)
 public class CreateDelightCore {
     public static final String MODID = "createdelightcore";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
