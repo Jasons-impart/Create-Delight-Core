@@ -6,6 +6,7 @@ import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +38,7 @@ public abstract class QualityFoodMixin {
                     // Weight would be 0, meaning no quality can be calculated
                     chance = QualityConfig.getChance(quality);
                 } else {
-                    chance = QualityConfig.calculateChance(quality, QualityConfig.getWeight(blockQuality));
+                    chance = Mth.clamp(QualityConfig.getChance(quality) * QualityConfig.calculateChance(quality, QualityConfig.getWeight(blockQuality)) * QualityConfig.getWeight(Quality.DIAMOND), 0.0, 1.0);
                 }
                 chance = Modification.harvestOrSeedMultiplier(quality, stack).apply(chance);
                 chance = Modification.luck(player).apply(chance);
