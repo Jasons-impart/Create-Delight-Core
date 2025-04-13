@@ -171,6 +171,8 @@ dependencies {
     // at runtime, use the full JEI jar for Forge
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
+    // architectury
+    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     // create
     implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
@@ -215,6 +217,12 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6399040")
     // quality foods
     implementation fg.deobf("curse.maven:quality_food-973932:6216348")
+
+    // vinery
+    implementation fg.deobf("curse.maven:vinery-704465:6264246")
+    implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
+    // central kitchen
+    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6307294")
 
 }
 
