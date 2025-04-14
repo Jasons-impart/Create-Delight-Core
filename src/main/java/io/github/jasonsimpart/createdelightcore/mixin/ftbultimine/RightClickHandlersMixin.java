@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.mixin.quality_food.ftbultimine;
+package io.github.jasonsimpart.createdelightcore.mixin.ftbultimine;
 
 import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.core.Quality;

@@ -229,7 +229,14 @@ dependencies {
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
+    //fruits delight
+    compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6255625")
 
+    //mixin extra
+    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
+        jarJar.ranged(it, "[0.4.1,)")
+    }
 
 }
 

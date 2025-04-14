@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.createdelightcore.mixin.quality_food.ftbultimine;
+package io.github.jasonsimpart.createdelightcore.mixin.ftbultimine;
 
 import dev.ftb.mods.ftbultimine.ItemCollection;
 import net.minecraft.core.BlockPos;
