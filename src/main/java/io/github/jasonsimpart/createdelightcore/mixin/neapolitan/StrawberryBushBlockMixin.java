@@ -1,0 +1,29 @@
+package io.github.jasonsimpart.createdelightcore.mixin.neapolitan;
+
+import com.teamabnormals.neapolitan.common.block.MintBlock;
+import com.teamabnormals.neapolitan.common.block.StrawberryBushBlock;
+import de.cadentem.quality_food.capability.LevelData;
+import de.cadentem.quality_food.util.DropData;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(StrawberryBushBlock.class)
+public class StrawberryBushBlockMixin {
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lcom/teamabnormals/neapolitan/common/block/StrawberryBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"))
+    public void setCropData(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
+        DropData.current.set(new DropData(LevelData.get(worldIn, pos, true), state, player, worldIn.getBlockState(pos.below())));
+    }
+    @Inject(method = "use", at = @At(value = "INVOKE", target = "Lcom/teamabnormals/neapolitan/common/block/StrawberryBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))
+    public void clearCropData(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
+        DropData.current.remove();
+    }
+}

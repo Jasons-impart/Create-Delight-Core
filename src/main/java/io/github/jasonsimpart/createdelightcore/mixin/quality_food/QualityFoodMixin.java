@@ -6,16 +6,24 @@ import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.Objects;
 
 import static de.cadentem.quality_food.util.QualityUtils.*;
 
@@ -25,9 +33,9 @@ public abstract class QualityFoodMixin {
     private static final RandomSource create_Delight_Core$RANDOM = RandomSource.create();
     @Inject(method = "applyQuality(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lde/cadentem/quality_food/core/Quality;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("HEAD"), cancellable = true, remap = false)
     private static void applyQualityMixin(ItemStack stack, BlockState state, Quality blockQuality, Player player, BlockState farmland, CallbackInfo ci) {
-        if (isRelevantCrop(state)) {
+        TagKey<Block> crop = TagKey.create(Registries.BLOCK, new ResourceLocation("createdelight", "quality_crops"));
+        if (isRelevantCrop(state) || state.is(crop)) {
             Quality selected = Quality.NONE;
-
             for (Quality quality : Quality.values()) {
                 if (quality.level() == 0) {
                     continue;
