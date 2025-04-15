@@ -231,6 +231,9 @@ dependencies {
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
     //fruits delight
     compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6255625")
+    //tetra
+    implementation fg.deobf("curse.maven:mutil-351914:6418901")
+    implementation fg.deobf("curse.maven:tetra-289712:6418957")
 
     //mixin extra
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))

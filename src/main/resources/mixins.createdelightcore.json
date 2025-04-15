@@ -1,5 +1,5 @@
 {
-  "required": false,
+  "required": true,
   "package": "io.github.jasonsimpart.createdelightcore.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.createdelightcore.refmap.json",
@@ -11,7 +11,9 @@
     "fruitsdelight.DoubleBushBlockMixin",
     "fruitsdelight.DoubleFruitBushBlockMixin",
     "fruitsdelight.FruitBushBlockMixin",
+    "ftbultimine.FTBUltimineMixin",
     "ftbultimine.ItemCollectionMixin",
+    "ftbultimine.RightClickHandlersInvoker",
     "ftbultimine.RightClickHandlersMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
