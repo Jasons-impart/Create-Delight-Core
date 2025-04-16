@@ -6,6 +6,7 @@
   "mixins": [
     "AbstractVillagerMixin",
     "VillagerMixin",
+    "alexscaves.GalenaGauntletItemMixin",
     "CA.EnergyNetWorkMixin",
     "CU.VoidBatteryMixin",
     "fruitsdelight.DoubleBushBlockMixin",
