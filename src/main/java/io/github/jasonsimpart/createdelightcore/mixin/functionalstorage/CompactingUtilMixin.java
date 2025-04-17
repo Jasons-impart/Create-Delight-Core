@@ -20,12 +20,12 @@ public class CompactingUtilMixin {
         QualityUtils.applyQuality(result, QualityUtils.getQuality(crafting.getItem(0)));
     }
 
-    @ModifyArg(method = "findUpperTier",at = @At(value = "INVOKE", ordinal = 0, target = "Lcom/buuz135/functionalstorage/util/CompactingUtil$Result;<init>(Lnet/minecraft/world/item/ItemStack;I)V"), index = 0, remap = false)
+    @ModifyArg(method = "findUpperTier",at = @At(value = "INVOKE", target = "Lcom/buuz135/functionalstorage/util/CompactingUtil$Result;<init>(Lnet/minecraft/world/item/ItemStack;I)V"), index = 0, remap = false)
     public ItemStack findUpperMixin(ItemStack result, @Local(argsOnly = true) ItemStack stack) {
         QualityUtils.applyQuality(result, QualityUtils.getQuality(stack));
         return result;
     }
-    @ModifyArg(method = "findLowerTier",at = @At(value = "INVOKE", ordinal = 0, target = "Lcom/buuz135/functionalstorage/util/CompactingUtil$Result;<init>(Lnet/minecraft/world/item/ItemStack;I)V"), index = 0, remap = false)
+    @ModifyArg(method = "findLowerTier",at = @At(value = "INVOKE", target = "Lcom/buuz135/functionalstorage/util/CompactingUtil$Result;<init>(Lnet/minecraft/world/item/ItemStack;I)V"), index = 0, remap = false)
     public ItemStack findLowerMixin(ItemStack result, @Local(argsOnly = true) ItemStack stack) {
         QualityUtils.applyQuality(result, QualityUtils.getQuality(stack));
         return result;
