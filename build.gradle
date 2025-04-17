@@ -234,6 +234,13 @@ dependencies {
     //tetra
     implementation fg.deobf("curse.maven:mutil-351914:6418901")
     implementation fg.deobf("curse.maven:tetra-289712:6418957")
+    //functional storage
+    implementation fg.deobf("curse.maven:titanium-287342:5468426")
+    implementation fg.deobf("curse.maven:functionalstorage-556861:5650296")
+    //ae2
+    implementation fg.deobf("curse.maven:ae2-223794:6357138")
+
+
 
     //mixin extra
     implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))

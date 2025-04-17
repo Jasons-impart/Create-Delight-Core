@@ -6,6 +6,9 @@
   "mixins": [
     "AbstractVillagerMixin",
     "VillagerMixin",
+    "ae2.AEBaseMenuAccessor",
+    "ae2.CraftingTermMenuMixin",
+    "ae2.CraftingTermSlotMixin",
     "alexscaves.GalenaGauntletItemMixin",
     "CA.EnergyNetWorkMixin",
     "CU.VoidBatteryMixin",
@@ -16,6 +19,7 @@
     "ftbultimine.ItemCollectionMixin",
     "ftbultimine.RightClickHandlersInvoker",
     "ftbultimine.RightClickHandlersMixin",
+    "functionalstorage.CompactingUtilMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
     "lunarian.BuyForOneEmeraldFactoryMixin",
