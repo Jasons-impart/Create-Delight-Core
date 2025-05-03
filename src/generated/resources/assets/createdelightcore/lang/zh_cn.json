@@ -123,5 +123,7 @@
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
   "jei.createdelightcore.BlazeBurnerFluid": "烈焰人燃烧流体",
-  "jei.createdelightcore.amountConsume": "消耗 %s mb"
+  "jei.createdelightcore.amountConsume": "消耗 %s mb",
+  "create.item_attributes.food_quality": "拥有%s品质",
+  "create.item_attributes.food_quality.inverted": "没有%s品质"
 }

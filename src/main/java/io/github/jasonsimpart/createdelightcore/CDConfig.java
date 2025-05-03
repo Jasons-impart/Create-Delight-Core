@@ -49,6 +49,5 @@ public class CDConfig
         moneyChain = MONEY_CAIN.get();
         useMoneyTeleport = USE_MONEY_TELEPORT.get();
         teleportCost = TELEPORT_COST.get();
-
     }
 }

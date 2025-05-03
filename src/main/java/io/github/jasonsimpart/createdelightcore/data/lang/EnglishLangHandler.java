@@ -41,6 +41,8 @@ public class EnglishLangHandler {
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "Need ");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "Free");
+        //attribute
+        provider.add("create.item_attributes.food_quality", "Has %s Quality");
 
     }
 }

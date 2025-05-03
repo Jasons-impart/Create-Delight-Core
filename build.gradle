@@ -64,7 +64,6 @@ minecraft {
         // applies to all the run configs below
         configureEach {
             workingDirectory project.file('run')
-
             // Recommended logging data for a userdev environment
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
@@ -230,7 +229,7 @@ dependencies {
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
     //fruits delight
-    compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6255625")
+    compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6242383")
     //tetra
     implementation fg.deobf("curse.maven:mutil-351914:6418901")
     implementation fg.deobf("curse.maven:tetra-289712:6418957")

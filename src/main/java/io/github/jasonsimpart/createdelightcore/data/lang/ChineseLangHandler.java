@@ -122,6 +122,8 @@ public class ChineseLangHandler {
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
+        //attribute
+        provider.add("create.item_attributes.food_quality", "品质为%s");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,

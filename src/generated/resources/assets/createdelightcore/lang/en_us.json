@@ -123,5 +123,7 @@
   "itemGroup.createdelightcore.food": "Create Delight | Food",
   "itemGroup.createdelightcore.misc": "Create Delight | Misc",
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid",
-  "jei.createdelightcore.amountConsume": "Consume %s mb"
+  "jei.createdelightcore.amountConsume": "Consume %s mb",
+  "create.item_attributes.food_quality": "has %s quality",
+  "create.item_attributes.food_quality.inverted": "do not has %s quality"
 }
