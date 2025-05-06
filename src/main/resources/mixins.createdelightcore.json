@@ -36,6 +36,7 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.StrawberryBushBlockMixin",
     "quality_food.QualityFoodMixin",
+    "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"
   ],
   "client": [],

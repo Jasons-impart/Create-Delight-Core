@@ -243,6 +243,8 @@ dependencies {
     implementation fg.deobf("curse.maven:ae2-223794:6357138")
     //bakeries
     implementation fg.deobf("blank:bakeries-1191781:6439004")
+    //bakeries
+    implementation fg.deobf("curse.maven:trade-refresh-821729:5452984")
     //
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
