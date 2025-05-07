@@ -21,13 +21,9 @@ import java.util.List;
 public class ThresherBlockEntityMixin {
     @Shadow(remap = false)
     public ItemStackHandler inputInv;
-    @Inject(method = "process", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
-    public void storeInput(CallbackInfo ci, @Local ItemStack stackInSlot, @Share("input") final LocalRef<ItemStack> input) {
-        input.set(inputInv.getStackInSlot(0));
-    }
     @ModifyArg(method = "lambda$process$1", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/items/ItemHandlerHelper;insertItemStacked(Lnet/minecraftforge/items/IItemHandler;Lnet/minecraft/world/item/ItemStack;Z)Lnet/minecraft/world/item/ItemStack;"), index = 1, remap = false)
-    public @NotNull ItemStack applyQuality(@NotNull ItemStack stack, @Share("input") final LocalRef<ItemStack> input) {
-        QualityUtils.applyQuality(stack, List.of(input.get()), null);
+    public ItemStack applyQuality(ItemStack stack) {
+        QualityUtils.applyQuality(stack, List.of(inputInv.getStackInSlot(0)), null);
         return stack;
     }
 }
