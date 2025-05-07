@@ -243,9 +243,16 @@ dependencies {
     implementation fg.deobf("curse.maven:ae2-223794:6357138")
     //bakeries
     implementation fg.deobf("blank:bakeries-1191781:6439004")
-    //bakeries
+    //trade-refresh
     implementation fg.deobf("curse.maven:trade-refresh-821729:5452984")
-    //
+    //mr crayfish
+    implementation fg.deobf("curse.maven:framework-549225:5911986")
+    implementation fg.deobf("curse.maven:refurbished_furniture-897116:6272885")
+    //casualness delight
+    implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
+    //createbicbit
+    implementation fg.deobf("curse.maven:createbicbit-918751:5446853")
+
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
 // these two are unfortunately needed since fg.deobf doesn't respect transitive dependencies yet

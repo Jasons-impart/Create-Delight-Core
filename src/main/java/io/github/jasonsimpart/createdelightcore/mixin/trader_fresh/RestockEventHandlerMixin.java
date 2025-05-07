@@ -16,7 +16,7 @@ public abstract class RestockEventHandlerMixin {
 
     @Unique
     private static final int create_Delight_Core$COOLDOWN = 24000;
-    @Inject(method = "onMobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/npc/Villager;resetNumberOfRestocks()V"), remap = false, cancellable = true, require = 1)
+    @Inject(method = "onMobInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/npc/Villager;resetNumberOfRestocks()V"), remap = false, cancellable = true)
     private static void onMobInteractMixin(PlayerInteractEvent.EntityInteract event, CallbackInfo ci, @Local Villager villager) {
         var player = event.getEntity();
         var villagerData = villager.getPersistentData();

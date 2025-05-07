@@ -1,5 +1,5 @@
 {
-  "required": true,
+  "required": false,
   "package": "io.github.jasonsimpart.createdelightcore.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.createdelightcore.refmap.json",
@@ -12,6 +12,8 @@
     "alexscaves.GalenaGauntletItemMixin",
     "bakeries.SnifferEventMixin",
     "CA.EnergyNetWorkMixin",
+    "casualness_delight.DeepFryingPanEntityMixin",
+    "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "eclipticseason.WeatherManagerMixin",
     "fruitsdelight.DoubleBushBlockMixin",
@@ -38,6 +40,8 @@
     "quality_food.QualityFoodMixin",
     "ratatouille.BakeDataMixin",
     "ratatouille.ThresherBlockEntityMixin",
+    "refurbished_furniture.FryingPanBlockEntityMixin",
+    "refurbished_furniture.StoveBlockEntityMixin",
     "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"
   ],
