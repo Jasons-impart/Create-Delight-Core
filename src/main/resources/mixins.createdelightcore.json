@@ -36,6 +36,8 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.StrawberryBushBlockMixin",
     "quality_food.QualityFoodMixin",
+    "ratatouille.BakeDataMixin",
+    "ratatouille.ThresherBlockEntityMixin",
     "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"
   ],
