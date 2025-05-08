@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -125,15 +126,14 @@ public class CDFluids {
         return REGISTRATE.fluid(name, STILL_RL, FLOW_RL, RadiationFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
-                        .lightLevel(15)
-                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
-                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
-                        .canHydrate(false)
-                        .canDrown(false)
-                        .canSwim(false))
+                        .lightLevel(5)
+                        .sound(SoundActions.BUCKET_EMPTY, ACSoundRegistry.ACID_UNSUBMERGE.get())
+                        .sound(SoundActions.BUCKET_FILL, ACSoundRegistry.ACID_SUBMERGE.get())
+                        .canHydrate(true)
+                        .canDrown(true)
+                        .canSwim(true))
                 .fluidProperties(p -> p.levelDecreasePerBlock(2)
-                        .tickRate(10)
-                        .slopeFindDistance(3)
+                        .tickRate(5)
                         .explosionResistance((float) 100.0))
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
