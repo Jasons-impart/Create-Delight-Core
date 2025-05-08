@@ -18,6 +18,8 @@
     "fruitsdelight.DoubleBushBlockMixin",
     "fruitsdelight.DoubleFruitBushBlockMixin",
     "fruitsdelight.FruitBushBlockMixin",
+    "ftbultimine.ItemCollectionMixin",
+    "ftbultimine.RightClickHandlersMixin",
     "functionalstorage.CompactingUtilMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
