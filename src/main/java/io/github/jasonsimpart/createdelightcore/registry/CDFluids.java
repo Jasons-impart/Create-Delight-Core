@@ -122,7 +122,7 @@ public class CDFluids {
     private static FluidEntry<ForgeFlowingFluid.Flowing> radiationFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
-        return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, RadiationFluidType::new)
+        return REGISTRATE.fluid(name, STILL_RL, FLOW_RL, RadiationFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
                         .lightLevel(15)

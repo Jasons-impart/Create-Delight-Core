@@ -224,18 +224,16 @@ dependencies {
     implementation fg.deobf("curse.maven:vinery-704465:6264246")
     implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
     // central kitchen
+    // !! 需要runData时先将这个改为compileOnly，然后build一下，再然后执行runData
     implementation fg.deobf("curse.maven:create-central-kitchen-820977:6307294")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
-    implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
+    compileOnly fg.deobf("curse.maven:neapolitan-382016:6248885")
     //fruits delight
     compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6242383")
-    //tetra
-    implementation fg.deobf("curse.maven:mutil-351914:6418901")
-    implementation fg.deobf("curse.maven:tetra-289712:6418957")
     //functional storage
     implementation fg.deobf("curse.maven:titanium-287342:5468426")
     implementation fg.deobf("curse.maven:functionalstorage-556861:5650296")
