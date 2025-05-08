@@ -16,6 +16,7 @@ import net.minecraft.world.level.LevelReader;
 public class CDCDamageTypes {
     public static final ResourceKey<DamageType> MOLTEN_METAL =key("molten_metal");
     public static final ResourceKey<DamageType> ICE_CREAM =key("ice_cream");
+    public static final ResourceKey<DamageType> RADIATION =key("radiation");
 
     public CDCDamageTypes() {
     }
@@ -27,6 +28,7 @@ public class CDCDamageTypes {
     public static void bootstrap(BootstapContext<DamageType> ctx) {
         (new DamageTypeBuilder(ICE_CREAM)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.FREEZING).register(ctx);
         (new DamageTypeBuilder(MOLTEN_METAL)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.BURNING).register(ctx);
+        (new DamageTypeBuilder(RADIATION)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.HURT).register(ctx);
     }
 
     private static DamageSource source(ResourceKey<DamageType> key, LevelReader level) {
@@ -40,6 +42,10 @@ public class CDCDamageTypes {
 
     public static DamageSource iceCream(Level level) {
         return source(ICE_CREAM, level);
+    }
+
+    public static DamageSource radiation(Level level) {
+        return source(RADIATION, level);
     }
 
 }

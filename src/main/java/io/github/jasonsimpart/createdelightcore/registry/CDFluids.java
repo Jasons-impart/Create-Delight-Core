@@ -41,6 +41,8 @@ public class CDFluids {
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
+    //radiation fluid
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
 
     public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {
@@ -110,6 +112,29 @@ public class CDFluids {
                         .tickRate(25)
                         .slopeFindDistance(3)
                         .explosionResistance((float) 50.0))
+                .source(ForgeFlowingFluid.Source::new)
+                .bucket()
+                .tab(FLUID_TAB)
+                .build()
+                .register();
+    }
+
+    private static FluidEntry<ForgeFlowingFluid.Flowing> radiationFluid(String name) {
+        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
+        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
+        return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, RadiationFluidType::new)
+                .properties(b -> b.viscosity(2000)
+                        .density(1400)
+                        .lightLevel(15)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_LAVA)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_LAVA)
+                        .canHydrate(false)
+                        .canDrown(false)
+                        .canSwim(false))
+                .fluidProperties(p -> p.levelDecreasePerBlock(2)
+                        .tickRate(10)
+                        .slopeFindDistance(3)
+                        .explosionResistance((float) 100.0))
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
                 .tab(FLUID_TAB)

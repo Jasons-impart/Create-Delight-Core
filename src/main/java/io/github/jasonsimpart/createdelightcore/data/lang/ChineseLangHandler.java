@@ -109,6 +109,8 @@ public class ChineseLangHandler {
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
+        //radiation
+        addFluid(provider, CDFluids.NUCLEAR_WASTE, "核废液");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
@@ -116,6 +118,8 @@ public class ChineseLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal.player", "%2$s以为%1$s是一块没有融化的金属");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream.player", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");
+        provider.add("death.attack." + CreateDelightCore.MODID + ".radiation", "%1$s因辐射而浑身溃烂");
+        provider.add("death.attack." + CreateDelightCore.MODID + ".radiation.player", "%1$s因辐射而浑身溃烂");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
