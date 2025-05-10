@@ -1,4 +1,5 @@
 {
+  "effects": "burning",
   "exhaustion": 0.0,
   "message_id": "createdelightcore.radiation",
   "scaling": "always"

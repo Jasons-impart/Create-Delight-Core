@@ -28,7 +28,7 @@ public class CDCDamageTypes {
     public static void bootstrap(BootstapContext<DamageType> ctx) {
         (new DamageTypeBuilder(ICE_CREAM)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.FREEZING).register(ctx);
         (new DamageTypeBuilder(MOLTEN_METAL)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.BURNING).register(ctx);
-        (new DamageTypeBuilder(RADIATION)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.HURT).register(ctx);
+        (new DamageTypeBuilder(RADIATION)).scaling(DamageScaling.ALWAYS).effects(DamageEffects.BURNING).register(ctx);
     }
 
     private static DamageSource source(ResourceKey<DamageType> key, LevelReader level) {
