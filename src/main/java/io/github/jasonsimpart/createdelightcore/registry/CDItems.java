@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.SSWTLZZ.ratatouille.entry.CRCreativeModeTabs;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
 import net.minecraft.resources.ResourceKey;
@@ -10,7 +11,6 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;

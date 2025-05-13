@@ -1,6 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.content.item;
 
-import com.simibubi.create.foundation.utility.Color;
+import net.createmod.catnip.theme.Color;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;

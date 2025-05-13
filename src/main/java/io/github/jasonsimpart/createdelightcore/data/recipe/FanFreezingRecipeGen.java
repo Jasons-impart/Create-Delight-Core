@@ -1,11 +1,11 @@
 package io.github.jasonsimpart.createdelightcore.data.recipe;
 
+import com.SSWTLZZ.ratatouille.entry.CRItems;
 import com.simibubi.create.AllItems;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Items;
-import org.forsteri.ratatouille.entry.CRItems;
 
 public class FanFreezingRecipeGen extends CDProcessingRecipeGen {
     GeneratedRecipe

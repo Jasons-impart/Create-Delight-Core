@@ -1,10 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.data.recipe;
 
+import com.SSWTLZZ.ratatouille.data.recipe.ProcessingRecipeGen;
+import com.SSWTLZZ.ratatouille.entry.CRRecipeTypes;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.data.PackOutput;
-import org.forsteri.ratatouille.data.recipe.ProcessingRecipeGen;
-import org.forsteri.ratatouille.entry.CRRecipeTypes;
 
 public class FreezingRecipeGenerator extends ProcessingRecipeGen {
     public FreezingRecipeGenerator(PackOutput packOutput) {
