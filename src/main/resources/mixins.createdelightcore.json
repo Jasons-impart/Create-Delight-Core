@@ -13,6 +13,7 @@
     "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
+    "createore.ExcavatingCategoryMixin",
     "CU.VoidBatteryMixin",
     "eclipticseason.WeatherManagerMixin",
     "fruitsdelight.DoubleBushBlockMixin",
