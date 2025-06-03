@@ -103,7 +103,7 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.CHOCOLATE_ICE_CREAM, "巧克力冰淇淋");
         addFluid(provider, CDFluids.MINT_ICE_CREAM, "薄荷冰淇淋");
         addFluid(provider, CDFluids.STRAWBERRY_ICE_CREAM, "草莓冰淇淋");
-        addFluid(provider, CDFluids.VANILLA_ICE_CREAM, "原味冰淇淋");
+        addFluid(provider, CDFluids.VANILLA_ICE_CREAM, "香草冰淇淋");
         addFluid(provider, CDFluids.LIME_ICE_CREAM, "青柠冰淇淋");
         addFluid(provider, CDFluids.POMEGRANATE_ICE_CREAM, "石榴冰淇淋");
         addFluid(provider, CDFluids.SWEETBERRY_ICE_CREAM, "甜浆果冰淇淋");
