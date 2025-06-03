@@ -1,9 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.mixin.createore;
 
-import com.simibubi.create.foundation.utility.Components;
-import com.simibubi.create.foundation.utility.Lang;
 import com.tom.createores.jei.ExcavatingCategory;
-import com.tom.createores.recipe.DrillingRecipe;
 import com.tom.createores.recipe.ExcavatingRecipe;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import net.minecraft.client.Minecraft;
