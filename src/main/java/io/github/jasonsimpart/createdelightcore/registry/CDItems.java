@@ -81,7 +81,7 @@ public class CDItems {
         // ice-cream
         SWEETBERRY_ICE_CREAM = iceCreamItem("sweetberry", 6, 0.4f);
         // milkshake
-        SWEETBERRY_MILKSHAKE = milkShakeItem("sweetberry", 2, 3.0f);
+        SWEETBERRY_MILKSHAKE = milkShakeItem("sweetberry", 2, 1.5f);
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
