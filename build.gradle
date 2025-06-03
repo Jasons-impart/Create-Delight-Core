@@ -224,10 +224,7 @@ dependencies {
     implementation fg.deobf("curse.maven:vinery-704465:6264246")
     implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
     // central kitchen
-    // !! 需要runData时先将这个改为compileOnly，然后build一下，再然后执行runData
     compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6307294"))
-
-    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6307294")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
@@ -253,7 +250,7 @@ dependencies {
     //createbicbit
     implementation fg.deobf("curse.maven:createbicbit-918751:5446853")
     //createoreexcavation
-    implementation fg.deobf("curse.maven:createoreexcavation-649832:5848320")
+    compileOnly fg.deobf("curse.maven:createoreexcavation-649832:5848320")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
