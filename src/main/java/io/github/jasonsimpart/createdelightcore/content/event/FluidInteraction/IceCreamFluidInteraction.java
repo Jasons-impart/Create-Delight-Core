@@ -22,6 +22,7 @@ public class IceCreamFluidInteraction {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA =CDFluids.VANILLA_ICE_CREAM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIME =CDFluids.LIME_ICE_CREAM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> POMEGRANATE =CDFluids.POMEGRANATE_ICE_CREAM;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> SWEETBERRY =CDFluids.SWEETBERRY_ICE_CREAM;
 
     @SubscribeEvent
     public static void register(FMLCommonSetupEvent event) {
@@ -33,6 +34,7 @@ public class IceCreamFluidInteraction {
         event.enqueueWork(() -> addInteraction(VANILLA.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(LIME.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(POMEGRANATE.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(SWEETBERRY.get().getFluidType()));
     }
     private static void addInteraction(FluidType fluidType) {
         FluidInteractionRegistry.addInteraction(ForgeMod.LAVA_TYPE.get(), new FluidInteractionRegistry.InteractionInformation(fluidType, fluidState -> fluidState.isSource() ? Blocks.OBSIDIAN.defaultBlockState() : Blocks.STONE.defaultBlockState()));

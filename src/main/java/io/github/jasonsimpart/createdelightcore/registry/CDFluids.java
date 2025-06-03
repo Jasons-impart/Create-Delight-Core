@@ -39,6 +39,7 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIME_ICE_CREAM = iceCreamFluid("lime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> POMEGRANATE_ICE_CREAM = iceCreamFluid("pomegranate");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> SWEETBERRY_ICE_CREAM = iceCreamFluid("sweetberry");
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");

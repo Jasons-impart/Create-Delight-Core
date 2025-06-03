@@ -27,6 +27,13 @@ public class CDItems {
     public static final ItemEntry<Item> UNFRIED_FISH;
     public static final ItemEntry<Item> UNFRIED_POTATO;
     public static final ItemEntry<Item> UNFRIED_CALAMARI;
+    //ice-cream scoop
+    public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> BANANA_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> MINT_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> ADZUKI_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> POMEGRANATE_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> LIME_ICE_CREAM_SCOOP;
     // chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
@@ -48,7 +55,6 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_INGOT;
     public static final ItemEntry<Item> BRONZE_NUGGET;
 
-    public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP;
 
     static {
         // food
@@ -59,13 +65,23 @@ public class CDItems {
         UNFRIED_FISH = simpleRawFood("unfried_fish", 3, 0.3f);
         UNFRIED_POTATO = simpleRawFood("unfried_potato", 2, 0.3f);
         UNFRIED_CALAMARI = simpleRawFood("unfried_calamari", 1, 0.3f);
+        // ice-cream scoop
+        STRAWBERRY_ICE_CREAM_SCOOP = iceCreamScoop("strawberry");
+        BANANA_ICE_CREAM_SCOOP = iceCreamScoop("banana");
+        MINT_ICE_CREAM_SCOOP = iceCreamScoop("mint");
+        ADZUKI_ICE_CREAM_SCOOP = iceCreamScoop("adzuki");
+        POMEGRANATE_ICE_CREAM_SCOOP = iceCreamScoop("pomegranate");
+        LIME_ICE_CREAM_SCOOP = iceCreamScoop("lime");
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
         RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid", RATATOUILLE_TAB);
-        BLACK_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("black_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(BLACK_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
-        WHITE_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("white_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(WHITE_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
-        RUBY_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("ruby_chocolate_mold_filled", properties -> new ChocolateMoldFilledItem(properties, new ItemStack(RUBY_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
+        BLACK_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("black_chocolate_mold_filled", properties ->
+                new ChocolateMoldFilledItem(properties, new ItemStack(BLACK_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
+        WHITE_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("white_chocolate_mold_filled", properties ->
+                new ChocolateMoldFilledItem(properties, new ItemStack(WHITE_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
+        RUBY_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("ruby_chocolate_mold_filled", properties ->
+                new ChocolateMoldFilledItem(properties, new ItemStack(RUBY_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
         // coin
         IRON = coinItem("iron", Rarity.COMMON);
         COPPER = coinItem("copper", Rarity.UNCOMMON);
@@ -80,8 +96,12 @@ public class CDItems {
         BRONZE_INGOT = simpleIngot("bronze");
         BRONZE_NUGGET = simpleNugget("bronze");
         // andesite
-        // ice-cream scoop
-        STRAWBERRY_ICE_CREAM_SCOOP = REGISTRATE.item("strawberry_ice_cream_scoop", properties -> new ThrownProjectileItem(properties, player -> new ThrownIceCreamScoopEntity(player.level(), player), -10.0F, 1.0F, 0.2F))
+    }
+
+    public static ItemEntry<ThrownProjectileItem> iceCreamScoop(String name) {
+        return REGISTRATE.item(name + "_ice_cream_scoop", properties ->
+                        new ThrownProjectileItem(properties, player ->
+                                new ThrownIceCreamScoopEntity(player.level(), player), -10.0F, 1.0F, 0.2F))
                 .tab(FOOD_TAB)
                 .register();
     }
