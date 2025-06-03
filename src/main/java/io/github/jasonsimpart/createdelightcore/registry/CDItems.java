@@ -4,6 +4,8 @@ import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEn
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
+import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
+import io.github.jasonsimpart.createdelightcore.content.item.MilkShakeItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -34,14 +36,18 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> ADZUKI_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> POMEGRANATE_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> LIME_ICE_CREAM_SCOOP;
-    // chocolate
+    //ice-cream
+    public static final ItemEntry<IceCreamItem> SWEETBERRY_ICE_CREAM;
+    //milkshake
+    public static final ItemEntry<MilkShakeItem> SWEETBERRY_MILKSHAKE;
+    //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
     public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> WHITE_CHOCOLATE_MOLD_FILLED;
     public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> RUBY_CHOCOLATE_MOLD_FILLED;
-    // coin
+    //coin
     public static final ItemEntry<Item> IRON;
     public static final ItemEntry<Item> COPPER;
     public static final ItemEntry<Item> GOLD;
@@ -72,6 +78,10 @@ public class CDItems {
         ADZUKI_ICE_CREAM_SCOOP = iceCreamScoop("adzuki");
         POMEGRANATE_ICE_CREAM_SCOOP = iceCreamScoop("pomegranate");
         LIME_ICE_CREAM_SCOOP = iceCreamScoop("lime");
+        // ice-cream
+        SWEETBERRY_ICE_CREAM = iceCreamItem("sweetberry", 6, 0.4f);
+        // milkshake
+        SWEETBERRY_MILKSHAKE = milkShakeItem("sweetberry", 2, 3.0f);
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
@@ -95,7 +105,34 @@ public class CDItems {
         // bronze
         BRONZE_INGOT = simpleIngot("bronze");
         BRONZE_NUGGET = simpleNugget("bronze");
-        // andesite
+    }
+
+    public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation){
+        return REGISTRATE.item(name + "_ice_cream", IceCreamItem::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build())
+                        .craftRemainder(Items.BOWL)
+                        .stacksTo(1)
+                )
+                .tab(FOOD_TAB)
+                .register();
+    }
+
+    public static ItemEntry<MilkShakeItem> milkShakeItem(String name, int nutrition, float saturation){
+        return REGISTRATE.item(name + "_milkshake", MilkShakeItem::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build())
+                        .craftRemainder(Items.GLASS_BOTTLE)
+                        .stacksTo(16)
+                )
+                .tab(FOOD_TAB)
+                .register();
     }
 
     public static ItemEntry<ThrownProjectileItem> iceCreamScoop(String name) {

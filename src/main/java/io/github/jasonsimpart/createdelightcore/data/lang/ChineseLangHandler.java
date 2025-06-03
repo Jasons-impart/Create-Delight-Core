@@ -114,6 +114,10 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.ADZUKI_ICE_CREAM_SCOOP, "红豆冰淇淋球");
         provider.addItem(CDItems.POMEGRANATE_ICE_CREAM_SCOOP, "石榴冰淇淋球");
         provider.addItem(CDItems.LIME_ICE_CREAM_SCOOP, "青柠冰淇淋球");
+        //ice-cream-item
+        provider.addItem(CDItems.SWEETBERRY_ICE_CREAM, "甜浆果冰淇淋");
+        //milkshake
+        provider.addItem(CDItems.SWEETBERRY_MILKSHAKE, "甜浆果奶昔");
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
