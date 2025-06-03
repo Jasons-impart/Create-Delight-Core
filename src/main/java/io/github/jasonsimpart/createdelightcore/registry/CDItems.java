@@ -1,15 +1,14 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
+import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
@@ -49,6 +48,8 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_INGOT;
     public static final ItemEntry<Item> BRONZE_NUGGET;
 
+    public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP;
+
     static {
         // food
         UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
@@ -79,6 +80,10 @@ public class CDItems {
         BRONZE_INGOT = simpleIngot("bronze");
         BRONZE_NUGGET = simpleNugget("bronze");
         // andesite
+        // ice-cream scoop
+        STRAWBERRY_ICE_CREAM_SCOOP = REGISTRATE.item("strawberry_ice_cream_scoop", properties -> new ThrownProjectileItem(properties, player -> new ThrownIceCreamScoopEntity(player.level(), player), -10.0F, 1.0F, 0.2F))
+                .tab(FOOD_TAB)
+                .register();
     }
 
     public static ItemEntry<Item> simpleFood(String name, int nutrition, float saturation) {

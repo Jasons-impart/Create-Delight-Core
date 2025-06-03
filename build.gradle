@@ -224,7 +224,9 @@ dependencies {
     implementation fg.deobf("curse.maven:vinery-704465:6264246")
     implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
     // central kitchen
-    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6307294"))
+    // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
+    // 不需要runData时改为implementation
+    implementation(fg.deobf("curse.maven:create-central-kitchen-820977:6307294"))
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
