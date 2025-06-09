@@ -6,12 +6,15 @@ import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.fluid.*;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
+import net.minecraftforge.fml.DistExecutor;
 
 import static com.simibubi.create.AllTags.forgeFluidTag;
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
@@ -39,6 +42,7 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIME_ICE_CREAM = iceCreamFluid("lime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> POMEGRANATE_ICE_CREAM = iceCreamFluid("pomegranate");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> SWEETBERRY_ICE_CREAM = iceCreamFluid("sweetberry");
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
@@ -101,8 +105,9 @@ public class CDFluids {
     private static FluidEntry<ForgeFlowingFluid.Flowing> slimeFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
-        return REGISTRATE.fluid(name, STILL_RL, FLOW_RL, SlimeFluidType::new)
-//                .renderType(RenderType::translucent)
+        var reg = REGISTRATE.fluid(name, STILL_RL, FLOW_RL, SlimeFluidType::new);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> reg.renderType(RenderType::translucent));
+        reg
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.SLIME_BLOCK_BREAK)
@@ -116,8 +121,8 @@ public class CDFluids {
                 .source(ForgeFlowingFluid.Source::new)
                 .bucket()
                 .tab(FLUID_TAB)
-                .build()
-                .register();
+                .build();
+            return reg.register();
     }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> radiationFluid(String name) {
@@ -144,6 +149,5 @@ public class CDFluids {
 
 
     public static void init() {
-
     }
 }

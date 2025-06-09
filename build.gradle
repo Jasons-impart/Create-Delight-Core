@@ -209,7 +209,7 @@ dependencies {
     // create utilities
     implementation fg.deobf("curse.maven:createutilities-881586:6293834")
     // lightmans currency
-    implementation fg.deobf("curse.maven:lightmanscurrency-472521:6205400")
+    compileOnly fg.deobf("curse.maven:lightmanscurrency-472521:6205400")
     // waystones
     implementation fg.deobf("curse.maven:balm-531761:6205942")
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
@@ -223,8 +223,9 @@ dependencies {
     implementation fg.deobf("curse.maven:vinery-704465:6264246")
     implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
     // central kitchen
-    // !! 需要runData时先将这个改为compileOnly，然后build一下，再然后执行runData
-//    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6307294"))
+    // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
+    // 不需要runData时改为implementation
+//    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
 
     implementation fg.deobf("curse.maven:create-central-kitchen-820977:6522105")
     // ftb ultimine
