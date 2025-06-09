@@ -13,7 +13,6 @@
     "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
-    "createore.ExcavatingCategoryMixin",
     "CU.VoidBatteryMixin",
     "eclipticseason.CropGrowthHandlerMixin",
     "eclipticseason.GrowthDetectorItemMixin",
