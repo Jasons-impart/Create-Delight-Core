@@ -185,8 +185,7 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     // ratatouille
-//    implementation fg.deobf("curse.maven:create-ratatouille-983234:5882077") 使用自己构建的ratatouille
-    implementation fg.deobf("blank:ratatouille-983234:5882077")
+    implementation fg.deobf("curse.maven:create-ratatouille-983234:6646233")
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
     implementation fg.deobf("earth.terrarium.botarium:botarium-forge-${minecraft_version}:${botarium_version}")

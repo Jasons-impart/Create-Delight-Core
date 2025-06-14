@@ -1,6 +1,5 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
-import com.SSWTLZZ.ratatouille.entry.CRCreativeModeTabs;
 import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -12,6 +11,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
