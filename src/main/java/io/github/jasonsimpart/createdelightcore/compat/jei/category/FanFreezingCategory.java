@@ -1,8 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.compat.jei.category;
 
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
-import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.level.block.Blocks;
 import org.jetbrains.annotations.NotNull;

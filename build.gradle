@@ -89,6 +89,7 @@ minecraft {
         client {
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             property 'forge.enabledGameTestNamespaces', mod_id
+
         }
 
         server {
@@ -128,13 +129,9 @@ repositories {
         url = "https://maven.saps.dev/minecraft"
         content { includeGroup "dev.latvian.mods" }
     }
-    maven { url = 'https://maven.tterrag.com/'
-        content {
-            includeGroup "com.simibubi.create"
-            includeGroup "com.jozufozu.flywheel"
-            includeGroup "com.tterrag.registrate"
-        }
-    }
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+    maven { url = "https://maven.tterrag.com" } // Registrate
+    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven {
         url = "https://dvs1.progwml6.com/files/maven/"
     }
@@ -176,16 +173,19 @@ dependencies {
     // architectury
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     // create
-    implementation fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
+    implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
+    compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}"))
+    runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}"))
+    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 
     // farmer's delight
     implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
 
     // ratatouille
-    implementation fg.deobf("curse.maven:create-ratatouille-983234:5882077")
-
+    implementation fg.deobf("curse.maven:create-ratatouille-983234:6646233")
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
     implementation fg.deobf("earth.terrarium.botarium:botarium-forge-${minecraft_version}:${botarium_version}")
@@ -193,7 +193,7 @@ dependencies {
 
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     // create metallurgy
-    implementation fg.deobf("curse.maven:create-metallurgy-1007404:5794774")
+    implementation fg.deobf("curse.maven:create-metallurgy-1007404:6441695")
     // Use the full Curios API jar at runtime
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
@@ -204,21 +204,19 @@ dependencies {
     // alex's caves
     implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
     // create addition
-    implementation fg.deobf("curse.maven:createaddition-439890:5658602")
+    implementation fg.deobf("curse.maven:createaddition-439890:6306951")
     // create utilities
-    implementation fg.deobf("curse.maven:createutilities-881586:5225304")
+    implementation fg.deobf("curse.maven:createutilities-881586:6293834")
     // lightmans currency
     compileOnly fg.deobf("curse.maven:lightmanscurrency-472521:6205400")
     // waystones
     implementation fg.deobf("curse.maven:balm-531761:6205942")
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
-    // create utilities
-    implementation fg.deobf("curse.maven:createutilities-881586:5225304")
 
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6399040")
     // quality foods
-    implementation fg.deobf("curse.maven:quality_food-973932:6216348")
+    implementation fg.deobf("curse.maven:quality_food-973932:6398389")
 
     // vinery
     implementation fg.deobf("curse.maven:vinery-704465:6264246")
@@ -226,8 +224,9 @@ dependencies {
     // central kitchen
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
-    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6307294")
-//    compileOnly fg.deobf("curse.maven:create-central-kitchen-820977:6307294")
+//    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
+
+    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6522105")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
@@ -251,9 +250,7 @@ dependencies {
     //casualness delight
     implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
     //createbicbit
-    implementation fg.deobf("curse.maven:createbicbit-918751:5446853")
-    //createoreexcavation
-    compileOnly fg.deobf("curse.maven:createoreexcavation-649832:5848320")
+    implementation fg.deobf("curse.maven:createbicbit-918751:6286509")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
