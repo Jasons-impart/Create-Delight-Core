@@ -130,7 +130,8 @@ repositories {
         content { includeGroup "dev.latvian.mods" }
     }
     maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
-    maven { url = "https://maven.tterrag.com" } // Registrate
+//    maven { url = "https://maven.tterrag.com" } // Registrate 暂时换一下源
+    maven { url = "https://maven.ithundxr.dev/mirror" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven {
         url = "https://dvs1.progwml6.com/files/maven/"
