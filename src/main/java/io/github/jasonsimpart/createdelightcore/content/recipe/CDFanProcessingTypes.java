@@ -3,11 +3,15 @@ package io.github.jasonsimpart.createdelightcore.content.recipe;
 import java.util.List;
 import java.util.Optional;
 
+import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import io.github.jasonsimpart.createdelightcore.registry.CDTags;
+import net.createmod.catnip.math.VecHelper;
+import net.createmod.catnip.theme.Color;
+import net.minecraft.core.Registry;
 import net.minecraft.world.entity.animal.SnowGolem;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.Stray;
@@ -15,8 +19,6 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import com.simibubi.create.foundation.recipe.RecipeApplier;
-import com.simibubi.create.foundation.utility.Color;
-import com.simibubi.create.foundation.utility.VecHelper;
 
 import it.unimi.dsi.fastutil.objects.Object2ReferenceOpenHashMap;
 import net.minecraft.core.BlockPos;
@@ -48,7 +50,7 @@ public class CDFanProcessingTypes {
     }
 
     private static <T extends FanProcessingType> T register(String id, T type) {
-        FanProcessingTypeRegistry.register(CreateDelightCore.id(id), type);
+        Registry.register(CreateBuiltInRegistries.FAN_PROCESSING_TYPE, CreateDelightCore.id(id), type);
         return type;
     }
 

@@ -6,7 +6,6 @@ import com.simibubi.create.AllBlocks;
 import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.simibubi.create.foundation.utility.Lang;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
