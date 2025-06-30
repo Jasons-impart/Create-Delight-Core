@@ -251,6 +251,8 @@ dependencies {
     implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
     //createbicbit
     implementation fg.deobf("curse.maven:createbicbit-918751:6286509")
+    //butchercraft
+    implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
