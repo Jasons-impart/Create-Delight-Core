@@ -10,6 +10,7 @@
     "ae2.CraftingTermMenuMixin",
     "ae2.CraftingTermSlotMixin",
     "bakeries.SnifferEventMixin",
+    "butchercraft.ButchercraftModEventsMixin",
     "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
