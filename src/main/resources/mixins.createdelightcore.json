@@ -40,6 +40,7 @@
     "ratatouille.ThresherBlockEntityMixin",
     "refurbished_furniture.FryingPanBlockEntityMixin",
     "refurbished_furniture.StoveBlockEntityMixin",
+    "solapplepie.FoodTrackerMixin",
     "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"
   ],

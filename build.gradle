@@ -214,7 +214,7 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
 
     // EclipticSeasons
-    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6399040")
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6701300")
     // quality foods
     implementation fg.deobf("curse.maven:quality_food-973932:6398389")
 
@@ -251,6 +251,8 @@ dependencies {
     implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
     //createbicbit
     implementation fg.deobf("curse.maven:createbicbit-918751:6286509")
+    //solapplepie
+    implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //

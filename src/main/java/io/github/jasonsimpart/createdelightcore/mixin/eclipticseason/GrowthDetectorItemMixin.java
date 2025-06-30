@@ -28,7 +28,7 @@ public class GrowthDetectorItemMixin {
     }
 
     @Inject(method = "getHumidityGrowChance", at = @At(value = "HEAD"), cancellable = true)
-    private static void getHumidityGrowChanceMixin(LevelAccessor world, CropGrowControl growControl, Humidity env, CropGrowthHandler.RoomStatus roomStatus, BlockPos pos, BlockState blockState, Season season, boolean hasUpdate, CallbackInfoReturnable<Float> cir) {
+    private static void getHumidityGrowChanceMixin(Level world, CropGrowControl growControl, Humidity env, CropGrowthHandler.RoomStatus roomStatus, BlockPos pos, BlockState blockState, Season season, boolean hasUpdate, CallbackInfoReturnable<Float> cir) {
         if (LevelData.get(world, pos).level() > 1)
             cir.setReturnValue(1.f);
     }
