@@ -182,7 +182,7 @@ dependencies {
     implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 
     // farmer's delight
-    implementation fg.deobf("curse.maven:farmers-delight-398521:5051242")
+    implementation fg.deobf("curse.maven:farmers-delight-398521:6597298")
 
     // ratatouille
     implementation fg.deobf("curse.maven:create-ratatouille-983234:6646233")

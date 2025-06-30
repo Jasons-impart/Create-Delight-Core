@@ -16,6 +16,7 @@
     "CU.VoidBatteryMixin",
     "eclipticseason.CropGrowthHandlerMixin",
     "eclipticseason.GrowthDetectorItemMixin",
+    "farmersdelight.DoughRecipeMakerMixin",
     "fruitsdelight.DoubleBushBlockMixin",
     "fruitsdelight.DoubleFruitBushBlockMixin",
     "fruitsdelight.FruitBushBlockMixin",
