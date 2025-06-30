@@ -251,8 +251,9 @@ dependencies {
     implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
     //createbicbit
     implementation fg.deobf("curse.maven:createbicbit-918751:6286509")
-    //solapplepie
+    //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
+    implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
