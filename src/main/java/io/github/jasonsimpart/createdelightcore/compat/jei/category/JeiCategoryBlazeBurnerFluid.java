@@ -26,7 +26,7 @@ import net.minecraft.world.level.material.Fluid;
 import java.util.List;
 
 import org.jetbrains.annotations.Nullable;
-import io.github.jasonsimpart.createdelightcore.compat.jei.utils.AnimatedBlazeBurner;
+import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 
 public class JeiCategoryBlazeBurnerFluid
         implements IRecipeCategory<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> {
