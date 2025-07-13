@@ -15,19 +15,19 @@ import java.util.List;
 
 @Mixin(targets = { "com.mrcrayfish.furniture.refurbished.blockentity.StoveBlockEntity$CookingSpace" })
 public class StoveBlockEntityMixin {
-    @Inject(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"), remap = false)
-    public void storeInput(CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Share("input") final LocalRef<ItemStack> input) {
-        input.set(itemStack.copy());
-    }
-    @ModifyArg(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lcom/mrcrayfish/furniture/refurbished/blockentity/StoveBlockEntity;setItem(ILnet/minecraft/world/item/ItemStack;)V", ordinal = 0), index = 1)
-    public ItemStack applyQualityCopy(ItemStack par2, @Share("input") final LocalRef<ItemStack> input) {
-        QualityUtils.applyQuality(par2, List.of(input.get()), null);
-        return par2;
-    }
-    @ModifyArg(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isSameItemSameTags(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"), index = 0)
-    public ItemStack applyQualityAnoCopy(ItemStack par2, @Share("input") final LocalRef<ItemStack> input) {
-        QualityUtils.applyQuality(par2, List.of(input.get()), null);
-        return par2;
-    }
+//    @Inject(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"), remap = false)
+//    public void storeInput(CallbackInfo ci, @Local(ordinal = 0) ItemStack itemStack, @Share("input") final LocalRef<ItemStack> input) {
+//        input.set(itemStack.copy());
+//    }
+//    @ModifyArg(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lcom/mrcrayfish/furniture/refurbished/blockentity/StoveBlockEntity;setItem(ILnet/minecraft/world/item/ItemStack;)V", ordinal = 0), index = 1)
+//    public ItemStack applyQualityCopy(ItemStack par2, @Share("input") final LocalRef<ItemStack> input) {
+//        QualityUtils.applyQuality(par2, List.of(input.get()), null);
+//        return par2;
+//    }
+//    @ModifyArg(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isSameItemSameTags(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"), index = 0)
+//    public ItemStack applyQualityAnoCopy(ItemStack par2, @Share("input") final LocalRef<ItemStack> input) {
+//        QualityUtils.applyQuality(par2, List.of(input.get()), null);
+//        return par2;
+//    }
 
 }

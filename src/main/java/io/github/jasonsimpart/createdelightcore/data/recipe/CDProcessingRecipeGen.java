@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
+import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
@@ -27,7 +28,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 
-public abstract class CDProcessingRecipeGen extends CreateRecipeProvider {
+public abstract class CDProcessingRecipeGen extends BaseRecipeProvider {
     protected static final List<CDProcessingRecipeGen> GENERATORS = new ArrayList<>();
 
     public static void registerAll(DataGenerator gen, PackOutput output) {
@@ -49,7 +50,7 @@ public abstract class CDProcessingRecipeGen extends CreateRecipeProvider {
     }
 
     public CDProcessingRecipeGen(PackOutput generator) {
-        super(generator);
+        super(generator, CreateDelightCore.MODID);
     }
 
     /**
@@ -123,31 +124,31 @@ public abstract class CDProcessingRecipeGen extends CreateRecipeProvider {
     }
 
     //HELPER
-    public CreateRecipeProvider.GeneratedRecipe convert(Block block, Block result) {
+    public GeneratedRecipe convert(Block block, Block result) {
         return create(() -> block, b -> b.output(result));
     }
 
-    public CreateRecipeProvider.GeneratedRecipe convert(Item item, Item result) {
+    public GeneratedRecipe convert(Item item, Item result) {
         return create(() -> item, b -> b.output(result));
     }
-    public CreateRecipeProvider.GeneratedRecipe convert(Supplier<ItemLike> item, Supplier<ItemLike> result) {
+    public GeneratedRecipe convert(Supplier<ItemLike> item, Supplier<ItemLike> result) {
         return create(item, b -> b.output((ItemLike) result));
     }
-    public CreateRecipeProvider.GeneratedRecipe convert(Item item, Item result, float chance) {
+    public GeneratedRecipe convert(Item item, Item result, float chance) {
         return create(() -> item, b -> b.output(chance, result));
     }
-    public CreateRecipeProvider.GeneratedRecipe convert(Item item, Item result1, float chance1, Item result2, float chance2) {
+    public GeneratedRecipe convert(Item item, Item result1, float chance1, Item result2, float chance2) {
         return create(() -> item, b -> b.output(chance1, result1).output(chance2, result2));
     }
-    public CreateRecipeProvider.GeneratedRecipe convert(Supplier<ItemLike> item, Supplier<ItemLike> result, float chance) {
+    public GeneratedRecipe convert(Supplier<ItemLike> item, Supplier<ItemLike> result, float chance) {
         return create(item, b -> b.output(chance, (ItemLike) result));
     }
 
-    public CreateRecipeProvider.GeneratedRecipe convert(ItemEntry<Item> item, ItemEntry<Item> result) {
+    public GeneratedRecipe convert(ItemEntry<Item> item, ItemEntry<Item> result) {
         return create(item::get, b -> b.output(result::get));
     }
 
-    public CreateRecipeProvider.GeneratedRecipe secondaryRecipe(Supplier<ItemLike> item, Supplier<ItemLike> first, Supplier<ItemLike> secondary,
+    public GeneratedRecipe secondaryRecipe(Supplier<ItemLike> item, Supplier<ItemLike> first, Supplier<ItemLike> secondary,
                                                                 float secondaryChance) {
         return create(item, b -> b.output(first.get(), 1)
                 .output(secondaryChance, secondary.get(), 1));
