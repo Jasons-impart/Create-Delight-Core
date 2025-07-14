@@ -15,6 +15,7 @@
     "casualness_delight.DeepFryingPanEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
+    "displaydelight.InterationManagerMixin",
     "eclipticseason.CropGrowthHandlerMixin",
     "eclipticseason.GrowthDetectorItemMixin",
     "farmersdelight.DoughRecipeMakerMixin",

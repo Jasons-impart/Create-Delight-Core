@@ -186,6 +186,7 @@ dependencies {
 
     // ratatouille
     implementation fg.deobf("curse.maven:create-ratatouille-983234:6646233")
+
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
     implementation fg.deobf("earth.terrarium.botarium:botarium-forge-${minecraft_version}:${botarium_version}")
@@ -258,6 +259,8 @@ dependencies {
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
 
     implementation fg.deobf("curse.maven:create_factory_logistics-1218807:6697751")
+
+    implementation fg.deobf("curse.maven:displaydelight-1144296:5964175")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //
