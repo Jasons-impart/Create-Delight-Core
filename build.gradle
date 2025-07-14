@@ -214,7 +214,7 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
 
     // EclipticSeasons
-    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6701300")
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6752783")
     // quality foods
     implementation fg.deobf("curse.maven:quality_food-973932:6398389")
 
@@ -225,14 +225,14 @@ dependencies {
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
 //    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
-
+    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     implementation fg.deobf("curse.maven:create-central-kitchen-820977:6522105")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
-    compileOnly fg.deobf("curse.maven:neapolitan-382016:6248885")
+    implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
     //fruits delight
     compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6242383")
     //functional storage

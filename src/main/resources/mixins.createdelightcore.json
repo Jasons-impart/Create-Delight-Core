@@ -35,6 +35,8 @@
     "lunarian.SellPotionHoldingItemFactoryMixin",
     "lunarian.SellSuspiciousStewFactoryMixin",
     "Minecraft.PlayerMixin",
+    "mynethersdelight.PowderyCaneBlockMixin",
+    "mynethersdelight.PowderyCannonBlockMixin",
     "neapolitan.MintBlockMixin",
     "neapolitan.StrawberryBushBlockMixin",
     "quality_food.QualityFoodMixin",

@@ -1,29 +1,35 @@
 package io.github.jasonsimpart.createdelightcore.mixin.quality_food;
 
+import com.soytutta.mynethersdelight.common.block.PowderyCaneBlock;
+import com.soytutta.mynethersdelight.common.block.PowderyCannonBlock;
+import com.teamabnormals.neapolitan.common.block.MintBlock;
+import com.teamabnormals.neapolitan.common.block.StrawberryBushBlock;
+import de.cadentem.quality_food.compat.Compat;
 import de.cadentem.quality_food.config.QualityConfig;
 import de.cadentem.quality_food.core.Modification;
 import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
-import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import dev.xkmc.fruitsdelight.content.block.DoubleFruitBushBlock;
+import dev.xkmc.fruitsdelight.content.block.FruitBushBlock;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.satisfy.vinery.core.block.GrapeBush;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
-import java.util.Objects;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import static de.cadentem.quality_food.util.QualityUtils.*;
 
@@ -72,5 +78,22 @@ public abstract class QualityFoodMixin {
             applyQuality(stack, player);
         }
         ci.cancel();
+    }
+
+    @Inject(method = "isRelevantCrop", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void isRelevantCropMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        Block block = state.getBlock();
+        if (Compat.isModLoaded("neapolitan") && block instanceof StrawberryBushBlock strawberryBushBlock)
+            cir.setReturnValue(strawberryBushBlock.isMaxAge(state));
+        else if (Compat.isModLoaded("neapolitan") && block instanceof MintBlock mintBlock)
+            cir.setReturnValue(mintBlock.isMaxAge(state));
+        else if (Compat.isModLoaded("fruitsdelight") && (block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock))
+            cir.setReturnValue(state.getValue(BlockStateProperties.AGE_4) == 4);
+        else if (Compat.isModLoaded("vinery") && block instanceof GrapeBush || block instanceof SweetBerryBushBlock)
+            cir.setReturnValue(state.getValue(BlockStateProperties.AGE_3) == 3);
+        else if (block instanceof PowderyCaneBlock)
+            cir.setReturnValue(state.getValue(PowderyCaneBlock.LIT));
+        else if (block instanceof PowderyCannonBlock)
+            cir.setReturnValue(state.getValue(PowderyCannonBlock.LIT));
     }
 }
