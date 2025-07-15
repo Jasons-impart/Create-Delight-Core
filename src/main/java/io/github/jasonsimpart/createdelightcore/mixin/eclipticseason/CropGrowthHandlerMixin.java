@@ -33,12 +33,10 @@ public abstract class CropGrowthHandlerMixin {
             return 1;
         return getGrowChance(event, growParameter);
     }
-    @Inject(method = "beforeCropGrowUp(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At(value = "INVOKE", target = "Lcom/teamtea/eclipticseasons/common/core/crop/CropGrowthHandler;checkHumidity(Lnet/minecraftforge/eventbus/api/Event;Lnet/minecraft/world/level/Level;Lcom/teamtea/eclipticseasons/api/data/crop/CropGrowControl;Lcom/teamtea/eclipticseasons/api/constant/biome/Humidity;Lcom/teamtea/eclipticseasons/common/core/crop/CropGrowthHandler$RoomStatus;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lcom/teamtea/eclipticseasons/api/constant/solar/Season;ZIF)V"), cancellable = true)
-    private static void beforeCropGrowUpHumidityMixin(Event event, Level level, BlockPos pos, BlockState blockState, CallbackInfo ci) {
-        if (LevelData.get(level, pos).level() > 1) {
-            setResult(event, GROW);
-            ci.cancel();
-        }
+    @Redirect(method = "checkHumidity", at = @At(value = "INVOKE", target = "Lcom/teamtea/eclipticseasons/common/core/crop/CropGrowthHandler;getGrowChance(Lnet/minecraftforge/eventbus/api/Event;Lcom/teamtea/eclipticseasons/api/data/crop/GrowParameter;)F"))
+    private static float checkHumidity$modifyGrowChance(Event event, GrowParameter growParameter, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos) {
+        if (LevelData.get(level, pos).level() > 1)
+            return 1;
+        return getGrowChance(event, growParameter);
     }
-
 }
