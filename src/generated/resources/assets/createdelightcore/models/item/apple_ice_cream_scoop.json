@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "createdelightcore:item/adzuki_ice_cream_bucket"
+    "layer0": "createdelightcore:item/apple_ice_cream_scoop"
   }
 }

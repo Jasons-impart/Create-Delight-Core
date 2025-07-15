@@ -97,16 +97,6 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.MOLTEN_ICE_STEEL, "熔融龙霜钢");
         addFluid(provider, CDFluids.MOLTEN_LIGHTNING_STEEL, "熔融龙霆钢");
         addFluid(provider, CDFluids.MOLTEN_FORGED_STEEL, "熔融锻造钢");
-        //ice cream
-        addFluid(provider, CDFluids.ADZUKI_ICE_CREAM, "红豆冰淇淋");
-        addFluid(provider, CDFluids.BANANA_ICE_CREAM, "香蕉冰淇淋");
-        addFluid(provider, CDFluids.CHOCOLATE_ICE_CREAM, "巧克力冰淇淋");
-        addFluid(provider, CDFluids.MINT_ICE_CREAM, "薄荷冰淇淋");
-        addFluid(provider, CDFluids.STRAWBERRY_ICE_CREAM, "草莓冰淇淋");
-        addFluid(provider, CDFluids.VANILLA_ICE_CREAM, "香草冰淇淋");
-        addFluid(provider, CDFluids.LIME_ICE_CREAM, "青柠冰淇淋");
-        addFluid(provider, CDFluids.POMEGRANATE_ICE_CREAM, "石榴冰淇淋");
-        addFluid(provider, CDFluids.SWEETBERRY_ICE_CREAM, "甜浆果冰淇淋");
         //ice cream scoop
         provider.addItem(CDItems.STRAWBERRY_ICE_CREAM_SCOOP, "草莓冰淇淋球");
         provider.addItem(CDItems.BANANA_ICE_CREAM_SCOOP, "香蕉冰淇淋球");
@@ -114,10 +104,12 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.ADZUKI_ICE_CREAM_SCOOP, "红豆冰淇淋球");
         provider.addItem(CDItems.POMEGRANATE_ICE_CREAM_SCOOP, "石榴冰淇淋球");
         provider.addItem(CDItems.LIME_ICE_CREAM_SCOOP, "青柠冰淇淋球");
-        //ice-cream-item
-        provider.addItem(CDItems.SWEETBERRY_ICE_CREAM, "甜浆果冰淇淋");
-        //milkshake
-        provider.addItem(CDItems.SWEETBERRY_MILKSHAKE, "甜浆果奶昔");
+        provider.addItem(CDItems.APPLE_ICE_CREAM_SCOOP, "苹果冰淇淋球");
+        provider.addItem(CDItems.BEETROOT_ICE_CREAM_SCOOP, "甜菜根冰淇淋球");
+        provider.addItem(CDItems.CARROT_ICE_CREAM_SCOOP, "胡萝卜冰淇淋球");
+        provider.addItem(CDItems.ENHANCED_FRUIT_ICE_CREAM_SCOOP, "附魔之果冰淇淋球");
+        provider.addItem(CDItems.GLOW_BERRY_ICE_CREAM_SCOOP, "发光浆果冰淇淋球");
+        provider.addItem(CDItems.PUMPKIN_ICE_CREAM_SCOOP, "南瓜冰淇淋球");
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");

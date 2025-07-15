@@ -4,6 +4,7 @@ import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.tterrag.registrate.Registrate;
 import com.tterrag.registrate.builders.FluidBuilder;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidSource;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.fluid.*;
 import net.minecraft.client.renderer.RenderType;
@@ -34,15 +35,6 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LIGHTNING_STEEL = moltenFluid("lightning_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_FORGED_STEEL = moltenFluid("forged_steel");
     // all ice cream
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> ADZUKI_ICE_CREAM = iceCreamFluid("adzuki");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> BANANA_ICE_CREAM = iceCreamFluid("banana");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> CHOCOLATE_ICE_CREAM = iceCreamFluid("chocolate");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> MINT_ICE_CREAM = iceCreamFluid("mint");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> STRAWBERRY_ICE_CREAM = iceCreamFluid("strawberry");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> VANILLA_ICE_CREAM = iceCreamFluid("vanilla");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> LIME_ICE_CREAM = iceCreamFluid("lime");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> POMEGRANATE_ICE_CREAM = iceCreamFluid("pomegranate");
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> SWEETBERRY_ICE_CREAM = iceCreamFluid("sweetberry");
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
@@ -59,7 +51,7 @@ public class CDFluids {
     private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
-        return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, MoltenFluidType::new)
+        return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)
                         .lightLevel(15)
@@ -80,27 +72,6 @@ public class CDFluids {
                 .register();
     }
 
-    private static FluidEntry<ForgeFlowingFluid.Flowing> iceCreamFluid(String name) {
-        ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
-        ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
-        return REGISTRATE.fluid(name + "_ice_cream", STILL_RL, FLOW_RL, IceCreamFluidType::new)
-                .properties(b -> b.viscosity(2000)
-                        .density(1400)
-                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY_POWDER_SNOW)
-                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL_POWDER_SNOW)
-                        .canHydrate(false)
-                        .supportsBoating(true))
-                .fluidProperties(p -> p.levelDecreasePerBlock(2)
-                        .tickRate(20)
-                        .slopeFindDistance(3)
-                        .explosionResistance((float) 50.0))
-                .tag(forgeFluidTag(name + "_ice_cream"), forgeFluidTag("ice_cream"))
-                .source(IceCreamFluidSource::new)
-                .bucket()
-                .tab(FLUID_TAB)
-                .build()
-                .register();
-    }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> slimeFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");

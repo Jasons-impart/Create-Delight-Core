@@ -226,8 +226,8 @@ dependencies {
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
 //    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
-    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     implementation fg.deobf("curse.maven:create-central-kitchen-820977:6522105")
+    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
@@ -261,6 +261,9 @@ dependencies {
     implementation fg.deobf("curse.maven:create_factory_logistics-1218807:6763009")
 
     implementation fg.deobf("curse.maven:displaydelight-1144296:5964175")
+
+    implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
+
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //

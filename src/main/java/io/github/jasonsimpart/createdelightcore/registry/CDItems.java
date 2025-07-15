@@ -36,10 +36,12 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> ADZUKI_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> POMEGRANATE_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> LIME_ICE_CREAM_SCOOP;
-    //ice-cream
-    public static final ItemEntry<IceCreamItem> SWEETBERRY_ICE_CREAM;
-    //milkshake
-    public static final ItemEntry<MilkShakeItem> SWEETBERRY_MILKSHAKE;
+    public static final ItemEntry<ThrownProjectileItem> APPLE_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> BEETROOT_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> CARROT_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> ENHANCED_FRUIT_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> GLOW_BERRY_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP;
     //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
     public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
@@ -78,10 +80,12 @@ public class CDItems {
         ADZUKI_ICE_CREAM_SCOOP = iceCreamScoop("adzuki");
         POMEGRANATE_ICE_CREAM_SCOOP = iceCreamScoop("pomegranate");
         LIME_ICE_CREAM_SCOOP = iceCreamScoop("lime");
-        // ice-cream
-        SWEETBERRY_ICE_CREAM = iceCreamItem("sweetberry", 6, 0.4f);
-        // milkshake
-        SWEETBERRY_MILKSHAKE = milkShakeItem("sweetberry", 2, 1.5f);
+        APPLE_ICE_CREAM_SCOOP = iceCreamScoop("apple");
+        BEETROOT_ICE_CREAM_SCOOP = iceCreamScoop("beetroot");
+        CARROT_ICE_CREAM_SCOOP = iceCreamScoop("carrot");
+        ENHANCED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enhanced_fruit");
+        GLOW_BERRY_ICE_CREAM_SCOOP = iceCreamScoop("glow_berry");
+        PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
         // chocolate
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);

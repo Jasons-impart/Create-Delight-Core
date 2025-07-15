@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "createdelightcore:item/mint_ice_cream_bucket"
-  }
-}
