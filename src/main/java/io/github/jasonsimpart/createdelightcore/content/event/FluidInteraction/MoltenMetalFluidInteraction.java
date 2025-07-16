@@ -81,15 +81,6 @@ public class MoltenMetalFluidInteraction {
 
     private static void addMoltenMetalInteraction(FluidType fluidType, BlockState blockState) {
         FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(ForgeMod.WATER_TYPE.get(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.ADZUKI_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.BANANA_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.CHOCOLATE_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.MINT_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.STRAWBERRY_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.VANILLA_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource() ? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.LIME_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource()? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.POMEGRANATE_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource()? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
-        FluidInteractionRegistry.addInteraction(fluidType, new FluidInteractionRegistry.InteractionInformation(CDFluids.SWEETBERRY_ICE_CREAM.get().getFluidType(), fluidState -> fluidState.isSource()? blockState : AllPaletteStoneTypes.SCORCHIA.getBaseBlock().get().defaultBlockState()));
     }
 
     private static final Map<FluidType, BlockState> moltenMetalBlocks = new HashMap<>();
