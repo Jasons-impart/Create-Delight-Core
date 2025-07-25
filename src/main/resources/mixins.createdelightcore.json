@@ -13,6 +13,7 @@
     "butchercraft.ButchercraftModEventsMixin",
     "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
+    "constructionwand.WandUtilMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",

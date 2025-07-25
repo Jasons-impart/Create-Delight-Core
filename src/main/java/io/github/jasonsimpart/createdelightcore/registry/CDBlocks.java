@@ -8,8 +8,7 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import io.github.jasonsimpart.createdelightcore.content.block.CoinPileBlock;
-import io.github.jasonsimpart.createdelightcore.content.block.GlassCassing;
+import io.github.jasonsimpart.createdelightcore.content.block.*;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
@@ -18,7 +17,11 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -60,6 +63,15 @@ public class CDBlocks {
     public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING;
     //coil
     public static final BlockEntry<CasingBlock> COPPER_COIL;
+
+    public static final BlockEntry<FlowerClusterBlock> FIRE_LILY_CLUSTER;
+    public static final BlockEntry<FlowerClusterBlock> FROST_LILY_CLUSTER;
+    public static final BlockEntry<FlowerClusterBlock> LIGHTNING_LILY_CLUSTER;
+
+    public static final BlockEntry<LunaSoilBlock> LUNA_SOIL;
+    public static final BlockEntry<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND;
+    public static final BlockEntry<PhantomCompostBlock> PHANTOM_COMPOST;
+
 
     static {
         //electrum
@@ -114,6 +126,36 @@ public class CDBlocks {
                         .sound(SoundType.COPPER)
                 )
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
+                .register();
+        FIRE_LILY_CLUSTER = REGISTRATE.block("fire_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FIRE_LILY.get()), () -> IafBlockRegistry.FIRE_LILY.get().asItem()))
+                .item()
+                .tab(MISC_TAB)
+                .build()
+                .register();
+        FROST_LILY_CLUSTER = REGISTRATE.block("frost_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FROST_LILY.get()), () -> IafBlockRegistry.FROST_LILY.get().asItem()))
+                .item()
+                .tab(MISC_TAB)
+                .build()
+                .register();
+        LIGHTNING_LILY_CLUSTER = REGISTRATE.block("lightning_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.LIGHTNING_LILY.get()), () -> IafBlockRegistry.LIGHTNING_LILY.get().asItem()))
+                .item()
+                .tab(MISC_TAB)
+                .build()
+                .register();
+        LUNA_SOIL = REGISTRATE.block("luna_soil", properties -> new LunaSoilBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).randomTicks()))
+                .item()
+                .tab(MISC_TAB)
+                .build()
+                .register();
+        PHANTOM_COMPOST = REGISTRATE.block("phantom_compost", properties -> new PhantomCompostBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)))
+                .item()
+                .tab(MISC_TAB)
+                .build()
+                .register();
+        LUNA_SOIL_FARMLAND = REGISTRATE.block("luna_soil_farmland", properties -> new LunaSoilFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)))
+                .item()
+                .tab(MISC_TAB)
+                .build()
                 .register();
     }
 

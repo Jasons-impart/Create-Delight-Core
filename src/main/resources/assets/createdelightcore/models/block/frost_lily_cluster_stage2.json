@@ -1,0 +1,6 @@
+{
+  "parent": "createdelightcore:block/lily_cluster_stage2",
+  "textures": {
+    "lily": "createdelightcore:block/frost_lily_cluster"
+  }
+}

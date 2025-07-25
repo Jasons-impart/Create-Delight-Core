@@ -71,6 +71,8 @@ public class CDTags {
     public enum AllBlockTags {
 
         FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
+        PHANTOM_COMPOST_ACTIVATORS(NameSpace.MOD, "phantom_compost_activators"),
+
 
         ;
 

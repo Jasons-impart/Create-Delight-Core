@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "createdelightcore:block/frost_lily_cluster_stage0"
+    },
+    "age=1": {
+      "model": "createdelightcore:block/frost_lily_cluster_stage1"
+    },
+    "age=2": {
+      "model": "createdelightcore:block/frost_lily_cluster_stage2"
+    }
+  }
+}

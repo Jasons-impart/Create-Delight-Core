@@ -30,6 +30,9 @@ public class CDConfig
             .comment("It's the base value of the chain.")
             .defineInRange("teleportCost", 45, 1, Integer.MAX_VALUE);
 
+    private static final ForgeConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
+            .comment("The chance for luna soil to boost crops grows.")
+            .defineInRange("lunaSoilBoostChance", 0.5, 0, 1);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
 
@@ -39,6 +42,7 @@ public class CDConfig
     public static String moneyChain;
     public static int teleportCost;
     public static boolean useMoneyTeleport;
+    public static double lunaSoilBoostChance;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -49,5 +53,6 @@ public class CDConfig
         moneyChain = MONEY_CAIN.get();
         useMoneyTeleport = USE_MONEY_TELEPORT.get();
         teleportCost = TELEPORT_COST.get();
+        lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
     }
 }

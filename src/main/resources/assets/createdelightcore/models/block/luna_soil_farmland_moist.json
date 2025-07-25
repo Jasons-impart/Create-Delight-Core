@@ -1,0 +1,8 @@
+{
+  "parent": "farmersdelight:block/template_farmland_custom",
+  "textures": {
+    "top": "createdelightcore:block/luna_soil_farmland_moist",
+    "bottom": "createdelightcore:block/luna_soil",
+    "side": "createdelightcore:block/luna_soil"
+  }
+}
