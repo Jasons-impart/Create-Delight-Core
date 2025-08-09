@@ -234,6 +234,7 @@ dependencies {
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
+    implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
     //fruits delight
     compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6242383")
     //functional storage
@@ -262,7 +263,6 @@ dependencies {
 
     implementation fg.deobf("curse.maven:displaydelight-1144296:5964175")
 
-    implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
 
     implementation fg.deobf("curse.maven:elysium-api-1158628:6589093")
     implementation fg.deobf("curse.maven:jadens-nether-expansion-1111833:6729020")

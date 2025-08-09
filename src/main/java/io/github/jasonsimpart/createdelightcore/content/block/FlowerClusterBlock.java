@@ -37,6 +37,10 @@ public class FlowerClusterBlock extends MushroomColonyBlock {
     public FlowerClusterBlock(Properties properties, Supplier<Item> mushroomType) {
         super(properties, mushroomType);
     }
+    @Override
+    public int getMaxAge() {
+        return 2;
+    }
 
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos floorPos = pos.below();

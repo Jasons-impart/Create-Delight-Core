@@ -143,11 +143,13 @@ public class CDBlocks {
                 .build()
                 .register();
         LUNA_SOIL = REGISTRATE.block("luna_soil", properties -> new LunaSoilBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).randomTicks()))
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.DIRT)
                 .item()
                 .tab(MISC_TAB)
                 .build()
                 .register();
         PHANTOM_COMPOST = REGISTRATE.block("phantom_compost", properties -> new PhantomCompostBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)))
+                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
                 .item()
                 .tab(MISC_TAB)
                 .build()

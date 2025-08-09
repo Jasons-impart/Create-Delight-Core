@@ -3,7 +3,8 @@
   "render_type": "minecraft:cutout",
   "texture_size": [16, 64],
   "textures": {
-    "flower": "#lily"
+    "flower": "#lily",
+    "particle": "#lily"
   },
   "elements": [
     {

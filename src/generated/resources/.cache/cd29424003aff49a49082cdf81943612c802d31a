@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-25T14:26:02.1247841	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2025-08-08T12:07:21.2849694	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
 ee912bdf76133dc3c9bf06adbd69d162071c0b32 assets/createdelightcore/blockstates/copper_coil.json
 ee1784e2466fa57cf6416d1c08aed2d7444b4f12 assets/createdelightcore/blockstates/copper_coin_pile.json
@@ -38,7 +38,7 @@ c6c4c8d23c4c6e90245827caf6051656a2c6c9d9 assets/createdelightcore/blockstates/st
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 a2592a8f71bb5d051ba8614e33fb2acf76d53dc8 assets/createdelightcore/lang/en_ud.json
 3f2e61fb802e7fcda7e91f6100d98699b30c2f73 assets/createdelightcore/lang/en_us.json
-3436c0e820dc2ff06e50653dc157c57699a55942 assets/createdelightcore/lang/zh_cn.json
+76491a886007b2412473f7552d167b4e2c065e72 assets/createdelightcore/lang/zh_cn.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
 0d6425b19a5fa59de29b7399b29cb82a2be735ab assets/createdelightcore/models/block/copper_coil.json
 944dd664042b870aa73769e70cccf4c9b8aca6b8 assets/createdelightcore/models/block/copper_coin_pile.json
@@ -215,6 +215,8 @@ d63de8049d2b5f7246ab0d5a0ef78fd6c50d2128 data/forge/tags/items/storage_blocks/el
 774f7a6c1c6193ef5654ec2d76cd4f6e186ea8e7 data/forge/tags/items/storage_blocks/forged_steel.json
 999fa53f930bb10a940e340831b5cdae6323ddbf data/forge/tags/items/storage_blocks/raw_tin.json
 c610159eee458eb6ba32c22e6e47b5fcd5986eeb data/forge/tags/items/storage_blocks/tin.json
+17dd2040298710f8dd64aef15146b279374720b2 data/minecraft/tags/blocks/dirt.json
 71dbce4768df32edfa66fe2086eabb61fc3c4078 data/minecraft/tags/blocks/mineable/pickaxe.json
+15da5dc23634eaf902d6d7df106c5bf1d8451fc8 data/minecraft/tags/blocks/mineable/shovel.json
 774f7a6c1c6193ef5654ec2d76cd4f6e186ea8e7 data/minecraft/tags/blocks/needs_diamond_tool.json
 e99ef040de9830dc6d443c9587dce23c66824595 data/minecraft/tags/blocks/needs_iron_tool.json
