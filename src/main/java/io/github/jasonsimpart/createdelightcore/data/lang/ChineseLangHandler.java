@@ -90,8 +90,8 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.LUNA_SOIL, "月壤沃土");
         provider.addBlock(CDBlocks.LUNA_SOIL_FARMLAND, "月壤沃土耕地");
         provider.addBlock(CDBlocks.FIRE_LILY_CLUSTER, "烈焰百合簇");
-        provider.addBlock(CDBlocks.FROST_LILY_CLUSTER, "寒霜百合簇");
-        provider.addBlock(CDBlocks.LIGHTNING_LILY_CLUSTER, "雷霆百合簇");
+        provider.addBlock(CDBlocks.FROST_LILY_CLUSTER, "寒冰百合簇");
+        provider.addBlock(CDBlocks.LIGHTNING_LILY_CLUSTER, "闪电百合簇");
         //molten fluid
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
         addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");

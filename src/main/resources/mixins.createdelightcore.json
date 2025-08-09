@@ -14,6 +14,7 @@
     "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "constructionwand.WandUtilMixin",
+    "create.BasinRecipeMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",
