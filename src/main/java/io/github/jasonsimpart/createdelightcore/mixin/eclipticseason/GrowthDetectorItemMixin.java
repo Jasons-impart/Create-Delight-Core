@@ -22,14 +22,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class GrowthDetectorItemMixin {
     @Redirect(method = "getGrowChance", at = @At(value = "INVOKE", target = "Lcom/teamtea/eclipticseasons/api/data/crop/GrowParameter;grow_chance()F"))
     private static float getGrowChanceMixin(GrowParameter instance, @Local(argsOnly = true) Level level, @Local(argsOnly = true) BlockPos pos) {
-        if (LevelData.get(level, pos).level() > 0)
-            return 1;
+        int rank = LevelData.get(level, pos).level();
+        float num = (float) (Math.pow(2, rank - 1) / 4);
+        float growChance = instance.grow_chance();
+        if (rank > 0)
+            return num + (1 - num) * growChance;
         return instance.grow_chance();
     }
 
     @Inject(method = "getHumidityGrowChance", at = @At(value = "HEAD"), cancellable = true)
     private static void getHumidityGrowChanceMixin(Level world, CropGrowControl growControl, Humidity env, CropGrowthHandler.RoomStatus roomStatus, BlockPos pos, BlockState blockState, Season season, boolean hasUpdate, CallbackInfoReturnable<Float> cir) {
-        if (LevelData.get(world, pos).level() > 1)
-            cir.setReturnValue(1.f);
+        int rank = LevelData.get(world, pos).level();
+        float num = (float) (Math.pow(2, rank - 1) / 4);
+        float growChance = cir.getReturnValue();
+        if (rank > 0)
+            cir.setReturnValue(num + (1 - num) * growChance);
+        cir.setReturnValue(1.f);
     }
 }
