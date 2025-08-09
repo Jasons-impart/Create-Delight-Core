@@ -128,17 +128,17 @@ public class CDBlocks {
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
                 .register();
         FIRE_LILY_CLUSTER = REGISTRATE.block("fire_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FIRE_LILY.get()), () -> IafBlockRegistry.FIRE_LILY.get().asItem()))
-                .item()
+                .item(FlowerClusterBlockItem::new)
                 .tab(MISC_TAB)
                 .build()
                 .register();
         FROST_LILY_CLUSTER = REGISTRATE.block("frost_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FROST_LILY.get()), () -> IafBlockRegistry.FROST_LILY.get().asItem()))
-                .item()
+                .item(FlowerClusterBlockItem::new)
                 .tab(MISC_TAB)
                 .build()
                 .register();
         LIGHTNING_LILY_CLUSTER = REGISTRATE.block("lightning_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.LIGHTNING_LILY.get()), () -> IafBlockRegistry.LIGHTNING_LILY.get().asItem()))
-                .item()
+                .item(FlowerClusterBlockItem::new)
                 .tab(MISC_TAB)
                 .build()
                 .register();
