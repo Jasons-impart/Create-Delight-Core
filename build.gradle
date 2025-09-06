@@ -182,10 +182,10 @@ dependencies {
     implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
 
     // farmer's delight
-    implementation fg.deobf("curse.maven:farmers-delight-398521:6597298")
+    implementation fg.deobf("curse.maven:farmers-delight-398521:6917255")
 
     // ratatouille
-    implementation fg.deobf("curse.maven:create-ratatouille-983234:6646233")
+    implementation fg.deobf("curse.maven:create-ratatouille-983234:6937491")
 
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
@@ -215,13 +215,13 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
 
     // EclipticSeasons
-    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6752783")
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6967672")
     // quality foods
     implementation fg.deobf("curse.maven:quality_food-973932:6398389")
 
     // vinery
-    implementation fg.deobf("curse.maven:vinery-704465:6264246")
-    implementation fg.deobf("curse.maven:nethervinery-930072:6164515")
+    implementation fg.deobf("curse.maven:vinery-704465:6854288")
+    implementation fg.deobf("curse.maven:nethervinery-930072:6855728")
     // central kitchen
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
@@ -267,6 +267,7 @@ dependencies {
     implementation fg.deobf("curse.maven:elysium-api-1158628:6589093")
     implementation fg.deobf("curse.maven:jadens-nether-expansion-1111833:6729020")
 
+//    implementation fg.deobf("curse.maven:create-stuff-additions-466792:6412397")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 //

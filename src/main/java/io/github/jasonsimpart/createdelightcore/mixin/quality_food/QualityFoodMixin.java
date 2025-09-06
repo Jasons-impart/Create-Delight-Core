@@ -14,6 +14,7 @@ import dev.xkmc.fruitsdelight.content.block.FruitBushBlock;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.common.util.FakePlayer;
 import net.satisfy.vinery.core.block.GrapeBush;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -59,8 +61,8 @@ public abstract class QualityFoodMixin {
                 chance = Modification.farmland(state, farmland).apply(chance);
                 // 非玩家收割不会拥有品质
                 float growChance = 0;
-                if (player != null) {
-                    growChance = EclipticSeasonsUtil.getGrowChance(player.level(), player.getOnPos(), state);
+                if (player != null && !(player instanceof FakePlayer)) {
+                    growChance = EclipticSeasonsUtil.getGrowChance(player.level(), player.getOnPos(), state) * 1.25f;
 //                CreateDelightCore.LOGGER.info("growChance:" + growChance);
                 }
                 chance = Modification.multiplicative(growChance).apply(chance);

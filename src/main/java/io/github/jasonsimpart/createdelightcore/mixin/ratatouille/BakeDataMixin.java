@@ -13,7 +13,7 @@ import java.util.List;
 
 @Mixin(BakeData.class)
 public class BakeDataMixin {
-    @ModifyArg(method = "processFood",index = 1, at = @At(value = "INVOKE", target = "Lcom/SSWTLZZ/ratatouille/content/oven/OvenBlockEntity$Inventory;setStackInSlot(ILnet/minecraft/world/item/ItemStack;)V"), remap = false)
+    @ModifyArg(method = "processFood",index = 1, at = @At(value = "INVOKE", target = "Lorg/forsteri/ratatouille/content/oven/OvenBlockEntity$Inventory;setStackInSlot(ILnet/minecraft/world/item/ItemStack;)V"), remap = false)
     public ItemStack applyQuality(ItemStack par2, @Local OvenBlockEntity.Inventory inventory) {
         QualityUtils.applyQuality(par2, List.of(inventory.getStackInSlot(0)), null);
         return par2;

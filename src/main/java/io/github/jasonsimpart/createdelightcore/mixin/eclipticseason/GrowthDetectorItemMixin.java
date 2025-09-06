@@ -30,13 +30,12 @@ public class GrowthDetectorItemMixin {
         return instance.grow_chance();
     }
 
-    @Inject(method = "getHumidityGrowChance", at = @At(value = "HEAD"), cancellable = true)
-    private static void getHumidityGrowChanceMixin(Level world, CropGrowControl growControl, Humidity env, CropGrowthHandler.RoomStatus roomStatus, BlockPos pos, BlockState blockState, Season season, boolean hasUpdate, CallbackInfoReturnable<Float> cir) {
-        int rank = LevelData.get(world, pos).level();
+    @Inject(method = "getHumidityGrowChance", at = @At(value = "RETURN"), cancellable = true)
+    private static void getHumidityGrowChanceMixin(Level level, CropGrowControl growControl, float env, CropGrowthHandler.RoomStatus roomStatus, BlockPos pos, BlockState blockState, Season season, boolean hasUpdate, CallbackInfoReturnable<Float> cir) {
+        int rank = LevelData.get(level, pos).level();
         float num = (float) (Math.pow(2, rank - 1) / 4);
         float growChance = cir.getReturnValue();
-        if (rank > 0)
+        if (rank > 0 && !hasUpdate)
             cir.setReturnValue(num + (1 - num) * growChance);
-        cir.setReturnValue(1.f);
     }
 }
