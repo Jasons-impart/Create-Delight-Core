@@ -23,7 +23,7 @@ public class TomatoVineBlockMixin {
     public void setDropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
         BlockPos blockPos = pos.below();
         while (level.getBlockState(blockPos).is(ModBlocks.TOMATO_CROP.get())) blockPos = blockPos.below();
-        DropData.current.set(new DropData(LevelData.get(level, pos, true), state,  player, level.getBlockState(pos.below())));
+        DropData.current.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(pos)));
     }
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/common/block/TomatoVineBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))
     public void clearCropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
