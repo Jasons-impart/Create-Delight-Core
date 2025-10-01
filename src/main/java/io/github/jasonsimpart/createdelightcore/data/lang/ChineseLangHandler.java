@@ -119,6 +119,7 @@ public class ChineseLangHandler {
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
+        addFluid(provider, CDFluids.CHORUSSLIME, "紫颂黏液");
         //radiation
         addFluid(provider, CDFluids.NUCLEAR_WASTE, "核废液");
         //recipes

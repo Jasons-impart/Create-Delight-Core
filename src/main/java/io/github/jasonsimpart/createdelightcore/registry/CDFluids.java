@@ -38,6 +38,7 @@ public class CDFluids {
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> CHORUSSLIME = slimeFluid("chorusslime");
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
