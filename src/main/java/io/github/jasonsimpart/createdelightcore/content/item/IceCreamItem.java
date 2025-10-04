@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.content.item;
 
+import com.teamabnormals.neapolitan.core.registry.NeapolitanSoundEvents;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BowlFoodItem;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +20,6 @@ public class IceCreamItem extends BowlFoodItem {
 
     @Override
     public SoundEvent getEatingSound() {
-        return SoundEvents.GENERIC_EAT;
+        return NeapolitanSoundEvents.ICE_CREAM_EAT.get();
     }
 }
