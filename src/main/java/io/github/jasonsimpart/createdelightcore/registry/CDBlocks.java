@@ -281,10 +281,12 @@ public class CDBlocks {
                 .tab(MISC_TAB)
                 .build()
                 .properties(p -> p
+                        .strength(6.0F, 1200.0F)
                         .mapColor(MapColor.METAL)
                         .sound(SoundType.METAL)
                 )
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
     }
 
