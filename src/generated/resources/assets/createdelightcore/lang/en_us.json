@@ -1,5 +1,6 @@
 {
   "block.createdelightcore.bronze_block": "Bronze Block",
+  "block.createdelightcore.chorusslime": "ChorusSlime",
   "block.createdelightcore.copper_coil": "Copper Coil",
   "block.createdelightcore.copper_coin_pile": "Copper Coin Pile",
   "block.createdelightcore.deepslate_tin_ore": "Deepslate Tin Ore",
@@ -44,6 +45,7 @@
   "death.attack.createdelightcore.molten_metal.player": "%2$s thought that %1$s was a piece of unmelted metal",
   "death.attack.createdelightcore.radiation": "%1$s rotted away from radiation exposure",
   "death.attack.createdelightcore.radiation.player": "%1$s rotted away from radiation exposure",
+  "fluid.createdelightcore.chorusslime": "Chorusslime",
   "fluid.createdelightcore.ferrouslime": "Ferrouslime",
   "fluid.createdelightcore.molten_andesite": "Molten Andesite",
   "fluid.createdelightcore.molten_azure_neodymium": "Molten Azure Neodymium",
@@ -68,6 +70,7 @@
   "item.createdelightcore.bronze_ingot": "Bronze Ingot",
   "item.createdelightcore.bronze_nugget": "Bronze Nugget",
   "item.createdelightcore.carrot_ice_cream_scoop": "Carrot Ice Cream Scoop",
+  "item.createdelightcore.chorusslime_bucket": "Chorusslime bucket",
   "item.createdelightcore.copper_coin": "Copper Coin",
   "item.createdelightcore.copper_coin.initial": "Copper",
   "item.createdelightcore.copper_coin.plural": "Copper Coin",
