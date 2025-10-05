@@ -1,6 +1,7 @@
 {
   "credit": "Made with Blockbench",
   "render_type": "minecraft:cutout",
+  "ambientocclusion": false,
   "texture_size": [16, 64],
   "textures": {
     "flower": "#lily",

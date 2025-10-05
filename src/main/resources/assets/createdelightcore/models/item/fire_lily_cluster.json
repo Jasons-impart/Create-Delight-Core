@@ -1,3 +1,4 @@
 {
-  "parent": "createdelightcore:block/fire_lily_cluster_stage2"
+  "parent": "createdelightcore:block/fire_lily_cluster_stage2",
+  "gui_light": "front"
 }
