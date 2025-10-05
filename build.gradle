@@ -233,6 +233,7 @@ dependencies {
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
+    implementation fg.deobf("curse.maven:gallery-1173553:6133771")
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
     implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
     //fruits delight
@@ -298,6 +299,7 @@ mixin {
 // When "copyIdeResources" is enabled, this will also run before the game launches in IDE environments.
 // See https://docs.gradle.org/current/dsl/org.gradle.language.jvm.tasks.ProcessResources.html
 tasks.named('processResources', ProcessResources).configure {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE // 排除重复文件
     var replaceProperties = [
             minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
             forge_version: forge_version, forge_version_range: forge_version_range,

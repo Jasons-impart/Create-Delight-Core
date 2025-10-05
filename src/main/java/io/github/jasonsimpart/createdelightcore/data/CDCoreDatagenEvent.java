@@ -24,7 +24,6 @@ public class CDCoreDatagenEvent {
 
         generator.addProvider(event.includeServer(), new FreezingRecipeGenerator(output));
         generator.addProvider(event.includeServer(), new CDCGenEntitiesProvider(output, event.getLookupProvider()));
-        generator.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(), List.of(new LootTableProvider.SubProviderEntry(CDBlockLoot::new, LootContextParamSets.BLOCK))));
 
         if (event.includeServer()) {
             CDProcessingRecipeGen.registerAll(generator, output);

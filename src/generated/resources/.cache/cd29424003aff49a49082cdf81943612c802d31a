@@ -1,5 +1,6 @@
-// 1.20.1	2025-08-08T12:07:21.2849694	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2025-10-05T12:49:46.2418873	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
+d9307129a8b8ee71dd6eade687be24e41e021526 assets/createdelightcore/blockstates/chorusslime.json
 ee912bdf76133dc3c9bf06adbd69d162071c0b32 assets/createdelightcore/blockstates/copper_coil.json
 ee1784e2466fa57cf6416d1c08aed2d7444b4f12 assets/createdelightcore/blockstates/copper_coin_pile.json
 f0848c5356eebbeb15db75c917c57dea375329cc assets/createdelightcore/blockstates/deepslate_tin_ore.json
@@ -36,10 +37,11 @@ a6ba2ee7b96401afba4c3fa3d522e4f774151d0a assets/createdelightcore/blockstates/nu
 c6c4c8d23c4c6e90245827caf6051656a2c6c9d9 assets/createdelightcore/blockstates/steel_glass_casing.json
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
-a2592a8f71bb5d051ba8614e33fb2acf76d53dc8 assets/createdelightcore/lang/en_ud.json
-3f2e61fb802e7fcda7e91f6100d98699b30c2f73 assets/createdelightcore/lang/en_us.json
-76491a886007b2412473f7552d167b4e2c065e72 assets/createdelightcore/lang/zh_cn.json
+8e22bd7ecf962a871b6a0c23e6a47760e418ea3a assets/createdelightcore/lang/en_ud.json
+4e12b4fd11ff4500c6bbd95083797e948635c890 assets/createdelightcore/lang/en_us.json
+7e61fc5f368fe28b229315b1443708980fcb42de assets/createdelightcore/lang/zh_cn.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
+effc27c038a427036c6268286608b68765d87186 assets/createdelightcore/models/block/chorusslime.json
 0d6425b19a5fa59de29b7399b29cb82a2be735ab assets/createdelightcore/models/block/copper_coil.json
 944dd664042b870aa73769e70cccf4c9b8aca6b8 assets/createdelightcore/models/block/copper_coin_pile.json
 926b0edb6ea3ce071e51422d6e95f170c43af98d assets/createdelightcore/models/block/deepslate_tin_ore.json
@@ -86,6 +88,7 @@ d1d84e01eac86f31dd6fcf87d67555b976ad8834 assets/createdelightcore/models/item/br
 af73221b929bed6ef454d3d636be1542a30a486d assets/createdelightcore/models/item/bronze_ingot.json
 1705144a7ec02daec71c8e55a9d70dfa43e6502a assets/createdelightcore/models/item/bronze_nugget.json
 68e8bcad78051c122a585a804e39a2cca5e478f2 assets/createdelightcore/models/item/carrot_ice_cream_scoop.json
+3c1dcc2219c24ae59a615cc37d2a9c1f0852da01 assets/createdelightcore/models/item/chorusslime_bucket.json
 93bea59b01e75668dd91c2af9ccec2b1bcd1b59b assets/createdelightcore/models/item/copper_coil.json
 369fe5d1a15994905463d7cccf4d16278c889b85 assets/createdelightcore/models/item/copper_coin.json
 cbf18c93920d0d579a427a794c005be8b14fe1f5 assets/createdelightcore/models/item/copper_coin_pile.json
@@ -216,7 +219,7 @@ d63de8049d2b5f7246ab0d5a0ef78fd6c50d2128 data/forge/tags/items/storage_blocks/el
 999fa53f930bb10a940e340831b5cdae6323ddbf data/forge/tags/items/storage_blocks/raw_tin.json
 c610159eee458eb6ba32c22e6e47b5fcd5986eeb data/forge/tags/items/storage_blocks/tin.json
 17dd2040298710f8dd64aef15146b279374720b2 data/minecraft/tags/blocks/dirt.json
-71dbce4768df32edfa66fe2086eabb61fc3c4078 data/minecraft/tags/blocks/mineable/pickaxe.json
+cabdb0db58706650071863cd2ca5c0670483ac67 data/minecraft/tags/blocks/mineable/pickaxe.json
 15da5dc23634eaf902d6d7df106c5bf1d8451fc8 data/minecraft/tags/blocks/mineable/shovel.json
 774f7a6c1c6193ef5654ec2d76cd4f6e186ea8e7 data/minecraft/tags/blocks/needs_diamond_tool.json
 e99ef040de9830dc6d443c9587dce23c66824595 data/minecraft/tags/blocks/needs_iron_tool.json
