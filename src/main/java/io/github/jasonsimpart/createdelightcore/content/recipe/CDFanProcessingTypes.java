@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.simibubi.create.api.registry.CreateBuiltInRegistries;
 import com.simibubi.create.content.kinetics.fan.processing.FanProcessingType;
-import com.simibubi.create.content.kinetics.fan.processing.FanProcessingTypeRegistry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import io.github.jasonsimpart.createdelightcore.registry.CDTags;
@@ -136,6 +135,8 @@ public class CDFanProcessingTypes {
 
             if (entity instanceof LivingEntity livingEntity) {
                 livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 20, 7, false, false));
+                livingEntity.setIsInPowderSnow(true);
+                livingEntity.setTicksFrozen(Math.min(livingEntity.getTicksRequiredToFreeze() + 5, livingEntity.getTicksFrozen() + 5));
             }
 
             if (entity instanceof SnowGolem snowgolem) {

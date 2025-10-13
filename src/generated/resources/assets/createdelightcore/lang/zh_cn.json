@@ -1,5 +1,6 @@
 {
   "block.createdelightcore.bronze_block": "青铜块",
+  "block.createdelightcore.chorusslime": "紫颂黏液",
   "block.createdelightcore.copper_coil": "铜线圈",
   "block.createdelightcore.copper_coin_pile": "铜币堆",
   "block.createdelightcore.deepslate_tin_ore": "深层锡矿石",
@@ -44,6 +45,7 @@
   "death.attack.createdelightcore.molten_metal.player": "%2$s以为%1$s是一块没有融化的金属",
   "death.attack.createdelightcore.radiation": "%1$s因辐射而浑身溃烂",
   "death.attack.createdelightcore.radiation.player": "%1$s因辐射而浑身溃烂",
+  "fluid.createdelightcore.chorusslime": "紫颂黏液",
   "fluid.createdelightcore.ferrouslime": "富铁黏液",
   "fluid.createdelightcore.molten_andesite": "熔融安山合金",
   "fluid.createdelightcore.molten_azure_neodymium": "熔融青钕合金",
@@ -68,6 +70,7 @@
   "item.createdelightcore.bronze_ingot": "青铜锭",
   "item.createdelightcore.bronze_nugget": "青铜粒",
   "item.createdelightcore.carrot_ice_cream_scoop": "胡萝卜冰淇淋球",
+  "item.createdelightcore.chorusslime_bucket": "紫颂黏液桶",
   "item.createdelightcore.copper_coin": "铜币",
   "item.createdelightcore.copper_coin.initial": "铜",
   "item.createdelightcore.copper_coin.plural": "铜币",
