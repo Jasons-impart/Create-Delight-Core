@@ -262,7 +262,7 @@ dependencies {
 
     implementation fg.deobf("curse.maven:create_factory_logistics-1218807:6763009")
 
-    implementation fg.deobf("curse.maven:displaydelight-1144296:5964175")
+    implementation fg.deobf("curse.maven:displaydelight-1144296:7027844")
 
 
     implementation fg.deobf("curse.maven:elysium-api-1158628:6589093")
