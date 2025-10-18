@@ -19,6 +19,9 @@
   "block.createdelightcore.lightning_lily_cluster": "Lightning Lily Cluster",
   "block.createdelightcore.luna_soil": "Luna Soil",
   "block.createdelightcore.luna_soil_farmland": "Luna Soil Farmland",
+  "block.createdelightcore.lush_confiture_jello": "Lush Confiture Jello",
+  "block.createdelightcore.lush_confiture_jelly": "Lush Confiture Jelly",
+  "block.createdelightcore.lush_confiture_jelly_bottle": "Lush Confiture Jelly Bottle",
   "block.createdelightcore.mint_syrup": "Mint Syrup",
   "block.createdelightcore.molten_andesite": "Molten Andesite",
   "block.createdelightcore.molten_azure_neodymium": "Molten Azure Neodymium",
@@ -130,5 +133,7 @@
   "itemGroup.createdelightcore.food": "Create Delight | Food",
   "itemGroup.createdelightcore.misc": "Create Delight | Misc",
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid",
-  "jei.createdelightcore.amountConsume": "Consume %s mb"
+  "jei.createdelightcore.amountConsume": "Consume %s mb",
+  "tooltip.createdelightcore.jello_block": "Slippery. Sticks to sticky blocks and same jello/jelly blocks.",
+  "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks."
 }

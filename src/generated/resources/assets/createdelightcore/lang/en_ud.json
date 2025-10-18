@@ -19,6 +19,9 @@
   "block.createdelightcore.lightning_lily_cluster": "ɹǝʇsnןƆ ʎןıꞀ buıuʇɥbıꞀ",
   "block.createdelightcore.luna_soil": "ןıoS ɐunꞀ",
   "block.createdelightcore.luna_soil_farmland": "puɐןɯɹɐℲ ןıoS ɐunꞀ",
+  "block.createdelightcore.lush_confiture_jello": "oןןǝſ ǝɹnʇıɟuoƆ ɥsnꞀ",
+  "block.createdelightcore.lush_confiture_jelly": "ʎןןǝſ ǝɹnʇıɟuoƆ ɥsnꞀ",
+  "block.createdelightcore.lush_confiture_jelly_bottle": "ǝןʇʇoᗺ ʎןןǝſ ǝɹnʇıɟuoƆ ɥsnꞀ",
   "block.createdelightcore.mint_syrup": "dnɹʎS ʇuıW",
   "block.createdelightcore.molten_andesite": "ǝʇısǝpuⱯ uǝʇןoW",
   "block.createdelightcore.molten_azure_neodymium": "ɯnıɯʎpoǝN ǝɹnzⱯ uǝʇןoW",
@@ -130,5 +133,7 @@
   "itemGroup.createdelightcore.food": "pooℲ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "itemGroup.createdelightcore.misc": "ɔsıW | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "jei.createdelightcore.BlazeBurnerFluid": "pınןℲ ɹǝuɹnᗺ ǝzɐןᗺ",
-  "jei.createdelightcore.amountConsume": "qɯ %s ǝɯnsuoƆ"
+  "jei.createdelightcore.amountConsume": "qɯ %s ǝɯnsuoƆ",
+  "tooltip.createdelightcore.jello_block": "˙sʞɔoןq ʎןןǝظ/oןןǝظ ǝɯɐs puɐ sʞɔoןq ʎʞɔıʇs oʇ sʞɔıʇS ˙ʎɹǝddıןS",
+  "tooltip.createdelightcore.jelly_block": "˙sʞɔoןq ʎʞɔıʇs ɹǝɥʇo oʇ buıʇɔǝuuoɔ ʇou ʇnq 'ʎʞɔıʇS"
 }

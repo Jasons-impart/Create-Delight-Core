@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/honey_block",
-  "textures": {
-    "down": "createdelightcore:block/banana_syrup",
-    "particle": "createdelightcore:block/banana_syrup",
-    "side": "createdelightcore:block/banana_syrup",
-    "up": "createdelightcore:block/banana_syrup"
-  }
-}

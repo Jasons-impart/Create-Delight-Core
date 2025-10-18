@@ -1,6 +1,9 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "createdelightcore:block/syrup",
+  "render_type": "minecraft:translucent",
   "textures": {
-    "all": "createdelightcore:block/vanilla_syrup"
+    "bottom": "createdelightcore:block/vanilla_syrup",
+    "side": "createdelightcore:block/vanilla_syrup",
+    "top": "createdelightcore:block/vanilla_syrup"
   }
 }

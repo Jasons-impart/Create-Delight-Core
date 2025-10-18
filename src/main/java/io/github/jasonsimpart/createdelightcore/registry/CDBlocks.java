@@ -9,10 +9,12 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import io.github.jasonsimpart.createdelightcore.content.item.JellyBottleItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -23,6 +25,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 
 import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
@@ -32,6 +35,7 @@ import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItem
 public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
+    public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
     //electrum
     public static final BlockEntry<Block> ELECTRUM;
     //tin
@@ -74,7 +78,12 @@ public class CDBlocks {
     public static final BlockEntry<SyrupBlock> VANILLA;
     public static final BlockEntry<SyrupBlock> MINT;
     public static final BlockEntry<SyrupBlock> BANANA;
-
+    //jam_bottle
+    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE;
+    //jelly_block
+    public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY;
+    //jello_block
+    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO;
 
 
     static {
@@ -136,6 +145,7 @@ public class CDBlocks {
                 .tab(MISC_TAB)
                 .build()
                 .register();
+//        FIRE_LILY_CLUSTER = simpleLilyClusterBlock("fire", IafBlockRegistry.FIRE_LILY.get());
         FROST_LILY_CLUSTER = REGISTRATE.block("frost_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FROST_LILY.get()), () -> IafBlockRegistry.FROST_LILY.get().asItem()))
                 .item(FlowerClusterBlockItem::new)
                 .tab(MISC_TAB)
@@ -169,6 +179,10 @@ public class CDBlocks {
         VANILLA = simpleSyrupBlock("vanilla");
         MINT = simpleSyrupBlock("mint");
         BANANA = simpleSyrupBlock("banana");
+        //jam
+        LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XFAFF76);
+        LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XFAFF76);
+        LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XFAFF76);
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
@@ -317,12 +331,19 @@ public class CDBlocks {
                 .register();
     }
 
+//    public static BlockEntry<FlowerClusterBlock> simpleLilyClusterBlock(String name, Block block) {
+//        return REGISTRATE.block(name + "_lily_cluster", (p) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(block), block::asItem))
+//                .item(FlowerClusterBlockItem::new)
+//                .tab(MISC_TAB)
+//                .build()
+//                .register();
+//    }
+//
     public static BlockEntry<SyrupBlock> simpleSyrupBlock(String name){
-        //noinspection removal
         return REGISTRATE.block(name + "_syrup", SyrupBlock::new)
                 .item()
                 .properties(p -> p.rarity(Rarity.COMMON))
-                .tab(MISC_TAB)
+                .tab(FOOD_TAB)
                 .build()
                 .initialProperties(() -> Blocks.HONEY_BLOCK)
                 .properties(properties -> properties
@@ -330,7 +351,74 @@ public class CDBlocks {
                         .noOcclusion()
                         .sound(SoundType.HONEY_BLOCK)
                 )
-                .addLayer(() -> RenderType::translucent)
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models().getBuilder(ctx.getName())
+                        .parent(new ModelFile.UncheckedModelFile(pvd.modLoc("block/syrup")))
+                        .texture("top", pvd.modLoc("block/" + name + "_syrup"))
+                        .texture("bottom", pvd.modLoc("block/" + name + "_syrup"))
+                        .texture("side", pvd.modLoc("block/" + name + "_syrup"))
+                        .renderType("translucent")
+                ))
+                .register();
+    }
+
+    public static BlockEntry<JellyBottleBlock> simpleJellyBottleBlock(String name, int nutrition, float saturation, int color){
+        return REGISTRATE.block(name + "_jelly_bottle", JellyBottleBlock::new)
+                .blockstate((ctx, pvd) ->pvd.simpleBlock(ctx.get(), pvd.models().getBuilder(ctx.getName())
+                        .parent(new ModelFile.UncheckedModelFile(pvd.modLoc("block/jam_bottle_block")))
+                        .texture("cap_top", pvd.modLoc("block/jam_bottle_cap_top"))
+                        .texture("cap_bottom", pvd.modLoc("block/jam_bottle_cap_bottom"))
+                        .texture("body", pvd.modLoc("block/jam_bottle_body"))
+                        .texture("content", pvd.modLoc("block/" + name + "_jam_content"))
+                        .renderType("cutout")
+                ))
+                .item(JellyBottleItem::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build())
+                        .rarity(Rarity.COMMON)
+                )
+                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx,
+                                pvd.modLoc("item/jam_bottle"),
+                                pvd.modLoc("item/jam")))
+                        .color(() -> () -> ((pStack, layer) -> layer == 0 ? -1 : color))
+                )
+                .tab(FOOD_TAB)
+                .build()
+                .properties(properties -> properties
+                        .strength(0.3F)
+                        .noOcclusion()
+                        .sound(SoundType.GLASS)
+                )
+                .register();
+    }
+
+    public static BlockEntry<JellyBlock> simpleJellyBlock(String name, String fruit, int color){
+        return REGISTRATE.block(name, p -> new JellyBlock(BlockBehaviour.Properties.copy(Blocks.HONEY_BLOCK), fruit))
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
+                        .withExistingParent(ctx.getName(), pvd.modLoc("block/tinted"))
+                        .texture("all", pvd.modLoc("block/jelly"))
+                        .renderType("translucent")))
+                .color(() -> () -> (s, l, p, x) -> color)
+                .item()
+                .color(() -> () -> (s, x) -> color)
+                .tab(FOOD_TAB)
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<JelloBlock> simpleJelloBlock(String name, String fruit, int color){
+        return REGISTRATE.block(name, p -> new JelloBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK), fruit))
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
+                        .withExistingParent(ctx.getName(), pvd.modLoc("block/tinted"))
+                        .texture("all", pvd.modLoc("block/jello"))
+                        .renderType("translucent")))
+                .color(() -> () -> (s, l, p, x) -> color)
+                .item()
+                .color(() -> () -> (s, x) -> color)
+                .tab(FOOD_TAB)
+                .build()
                 .register();
     }
 

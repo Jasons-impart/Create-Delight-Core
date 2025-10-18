@@ -44,6 +44,8 @@ public class EnglishLangHandler {
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "Need ");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "Free");
-
+        //tooltip
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jelly_block", "Sticky, but not connecting to other sticky blocks.");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "Slippery. Sticks to sticky blocks and same jello/jelly blocks.");
     }
 }

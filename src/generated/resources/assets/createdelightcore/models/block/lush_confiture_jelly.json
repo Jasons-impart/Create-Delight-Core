@@ -1,0 +1,7 @@
+{
+  "parent": "createdelightcore:block/tinted",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "createdelightcore:block/jelly"
+  }
+}

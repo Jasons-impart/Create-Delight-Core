@@ -19,6 +19,9 @@
   "block.createdelightcore.lightning_lily_cluster": "闪电百合簇",
   "block.createdelightcore.luna_soil": "月壤沃土",
   "block.createdelightcore.luna_soil_farmland": "月壤沃土耕地",
+  "block.createdelightcore.lush_confiture_jello": "繁茂果冻块",
+  "block.createdelightcore.lush_confiture_jelly": "繁茂果酱块",
+  "block.createdelightcore.lush_confiture_jelly_bottle": "繁茂果酱瓶",
   "block.createdelightcore.mint_syrup": "薄荷糖浆块",
   "block.createdelightcore.molten_andesite": "熔融安山合金",
   "block.createdelightcore.molten_azure_neodymium": "熔融青钕合金",
@@ -130,5 +133,7 @@
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
   "jei.createdelightcore.BlazeBurnerFluid": "烈焰人燃烧流体",
-  "jei.createdelightcore.amountConsume": "消耗 %s mb"
+  "jei.createdelightcore.amountConsume": "消耗 %s mb",
+  "tooltip.createdelightcore.jello_block": "光滑，但是能和相同果酱/果冻方块粘黏",
+  "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏"
 }

@@ -81,6 +81,12 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.VANILLA, "香草糖浆块");
         provider.addBlock(CDBlocks.MINT, "薄荷糖浆块");
         provider.addBlock(CDBlocks.BANANA, "香蕉糖浆块");
+        //jelly bottle
+        provider.addBlock(CDBlocks.LUSH_CONFITURE, "繁茂果酱瓶");
+        //jelly_block
+        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLY, "繁茂果酱块");
+        //jello_block
+        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLO, "繁茂果冻块");
         //coin
         coin(provider, CDItems.IRON, "铁币", "铁");
         coin(provider, CDItems.COPPER, "铜币", "铜");
@@ -143,6 +149,9 @@ public class ChineseLangHandler {
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
+        //tooltip
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jelly_block", "带有粘性，但是不和其他粘性方块粘黏");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "光滑，但是能和相同果酱/果冻方块粘黏");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,
