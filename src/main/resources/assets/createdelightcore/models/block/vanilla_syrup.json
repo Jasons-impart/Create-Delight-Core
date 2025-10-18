@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/honey_block",
+  "textures": {
+    "down": "createdelightcore:block/vanilla_syrup",
+    "particle": "createdelightcore:block/vanilla_syrup",
+    "side": "createdelightcore:block/vanilla_syrup",
+    "up": "createdelightcore:block/vanilla_syrup"
+  }
+}

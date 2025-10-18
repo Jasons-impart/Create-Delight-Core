@@ -17,10 +17,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.GlassBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -63,14 +60,21 @@ public class CDBlocks {
     public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING;
     //coil
     public static final BlockEntry<CasingBlock> COPPER_COIL;
-
+    //flower_cluster
     public static final BlockEntry<FlowerClusterBlock> FIRE_LILY_CLUSTER;
     public static final BlockEntry<FlowerClusterBlock> FROST_LILY_CLUSTER;
     public static final BlockEntry<FlowerClusterBlock> LIGHTNING_LILY_CLUSTER;
-
+    //luna_soil
     public static final BlockEntry<LunaSoilBlock> LUNA_SOIL;
     public static final BlockEntry<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND;
     public static final BlockEntry<PhantomCompostBlock> PHANTOM_COMPOST;
+    //syrup
+    public static final BlockEntry<SyrupBlock> BASE;
+    public static final BlockEntry<SyrupBlock> STRAWBERRY;
+    public static final BlockEntry<SyrupBlock> VANILLA;
+    public static final BlockEntry<SyrupBlock> MINT;
+    public static final BlockEntry<SyrupBlock> BANANA;
+
 
 
     static {
@@ -159,6 +163,12 @@ public class CDBlocks {
                 .tab(MISC_TAB)
                 .build()
                 .register();
+        //syrup
+        BASE = simpleSyrupBlock("base");
+        STRAWBERRY = simpleSyrupBlock("strawberry");
+        VANILLA = simpleSyrupBlock("vanilla");
+        MINT = simpleSyrupBlock("mint");
+        BANANA = simpleSyrupBlock("banana");
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
@@ -307,6 +317,22 @@ public class CDBlocks {
                 .register();
     }
 
+    public static BlockEntry<SyrupBlock> simpleSyrupBlock(String name){
+        //noinspection removal
+        return REGISTRATE.block(name + "_syrup", SyrupBlock::new)
+                .item()
+                .properties(p -> p.rarity(Rarity.COMMON))
+                .tab(MISC_TAB)
+                .build()
+                .initialProperties(() -> Blocks.HONEY_BLOCK)
+                .properties(properties -> properties
+                        .instabreak()
+                        .noOcclusion()
+                        .sound(SoundType.HONEY_BLOCK)
+                )
+                .addLayer(() -> RenderType::translucent)
+                .register();
+    }
 
 
     public static void init() {
