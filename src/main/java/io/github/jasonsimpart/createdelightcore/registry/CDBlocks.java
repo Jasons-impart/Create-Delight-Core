@@ -180,9 +180,9 @@ public class CDBlocks {
         MINT = simpleSyrupBlock("mint");
         BANANA = simpleSyrupBlock("banana");
         //jam
-        LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XFAFF76);
-        LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XFAFF76);
-        LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XFAFF76);
+        LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
+        LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
+        LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
     }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
