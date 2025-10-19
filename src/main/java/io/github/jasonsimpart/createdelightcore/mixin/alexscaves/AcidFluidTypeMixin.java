@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(value = AcidFluidType.class, remap = false)
+@Mixin(value = AcidFluidType.class)
 public class AcidFluidTypeMixin {
     @Inject(method = "onVaporize", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"), cancellable = true)
     public void onVaporizeMixin(Player player, Level level, BlockPos pos, FluidStack stack, CallbackInfo ci) {
