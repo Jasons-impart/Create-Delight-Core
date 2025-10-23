@@ -37,7 +37,7 @@ public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
     //electrum
-    public static final BlockEntry<Block> ELECTRUM;
+//    public static final BlockEntry<Block> ELECTRUM;
     //tin
         //ore
         public static final BlockEntry<Block> TIN_ORE;
@@ -88,7 +88,7 @@ public class CDBlocks {
 
     static {
         //electrum
-        ELECTRUM = simpleMetalBlock("electrum", BlockTags.NEEDS_IRON_TOOL);
+//        ELECTRUM = simpleMetalBlock("electrum", BlockTags.NEEDS_IRON_TOOL);
         //tin
             //ore
             TIN_ORE = simpleOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);

@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.content.event.FluidInteraction;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.mrh0.createaddition.index.CABlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.tterrag.registrate.util.entry.FluidEntry;
@@ -106,7 +107,7 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(BRASS.get().getFluidType(), AllBlocks.BRASS_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(BRONZE.get().getFluidType(), CDBlocks.BRONZE.getDefaultState());
             moltenMetalBlocks.put(FORGED_STEEL.get().getFluidType(), CDBlocks.FORGED_STEEL.getDefaultState());
-            moltenMetalBlocks.put(ELECTRUM.get().getFluidType(), CDBlocks.ELECTRUM.getDefaultState());
+            moltenMetalBlocks.put(ELECTRUM.get().getFluidType(), CABlocks.ELECTRUM_BLOCK.getDefaultState());
             moltenMetalBlocks.put(NETHERITE.get().getFluidType(), Blocks.NETHERITE_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(STEEL.get().getFluidType(), CMBlocks.STEEL_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(VOID_STEEL.get().getFluidType(), CUBlocks.VOID_STEEL_BLOCK.get().defaultBlockState());
