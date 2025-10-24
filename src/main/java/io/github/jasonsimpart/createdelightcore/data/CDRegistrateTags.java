@@ -11,7 +11,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 
 public class CDRegistrateTags {

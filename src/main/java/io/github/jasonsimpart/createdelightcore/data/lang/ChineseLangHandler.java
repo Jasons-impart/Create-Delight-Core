@@ -29,6 +29,13 @@ public class ChineseLangHandler {
         provider.add("block." + namespace + "." + id, name);
         provider.add(fluid.getBucket().get(), name + "桶");
     }
+    private static void addVirtualFluid(RegistrateCNLangProvider provider, FluidEntry<?> fluid, String name) {
+        var namespace = fluid.getId().getNamespace();
+        var id = fluid.getId().getPath();
+        if (id.startsWith("flowing_"))
+            id = id.substring("flowing_".length());
+        provider.add("fluid." + namespace + "." + id, name);
+    }
 
     public static void init(RegistrateCNLangProvider provider) {
         //creativetabs
@@ -134,6 +141,8 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.CHORUSSLIME, "紫颂黏液");
         //radiation
         addFluid(provider, CDFluids.NUCLEAR_WASTE, "核废液");
+        //milkshake
+        addVirtualFluid(provider, CDFluids.MILK_SHAKE, "奶昔");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

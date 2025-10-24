@@ -28,7 +28,7 @@ import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 
-import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeBlockTag;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 

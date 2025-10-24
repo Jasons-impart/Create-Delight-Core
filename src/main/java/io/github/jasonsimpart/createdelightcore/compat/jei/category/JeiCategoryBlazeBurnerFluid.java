@@ -25,7 +25,7 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 
 public class JeiCategoryBlazeBurnerFluid
         implements IRecipeCategory<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(CreateDelightCore.MODID, "blaze_burner");
+    public static final ResourceLocation UID = CreateDelightCore.id("blaze_burner");
     private final IJeiHelpers helpers;
     private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
 

@@ -3,7 +3,6 @@ package io.github.jasonsimpart.createdelightcore.registry;
 import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
-import io.github.jasonsimpart.createdelightcore.content.item.ChocolateMoldFilledItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
 import io.github.jasonsimpart.createdelightcore.content.item.MilkShakeItem;
 import net.minecraft.resources.ResourceKey;
@@ -13,7 +12,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
 
-import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 
 public class CDItems {
@@ -44,11 +43,11 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP;
     //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<ChocolateMoldFilledItem> BLACK_CHOCOLATE_MOLD_FILLED;
+    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_FILLED;
     public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<ChocolateMoldFilledItem> WHITE_CHOCOLATE_MOLD_FILLED;
+    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_FILLED;
     public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<ChocolateMoldFilledItem> RUBY_CHOCOLATE_MOLD_FILLED;
+    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_FILLED;
     //coin
     public static final ItemEntry<Item> IRON;
     public static final ItemEntry<Item> COPPER;
@@ -90,12 +89,9 @@ public class CDItems {
         BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
         WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
         RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid", RATATOUILLE_TAB);
-        BLACK_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("black_chocolate_mold_filled", properties ->
-                new ChocolateMoldFilledItem(properties, new ItemStack(BLACK_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
-        WHITE_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("white_chocolate_mold_filled", properties ->
-                new ChocolateMoldFilledItem(properties, new ItemStack(WHITE_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
-        RUBY_CHOCOLATE_MOLD_FILLED = REGISTRATE.item("ruby_chocolate_mold_filled", properties ->
-                new ChocolateMoldFilledItem(properties, new ItemStack(RUBY_CHOCOLATE_MOLD_SOLID.get()))).tab(RATATOUILLE_TAB).register();
+        BLACK_CHOCOLATE_MOLD_FILLED = simpleItem("black_chocolate_mold_filled", RATATOUILLE_TAB);
+        WHITE_CHOCOLATE_MOLD_FILLED = simpleItem("white_chocolate_mold_filled", RATATOUILLE_TAB);
+        RUBY_CHOCOLATE_MOLD_FILLED = simpleItem("ruby_chocolate_mold_filled", RATATOUILLE_TAB);
         // coin
         IRON = coinItem("iron", Rarity.COMMON);
         COPPER = coinItem("copper", Rarity.UNCOMMON);

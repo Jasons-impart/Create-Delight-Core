@@ -1,8 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.data.lang;
 
 import com.tterrag.registrate.providers.RegistrateLangProvider;
+import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
+import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
 
@@ -15,6 +17,14 @@ public class EnglishLangHandler {
         provider.add(id + ".initial", initial);
         provider.add(id + ".plural", name);
     }
+    private static void addVirtualFluid(RegistrateLangProvider provider, FluidEntry<?> fluid, String name) {
+        var namespace = fluid.getId().getNamespace();
+        var id = fluid.getId().getPath();
+        if (id.startsWith("flowing_"))
+            id = id.substring("flowing_".length());
+        provider.add("fluid." + namespace + "." + id, name);
+    }
+
 
     public static void init(RegistrateLangProvider provider) {
         provider.add(CDCreativeTabs.MISC.get(), "Create Delight | Misc");
@@ -38,6 +48,8 @@ public class EnglishLangHandler {
 
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
+        //milkshake
+        addVirtualFluid(provider, CDFluids.MILK_SHAKE, "Milkshake");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");

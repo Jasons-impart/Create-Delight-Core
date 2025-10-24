@@ -14,11 +14,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
+import plus.dragons.createcentralkitchen.dragonLibLegacy.init.SafeRegistrate;
 
 @Mod(CreateDelightCore.MODID)
 public class CreateDelightCore {
     public static final String MODID = "createdelightcore";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static final SafeRegistrate REGISTRATE = new SafeRegistrate(MODID);
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -29,6 +31,8 @@ public class CreateDelightCore {
         CDBlocks.init();
         CDCreativeTabs.register(modEventBus);
         CDRecipeTypes.register(modEventBus);
+
+        REGISTRATE.registerEventListeners(modEventBus);
 
         CDTags.init();
         CDCoreDatagen.init();

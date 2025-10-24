@@ -1,27 +1,34 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
-import com.tterrag.registrate.Registrate;
-import com.tterrag.registrate.builders.FluidBuilder;
+import com.simibubi.create.AllFluids;
+import com.simibubi.create.Create;
+import com.simibubi.create.content.fluids.VirtualFluid;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidSource;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.fluid.*;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.SoundActions;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.DistExecutor;
 
 import static com.simibubi.create.AllTags.forgeFluidTag;
-import static io.github.jasonsimpart.createdelightcore.registry.CDRegistration.REGISTRATE;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 
 public class CDFluids {
     public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.FLUID.getKey();
+    public static final ResourceLocation MILK_STILL = Create.asResource("fluid/milk_still");
+    public static final ResourceLocation MILK_FLOW = Create.asResource("fluid/milk_flow");
 
     // all molten metal
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = moltenFluid("andesite");
@@ -39,14 +46,16 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> CHORUSSLIME = slimeFluid("chorusslime");
+    // milkShake
+    public static final FluidEntry<VirtualFluid> MILK_SHAKE =  milkShake("milk_shake", 0x66CCFF);
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
 
-    public static FluidBuilder<ForgeFlowingFluid.Flowing, Registrate> createFluid(String name) {
+    public static FluidEntry<ForgeFlowingFluid.Flowing> createFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
-        return REGISTRATE.fluid(name, STILL_RL, FLOW_RL);
+        return REGISTRATE.fluid(name, STILL_RL, FLOW_RL).register();
     }
 
     private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name) {
@@ -118,6 +127,26 @@ public class CDFluids {
                 .build()
                 .register();
     }
+
+    public static FluidEntry<VirtualFluid> milkShake(String name, int colorIn) {
+        final int color = 0xFF000000 | colorIn;
+        return CreateDelightCore.REGISTRATE.virtualFluid(name, MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
+                        new AllFluids.TintedFluidType(p, sT, fT) {
+                            @Override
+                            protected int getTintColor(FluidStack stack) {
+                                return color;
+                            }
+                            @Override
+                            protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
+                                return color;
+                            }
+                        }), VirtualFluid::createSource, VirtualFluid::createFlowing)
+                .properties(b -> b
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
+                .register();
+    }
+
 
 
     public static void init() {
