@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-25T13:38:27.1786397	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2025-10-25T14:44:37.7371042	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -44,9 +44,9 @@ a81bcbc894c25b6686c0b6773552cbf586c943e4 assets/createdelightcore/blockstates/st
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 995dfada531df44f83764c4d4f90c27029e20ce9 assets/createdelightcore/blockstates/vanilla_syrup.json
-90f479fa2467b304c2fdd67ce530d370828feb5c assets/createdelightcore/lang/en_ud.json
-1853e56c6ec7db38d543acb30453df3abce4c907 assets/createdelightcore/lang/en_us.json
-9c9f4915f4e68cbd1fe3c0044fdaa1d1ebe094e4 assets/createdelightcore/lang/zh_cn.json
+95f87e19f4930b2a9326b3798d2ddd24c4c9409e assets/createdelightcore/lang/en_ud.json
+e2f347b660b745dc274fa0544cda97751095a79b assets/createdelightcore/lang/en_us.json
+24490308c5f9750b6695d9e55281925066253aca assets/createdelightcore/lang/zh_cn.json
 a9f3adf9ef4db5e80e37acb6bc78478e3ccd1e4a assets/createdelightcore/models/block/banana_syrup.json
 8d9a4f8f2bf9e1fd6c72917168aa5de152a1d45d assets/createdelightcore/models/block/base_syrup.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
@@ -111,7 +111,7 @@ cbf18c93920d0d579a427a794c005be8b14fe1f5 assets/createdelightcore/models/item/co
 bfe5907bacc8b0f52377b0098157801ab824f517 assets/createdelightcore/models/item/deepslate_tin_ore.json
 af1e5b682ff1aa605c9d056c5470bc09030a82cd assets/createdelightcore/models/item/emerald_coin.json
 4b7fcfbefc2d17212886bb91f4a145097d9316cb assets/createdelightcore/models/item/emerald_coin_pile.json
-9794120532f82295fa3832bdd2c84717119aeed8 assets/createdelightcore/models/item/enhanced_fruit_ice_cream_scoop.json
+05b58b11a3cf57bae9c85b1a71741b89ab4e8692 assets/createdelightcore/models/item/enchanted_fruit_ice_cream_scoop.json
 be3d123c75f7b2fa9cac90cd72873807850da404 assets/createdelightcore/models/item/ferrouslime_bucket.json
 32da32924efe94b3ea2fbc9da8de1f8a3a67e1e5 assets/createdelightcore/models/item/fire_lily_cluster.json
 362789276a886bed6b23db98e5b1c93e7447e484 assets/createdelightcore/models/item/forged_steel_block.json

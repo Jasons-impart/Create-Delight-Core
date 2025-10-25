@@ -132,7 +132,7 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.APPLE_ICE_CREAM_SCOOP, "苹果冰淇淋球");
         provider.addItem(CDItems.BEETROOT_ICE_CREAM_SCOOP, "甜菜根冰淇淋球");
         provider.addItem(CDItems.CARROT_ICE_CREAM_SCOOP, "胡萝卜冰淇淋球");
-        provider.addItem(CDItems.ENHANCED_FRUIT_ICE_CREAM_SCOOP, "附魔之果冰淇淋球");
+        provider.addItem(CDItems.ENCHANTED_FRUIT_ICE_CREAM_SCOOP, "附魔之果冰淇淋球");
         provider.addItem(CDItems.GLOW_BERRY_ICE_CREAM_SCOOP, "发光浆果冰淇淋球");
         provider.addItem(CDItems.PUMPKIN_ICE_CREAM_SCOOP, "南瓜冰淇淋球");
         //slime

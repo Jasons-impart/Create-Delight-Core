@@ -38,7 +38,7 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> APPLE_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> BEETROOT_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> CARROT_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> ENHANCED_FRUIT_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> ENCHANTED_FRUIT_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> GLOW_BERRY_ICE_CREAM_SCOOP;
     public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP;
     //chocolate
@@ -82,7 +82,7 @@ public class CDItems {
         APPLE_ICE_CREAM_SCOOP = iceCreamScoop("apple");
         BEETROOT_ICE_CREAM_SCOOP = iceCreamScoop("beetroot");
         CARROT_ICE_CREAM_SCOOP = iceCreamScoop("carrot");
-        ENHANCED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enhanced_fruit");
+        ENCHANTED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enchanted_fruit");
         GLOW_BERRY_ICE_CREAM_SCOOP = iceCreamScoop("glow_berry");
         PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
         // chocolate
