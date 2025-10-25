@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "createdelightcore:block/gold_coin_pile"
-  }
-}

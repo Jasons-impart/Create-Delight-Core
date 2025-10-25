@@ -21,91 +21,47 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
     // food
-    public static final ItemEntry<Item> UNFRIED_SHRIMP;
-    public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP;
-    public static final ItemEntry<Item> UNFRIED_CHICKEN_LEG;
-    public static final ItemEntry<Item> UNFRIED_TONKATSU;
-    public static final ItemEntry<Item> UNFRIED_FISH;
-    public static final ItemEntry<Item> UNFRIED_POTATO;
-    public static final ItemEntry<Item> UNFRIED_CALAMARI;
+    public static final ItemEntry<Item> UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_CHICKEN_LEG = simpleRawFood("unfried_chicken_leg", 2, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_TONKATSU = simpleRawFood("unfried_tonkatsu", 4, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_FISH = simpleRawFood("unfried_fish", 3, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_POTATO = simpleRawFood("unfried_potato", 2, 0.3f);
+    public static final ItemEntry<Item> UNFRIED_CALAMARI = simpleRawFood("unfried_calamari", 3, 0.3f);
     //ice-cream scoop
-    public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> BANANA_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> MINT_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> ADZUKI_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> POMEGRANATE_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> LIME_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> APPLE_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> BEETROOT_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> CARROT_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> ENCHANTED_FRUIT_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> GLOW_BERRY_ICE_CREAM_SCOOP;
-    public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP;
+    public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP = iceCreamScoop("strawberry");
+    public static final ItemEntry<ThrownProjectileItem> BANANA_ICE_CREAM_SCOOP = iceCreamScoop("banana");
+    public static final ItemEntry<ThrownProjectileItem> MINT_ICE_CREAM_SCOOP = iceCreamScoop("mint");
+    public static final ItemEntry<ThrownProjectileItem> ADZUKI_ICE_CREAM_SCOOP = iceCreamScoop("adzuki");
+    public static final ItemEntry<ThrownProjectileItem> POMEGRANATE_ICE_CREAM_SCOOP = iceCreamScoop("pomegranate");
+    public static final ItemEntry<ThrownProjectileItem> LIME_ICE_CREAM_SCOOP = iceCreamScoop("lime");
+    public static final ItemEntry<ThrownProjectileItem> APPLE_ICE_CREAM_SCOOP = iceCreamScoop("apple");
+    public static final ItemEntry<ThrownProjectileItem> BEETROOT_ICE_CREAM_SCOOP = iceCreamScoop("beetroot");
+    public static final ItemEntry<ThrownProjectileItem> CARROT_ICE_CREAM_SCOOP = iceCreamScoop("carrot");
+    public static final ItemEntry<ThrownProjectileItem> ENCHANTED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enchanted_fruit");
+    public static final ItemEntry<ThrownProjectileItem> GLOW_BERRY_ICE_CREAM_SCOOP = iceCreamScoop("glow_berry");
+    public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
     //chocolate
-    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_FILLED;
-    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_FILLED;
-    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID;
-    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_FILLED;
+    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
+    public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_FILLED = simpleItem("black_chocolate_mold_filled", RATATOUILLE_TAB);
+    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
+    public static final ItemEntry<Item> WHITE_CHOCOLATE_MOLD_FILLED = simpleItem("white_chocolate_mold_filled", RATATOUILLE_TAB);
+    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid", RATATOUILLE_TAB);
+    public static final ItemEntry<Item> RUBY_CHOCOLATE_MOLD_FILLED = simpleItem("ruby_chocolate_mold_filled", RATATOUILLE_TAB);
     //coin
-    public static final ItemEntry<Item> IRON;
-    public static final ItemEntry<Item> COPPER;
-    public static final ItemEntry<Item> GOLD;
-    public static final ItemEntry<Item> EMERALD;
-    public static final ItemEntry<Item> NETHERITE;
-    //tin
-    public static final ItemEntry<Item> TIN_INGOT;
-    public static final ItemEntry<Item> TIN_NUGGET;
-    public static final ItemEntry<Item> RAW_TIN;
-    //bronze
-    public static final ItemEntry<Item> BRONZE_INGOT;
-    public static final ItemEntry<Item> BRONZE_NUGGET;
+    public static final ItemEntry<Item> IRON = coinItem("iron", Rarity.COMMON);
+    public static final ItemEntry<Item> COPPER = coinItem("copper", Rarity.UNCOMMON);
+    public static final ItemEntry<Item> GOLD = coinItem("gold", Rarity.RARE);
+    public static final ItemEntry<Item> EMERALD = coinItem("emerald", Rarity.RARE);
+    public static final ItemEntry<Item> NETHERITE = coinItem("netherite", Rarity.EPIC);
+    // tin
+    public static final ItemEntry<Item> TIN_INGOT = simpleIngot("tin");
+    public static final ItemEntry<Item> TIN_NUGGET = simpleNugget("tin");
+    public static final ItemEntry<Item> RAW_TIN = simpleRawMaterial("tin");
+    // bronze
+    public static final ItemEntry<Item> BRONZE_INGOT = simpleIngot("bronze");
+    public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
 
-
-    static {
-        // food
-        UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
-        UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);
-        UNFRIED_CHICKEN_LEG = simpleRawFood("unfried_chicken_leg", 2, 0.3f);
-        UNFRIED_TONKATSU = simpleRawFood("unfried_tonkatsu", 4, 0.3f);
-        UNFRIED_FISH = simpleRawFood("unfried_fish", 3, 0.3f);
-        UNFRIED_POTATO = simpleRawFood("unfried_potato", 2, 0.3f);
-        UNFRIED_CALAMARI = simpleRawFood("unfried_calamari", 1, 0.3f);
-        // ice-cream scoop
-        STRAWBERRY_ICE_CREAM_SCOOP = iceCreamScoop("strawberry");
-        BANANA_ICE_CREAM_SCOOP = iceCreamScoop("banana");
-        MINT_ICE_CREAM_SCOOP = iceCreamScoop("mint");
-        ADZUKI_ICE_CREAM_SCOOP = iceCreamScoop("adzuki");
-        POMEGRANATE_ICE_CREAM_SCOOP = iceCreamScoop("pomegranate");
-        LIME_ICE_CREAM_SCOOP = iceCreamScoop("lime");
-        APPLE_ICE_CREAM_SCOOP = iceCreamScoop("apple");
-        BEETROOT_ICE_CREAM_SCOOP = iceCreamScoop("beetroot");
-        CARROT_ICE_CREAM_SCOOP = iceCreamScoop("carrot");
-        ENCHANTED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enchanted_fruit");
-        GLOW_BERRY_ICE_CREAM_SCOOP = iceCreamScoop("glow_berry");
-        PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
-        // chocolate
-        BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
-        WHITE_CHOCOLATE_MOLD_SOLID = simpleItem("white_chocolate_mold_solid", RATATOUILLE_TAB);
-        RUBY_CHOCOLATE_MOLD_SOLID = simpleItem("ruby_chocolate_mold_solid", RATATOUILLE_TAB);
-        BLACK_CHOCOLATE_MOLD_FILLED = simpleItem("black_chocolate_mold_filled", RATATOUILLE_TAB);
-        WHITE_CHOCOLATE_MOLD_FILLED = simpleItem("white_chocolate_mold_filled", RATATOUILLE_TAB);
-        RUBY_CHOCOLATE_MOLD_FILLED = simpleItem("ruby_chocolate_mold_filled", RATATOUILLE_TAB);
-        // coin
-        IRON = coinItem("iron", Rarity.COMMON);
-        COPPER = coinItem("copper", Rarity.UNCOMMON);
-        GOLD = coinItem("gold", Rarity.RARE);
-        EMERALD = coinItem("emerald", Rarity.RARE);
-        NETHERITE = coinItem("netherite", Rarity.EPIC);
-        // tin
-        RAW_TIN = simpleRawMaterial("tin");
-        TIN_INGOT = simpleIngot("tin");
-        TIN_NUGGET = simpleNugget("tin");
-        // bronze
-        BRONZE_INGOT = simpleIngot("bronze");
-        BRONZE_NUGGET = simpleNugget("bronze");
-    }
 
     public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation){
         return REGISTRATE.item(name + "_ice_cream", IceCreamItem::new)

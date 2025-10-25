@@ -22,7 +22,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -36,154 +35,117 @@ public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
-    //electrum
-//    public static final BlockEntry<Block> ELECTRUM;
     //tin
-        //ore
-        public static final BlockEntry<Block> TIN_ORE;
-        public static final BlockEntry<Block> DEEPSLATE_TIN_ORE;
-        //metal
-        public static final BlockEntry<Block> RAW_TIN;
-        public static final BlockEntry<Block> TIN;
+    //ore
+    public static final BlockEntry<Block> TIN_ORE = simpleOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);
+    public static final BlockEntry<Block> DEEPSLATE_TIN_ORE = simpleDeepslateOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);
+    //metal
+    public static final BlockEntry<Block> RAW_TIN = simpleRawMetalBlock("tin", BlockTags.NEEDS_IRON_TOOL);
+    public static final BlockEntry<Block> TIN = simpleMetalBlock("tin", BlockTags.NEEDS_IRON_TOOL);
     //bronze
-    public static final BlockEntry<Block> BRONZE;
+    public static final BlockEntry<Block> BRONZE = simpleMetalBlock("bronze", BlockTags.NEEDS_IRON_TOOL);
     //forged_steel
-    public static final BlockEntry<Block> FORGED_STEEL;
-    //fragment_of_border
-    public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER;
-    //coin_pile
-    public static final BlockEntry<CoinPileBlock> IRON;
-    public static final BlockEntry<CoinPileBlock> COPPER;
-    public static final BlockEntry<CoinPileBlock> GOLD;
-    public static final BlockEntry<CoinPileBlock> EMERALD;
-    public static final BlockEntry<CoinPileBlock> NETHERITE;
+    public static final BlockEntry<Block> FORGED_STEEL = simpleMetalBlock("forged_steel", BlockTags.NEEDS_DIAMOND_TOOL);
     //casing
-    public static final BlockEntry<CasingBlock> STEEL_CASING;
-    public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING;
-    public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING;
-    public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING;
-    //coil
-    public static final BlockEntry<CasingBlock> COPPER_COIL;
-    //flower_cluster
-    public static final BlockEntry<FlowerClusterBlock> FIRE_LILY_CLUSTER;
-    public static final BlockEntry<FlowerClusterBlock> FROST_LILY_CLUSTER;
-    public static final BlockEntry<FlowerClusterBlock> LIGHTNING_LILY_CLUSTER;
-    //luna_soil
-    public static final BlockEntry<LunaSoilBlock> LUNA_SOIL;
-    public static final BlockEntry<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND;
-    public static final BlockEntry<PhantomCompostBlock> PHANTOM_COMPOST;
+    public static final BlockEntry<CasingBlock> STEEL_CASING = simpleCasingBlock("steel", CDCSpriteShifts.STEEL_CASING);
+    public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
+    public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
+    public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
     //syrup
-    public static final BlockEntry<SyrupBlock> BASE;
-    public static final BlockEntry<SyrupBlock> STRAWBERRY;
-    public static final BlockEntry<SyrupBlock> VANILLA;
-    public static final BlockEntry<SyrupBlock> MINT;
-    public static final BlockEntry<SyrupBlock> BANANA;
+    public static final BlockEntry<SyrupBlock> BASE = simpleSyrupBlock("base");
+    public static final BlockEntry<SyrupBlock> STRAWBERRY = simpleSyrupBlock("strawberry");
+    public static final BlockEntry<SyrupBlock> VANILLA = simpleSyrupBlock("vanilla");
+    public static final BlockEntry<SyrupBlock> MINT = simpleSyrupBlock("mint");
+    public static final BlockEntry<SyrupBlock> BANANA = simpleSyrupBlock("banana");
     //jam_bottle
-    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE;
+    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
     //jelly_block
-    public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY;
+    public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
     //jello_block
-    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO;
-
-
-    static {
-        //electrum
-//        ELECTRUM = simpleMetalBlock("electrum", BlockTags.NEEDS_IRON_TOOL);
-        //tin
-            //ore
-            TIN_ORE = simpleOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);
-            DEEPSLATE_TIN_ORE = simpleDeepslateOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);
-            //metal
-            RAW_TIN = simpleRawMetalBlock("tin", BlockTags.NEEDS_IRON_TOOL);
-            TIN = simpleMetalBlock("tin", BlockTags.NEEDS_IRON_TOOL);
-        //bronze
-        BRONZE = simpleMetalBlock("bronze", BlockTags.NEEDS_IRON_TOOL);
-        //forged_steel
-        FORGED_STEEL = simpleMetalBlock("forged_steel", BlockTags.NEEDS_DIAMOND_TOOL);
-        //fargment_of_border
-        //noinspection removal
-        FRAGMENT_OF_BORDER = REGISTRATE.block("fragment_of_border", GlassBlock::new)
-                .item()
-                .properties(p -> p.rarity(Rarity.RARE))
-                .tab(MISC_TAB)
-                .build()
-                .initialProperties(() -> Blocks.GLASS)
-                .properties(p -> p
-                        .lightLevel(bs -> 15)
-                        .strength(10.0F)
-                        .sound(SoundType.METAL)
-                        .noLootTable()
-                )
+    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
+    //fragment_of_border
+    public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER =
+            REGISTRATE.block("fragment_of_border", GlassBlock::new)
+                    .item()
+                    .properties(p -> p.rarity(Rarity.RARE))
+                    .tab(MISC_TAB)
+                    .build()
+                    .initialProperties(() -> Blocks.GLASS)
+                    .properties(p -> p
+                            .lightLevel(bs -> 15)
+                            .strength(10.0F)
+                            .sound(SoundType.METAL)
+                            .noLootTable())
                 .addLayer(() -> RenderType::translucent)
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
-        //coin_pile
-        IRON = coinPileBlock("iron", Rarity.COMMON);
-        COPPER = coinPileBlock("copper", Rarity.UNCOMMON);
-        GOLD = coinPileBlock("gold", Rarity.RARE);
-        EMERALD = coinPileBlock("emerald", Rarity.RARE);
-        NETHERITE = coinPileBlock("netherite", Rarity.EPIC);
-        //casing
-        STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
-        FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
-        STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
-        STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
-        //coil
-        COPPER_COIL = REGISTRATE.block("copper_coil", CasingBlock::new)
-                .item()
-                .properties(p -> p.rarity(Rarity.COMMON))
-                .tab(MISC_TAB)
-                .build()
-                .properties(p -> p
-                        .mapColor(MapColor.METAL)
-                        .sound(SoundType.COPPER)
-                )
-                .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
-                .register();
-        FIRE_LILY_CLUSTER = REGISTRATE.block("fire_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FIRE_LILY.get()), () -> IafBlockRegistry.FIRE_LILY.get().asItem()))
-                .item(FlowerClusterBlockItem::new)
-                .tab(MISC_TAB)
-                .build()
-                .register();
-//        FIRE_LILY_CLUSTER = simpleLilyClusterBlock("fire", IafBlockRegistry.FIRE_LILY.get());
-        FROST_LILY_CLUSTER = REGISTRATE.block("frost_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.FROST_LILY.get()), () -> IafBlockRegistry.FROST_LILY.get().asItem()))
-                .item(FlowerClusterBlockItem::new)
-                .tab(MISC_TAB)
-                .build()
-                .register();
-        LIGHTNING_LILY_CLUSTER = REGISTRATE.block("lightning_lily_cluster", (properties) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(IafBlockRegistry.LIGHTNING_LILY.get()), () -> IafBlockRegistry.LIGHTNING_LILY.get().asItem()))
-                .item(FlowerClusterBlockItem::new)
-                .tab(MISC_TAB)
-                .build()
-                .register();
-        LUNA_SOIL = REGISTRATE.block("luna_soil", properties -> new LunaSoilBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).randomTicks()))
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.DIRT)
-                .item()
-                .tab(MISC_TAB)
-                .build()
-                .register();
-        PHANTOM_COMPOST = REGISTRATE.block("phantom_compost", properties -> new PhantomCompostBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).strength(1.2F).sound(SoundType.CROP)))
-                .tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .item()
-                .tab(MISC_TAB)
-                .build()
-                .register();
-        LUNA_SOIL_FARMLAND = REGISTRATE.block("luna_soil_farmland", properties -> new LunaSoilFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)))
-                .item()
-                .tab(MISC_TAB)
-                .build()
-                .register();
-        //syrup
-        BASE = simpleSyrupBlock("base");
-        STRAWBERRY = simpleSyrupBlock("strawberry");
-        VANILLA = simpleSyrupBlock("vanilla");
-        MINT = simpleSyrupBlock("mint");
-        BANANA = simpleSyrupBlock("banana");
-        //jam
-        LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
-        LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
-        LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
-    }
+    //coil
+    public static final BlockEntry<CasingBlock> COPPER_COIL =
+            REGISTRATE.block("copper_coil", CasingBlock::new)
+                    .item()
+                    .properties(p -> p.rarity(Rarity.COMMON))
+                    .tab(MISC_TAB)
+                    .build()
+                    .properties(p -> p
+                            .strength(6.0F, 1200.0F)
+                            .mapColor(MapColor.METAL)
+                            .sound(SoundType.COPPER)
+                    )
+                    .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .register();
+    //flower_cluster
+    public static final BlockEntry<FlowerClusterBlock> FIRE_LILY_CLUSTER =
+            REGISTRATE.block("fire_lily_cluster", p -> new FlowerClusterBlock(
+                    BlockBehaviour.Properties.copy(IafBlockRegistry.FIRE_LILY.get()),
+                            () -> IafBlockRegistry.FIRE_LILY.get().asItem()))
+                    .item(FlowerClusterBlockItem::new)
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+    public static final BlockEntry<FlowerClusterBlock> FROST_LILY_CLUSTER =
+            REGISTRATE.block("frost_lily_cluster", p -> new FlowerClusterBlock(
+                    BlockBehaviour.Properties.copy(IafBlockRegistry.FROST_LILY.get()),
+                            () -> IafBlockRegistry.FROST_LILY.get().asItem()))
+                    .item(FlowerClusterBlockItem::new)
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+    public static final BlockEntry<FlowerClusterBlock> LIGHTNING_LILY_CLUSTER =
+            REGISTRATE.block("lightning_lily_cluster", p -> new FlowerClusterBlock(
+                    BlockBehaviour.Properties.copy(IafBlockRegistry.LIGHTNING_LILY.get()),
+                            () -> IafBlockRegistry.LIGHTNING_LILY.get().asItem()))
+                    .item(FlowerClusterBlockItem::new)
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+    //luna_soil
+    public static final BlockEntry<LunaSoilBlock> LUNA_SOIL =
+            REGISTRATE.block("luna_soil", p -> new LunaSoilBlock(BlockBehaviour.Properties.copy(Blocks.DIRT).randomTicks()))
+                    .tag(BlockTags.MINEABLE_WITH_SHOVEL, BlockTags.DIRT)
+                    .item()
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+    public static final BlockEntry<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND =
+            REGISTRATE.block("luna_soil_farmland", properties -> new LunaSoilFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)))
+                    .item()
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+    public static final BlockEntry<PhantomCompostBlock> PHANTOM_COMPOST =
+            REGISTRATE.block("phantom_compost", p -> new PhantomCompostBlock(
+                            BlockBehaviour.Properties
+                                    .copy(Blocks.DIRT)
+                                    .strength(1.2F)
+                                    .sound(SoundType.CROP)))
+                    .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                    .item()
+                    .tab(MISC_TAB)
+                    .build()
+                    .register();
+
+
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
         return REGISTRATE.block(metalName + "_block", Block::new)
@@ -281,33 +243,24 @@ public class CDBlocks {
                 .register();
     }
 
-    public static BlockEntry<CoinPileBlock> coinPileBlock(String coinTtier, Rarity rarity) {
-        return REGISTRATE.block(coinTtier + "_coin_pile", CoinPileBlock::new)
-                .item()
-                .properties(properties -> properties
-                        .fireResistant()
-                        .rarity(rarity))
-                .build()
-                .properties(properties -> properties
-                        .strength(0.3F)
-                        .sound(IafBlockRegistry.SOUND_TYPE_GOLD)
-                        .forceSolidOff()
-                        .randomTicks()
-                        .pushReaction(PushReaction.DESTROY)
-                )
-                .register();
+    public static BlockEntry<CasingBlock> simpleCasingBlock(String name, CTSpriteShiftEntry spriteShifts){
+        return simpleCasingBlock(name, Rarity.COMMON, spriteShifts);
     }
 
     public static BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
+        return simpleCasingBlock(name, rarity, spriteShifts, SoundType.METAL, 6.0F, 1200.0F);
+    }
+
+    public static BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts, SoundType soundType, float destroyTime, float resistance){
         return REGISTRATE.block(name + "_casing", CasingBlock::new)
                 .item()
                 .properties(p -> p.rarity(rarity))
                 .tab(MISC_TAB)
                 .build()
                 .properties(p -> p
-                        .strength(6.0F, 1200.0F)
+                        .strength(destroyTime, resistance)
                         .mapColor(MapColor.METAL)
-                        .sound(SoundType.METAL)
+                        .sound(soundType)
                 )
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
@@ -331,14 +284,6 @@ public class CDBlocks {
                 .register();
     }
 
-//    public static BlockEntry<FlowerClusterBlock> simpleLilyClusterBlock(String name, Block block) {
-//        return REGISTRATE.block(name + "_lily_cluster", (p) -> new FlowerClusterBlock(BlockBehaviour.Properties.copy(block), block::asItem))
-//                .item(FlowerClusterBlockItem::new)
-//                .tab(MISC_TAB)
-//                .build()
-//                .register();
-//    }
-//
     public static BlockEntry<SyrupBlock> simpleSyrupBlock(String name){
         return REGISTRATE.block(name + "_syrup", SyrupBlock::new)
                 .item()

@@ -100,11 +100,6 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD, "金币", "金");
         coin(provider, CDItems.EMERALD, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE, "下界合金币", "下界");
-        provider.addBlock(CDBlocks.IRON, "铁币堆");
-        provider.addBlock(CDBlocks.COPPER, "铜币堆");
-        provider.addBlock(CDBlocks.GOLD, "金币堆");
-        provider.addBlock(CDBlocks.EMERALD, "绿宝石币堆");
-        provider.addBlock(CDBlocks.NETHERITE, "下界合金币堆");
         provider.addBlock(CDBlocks.PHANTOM_COMPOST, "幻灵肥料");
         provider.addBlock(CDBlocks.LUNA_SOIL, "月壤沃土");
         provider.addBlock(CDBlocks.LUNA_SOIL_FARMLAND, "月壤沃土耕地");
