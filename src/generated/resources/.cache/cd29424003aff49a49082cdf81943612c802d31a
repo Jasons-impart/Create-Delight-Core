@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-25T00:48:22.7054644	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2025-10-25T13:38:27.1786397	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -44,9 +44,9 @@ a81bcbc894c25b6686c0b6773552cbf586c943e4 assets/createdelightcore/blockstates/st
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 995dfada531df44f83764c4d4f90c27029e20ce9 assets/createdelightcore/blockstates/vanilla_syrup.json
-d845bd8e37653622dae71502c717fac57887dd51 assets/createdelightcore/lang/en_ud.json
-59d0037067e21f92c553531318202dce6aaff916 assets/createdelightcore/lang/en_us.json
-fb11e97c7fdf286686992eab55bb99ef3b9acaf0 assets/createdelightcore/lang/zh_cn.json
+90f479fa2467b304c2fdd67ce530d370828feb5c assets/createdelightcore/lang/en_ud.json
+1853e56c6ec7db38d543acb30453df3abce4c907 assets/createdelightcore/lang/en_us.json
+9c9f4915f4e68cbd1fe3c0044fdaa1d1ebe094e4 assets/createdelightcore/lang/zh_cn.json
 a9f3adf9ef4db5e80e37acb6bc78478e3ccd1e4a assets/createdelightcore/models/block/banana_syrup.json
 8d9a4f8f2bf9e1fd6c72917168aa5de152a1d45d assets/createdelightcore/models/block/base_syrup.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json

@@ -47,7 +47,11 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FERROUSLIME = slimeFluid("ferrouslime");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> CHORUSSLIME = slimeFluid("chorusslime");
     // milkShake
-    public static final FluidEntry<VirtualFluid> MILK_SHAKE =  milkShake("milk_shake", 0x66CCFF);
+    public static final FluidEntry<VirtualFluid> CARROT =  milkShake("carrot", 0xFDC381);
+    public static final FluidEntry<VirtualFluid> GLOW_BERRY = milkShake("glow_berry", 0XF5B256);
+    public static final FluidEntry<VirtualFluid> ENCHANTED_FRUIT = milkShake("enchanted_fruit", 0Xdfda48);
+    public static final FluidEntry<VirtualFluid> APPLE = milkShake("apple", 0Xf6d894);
+    public static final FluidEntry<VirtualFluid> BEETROOT = milkShake("beetroot", 0Xea4d5b);
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
@@ -130,7 +134,7 @@ public class CDFluids {
 
     public static FluidEntry<VirtualFluid> milkShake(String name, int colorIn) {
         final int color = 0xFF000000 | colorIn;
-        return CreateDelightCore.REGISTRATE.virtualFluid(name, MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
+        return CreateDelightCore.REGISTRATE.virtualFluid(name + "_milkshake", MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
                         new AllFluids.TintedFluidType(p, sT, fT) {
                             @Override
                             protected int getTintColor(FluidStack stack) {

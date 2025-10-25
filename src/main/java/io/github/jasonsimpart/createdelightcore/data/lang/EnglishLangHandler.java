@@ -49,7 +49,11 @@ public class EnglishLangHandler {
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
         //milkshake
-        addVirtualFluid(provider, CDFluids.MILK_SHAKE, "Milkshake");
+        addVirtualFluid(provider, CDFluids.APPLE, "Apple Milkshake");
+        addVirtualFluid(provider, CDFluids.GLOW_BERRY, "Glow Berry Milkshake");
+        addVirtualFluid(provider, CDFluids.CARROT, "Carrot Milkshake");
+        addVirtualFluid(provider, CDFluids.BEETROOT, "Beetroot Milkshake");
+        addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "Enchanted fruit Milkshake");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");

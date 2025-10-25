@@ -142,7 +142,11 @@ public class ChineseLangHandler {
         //radiation
         addFluid(provider, CDFluids.NUCLEAR_WASTE, "核废液");
         //milkshake
-        addVirtualFluid(provider, CDFluids.MILK_SHAKE, "奶昔");
+        addVirtualFluid(provider, CDFluids.APPLE, "苹果味奶昔");
+        addVirtualFluid(provider, CDFluids.GLOW_BERRY, "发光浆果味奶昔");
+        addVirtualFluid(provider, CDFluids.CARROT, "胡萝卜味奶昔");
+        addVirtualFluid(provider, CDFluids.BEETROOT, "甜菜味奶昔");
+        addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "附魔之果味奶昔");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
