@@ -10,6 +10,7 @@
     "ae2.CraftingTermMenuMixin",
     "ae2.CraftingTermSlotMixin",
     "alexscaves.AcidFluidTypeMixin",
+    "alexscaves.SackOfSatingMixin",
     "bakeries.SnifferEventMixin",
     "butchercraft.ButchercraftModEventsMixin",
     "CA.EnergyNetWorkMixin",
