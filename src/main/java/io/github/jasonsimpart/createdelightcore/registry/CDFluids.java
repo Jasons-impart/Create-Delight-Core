@@ -41,6 +41,9 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ICE_STEEL = moltenFluid("ice_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_LIGHTNING_STEEL = moltenFluid("lightning_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_FORGED_STEEL = moltenFluid("forged_steel");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GLASS = moltenFluid("glass");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_QUARTZ_GLASS = moltenFluid("quartz_glass");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_QUARTZ_VIBRANT_GLASS = moltenFluid("quartz_vibrant_glass");
     // all ice cream
     // slime
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SLIME = slimeFluid("slime");
@@ -65,6 +68,9 @@ public class CDFluids {
     private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name) {
         ResourceLocation STILL_RL = CreateDelightCore.id("block/fluid/" + name + "/still");
         ResourceLocation FLOW_RL = CreateDelightCore.id("block/fluid/" + name + "/flowing");
+        return moltenFluid(name, STILL_RL, FLOW_RL);
+    }
+    private static FluidEntry<ForgeFlowingFluid.Flowing> moltenFluid(String name, ResourceLocation STILL_RL, ResourceLocation FLOW_RL) {
         return REGISTRATE.fluid("molten_" + name, STILL_RL, FLOW_RL, fr.lucreeper74.createmetallurgy.content.fluids.MoltenFluidType::new)
                 .properties(b -> b.viscosity(2000)
                         .density(1400)

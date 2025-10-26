@@ -19,6 +19,12 @@
     "createdelightcore:flowing_molten_lightning_steel",
     "createdelightcore:molten_lightning_steel",
     "createdelightcore:flowing_molten_forged_steel",
-    "createdelightcore:molten_forged_steel"
+    "createdelightcore:molten_forged_steel",
+    "createdelightcore:flowing_molten_glass",
+    "createdelightcore:molten_glass",
+    "createdelightcore:flowing_molten_quartz_glass",
+    "createdelightcore:molten_quartz_glass",
+    "createdelightcore:flowing_molten_quartz_vibrant_glass",
+    "createdelightcore:molten_quartz_vibrant_glass"
   ]
 }

@@ -116,6 +116,9 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.MOLTEN_ICE_STEEL, "熔融龙霜钢");
         addFluid(provider, CDFluids.MOLTEN_LIGHTNING_STEEL, "熔融龙霆钢");
         addFluid(provider, CDFluids.MOLTEN_FORGED_STEEL, "熔融锻造钢");
+        addFluid(provider, CDFluids.MOLTEN_GLASS, "熔融玻璃");
+        addFluid(provider, CDFluids.MOLTEN_QUARTZ_GLASS, "熔融石英玻璃");
+        addFluid(provider, CDFluids.MOLTEN_QUARTZ_VIBRANT_GLASS, "熔融聚能石英玻璃");
         //ice cream scoop
         provider.addItem(CDItems.STRAWBERRY_ICE_CREAM_SCOOP, "草莓冰淇淋球");
         provider.addItem(CDItems.BANANA_ICE_CREAM_SCOOP, "香蕉冰淇淋球");
