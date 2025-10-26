@@ -68,7 +68,6 @@ public class ChineseLangHandler {
 
         //block
         provider.addBlock(CDBlocks.FRAGMENT_OF_BORDER, "边境碎片");
-//        provider.addBlock(CDBlocks.ELECTRUM, "琥珀金块");
         provider.addBlock(CDBlocks.TIN_ORE, "锡矿石");
         provider.addBlock(CDBlocks.DEEPSLATE_TIN_ORE, "深层锡矿石");
         provider.addBlock(CDBlocks.RAW_TIN, "粗锡块");

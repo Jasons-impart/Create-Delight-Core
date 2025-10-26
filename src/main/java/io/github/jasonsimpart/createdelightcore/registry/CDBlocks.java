@@ -47,7 +47,7 @@ public class CDBlocks {
     //forged_steel
     public static final BlockEntry<Block> FORGED_STEEL = simpleMetalBlock("forged_steel", BlockTags.NEEDS_DIAMOND_TOOL);
     //casing
-    public static final BlockEntry<CasingBlock> STEEL_CASING = simpleCasingBlock("steel", CDCSpriteShifts.STEEL_CASING);
+    public static final BlockEntry<CasingBlock> STEEL_CASING = simpleCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_CASING);
     public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
     public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
     public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
@@ -146,7 +146,6 @@ public class CDBlocks {
                     .register();
 
 
-
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
         return REGISTRATE.block(metalName + "_block", Block::new)
                 .item()
@@ -208,12 +207,11 @@ public class CDBlocks {
     public static BlockEntry<Block> simpleDeepslateOre(String metalName, TagKey<Block> pickaxeLevel, ItemEntry<Item> dropItem) {
         return REGISTRATE.block("deepslate_" + metalName + "_ore", Block::new)
                 .item()
-                .properties(properties -> properties.rarity(Rarity.COMMON))
-                .tag(Tags.Items.ORES, forgeItemTag("ores/deepslate" + metalName),
+                .tag(Tags.Items.ORES, forgeItemTag("ores/" + metalName),
                         forgeItemTag("ores_in_ground/deepslate"))
                 .tab(MISC_TAB)
                 .build()
-                .initialProperties(() -> Blocks.DEEPSLATE_GOLD_ORE)
+                .initialProperties(() -> Blocks.GOLD_ORE)
                 .properties(p -> p.mapColor(MapColor.METAL)
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.DEEPSLATE)
@@ -223,7 +221,7 @@ public class CDBlocks {
                                 lt.applyExplosionDecay(b, LootItem.lootTableItem(dropItem.get())
                                         .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))))))
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE, pickaxeLevel)
-                .tag(Tags.Blocks.ORES, forgeBlockTag("ores/deepslate" + metalName),
+                .tag(Tags.Blocks.ORES, forgeBlockTag("ores/" + metalName),
                         forgeBlockTag("ores_in_ground/deepslate"))
                 .register();
     }
@@ -243,24 +241,16 @@ public class CDBlocks {
                 .register();
     }
 
-    public static BlockEntry<CasingBlock> simpleCasingBlock(String name, CTSpriteShiftEntry spriteShifts){
-        return simpleCasingBlock(name, Rarity.COMMON, spriteShifts);
-    }
-
     public static BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts){
-        return simpleCasingBlock(name, rarity, spriteShifts, SoundType.METAL, 6.0F, 1200.0F);
-    }
-
-    public static BlockEntry<CasingBlock> simpleCasingBlock(String name, Rarity rarity, CTSpriteShiftEntry spriteShifts, SoundType soundType, float destroyTime, float resistance){
         return REGISTRATE.block(name + "_casing", CasingBlock::new)
                 .item()
                 .properties(p -> p.rarity(rarity))
                 .tab(MISC_TAB)
                 .build()
                 .properties(p -> p
-                        .strength(destroyTime, resistance)
+                        .strength(6.0F, 1200.0F)
                         .mapColor(MapColor.METAL)
-                        .sound(soundType)
+                        .sound(SoundType.METAL)
                 )
                 .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(spriteShifts)))
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)

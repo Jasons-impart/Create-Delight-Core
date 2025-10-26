@@ -1,4 +1,4 @@
-// 1.20.1	2025-10-26T02:42:36.1796296	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2025-10-26T11:03:30.8144784	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -186,8 +186,7 @@ bc8701774f57ab000a8f0f1d390702175a6cdbb8 data/createdelightcore/tags/blocks/fan_
 3f40e44b36575a2043f567d4f23aa1aa17d9d9e2 data/createdelightcore/tags/items/freezable.json
 6782ba67cdbab24fa84f8bb550cbc73711079762 data/create/tags/blocks/fan_transparent.json
 242999dbf6273e57ce0fdc49645bde6b714c15a3 data/forge/tags/blocks/ores.json
-5fe8800d999a46282d1527a10dc604bd6fba5d13 data/forge/tags/blocks/ores/deepslatetin.json
-decb4b36c9c862641bd646a28d1f5132cde4c852 data/forge/tags/blocks/ores/tin.json
+242999dbf6273e57ce0fdc49645bde6b714c15a3 data/forge/tags/blocks/ores/tin.json
 5fe8800d999a46282d1527a10dc604bd6fba5d13 data/forge/tags/blocks/ores_in_ground/deepslate.json
 decb4b36c9c862641bd646a28d1f5132cde4c852 data/forge/tags/blocks/ores_in_ground/stone.json
 e70d3ffef87d8c26d593bb40cdfca913ba3edf4b data/forge/tags/blocks/storage_blocks.json
@@ -213,8 +212,7 @@ db662675156758c32ecd21b9d07d024b9fa94cd1 data/forge/tags/items/nuggets.json
 057f72d28a826e8117d84d87d3265b015a0027c7 data/forge/tags/items/nuggets/bronze.json
 546082159746a65952e6cd7c098fe9b5c2707f3c data/forge/tags/items/nuggets/tin.json
 242999dbf6273e57ce0fdc49645bde6b714c15a3 data/forge/tags/items/ores.json
-5fe8800d999a46282d1527a10dc604bd6fba5d13 data/forge/tags/items/ores/deepslatetin.json
-decb4b36c9c862641bd646a28d1f5132cde4c852 data/forge/tags/items/ores/tin.json
+242999dbf6273e57ce0fdc49645bde6b714c15a3 data/forge/tags/items/ores/tin.json
 5fe8800d999a46282d1527a10dc604bd6fba5d13 data/forge/tags/items/ores_in_ground/deepslate.json
 decb4b36c9c862641bd646a28d1f5132cde4c852 data/forge/tags/items/ores_in_ground/stone.json
 58e9904de7972434b1b22c57edde6b4b94559e61 data/forge/tags/items/raw_materials.json
