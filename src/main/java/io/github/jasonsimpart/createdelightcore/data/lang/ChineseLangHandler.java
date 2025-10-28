@@ -87,6 +87,12 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.VANILLA, "香草糖浆块");
         provider.addBlock(CDBlocks.MINT, "薄荷糖浆块");
         provider.addBlock(CDBlocks.BANANA, "香蕉糖浆块");
+        //jelly bottle
+        provider.addBlock(CDBlocks.LUSH_CONFITURE, "繁茂果酱瓶");
+        //jelly_block
+        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLY, "繁茂果酱块");
+        //jello_block
+        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLO, "繁茂果冻块");
         //coin
         coin(provider, CDItems.IRON, "铁币", "铁");
         coin(provider, CDItems.COPPER, "铜币", "铜");

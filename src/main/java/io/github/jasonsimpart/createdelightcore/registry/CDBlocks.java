@@ -9,10 +9,12 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import io.github.jasonsimpart.createdelightcore.content.item.JellyBottleItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -55,6 +57,12 @@ public class CDBlocks {
     public static final BlockEntry<SyrupBlock> VANILLA = simpleSyrupBlock("vanilla");
     public static final BlockEntry<SyrupBlock> MINT = simpleSyrupBlock("mint");
     public static final BlockEntry<SyrupBlock> BANANA = simpleSyrupBlock("banana");
+    //jam_bottle
+    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
+    //jelly_block
+    public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
+    //jello_block
+    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
     //fragment_of_border
     public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER =
             REGISTRATE.block("fragment_of_border", GlassBlock::new)
@@ -288,6 +296,66 @@ public class CDBlocks {
                 .register();
     }
 
+    public static BlockEntry<JellyBottleBlock> simpleJellyBottleBlock(String name, int nutrition, float saturation, int color){
+        return REGISTRATE.block(name + "_jelly_bottle", JellyBottleBlock::new)
+                .blockstate((ctx, pvd) ->pvd.simpleBlock(ctx.get(), pvd.models().getBuilder(ctx.getName())
+                        .parent(new ModelFile.UncheckedModelFile(pvd.modLoc("block/jam_bottle_block")))
+                        .texture("cap_top", pvd.modLoc("block/jam_bottle_cap_top"))
+                        .texture("cap_bottom", pvd.modLoc("block/jam_bottle_cap_bottom"))
+                        .texture("body", pvd.modLoc("block/jam_bottle_body"))
+                        .texture("content", pvd.modLoc("block/" + name + "_jam_content"))
+                        .renderType("cutout")
+                ))
+                .item(JellyBottleItem::new)
+                .properties(p -> p
+                        .food(new FoodProperties.Builder()
+                                .nutrition(nutrition)
+                                .saturationMod(saturation)
+                                .build())
+                        .rarity(Rarity.COMMON)
+                )
+                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx,
+                                pvd.modLoc("item/jam_bottle"),
+                                pvd.modLoc("item/jam")))
+                        .color(() -> () -> ((pStack, layer) -> layer == 0 ? -1 : color))
+                )
+                .tab(FOOD_TAB)
+                .build()
+                .properties(properties -> properties
+                        .strength(0.3F)
+                        .noOcclusion()
+                        .sound(SoundType.GLASS)
+                )
+                .register();
+    }
+
+    public static BlockEntry<JellyBlock> simpleJellyBlock(String name, String fruit, int color){
+        return REGISTRATE.block(name, p -> new JellyBlock(BlockBehaviour.Properties.copy(Blocks.HONEY_BLOCK), fruit))
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
+                        .withExistingParent(ctx.getName(), pvd.modLoc("block/tinted"))
+                        .texture("all", pvd.modLoc("block/jelly"))
+                        .renderType("translucent")))
+                .color(() -> () -> (s, l, p, x) -> color)
+                .item()
+                .color(() -> () -> (s, x) -> color)
+                .tab(FOOD_TAB)
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<JelloBlock> simpleJelloBlock(String name, String fruit, int color){
+        return REGISTRATE.block(name, p -> new JelloBlock(BlockBehaviour.Properties.copy(Blocks.SLIME_BLOCK), fruit))
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(), pvd.models()
+                        .withExistingParent(ctx.getName(), pvd.modLoc("block/tinted"))
+                        .texture("all", pvd.modLoc("block/jello"))
+                        .renderType("translucent")))
+                .color(() -> () -> (s, l, p, x) -> color)
+                .item()
+                .color(() -> () -> (s, x) -> color)
+                .tab(FOOD_TAB)
+                .build()
+                .register();
+    }
 
 
     public static void init() {
