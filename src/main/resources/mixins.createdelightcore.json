@@ -46,6 +46,7 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.NeapolitanJEIPluginMixin",
     "neapolitan.StrawberryBushBlockMixin",
+    "quality_food.BlockDataMixin",
     "quality_food.QualityFoodMixin",
     "ratatouille.BakeDataMixin",
     "ratatouille.SqueezeBasinBlockEntityMixin",
