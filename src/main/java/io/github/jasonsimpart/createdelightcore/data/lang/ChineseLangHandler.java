@@ -144,6 +144,17 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.CARROT, "胡萝卜味奶昔");
         addVirtualFluid(provider, CDFluids.BEETROOT, "甜菜味奶昔");
         addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "附魔之果味奶昔");
+        //grape juice
+        addVirtualFluid(provider, CDFluids.RED_GRAPE, "红葡萄汁");
+        addVirtualFluid(provider, CDFluids.JUNGLE_RED_GRAPE, "丛林红葡萄汁");
+        addVirtualFluid(provider, CDFluids.SAVANNA_RED_GRAPE, "热带草原红葡萄汁");
+        addVirtualFluid(provider, CDFluids.TAIGA_RED_GRAPE, "针叶林红葡萄汁");
+        addVirtualFluid(provider, CDFluids.WHITE_GRAPE, "白葡萄汁");
+        addVirtualFluid(provider, CDFluids.JUNGLE_WHITE_GRAPE, "丛林白葡萄汁");
+        addVirtualFluid(provider, CDFluids.SAVANNA_WHITE_GRAPE, "热带草原白葡萄汁");
+        addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "针叶林白葡萄汁");
+        addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "诡异葡萄汁");
+        addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "绯红葡萄汁");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
@@ -156,6 +167,9 @@ public class ChineseLangHandler {
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
+        //jade
+        provider.add("config.jade.plugin_balm.jade", "Jade");
+        provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "雪傀儡冷却器");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");

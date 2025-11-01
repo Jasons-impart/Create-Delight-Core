@@ -55,6 +55,17 @@ public class CDFluids {
     public static final FluidEntry<VirtualFluid> ENCHANTED_FRUIT = milkShake("enchanted_fruit", 0Xdfda48);
     public static final FluidEntry<VirtualFluid> APPLE = milkShake("apple", 0Xf6d894);
     public static final FluidEntry<VirtualFluid> BEETROOT = milkShake("beetroot", 0Xea4d5b);
+    // grapeJuice
+    public static final FluidEntry<VirtualFluid> RED_GRAPE = grapeJuice("red_grape", 0X73207a);
+    public static final FluidEntry<VirtualFluid> JUNGLE_RED_GRAPE = grapeJuice("jungle_red_grape", 0X4f1d85);
+    public static final FluidEntry<VirtualFluid> SAVANNA_RED_GRAPE = grapeJuice("savanna_red_grape", 0Xbe4ee0);
+    public static final FluidEntry<VirtualFluid> TAIGA_RED_GRAPE = grapeJuice("taiga_red_grape", 0X7400a8);
+    public static final FluidEntry<VirtualFluid> WHITE_GRAPE = grapeJuice("white_grape", 0X819e4c);
+    public static final FluidEntry<VirtualFluid> JUNGLE_WHITE_GRAPE = grapeJuice("jungle_white_grape", 0X48531e);
+    public static final FluidEntry<VirtualFluid> SAVANNA_WHITE_GRAPE = grapeJuice("savanna_white_grape", 0X98af3d);
+    public static final FluidEntry<VirtualFluid> TAIGA_WHITE_GRAPE = grapeJuice("taiga_white_grape", 0X77882f);
+    public static final FluidEntry<VirtualFluid> WARPED_GRAPE = grapeJuice("warped_grape", 0X005251);
+    public static final FluidEntry<VirtualFluid> CRIMSON_GRAPE = grapeJuice("crimson_grape", 0X651114);
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
@@ -141,6 +152,25 @@ public class CDFluids {
     public static FluidEntry<VirtualFluid> milkShake(String name, int colorIn) {
         final int color = 0xFF000000 | colorIn;
         return CreateDelightCore.REGISTRATE.virtualFluid(name + "_milkshake", MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
+                        new AllFluids.TintedFluidType(p, sT, fT) {
+                            @Override
+                            protected int getTintColor(FluidStack stack) {
+                                return color;
+                            }
+                            @Override
+                            protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
+                                return color;
+                            }
+                        }), VirtualFluid::createSource, VirtualFluid::createFlowing)
+                .properties(b -> b
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
+                .register();
+    }
+
+    public static FluidEntry<VirtualFluid> grapeJuice(String name, int colorIn) {
+        final int color = 0xFF000000 | colorIn;
+        return CreateDelightCore.REGISTRATE.virtualFluid(name + "juice", MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
                         new AllFluids.TintedFluidType(p, sT, fT) {
                             @Override
                             protected int getTintColor(FluidStack stack) {

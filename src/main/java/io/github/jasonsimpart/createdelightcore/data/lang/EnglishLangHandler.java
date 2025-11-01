@@ -54,9 +54,23 @@ public class EnglishLangHandler {
         addVirtualFluid(provider, CDFluids.CARROT, "Carrot Milkshake");
         addVirtualFluid(provider, CDFluids.BEETROOT, "Beetroot Milkshake");
         addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "Enchanted fruit Milkshake");
+        //grape juice
+        addVirtualFluid(provider, CDFluids.RED_GRAPE, "Red Grape Juice");
+        addVirtualFluid(provider, CDFluids.JUNGLE_RED_GRAPE, "Jungle Red Grape Juice");
+        addVirtualFluid(provider, CDFluids.SAVANNA_RED_GRAPE, "Savanna Red Grape Juice");
+        addVirtualFluid(provider, CDFluids.TAIGA_RED_GRAPE, "Taiga Red Grape Juice");
+        addVirtualFluid(provider, CDFluids.WHITE_GRAPE, "White Grape Juice");
+        addVirtualFluid(provider, CDFluids.JUNGLE_WHITE_GRAPE, "Jungle White Grape Juice");
+        addVirtualFluid(provider, CDFluids.SAVANNA_WHITE_GRAPE, "Savanna White Grape Juice");
+        addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "Taiga White Grape Juice");
+        addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "Warped Grape Juice");
+        addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "Crimson Grape Juice");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");
+        //jade
+        provider.add("config.jade.plugin_balm.jade", "Jade");
+        provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "Snowman Cooler");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "Need ");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "Free");
