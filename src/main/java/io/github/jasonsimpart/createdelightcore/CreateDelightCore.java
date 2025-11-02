@@ -4,6 +4,8 @@ import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.content.event.TeleportHandler;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
 import io.github.jasonsimpart.createdelightcore.content.recipe.CDFanProcessingTypes;
+import io.github.jasonsimpart.createdelightcore.eventhandlers.ForgeEventsHandler;
+import io.github.jasonsimpart.createdelightcore.eventhandlers.ModEventHandler;
 import io.github.jasonsimpart.createdelightcore.registry.*;
 import io.github.jasonsimpart.createdelightcore.server.ItemEntityEvent;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +27,8 @@ public class CreateDelightCore {
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
+        MinecraftForge.EVENT_BUS.register(ForgeEventsHandler.class);
+        modEventBus.register(ModEventHandler.class);
         MinecraftForge.EVENT_BUS.register(new TeleportHandler());
         CDItems.init();
         CDFluids.init();

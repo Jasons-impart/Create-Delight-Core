@@ -56,7 +56,9 @@
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
     "trader_fresh.RestockEventHandlerMixin",
-    "waystones.WaystoneButtonMixin"
+    "waystones.WaystoneButtonMixin",
+    "cmr.SnowmanCoolerAccessor",
+    "cmr.MixinSnowmanCoolerTileEntity"
   ],
   "client": [],
   "minVersion": "0.8"
