@@ -22,23 +22,23 @@ import java.util.Map;
 public class CoolerStomachHandler {
     public static Map<Fluid, Pair<ResourceLocation, Triplet<Integer, Boolean, Integer>>> LIQUID_COOLER_FUEL_MAP = new HashMap<>();
 
-    public static void tick(SmartBlockEntity entity) {
-        if (!(entity instanceof SnowmanCoolerAccessor coolerAccessor)) return;
+    public static boolean tick(SmartBlockEntity entity) {
+        if (!(entity instanceof SnowmanCoolerAccessor coolerAccessor)) return false;
 
         @SuppressWarnings("DataFlowIssue")
         SmartFluidTank stomach = (SmartFluidTank) entity.getCapability(ForgeCapabilities.FLUID_HANDLER).orElse(null);
 
         //noinspection ConstantValue
         if (stomach == null)
-            return;
+            return false;
 
-        if (stomach.getFluid().getAmount() <= 0) return;
+        if (stomach.getFluid().getAmount() <= 0) return false;
 
         Triplet<Integer, Boolean, Integer> burnerProperty = LIQUID_COOLER_FUEL_MAP.get(
                 stomach.getFluid().getFluid()).getSecond();
 
         if (burnerProperty == null)
-            return;
+            return false;
 
         boolean fluidSuperHeats = burnerProperty.getSecond();
 
@@ -46,7 +46,7 @@ public class CoolerStomachHandler {
 
         if (stomach.getFluid().getAmount() < mbConsuming) {
             stomach.getFluid().setAmount(0);
-            return;
+            return false;
         }
 
         if (fluidSuperHeats)
@@ -57,12 +57,12 @@ public class CoolerStomachHandler {
         int newBurnTime = coolerAccessor.createdelightcore$getRemainingBurnTime() + burnerProperty.getFirst();
 
         if (newBurnTime > SnowmanCoolerBlockEntity.MAX_HEAT_CAPACITY)
-            return;
+            return false;
 
         coolerAccessor.createdelightcore$setRemainingBurnTime(newBurnTime);
 
         stomach.getFluid().shrink(mbConsuming);
-
+        return true;
     }
 
     public static void tryUpdateFuel(@NotNull SmartBlockEntity entity, ItemStack itemStack, boolean forceOverflow, boolean simulate, CallbackInfoReturnable<Boolean> cir) {

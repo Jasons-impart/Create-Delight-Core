@@ -52,9 +52,9 @@ public abstract class MixinSnowmanCoolerTileEntity extends SmartBlockEntity {
         };
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lfr/iglee42/cmr/cooler/SnowmanCoolerBlockEntity;updateBlockState()V", ordinal = 1), cancellable = true)
     public void tick(CallbackInfo info) {
-        CoolerStomachHandler.tick(this);
+        if (CoolerStomachHandler.tick(this)) info.cancel();
     }
 
     @Inject(method = "read", at = @At("TAIL"))
