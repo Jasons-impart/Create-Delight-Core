@@ -13,8 +13,9 @@ public class MixinSnowmanCoolerBlock {
     @Redirect(method = "tryInsert", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
     private static void tryInsert(ItemStack instance, int p_41775_) {
         var handler = instance.getCapability(ForgeCapabilities.FLUID_HANDLER_ITEM);
-        if (!handler.isPresent()) {
+        if (!handler.isPresent())
             instance.shrink(p_41775_);
-        }
+        else if (instance.hasCraftingRemainingItem())
+            instance.shrink(p_41775_);
     }
 }

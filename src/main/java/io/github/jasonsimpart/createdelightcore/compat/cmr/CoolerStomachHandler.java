@@ -90,10 +90,9 @@ public class CoolerStomachHandler {
         }
 
         if (!simulate) {
-            if (stomach.getFluid().isEmpty())
-                stomach.setFluid(fluidStack.copy());
-            else
-                stomach.getFluid().grow(fluidStack.getAmount());
+            int amount = fluidStack.getAmount();
+            FluidStack drained = handler.drain(amount, IFluidHandler.FluidAction.EXECUTE);
+            stomach.fill(drained, IFluidHandler.FluidAction.EXECUTE);
         }
 
         cir.setReturnValue(true);
