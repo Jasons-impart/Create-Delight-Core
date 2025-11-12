@@ -80,18 +80,18 @@ public class CDBlocks {
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
     //coil
-    public static final BlockEntry<CasingBlock> COPPER_COIL =
-            REGISTRATE.block("copper_coil", CasingBlock::new)
+    public static final BlockEntry<CoilBlock> COPPER_COIL =
+            REGISTRATE.block("copper_coil", CoilBlock::new)
                     .item()
                     .properties(p -> p.rarity(Rarity.COMMON))
                     .tab(MISC_TAB)
                     .build()
                     .properties(p -> p
                             .strength(6.0F, 1200.0F)
-                            .mapColor(MapColor.METAL)
+                            .isViewBlocking((a,b,c) -> false)
                             .sound(SoundType.COPPER)
                     )
-                    .onRegister(CreateRegistrate.connectedTextures(() -> new SimpleCTBehaviour(CDCSpriteShifts.COPPER_COIL)))
+                    .addLayer(() -> RenderType::cutoutMipped)
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
     //flower_cluster

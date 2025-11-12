@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createdelightcore:block/copper_coil",
+      "x": 270
+    },
+    "facing=east": {
+      "model": "createdelightcore:block/copper_coil",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "createdelightcore:block/copper_coil",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "createdelightcore:block/copper_coil"
+    },
+    "facing=up": {
+      "model": "createdelightcore:block/copper_coil",
+      "x": 90
+    },
+    "facing=west": {
+      "model": "createdelightcore:block/copper_coil",
+      "y": 90
+    }
+  }
+}
