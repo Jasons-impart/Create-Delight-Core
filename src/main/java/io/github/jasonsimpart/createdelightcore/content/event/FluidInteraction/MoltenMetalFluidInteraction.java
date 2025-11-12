@@ -52,6 +52,8 @@ public class MoltenMetalFluidInteraction {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NETHERITE = CMFluids.MOLTEN_NETHERITE;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> STEEL = CMFluids.MOLTEN_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> VOID_STEEL = CMFluids.MOLTEN_VOID_STEEL;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> OBDURIUM = CMFluids.MOLTEN_OBDURIUM;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> SLAG = CMFluids.MOLTEN_SLAG;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> GLASS = CDFluids.MOLTEN_GLASS;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> QUARTZ_GLASS = CDFluids.MOLTEN_QUARTZ_GLASS;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> QUARTZ_VIBRANT_GLASS = CDFluids.MOLTEN_QUARTZ_VIBRANT_GLASS;
@@ -81,6 +83,8 @@ public class MoltenMetalFluidInteraction {
         event.enqueueWork(() -> addInteraction(NETHERITE.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(VOID_STEEL.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(OBDURIUM.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(SLAG.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(GLASS.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(QUARTZ_GLASS.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(QUARTZ_VIBRANT_GLASS.get().getFluidType()));
@@ -117,6 +121,8 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(NETHERITE.get().getFluidType(), Blocks.NETHERITE_BLOCK.defaultBlockState());
             moltenMetalBlocks.put(STEEL.get().getFluidType(), CMBlocks.STEEL_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(VOID_STEEL.get().getFluidType(), CUBlocks.VOID_STEEL_BLOCK.get().defaultBlockState());
+            moltenMetalBlocks.put(OBDURIUM.get().getFluidType(), CMBlocks.OBDURIUM_BLOCK.getDefaultState());
+            moltenMetalBlocks.put(SLAG.get().getFluidType(), Blocks.TUFF.defaultBlockState());
             moltenMetalBlocks.put(GLASS.get().getFluidType(), Blocks.GLASS.defaultBlockState());
             moltenMetalBlocks.put(QUARTZ_GLASS.get().getFluidType(), AEBlocks.QUARTZ_GLASS.block().defaultBlockState());
             moltenMetalBlocks.put(QUARTZ_VIBRANT_GLASS.get().getFluidType(), AEBlocks.QUARTZ_VIBRANT_GLASS.block().defaultBlockState());
