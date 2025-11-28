@@ -79,21 +79,6 @@ public class CDBlocks {
                 .addLayer(() -> RenderType::translucent)
                 .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .register();
-    //coil
-    public static final BlockEntry<CoilBlock> COPPER_COIL =
-            REGISTRATE.block("copper_coil", CoilBlock::new)
-                    .item()
-                    .properties(p -> p.rarity(Rarity.COMMON))
-                    .tab(MISC_TAB)
-                    .build()
-                    .properties(p -> p
-                            .strength(6.0F, 1200.0F)
-                            .isViewBlocking((a,b,c) -> false)
-                            .sound(SoundType.COPPER)
-                    )
-                    .addLayer(() -> RenderType::cutoutMipped)
-                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    .register();
     //flower_cluster
     public static final BlockEntry<FlowerClusterBlock> FIRE_LILY_CLUSTER =
             REGISTRATE.block("fire_lily_cluster", p -> new FlowerClusterBlock(

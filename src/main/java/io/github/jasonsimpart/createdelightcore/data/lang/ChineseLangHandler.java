@@ -79,8 +79,6 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.FORGE_STEEL_CASING, "锻造钢机壳");
         provider.addBlock(CDBlocks.STEEL_GLASS_CASING, "钢制玻璃机壳");
         provider.addBlock(CDBlocks.STEEL_CLEAR_GLASS_CASING, "钢制通透玻璃机壳");
-        //coil
-        provider.addBlock(CDBlocks.COPPER_COIL, "铜线圈");
         //syrup
         provider.addBlock(CDBlocks.BASE, "基础糖浆块");
         provider.addBlock(CDBlocks.STRAWBERRY, "草莓糖浆块");
