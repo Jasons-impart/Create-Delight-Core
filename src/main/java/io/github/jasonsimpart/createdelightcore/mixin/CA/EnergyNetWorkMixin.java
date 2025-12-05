@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public abstract class EnergyNetWorkMixin {
     @ModifyArg(method = "getMaxBuff", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I"), index = 1, remap = false)
     private int modifyMaxBuff(int maxBuff){
-        return 1000000;
+        return 2147483647;
     }
 }
