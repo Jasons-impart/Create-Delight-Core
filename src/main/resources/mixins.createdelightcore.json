@@ -13,7 +13,6 @@
     "alexscaves.SackOfSatingMixin",
     "bakeries.SnifferEventMixin",
     "butchercraft.ButchercraftModEventsMixin",
-    "CA.EnergyNetWorkMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "cmr.MixinSnowmanCoolerBlock",
     "cmr.MixinSnowmanCoolerTileEntity",
