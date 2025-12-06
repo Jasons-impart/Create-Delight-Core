@@ -174,8 +174,8 @@ public class ChineseLangHandler {
         provider.add("tooltip." + CreateDelightCore.MODID + ".superHeat", "超级燃烧");
         provider.add("tooltip." + CreateDelightCore.MODID + ".Heat", "加热");
 
-        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeCool", "§r§8按住 [§r§7Shift§r§8] 查看雪傀儡冷却信息§r");
-        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftCool", "§r§8按住 [§r§rShift§r§8] 查看雪傀儡冷却信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdControlToSeeCool", "§r§8按住 [§r§7Ctrl§r§8] 查看雪傀儡冷却信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdControlCool", "§r§8按住 [§r§rCtrl§r§8] 查看雪傀儡冷却信息§r");
         provider.add("tooltip." + CreateDelightCore.MODID + ".coolTime", "§8冷却时间: ");
         provider.add("tooltip." + CreateDelightCore.MODID + ".coolType", "§8冷却类型: ");
         provider.add("tooltip." + CreateDelightCore.MODID + ".Frozen", "速冻");

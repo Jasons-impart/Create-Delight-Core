@@ -64,11 +64,11 @@ public class TooltipEvent {
                         Boolean isSuperCool = info.getSecond();
                         Integer amountConsume = info.getThird();
                         if(coolTime != null && isSuperCool != null && amountConsume != null){
-                            if( Screen.hasShiftDown()) {
+                            if( Screen.hasControlDown()) {
                                 var coolType = isSuperCool
                                         ? Component.translatable("tooltip." + CreateDelightCore.MODID + ".Frozen").withStyle(ChatFormatting.BLUE)
                                         : Component.translatable("tooltip." + CreateDelightCore.MODID + ".Cooled").withStyle(ChatFormatting.AQUA);
-                                event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdShiftCool"));
+                                event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdControlCool"));
                                 var coolTimeComponent = Component.literal(formatTime(coolTime)).withStyle(ChatFormatting.GOLD);
                                 var amountConsumeComponent = Component.literal(amountConsume.toString() + " mB").withStyle(ChatFormatting.GOLD);
                                 event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".coolTime").append(coolTimeComponent));
@@ -76,7 +76,7 @@ public class TooltipEvent {
                                 event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".coolType").append(coolType));
                             }
                             else{
-                                event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeCool"));
+                                event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdControlToSeeCool"));
                             }
                         }
                     }

@@ -76,9 +76,8 @@ public class EnglishLangHandler {
         provider.add("tooltip." + CreateDelightCore.MODID + ".heatType", "§8Heating Type: ");
         provider.add("tooltip." + CreateDelightCore.MODID + ".superHeat", "Super Heating");
         provider.add("tooltip." + CreateDelightCore.MODID + ".Heat", "Heating");
-
-        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeCool", "§r§8Hold [§r§7Shift§r§8] to view Snow Golem cooling information§r");
-        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftCool", "§r§8Hold [§r§rShift§r§8] to view Snow Golem cooling information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdControlToSeeCool", "§r§8Hold [§r§7Ctrl§r§8] to view Snow Golem cooling information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdControlCool", "§r§8Hold [§r§rCtrl§r§8] to view Snow Golem cooling information§r");
         provider.add("tooltip." + CreateDelightCore.MODID + ".coolTime", "§8Cooling Time: ");
         provider.add("tooltip." + CreateDelightCore.MODID + ".coolType", "§8Cooling Type: ");
         provider.add("tooltip." + CreateDelightCore.MODID + ".Frozen", "Frozen");
