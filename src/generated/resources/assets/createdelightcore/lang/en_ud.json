@@ -151,8 +151,19 @@
   "itemGroup.createdelightcore.fluid": "pınןℲ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "itemGroup.createdelightcore.food": "pooℲ | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "itemGroup.createdelightcore.misc": "ɔsıW | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
-  "jei.createdelightcore.BlazeBurnerFluid": "pınןℲ ɹǝuɹnᗺ ǝzɐןᗺ",
-  "jei.createdelightcore.amountConsume": "qɯ %s ǝɯnsuoƆ",
+  "tooltip.createdelightcore.Cooled": "pǝןooƆ",
+  "tooltip.createdelightcore.Frozen": "uǝzoɹℲ",
+  "tooltip.createdelightcore.Heat": "buıʇɐǝH",
+  "tooltip.createdelightcore.amountConsume": " :ǝɯnsuoƆ ןǝnℲ8§",
+  "tooltip.createdelightcore.burnTime": " :ǝɯı⟘ uɹnᗺ8§",
+  "tooltip.createdelightcore.coolTime": " :ǝɯı⟘ buıןooƆ8§",
+  "tooltip.createdelightcore.coolType": " :ǝdʎ⟘ buıןooƆ8§",
+  "tooltip.createdelightcore.heatType": " :ǝdʎ⟘ buıʇɐǝH8§",
+  "tooltip.createdelightcore.holdShiftCool": "ɹ§uoıʇɐɯɹoɟuı buıןooɔ ɯǝןo⅁ ʍouS ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSɹ§ɹ§[ pןoH8§ɹ§",
+  "tooltip.createdelightcore.holdShiftHeat": "ɹ§uoıʇɐɯɹoɟuı buıʇɐǝɥ ǝzɐןᗺ ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSɹ§ɹ§[ pןoH8§ɹ§",
+  "tooltip.createdelightcore.holdShiftToSeeCool": "ɹ§uoıʇɐɯɹoɟuı buıןooɔ ɯǝןo⅁ ʍouS ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSㄥ§ɹ§[ pןoH8§ɹ§",
+  "tooltip.createdelightcore.holdShiftToSeeHeat": "ɹ§uoıʇɐɯɹoɟuı buıʇɐǝɥ ǝzɐןᗺ ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSㄥ§ɹ§[ pןoH8§ɹ§",
   "tooltip.createdelightcore.jello_block": "˙sʞɔoןq ʎןןǝظ/oןןǝظ ǝɯɐs puɐ sʞɔoןq ʎʞɔıʇs oʇ sʞɔıʇS ˙ʎɹǝddıןS",
-  "tooltip.createdelightcore.jelly_block": "˙sʞɔoןq ʎʞɔıʇs ɹǝɥʇo oʇ buıʇɔǝuuoɔ ʇou ʇnq 'ʎʞɔıʇS"
+  "tooltip.createdelightcore.jelly_block": "˙sʞɔoןq ʎʞɔıʇs ɹǝɥʇo oʇ buıʇɔǝuuoɔ ʇou ʇnq 'ʎʞɔıʇS",
+  "tooltip.createdelightcore.superHeat": "buıʇɐǝH ɹǝdnS"
 }

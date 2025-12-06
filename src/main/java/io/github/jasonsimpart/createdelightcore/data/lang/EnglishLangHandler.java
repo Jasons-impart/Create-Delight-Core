@@ -66,8 +66,23 @@ public class EnglishLangHandler {
         addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "Warped Grape Juice");
         addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "Crimson Grape Juice");
         //jei
-        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
-        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");
+//        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid");
+//        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consume %s mb");
+        //tooltip
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftHeat", "§r§8Hold [§r§rShift§r§8] to view Blaze heating information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".amountConsume", "§8Fuel Consume: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".burnTime", "§8Burn Time: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".heatType", "§8Heating Type: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".superHeat", "Super Heating");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Heat", "Heating");
+
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeCool", "§r§8Hold [§r§7Shift§r§8] to view Snow Golem cooling information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftCool", "§r§8Hold [§r§rShift§r§8] to view Snow Golem cooling information§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".coolTime", "§8Cooling Time: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".coolType", "§8Cooling Type: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Frozen", "Frozen");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Cooled", "Cooled");
         //jade
         provider.add("config.jade.plugin_balm.jade", "Jade");
         provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "Snowman Cooler");

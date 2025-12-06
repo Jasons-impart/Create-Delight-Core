@@ -151,8 +151,19 @@
   "itemGroup.createdelightcore.fluid": "Create Delight | Fluid",
   "itemGroup.createdelightcore.food": "Create Delight | Food",
   "itemGroup.createdelightcore.misc": "Create Delight | Misc",
-  "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid",
-  "jei.createdelightcore.amountConsume": "Consume %s mb",
+  "tooltip.createdelightcore.Cooled": "Cooled",
+  "tooltip.createdelightcore.Frozen": "Frozen",
+  "tooltip.createdelightcore.Heat": "Heating",
+  "tooltip.createdelightcore.amountConsume": "§8Fuel Consume: ",
+  "tooltip.createdelightcore.burnTime": "§8Burn Time: ",
+  "tooltip.createdelightcore.coolTime": "§8Cooling Time: ",
+  "tooltip.createdelightcore.coolType": "§8Cooling Type: ",
+  "tooltip.createdelightcore.heatType": "§8Heating Type: ",
+  "tooltip.createdelightcore.holdShiftCool": "§r§8Hold [§r§rShift§r§8] to view Snow Golem cooling information§r",
+  "tooltip.createdelightcore.holdShiftHeat": "§r§8Hold [§r§rShift§r§8] to view Blaze heating information§r",
+  "tooltip.createdelightcore.holdShiftToSeeCool": "§r§8Hold [§r§7Shift§r§8] to view Snow Golem cooling information§r",
+  "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r",
   "tooltip.createdelightcore.jello_block": "Slippery. Sticks to sticky blocks and same jello/jelly blocks.",
-  "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks."
+  "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks.",
+  "tooltip.createdelightcore.superHeat": "Super Heating"
 }

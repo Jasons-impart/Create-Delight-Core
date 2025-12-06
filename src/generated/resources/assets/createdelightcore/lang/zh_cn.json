@@ -151,8 +151,19 @@
   "itemGroup.createdelightcore.fluid": "齿轮盛宴 | 流体",
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
-  "jei.createdelightcore.BlazeBurnerFluid": "烈焰人燃烧流体",
-  "jei.createdelightcore.amountConsume": "消耗 %s mb",
+  "tooltip.createdelightcore.Cooled": "冷却",
+  "tooltip.createdelightcore.Frozen": "速冻",
+  "tooltip.createdelightcore.Heat": "加热",
+  "tooltip.createdelightcore.amountConsume": "§8消耗燃料: ",
+  "tooltip.createdelightcore.burnTime": "§8燃烧时间: ",
+  "tooltip.createdelightcore.coolTime": "§8冷却时间: ",
+  "tooltip.createdelightcore.coolType": "§8冷却类型: ",
+  "tooltip.createdelightcore.heatType": "§8燃烧类型: ",
+  "tooltip.createdelightcore.holdShiftCool": "§r§8按住 [§r§rShift§r§8] 查看雪傀儡冷却信息§r",
+  "tooltip.createdelightcore.holdShiftHeat": "§r§8按住 [§r§rShift§r§8] 查看烈焰人燃烧信息§r",
+  "tooltip.createdelightcore.holdShiftToSeeCool": "§r§8按住 [§r§7Shift§r§8] 查看雪傀儡冷却信息§r",
+  "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r",
   "tooltip.createdelightcore.jello_block": "光滑，但是能和相同果酱/果冻方块粘黏",
-  "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏"
+  "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏",
+  "tooltip.createdelightcore.superHeat": "超级燃烧"
 }

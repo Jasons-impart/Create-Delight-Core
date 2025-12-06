@@ -29,13 +29,13 @@ public class LiquidCoolerFuelJsonLoader extends SimpleJsonResourceReloadListener
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> p_10793_, @NotNull ResourceManager p_10794_, @NotNull ProfilerFiller p_10795_) {
+        CoolerStomachHandler.LIQUID_COOLER_FUEL_MAP.clear();
         for (Map.Entry<ResourceLocation, JsonElement> entry : p_10793_.entrySet()) {
             JsonElement element = entry.getValue();
             if (element.isJsonObject()) {
                 ResourceLocation id = entry.getKey();
                 JsonObject object = element.getAsJsonObject();
                 JsonElement fluidElement = object.get("fluid");
-
                 if (fluidElement != null) {
                     try {
                         Fluid value = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidElement.getAsString()));

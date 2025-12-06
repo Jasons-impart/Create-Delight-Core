@@ -163,17 +163,32 @@ public class ChineseLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".radiation", "%1$s因辐射而浑身溃烂");
         provider.add("death.attack." + CreateDelightCore.MODID + ".radiation.player", "%1$s因辐射而浑身溃烂");
         //jei
-        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
-        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
+//        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
+//        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
+        //tooltip
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftHeat", "§r§8按住 [§r§rShift§r§8] 查看烈焰人燃烧信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".amountConsume", "§8消耗燃料: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".burnTime", "§8燃烧时间: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".heatType", "§8燃烧类型: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".superHeat", "超级燃烧");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Heat", "加热");
+
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeCool", "§r§8按住 [§r§7Shift§r§8] 查看雪傀儡冷却信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftCool", "§r§8按住 [§r§rShift§r§8] 查看雪傀儡冷却信息§r");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".coolTime", "§8冷却时间: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".coolType", "§8冷却类型: ");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Frozen", "速冻");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".Cooled", "冷却");
+
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jelly_block", "带有粘性，但是不和其他粘性方块粘黏");
+        provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "光滑，但是能和相同果酱/果冻方块粘黏");
         //jade
         provider.add("config.jade.plugin_balm.jade", "Jade");
         provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "雪傀儡冷却器");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
-        //tooltip
-        provider.add("tooltip." + CreateDelightCore.MODID + ".jelly_block", "带有粘性，但是不和其他粘性方块粘黏");
-        provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "光滑，但是能和相同果酱/果冻方块粘黏");
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,
