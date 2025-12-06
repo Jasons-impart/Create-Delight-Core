@@ -35,25 +35,26 @@ public class JeiPage implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> heatFluids = new ArrayList<>();
-        //test
-        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(AllFluids.CHOCOLATE.get(), 20, 10));
-        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(Fluids.WATER.getSource(), 32, 16));
-        
-        BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, item) -> {
-            // item: <ResourceLocation, info: <burnTime: int, isSuperHeat: bool, amountConsume: int>>
-            if(item != null){
-                var info = item.getSecond();
-                if(info != null){
-                    Boolean isSuperHeat = info.getSecond();
-                    Integer burnTime = info.getFirst();
-                    Integer amountConsume = info.getThird();
-                    if(isSuperHeat != null && burnTime != null && amountConsume != null){
-                        heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(fluid, isSuperHeat, burnTime, amountConsume));
-                    }
-                }
-            }
-        });
-        registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, heatFluids);
+        // 请求有缘人修复
+//        List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> heatFluids = new ArrayList<>();
+//        //test
+//        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(AllFluids.CHOCOLATE.get(), 20, 10));
+//        // heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(Fluids.WATER.getSource(), 32, 16));
+//
+//        BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, item) -> {
+//            // item: <ResourceLocation, info: <burnTime: int, isSuperHeat: bool, amountConsume: int>>
+//            if(item != null){
+//                var info = item.getSecond();
+//                if(info != null){
+//                    Boolean isSuperHeat = info.getSecond();
+//                    Integer burnTime = info.getFirst();
+//                    Integer amountConsume = info.getThird();
+//                    if(isSuperHeat != null && burnTime != null && amountConsume != null){
+//                        heatFluids.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(fluid, isSuperHeat, burnTime, amountConsume));
+//                    }
+//                }
+//            }
+//        });
+//        registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, heatFluids);
     }
 }
