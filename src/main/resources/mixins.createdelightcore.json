@@ -26,6 +26,7 @@
     "eclipticseason.CropGrowthHandlerMixin",
     "eclipticseason.GrowthDetectorItemMixin",
     "farmersdelight.DoughRecipeMakerMixin",
+    "farmersdelight.MushroomColonyBlockMixin",
     "farmersdelight.TomatoVineBlockMixin",
     "fruitsdelight.DoubleBushBlockMixin",
     "fruitsdelight.DoubleFruitBushBlockMixin",
