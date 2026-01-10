@@ -212,7 +212,7 @@ dependencies {
     // create utilities
     implementation fg.deobf("curse.maven:createutilities-881586:6293834")
     // lightmans currency
-    compileOnly fg.deobf("curse.maven:lightmanscurrency-472521:6205400")
+    implementation fg.deobf("curse.maven:lightmans-currency-472521:7426828")
     // waystones
     implementation fg.deobf("curse.maven:balm-531761:6205942")
     implementation fg.deobf("curse.maven:waystones-245755:6156671")

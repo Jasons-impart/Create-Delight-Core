@@ -12,10 +12,10 @@ import java.util.Objects;
 
 public class MoneyUtil {
     public static Item getBaseCoinFromChain() {
-        return CoinAPI.API.ChainData(CDConfig.moneyChain).getAllEntries(false).get(0).getCoin();
+        return CoinAPI.getApi().ChainData(CDConfig.moneyChain).getAllEntries(false).get(0).getCoin();
     }
     public static boolean playerCanAfford(Player player, MoneyValue coinValue) {
-        return MoneyAPI.API.GetPlayersMoneyHandler(player).getStoredMoney().containsValue(coinValue);
+        return MoneyAPI.getApi().GetPlayersMoneyHandler(player).getStoredMoney().containsValue(coinValue);
     }
 
     public static MoneyValue baseCoinNumberToCoinValue(int number) {

@@ -41,7 +41,7 @@ public class TeleportHandler {
                 boolean canAfford = MoneyUtil.playerCanAfford(player, moneyCost);
                 // 执行消费或取消传送
                 if (canAfford) {
-                    MoneyAPI.API.GetPlayersMoneyHandler(player).extractMoney(moneyCost, false);
+                    MoneyAPI.getApi().GetPlayersMoneyHandler(player).extractMoney(moneyCost, false);
                     event.setXpCost(0);
                 } else {
                     event.setCanceled(true);
