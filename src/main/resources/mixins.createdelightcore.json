@@ -57,6 +57,8 @@
     "ratatouille.ThresherBlockEntityMixin",
     "refurbished_furniture.FryingPanBlockEntityMixin",
     "refurbished_furniture.StoveBlockEntityMixin",
+    "solapplepie.BenefitsHandlerMixin",
+    "solapplepie.FoodListMixin",
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
     "trader_fresh.RestockEventHandlerMixin",
