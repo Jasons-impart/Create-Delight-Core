@@ -13,7 +13,7 @@ import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
-import me.duquee.createutilities.blocks.CUBlocks;
+import io.github.jasonsimpart.createutilitiesj.blocks.CUBlocks;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ForgeMod;

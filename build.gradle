@@ -212,8 +212,8 @@ dependencies {
     implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
     // create addition
     implementation fg.deobf("curse.maven:createaddition-439890:6306951")
-    // create utilities
-    implementation fg.deobf("curse.maven:createutilities-881586:6293834")
+    // create utilities j
+    implementation fg.deobf("curse.maven:create-utilities-j-1437484:7489155")
     // lightmans currency
     implementation fg.deobf("curse.maven:lightmans-currency-472521:7426828")
     // waystones

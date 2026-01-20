@@ -1,6 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.mixin.CU;
 
-import me.duquee.createutilities.blocks.voidtypes.battery.VoidBattery;
+import io.github.jasonsimpart.createutilitiesj.blocks.voidtypes.battery.VoidBattery;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
