@@ -34,6 +34,8 @@ public class CDFluids {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = moltenFluid("andesite");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_AZURE_NEODYMIUM = moltenFluid("azure_neodymium");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_SCARLET_NEODYMIUM = moltenFluid("scarlet_neodymium");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TITANIUM = moltenFluid("titanium");
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_MARTIAN_STEEL = moltenFluid("martian_steel");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_DESH = moltenFluid("desh");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_OSTRUM = moltenFluid("ostrum");
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_CLAORITE = moltenFluid("calorite");

@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore.content.event.FluidInteraction;
 import appeng.core.definitions.AEBlocks;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.lightning.northstar.content.NorthstarBlocks;
 import com.mrh0.createaddition.index.CABlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
@@ -35,6 +36,8 @@ public class MoltenMetalFluidInteraction {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> DESH = CDFluids.MOLTEN_DESH;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> OSTRUM = CDFluids.MOLTEN_OSTRUM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> CLAORITE = CDFluids.MOLTEN_CLAORITE;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> TITANIUM = CDFluids.MOLTEN_TITANIUM;
+    public static final FluidEntry<ForgeFlowingFluid.Flowing> MARTIAN_STEEL = CDFluids.MOLTEN_MARTIAN_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FIRE_STEEL = CDFluids.MOLTEN_FIRE_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> ICE_STEEL = CDFluids.MOLTEN_ICE_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> LIGHTNING_STEEL = CDFluids.MOLTEN_LIGHTNING_STEEL;
@@ -101,6 +104,9 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(ANDESITE.get().getFluidType(), AllBlocks.ANDESITE_ALLOY_BLOCK.getDefaultState());
             moltenMetalBlocks.put(AZURE_NEODYMIUM.get().getFluidType(), ACBlockRegistry.BLOCK_OF_AZURE_NEODYMIUM.get().defaultBlockState());
             moltenMetalBlocks.put(SCARLET_NEODYMIUM.get().getFluidType(), ACBlockRegistry.BLOCK_OF_SCARLET_NEODYMIUM.get().defaultBlockState());
+            moltenMetalBlocks.put(TITANIUM.get().getFluidType(), NorthstarBlocks.TITANIUM_BLOCK.getDefaultState());
+            moltenMetalBlocks.put(MARTIAN_STEEL.get().getFluidType(), NorthstarBlocks.MARTIAN_STEEL_BLOCK.getDefaultState());
+
             moltenMetalBlocks.put(DESH.get().getFluidType(), ModBlocks.DESH_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(OSTRUM.get().getFluidType(), ModBlocks.OSTRUM_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(CLAORITE.get().getFluidType(), ModBlocks.CALORITE_BLOCK.get().defaultBlockState());
