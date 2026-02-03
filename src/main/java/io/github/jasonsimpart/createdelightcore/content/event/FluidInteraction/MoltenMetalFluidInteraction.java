@@ -69,6 +69,8 @@ public class MoltenMetalFluidInteraction {
         event.enqueueWork(() -> addInteraction(DESH.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(OSTRUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(CLAORITE.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(MARTIAN_STEEL.get().getFluidType()));
+        event.enqueueWork(() -> addInteraction(TITANIUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(FIRE_STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(ICE_STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(LIGHTNING_STEEL.get().getFluidType()));
