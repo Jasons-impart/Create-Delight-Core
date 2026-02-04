@@ -1,6 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.content.block;
 
-import earth.terrarium.adastra.AdAstra;
+import com.lightning.northstar.Northstar;
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import net.jadenxgamer.netherexp.registry.fluid.JNEFluids;
@@ -75,7 +75,7 @@ public class LunaSoilFarmlandBlock extends RichSoilFarmlandBlock {
                 return;
             }
 
-            if (!level.dimension().location().getNamespace().equals(AdAstra.MOD_ID))
+            if (!level.dimension().location().getNamespace().equals(Northstar.MOD_ID))
                 return;
 
             BlockState aboveState = level.getBlockState(pos.above());

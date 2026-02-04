@@ -107,9 +107,6 @@ public class ChineseLangHandler {
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
         addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");
         addFluid(provider, CDFluids.MOLTEN_SCARLET_NEODYMIUM, "熔融赤钕合金");
-        addFluid(provider, CDFluids.MOLTEN_DESH, "熔融戴斯");
-        addFluid(provider, CDFluids.MOLTEN_OSTRUM, "熔融紫金");
-        addFluid(provider, CDFluids.MOLTEN_CLAORITE, "熔融耐热金属");
         addFluid(provider, CDFluids.MOLTEN_TITANIUM, "熔融钛");
         addFluid(provider, CDFluids.MOLTEN_MARTIAN_STEEL, "熔融火星钢");
         addFluid(provider, CDFluids.MOLTEN_FIRE_STEEL, "熔融龙炎钢");

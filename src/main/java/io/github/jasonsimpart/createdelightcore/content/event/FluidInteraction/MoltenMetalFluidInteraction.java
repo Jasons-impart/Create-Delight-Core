@@ -8,7 +8,6 @@ import com.mrh0.createaddition.index.CABlocks;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes;
 import com.tterrag.registrate.util.entry.FluidEntry;
-import earth.terrarium.adastra.common.registry.ModBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMBlocks;
 import fr.lucreeper74.createmetallurgy.registries.CMFluids;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
@@ -33,9 +32,6 @@ public class MoltenMetalFluidInteraction {
     public static final FluidEntry<ForgeFlowingFluid.Flowing> ANDESITE = CDFluids.MOLTEN_ANDESITE;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> AZURE_NEODYMIUM = CDFluids.MOLTEN_AZURE_NEODYMIUM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> SCARLET_NEODYMIUM = CDFluids.MOLTEN_SCARLET_NEODYMIUM;
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> DESH = CDFluids.MOLTEN_DESH;
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> OSTRUM = CDFluids.MOLTEN_OSTRUM;
-    public static final FluidEntry<ForgeFlowingFluid.Flowing> CLAORITE = CDFluids.MOLTEN_CLAORITE;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> TITANIUM = CDFluids.MOLTEN_TITANIUM;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MARTIAN_STEEL = CDFluids.MOLTEN_MARTIAN_STEEL;
     public static final FluidEntry<ForgeFlowingFluid.Flowing> FIRE_STEEL = CDFluids.MOLTEN_FIRE_STEEL;
@@ -66,9 +62,6 @@ public class MoltenMetalFluidInteraction {
         event.enqueueWork(() -> addInteraction(ANDESITE.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(AZURE_NEODYMIUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(SCARLET_NEODYMIUM.get().getFluidType()));
-        event.enqueueWork(() -> addInteraction(DESH.get().getFluidType()));
-        event.enqueueWork(() -> addInteraction(OSTRUM.get().getFluidType()));
-        event.enqueueWork(() -> addInteraction(CLAORITE.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(MARTIAN_STEEL.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(TITANIUM.get().getFluidType()));
         event.enqueueWork(() -> addInteraction(FIRE_STEEL.get().getFluidType()));
@@ -109,9 +102,6 @@ public class MoltenMetalFluidInteraction {
             moltenMetalBlocks.put(TITANIUM.get().getFluidType(), NorthstarBlocks.TITANIUM_BLOCK.getDefaultState());
             moltenMetalBlocks.put(MARTIAN_STEEL.get().getFluidType(), NorthstarBlocks.MARTIAN_STEEL_BLOCK.getDefaultState());
 
-            moltenMetalBlocks.put(DESH.get().getFluidType(), ModBlocks.DESH_BLOCK.get().defaultBlockState());
-            moltenMetalBlocks.put(OSTRUM.get().getFluidType(), ModBlocks.OSTRUM_BLOCK.get().defaultBlockState());
-            moltenMetalBlocks.put(CLAORITE.get().getFluidType(), ModBlocks.CALORITE_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(FIRE_STEEL.get().getFluidType(), IafBlockRegistry.DRAGONSTEEL_FIRE_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(ICE_STEEL.get().getFluidType(), IafBlockRegistry.DRAGONSTEEL_ICE_BLOCK.get().defaultBlockState());
             moltenMetalBlocks.put(LIGHTNING_STEEL.get().getFluidType(), IafBlockRegistry.DRAGONSTEEL_LIGHTNING_BLOCK.get().defaultBlockState());
