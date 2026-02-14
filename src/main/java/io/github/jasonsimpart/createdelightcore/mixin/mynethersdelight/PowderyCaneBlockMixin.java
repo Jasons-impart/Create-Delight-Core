@@ -23,11 +23,11 @@ public class PowderyCaneBlockMixin {
         BlockPos farmlandPos = pos.below();
         while (level.getBlockState(farmlandPos).is(MNDBlocks.POWDERY_CANE.get()))
             farmlandPos = farmlandPos.below();
-        DropData.current.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(farmlandPos)));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(farmlandPos)));
     }
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lcom/soytutta/mynethersdelight/common/block/PowderyCaneBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))
     public void clearCropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.current.remove();
+        DropData.CURRENT.remove();
     }
 }

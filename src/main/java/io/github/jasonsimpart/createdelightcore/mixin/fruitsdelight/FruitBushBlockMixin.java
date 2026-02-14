@@ -19,10 +19,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FruitBushBlockMixin {
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Ldev/xkmc/fruitsdelight/content/block/FruitBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"))
     public void applyQuality(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.current.set(new DropData(LevelData.get(level, pos, true), state,  player, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state,  player, level.getBlockState(pos.below())));
     }
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Ldev/xkmc/fruitsdelight/content/block/FruitBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))
     public void clearCropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.current.remove();
+        DropData.CURRENT.remove();
     }
 }

@@ -21,6 +21,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -85,13 +86,18 @@ public abstract class QualityFoodMixin {
     @Inject(method = "isRelevantCrop", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isRelevantCropMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         Block block = state.getBlock();
-        if (Compat.isModLoaded("neapolitan") && block instanceof StrawberryBushBlock strawberryBushBlock)
+        if (block instanceof CropBlock cropBlock) {
+            if (cropBlock.isMaxAge(state)) {
+                cir.setReturnValue(true);
+            }
+        }
+        if (block instanceof StrawberryBushBlock strawberryBushBlock)
             cir.setReturnValue(strawberryBushBlock.isMaxAge(state));
-        else if (Compat.isModLoaded("neapolitan") && block instanceof MintBlock mintBlock)
+        else if (block instanceof MintBlock mintBlock)
             cir.setReturnValue(mintBlock.isMaxAge(state));
-        else if (Compat.isModLoaded("fruitsdelight") && (block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock))
+        else if ((block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock))
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_4) == 4);
-        else if (Compat.isModLoaded("vinery") && block instanceof GrapeBush || block instanceof SweetBerryBushBlock)
+        else if (block instanceof GrapeBush || block instanceof SweetBerryBushBlock)
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_3) == 3);
         else if (block instanceof PowderyCaneBlock)
             cir.setReturnValue(state.getValue(PowderyCaneBlock.LIT));

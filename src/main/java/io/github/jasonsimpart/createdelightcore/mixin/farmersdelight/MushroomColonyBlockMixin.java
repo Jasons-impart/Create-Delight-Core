@@ -19,10 +19,10 @@ import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 public class MushroomColonyBlockMixin {
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/common/block/MushroomColonyBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"))
     public void setDropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.current.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(pos.below())));
     }
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lvectorwing/farmersdelight/common/block/MushroomColonyBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))
     public void clearCropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.current.remove();
+        DropData.CURRENT.remove();
     }
 }

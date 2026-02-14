@@ -230,7 +230,7 @@ dependencies {
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6967672")
     // quality foods
-    implementation fg.deobf("curse.maven:quality_food-973932:6398389")
+    implementation fg.deobf("curse.maven:quality_food-973932:7618171")
 
     // vinery
     implementation fg.deobf("curse.maven:vinery-704465:6854288")
