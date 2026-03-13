@@ -10,9 +10,6 @@ import com.simibubi.create.api.data.recipe.BaseRecipeProvider;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.data.recipe.CompatMetals;
-import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
-import com.simibubi.create.foundation.data.recipe.Mods;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -158,23 +155,4 @@ public abstract class CDProcessingRecipeGen extends BaseRecipeProvider {
         return create(CreateDelightCore.id(getItemName(result) + "_from_" + getItemName(item)), b -> b.withItemIngredients(Ingredient.of(item)).output(chance, result, 1));
     }
 
-    public GeneratedRecipe crushedOre(Supplier<ItemLike> crushed, ItemLike ingot, ItemLike secondary,
-                                      float secondaryChance) {
-        return create(crushed::get, b -> b.output(ingot, 1)
-                .output(secondaryChance, secondary, 1));
-    }
-
-    public GeneratedRecipe moddedCrushedOre(ItemEntry<? extends Item> crushed, CompatMetals metal) {
-        String metalName = metal.getName();
-        for (Mods mod : metal.getMods()) {
-            ResourceLocation ingot = mod.ingotOf(metalName);
-            create(mod.getId() + "/" + crushed.getId()
-                            .getPath(),
-                    b -> b.withItemIngredients(Ingredient.of(crushed::get))
-                            .output(1, ingot, 1)
-                            .output(0.5f, ingot, 1)
-                            .whenModLoaded(mod.getId()));
-        }
-        return null;
-    }
 }
