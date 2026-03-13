@@ -194,20 +194,20 @@ dependencies {
     implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
-    implementation fg.deobf("curse.maven:create-morerecipes-1103188:6682790")
+    implementation fg.deobf("curse.maven:create-morerecipes-1103188:7159787")
 
     // farmer's delight
     implementation fg.deobf("curse.maven:farmers-delight-398521:6917255")
 
     // ratatouille
-    implementation fg.deobf("curse.maven:create-ratatouille-983234:6937491")
+    implementation fg.deobf("curse.maven:create-ratatouille-983234:7488626")
 
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
 
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api"))
     // create metallurgy
-    implementation fg.deobf("curse.maven:create-metallurgy-1007404:6441695")
+    implementation fg.deobf("curse.maven:create-metallurgy-1007404:7729214")
     // Use the full Curios API jar at runtime
     runtimeOnly(fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}"))
 
@@ -220,7 +220,7 @@ dependencies {
     // create addition
     implementation fg.deobf("curse.maven:createaddition-439890:6306951")
     // create utilities j
-    implementation fg.deobf("curse.maven:create-utilities-j-1437484:7489155")
+    implementation fg.deobf("curse.maven:create-utilities-j-1437484:7528356")
     // lightmans currency
     implementation fg.deobf("curse.maven:lightmans-currency-472521:7426828")
     // waystones
@@ -239,7 +239,7 @@ dependencies {
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
 //    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
-    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6522105")
+    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6987710")
     implementation fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
@@ -266,14 +266,12 @@ dependencies {
     //casualness delight
     implementation fg.deobf("curse.maven:casualness_delight-909519:5181805")
     //createbicbit
-    implementation fg.deobf("curse.maven:createbicbit-918751:6286509")
+    implementation fg.deobf("curse.maven:createbicbit-918751:7270573")
     //butchercraft
     implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
-
-    implementation fg.deobf("curse.maven:create_factory_logistics-1218807:6763009")
 
     implementation fg.deobf("curse.maven:displaydelight-1144296:7027844")
     implementation fg.deobf("curse.maven:northstar-redux-1318310:7476515")

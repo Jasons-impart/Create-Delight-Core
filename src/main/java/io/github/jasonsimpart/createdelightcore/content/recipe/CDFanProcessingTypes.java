@@ -87,7 +87,7 @@ public class CDFanProcessingTypes {
         public List<ItemStack> process(ItemStack stack, Level level) {
             FREEZING_WRAPPER.setItem(0, stack);
             Optional<FanFreezingRecipe> recipe = CDRecipeTypes.FAN_FREEZING.find(FREEZING_WRAPPER, level);
-            return recipe.map(fanFreezingRecipe -> RecipeApplier.applyRecipeOn(level, stack, fanFreezingRecipe)).orElse(null);
+            return recipe.map(fanFreezingRecipe -> RecipeApplier.applyRecipeOn(level, stack, fanFreezingRecipe, false)).orElse(null);
         }
 
         @Override
