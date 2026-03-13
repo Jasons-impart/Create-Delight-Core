@@ -250,7 +250,7 @@ dependencies {
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
     implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
     //fruits delight
-    compileOnly fg.deobf("curse.maven:fruitsdelight-943774:6242383")
+    implementation fg.deobf("blank:fruitsdelight:1.1.1-noregistrate")
     //functional storage
     implementation fg.deobf("curse.maven:titanium-287342:5468426")
     implementation fg.deobf("curse.maven:functionalstorage-556861:5650296")
@@ -320,6 +320,7 @@ tasks.named('processResources', ProcessResources).configure {
             loader_version_range: loader_version_range,
             mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
             mod_authors: mod_authors, mod_description: mod_description,
+            create_version_range: create_version_range,
     ]
     inputs.properties replaceProperties
 
