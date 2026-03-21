@@ -9,9 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.registries.ForgeRegistries;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.MODID;
 
 public class DrainableFuelLoader {
-    public static final ResourceLocation IDENTIFIER = ResourceLocation.of("createdelightcore:drainable_fuel_loader", ':');
+    public static final ResourceLocation IDENTIFIER = ResourceLocation.fromNamespaceAndPath(MODID, "drainable_fuel_loader");
     public static void load() {
         ForgeHooks.updateBurns();
 

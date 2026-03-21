@@ -31,7 +31,7 @@ public class CDTags {
     }
 
     public static <T> TagKey<T> forgeTag(IForgeRegistry<T> registry, String path) {
-        return optionalTag(registry, new ResourceLocation("forge", path));
+        return optionalTag(registry, ResourceLocation.fromNamespaceAndPath("forge", path));
     }
 
     public static TagKey<Block> forgeBlockTag(String path) {
@@ -96,7 +96,7 @@ public class CDTags {
         }
 
         AllBlockTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.BLOCKS, id);
             } else {
@@ -149,7 +149,7 @@ public class CDTags {
         }
 
         AllItemTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.ITEMS, id);
             } else {
@@ -196,7 +196,7 @@ public class CDTags {
         }
 
         AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.FLUIDS, id);
             } else {
@@ -242,7 +242,7 @@ public class CDTags {
         }
 
         AllEntityTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.ENTITY_TYPES, id);
             } else {
@@ -287,7 +287,7 @@ public class CDTags {
         }
 
         AllRecipeSerializerTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = new ResourceLocation(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
             if (optional) {
                 tag = optionalTag(ForgeRegistries.RECIPE_SERIALIZERS, id);
             } else {

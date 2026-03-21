@@ -7,10 +7,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import snownee.jade.api.*;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.MODID;
 
 public class CDPlugin implements IWailaPlugin {
-    public static final String ID = "createdelightcore.cmr";
-    public static final ResourceLocation SNOWMAN_COOLER = new ResourceLocation(ID, "snowman_cooler");
+    public static final ResourceLocation SNOWMAN_COOLER = ResourceLocation.fromNamespaceAndPath(MODID, "cmr.snowman_cooler");
 
     @Override
     public void register(IWailaCommonRegistration registration) {
