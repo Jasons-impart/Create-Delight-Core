@@ -44,9 +44,10 @@ public class CreateDelightCore {
 
         CDFanProcessingTypes.register();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CDConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CDConfig.SERVER_SPEC);
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MODID, path);
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

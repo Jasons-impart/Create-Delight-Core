@@ -35,6 +35,15 @@ public class CDConfig
             .defineInRange("lunaSoilBoostChance", 0.5, 0, 1);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
+    private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
+    private static final ForgeConfigSpec.IntValue SURFACE_DEPTH_LIMIT = SERVER_BUILDER
+            .comment("The depth limit from surface for carving and noise cave start generating.")
+            .comment("Carving and noise cave generation will be restricted to this many blocks below the surface.")
+            .comment("Set to 0 to disable this feature.")
+            .comment("default: 16")
+            .defineInRange("surfaceDepthLimit", 16, 0, 256);
+    static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
+
 
     public static boolean disableDropReport;
     public static int itemThreshold;
@@ -43,6 +52,7 @@ public class CDConfig
     public static int teleportCost;
     public static boolean useMoneyTeleport;
     public static double lunaSoilBoostChance;
+    public static int surfaceDepthLimit;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -54,5 +64,6 @@ public class CDConfig
         useMoneyTeleport = USE_MONEY_TELEPORT.get();
         teleportCost = TELEPORT_COST.get();
         lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
+        surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();
     }
 }

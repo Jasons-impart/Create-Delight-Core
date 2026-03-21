@@ -15,9 +15,10 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.MODID;
 
 public class LiquidCoolerFuelJsonLoader extends SimpleJsonResourceReloadListener {
-    public static final ResourceLocation IDENTIFIER = ResourceLocation.of("createdelightcore:drainable_fuel_loader", ':');
+    public static final ResourceLocation IDENTIFIER = ResourceLocation.fromNamespaceAndPath(MODID, "drainable_fuel_loader");
 
     private static final Gson GSON = new Gson();
 
@@ -38,7 +39,7 @@ public class LiquidCoolerFuelJsonLoader extends SimpleJsonResourceReloadListener
                 JsonElement fluidElement = object.get("fluid");
                 if (fluidElement != null) {
                     try {
-                        Fluid value = ForgeRegistries.FLUIDS.getValue(new ResourceLocation(fluidElement.getAsString()));
+                        Fluid value = ForgeRegistries.FLUIDS.getValue(ResourceLocation.parse(fluidElement.getAsString()));
                         if (value != null) {
                             CoolerStomachHandler.LIQUID_COOLER_FUEL_MAP.put(value,
                                     Pair.of(
