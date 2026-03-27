@@ -21,33 +21,33 @@ import com.simibubi.create.content.kinetics.belt.transport.TransportedItemStack;
  * at com.simibubi.create.content.fluids.drain.ItemDrainBlockEntity.continueProcessing(ItemDrainBlockEntity.java:216)
  * 
  * 修复方案:
- * 使用@Shadow 影子方法访问私有字段 heldItem，这是 Mixin 最优雅的方式
- * 在方法开始处添加空值检查，如果 heldItem 为 null 则返回 false 停止处理
+ * 在方法开始处检查 heldItem 是否为 null，如果是则重置 processingTicks 并返回 false
+ * 这样 tick() 方法会执行后续的 notifyUpdate() 和 return 逻辑
  * 
  * @see <a href="https://github.com/Jasons-impart/Create-Delight-Remake/issues/1535">Issue #1535</a>
  */
 @Mixin(value = ItemDrainBlockEntity.class, remap = false)
 public abstract class ItemDrainBlockEntityMixin {
 
-    /**
-     * 使用@Shadow 访问私有字段 heldItem
-     * 这是 Mixin 最优雅的方式：抽象类 + 抽象影子方法
-     * 无需方法体，更简洁、更安全
-     */
     @Shadow
     private TransportedItemStack heldItem;
 
     @Shadow
     private int processingTicks;
 
+    /**
+     * 在 continueProcessing 方法开始处检查 heldItem 是否为 null
+     * 如果为 null，重置 processingTicks 并返回 false
+     * 这样 tick() 方法会执行：processingTicks = 0; notifyUpdate(); return;
+     */
     @Inject(method = "continueProcessing()Z", at = @At("HEAD"), cancellable = true)
     private void checkHeldItemNull(CallbackInfoReturnable<Boolean> cir) {
-        // 使用@Shadow 访问 heldItem，无需反射
+        // 如果 heldItem 为 null，重置 processingTicks 并返回 false
         if (heldItem == null) {
             processingTicks = 0;
             cir.setReturnValue(false);
         }
-        // 如果 heldItem.stack 为 null，也停止处理
+        // 如果 heldItem.stack 为 null 或空，也重置并返回 false
         else if (heldItem.stack == null || heldItem.stack.isEmpty()) {
             processingTicks = 0;
             cir.setReturnValue(false);
