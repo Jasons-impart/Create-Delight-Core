@@ -37,15 +37,14 @@ public abstract class ItemDrainBlockEntityMixin {
 
     /**
      * 在 continueProcessing 方法开始处检查 heldItem 是否为 null
-     * 如果为 null，返回 false，让 tick() 方法自然处理重置
+     * 如果为 null，重置 processingTicks 并返回 false
      * 
-     * 注意：
-     * - 不修改 processingTicks，让 tick() 方法处理
-     * - 不检查 heldItem.stack，让原方法处理正常逻辑
+     * 注意：必须重置 processingTicks，确保状态一致
      */
     @Inject(method = "continueProcessing()Z", at = @At("HEAD"), cancellable = true)
     private void checkHeldItemNull(CallbackInfoReturnable<Boolean> cir) {
         if (heldItem == null) {
+            processingTicks = 0;
             cir.setReturnValue(false);
         }
     }
