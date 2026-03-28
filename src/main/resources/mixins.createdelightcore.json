@@ -20,7 +20,6 @@
     "constructionwand.WandUtilMixin",
     "create.BasinRecipeMixin",
     "create.BlazeBurnerBlockMixin",
-    "create.ItemDrainBlockEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",
