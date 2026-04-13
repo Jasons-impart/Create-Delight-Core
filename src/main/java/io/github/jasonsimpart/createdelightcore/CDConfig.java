@@ -5,6 +5,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Mod.EventBusSubscriber(modid = CreateDelightCore.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CDConfig
 {
@@ -42,6 +45,12 @@ public class CDConfig
             .comment("Set to 0 to disable this feature.")
             .comment("default: 16")
             .defineInRange("surfaceDepthLimit", 16, 0, 256);
+    private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = SERVER_BUILDER
+            .comment("Sandpaper polishing recipe IDs to block from the Belt Grinder.")
+            .comment("Example: [\"createdelight:sandpaper_polishing/rose_quartz\"]")
+            .defineList("beltGrinderBlockedSandpaperRecipes",
+                    List.of("createdelight:sandpaper_polishing/rose_quartz"),
+                    obj -> obj instanceof String);
     static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
 
 
@@ -53,17 +62,23 @@ public class CDConfig
     public static boolean useMoneyTeleport;
     public static double lunaSoilBoostChance;
     public static int surfaceDepthLimit;
+    public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
-        disableDropReport = DISABLE_DROP_REPORT.get();
-        itemThreshold = ITEM_THRESHOLD.get();
-        ignoreStackCount = IGNORE_STACK_COUNT.get();
-        moneyChain = MONEY_CAIN.get();
-        useMoneyTeleport = USE_MONEY_TELEPORT.get();
-        teleportCost = TELEPORT_COST.get();
-        lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
-        surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();
+        if (event.getConfig().getSpec() == SPEC) {
+            disableDropReport = DISABLE_DROP_REPORT.get();
+            itemThreshold = ITEM_THRESHOLD.get();
+            ignoreStackCount = IGNORE_STACK_COUNT.get();
+            moneyChain = MONEY_CAIN.get();
+            useMoneyTeleport = USE_MONEY_TELEPORT.get();
+            teleportCost = TELEPORT_COST.get();
+            lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
+        }
+        if (event.getConfig().getSpec() == SERVER_SPEC) {
+            surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();
+            beltGrinderBlockedSandpaperRecipes = new ArrayList<>(BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES.get());
+        }
     }
 }
