@@ -58,6 +58,7 @@
     "solapplepie.FoodListMixin",
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
+    "trueuuid.SkinRefreshHandlerMixin",
     "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"
   ],
