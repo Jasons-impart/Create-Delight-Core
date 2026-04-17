@@ -15,6 +15,7 @@
     "butchercraft.ButchercraftModEventsMixin",
     "casualness_delight.DeepFryingPanEntityMixin",
     "createmetallurgy.BeltGrinderBlockEntityMixin",
+    "createmetallurgy.CMFluidsMixin",
     "cmr.MixinSnowmanCoolerBlock",
     "cmr.MixinSnowmanCoolerTileEntity",
     "cmr.SnowmanCoolerAccessor",
