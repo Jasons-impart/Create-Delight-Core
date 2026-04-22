@@ -7,6 +7,7 @@ import io.github.jasonsimpart.createdelightcore.content.recipe.CDFanProcessingTy
 import io.github.jasonsimpart.createdelightcore.event.TooltipEvent;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ForgeEventsHandler;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ModEventHandler;
+import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.registry.*;
 import io.github.jasonsimpart.createdelightcore.server.ItemEntityEvent;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,7 @@ public class CreateDelightCore {
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        CDNetwork.register();
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
         MinecraftForge.EVENT_BUS.register(ForgeEventsHandler.class);
         modEventBus.register(ModEventHandler.class);
