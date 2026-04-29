@@ -9,10 +9,12 @@ import de.cadentem.quality_food.config.QualityConfig;
 import de.cadentem.quality_food.core.Modification;
 import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
+import de.cadentem.quality_food.util.Utils;
 import dev.xkmc.fruitsdelight.content.block.DoubleFruitBushBlock;
 import dev.xkmc.fruitsdelight.content.block.FruitBushBlock;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -34,12 +36,48 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Collection;
+
 import static de.cadentem.quality_food.util.QualityUtils.*;
 
 @Mixin(QualityUtils.class)
 public abstract class QualityFoodMixin {
     @Unique
     private static final RandomSource create_Delight_Core$RANDOM = RandomSource.create();
+
+    @Inject(method = "applyQuality(Lnet/minecraft/world/item/ItemStack;Ljava/util/Collection;Lnet/minecraft/world/entity/player/Player;)V", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void applyQualityFromIngredientsMixin(ItemStack stack, Collection<ItemStack> ingredients, Player player, CallbackInfo ci) {
+        boolean hasValidIngredient = false;
+        for (ItemStack ingredient : ingredients) {
+            if (!Utils.isValidItem(ingredient)) {
+                continue;
+            }
+            hasValidIngredient = true;
+            if (!isValidQuality(getQuality(ingredient))) {
+                create_Delight_Core$clearQuality(stack);
+                ci.cancel();
+                return;
+            }
+        }
+
+        if (!hasValidIngredient) {
+            create_Delight_Core$clearQuality(stack);
+            ci.cancel();
+        }
+    }
+
+    @Unique
+    private static void create_Delight_Core$clearQuality(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag == null || !tag.contains(QUALITY_TAG)) {
+            return;
+        }
+        tag.remove(QUALITY_TAG);
+        if (tag.isEmpty()) {
+            stack.setTag(null);
+        }
+    }
+
     @Inject(method = "applyQuality(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lde/cadentem/quality_food/core/Quality;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("HEAD"), cancellable = true, remap = false)
     private static void applyQualityMixin(ItemStack stack, BlockState state, Quality blockQuality, Player player, BlockState farmland, CallbackInfo ci) {
         TagKey<Block> crop = TagKey.create(Registries.BLOCK, new ResourceLocation("createdelight", "quality_crops"));
@@ -82,6 +120,7 @@ public abstract class QualityFoodMixin {
         }
         ci.cancel();
     }
+
 
     @Inject(method = "isRelevantCrop", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isRelevantCropMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
