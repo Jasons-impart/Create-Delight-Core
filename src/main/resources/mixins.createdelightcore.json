@@ -50,6 +50,7 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.NeapolitanJEIPluginMixin",
     "neapolitan.StrawberryBushBlockMixin",
+    "quality_food.BlockDropContextMixin",
     "quality_food.BlockDataMixin",
     "quality_food.QualityFoodMixin",
     "ratatouille.BakeDataMixin",
@@ -61,6 +62,7 @@
     "solapplepie.FoodListMixin",
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
+    "trailandtalesdelight.BuddingLanternFruitBlockMixin",
     "trueuuid.SkinRefreshHandlerMixin",
     "trader_fresh.RestockEventHandlerMixin",
     "waystones.WaystoneButtonMixin"

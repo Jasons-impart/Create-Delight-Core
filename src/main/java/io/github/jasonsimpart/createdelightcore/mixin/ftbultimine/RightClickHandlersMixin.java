@@ -5,6 +5,7 @@ import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.util.QualityUtils;
 import dev.ftb.mods.ftbultimine.FTBUltiminePlayerData;
 import dev.ftb.mods.ftbultimine.RightClickHandlers;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityFoodHarvestContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class RightClickHandlersMixin {
     @Inject(method = "cropHarvesting", at = @At(value = "INVOKE", target = "Ldev/ftb/mods/ftbultimine/ItemCollection;add(Lnet/minecraft/world/item/ItemStack;)V"), remap = false)
     private static void cropHarvestingApplyQuality(ServerPlayer player, InteractionHand hand, BlockPos clickPos, Direction face, FTBUltiminePlayerData data, CallbackInfoReturnable<Integer> cir, @Local(ordinal = 1) BlockPos pos, @Local BlockState state, @Local ItemStack stack) {
-        QualityUtils.applyQuality(stack, state, LevelData.get(player.level(), pos), player, player.level().getBlockState(pos.below()));
+        BlockPos previous = QualityFoodHarvestContext.push(pos);
+        try {
+            QualityUtils.applyQuality(stack, state, LevelData.get(player.level(), pos), player, player.level().getBlockState(pos.below()));
+        } finally {
+            QualityFoodHarvestContext.pop(previous);
+        }
     }
 }

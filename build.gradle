@@ -136,11 +136,11 @@ repositories {
     maven { url = "https://maven.tterrag.com" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
     maven {
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
         url = "https://maven.blamejared.com/"
     }
+    // Primary JEI host may return HTTP 523 in some regions.
+    // Keep this disabled to avoid hard failure during dependency resolution.
+    // maven { url = "https://dvs1.progwml6.com/files/maven/" }
     maven {
         url = "https://modmaven.dev"
     }
@@ -284,6 +284,7 @@ dependencies {
     implementation fg.deobf("curse.maven:elysium-api-1158628:6589093")
     implementation fg.deobf("curse.maven:jadens-nether-expansion-1111833:6729020")
 
+    implementation fg.deobf("curse.maven:trailandtales_delight-1198527:6526276")
 //    implementation fg.deobf("curse.maven:create-stuff-additions-466792:6412397")
 
 //    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
