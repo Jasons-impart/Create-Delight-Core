@@ -20,10 +20,13 @@ import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 
+import com.simibubi.create.AllBlocks;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
+import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -34,6 +37,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,6 +52,7 @@ import net.minecraft.world.level.ItemLike;
 @ParametersAreNonnullByDefault
 public class CDJEI implements IModPlugin {
     private static final ResourceLocation ID = CreateDelightCore.id("jei_plugin");
+    public static IJeiRuntime jeiRuntime = null;
 
     private final List<CreateRecipeCategory<?>> allCategories = new ArrayList<>();
     private IIngredientManager ingredientManager;
@@ -74,9 +79,17 @@ public class CDJEI implements IModPlugin {
     }
 
     @Override
+    public void onRuntimeAvailable(@Nonnull IJeiRuntime runtime) {
+        jeiRuntime = runtime;
+        // Register callback so SyncFuelMapsPacket can trigger a JEI update
+        ClientFuelCache.onUpdate = CDJEI::onFuelCacheUpdated;
+    }
+
+    @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         loadCategories();
         registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+        registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
     }
 
     @Override
@@ -86,11 +99,38 @@ public class CDJEI implements IModPlugin {
         allCategories.forEach(c -> c.registerRecipes(registration));
 
         registration.addRecipes(RecipeTypes.CRAFTING, ToolboxColoringRecipeMaker.createRecipes().toList());
+        registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
+        registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
+    }
+
+    /** Build recipes from the client-side fuel cache (populated via network from server). */
+    public static List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> buildFluidRecipeList() {
+        List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> recipes = new ArrayList<>();
+        ClientFuelCache.BURNER_MAP.forEach((fluid, triplet) -> {
+            Integer burnTime = triplet.getFirst();
+            Boolean isSuperHeat = triplet.getSecond();
+            Integer amountConsume = triplet.getThird();
+            if (burnTime != null && isSuperHeat != null && amountConsume != null) {
+                recipes.add(new JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe(fluid, isSuperHeat, burnTime, amountConsume));
+            }
+        });
+        return recipes;
+    }
+
+    /**
+     * Called by SyncFuelMapsPacket after the client fuel cache is populated.
+     * Adds any new fuel recipes to JEI if the runtime is already available
+     * (covers the case where the server packet arrives after JEI has initialized).
+     */
+    public static void onFuelCacheUpdated() {
+        if (jeiRuntime != null) {
+            jeiRuntime.getRecipeManager().addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
+        }
     }
 
     private class CategoryBuilder<T extends Recipe<?>> {

@@ -162,5 +162,7 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r",
   "tooltip.createdelightcore.jello_block": "光滑，但是能和相同果酱/果冻方块粘黏",
   "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏",
-  "tooltip.createdelightcore.superHeat": "超级燃烧"
+  "tooltip.createdelightcore.superHeat": "超级燃烧",
+  "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
+  "jei.createdelightcore.amountConsume": "消耗%smB"
 }

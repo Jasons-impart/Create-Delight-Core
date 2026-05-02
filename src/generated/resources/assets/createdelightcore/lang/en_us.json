@@ -162,5 +162,7 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r",
   "tooltip.createdelightcore.jello_block": "Slippery. Sticks to sticky blocks and same jello/jelly blocks.",
   "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks.",
-  "tooltip.createdelightcore.superHeat": "Super Heating"
+  "tooltip.createdelightcore.superHeat": "Super Heating",
+  "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid Recipe",
+  "jei.createdelightcore.amountConsume": "Consumes %smB"
 }
