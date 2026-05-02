@@ -21,10 +21,12 @@ import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.infrastructure.config.CRecipes;
 
 import com.simibubi.create.AllBlocks;
+import fr.iglee42.cmr.init.CMRRegistries;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategorySnowmanCoolerFluid;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
@@ -90,6 +92,7 @@ public class CDJEI implements IModPlugin {
         loadCategories();
         registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
+        registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
     }
 
     @Override
@@ -100,12 +103,14 @@ public class CDJEI implements IModPlugin {
 
         registration.addRecipes(RecipeTypes.CRAFTING, ToolboxColoringRecipeMaker.createRecipes().toList());
         registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
+        registration.addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
+        registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
     }
 
     /** Build recipes from the client-side fuel cache (populated via network from server). */
@@ -130,7 +135,22 @@ public class CDJEI implements IModPlugin {
     public static void onFuelCacheUpdated() {
         if (jeiRuntime != null) {
             jeiRuntime.getRecipeManager().addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
+            jeiRuntime.getRecipeManager().addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
         }
+    }
+
+    /** Build recipes from the client-side cooler cache (populated via network from server). */
+    public static List<JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe> buildCoolerFluidRecipeList() {
+        List<JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe> recipes = new ArrayList<>();
+        ClientFuelCache.COOLER_MAP.forEach((fluid, triplet) -> {
+            Integer coolTime = triplet.getFirst();
+            Boolean isFreezing = triplet.getSecond();
+            Integer amountConsume = triplet.getThird();
+            if (coolTime != null && isFreezing != null && amountConsume != null) {
+                recipes.add(new JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe(fluid, isFreezing, coolTime, amountConsume));
+            }
+        });
+        return recipes;
     }
 
     private class CategoryBuilder<T extends Recipe<?>> {

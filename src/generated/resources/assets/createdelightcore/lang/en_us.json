@@ -164,5 +164,7 @@
   "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks.",
   "tooltip.createdelightcore.superHeat": "Super Heating",
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid Recipe",
-  "jei.createdelightcore.amountConsume": "Consumes %smB"
+  "jei.createdelightcore.amountConsume": "Consumes %smB",
+  "jei.createdelightcore.SnowmanCoolerFluid": "Snowman Cooler Fluid Recipe",
+  "jei.createdelightcore.amountConsumeCool": "Consumes %smB"
 }

@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.content.event.TeleportHandler;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
 import io.github.jasonsimpart.createdelightcore.content.recipe.CDFanProcessingTypes;
-import io.github.jasonsimpart.createdelightcore.event.TooltipEvent;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ForgeEventsHandler;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ModEventHandler;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
