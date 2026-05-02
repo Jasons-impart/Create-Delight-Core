@@ -4,7 +4,7 @@ import com.soytutta.mynethersdelight.common.block.PowderyCaneBlock;
 import com.soytutta.mynethersdelight.common.block.PowderyCannonBlock;
 import com.teamabnormals.neapolitan.common.block.MintBlock;
 import com.teamabnormals.neapolitan.common.block.StrawberryBushBlock;
-import de.cadentem.quality_food.compat.Compat;
+import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.config.QualityConfig;
 import de.cadentem.quality_food.core.Modification;
 import de.cadentem.quality_food.core.Quality;
@@ -13,10 +13,11 @@ import de.cadentem.quality_food.util.Utils;
 import dev.xkmc.fruitsdelight.content.block.DoubleFruitBushBlock;
 import dev.xkmc.fruitsdelight.content.block.FruitBushBlock;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityFoodHarvestContext;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -28,6 +29,7 @@ import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.util.FakePlayer;
+import net.minecraftforge.fml.ModList;
 import net.satisfy.vinery.core.block.GrapeBush;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -38,7 +40,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Collection;
 
-import static de.cadentem.quality_food.util.QualityUtils.*;
+import static de.cadentem.quality_food.util.QualityUtils.QUALITY_TAG;
+import static de.cadentem.quality_food.util.QualityUtils.applyQuality;
+import static de.cadentem.quality_food.util.QualityUtils.getQuality;
+import static de.cadentem.quality_food.util.QualityUtils.isRelevantCrop;
+import static de.cadentem.quality_food.util.QualityUtils.isValidQuality;
 
 @Mixin(QualityUtils.class)
 public abstract class QualityFoodMixin {
@@ -83,6 +89,7 @@ public abstract class QualityFoodMixin {
         TagKey<Block> crop = TagKey.create(Registries.BLOCK, new ResourceLocation("createdelight", "quality_crops"));
         if (isRelevantCrop(state) || state.is(crop)) {
             Quality selected = Quality.NONE;
+            float growChance = create_Delight_Core$getGrowChance(player, state, blockQuality);
             for (Quality quality : Quality.values()) {
                 if (quality.level() == 0) {
                     continue;
@@ -90,20 +97,17 @@ public abstract class QualityFoodMixin {
 
                 double chance;
                 if (blockQuality.level() == 0) {
-                    // Weight would be 0, meaning no quality can be calculated
                     chance = QualityConfig.getChance(quality);
                 } else {
-                    chance = Mth.clamp(QualityConfig.getChance(quality) * QualityConfig.calculateChance(quality, QualityConfig.getWeight(blockQuality)) * QualityConfig.getWeight(Quality.DIAMOND), 0.0, 1.0);
+                    chance = Mth.clamp(
+                            QualityConfig.getChance(quality) * QualityConfig.calculateChance(quality, QualityConfig.getWeight(blockQuality)) * QualityConfig.getWeight(Quality.DIAMOND),
+                            0.0,
+                            1.0
+                    );
                 }
                 chance = Modification.harvestOrSeedMultiplier(quality, stack).apply(chance);
                 chance = Modification.luck(player).apply(chance);
                 chance = Modification.farmland(state, farmland).apply(chance);
-                // 非玩家收割不会拥有品质
-                float growChance = 0;
-                if (player != null && !(player instanceof FakePlayer)) {
-                    growChance = EclipticSeasonsUtil.getGrowChance(player.level(), player.getOnPos(), state) * 1.25f;
-//                CreateDelightCore.LOGGER.info("growChance:" + growChance);
-                }
                 chance = Modification.multiplicative(growChance).apply(chance);
                 if (chance > 0 && chance >= create_Delight_Core$RANDOM.nextDouble()) {
                     selected = quality;
@@ -112,15 +116,66 @@ public abstract class QualityFoodMixin {
 
             applyQuality(stack, selected);
         } else if (isValidQuality(blockQuality)) {
-            // The block itself if it has quality
             applyQuality(stack, blockQuality);
         } else if (blockQuality != Quality.NONE_PLAYER_PLACED) {
-            // The block itself or harvested items when the crop has no quality
             applyQuality(stack, player);
         }
         ci.cancel();
     }
 
+    @Unique
+    private static float create_Delight_Core$getGrowChance(Player player, BlockState state, Quality blockQuality) {
+        if (player == null || player instanceof FakePlayer) {
+            return 0.0F;
+        }
+
+        if (!ModList.get().isLoaded("eclipticseasons")) {
+            return 1.0F;
+        }
+
+        BlockPos growPos = QualityFoodHarvestContext.getCropPos();
+        if (growPos == null) {
+            growPos = player.getOnPos();
+        }
+
+        int sourceRank = LevelData.get(player.level(), growPos).level();
+        int targetRank = blockQuality.level();
+        float growChance = EclipticSeasonsUtil.getGrowChance(player.level(), growPos, state);
+        float baseGrowChance = create_Delight_Core$removeRankBoost(growChance, sourceRank);
+        float correctedGrowChance = create_Delight_Core$applyRankBoost(baseGrowChance, targetRank);
+        return Mth.clamp(correctedGrowChance * 1.25F, 0.0F, 1.0F);
+    }
+
+    @Unique
+    private static float create_Delight_Core$applyRankBoost(float chance, int rank) {
+        float clamped = Mth.clamp(chance, 0.0F, 1.0F);
+        if (rank <= 0) {
+            return clamped;
+        }
+
+        float boost = create_Delight_Core$getRankBoost(rank);
+        return Mth.clamp(boost + (1.0F - boost) * clamped, 0.0F, 1.0F);
+    }
+
+    @Unique
+    private static float create_Delight_Core$removeRankBoost(float chance, int rank) {
+        float clamped = Mth.clamp(chance, 0.0F, 1.0F);
+        if (rank <= 0) {
+            return clamped;
+        }
+
+        float boost = create_Delight_Core$getRankBoost(rank);
+        float denominator = 1.0F - boost;
+        if (denominator <= 0.0F) {
+            return 1.0F;
+        }
+        return Mth.clamp((clamped - boost) / denominator, 0.0F, 1.0F);
+    }
+
+    @Unique
+    private static float create_Delight_Core$getRankBoost(int rank) {
+        return (float) (Math.pow(2, rank - 1) / 4);
+    }
 
     @Inject(method = "isRelevantCrop", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isRelevantCropMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
@@ -130,17 +185,18 @@ public abstract class QualityFoodMixin {
                 cir.setReturnValue(true);
             }
         }
-        if (block instanceof StrawberryBushBlock strawberryBushBlock)
+        if (block instanceof StrawberryBushBlock strawberryBushBlock) {
             cir.setReturnValue(strawberryBushBlock.isMaxAge(state));
-        else if (block instanceof MintBlock mintBlock)
+        } else if (block instanceof MintBlock mintBlock) {
             cir.setReturnValue(mintBlock.isMaxAge(state));
-        else if ((block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock))
+        } else if (block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock) {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_4) == 4);
-        else if (block instanceof GrapeBush || block instanceof SweetBerryBushBlock)
+        } else if (block instanceof GrapeBush || block instanceof SweetBerryBushBlock) {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_3) == 3);
-        else if (block instanceof PowderyCaneBlock)
+        } else if (block instanceof PowderyCaneBlock) {
             cir.setReturnValue(state.getValue(PowderyCaneBlock.LIT));
-        else if (block instanceof PowderyCannonBlock)
+        } else if (block instanceof PowderyCannonBlock) {
             cir.setReturnValue(state.getValue(PowderyCannonBlock.LIT));
+        }
     }
 }

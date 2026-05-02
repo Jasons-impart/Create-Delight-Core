@@ -9,6 +9,5 @@ pluginManagement {
     }
 }
 
-plugins {
-    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.7.0'
-}
+// Optional toolchain resolver plugin.
+// Disabled because plugins.gradle.org may be unreachable in some networks.
