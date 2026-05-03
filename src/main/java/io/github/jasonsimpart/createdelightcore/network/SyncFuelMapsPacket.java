@@ -87,6 +87,11 @@ public class SyncFuelMapsPacket {
                     ClientFuelCache.COOLER_MAP.put(fluid, triplet);
                 }
             });
+
+            // Notify JEI (if loaded and initialized) to add the freshly synced fuel recipes
+            if (ClientFuelCache.onUpdate != null) {
+                ClientFuelCache.onUpdate.run();
+            }
         });
         ctx.get().setPacketHandled(true);
     }
