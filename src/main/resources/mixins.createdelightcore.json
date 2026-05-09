@@ -40,6 +40,7 @@
     "fruitsdelight.DurianLeavesBlockQualityMixin",
     "fruitsdelight.DoubleBushBlockMixin",
     "fruitsdelight.DoubleFruitBushBlockMixin",
+    "fruitsdelight.FallingBlockEntityDurianQualityMixin",
     "fruitsdelight.FruitBushBlockMixin",
     "fruitsdelight.LevelMixin",
     "fruitsdelight.PassableLeavesBlockQualityMixin",
