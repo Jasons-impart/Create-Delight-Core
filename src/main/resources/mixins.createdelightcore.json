@@ -25,6 +25,7 @@
     "constructionwand.WandUtilMixin",
     "create.BasinRecipeMixin",
     "create.BlazeBurnerBlockMixin",
+    "create.ItemDrainCategoryMixin",
     "create.CreateRecipeCategoryMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
