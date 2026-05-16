@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "covered=false": {
+      "model": "createdelightcore:block/mint_syrup"
+    },
+    "covered=true": {
+      "model": "createdelightcore:block/mint_syrup"
+    }
+  }
+}

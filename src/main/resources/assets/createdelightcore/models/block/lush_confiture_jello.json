@@ -1,0 +1,6 @@
+{
+  "parent": "createdelightcore:block/tinted",
+  "textures": {
+    "all": "createdelightcore:block/jello"
+  }
+}

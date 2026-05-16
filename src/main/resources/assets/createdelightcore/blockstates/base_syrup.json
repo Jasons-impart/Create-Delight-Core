@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "covered=false": {
+      "model": "createdelightcore:block/base_syrup"
+    },
+    "covered=true": {
+      "model": "createdelightcore:block/base_syrup"
+    }
+  }
+}

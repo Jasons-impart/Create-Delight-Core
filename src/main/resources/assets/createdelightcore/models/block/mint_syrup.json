@@ -1,0 +1,9 @@
+{
+  "parent": "createdelightcore:block/syrup",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "bottom": "createdelightcore:block/mint_syrup",
+    "side": "createdelightcore:block/mint_syrup",
+    "top": "createdelightcore:block/mint_syrup"
+  }
+}

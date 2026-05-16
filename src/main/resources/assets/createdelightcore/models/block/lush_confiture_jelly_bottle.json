@@ -1,0 +1,10 @@
+{
+  "parent": "createdelightcore:block/jam_bottle_block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "body": "createdelightcore:block/jam_bottle_body",
+    "cap_bottom": "createdelightcore:block/jam_bottle_cap_bottom",
+    "cap_top": "createdelightcore:block/jam_bottle_cap_top",
+    "content": "createdelightcore:block/lush_confiture_jam_content"
+  }
+}

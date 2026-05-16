@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.jasonsimpart.mixin",
+  "plugin": "io.github.jasonsimpart.mixin.CDCMixinPlugin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "quark.ContributorRewardHandlerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}
