@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "createdelightcore:ore_tin_middle",
+    "createdelightcore:ore_tin_small",
+    "createdelightcore:ore_tin_upper"
+  ],
+  "step": "underground_ores"
+}
