@@ -1,0 +1,7 @@
+﻿{
+    "parent":  "minecraft:item/generated",
+    "textures":  {
+                     "layer0":  "createdelightcore:item/enchanted_golden_lantern_fruit"
+                 }
+}
+

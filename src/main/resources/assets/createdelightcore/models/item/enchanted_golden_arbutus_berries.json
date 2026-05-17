@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "cosmopolitan:item/golden_arbutus_berries"
+  }
+}

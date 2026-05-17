@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:spent_liquor",
+    "createdelightcore:flowing_spent_liquor"
+  ]
+}

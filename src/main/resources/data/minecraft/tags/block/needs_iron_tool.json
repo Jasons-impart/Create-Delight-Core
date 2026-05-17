@@ -5,6 +5,21 @@
     "createdelightcore:deepslate_tin_ore",
     "createdelightcore:raw_tin_block",
     "createdelightcore:tin_block",
-    "createdelightcore:bronze_block"
+    "createdelightcore:bronze_block",
+    "createdelightcore:enriched_sky_stone_block",
+    "createdelightcore:iron_casing",
+    "createdelightcore:space_casing",
+    "createdelightcore:sky_steel_casing",
+    "createdelightcore:cow_zip",
+    "createdelightcore:sheep_zip",
+    "createdelightcore:pig_zip",
+    "createdelightcore:chicken_zip",
+    "createdelightcore:goat_zip",
+    "createdelightcore:black_rabbit_zip",
+    "createdelightcore:brown_rabbit_zip",
+    "createdelightcore:splotched_rabbit_zip",
+    "createdelightcore:gold_rabbit_zip",
+    "createdelightcore:white_rabbit_zip",
+    "createdelightcore:salt_rabbit_zip"
   ]
 }

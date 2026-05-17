@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:base_syrup",
+    "createdelightcore:strawberry_syrup",
+    "createdelightcore:vanilla_syrup",
+    "createdelightcore:mint_syrup",
+    "createdelightcore:banana_syrup"
+  ]
+}

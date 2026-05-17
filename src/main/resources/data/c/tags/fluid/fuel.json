@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:fuel_mixtures",
+    "createdelightcore:flowing_fuel_mixtures",
+    "createdelightcore:ethylene_fluid",
+    "createdelightcore:flowing_ethylene_fluid",
+    "createdelightcore:cryo_fuel",
+    "createdelightcore:flowing_cryo_fuel"
+  ]
+}

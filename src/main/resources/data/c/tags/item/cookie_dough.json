@@ -1,0 +1,19 @@
+﻿{
+  "replace": false,
+  "values": [
+    "createdelightcore:persimmon_cookie_dough",
+    "createdelightcore:lemon_cookie_dough",
+    "createdelightcore:oatmeal_cookie_dough",
+    "createdelightcore:green_tea_cookie_dough",
+    "createdelightcore:cranberry_cookie_dough",
+    "createdelightcore:bayberry_cookie_dough",
+    "createdelightcore:chocolate_cookie_dough",
+    "createdelightcore:honey_cookie_dough",
+    "createdelightcore:sweet_berry_cookie_dough",
+    "createdelightcore:lime_cookie_dough",
+    "createdelightcore:chorus_cookie_dough",
+    "createdelightcore:bat_cookie_dough",
+    "createdelightcore:paw_cookie_dough"
+  ]
+}
+

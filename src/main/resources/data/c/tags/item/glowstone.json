@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:glowstone_paste",
+    "minecraft:glowstone_dust"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "parent": "neoforge:item/bucket",
+  "loader": "neoforge:fluid_container",
+  "fluid": "createdelightcore:artificial_egg_yolk"
+}

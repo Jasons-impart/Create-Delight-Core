@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createdelightcore:item/unformed_quantum_omni_cell_housing"
+  }
+}

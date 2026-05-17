@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createdelightcore:item/initial_processing_of_printed_calculation_processor"
+  }
+}

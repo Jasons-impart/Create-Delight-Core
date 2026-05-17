@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:redstone_paste",
+    "minecraft:redstone"
+  ]
+}

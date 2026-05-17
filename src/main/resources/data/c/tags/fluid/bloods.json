@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:fire_dragon_blood",
+    "createdelightcore:ice_dragon_blood",
+    "createdelightcore:lightning_dragon_blood"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:quartz_vibrant_glass_parts",
+    {
+      "id": "ae2:quartz_vibrant_glass",
+      "required": false
+    }
+  ]
+}

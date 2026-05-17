@@ -1,0 +1,7 @@
+﻿{
+    "parent":  "minecraft:item/generated",
+    "textures":  {
+                     "layer0":  "createdelightcore:item/deep_sea_sushi_roll_slice"
+                 }
+}
+

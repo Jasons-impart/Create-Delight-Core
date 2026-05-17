@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:nut_milk",
+    "createdelightcore:flowing_nut_milk",
+    "createdelightcore:soya_milk",
+    "createdelightcore:flowing_soya_milk"
+  ]
+}

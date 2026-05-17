@@ -1,0 +1,12 @@
+﻿{
+  "replace": false,
+  "values": [
+    "createdelightcore:unbaked_red_velvet_cupcake",
+    "createdelightcore:unbaked_mixed_berry_muffin",
+    "createdelightcore:unbaked_chocolate_pumpkin_muffin",
+    "createdelightcore:unbaked_blueberry_muffin",
+    "createdelightcore:unbaked_cranberry_muffin",
+    "createdelightcore:unbaked_monster_muffin"
+  ]
+}
+

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "createdelightcore:block/enriched_sky_stone_block"
+  }
+}

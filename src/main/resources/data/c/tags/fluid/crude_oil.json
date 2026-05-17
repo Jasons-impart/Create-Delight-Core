@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:light_crude_oil",
+    "createdelightcore:flowing_light_crude_oil"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:sky_stone_paste",
+    {
+      "id": "ae2:sky_dust",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createdelightcore:item/unformed_mega_item_cell_housing"
+  }
+}

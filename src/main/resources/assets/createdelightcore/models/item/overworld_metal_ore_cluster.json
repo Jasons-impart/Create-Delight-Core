@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createdelightcore:item/overworld_metal_ore_cluster"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:dusts/carbon",
+    "#c:dusts/tin",
+    "#c:dusts/silver",
+    "#c:dusts/titanium",
+    "#c:dusts/uranium",
+    "createdelightcore:enriched_uraniumdust",
+    "createdelightcore:depleted_uranium_dust"
+  ]
+}

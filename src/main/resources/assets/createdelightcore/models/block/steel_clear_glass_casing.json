@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "all": "createdelightcore:block/steel_clear_glass_casing",
+    "particle": "createdelightcore:block/steel_clear_glass_casing"
+  }
+}

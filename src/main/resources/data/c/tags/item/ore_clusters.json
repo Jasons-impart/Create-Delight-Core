@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:overworld_metal_ore_cluster",
+    "createdelightcore:overworld_noble_metal_ore_cluster",
+    "createdelightcore:nether_ore_cluster",
+    "createdelightcore:moon_ore_cluster",
+    "createdelightcore:mars_ore_cluster",
+    "createdelightcore:mercury_ore_cluster",
+    "createdelightcore:venus_ore_cluster",
+    "createdelightcore:glacio_ore_cluster",
+    "createdelightcore:mars_gemstone_cluster"
+  ]
+}

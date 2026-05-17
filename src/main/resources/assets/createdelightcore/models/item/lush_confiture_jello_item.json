@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "createdelightcore:item/lush_confiture_jello_item"
+  }
+}
