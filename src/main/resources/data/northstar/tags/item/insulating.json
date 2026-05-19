@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "createdelightcore:oxygen_tank",
-    "createdelightcore:sturdy_oxygen_tank"
+    "createdelightcore:oxygen_tank"
   ]
 }
