@@ -2,6 +2,8 @@ package io.github.jasonsimpart.createdelightcore.mixin.Minecraft;
 
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.CarvingMask;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Aquifer;
@@ -48,6 +50,13 @@ public abstract class CarverMixin {
 
         // 2. 获取该垂直柱子在世界生成阶段的"真实地表高度"，排除水
         int surfaceY = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, localX, localZ);
+        int surfaceBlockY = surfaceY - 1;
+        if (surfaceBlockY >= chunk.getMinBuildHeight() && surfaceBlockY < chunk.getMaxBuildHeight()) {
+            BlockState surfaceState = chunk.getBlockState(new BlockPos(pos.getX(), surfaceBlockY, pos.getZ()));
+            if (surfaceState.is(Blocks.END_STONE) || surfaceState.is(Blocks.NETHERRACK)) {
+                return;
+            }
+        }
 
         // 3. 核心拦截逻辑：如果当前正在尝试雕刻的 Y 坐标，距离地表不到配置的深度限制
         if (pos.getY() >= surfaceY - CDConfig.surfaceDepthLimit) {

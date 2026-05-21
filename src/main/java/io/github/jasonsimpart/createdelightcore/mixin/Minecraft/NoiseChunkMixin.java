@@ -4,6 +4,7 @@ import io.github.jasonsimpart.createdelightcore.CDConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,6 +30,9 @@ public abstract class NoiseChunkMixin {
         if (CDConfig.surfaceDepthLimit <= 0) {
             return;
         }
+        if (!region.getLevel().dimension().equals(Level.OVERWORLD)) {
+            return;
+        }
 
         BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos();
         BlockState stone = Blocks.STONE.defaultBlockState();
@@ -47,7 +51,7 @@ public abstract class NoiseChunkMixin {
                 int surfaceY = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, localX, localZ);
 
                 // 从推算出的地表往下扫配置的深度限制格
-                for (int y = surfaceY - CDConfig.surfaceDepthLimit; y <= surfaceY; y++) {
+                for (int y = surfaceY - CDConfig.surfaceDepthLimit; y < surfaceY; y++) {
                     if (y < chunk.getMinBuildHeight() || y >= chunk.getMaxBuildHeight()) continue;
 
                     mPos.set(worldX, y, worldZ);
