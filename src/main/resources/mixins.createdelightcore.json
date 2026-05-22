@@ -50,6 +50,7 @@
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
     "Minecraft.CarverMixin",
+    "Minecraft.HoneyBlockMixin",
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
     "mynethersdelight.PowderyCaneBlockMixin",
