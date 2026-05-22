@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore.registry;
 import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
 import io.github.jasonsimpart.createdelightcore.content.item.MilkShakeItem;
 import net.minecraft.resources.ResourceKey;
@@ -139,7 +140,7 @@ public class CDItems {
     }
 
     public static ItemEntry<Item> coinItem(String coinTier, Rarity rarity) {
-        return REGISTRATE.item(coinTier + "_coin", Item::new)
+        return REGISTRATE.<Item>item(coinTier + "_coin", properties -> new CoinItem(coinTier, properties))
                 .properties(properties -> properties
                         .rarity(rarity)
                         .fireResistant()

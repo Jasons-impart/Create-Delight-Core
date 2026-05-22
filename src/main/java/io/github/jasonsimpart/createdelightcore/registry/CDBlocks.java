@@ -5,10 +5,14 @@ import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import io.github.jasonsimpart.createdelightcore.content.item.JellyBottleItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
@@ -24,6 +28,11 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
+import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 
@@ -35,6 +44,12 @@ public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+    //coin
+    public static final BlockEntry<CoinPileBlock> IRON_COIN_PILE = simpleCoinPileBlock("iron", CDItems.IRON);
+    public static final BlockEntry<CoinPileBlock> COPPER_COIN_PILE = simpleCoinPileBlock("copper", CDItems.COPPER);
+    public static final BlockEntry<CoinPileBlock> GOLD_COIN_PILE = simpleCoinPileBlock("gold", CDItems.GOLD);
+    public static final BlockEntry<CoinPileBlock> EMERALD_COIN_PILE = simpleCoinPileBlock("emerald", CDItems.EMERALD);
+    public static final BlockEntry<CoinPileBlock> NETHERITE_COIN_PILE = simpleCoinPileBlock("netherite", CDItems.NETHERITE);
     //tin
     //ore
     public static final BlockEntry<Block> TIN_ORE = simpleOre("tin", BlockTags.NEEDS_IRON_TOOL, CDItems.RAW_TIN);
@@ -130,6 +145,59 @@ public class CDBlocks {
                     .build()
                     .register();
 
+
+    public static BlockEntry<CoinPileBlock> simpleCoinPileBlock(String coinTier, ItemEntry<Item> coinItem) {
+        return REGISTRATE.block(coinTier + "_coin_pile", p -> new CoinPileBlock(p, coinItem))
+                .properties(p -> p
+                        .mapColor(MapColor.METAL)
+                        .strength(0.3F, 1.0F)
+                        .noOcclusion()
+                        .sound(IafBlockRegistry.SOUND_TYPE_GOLD)
+                )
+                .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state ->
+                        ConfiguredModel.builder()
+                                .modelFile(coinPileModel(pvd, coinTier, state.getValue(CoinPileBlock.LAYERS)))
+                                .build()))
+                .loot((lt, block) -> {
+                    var pool = net.minecraft.world.level.storage.loot.LootPool.lootPool()
+                            .setRolls(ConstantValue.exactly(1.0F));
+                    for (int layers = 1; layers <= 8; layers++) {
+                        pool.add(LootItem.lootTableItem(coinItem.get())
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(CoinPileBlock.LAYERS, layers)))
+                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(layers))));
+                    }
+                    lt.add(block, net.minecraft.world.level.storage.loot.LootTable.lootTable().withPool(pool));
+                })
+                .register();
+    }
+
+    private static ModelFile coinPileModel(RegistrateBlockstateProvider pvd, String coinTier, int layers) {
+        int height = layers * 2;
+        String modelName = coinTier + "_coin_pile_height" + height;
+        ResourceLocation texture = pvd.modLoc("block/" + coinTier + "_coin_pile");
+
+        if (layers == 8)
+            return pvd.models().cubeAll(modelName, texture);
+
+        BlockModelBuilder model = pvd.models().getBuilder(modelName)
+                .parent(new ModelFile.UncheckedModelFile("block/thin_block"))
+                .texture("particle", texture)
+                .texture("texture", texture);
+
+        model.element()
+                .from(0.0F, 0.0F, 0.0F)
+                .to(16.0F, height, 16.0F)
+                .face(Direction.DOWN).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").cullface(Direction.DOWN).end()
+                .face(Direction.UP).uvs(0.0F, 0.0F, 16.0F, 16.0F).texture("#texture").end()
+                .face(Direction.NORTH).uvs(0.0F, 16.0F - height, 16.0F, 16.0F).texture("#texture").cullface(Direction.NORTH).end()
+                .face(Direction.SOUTH).uvs(0.0F, 16.0F - height, 16.0F, 16.0F).texture("#texture").cullface(Direction.SOUTH).end()
+                .face(Direction.WEST).uvs(0.0F, 16.0F - height, 16.0F, 16.0F).texture("#texture").cullface(Direction.WEST).end()
+                .face(Direction.EAST).uvs(0.0F, 16.0F - height, 16.0F, 16.0F).texture("#texture").cullface(Direction.EAST).end()
+                .end();
+        return model;
+    }
 
     public static BlockEntry<Block> simpleMetalBlock(String metalName, TagKey<Block> pickaxeLevel) {
         return REGISTRATE.block(metalName + "_block", Block::new)
