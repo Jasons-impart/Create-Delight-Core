@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.content.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -15,9 +16,11 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -122,7 +125,12 @@ public class CoinPileBlock extends Block {
         ItemStack stack = player.getItemInHand(hand);
         if (!stack.isEmpty() && stack.is(getCoinItem()) && state.getValue(LAYERS) < 8) {
             if (!level.isClientSide) {
-                level.setBlock(pos, state.setValue(LAYERS, state.getValue(LAYERS) + 1), 3);
+                BlockState newState = state.setValue(LAYERS, state.getValue(LAYERS) + 1);
+                level.setBlock(pos, newState, 3);
+                SoundType soundType = newState.getSoundType(level, pos, player);
+                level.playSound(null, pos, soundType.getPlaceSound(), SoundSource.BLOCKS,
+                        (soundType.getVolume() + 1.0F) / 2.0F, soundType.getPitch() * 0.8F);
+                level.gameEvent(GameEvent.BLOCK_PLACE, pos, GameEvent.Context.of(player, newState));
                 if (!player.getAbilities().instabuild)
                     stack.shrink(1);
             }
