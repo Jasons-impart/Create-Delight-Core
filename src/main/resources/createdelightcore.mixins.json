@@ -7,6 +7,9 @@
   "mixins": [
     "alexscaves.ACBiomeRarityMixin",
     "alexscaves.ChunkStatusTasksMixin",
+    "eclipticseasons.PlayerChunkSenderMixin",
+    "eclipticseasons.ServerGamePacketListenerImplMixin",
+    "eclipticseasons.SnowyStatusHandlerMixin",
     "quark.ContributorRewardHandlerMixin"
   ],
   "client": [
