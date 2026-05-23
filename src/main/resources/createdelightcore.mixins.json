@@ -11,6 +11,12 @@
     "eclipticseasons.PlayerChunkSenderMixin",
     "eclipticseasons.ServerGamePacketListenerImplMixin",
     "eclipticseasons.SnowyStatusHandlerMixin",
+    "iceandfire.CyclopsCavePieceMixin",
+    "iceandfire.DragonCavePieceMixin",
+    "iceandfire.DragonRoostPieceMixin",
+    "iceandfire.HydraCavePieceMixin",
+    "iceandfire.PixieVillagePieceMixin",
+    "iceandfire.SirenIslandPieceMixin",
     "resourcepack.PathPackResourcesMixin",
     "quark.ContributorRewardHandlerMixin"
   ],
