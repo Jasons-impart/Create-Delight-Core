@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.content.block;
 
+import io.github.jasonsimpart.Config;
 import io.github.jasonsimpart.CreateDelightCore;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -119,6 +120,10 @@ public class JellyBlock extends HoneyBlock {
     }
 
     private static void showParticles(Level level, BlockState state, Entity entity, int particleCount) {
+        if (!Config.ENABLE_JELLY_BLOCK_PARTICLES.get()) {
+            return;
+        }
+
         for (int i = 0; i < particleCount; i++) {
             level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, state), entity.getX(), entity.getY(), entity.getZ(), 0.0D, 0.0D, 0.0D);
         }

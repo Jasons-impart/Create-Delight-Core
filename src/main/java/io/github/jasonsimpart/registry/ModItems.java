@@ -198,7 +198,7 @@ public final class ModItems {
     public static final DeferredItem<Item> FLAWLESS_GENETIC_SEED = simpleItem("flawless_genetic_seed");
 
     // 普通食物和带效果食物。
-    public static final DeferredItem<Item> FUGU_ROLL = simpleFood("fugu_roll", 7, 1.0F);
+    public static final DeferredItem<Item> FUGU_ROLL = ITEMS.registerSimpleItem("fugu_roll", new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationModifier(1.0F).effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1200), 1.0F).build()));
     public static final DeferredItem<Item> RADGILL_SUSHI = ITEMS.registerSimpleItem("radgill_sushi", new Item.Properties().food(new FoodProperties.Builder().nutrition(1).saturationModifier(1.0F).effect(() -> new MobEffectInstance(ACEffectRegistry.IRRADIATED, 1200, 2), 1.0F).effect(() -> new MobEffectInstance(MobEffects.SATURATION, 1200), 1.0F).build()));
     public static final DeferredItem<Item> DEEP_SEA_SUSHI_ROLL_SLICE = ITEMS.registerSimpleItem("deep_sea_sushi_roll_slice", new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationModifier(1.0F).effect(() -> new MobEffectInstance(ACEffectRegistry.DEEPSIGHT, 1200), 1.0F).build()));
     public static final DeferredItem<Item> BUTTER = badFastFood("butter");
@@ -212,7 +212,7 @@ public final class ModItems {
     public static final DeferredItem<Item> SALAMI = ITEMS.registerSimpleItem("salami", new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationModifier(0.7F).effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 1), 1.0F).build()));
     public static final DeferredItem<Item> RAW_POTATO_PANCAKE = simpleFood("raw_potato_pancake", 2, 0.5F);
     public static final DeferredItem<Item> YORKSHIRE_PUDDING_AND_BEEF = simpleFood("yorkshire_pudding_and_beef", 12, 1.0F);
-    public static final DeferredItem<Item> EMPTY_POPSICLE = ITEMS.registerSimpleItem("empty_popsicle", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.25F).fast().build()));
+    public static final DeferredItem<Item> EMPTY_POPSICLE = ITEMS.registerSimpleItem("empty_popsicle", new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationModifier(0.25F).fast().effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200), 1.0F).build()));
     public static final DeferredItem<Item> BRAISED_INTESTINES_IN_BROWN_SAUCE = ITEMS.registerSimpleItem("braised_intestines_in_brown_sauce", new Item.Properties().rarity(Rarity.EPIC).stacksTo(16).food(new FoodProperties.Builder().nutrition(20).saturationModifier(1.0F).effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 6000), 1.0F).usingConvertsTo(Items.BOWL).build()));
     public static final DeferredItem<Item> BOILING_WATER_CABBAGE = ITEMS.registerSimpleItem("boiling_water_cabbage", new Item.Properties().rarity(Rarity.UNCOMMON).stacksTo(1).food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.6F).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 400, 1), 0.5F).effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3000), 1.0F).usingConvertsTo(Items.BOWL).build()));
     public static final DeferredItem<Item> MAYO_CORN_DOG = ITEMS.registerSimpleItem("mayo_corn_dog", new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationModifier(0.6F).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200), 1.0F).build()));
@@ -284,6 +284,12 @@ public final class ModItems {
 
     private static DeferredItem<Item> cookieDoughItem(String name) {
         FoodProperties food = new FoodProperties.Builder().nutrition(1).saturationModifier(1.0F).fast().effect(() -> new MobEffectInstance(MobEffects.HUNGER, 200, 1), 0.8F).build();
+        if ("green_tea_cookie_dough".equals(name)) {
+            return ITEMS.registerItem(name, properties -> new OptionalEffectFoodItem(properties.food(food), List.of(OptionalEffectFoodItem.OptionalEffect.of("youkaishomecoming", "tea_polyphenols", 200, 0))));
+        }
+        if ("chorus_cookie_dough".equals(name)) {
+            return ITEMS.registerItem(name, properties -> new OptionalEffectFoodItem(properties.food(food), List.of(OptionalEffectFoodItem.OptionalEffect.of("fruitsdelight", "chorus", 1, 0))));
+        }
         return ITEMS.registerSimpleItem(name, new Item.Properties().food(food));
     }
 

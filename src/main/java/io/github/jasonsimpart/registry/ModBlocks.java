@@ -14,6 +14,7 @@ import io.github.jasonsimpart.content.block.PhantomCompostBlock;
 import io.github.jasonsimpart.content.block.SyrupBlock;
 import io.github.jasonsimpart.content.item.FlowerClusterBlockItem;
 import io.github.jasonsimpart.content.item.JellyBottleItem;
+import io.github.jasonsimpart.content.item.OptionalEffectFoodItem;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
+import java.util.List;
 
 public final class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CreateDelightCore.MODID);
@@ -98,7 +100,7 @@ public final class ModBlocks {
     }
 
     public static void register(IEventBus modEventBus) {
-        ModItems.ITEMS.register("lush_confiture_jelly_bottle", () -> new JellyBottleItem(LUSH_CONFITURE_JELLY_BOTTLE.get(), new Item.Properties().food(new net.minecraft.world.food.FoodProperties.Builder().nutrition(1).saturationModifier(1.0F).build())));
+        ModItems.ITEMS.register("lush_confiture_jelly_bottle", () -> new JellyBottleItem(LUSH_CONFITURE_JELLY_BOTTLE.get(), new Item.Properties().stacksTo(16).food(new net.minecraft.world.food.FoodProperties.Builder().nutrition(4).saturationModifier(0.75F).build()), List.of(OptionalEffectFoodItem.OptionalEffect.of("cosmopolitan", "tracer", 600, 0), OptionalEffectFoodItem.OptionalEffect.of("cosmopolitan", "phototaxis", 600, 0))));
         BLOCKS.register(modEventBus);
     }
 

@@ -1,7 +1,9 @@
 package io.github.jasonsimpart.content.item;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -9,11 +11,15 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.TooltipContext;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OptionalEffectFoodItem extends Item {
@@ -60,6 +66,27 @@ public class OptionalEffectFoodItem extends Item {
     @Override
     public boolean isFoil(ItemStack stack) {
         return foiled || super.isFoil(stack);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
+        super.appendHoverText(stack, context, tooltip, flag);
+        appendOptionalEffectTooltip(optionalEffects, context, tooltip);
+    }
+
+    public static void appendOptionalEffectTooltip(List<OptionalEffect> optionalEffects, TooltipContext context, List<Component> tooltip) {
+        HolderLookup.Provider registries = context.registries();
+        if (registries == null || optionalEffects.isEmpty()) {
+            return;
+        }
+
+        List<MobEffectInstance> effects = new ArrayList<>();
+        HolderLookup.RegistryLookup<MobEffect> effectRegistry = registries.lookupOrThrow(Registries.MOB_EFFECT);
+        optionalEffects.forEach(optionalEffect -> effectRegistry.get(optionalEffect.key())
+                .ifPresent(effect -> effects.add(new MobEffectInstance(effect, optionalEffect.duration(), optionalEffect.amplifier()))));
+        if (!effects.isEmpty()) {
+            PotionContents.addPotionTooltip(effects, tooltip::add, 1.0F, 20.0F);
+        }
     }
 
     public record OptionalEffect(ResourceKey<MobEffect> key, int duration, int amplifier) {
