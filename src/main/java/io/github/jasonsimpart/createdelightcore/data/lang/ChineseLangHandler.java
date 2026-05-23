@@ -171,6 +171,11 @@ public class ChineseLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗%smB");
         provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "雪傀儡液体冷却剂配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "消耗%smB");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "在外星球中幻化");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.light", "有日光时会加快");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.fluid", "周围有水时会加快");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.accelerators", "周围有以下幻化催化剂时会加快");
         //tooltip
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r");
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftHeat", "§r§8按住 [§r§rShift§r§8] 查看烈焰人燃烧信息§r");

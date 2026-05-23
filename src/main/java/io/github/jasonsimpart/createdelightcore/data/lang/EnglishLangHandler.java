@@ -70,6 +70,11 @@ public class EnglishLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");
         provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "Snowman Cooler Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "Consumes %smB");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "Phantom Composting");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "Transforms in outer planet dimensions");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.light", "Sky light increases the transformation chance");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.fluid", "Nearby Ectoplasm source blocks increase the transformation chance");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.accelerators", "Nearby activator blocks increase the transformation chance");
         //tooltip
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r");
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftHeat", "§r§8Hold [§r§rShift§r§8] to view Blaze heating information§r");

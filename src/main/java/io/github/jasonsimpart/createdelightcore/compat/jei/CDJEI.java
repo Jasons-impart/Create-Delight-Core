@@ -27,8 +27,10 @@ import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessing
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategorySnowmanCoolerFluid;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.PhantomCompostingCategory;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
+import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -93,6 +95,7 @@ public class CDJEI implements IModPlugin {
         registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
         registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
+        registration.addRecipeCategories(new PhantomCompostingCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -104,6 +107,8 @@ public class CDJEI implements IModPlugin {
         registration.addRecipes(RecipeTypes.CRAFTING, ToolboxColoringRecipeMaker.createRecipes().toList());
         registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
         registration.addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+        registration.addRecipes(PhantomCompostingCategory.RECIPE_TYPE,
+                List.of(new PhantomCompostingCategory.PhantomCompostingRecipe()));
     }
 
     @Override
@@ -111,6 +116,7 @@ public class CDJEI implements IModPlugin {
         allCategories.forEach(c -> c.registerCatalysts(registration));
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
         registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
+        registration.addRecipeCatalyst(CDBlocks.PHANTOM_COMPOST.asStack(), PhantomCompostingCategory.RECIPE_TYPE);
     }
 
     /** Build recipes from the client-side fuel cache (populated via network from server). */
