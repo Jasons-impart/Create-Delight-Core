@@ -6,6 +6,7 @@
   "itemGroup.createdelightcore.coins": "Create Delight Core - Coins",
   "effect.createdelightcore.daredevil_form": "Daredevil Form",
   "sound_event.createdelightcore.fission_reactor": "Fission Reactor",
+  "message.createdelightcore.budding_quartz": "Certus quartz budding blocks can degrade when broken without Silk Touch.\n(Flawless budding quartz always degrades when broken.)\nSneak while mining if you really want to break it.",
   "item.createdelightcore.unfried_shrimp": "Unfried Shrimp",
   "item.createdelightcore.unfried_chicken_chip": "Unfried Chicken Chip",
   "item.createdelightcore.unfried_chicken_leg": "Unfried Chicken Leg",
