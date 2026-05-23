@@ -97,6 +97,11 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD, "金币", "金");
         coin(provider, CDItems.EMERALD, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE, "下界合金币", "下界");
+        provider.addBlock(CDBlocks.IRON_COIN_PILE, "铁币堆");
+        provider.addBlock(CDBlocks.COPPER_COIN_PILE, "铜币堆");
+        provider.addBlock(CDBlocks.GOLD_COIN_PILE, "金币堆");
+        provider.addBlock(CDBlocks.EMERALD_COIN_PILE, "绿宝石币堆");
+        provider.addBlock(CDBlocks.NETHERITE_COIN_PILE, "下界合金币堆");
         provider.addBlock(CDBlocks.PHANTOM_COMPOST, "幻灵肥料");
         provider.addBlock(CDBlocks.LUNA_SOIL, "月壤沃土");
         provider.addBlock(CDBlocks.LUNA_SOIL_FARMLAND, "月壤沃土耕地");
@@ -162,8 +167,15 @@ public class ChineseLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".radiation", "%1$s因辐射而浑身溃烂");
         provider.add("death.attack." + CreateDelightCore.MODID + ".radiation.player", "%1$s因辐射而浑身溃烂");
         //jei
-//        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人燃烧流体");
-//        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗 %s mb");
+        provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人液体燃料配方");
+        provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗%smB");
+        provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "雪傀儡液体冷却剂配方");
+        provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "消耗%smB");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "在外星球中幻化");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.light", "有日光时会加快");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.fluid", "周围有水时会加快");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.accelerators", "周围有以下幻化催化剂时会加快");
         //tooltip
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r");
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftHeat", "§r§8按住 [§r§rShift§r§8] 查看烈焰人燃烧信息§r");

@@ -259,7 +259,9 @@ dependencies {
     //ae2
     implementation fg.deobf("curse.maven:ae2-223794:6357138")
     //bakeries
-    implementation fg.deobf("blank:bakeries-1191781:6439004")
+    implementation fg.deobf("curse.maven:bakeries-1191781:7395677")
+    //create-bitterballen
+    implementation fg.deobf("curse.maven:create-bitterballen-918751:7270573")
     //trade-refresh
     implementation fg.deobf("curse.maven:trade-refresh-821729:5452984")
     //mr crayfish
