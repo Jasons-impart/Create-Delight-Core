@@ -12,6 +12,7 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
     private static final String ALEXSCAVES_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.alexscaves.";
     private static final String ECLIPTICSEASONS_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.eclipticseasons.";
     private static final String QUARK_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.quark.";
+    private static final String XAERO_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.xaero.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -32,6 +33,15 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.startsWith(QUARK_MIXIN_PACKAGE)) {
             return isModLoaded("quark");
+        }
+        if (mixinClassName.equals(XAERO_MIXIN_PACKAGE + "PatreonMixin")) {
+            return isModLoaded("xaerolib");
+        }
+        if (mixinClassName.equals(XAERO_MIXIN_PACKAGE + "MinimapInternetMixin")) {
+            return isModLoaded("xaerominimap");
+        }
+        if (mixinClassName.equals(XAERO_MIXIN_PACKAGE + "WorldMapInternetMixin")) {
+            return isModLoaded("xaeroworldmap");
         }
         return true;
     }

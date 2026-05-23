@@ -15,6 +15,9 @@
     "quark.ContributorRewardHandlerMixin"
   ],
   "client": [
+    "xaero.MinimapInternetMixin",
+    "xaero.PatreonMixin",
+    "xaero.WorldMapInternetMixin"
   ],
   "injectors": {
     "defaultRequire": 1
