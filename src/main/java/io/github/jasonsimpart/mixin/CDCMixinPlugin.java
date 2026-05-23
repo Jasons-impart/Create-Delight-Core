@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class CDCMixinPlugin implements IMixinConfigPlugin {
+    private static final String ALEXSCAVES_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.alexscaves.";
     private static final String QUARK_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.quark.";
 
     @Override
@@ -22,6 +23,9 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.startsWith(ALEXSCAVES_MIXIN_PACKAGE)) {
+            return isModLoaded("alexscaves");
+        }
         if (mixinClassName.startsWith(QUARK_MIXIN_PACKAGE)) {
             return isModLoaded("quark");
         }
