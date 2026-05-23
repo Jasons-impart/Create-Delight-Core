@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:luna_soil",
+    "createdelightcore:luna_soil_farmland",
+    "createdelightcore:phantom_compost"
+  ]
+}

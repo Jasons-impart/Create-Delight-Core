@@ -1,13 +1,20 @@
 package io.github.jasonsimpart.registry;
 
+import com.iafenvoy.iceandfire.registry.IafBlocks;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import io.github.jasonsimpart.CreateDelightCore;
+import io.github.jasonsimpart.content.block.FlowerClusterBlock;
 import io.github.jasonsimpart.content.block.GlassCasingBlock;
 import io.github.jasonsimpart.content.block.JelloBlock;
 import io.github.jasonsimpart.content.block.JellyBottleBlock;
 import io.github.jasonsimpart.content.block.JellyBlock;
+import io.github.jasonsimpart.content.block.LunaSoilBlock;
+import io.github.jasonsimpart.content.block.LunaSoilFarmlandBlock;
+import io.github.jasonsimpart.content.block.PhantomCompostBlock;
 import io.github.jasonsimpart.content.block.SyrupBlock;
+import io.github.jasonsimpart.content.item.FlowerClusterBlockItem;
 import io.github.jasonsimpart.content.item.JellyBottleItem;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -78,6 +85,15 @@ public final class ModBlocks {
 
     public static final DeferredBlock<JellyBottleBlock> LUSH_CONFITURE_JELLY_BOTTLE = BLOCKS.register("lush_confiture_jelly_bottle", () -> new JellyBottleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(0.3F).noOcclusion().sound(SoundType.GLASS)));
 
+    // Ice and Fire lily colonies grown from luna soil in old Core.
+    public static final DeferredBlock<FlowerClusterBlock> FIRE_LILY_CLUSTER = flowerCluster("fire_lily_cluster", IafBlocks.FIRE_LILY);
+    public static final DeferredBlock<FlowerClusterBlock> FROST_LILY_CLUSTER = flowerCluster("frost_lily_cluster", IafBlocks.FROST_LILY);
+    public static final DeferredBlock<FlowerClusterBlock> LIGHTNING_LILY_CLUSTER = flowerCluster("lightning_lily_cluster", IafBlocks.LIGHTNING_LILY);
+
+    public static final DeferredBlock<LunaSoilBlock> LUNA_SOIL = registerBlock("luna_soil", () -> new LunaSoilBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).randomTicks().strength(0.6F).sound(SoundType.GRAVEL)));
+    public static final DeferredBlock<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND = registerBlock("luna_soil_farmland", () -> new LunaSoilFarmlandBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND).randomTicks().strength(0.6F).sound(SoundType.GRAVEL)));
+    public static final DeferredBlock<PhantomCompostBlock> PHANTOM_COMPOST = registerBlock("phantom_compost", () -> new PhantomCompostBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).randomTicks().strength(1.2F).sound(SoundType.CROP)));
+
     private ModBlocks() {
     }
 
@@ -110,5 +126,11 @@ public final class ModBlocks {
 
     private static DeferredBlock<GlassCasingBlock> glassCasing(String name, Rarity rarity) {
         return registerBlock(name, () -> new GlassCasingBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).mapColor(MapColor.METAL).sound(SoundType.GLASS).noOcclusion()), new Item.Properties().rarity(rarity));
+    }
+
+    private static DeferredBlock<FlowerClusterBlock> flowerCluster(String name, Holder<Block> baseFlower) {
+        DeferredBlock<FlowerClusterBlock> registeredBlock = BLOCKS.register(name, () -> new FlowerClusterBlock(Holder.direct(baseFlower.value().asItem()), BlockBehaviour.Properties.ofFullCopy(baseFlower.value())));
+        ModItems.ITEMS.register(name, () -> new FlowerClusterBlockItem(registeredBlock.get(), new Item.Properties()));
+        return registeredBlock;
     }
 }

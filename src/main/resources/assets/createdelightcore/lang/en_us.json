@@ -587,5 +587,11 @@
   "fluid.createdelightcore.con_panna_fluid": "Con Panna",
   "fluid.createdelightcore.cappuccino_fluid": "Cappuccino",
   "fluid.createdelightcore.macchiato_fluid": "Macchiato",
-  "fluid.createdelightcore.mocha_fluid": "Mocha"
+  "fluid.createdelightcore.mocha_fluid": "Mocha",
+  "block.createdelightcore.fire_lily_cluster": "Fire Lily Cluster",
+  "block.createdelightcore.frost_lily_cluster": "Frost Lily Cluster",
+  "block.createdelightcore.lightning_lily_cluster": "Lightning Lily Cluster",
+  "block.createdelightcore.luna_soil": "Luna Soil",
+  "block.createdelightcore.luna_soil_farmland": "Luna Soil Farmland",
+  "block.createdelightcore.phantom_compost": "Phantom Compost"
 }

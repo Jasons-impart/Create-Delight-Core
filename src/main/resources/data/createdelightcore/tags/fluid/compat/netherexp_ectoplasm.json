@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "netherexp:ectoplasm_source",
+      "required": false
+    },
+    {
+      "id": "netherexp:ectoplasm_flowing",
+      "required": false
+    },
+    {
+      "id": "netherexp:ectoplasm",
+      "required": false
+    },
+    {
+      "id": "netherexp:flowing_ectoplasm",
+      "required": false
+    }
+  ]
+}

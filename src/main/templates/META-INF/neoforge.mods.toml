@@ -82,7 +82,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "farmersdelight"
 type = "required"
-versionRange = "[1.3.1,)"
+versionRange = "[1.3.2,)"
 ordering = "AFTER"
 side = "BOTH"
 
@@ -97,6 +97,13 @@ side = "BOTH"
 modId = "alexscaves"
 type = "required"
 versionRange = "[2.0.10,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "iceandfire"
+type = "required"
+versionRange = "[2.0-beta.16,)"
 ordering = "AFTER"
 side = "BOTH"
 

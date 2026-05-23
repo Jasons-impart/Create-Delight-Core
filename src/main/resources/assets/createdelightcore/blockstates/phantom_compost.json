@@ -1,0 +1,40 @@
+{
+  "variants": {
+    "composting=0": [
+      { "model": "createdelightcore:block/phantom_compost_0" },
+      { "model": "createdelightcore:block/phantom_compost_0", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_0", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_0", "y": 270 }
+    ],
+    "composting=1": [
+      { "model": "createdelightcore:block/phantom_compost_1" },
+      { "model": "createdelightcore:block/phantom_compost_1", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_1", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_1", "y": 270 }
+    ],
+    "composting=2": [
+      { "model": "createdelightcore:block/phantom_compost_2" },
+      { "model": "createdelightcore:block/phantom_compost_2", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_2", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_2", "y": 270 }
+    ],
+    "composting=3": [
+      { "model": "createdelightcore:block/phantom_compost_3" },
+      { "model": "createdelightcore:block/phantom_compost_3", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_3", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_3", "y": 270 }
+    ],
+    "composting=4": [
+      { "model": "createdelightcore:block/phantom_compost_4" },
+      { "model": "createdelightcore:block/phantom_compost_4", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_4", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_4", "y": 270 }
+    ],
+    "composting=5": [
+      { "model": "createdelightcore:block/phantom_compost_5" },
+      { "model": "createdelightcore:block/phantom_compost_5", "y": 90 },
+      { "model": "createdelightcore:block/phantom_compost_5", "y": 180 },
+      { "model": "createdelightcore:block/phantom_compost_5", "y": 270 }
+    ]
+  }
+}

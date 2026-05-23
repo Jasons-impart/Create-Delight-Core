@@ -41,6 +41,9 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.LUSH_CONFITURE_JELLY.get());
         output.accept(ModBlocks.LUSH_CONFITURE_JELLO.get());
         output.accept(ModBlocks.LUSH_CONFITURE_JELLY_BOTTLE.get());
+        output.accept(ModBlocks.FIRE_LILY_CLUSTER.get());
+        output.accept(ModBlocks.FROST_LILY_CLUSTER.get());
+        output.accept(ModBlocks.LIGHTNING_LILY_CLUSTER.get());
         output.accept(ModItems.EMPTY_RICEBALL);
         output.accept(ModItems.FUGU_ROLL);
         output.accept(ModItems.RADGILL_SUSHI);
@@ -86,6 +89,9 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.FORGED_STEEL_BLOCK.get());
         output.accept(ModBlocks.FRAGMENT_OF_BORDER.get());
         output.accept(ModBlocks.ENRICHED_SKY_STONE_BLOCK.get());
+        output.accept(ModBlocks.LUNA_SOIL.get());
+        output.accept(ModBlocks.LUNA_SOIL_FARMLAND.get());
+        output.accept(ModBlocks.PHANTOM_COMPOST.get());
         output.accept(ModBlocks.IRON_CASING.get());
         output.accept(ModBlocks.SPACE_CASING.get());
         output.accept(ModBlocks.SKY_STEEL_CASING.get());

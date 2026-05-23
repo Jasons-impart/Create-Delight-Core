@@ -587,5 +587,11 @@
   "fluid.createdelightcore.con_panna_fluid": "康宝蓝",
   "fluid.createdelightcore.cappuccino_fluid": "卡布奇诺",
   "fluid.createdelightcore.macchiato_fluid": "玛奇雅朵",
-  "fluid.createdelightcore.mocha_fluid": "摩卡"
+  "fluid.createdelightcore.mocha_fluid": "摩卡",
+  "block.createdelightcore.fire_lily_cluster": "烈焰百合簇",
+  "block.createdelightcore.frost_lily_cluster": "寒冰百合簇",
+  "block.createdelightcore.lightning_lily_cluster": "闪电百合簇",
+  "block.createdelightcore.luna_soil": "月壤沃土",
+  "block.createdelightcore.luna_soil_farmland": "月壤沃土耕地",
+  "block.createdelightcore.phantom_compost": "幻灵肥料"
 }
