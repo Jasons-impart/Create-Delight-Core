@@ -1,0 +1,16 @@
+{
+  "values": {
+    "createdelightcore:ethylene_fluid_bucket": {
+      "burn_time": 25000
+    },
+    "createdelightcore:fuel_mixtures_bucket": {
+      "burn_time": 50000
+    },
+    "createdelightcore:lubricating_oil_bucket": {
+      "burn_time": 10000
+    },
+    "createdelightcore:fuel_hotcream": {
+      "burn_time": 10000
+    }
+  }
+}
