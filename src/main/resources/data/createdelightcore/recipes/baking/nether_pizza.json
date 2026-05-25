@@ -1,0 +1,14 @@
+{
+  "type": "ratatouille:baking",
+  "ingredients": [
+    {
+      "item": "createdelightcore:raw_nether_pizza"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "createdelightcore:nether_pizza"
+    }
+  ]
+}

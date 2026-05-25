@@ -1,0 +1,14 @@
+{
+  "type": "ratatouille:baking",
+  "ingredients": [
+    {
+      "item": "bakeries:raw_custom_pizza"
+    }
+  ],
+  "processingTime": 50,
+  "results": [
+    {
+      "item": "bakeries:custom_pizza"
+    }
+  ]
+}

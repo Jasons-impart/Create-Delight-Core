@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,slice=0": {
+      "model": "bakeries:block/pizza_1",
+      "y": 270
+    },
+    "facing=east,slice=1": {
+      "model": "bakeries:block/pizza_2",
+      "y": 270
+    },
+    "facing=east,slice=2": {
+      "model": "bakeries:block/pizza_3",
+      "y": 270
+    },
+    "facing=east,slice=3": {
+      "model": "bakeries:block/pizza_4",
+      "y": 270
+    },
+    "facing=north,slice=0": {
+      "model": "bakeries:block/pizza_1",
+      "y": 180
+    },
+    "facing=north,slice=1": {
+      "model": "bakeries:block/pizza_2",
+      "y": 180
+    },
+    "facing=north,slice=2": {
+      "model": "bakeries:block/pizza_3",
+      "y": 180
+    },
+    "facing=north,slice=3": {
+      "model": "bakeries:block/pizza_4",
+      "y": 180
+    },
+    "facing=south,slice=0": {
+      "model": "bakeries:block/pizza_1"
+    },
+    "facing=south,slice=1": {
+      "model": "bakeries:block/pizza_2"
+    },
+    "facing=south,slice=2": {
+      "model": "bakeries:block/pizza_3"
+    },
+    "facing=south,slice=3": {
+      "model": "bakeries:block/pizza_4"
+    },
+    "facing=west,slice=0": {
+      "model": "bakeries:block/pizza_1",
+      "y": 90
+    },
+    "facing=west,slice=1": {
+      "model": "bakeries:block/pizza_2",
+      "y": 90
+    },
+    "facing=west,slice=2": {
+      "model": "bakeries:block/pizza_3",
+      "y": 90
+    },
+    "facing=west,slice=3": {
+      "model": "bakeries:block/pizza_4",
+      "y": 90
+    }
+  }
+}
