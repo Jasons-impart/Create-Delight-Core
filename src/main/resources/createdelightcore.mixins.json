@@ -17,6 +17,7 @@
     "iceandfire.HydraCavePieceMixin",
     "iceandfire.PixieVillagePieceMixin",
     "iceandfire.SirenIslandPieceMixin",
+    "createmetallurgy.CMFluidsMixin",
     "resourcepack.PathPackResourcesMixin",
     "quark.ContributorRewardHandlerMixin"
   ],

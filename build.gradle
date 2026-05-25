@@ -139,6 +139,7 @@ dependencies {
     implementation("curse.maven:iceandfire-ce-1040076:${iceandfire_file_id}")
     runtimeOnly("curse.maven:uranus-1010827:${uranus_file_id}")
     runtimeOnly("curse.maven:jupiter-1072905:${jupiter_file_id}")
+    implementation("curse.maven:create-metallurgy-1007404:${createmetallurgy_file_id}")
     compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
