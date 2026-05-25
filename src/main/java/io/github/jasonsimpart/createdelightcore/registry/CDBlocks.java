@@ -1,6 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.renyigesai.bakeries.block.pizza.PizzaBlock;
+import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
@@ -9,6 +11,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
@@ -35,6 +38,7 @@ import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeBlockTag;
@@ -144,6 +148,12 @@ public class CDBlocks {
                     .tab(MISC_TAB)
                     .build()
                     .register();
+    public static final BlockEntry<RawPizzaBlock> RAW_VEGETABLE_PIZZA = rawPizzaBlock("vegetable");
+    public static final BlockEntry<PizzaBlock> VEGETABLE_PIZZA = pizzaBlock("vegetable");
+    public static final BlockEntry<RawPizzaBlock> RAW_MEATLOVERS_PIZZA = rawPizzaBlock("meatlovers");
+    public static final BlockEntry<PizzaBlock> MEATLOVERS_PIZZA = pizzaBlock("meatlovers");
+    public static final BlockEntry<RawPizzaBlock> RAW_NETHER_PIZZA = rawPizzaBlock("nether");
+    public static final BlockEntry<PizzaBlock> NETHER_PIZZA = pizzaBlock("nether");
 
 
     public static BlockEntry<CoinPileBlock> simpleCoinPileBlock(String coinTier, ItemEntry<Item> coinItem) {
@@ -170,6 +180,55 @@ public class CDBlocks {
                     }
                     lt.add(block, net.minecraft.world.level.storage.loot.LootTable.lootTable().withPool(pool));
                 })
+                .register();
+    }
+
+    public static BlockEntry<RawPizzaBlock> rawPizzaBlock(String name) {
+        String id = "raw_" + name + "_pizza";
+        return REGISTRATE.block(id, p -> new RawPizzaBlock(() -> ForgeRegistries.ITEMS.getValue(CreateDelightCore.id(id))))
+                .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                        new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath("bakeries", "block/raw_pizza"))))
+                .item()
+                .properties(p -> p.stacksTo(16))
+                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + id))))
+                .tab(FOOD_TAB)
+                .build()
+                .register();
+    }
+
+    public static BlockEntry<PizzaBlock> pizzaBlock(String name) {
+        String id = name + "_pizza";
+        String texture = switch (name) {
+            case "vegetable", "meatlovers" -> "cooked_" + id;
+            default -> id;
+        };
+        return REGISTRATE.block(id, p -> new PizzaBlock(2, 0.1F))
+                .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state -> {
+                    Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
+                    int slice = state.getValue(PizzaBlock.SLICE);
+                    int rotation = switch (facing) {
+                        case EAST -> 270;
+                        case NORTH -> 180;
+                        case WEST -> 90;
+                        default -> 0;
+                    };
+                    return ConfiguredModel.builder()
+                            .modelFile(new ModelFile.UncheckedModelFile(
+                                    ResourceLocation.fromNamespaceAndPath("bakeries", "block/pizza_" + (slice + 1))))
+                            .rotationY(rotation)
+                            .build();
+                }))
+                .item()
+                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + texture))))
+                .tab(FOOD_TAB)
+                .build()
+                .loot((lt, block) -> lt.add(block, net.minecraft.world.level.storage.loot.LootTable.lootTable()
+                        .withPool(net.minecraft.world.level.storage.loot.LootPool.lootPool()
+                                .setRolls(ConstantValue.exactly(1.0F))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(block)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(PizzaBlock.SLICE, 0)))
+                                .add(LootItem.lootTableItem(block)))))
                 .register();
     }
 

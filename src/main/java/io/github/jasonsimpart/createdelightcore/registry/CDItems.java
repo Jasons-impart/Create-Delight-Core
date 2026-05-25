@@ -29,6 +29,10 @@ public class CDItems {
     public static final ItemEntry<Item> UNFRIED_FISH = simpleRawFood("unfried_fish", 3, 0.3f);
     public static final ItemEntry<Item> UNFRIED_POTATO = simpleRawFood("unfried_potato", 2, 0.3f);
     public static final ItemEntry<Item> UNFRIED_CALAMARI = simpleRawFood("unfried_calamari", 3, 0.3f);
+    public static final ItemEntry<Item> PIZZA_SLICE = simpleFood("pizza_slice", 2, 0.1f);
+    public static final ItemEntry<Item> VEGETABLE_PIZZA_SLICE = simpleFood("vegetable_pizza_slice", 2, 0.1f);
+    public static final ItemEntry<Item> MEATLOVERS_PIZZA_SLICE = simpleFood("meatlovers_pizza_slice", 2, 0.1f);
+    public static final ItemEntry<Item> NETHER_PIZZA_SLICE = simpleFood("nether_pizza_slice", 2, 0.1f);
     //ice-cream scoop
     public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP = iceCreamScoop("strawberry");
     public static final ItemEntry<ThrownProjectileItem> BANANA_ICE_CREAM_SCOOP = iceCreamScoop("banana");

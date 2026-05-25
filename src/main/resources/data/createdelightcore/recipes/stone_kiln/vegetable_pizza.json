@@ -1,0 +1,13 @@
+{
+  "type": "bakeries:stone_kiln",
+  "ingredients": [
+    {
+      "item": "createdelightcore:raw_vegetable_pizza"
+    }
+  ],
+  "output": {
+    "item": "createdelightcore:vegetable_pizza",
+    "count": 1
+  },
+  "cooking_time": [50, 50, 50, 50]
+}

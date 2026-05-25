@@ -51,6 +51,10 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.UNFRIED_FISH, "生炸鱼");
         provider.addItem(CDItems.UNFRIED_POTATO, "生炸土豆");
         provider.addItem(CDItems.UNFRIED_CALAMARI, "生炸鱿鱼圈");
+        replace(provider, CDItems.PIZZA_SLICE.get().getDescriptionId(), "披萨切片");
+        replace(provider, CDItems.VEGETABLE_PIZZA_SLICE.get().getDescriptionId(), "蔬菜披萨切片");
+        replace(provider, CDItems.MEATLOVERS_PIZZA_SLICE.get().getDescriptionId(), "肉披萨切片");
+        replace(provider, CDItems.NETHER_PIZZA_SLICE.get().getDescriptionId(), "下界披萨切片");
         // chocolate
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");
@@ -108,6 +112,12 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.FIRE_LILY_CLUSTER, "烈焰百合簇");
         provider.addBlock(CDBlocks.FROST_LILY_CLUSTER, "寒冰百合簇");
         provider.addBlock(CDBlocks.LIGHTNING_LILY_CLUSTER, "闪电百合簇");
+        replace(provider, CDBlocks.RAW_VEGETABLE_PIZZA.get().getDescriptionId(), "生蔬菜披萨");
+        replace(provider, CDBlocks.VEGETABLE_PIZZA.get().getDescriptionId(), "蔬菜披萨");
+        replace(provider, CDBlocks.RAW_MEATLOVERS_PIZZA.get().getDescriptionId(), "生肉披萨");
+        replace(provider, CDBlocks.MEATLOVERS_PIZZA.get().getDescriptionId(), "肉披萨");
+        replace(provider, CDBlocks.RAW_NETHER_PIZZA.get().getDescriptionId(), "生下界披萨");
+        replace(provider, CDBlocks.NETHER_PIZZA.get().getDescriptionId(), "下界披萨");
         //molten fluid
         addFluid(provider, CDFluids.MOLTEN_ANDESITE, "熔融安山合金");
         addFluid(provider, CDFluids.MOLTEN_AZURE_NEODYMIUM, "熔融青钕合金");
@@ -174,7 +184,7 @@ public class ChineseLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "在外星球中幻化");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.light", "有日光时会加快");
-        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.fluid", "周围有水时会加快");
+        provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.fluid", "周围有灵质时会加快");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.accelerators", "周围有以下幻化催化剂时会加快");
         //tooltip
         provider.add("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat", "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r");

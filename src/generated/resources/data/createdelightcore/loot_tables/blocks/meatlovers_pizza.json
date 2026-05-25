@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "createdelightcore:meatlovers_pizza",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "slice": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "createdelightcore:meatlovers_pizza"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "createdelightcore:blocks/meatlovers_pizza"
+}

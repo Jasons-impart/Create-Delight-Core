@@ -12,6 +12,7 @@
     "alexscaves.AcidFluidTypeMixin",
     "alexscaves.SackOfSatingMixin",
     "bakeries.PizzaFlatbreadBlockMixin",
+    "bakeries.PizzaBlockMixin",
     "bakeries.SnifferEventMixin",
     "butchercraft.ButchercraftModEventsMixin",
     "casualness_delight.DeepFryingPanEntityMixin",

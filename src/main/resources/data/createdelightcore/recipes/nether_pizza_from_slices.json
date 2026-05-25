@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "createdelightcore_pizza_from_slices",
+  "key": {
+    "#": {
+      "item": "createdelightcore:nether_pizza_slice"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "createdelightcore:nether_pizza"
+  },
+  "show_notification": true
+}

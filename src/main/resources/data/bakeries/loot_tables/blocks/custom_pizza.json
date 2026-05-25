@@ -1,0 +1,51 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        },
+        {
+          "block": "bakeries:custom_pizza",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "slice": "0"
+          }
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Inventory",
+                  "target": "Inventory"
+                },
+                {
+                  "op": "replace",
+                  "source": "Nutrition",
+                  "target": "Nutrition"
+                },
+                {
+                  "op": "replace",
+                  "source": "SaturationMod",
+                  "target": "SaturationMod"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
+          "name": "bakeries:custom_pizza"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "bakeries:blocks/custom_pizza"
+}
