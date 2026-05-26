@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-25T22:26:49.18709	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2026-05-26T23:01:37.9487461	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -20,7 +20,7 @@ eb877c56a5b817088f79992e84b1b25e457154aa assets/createdelightcore/blockstates/lu
 e7e40e7fa2be0b05ab4b95c96003f835a60ba99f assets/createdelightcore/blockstates/lush_confiture_jello.json
 f1c3ccb8d016571c6aa02bdeedc67524294b83d9 assets/createdelightcore/blockstates/lush_confiture_jelly.json
 8a2f852304bad898f855ff0495bb871726ba1a8e assets/createdelightcore/blockstates/lush_confiture_jelly_bottle.json
-b684c4bcd0b067333a7d827a47f5153f6b0ed65a assets/createdelightcore/blockstates/meatlovers_pizza.json
+c72e0756a4e84f4a04244a2f0f571e0debe4b184 assets/createdelightcore/blockstates/meatlovers_pizza.json
 06579915eec1954f63834923f861d8ddaad6121c assets/createdelightcore/blockstates/mint_syrup.json
 8892b10e149c7c526ea464d923537fe91e313d55 assets/createdelightcore/blockstates/molten_andesite.json
 840a241b5991c55b030e44876a37f7525e9ca414 assets/createdelightcore/blockstates/molten_azure_neodymium.json
@@ -35,13 +35,13 @@ b684c4bcd0b067333a7d827a47f5153f6b0ed65a assets/createdelightcore/blockstates/me
 606c1eda5c6777c056cebb03d219302b845e077c assets/createdelightcore/blockstates/molten_scarlet_neodymium.json
 ba2fbaa1d5f967100552d32ef2281bf38ceae891 assets/createdelightcore/blockstates/molten_titanium.json
 4110b749045686210159f131e570d495d9a48a6d assets/createdelightcore/blockstates/netherite_coin_pile.json
-b684c4bcd0b067333a7d827a47f5153f6b0ed65a assets/createdelightcore/blockstates/nether_pizza.json
+c72e0756a4e84f4a04244a2f0f571e0debe4b184 assets/createdelightcore/blockstates/nether_pizza.json
 a6ba2ee7b96401afba4c3fa3d522e4f774151d0a assets/createdelightcore/blockstates/nuclear_waste.json
 561d296677c91b979f66eeb4d6ed0a21d83e9d65 assets/createdelightcore/blockstates/phantom_compost.json
-fda9e770ff4f84c135d8e8ad81bcb9769d15d6e0 assets/createdelightcore/blockstates/raw_meatlovers_pizza.json
-fda9e770ff4f84c135d8e8ad81bcb9769d15d6e0 assets/createdelightcore/blockstates/raw_nether_pizza.json
+671ef25bd2d2e66e6dbca000093310868f5ab2f9 assets/createdelightcore/blockstates/raw_meatlovers_pizza.json
+671ef25bd2d2e66e6dbca000093310868f5ab2f9 assets/createdelightcore/blockstates/raw_nether_pizza.json
 26d134edc427ab0f2e17d7463a313a8645bcf7ed assets/createdelightcore/blockstates/raw_tin_block.json
-fda9e770ff4f84c135d8e8ad81bcb9769d15d6e0 assets/createdelightcore/blockstates/raw_vegetable_pizza.json
+671ef25bd2d2e66e6dbca000093310868f5ab2f9 assets/createdelightcore/blockstates/raw_vegetable_pizza.json
 963336c2b41509a1bf7227894807f02d7725d74e assets/createdelightcore/blockstates/slime.json
 0dfbe8544c0f8accb33956de35f01f574cbf09ea assets/createdelightcore/blockstates/steel_casing.json
 42f3ea021cb64e538303ca7d172608a20d445e1c assets/createdelightcore/blockstates/steel_clear_glass_casing.json
@@ -50,7 +50,7 @@ a81bcbc894c25b6686c0b6773552cbf586c943e4 assets/createdelightcore/blockstates/st
 2f25f9e87c603e70b09e07bc2db75654593c0738 assets/createdelightcore/blockstates/tin_block.json
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 995dfada531df44f83764c4d4f90c27029e20ce9 assets/createdelightcore/blockstates/vanilla_syrup.json
-b684c4bcd0b067333a7d827a47f5153f6b0ed65a assets/createdelightcore/blockstates/vegetable_pizza.json
+c72e0756a4e84f4a04244a2f0f571e0debe4b184 assets/createdelightcore/blockstates/vegetable_pizza.json
 219d0c8afea8644cb979cafde85f0cf893646b12 assets/createdelightcore/lang/en_ud.json
 16054a6d51b70b33201d54a0ad0cf25f652b70bd assets/createdelightcore/lang/en_us.json
 b2bc88b15e1425f579e0871abadda6b93eacd0d7 assets/createdelightcore/lang/zh_cn.json

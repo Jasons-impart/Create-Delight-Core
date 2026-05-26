@@ -1,0 +1,9 @@
+{
+  "parent": "createdelightcore:custom/pizza_4",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "1": "createdelightcore:block/pizza",
+    "2": "createdelightcore:block/pizza_side",
+    "particle": "createdelightcore:block/pizza_side"
+  }
+}

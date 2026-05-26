@@ -148,6 +148,7 @@ public class CDBlocks {
                     .tab(MISC_TAB)
                     .build()
                     .register();
+    // pizza
     public static final BlockEntry<RawPizzaBlock> RAW_VEGETABLE_PIZZA = rawPizzaBlock("vegetable");
     public static final BlockEntry<PizzaBlock> VEGETABLE_PIZZA = pizzaBlock("vegetable");
     public static final BlockEntry<RawPizzaBlock> RAW_MEATLOVERS_PIZZA = rawPizzaBlock("meatlovers");
@@ -187,7 +188,7 @@ public class CDBlocks {
         String id = "raw_" + name + "_pizza";
         return REGISTRATE.block(id, p -> new RawPizzaBlock(() -> ForgeRegistries.ITEMS.getValue(CreateDelightCore.id(id))))
                 .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
-                        new ModelFile.UncheckedModelFile(ResourceLocation.fromNamespaceAndPath("bakeries", "block/raw_pizza"))))
+                        new ModelFile.UncheckedModelFile(pvd.modLoc("block/raw_pizza"))))
                 .item()
                 .properties(p -> p.stacksTo(16))
                 .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + id))))
@@ -214,7 +215,7 @@ public class CDBlocks {
                     };
                     return ConfiguredModel.builder()
                             .modelFile(new ModelFile.UncheckedModelFile(
-                                    ResourceLocation.fromNamespaceAndPath("bakeries", "block/pizza_" + (slice + 1))))
+                                    pvd.modLoc("block/pizza_" + (slice + 1))))
                             .rotationY(rotation)
                             .build();
                 }))
