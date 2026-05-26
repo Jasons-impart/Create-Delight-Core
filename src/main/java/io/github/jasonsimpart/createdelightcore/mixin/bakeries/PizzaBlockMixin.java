@@ -1,6 +1,9 @@
 package io.github.jasonsimpart.createdelightcore.mixin.bakeries;
 
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
+import de.cadentem.quality_food.capability.LevelData;
+import de.cadentem.quality_food.core.Quality;
+import de.cadentem.quality_food.util.QualityUtils;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -62,17 +65,25 @@ public class PizzaBlockMixin {
 
         if (!level.isClientSide) {
             int slice = state.getValue(PizzaBlock.SLICE);
+            Quality quality = LevelData.get(level, pos);
             PizzaBlock pizzaBlock = (PizzaBlock) (Object) this;
             if (slice < pizzaBlock.getSlice() - 1) {
                 level.setBlock(pos, state.setValue(PizzaBlock.SLICE, slice + 1), 3);
+                if (quality != Quality.NONE) {
+                    LevelData.set(level, pos, quality);
+                }
             } else {
                 level.removeBlock(pos, false);
             }
 
             Direction direction = player.getDirection().getOpposite();
+            ItemStack sliceStack = new ItemStack(sliceItem);
+            if (QualityUtils.isValidQuality(quality)) {
+                QualityUtils.applyQuality(sliceStack, quality);
+            }
             ItemUtils.spawnItemEntity(
                     level,
-                    new ItemStack(sliceItem),
+                    sliceStack,
                     pos.getX() + 0.5D,
                     pos.getY() + 0.3D,
                     pos.getZ() + 0.5D,

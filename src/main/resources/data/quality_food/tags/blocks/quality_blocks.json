@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:raw_vegetable_pizza",
+    "createdelightcore:vegetable_pizza",
+    "createdelightcore:raw_meatlovers_pizza",
+    "createdelightcore:meatlovers_pizza",
+    "createdelightcore:raw_nether_pizza",
+    "createdelightcore:nether_pizza",
+    {
+      "id": "bakeries:raw_pizza",
+      "required": false
+    },
+    {
+      "id": "bakeries:pizza",
+      "required": false
+    }
+  ]
+}
