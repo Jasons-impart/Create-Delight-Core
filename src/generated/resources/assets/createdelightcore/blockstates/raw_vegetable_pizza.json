@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "createdelightcore:block/raw_pizza"
+      "model": "createdelightcore:block/raw_vegetable_pizza"
     }
   }
 }
