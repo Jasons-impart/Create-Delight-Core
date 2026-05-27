@@ -188,7 +188,7 @@ public class CDBlocks {
         String id = "raw_" + name + "_pizza";
         return REGISTRATE.block(id, p -> new RawPizzaBlock(() -> ForgeRegistries.ITEMS.getValue(CreateDelightCore.id(id))))
                 .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
-                        new ModelFile.UncheckedModelFile(pvd.modLoc("block/raw_pizza"))))
+                        new ModelFile.UncheckedModelFile(pvd.modLoc("block/" + id))))
                 .item()
                 .properties(p -> p.stacksTo(16))
                 .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + id))))
@@ -199,10 +199,6 @@ public class CDBlocks {
 
     public static BlockEntry<PizzaBlock> pizzaBlock(String name) {
         String id = name + "_pizza";
-        String texture = switch (name) {
-            case "vegetable", "meatlovers" -> "cooked_" + id;
-            default -> id;
-        };
         return REGISTRATE.block(id, p -> new PizzaBlock(2, 0.1F))
                 .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state -> {
                     Direction facing = state.getValue(HorizontalDirectionalBlock.FACING);
@@ -215,12 +211,12 @@ public class CDBlocks {
                     };
                     return ConfiguredModel.builder()
                             .modelFile(new ModelFile.UncheckedModelFile(
-                                    pvd.modLoc("block/pizza_" + (slice + 1))))
+                                    pvd.modLoc("block/" + id + "_" + (slice + 1))))
                             .rotationY(rotation)
                             .build();
                 }))
                 .item()
-                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + texture))))
+                .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx, pvd.modLoc("item/" + id))))
                 .tab(FOOD_TAB)
                 .build()
                 .loot((lt, block) -> lt.add(block, net.minecraft.world.level.storage.loot.LootTable.lootTable()
