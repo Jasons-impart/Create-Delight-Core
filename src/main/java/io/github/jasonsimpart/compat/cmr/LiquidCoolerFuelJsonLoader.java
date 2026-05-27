@@ -23,7 +23,7 @@ public class LiquidCoolerFuelJsonLoader extends SimpleJsonResourceReloadListener
     public static final LiquidCoolerFuelJsonLoader INSTANCE = new LiquidCoolerFuelJsonLoader();
 
     private static final Gson GSON = new Gson();
-    private static final String DIRECTORY = "compat";
+    private static final String DIRECTORY = "compat_cooler";
 
     public LiquidCoolerFuelJsonLoader() {
         super(GSON, DIRECTORY);
