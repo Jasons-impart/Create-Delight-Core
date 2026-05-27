@@ -2,6 +2,8 @@ package io.github.jasonsimpart;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+import java.util.List;
+
 public final class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -95,6 +97,17 @@ public final class Config {
                     "Fix Ecliptic Seasons snowy chunk attachment sync timing by sending incremental updates only to clients that have acknowledged the chunk. The mixins only apply when Ecliptic Seasons is present. Requires restart."
             )
             .define("enableEclipticSeasonsChunkAttachmentSyncPatch", true);
+
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = BUILDER
+            .comment(
+                    "Sandpaper polishing recipe IDs to hide from Create: Metallurgy Belt Grinder auto-inheritance and JEI display.",
+                    "Example: [\"createdelightcore:sandpaper_polishing/rose_quartz\"]"
+            )
+            .defineListAllowEmpty(
+                    "beltGrinderBlockedSandpaperRecipes",
+                    List.of("createdelightcore:sandpaper_polishing/rose_quartz"),
+                    value -> value instanceof String
+            );
 
     public static final ModConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
             .comment(

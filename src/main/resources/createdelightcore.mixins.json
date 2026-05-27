@@ -17,7 +17,12 @@
     "iceandfire.HydraCavePieceMixin",
     "iceandfire.PixieVillagePieceMixin",
     "iceandfire.SirenIslandPieceMixin",
+    "createmetallurgy.BeltGrinderBlockEntityMixin",
     "createmetallurgy.CMFluidsMixin",
+    "create.CreateRecipeCategoryMixin",
+    "cmr.MixinSnowmanCoolerBlock",
+    "cmr.MixinSnowmanCoolerBlockEntity",
+    "cmr.SnowmanCoolerAccessor",
     "resourcepack.PathPackResourcesMixin",
     "quark.ContributorRewardHandlerMixin"
   ],
