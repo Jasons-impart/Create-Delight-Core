@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.mixin.createmetallurgy;
 
+import fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity;
 import io.github.jasonsimpart.Config;
 import io.github.jasonsimpart.CreateDelightCore;
 import net.minecraft.world.item.crafting.Recipe;
@@ -12,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mixin(targets = "fr.lucreeper74.createmetallurgy.content.blocks.belt_grinder.BeltGrinderBlockEntity", remap = false)
+@Mixin(value = BeltGrinderBlockEntity.class, remap = false)
 public class BeltGrinderBlockEntityMixin {
     @Inject(method = "getRecipes", at = @At("RETURN"), cancellable = true)
     private void createdelightcore$filterBlockedSandpaperRecipes(CallbackInfoReturnable<List<RecipeHolder<? extends Recipe<?>>>> cir) {
@@ -41,6 +42,7 @@ public class BeltGrinderBlockEntityMixin {
 
         if (changed) {
             cir.setReturnValue(filtered);
+            cir.cancel();
         }
     }
 }

@@ -2,6 +2,7 @@ package io.github.jasonsimpart;
 
 import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.compat.cmr.CmrCompat;
+import io.github.jasonsimpart.network.ModNetwork;
 import io.github.jasonsimpart.registry.ModBlocks;
 import io.github.jasonsimpart.registry.ModCreativeTabs;
 import io.github.jasonsimpart.registry.ModFluids;
@@ -33,6 +34,7 @@ public class CreateDelightCore {
         ModCommonEvents.register(modEventBus);
         ModSpoutBehaviours.register(modEventBus);
         CmrCompat.register(modEventBus);
+        ModNetwork.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents(modEventBus);

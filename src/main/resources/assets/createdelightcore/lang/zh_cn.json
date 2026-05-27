@@ -596,5 +596,9 @@
   "block.createdelightcore.lightning_lily_cluster": "闪电百合簇",
   "block.createdelightcore.luna_soil": "月壤沃土",
   "block.createdelightcore.luna_soil_farmland": "月壤沃土耕地",
-  "block.createdelightcore.phantom_compost": "幻灵肥料"
+  "block.createdelightcore.phantom_compost": "幻灵肥料",
+  "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
+  "jei.createdelightcore.amountConsume": "消耗%smB",
+  "jei.createdelightcore.SnowmanCoolerFluid": "雪傀儡液体冷却剂配方",
+  "jei.createdelightcore.amountConsumeCool": "消耗%smB"
 }

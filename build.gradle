@@ -140,6 +140,8 @@ dependencies {
     runtimeOnly("curse.maven:uranus-1010827:${uranus_file_id}")
     runtimeOnly("curse.maven:jupiter-1072905:${jupiter_file_id}")
     implementation("curse.maven:create-metallurgy-1007404:${createmetallurgy_file_id}")
+    implementation("curse.maven:create-morerecipes-1103188:${cmr_file_id}")
+    implementation("curse.maven:create-liquid-fuel-840734:${createliquidfuel_file_id}")
     compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
