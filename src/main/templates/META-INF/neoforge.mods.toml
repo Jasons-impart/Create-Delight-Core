@@ -109,8 +109,22 @@ side = "BOTH"
 
 [[dependencies."${mod_id}"]]
 modId = "createmetallurgy"
-type = "optional"
+type = "required"
 versionRange = "[1.0.3,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "cmr"
+type = "required"
+versionRange = "[1.2.1,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "createliquidfuel"
+type = "required"
+versionRange = "[2.1.1,)"
 ordering = "AFTER"
 side = "BOTH"
 
