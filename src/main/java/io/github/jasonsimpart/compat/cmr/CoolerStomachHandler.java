@@ -49,7 +49,7 @@ public final class CoolerStomachHandler {
 
         LiquidCoolerFuel fuel = entry.getSecond();
         if (fluidStack.getAmount() < fuel.amountConsumedPerTick()) {
-            fluidStack.setAmount(0);
+            stomach.drain(fluidStack.getAmount(), IFluidHandler.FluidAction.EXECUTE);
             return false;
         }
 
@@ -63,7 +63,7 @@ public final class CoolerStomachHandler {
         }
 
         coolerAccessor.createdelightcore$setRemainingBurnTime(newBurnTime);
-        fluidStack.shrink(fuel.amountConsumedPerTick());
+        stomach.drain(fuel.amountConsumedPerTick(), IFluidHandler.FluidAction.EXECUTE);
         return true;
     }
 
