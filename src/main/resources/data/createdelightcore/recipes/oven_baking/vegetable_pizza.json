@@ -1,0 +1,9 @@
+{
+  "type": "refurbished_furniture:oven_baking",
+  "category": "food",
+  "ingredient": {
+    "item": "createdelightcore:raw_vegetable_pizza"
+  },
+  "result": "createdelightcore:vegetable_pizza",
+  "time": 40
+}

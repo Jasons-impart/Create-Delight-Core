@@ -19,7 +19,7 @@ public class StoveBlockEntityMixin {
         input.set(create_Delight_Core$copyQualityTag(itemStack));
     }
 
-    @Redirect(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;copy()Lnet/minecraft/world/item/ItemStack;"), remap = false)
+    @Redirect(method = "onCompleteProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;copy()Lnet/minecraft/world/item/ItemStack;", remap = true), remap = false)
     public ItemStack applyQualityToCopy(ItemStack instance, @Share("ovenInput") final LocalRef<CompoundTag> input) {
         ItemStack result = instance.copy();
         create_Delight_Core$applyQualityTag(result, input.get());

@@ -1,0 +1,9 @@
+{
+  "type": "refurbished_furniture:oven_baking",
+  "category": "food",
+  "ingredient": {
+    "item": "bakeries:raw_pizza"
+  },
+  "result": "bakeries:pizza",
+  "time": 40
+}

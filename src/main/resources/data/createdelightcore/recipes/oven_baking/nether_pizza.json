@@ -1,0 +1,9 @@
+{
+  "type": "refurbished_furniture:oven_baking",
+  "category": "food",
+  "ingredient": {
+    "item": "createdelightcore:raw_nether_pizza"
+  },
+  "result": "createdelightcore:nether_pizza",
+  "time": 40
+}
