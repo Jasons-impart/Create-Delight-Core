@@ -23,6 +23,7 @@
     "cmr.MixinSnowmanCoolerBlock",
     "cmr.MixinSnowmanCoolerBlockEntity",
     "cmr.SnowmanCoolerAccessor",
+    "minecraft.SimpleJsonResourceReloadListenerMixin",
     "resourcepack.PathPackResourcesMixin",
     "quark.ContributorRewardHandlerMixin"
   ],
