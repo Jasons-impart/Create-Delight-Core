@@ -1,0 +1,9 @@
+{
+  "type": "refurbished_furniture:oven_baking",
+  "category": "food",
+  "ingredient": {
+    "item": "createdelightcore:raw_meatlovers_pizza"
+  },
+  "result": "createdelightcore:meatlovers_pizza",
+  "time": 40
+}
