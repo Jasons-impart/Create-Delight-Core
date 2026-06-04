@@ -51,6 +51,7 @@
     "ftbultimine.ItemCollectionMixin",
     "ftbultimine.RightClickHandlersMixin",
     "functionalstorage.CompactingUtilMixin",
+    "functionalstorage.StorageControllerExtensionTileMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
     "Minecraft.CarverMixin",
