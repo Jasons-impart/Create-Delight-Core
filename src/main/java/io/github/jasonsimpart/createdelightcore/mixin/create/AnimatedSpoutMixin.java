@@ -19,6 +19,7 @@ public class AnimatedSpoutMixin {
 
     @Inject(method = "draw", at = @At("HEAD"), cancellable = true)
     private void createdelightcore$skipEmptyFluidAnimation(GuiGraphics graphics, int xOffset, int yOffset, CallbackInfo ci) {
+        // Create's spout animation assumes at least one fluid; empty tag ingredients can reach JEI before resolving.
         if (fluids == null || fluids.isEmpty())
             ci.cancel();
     }

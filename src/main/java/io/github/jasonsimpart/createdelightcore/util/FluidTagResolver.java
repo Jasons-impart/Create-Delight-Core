@@ -20,12 +20,14 @@ public final class FluidTagResolver {
     public static List<FluidStack> resolve(TagKey<Fluid> tag, int amount) {
         Set<Fluid> fluids = new LinkedHashSet<>();
 
+        // Use the live Forge tag manager so datapack and KubeJS-added fluid tags are both represented.
         ITagManager<Fluid> tagManager = ForgeRegistries.FLUIDS.tags();
         if (tagManager != null) {
             tagManager.getTag(tag)
                     .forEach(fluid -> addSourceFluid(fluids, fluid));
         }
 
+        // Some holders know their tags even when the manager-backed collection was empty during reload.
         for (Fluid fluid : ForgeRegistries.FLUIDS.getValues()) {
             if (fluid.is(tag))
                 addSourceFluid(fluids, fluid);
@@ -37,6 +39,7 @@ public final class FluidTagResolver {
     }
 
     private static void addSourceFluid(Set<Fluid> fluids, Fluid fluid) {
+        // JEI should cycle one entry per logical fluid, not both still and flowing variants.
         fluids.add(fluid instanceof FlowingFluid flowing ? flowing.getSource() : fluid);
     }
 }

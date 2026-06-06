@@ -25,6 +25,7 @@ public abstract class FluidIngredientMixin {
 
     @Inject(method = "getMatchingFluidStacks", at = @At("RETURN"), cancellable = true)
     private void createdelightcore$retryEmptyFluidTagResolution(CallbackInfoReturnable<List<FluidStack>> cir) {
+        // Create caches even an empty tag result; retry so late/KubeJS tag additions can still appear in JEI.
         TagKey<Fluid> tag = createdelightcore$getFluidTag();
         if (tag == null)
             return;
@@ -35,6 +36,7 @@ public abstract class FluidIngredientMixin {
 
         List<FluidStack> resolved = FluidTagResolver.resolve(tag, getRequiredAmount());
         if (resolved.isEmpty()) {
+            // Keep the cache open for a later retry instead of pinning this tag to an empty JEI ingredient list.
             matchingFluidStacks = null;
             return;
         }
@@ -46,6 +48,7 @@ public abstract class FluidIngredientMixin {
     @SuppressWarnings("unchecked")
     private TagKey<Fluid> createdelightcore$getFluidTag() {
         try {
+            // Avoid a mixin accessor here; direct references to helper mixins can trip Mixin's package load guard.
             Field field = getClass().getDeclaredField("tag");
             field.setAccessible(true);
             Object value = field.get(this);
