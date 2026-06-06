@@ -27,3 +27,4 @@ forge*changelog.txt
 
 .vscode/
 .codex-tmp/
+.tmp/
