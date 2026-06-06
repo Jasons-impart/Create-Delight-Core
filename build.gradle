@@ -353,6 +353,18 @@ tasks.named('jar', Jar).configure {
     finalizedBy 'reobfJar'
 }
 
+tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJar).configureEach {
+    useArgsFile()
+}
+
+tasks.withType(net.minecraftforge.gradle.userdev.tasks.RenameJarInPlace).configureEach {
+    useArgsFile()
+}
+
+tasks.withType(net.minecraftforge.gradle.patcher.tasks.ReobfuscateJar).configureEach {
+    useArgsFile()
+}
+
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing:
 // tasks.named('publish').configure {
 //     dependsOn 'reobfJar'
