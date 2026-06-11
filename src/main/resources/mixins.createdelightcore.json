@@ -34,6 +34,7 @@
     "create.CreateRecipeCategoryMixin",
     "create.FluidIngredientMixin",
     "create.FluidTagIngredientMixin",
+    "create.ProcessingRecipeSerializerMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",

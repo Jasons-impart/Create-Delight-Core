@@ -221,7 +221,8 @@ dependencies {
     implementation fg.deobf("curse.maven:createaddition-439890:6306951")
     // create utilities j
     implementation fg.deobf("curse.maven:create-utilities-j-1437484:7528356")
-    // lightmans currency
+    // runServer 提示：该版本 Lightman's Currency 在 userdev 专服中会加载客户端类。
+    // 运行 runServer 前请临时改为 compileOnly；客户端或完整整合包测试时保持 implementation。
     implementation fg.deobf("curse.maven:lightmans-currency-472521:7426828")
     // waystones
     implementation fg.deobf("curse.maven:balm-531761:6205942")
@@ -283,6 +284,8 @@ dependencies {
 
 
     implementation fg.deobf("curse.maven:elysium-api-1158628:6589093")
+    // runServer 提示：该版本 Jaden's Nether Expansion 在 userdev 专服中会加载客户端类。
+    // 运行 runServer 前请临时改为 compileOnly；客户端或完整整合包测试时保持 implementation。
     implementation fg.deobf("curse.maven:jadens-nether-expansion-1111833:6729020")
 
     implementation fg.deobf("curse.maven:trailandtales_delight-1198527:6526276")
