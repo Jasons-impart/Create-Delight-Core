@@ -144,6 +144,8 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.ENCHANTED_FRUIT_ICE_CREAM_SCOOP, "附魔之果冰淇淋球");
         provider.addItem(CDItems.GLOW_BERRY_ICE_CREAM_SCOOP, "发光浆果冰淇淋球");
         provider.addItem(CDItems.PUMPKIN_ICE_CREAM_SCOOP, "南瓜冰淇淋球");
+        provider.addItem(CDItems.LUCUMA_ICE_CREAM_SCOOP, "蛋黄果冰淇淋球");
+        provider.addItem(CDItems.PINK_DRAGON_FRUIT_ICE_CREAM_SCOOP, "红心火龙果冰淇淋球");
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
@@ -156,6 +158,8 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.CARROT, "胡萝卜味奶昔");
         addVirtualFluid(provider, CDFluids.BEETROOT, "甜菜味奶昔");
         addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "附魔之果味奶昔");
+        addVirtualFluid(provider, CDFluids.LUCUMA, "蛋黄果味奶昔");
+        addVirtualFluid(provider, CDFluids.PINK_DRAGON_FRUIT, "火龙果味奶昔");
         //grape juice
         addVirtualFluid(provider, CDFluids.RED_GRAPE, "红葡萄汁");
         addVirtualFluid(provider, CDFluids.JUNGLE_RED_GRAPE, "丛林红葡萄汁");

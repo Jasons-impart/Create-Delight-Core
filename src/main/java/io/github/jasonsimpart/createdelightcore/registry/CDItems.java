@@ -47,6 +47,9 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> ENCHANTED_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("enchanted_fruit");
     public static final ItemEntry<ThrownProjectileItem> GLOW_BERRY_ICE_CREAM_SCOOP = iceCreamScoop("glow_berry");
     public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
+    public static final ItemEntry<ThrownProjectileItem> LUCUMA_ICE_CREAM_SCOOP = iceCreamScoop("lucuma");
+    public static final ItemEntry<ThrownProjectileItem> PINK_DRAGON_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("pink_dragon_fruit");
+
     //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_FILLED = simpleItem("black_chocolate_mold_filled", RATATOUILLE_TAB);

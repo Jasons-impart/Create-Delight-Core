@@ -54,6 +54,8 @@ public class EnglishLangHandler {
         addVirtualFluid(provider, CDFluids.CARROT, "Carrot Milkshake");
         addVirtualFluid(provider, CDFluids.BEETROOT, "Beetroot Milkshake");
         addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "Enchanted fruit Milkshake");
+        addVirtualFluid(provider, CDFluids.LUCUMA, "Lucuma Milkshake");
+        addVirtualFluid(provider, CDFluids.PINK_DRAGON_FRUIT, "Pink Dragon fruit Milkshake");
         //grape juice
         addVirtualFluid(provider, CDFluids.RED_GRAPE, "Red Grape Juice");
         addVirtualFluid(provider, CDFluids.JUNGLE_RED_GRAPE, "Jungle Red Grape Juice");

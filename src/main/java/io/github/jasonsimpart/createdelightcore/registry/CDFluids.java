@@ -54,6 +54,8 @@ public class CDFluids {
     public static final FluidEntry<VirtualFluid> ENCHANTED_FRUIT = milkShake("enchanted_fruit", 0Xdfda48);
     public static final FluidEntry<VirtualFluid> APPLE = milkShake("apple", 0Xf6d894);
     public static final FluidEntry<VirtualFluid> BEETROOT = milkShake("beetroot", 0Xea4d5b);
+    public static final FluidEntry<VirtualFluid> LUCUMA = milkShake("lucuma", 0Xfcd452);
+    public static final FluidEntry<VirtualFluid> PINK_DRAGON_FRUIT = milkShake("pink_dragon_fruit", 0Xe569e7);
     // grapeJuice
     public static final FluidEntry<VirtualFluid> RED_GRAPE = grapeJuice("red_grape", 0X73207a);
     public static final FluidEntry<VirtualFluid> JUNGLE_RED_GRAPE = grapeJuice("jungle_red_grape", 0X4f1d85);
