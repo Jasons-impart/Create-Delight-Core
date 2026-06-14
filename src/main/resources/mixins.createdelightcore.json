@@ -71,6 +71,7 @@
     "quality_food.BlockUseContextMixin",
     "quality_food.BlockDataMixin",
     "quality_food.QualityFoodMixin",
+    "quality_food.SpecialContainerMixin",
     "ratatouille.BakeDataMixin",
     "ratatouille.SqueezeBasinBlockEntityMixin",
     "ratatouille.ThresherBlockEntityMixin",
