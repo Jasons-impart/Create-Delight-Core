@@ -42,6 +42,7 @@ Create Delight Core (CDC) is the custom Forge Java mod for Create-Delight Remake
 ## DEVELOPMENT RULES
 
 - Keep `gradle.properties` `mod_version` aligned with the Create-Delight-Core jar used by the parent modpack.
+- `mod_version` must start with a digit because Forge expands it into `META-INF/mods.toml` and rejects non-numeric-leading versions.
 - When updating the parent submodule pointer, verify the CDC source version and packaged CDC mod version are the same.
 - Registrations flow through `CreateDelightCore.REGISTRATE` and the classes in `registry/`.
 - New mixin classes must also be listed in `src/main/resources/mixins.createdelightcore.json`.
