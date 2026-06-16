@@ -84,6 +84,7 @@
     "trailandtalesdelight.BuddingLanternFruitBlockMixin",
     "trueuuid.SkinRefreshHandlerMixin",
     "trader_fresh.RestockEventHandlerMixin",
+    "vintagedelight.FermentingJarBlockEntityMixin",
     "waystones.WaystoneButtonMixin"
   ],
   "client": [],
