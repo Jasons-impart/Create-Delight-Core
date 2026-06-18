@@ -229,7 +229,7 @@ dependencies {
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
 
     // EclipticSeasons
-    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:6967672")
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // quality foods
     implementation fg.deobf("curse.maven:quality_food-973932:7618171")
 
