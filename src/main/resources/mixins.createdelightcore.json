@@ -39,6 +39,7 @@
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",
     "eclipticseason.CropGrowthHandlerMixin",
+    "eclipticseason.GreenHouseCoreBlockMixin",
     "eclipticseason.GrowthDetectorItemMixin",
     "farmersdelight.DoughRecipeMakerMixin",
     "farmersdelight.MushroomColonyBlockMixin",
