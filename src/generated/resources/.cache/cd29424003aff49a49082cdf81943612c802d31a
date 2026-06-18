@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-12T23:11:15.4676535	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2026-06-18T11:37:04.577224	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -51,9 +51,9 @@ a81bcbc894c25b6686c0b6773552cbf586c943e4 assets/createdelightcore/blockstates/st
 b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/tin_ore.json
 995dfada531df44f83764c4d4f90c27029e20ce9 assets/createdelightcore/blockstates/vanilla_syrup.json
 a976123c5fbea002389af9a4aae9c3aaef18edb7 assets/createdelightcore/blockstates/vegetable_pizza.json
-11bcbd47f5ee0c10c9d4c57c171bdf7d1c84acf3 assets/createdelightcore/lang/en_ud.json
-5d7473068e1982c92c4144e0d12f84b01f10a9d3 assets/createdelightcore/lang/en_us.json
-5577a913de0d9035b1d8f1d3a03a102ba8c09baa assets/createdelightcore/lang/zh_cn.json
+d97326b543b07ee175687fe0de56cb90fa075cb3 assets/createdelightcore/lang/en_ud.json
+7158ac46f6528d11f27d824fa11bdce200f89b09 assets/createdelightcore/lang/en_us.json
+c9a37f64488bc5aec78eb463a485965f2a92ee64 assets/createdelightcore/lang/zh_cn.json
 a9f3adf9ef4db5e80e37acb6bc78478e3ccd1e4a assets/createdelightcore/models/block/banana_syrup.json
 8d9a4f8f2bf9e1fd6c72917168aa5de152a1d45d assets/createdelightcore/models/block/base_syrup.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
@@ -163,6 +163,7 @@ ed8f23145d5af428005316f052d84ac4cab99dcf assets/createdelightcore/models/item/go
 1d2cfc794c23651e546cfbc39d51924e8496a199 assets/createdelightcore/models/item/iron_coin.json
 635eccbc5d04de6a521709f70319df82935c07b7 assets/createdelightcore/models/item/lightning_lily_cluster.json
 4b4d913ca372a7fca6a17a7aaf7ffe4227d222ba assets/createdelightcore/models/item/lime_ice_cream_scoop.json
+fd0558c4c495c71889af99c7c6cbdf935e7ed813 assets/createdelightcore/models/item/lucuma_ice_cream_cone.json
 a62dc918b3359722e1c8a5e3743721b800c76e08 assets/createdelightcore/models/item/lucuma_ice_cream_scoop.json
 8b4fbdf9f479f3717671170e0664616da554951a assets/createdelightcore/models/item/luna_soil.json
 6b78ddac473b7d3306168724defc76eb8680d492 assets/createdelightcore/models/item/luna_soil_farmland.json
@@ -190,6 +191,7 @@ abdf63602b598594202e4f7f5cd50dece90758f1 assets/createdelightcore/models/item/ne
 1d045a92111eded6b63f116b59693ee9c06c40db assets/createdelightcore/models/item/nether_pizza_slice.json
 7c8ec13031cd20398b542a66018d250a85ff5f3f assets/createdelightcore/models/item/nuclear_waste_bucket.json
 635b56beae14d30646be1ae9f26885630eda889b assets/createdelightcore/models/item/phantom_compost.json
+2793e9603a5735f20f8ec8e2d1c2a89672a01482 assets/createdelightcore/models/item/pink_dragon_fruit_ice_cream_cone.json
 9f26a3d6256932078a9b71d32956dcd67b4692cd assets/createdelightcore/models/item/pink_dragon_fruit_ice_cream_scoop.json
 a656ec9e153ec5dbbdf78944511ad6be72665c89 assets/createdelightcore/models/item/pizza_slice.json
 61e6e0f0ecfe9c4ad61ee51816b0b3f8459cac66 assets/createdelightcore/models/item/pomegranate_ice_cream_scoop.json
@@ -207,6 +209,7 @@ b6c02f6b3c6440b3b51e9abc921dadd8264c793b assets/createdelightcore/models/item/st
 1b6e6475e28b87a0f050e7af1a994040fdab1670 assets/createdelightcore/models/item/steel_glass_casing.json
 abdb489a75801d5cbc5760991aaff1947880d137 assets/createdelightcore/models/item/strawberry_ice_cream_scoop.json
 4c4f49393c352701d61c489f9767dee746f80249 assets/createdelightcore/models/item/strawberry_syrup.json
+0797026752e4cfa52b083f0240b8be468cddb83c assets/createdelightcore/models/item/sunny_ice_cream_sandwich.json
 7f5af07086882559daa7b1809683d75a8392df03 assets/createdelightcore/models/item/tin_block.json
 caaaf1062e3cac9ec814d3ead4d45b7e4b8cf670 assets/createdelightcore/models/item/tin_ingot.json
 b2cc038738bd44221210ed47dcf0dc6273fca650 assets/createdelightcore/models/item/tin_nugget.json

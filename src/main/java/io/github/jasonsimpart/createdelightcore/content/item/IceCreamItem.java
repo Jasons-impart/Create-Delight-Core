@@ -1,25 +1,25 @@
 package io.github.jasonsimpart.createdelightcore.content.item;
 
+import com.gumillea.cosmopolitan.common.item.FrozenDessertItem;
+import com.gumillea.cosmopolitan.core.util.CosmoCompat;
 import com.teamabnormals.neapolitan.core.registry.NeapolitanSoundEvents;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.BowlFoodItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.sounds.SoundEvents;
 
-public class IceCreamItem extends BowlFoodItem {
-    public IceCreamItem(Properties pProperties) {
-        super(pProperties);
+public class IceCreamItem extends FrozenDessertItem {
+
+    public IceCreamItem(Properties properties, boolean bowl, int tFrozen) {
+        super(properties, bowl, tFrozen);
     }
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        entity.setTicksFrozen(entity.getTicksFrozen() + 200);
-        return super.finishUsingItem(stack, level, entity);
+    public SoundEvent getDrinkingSound() {
+        return CosmoCompat.nea ? (SoundEvent) NeapolitanSoundEvents.ICE_CREAM_EAT.get() : SoundEvents.GENERIC_EAT;
     }
 
     @Override
     public SoundEvent getEatingSound() {
-        return NeapolitanSoundEvents.ICE_CREAM_EAT.get();
+        return CosmoCompat.nea ? (SoundEvent)NeapolitanSoundEvents.ICE_CREAM_EAT.get() : SoundEvents.GENERIC_EAT;
     }
+
 }
