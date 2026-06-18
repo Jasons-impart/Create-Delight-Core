@@ -2,10 +2,10 @@ package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
+import com.gumillea.cosmopolitan.common.item.DrinkItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
-import io.github.jasonsimpart.createdelightcore.content.item.MilkShakeItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -49,6 +49,11 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> PUMPKIN_ICE_CREAM_SCOOP = iceCreamScoop("pumpkin");
     public static final ItemEntry<ThrownProjectileItem> LUCUMA_ICE_CREAM_SCOOP = iceCreamScoop("lucuma");
     public static final ItemEntry<ThrownProjectileItem> PINK_DRAGON_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("pink_dragon_fruit");
+    //ice-cream sandwich
+    public static final ItemEntry<IceCreamItem> SUNNY_ICE_CREAM_SANDWICH = iceCreamSandwich("sunny_ice_cream_sandwich", 6, 0.3f);
+    //ice-cream cone
+    public static final ItemEntry<IceCreamItem> LUCUMA_ICE_CREAM_CONE = iceCreamCone("lucuma_ice_cream_cone", 4, 0.3f);
+    public static final ItemEntry<IceCreamItem> PINK_DRAGON_FRUIT_ICE_CREAM_CONE = iceCreamCone("pink_dragon_fruit_ice_cream_cone", 4, 0.3f);
 
     //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);
@@ -72,22 +77,28 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
 
 
-    public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation){
-        return REGISTRATE.item(name + "_ice_cream", IceCreamItem::new)
+    public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation, boolean bowl, int tFrozen){
+        return REGISTRATE.item(name, p -> new IceCreamItem(p, bowl, tFrozen))
                 .properties(p -> p
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
                                 .saturationMod(saturation)
                                 .build())
-                        .craftRemainder(Items.BOWL)
-                        .stacksTo(1)
                 )
                 .tab(FOOD_TAB)
                 .register();
     }
 
-    public static ItemEntry<MilkShakeItem> milkShakeItem(String name, int nutrition, float saturation){
-        return REGISTRATE.item(name + "_milkshake", MilkShakeItem::new)
+    public static ItemEntry<IceCreamItem> iceCreamSandwich(String name, int nutrition, float saturation){
+        return iceCreamItem(name, nutrition, saturation, false, 100);
+    }
+
+    public static ItemEntry<IceCreamItem> iceCreamCone(String name, int nutrition, float saturation){
+        return iceCreamItem(name, nutrition, saturation, false, 80);
+    }
+
+    public static ItemEntry<DrinkItem> milkShakeItem(String name, int nutrition, float saturation, boolean tooltip){
+        return REGISTRATE.item(name + "_milkshake", p -> new DrinkItem(p, true, tooltip))
                 .properties(p -> p
                         .food(new FoodProperties.Builder()
                                 .nutrition(nutrition)
