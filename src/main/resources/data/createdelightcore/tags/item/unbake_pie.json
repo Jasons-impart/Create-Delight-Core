@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:unbake_chorus_fruit_pie",
+    "createdelightcore:unbake_apple_pie",
+    "createdelightcore:unbake_sweet_berry_cheesecake",
+    "createdelightcore:unbake_chocolate_pie",
+    "createdelightcore:unbake_rose_hip_pie",
+    "createdelightcore:unbake_lime_pie",
+    "createdelightcore:unbake_pinenut_pie",
+    "createdelightcore:unbake_cherry_cheese_pie",
+    "createdelightcore:unbake_tarte_lune",
+    "createdelightcore:unbake_spider_pie",
+    "createdelightcore:unbake_sculk_tart",
+    "createdelightcore:unbake_pineapple_pie",
+    "createdelightcore:unbake_durian_pie",
+    "createdelightcore:unbake_tectonic_cheesecake",
+    "createdelightcore:unbake_water_pie",
+    "createdelightcore:unbake_stargazy_pie",
+    "createdelightcore:unbake_portobello_quiche",
+    "createdelightcore:unbake_quiche_lorraine"
+  ]
+}

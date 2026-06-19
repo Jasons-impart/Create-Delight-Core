@@ -8,6 +8,7 @@ import io.github.jasonsimpart.CreateDelightCore;
 import io.github.jasonsimpart.content.item.FoiledItem;
 import io.github.jasonsimpart.content.item.OptionalEffectFoodItem;
 import io.github.jasonsimpart.content.item.OxygenTankItem;
+import io.github.jasonsimpart.content.item.ProspectorItem;
 import io.github.jasonsimpart.content.item.QualityAbsorberItem;
 import io.github.jasonsimpart.content.item.ReturningFoodItem;
 import net.minecraft.ChatFormatting;
@@ -66,6 +67,7 @@ public final class ModItems {
     // 食品中间件批量名称表。
     private static final String[] COOKIE_DOUGH_ITEM_NAMES = {"persimmon_cookie_dough", "lemon_cookie_dough", "oatmeal_cookie_dough", "green_tea_cookie_dough", "cranberry_cookie_dough", "bayberry_cookie_dough", "chocolate_cookie_dough", "honey_cookie_dough", "sweet_berry_cookie_dough", "lime_cookie_dough", "chorus_cookie_dough", "bat_cookie_dough", "paw_cookie_dough"};
     private static final String[] UNBAKED_MUFFIN_ITEM_NAMES = {"unbaked_red_velvet_cupcake", "unbaked_mixed_berry_muffin", "unbaked_chocolate_pumpkin_muffin", "unbaked_blueberry_muffin", "unbaked_cranberry_muffin", "unbaked_monster_muffin"};
+    private static final String[] UNBAKED_PIE_ITEM_NAMES = {"unbake_chorus_fruit_pie", "unbake_apple_pie", "unbake_sweet_berry_cheesecake", "unbake_chocolate_pie", "unbake_rose_hip_pie", "unbake_lime_pie", "unbake_pinenut_pie", "unbake_cherry_cheese_pie", "unbake_tarte_lune", "unbake_spider_pie", "unbake_sculk_tart", "unbake_pineapple_pie", "unbake_durian_pie", "unbake_tectonic_cheesecake", "unbake_water_pie", "unbake_stargazy_pie", "unbake_portobello_quiche", "unbake_quiche_lorraine"};
     private static final String[] POPSICLE_MOLD_FILLED_ITEM_NAMES = {"empty_popsicle_mold_filled", "chorus_fruit_popsicle_mold_filled", "tear_popsicle_mold_filled", "milk_popsicle_mold_filled", "hamimelon_popsicle_mold_filled", "lime_popsicle_mold_filled", "kiwi_popsicle_mold_filled", "berry_popsicle_mold_filled", "big_popsicle_mold_filled", "green_tongue_mold_filled"};
     private static final String[] POPSICLE_MOLD_SOLID_ITEM_NAMES = {"empty_popsicle_mold_solid", "chorus_fruit_popsicle_mold_solid", "tear_popsicle_mold_solid", "milk_popsicle_mold_solid", "hamimelon_popsicle_mold_solid", "lime_popsicle_mold_solid", "kiwi_popsicle_mold_solid", "berry_popsicle_mold_solid", "big_popsicle_mold_solid", "green_tongue_mold_solid"};
 
@@ -145,7 +147,7 @@ public final class ModItems {
     public static final DeferredItem<Item> CELL_HOUSING_CURVING_HEAD = simpleItem("cell_housing_curving_head");
     public static final DeferredItem<Item> PLANET_GEAR = rarityItem("planet_gear", Rarity.UNCOMMON);
     public static final DeferredItem<Item> MAGNETIC_MECHANISM = rarityItem("magnetic_mechanism", Rarity.UNCOMMON);
-    public static final DeferredItem<Item> PROSPECTOR = unstackableItem("prospector");
+    public static final DeferredItem<ProspectorItem> PROSPECTOR = ITEMS.registerItem("prospector", ProspectorItem::new);
     public static final DeferredItem<Item> PROSPECTOR_CORE = simpleItem("prospector_core");
     public static final DeferredItem<Item> PHASE_TRANSITION_IRON = simpleItem("phase_transition_iron");
     public static final DeferredItem<Item> MMD_DIAMOND = simpleItem("mmd_diamond");
@@ -204,6 +206,7 @@ public final class ModItems {
     public static final DeferredItem<Item> BUTTER = badFastFood("butter");
     public static final DeferredItem<Item> OIL_DOUGH = badFastFood("oil_dough");
     public static final DeferredItem<Item> PUFF_PASTRY = badFastFood("puff_pastry");
+    public static final DeferredItem<Item> RAW_PIE_CRUST = simpleItem("raw_pie_crust");
     public static final DeferredItem<Item> RAW_CALAMARI = simpleFood("raw_calamari", 1, 1.0F);
     public static final DeferredItem<Item> RAW_GHAST_CALAMARI = simpleFood("raw_ghast_calamari", 1, 1.0F);
     public static final DeferredItem<Item> RAW_EMPANADA = simpleFood("raw_empanada", 4, 0.25F);
@@ -221,12 +224,15 @@ public final class ModItems {
     public static final DeferredItem<FoiledItem> ENCHANTED_GOLDEN_LANTERN_FRUIT = ITEMS.registerItem("enchanted_golden_lantern_fruit", properties -> new FoiledItem(properties.rarity(Rarity.EPIC).food(new FoodProperties.Builder().nutrition(4).saturationModifier(1.5F).effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 6000), 1.0F).effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 3600, 3), 1.0F).effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 400, 2), 1.0F).effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 3600), 1.0F).build())));
     public static final DeferredItem<FoiledItem> ENCHANTED_GOLDEN_CARROT = ITEMS.registerItem("enchanted_golden_carrot", properties -> new FoiledItem(properties.rarity(Rarity.RARE).food(new FoodProperties.Builder().nutrition(6).saturationModifier(1.2F).effect(() -> new MobEffectInstance(MobEffects.SATURATION, 20), 1.0F).effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 3600), 1.0F).build())));
     public static final DeferredItem<Item> FUEL_HOTCREAM = simpleItem("fuel_hotcream");
+    public static final DeferredItem<Item> RED_VELVET_CAKE_MOLD_FILLED = simpleItem("red_velvet_cake_mold_filled");
+    public static final DeferredItem<Item> RED_VELVET_CAKE_MOLD_BAKED = simpleItem("red_velvet_cake_mold_baked");
     public static final DeferredItem<OptionalEffectFoodItem> LUSH_CONFITURE_JELLO_ITEM = ITEMS.registerItem("lush_confiture_jello_item", properties -> new OptionalEffectFoodItem(properties.food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.5F).build()), List.of(OptionalEffectFoodItem.OptionalEffect.of("cosmopolitan", "tracer", 600, 0), OptionalEffectFoodItem.OptionalEffect.of("cosmopolitan", "phototaxis", 600, 0)), Items.BOWL));
     public static final DeferredItem<OptionalEffectFoodItem> ENCHANTED_GOLDEN_ARBUTUS_BERRIES = ITEMS.registerItem("enchanted_golden_arbutus_berries", properties -> new OptionalEffectFoodItem(properties.rarity(Rarity.EPIC).food(new FoodProperties.Builder().nutrition(4).saturationModifier(1.0F).build()), List.of(OptionalEffectFoodItem.OptionalEffect.of("cosmopolitan", "phototaxis", 1200, 1), OptionalEffectFoodItem.OptionalEffect.of("minecraft", "strength", 1200, 2)), true));
 
     // 批量注册的食品中间件。
     public static final List<DeferredItem<Item>> COOKIE_DOUGH_ITEMS = registerCookieDoughItems(List.of(COOKIE_DOUGH_ITEM_NAMES));
     public static final List<DeferredItem<Item>> UNBAKED_MUFFIN_ITEMS = registerSimpleItems(List.of(UNBAKED_MUFFIN_ITEM_NAMES));
+    public static final List<DeferredItem<Item>> UNBAKED_PIE_ITEMS = registerSimpleItems(List.of(UNBAKED_PIE_ITEM_NAMES));
     public static final List<DeferredItem<Item>> POPSICLE_MOLD_FILLED_ITEMS = registerSimpleItems(List.of(POPSICLE_MOLD_FILLED_ITEM_NAMES));
     public static final List<DeferredItem<Item>> POPSICLE_MOLD_SOLID_ITEMS = registerSimpleItems(List.of(POPSICLE_MOLD_SOLID_ITEM_NAMES));
 

@@ -26,6 +26,11 @@
     "createdelightcore:splotched_rabbit_zip",
     "createdelightcore:gold_rabbit_zip",
     "createdelightcore:white_rabbit_zip",
-    "createdelightcore:salt_rabbit_zip"
+    "createdelightcore:salt_rabbit_zip",
+    "createdelightcore:iron_coin_pile",
+    "createdelightcore:copper_coin_pile",
+    "createdelightcore:gold_coin_pile",
+    "createdelightcore:emerald_coin_pile",
+    "createdelightcore:netherite_coin_pile"
   ]
 }

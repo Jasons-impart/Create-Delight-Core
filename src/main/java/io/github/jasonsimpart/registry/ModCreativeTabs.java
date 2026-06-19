@@ -51,6 +51,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.BUTTER);
         output.accept(ModItems.OIL_DOUGH);
         output.accept(ModItems.PUFF_PASTRY);
+        output.accept(ModItems.RAW_PIE_CRUST);
         output.accept(ModItems.RAW_CALAMARI);
         output.accept(ModItems.RAW_GHAST_CALAMARI);
         output.accept(ModItems.RAW_EMPANADA);
@@ -68,6 +69,8 @@ public final class ModCreativeTabs {
         output.accept(ModItems.ENCHANTED_GOLDEN_LANTERN_FRUIT);
         output.accept(ModItems.ENCHANTED_GOLDEN_CARROT);
         output.accept(ModItems.FUEL_HOTCREAM);
+        output.accept(ModItems.RED_VELVET_CAKE_MOLD_FILLED);
+        output.accept(ModItems.RED_VELVET_CAKE_MOLD_BAKED);
         output.accept(ModItems.LUSH_CONFITURE_JELLO_ITEM);
         output.accept(ModItems.ENCHANTED_GOLDEN_ARBUTUS_BERRIES);
         ModItems.COOKIE_DOUGH_ITEMS.forEach(output::accept);
@@ -87,6 +90,11 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.TIN_BLOCK.get());
         output.accept(ModBlocks.BRONZE_BLOCK.get());
         output.accept(ModBlocks.FORGED_STEEL_BLOCK.get());
+        output.accept(ModBlocks.IRON_COIN_PILE.get());
+        output.accept(ModBlocks.COPPER_COIN_PILE.get());
+        output.accept(ModBlocks.GOLD_COIN_PILE.get());
+        output.accept(ModBlocks.EMERALD_COIN_PILE.get());
+        output.accept(ModBlocks.NETHERITE_COIN_PILE.get());
         output.accept(ModBlocks.FRAGMENT_OF_BORDER.get());
         output.accept(ModBlocks.ENRICHED_SKY_STONE_BLOCK.get());
         output.accept(ModBlocks.LUNA_SOIL.get());
@@ -201,6 +209,7 @@ public final class ModCreativeTabs {
     // 半成品页：Create 序列装配中间件、AE 中间件和食品模具等。
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> INTERMEDIATES = CREATIVE_TABS.register("intermediates", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.createdelightcore.intermediates")).withTabsBefore(FLUIDS.getKey()).icon(() -> ModItems.CREATE_MACHINE_TRANSITIONAL_ITEMS.getFirst().get().getDefaultInstance()).displayItems((parameters, output) -> {
         ModItems.UNBAKED_MUFFIN_ITEMS.forEach(output::accept);
+        ModItems.UNBAKED_PIE_ITEMS.forEach(output::accept);
         ModItems.POPSICLE_MOLD_FILLED_ITEMS.forEach(output::accept);
         ModItems.POPSICLE_MOLD_SOLID_ITEMS.forEach(output::accept);
         output.accept(ModItems.POTATO_STEW_BEEF);
@@ -220,6 +229,11 @@ public final class ModCreativeTabs {
         output.accept(ModItems.GOLD_COIN);
         output.accept(ModItems.EMERALD_COIN);
         output.accept(ModItems.NETHERITE_COIN);
+        output.accept(ModBlocks.IRON_COIN_PILE.get());
+        output.accept(ModBlocks.COPPER_COIN_PILE.get());
+        output.accept(ModBlocks.GOLD_COIN_PILE.get());
+        output.accept(ModBlocks.EMERALD_COIN_PILE.get());
+        output.accept(ModBlocks.NETHERITE_COIN_PILE.get());
     }).build());
 
     private ModCreativeTabs() {

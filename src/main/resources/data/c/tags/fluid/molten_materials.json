@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "createdelightcore:molten_andesite",
+    "createdelightcore:molten_azure_neodymium",
+    "createdelightcore:molten_scarlet_neodymium",
+    "createdelightcore:molten_titanium",
+    "createdelightcore:molten_martian_steel",
+    "createdelightcore:molten_fire_steel",
+    "createdelightcore:molten_ice_steel",
+    "createdelightcore:molten_lightning_steel",
+    "createdelightcore:molten_forged_steel",
+    "createdelightcore:molten_glass",
+    "createdelightcore:molten_quartz_glass",
+    "createdelightcore:molten_quartz_vibrant_glass"
+  ]
+}

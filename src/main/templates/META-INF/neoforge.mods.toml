@@ -129,6 +129,13 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
+modId = "createoreexcavation"
+type = "required"
+versionRange = "[1.6.8,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
 modId = "jei"
 type = "optional"
 versionRange = "[19.27.0.336,)"
