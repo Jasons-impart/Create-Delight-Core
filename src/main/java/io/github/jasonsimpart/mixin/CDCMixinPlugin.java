@@ -12,8 +12,10 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
     private static final String ALEXSCAVES_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.alexscaves.";
     private static final String ECLIPTICSEASONS_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.eclipticseasons.";
     private static final String ICEANDFIRE_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.iceandfire.";
+    private static final String CREATE_METALLURGY_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.createmetallurgy.";
     private static final String CREATE_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.create.";
     private static final String QUARK_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.quark.";
+    private static final String VINTAGE_IMPROVEMENTS_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.vintageimprovements.";
     private static final String XAERO_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.xaero.";
 
     @Override
@@ -36,11 +38,20 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.startsWith(ICEANDFIRE_MIXIN_PACKAGE)) {
             return isModLoaded("iceandfire");
         }
+        if (mixinClassName.equals(CREATE_METALLURGY_MIXIN_PACKAGE + "CreateMetallurgyJEIMixin")) {
+            return isModLoaded("createmetallurgy") && isModLoaded("jei");
+        }
+        if (mixinClassName.startsWith(CREATE_METALLURGY_MIXIN_PACKAGE)) {
+            return isModLoaded("createmetallurgy");
+        }
         if (mixinClassName.startsWith(CREATE_MIXIN_PACKAGE)) {
             return isModLoaded("create") && isModLoaded("jei");
         }
         if (mixinClassName.startsWith(QUARK_MIXIN_PACKAGE)) {
             return isModLoaded("quark");
+        }
+        if (mixinClassName.startsWith(VINTAGE_IMPROVEMENTS_MIXIN_PACKAGE)) {
+            return isModLoaded("vintageimprovements");
         }
         if (mixinClassName.equals(XAERO_MIXIN_PACKAGE + "PatreonMixin")) {
             return isModLoaded("xaerolib");
