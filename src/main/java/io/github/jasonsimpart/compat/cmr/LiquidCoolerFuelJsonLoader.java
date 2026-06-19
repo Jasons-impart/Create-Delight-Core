@@ -36,8 +36,6 @@ public class LiquidCoolerFuelJsonLoader extends SimpleJsonResourceReloadListener
         for (Map.Entry<ResourceLocation, JsonElement> entry : entries.entrySet()) {
             loadFuel(entry.getKey(), entry.getValue());
         }
-
-        DrainableFuelLoader.load();
     }
 
     private static void loadFuel(ResourceLocation id, JsonElement element) {
