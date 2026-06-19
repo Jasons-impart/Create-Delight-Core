@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:fan_freezing",
+  "ingredients": [
+    {
+      "item": "minecraft:snow"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:snow_block"
+    }
+  ]
+}
