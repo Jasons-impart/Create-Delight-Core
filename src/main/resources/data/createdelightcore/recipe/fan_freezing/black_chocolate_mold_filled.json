@@ -1,0 +1,13 @@
+{
+  "type": "createdelightcore:fan_freezing",
+  "ingredients": [
+    {
+      "item": "createdelightcore:black_chocolate_mold_filled"
+    }
+  ],
+  "results": [
+    {
+      "id": "createdelightcore:black_chocolate_mold_solid"
+    }
+  ]
+}

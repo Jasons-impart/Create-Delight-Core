@@ -1,0 +1,17 @@
+{
+  "type": "createdelightcore:fan_freezing",
+  "ingredients": [
+    {
+      "item": "create:blaze_cake"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:powdered_obsidian"
+    },
+    {
+      "id": "create:cinder_flour",
+      "chance": 0.9
+    }
+  ]
+}
