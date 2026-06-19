@@ -64,6 +64,7 @@
     "Minecraft.NoiseChunkMixin",
     "mynethersdelight.PowderyCaneBlockMixin",
     "mynethersdelight.PowderyCannonBlockMixin",
+    "moonlight.SoftFluidStackImplMixin",
     "neapolitan.MintBlockMixin",
     "neapolitan.NeapolitanJEIPluginMixin",
     "neapolitan.StrawberryBushBlockMixin",
