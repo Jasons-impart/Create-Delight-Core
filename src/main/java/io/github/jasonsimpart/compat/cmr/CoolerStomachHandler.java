@@ -3,7 +3,8 @@ package io.github.jasonsimpart.compat.cmr;
 import com.mojang.datafixers.util.Pair;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.fluid.SmartFluidTank;
-import io.github.jasonsimpart.CreateDelightCore;
+import fr.iglee42.cmr.cooler.SnowmanCoolerBlockEntity;
+import fr.iglee42.cmr.cooler.SnowmanCoolerBlockEntity.FuelType;
 import io.github.jasonsimpart.mixin.cmr.SnowmanCoolerAccessor;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -15,24 +16,19 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.NotNull;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
 public final class CoolerStomachHandler {
-    private static final int FALLBACK_MAX_HEAT_CAPACITY = 10000;
-    private static Method setBlockHeatMethod;
-    private static Class<? extends Enum> heatLevelClass;
-    private static Field maxHeatCapacityField;
-
     public static final Map<Fluid, Pair<ResourceLocation, LiquidCoolerFuel>> LIQUID_COOLER_FUEL_MAP = new HashMap<>();
 
     private CoolerStomachHandler() {
     }
 
     public static boolean tick(SmartBlockEntity entity) {
-        if (!(entity instanceof SnowmanCoolerAccessor coolerAccessor) || !(entity instanceof CoolerStomachAccess stomachAccess)) {
+        if (!(entity instanceof SnowmanCoolerBlockEntity cooler)
+                || !(entity instanceof SnowmanCoolerAccessor coolerAccessor)
+                || !(entity instanceof CoolerStomachAccess stomachAccess)) {
             return false;
         }
 
@@ -48,21 +44,24 @@ public final class CoolerStomachHandler {
         }
 
         LiquidCoolerFuel fuel = entry.getSecond();
+        FuelType activeFuel = fuel.freezing() ? FuelType.SPECIAL : FuelType.NORMAL;
+        if (activeFuel.ordinal() < coolerAccessor.createdelightcore$getActiveFuel().ordinal()) {
+            return false;
+        }
+
         if (fluidStack.getAmount() < fuel.amountConsumedPerTick()) {
             stomach.drain(fluidStack.getAmount(), IFluidHandler.FluidAction.EXECUTE);
             return false;
         }
 
-        if (!setBlockHeat(entity, fuel.freezing())) {
-            return false;
-        }
-
         int newBurnTime = coolerAccessor.createdelightcore$getRemainingBurnTime() + fuel.burnTime();
-        if (newBurnTime > getMaxHeatCapacity(entity)) {
+        if (newBurnTime > getMaxHeatCapacity()) {
             return false;
         }
 
+        coolerAccessor.createdelightcore$setActiveFuel(activeFuel);
         coolerAccessor.createdelightcore$setRemainingBurnTime(newBurnTime);
+        cooler.updateBlockState();
         stomach.drain(fuel.amountConsumedPerTick(), IFluidHandler.FluidAction.EXECUTE);
         return true;
     }
@@ -104,32 +103,8 @@ public final class CoolerStomachHandler {
         cir.setReturnValue(true);
     }
 
-    private static boolean setBlockHeat(SmartBlockEntity entity, boolean freezing) {
-        try {
-            if (setBlockHeatMethod == null) {
-                heatLevelClass = Class.forName("fr.iglee42.cmr.cooler.SnowmanCoolerBlock$HeatLevel").asSubclass(Enum.class);
-                setBlockHeatMethod = entity.getClass().getDeclaredMethod("setBlockHeat", heatLevelClass);
-                setBlockHeatMethod.setAccessible(true);
-            }
-
-            Enum heatLevel = Enum.valueOf(heatLevelClass, freezing ? "FREEZING" : "COOLING");
-            setBlockHeatMethod.invoke(entity, heatLevel);
-            return true;
-        } catch (ReflectiveOperationException exception) {
-            CreateDelightCore.LOGGER.warn("Failed to update Snowman Cooler heat level for liquid fuel", exception);
-            return false;
-        }
-    }
-
-    private static int getMaxHeatCapacity(SmartBlockEntity entity) {
-        try {
-            if (maxHeatCapacityField == null) {
-                maxHeatCapacityField = entity.getClass().getField("MAX_HEAT_CAPACITY");
-            }
-            return maxHeatCapacityField.getInt(null);
-        } catch (ReflectiveOperationException exception) {
-            return FALLBACK_MAX_HEAT_CAPACITY;
-        }
+    private static int getMaxHeatCapacity() {
+        return SnowmanCoolerBlockEntity.MAX_HEAT_CAPACITY;
     }
 
     public record LiquidCoolerFuel(int burnTime, boolean freezing, int amountConsumedPerTick) {

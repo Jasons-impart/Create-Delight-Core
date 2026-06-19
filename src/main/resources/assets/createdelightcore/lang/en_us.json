@@ -4,6 +4,8 @@
   "itemGroup.createdelightcore.fluids": "Create Delight Core - Fluids",
   "itemGroup.createdelightcore.intermediates": "Create Delight Core - Intermediates",
   "itemGroup.createdelightcore.coins": "Create Delight Core - Coins",
+  "config.jade.plugin_createdelightcore.create.blaze_burner": "Blaze Burner",
+  "config.jade.plugin_createdelightcore.cmr.snowman_cooler": "Snowman Cooler",
   "effect.createdelightcore.daredevil_form": "Daredevil Form",
   "sound_event.createdelightcore.fission_reactor": "Fission Reactor",
   "dimension.createdelightcore.magnetic_caves_dimension": "Magnetic Caves",
