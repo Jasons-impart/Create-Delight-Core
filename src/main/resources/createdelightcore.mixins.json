@@ -19,13 +19,16 @@
     "iceandfire.SirenIslandPieceMixin",
     "createmetallurgy.BeltGrinderBlockEntityMixin",
     "createmetallurgy.CMFluidsMixin",
+    "createmetallurgy.CreateMetallurgyJEIMixin",
     "create.CreateRecipeCategoryMixin",
     "cmr.MixinSnowmanCoolerBlock",
     "cmr.MixinSnowmanCoolerBlockEntity",
     "cmr.SnowmanCoolerAccessor",
     "minecraft.SimpleJsonResourceReloadListenerMixin",
     "resourcepack.PathPackResourcesMixin",
-    "quark.ContributorRewardHandlerMixin"
+    "quark.ContributorRewardHandlerMixin",
+    "vintageimprovements.PressurizingRecipeMixin",
+    "vintageimprovements.VacuumizingRecipeMixin"
   ],
   "client": [
     "xaero.MinimapInternetMixin",
