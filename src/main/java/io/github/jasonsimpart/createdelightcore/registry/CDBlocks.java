@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.gumillea.cosmopolitan.core.reg.CosmoBlocks;
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
 import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -76,6 +78,29 @@ public class CDBlocks {
     public static final BlockEntry<SyrupBlock> VANILLA = simpleSyrupBlock("vanilla");
     public static final BlockEntry<SyrupBlock> MINT = simpleSyrupBlock("mint");
     public static final BlockEntry<SyrupBlock> BANANA = simpleSyrupBlock("banana");
+    //ice-cream bricks
+    public static final BlockEntry<Block> LUCUMA_ICE_CREAM_BRICKS =
+            REGISTRATE.block("lucuma_ice_cream_bricks", Block::new)
+                    .item()
+                    .properties(p -> p.rarity(Rarity.COMMON))
+                    .tab(FOOD_TAB)
+                    .build()
+                    .initialProperties(CosmoBlocks.ADZUKI_ICE_CREAM_BRICKS::get)
+                    .properties(p -> p
+                            .mapColor(MapColor.COLOR_ORANGE))
+                    .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                    .register();
+    public static final BlockEntry<Block> PINK_DRAGON_FRUIT_ICE_CREAM_BRICKS =
+            REGISTRATE.block("pink_dragon_fruit_ice_cream_bricks", Block::new)
+                    .item()
+                    .properties(p -> p.rarity(Rarity.COMMON))
+                    .tab(FOOD_TAB)
+                    .build()
+                    .initialProperties(CosmoBlocks.ADZUKI_ICE_CREAM_BRICKS::get)
+                    .properties(p -> p
+                            .mapColor(MapColor.COLOR_PINK))
+                    .tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                    .register();
     //jam_bottle
     public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
     //jelly_block

@@ -89,6 +89,9 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.VANILLA, "香草糖浆块");
         provider.addBlock(CDBlocks.MINT, "薄荷糖浆块");
         provider.addBlock(CDBlocks.BANANA, "香蕉糖浆块");
+        //ice-cream bricks
+        provider.addBlock(CDBlocks.LUCUMA_ICE_CREAM_BRICKS, "蛋黄果味冰淇淋砖");
+        provider.addBlock(CDBlocks.PINK_DRAGON_FRUIT_ICE_CREAM_BRICKS, "火龙果味冰淇淋砖");
         //jelly bottle
         provider.addBlock(CDBlocks.LUSH_CONFITURE, "繁茂果酱瓶");
         //jelly_block
