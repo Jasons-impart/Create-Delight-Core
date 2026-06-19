@@ -708,5 +708,7 @@
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid Recipe",
   "jei.createdelightcore.amountConsume": "Consumes %smB",
   "jei.createdelightcore.SnowmanCoolerFluid": "Snowman Cooler Fluid Recipe",
+  "createdelightcore.recipe.fan_freezing": "Bulk Freezing",
+  "createdelightcore.recipe.fan_freezing.fan": "Fan behind Powder Snow",
   "jei.createdelightcore.amountConsumeCool": "Consumes %smB"
 }

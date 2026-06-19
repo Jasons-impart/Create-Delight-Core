@@ -708,5 +708,7 @@
   "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
   "jei.createdelightcore.amountConsume": "消耗%smB",
   "jei.createdelightcore.SnowmanCoolerFluid": "雪傀儡液体冷却剂配方",
+  "createdelightcore.recipe.fan_freezing": "批量冷冻",
+  "createdelightcore.recipe.fan_freezing.fan": "在细雪后放置鼓风机",
   "jei.createdelightcore.amountConsumeCool": "消耗%smB"
 }

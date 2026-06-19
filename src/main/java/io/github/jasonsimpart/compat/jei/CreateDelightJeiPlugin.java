@@ -1,15 +1,23 @@
 package io.github.jasonsimpart.compat.jei;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import io.github.jasonsimpart.compat.jei.category.FanFreezingCategory;
 import fr.iglee42.cmr.init.CMRRegistries;
 import io.github.jasonsimpart.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import io.github.jasonsimpart.compat.jei.category.JeiCategorySnowmanCoolerFluid;
 import io.github.jasonsimpart.CreateDelightCore;
+import io.github.jasonsimpart.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.network.ClientFuelCache;
 import io.github.jasonsimpart.registry.ModItems;
+import io.github.jasonsimpart.registry.ModRecipeTypes;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
@@ -17,12 +25,14 @@ import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Supplier;
 
 @JeiPlugin
 public final class CreateDelightJeiPlugin implements IModPlugin {
@@ -32,6 +42,7 @@ public final class CreateDelightJeiPlugin implements IModPlugin {
     private static IJeiRuntime jeiRuntime;
     private static List<JeiCategoryBlazeBurnerFluid.BlazeBurnerFluidRecipe> visibleBlazeRecipes = List.of();
     private static List<JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe> visibleCoolerRecipes = List.of();
+    private final List<CreateRecipeCategory<?>> createCategories = new ArrayList<>();
 
     @Override
     public ResourceLocation getPluginUid() {
@@ -54,12 +65,15 @@ public final class CreateDelightJeiPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
+        loadCreateCategories();
+        registration.addRecipeCategories(createCategories.toArray(IRecipeCategory[]::new));
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
         registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        createCategories.forEach(category -> category.registerRecipes(registration));
         visibleBlazeRecipes = buildBlazeBurnerFluidRecipes();
         visibleCoolerRecipes = buildSnowmanCoolerFluidRecipes();
         registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, visibleBlazeRecipes);
@@ -68,8 +82,29 @@ public final class CreateDelightJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        createCategories.forEach(category -> category.registerCatalysts(registration));
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
         registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
+    }
+
+    private void loadCreateCategories() {
+        createCategories.clear();
+        createCategories.add(new CreateRecipeCategory.Builder<>(FanFreezingRecipe.class)
+                .addTypedRecipes(ModRecipeTypes.FAN_FREEZING)
+                .catalystStack(fanCatalyst())
+                .doubleItemIcon(AllItems.PROPELLER.get(), Items.POWDER_SNOW_BUCKET)
+                .emptyBackground(178, 72)
+                .build(ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, "fan_freezing"),
+                        FanFreezingCategory::new));
+    }
+
+    private static Supplier<ItemStack> fanCatalyst() {
+        return () -> {
+            ItemStack stack = AllBlocks.ENCASED_FAN.asStack();
+            stack.set(DataComponents.CUSTOM_NAME, Component.translatable("createdelightcore.recipe.fan_freezing.fan")
+                    .withStyle(style -> style.withItalic(false)));
+            return stack;
+        };
     }
 
     private static void onFuelCacheUpdated() {
