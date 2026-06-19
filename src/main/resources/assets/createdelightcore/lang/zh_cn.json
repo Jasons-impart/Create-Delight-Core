@@ -4,6 +4,8 @@
   "itemGroup.createdelightcore.fluids": "齿轮盛宴 | 流体",
   "itemGroup.createdelightcore.intermediates": "齿轮盛宴 | 半成品",
   "itemGroup.createdelightcore.coins": "齿轮盛宴 | 钱币",
+  "config.jade.plugin_createdelightcore.create.blaze_burner": "烈焰人燃烧室",
+  "config.jade.plugin_createdelightcore.cmr.snowman_cooler": "雪傀儡冷却器",
   "effect.createdelightcore.daredevil_form": "亡命之徒形态",
   "sound_event.createdelightcore.fission_reactor": "裂变反应堆",
   "dimension.createdelightcore.magnetic_caves_dimension": "磁场洞窟",
