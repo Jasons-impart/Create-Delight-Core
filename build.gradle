@@ -228,6 +228,9 @@ dependencies {
     implementation fg.deobf("curse.maven:balm-531761:6205942")
     implementation fg.deobf("curse.maven:waystones-245755:6156671")
 
+    // Moonlight soft-fluid bridge used by Supplementaries faucets.
+    compileOnly fg.deobf("curse.maven:moonlight-499980:7541536")
+
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // quality foods
