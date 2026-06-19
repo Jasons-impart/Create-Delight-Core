@@ -3,6 +3,7 @@ package io.github.jasonsimpart.registry;
 import com.iafenvoy.iceandfire.registry.IafBlocks;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
 import io.github.jasonsimpart.CreateDelightCore;
+import io.github.jasonsimpart.content.block.CoinPileBlock;
 import io.github.jasonsimpart.content.block.FlowerClusterBlock;
 import io.github.jasonsimpart.content.block.GlassCasingBlock;
 import io.github.jasonsimpart.content.block.JelloBlock;
@@ -46,6 +47,12 @@ public final class ModBlocks {
     public static final DeferredBlock<Block> BRONZE_BLOCK = registerBlock("bronze_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).sound(SoundType.METAL).requiresCorrectToolForDrops()));
 
     public static final DeferredBlock<Block> FORGED_STEEL_BLOCK = registerBlock("forged_steel_block", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK).sound(SoundType.METAL).requiresCorrectToolForDrops()));
+
+    public static final DeferredBlock<CoinPileBlock> IRON_COIN_PILE = coinPile("iron", ModItems.IRON_COIN);
+    public static final DeferredBlock<CoinPileBlock> COPPER_COIN_PILE = coinPile("copper", ModItems.COPPER_COIN);
+    public static final DeferredBlock<CoinPileBlock> GOLD_COIN_PILE = coinPile("gold", ModItems.GOLD_COIN);
+    public static final DeferredBlock<CoinPileBlock> EMERALD_COIN_PILE = coinPile("emerald", ModItems.EMERALD_COIN);
+    public static final DeferredBlock<CoinPileBlock> NETHERITE_COIN_PILE = coinPile("netherite", ModItems.NETHERITE_COIN);
 
     public static final DeferredBlock<TransparentBlock> FRAGMENT_OF_BORDER = registerBlock("fragment_of_border", () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).lightLevel(state -> 15).strength(10.0F).sound(SoundType.METAL).noOcclusion().noLootTable()), new Item.Properties().rarity(Rarity.RARE));
 
@@ -120,6 +127,10 @@ public final class ModBlocks {
 
     private static DeferredBlock<Block> zip(String name) {
         return registerBlock(name, () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.POWDER_SNOW).strength(10.0F, 10.0F).sound(SoundType.POWDER_SNOW)));
+    }
+
+    private static DeferredBlock<CoinPileBlock> coinPile(String coinTier, Supplier<? extends Item> coinItem) {
+        return registerBlock(coinTier + "_coin_pile", () -> new CoinPileBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GOLD_BLOCK).mapColor(MapColor.METAL).strength(0.3F, 1.0F).noOcclusion().sound(SoundType.METAL), coinItem));
     }
 
     private static DeferredBlock<CasingBlock> casing(String name, Rarity rarity) {

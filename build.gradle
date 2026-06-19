@@ -137,6 +137,7 @@ dependencies {
     implementation("curse.maven:alexs-caves-unofficial-port-1420348:${alexscaves_file_id}")
     implementation("curse.maven:architectury-api-419699:${architectury_file_id}")
     implementation("curse.maven:iceandfire-ce-1040076:${iceandfire_file_id}")
+    implementation("curse.maven:create-ore-excavation-649832:${createoreexcavation_file_id}")
     runtimeOnly("curse.maven:uranus-1010827:${uranus_file_id}")
     runtimeOnly("curse.maven:jupiter-1072905:${jupiter_file_id}")
     implementation("curse.maven:create-metallurgy-1007404:${createmetallurgy_file_id}")
