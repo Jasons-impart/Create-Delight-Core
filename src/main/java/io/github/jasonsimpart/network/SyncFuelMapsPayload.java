@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
 import io.github.jasonsimpart.CreateDelightCore;
 import io.github.jasonsimpart.compat.cmr.CoolerStomachHandler;
+import io.github.jasonsimpart.compat.createliquidfuel.DrainableBurnerFuelLoader;
 import io.github.jasonsimpart.network.ClientFuelCache.FuelData;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -30,6 +31,7 @@ public record SyncFuelMapsPayload(
     }
 
     public static SyncFuelMapsPayload snapshot() {
+        DrainableBurnerFuelLoader.load();
         return new SyncFuelMapsPayload(snapshotBurnerData(), snapshotCoolerData());
     }
 
