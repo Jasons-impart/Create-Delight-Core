@@ -34,6 +34,7 @@
     "create.CreateRecipeCategoryMixin",
     "create.FluidIngredientMixin",
     "create.GenericItemFillingMixin",
+    "create.OpenEndedPipeMixin",
     "create.FluidTagIngredientMixin",
     "create.ProcessingRecipeSerializerMixin",
     "createbicbit.DeepFryingRecipeMixin",
