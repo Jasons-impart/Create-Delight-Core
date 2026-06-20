@@ -86,6 +86,7 @@
     "solapplepie.FoodListMixin",
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
+    "supplementaries.SupplementariesFaucetFluidPrecisionMixin",
     "trailandtalesdelight.BuddingLanternFruitBlockMixin",
     "trueuuid.SkinRefreshHandlerMixin",
     "trader_fresh.RestockEventHandlerMixin",
