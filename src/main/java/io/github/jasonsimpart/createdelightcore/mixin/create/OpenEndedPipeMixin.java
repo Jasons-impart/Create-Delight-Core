@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.advancement.AdvancementBehaviour;
 import com.simibubi.create.foundation.advancement.AllAdvancements;
 import com.simibubi.create.foundation.fluid.FluidHelper;
 import com.simibubi.create.foundation.mixin.accessor.FlowingFluidAccessor;
+import io.github.jasonsimpart.createdelightcore.CDConfig;
 import net.createmod.catnip.math.BlockFace;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
@@ -49,6 +50,10 @@ public class OpenEndedPipeMixin extends FlowSource {
 
     @Inject(method = "removeFluidFromSpace", at = @At("HEAD"), cancellable = true, remap = false)
     private void createdelightcore$removeFluidFromSpace(boolean simulate, CallbackInfoReturnable<FluidStack> cir) {
+        if (!CDConfig.enableOpenEndedPipeLavaDrainFix) {
+            return;
+        }
+
         FluidStack empty = FluidStack.EMPTY;
         if (world == null) {
             cir.setReturnValue(empty);

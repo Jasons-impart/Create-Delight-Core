@@ -51,6 +51,10 @@ public class CDConfig
             .defineList("beltGrinderBlockedSandpaperRecipes",
                     List.of("createdelight:sandpaper_polishing/rose_quartz"),
                     obj -> obj instanceof String);
+    private static final ForgeConfigSpec.BooleanValue ENABLE_OPEN_ENDED_PIPE_LAVA_DRAIN_FIX = SERVER_BUILDER
+            .comment("Whether Create open-ended pipes should safely drain lavalogged source blocks, such as Quark grates with lava.")
+            .comment("Disable this only if a pack intentionally wants Create's original lava-draining behavior.")
+            .define("enableOpenEndedPipeLavaDrainFix", true);
     static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
 
 
@@ -63,6 +67,7 @@ public class CDConfig
     public static double lunaSoilBoostChance;
     public static int surfaceDepthLimit;
     public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
+    public static boolean enableOpenEndedPipeLavaDrainFix = true;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -79,6 +84,7 @@ public class CDConfig
         if (event.getConfig().getSpec() == SERVER_SPEC) {
             surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();
             beltGrinderBlockedSandpaperRecipes = new ArrayList<>(BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES.get());
+            enableOpenEndedPipeLavaDrainFix = ENABLE_OPEN_ENDED_PIPE_LAVA_DRAIN_FIX.get();
         }
     }
 }
