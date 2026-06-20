@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore.registry;
 import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEntity;
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.gumillea.cosmopolitan.common.item.DrinkItem;
+import com.lightning.northstar.content.NorthstarFluids;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
@@ -11,7 +12,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.material.Fluid;
 import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
+
+import java.util.function.Supplier;
 
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
@@ -21,6 +25,7 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+    public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.FLUID.getKey();
     // food
     public static final ItemEntry<Item> UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
     public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);
@@ -75,6 +80,12 @@ public class CDItems {
     // bronze
     public static final ItemEntry<Item> BRONZE_INGOT = simpleIngot("bronze");
     public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
+    // northstar buckets
+    public static final ItemEntry<BucketItem> HYDROGEN_BUCKET = bucket("hydrogen_bucket", () -> NorthstarFluids.HYDROGEN.getSource());
+    public static final ItemEntry<BucketItem> OXYGEN_BUCKET = bucket("oxygen_bucket", () -> NorthstarFluids.OXYGEN.getSource());
+    public static final ItemEntry<BucketItem> CARBON_BUCKET = bucket("carbon_bucket", () -> NorthstarFluids.CARBON.getSource());
+    public static final ItemEntry<BucketItem> CHLORINE_BUCKET = bucket("chlorine_bucket", () -> NorthstarFluids.CHLORINE.getSource());
+    public static final ItemEntry<BucketItem> SODIUM_BUCKET = bucket("sodium_bucket", () -> NorthstarFluids.SODIUM.getSource());
 
 
     public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation, boolean bowl, int tFrozen){
@@ -186,6 +197,17 @@ public class CDItems {
         return REGISTRATE.item("raw_" + metalName, Item::new)
                 .tag(forgeItemTag("raw_materials/" + metalName), forgeItemTag("raw_materials"))
                 .tab(MISC_TAB)
+                .register();
+    }
+
+    private static Item.Properties bucketProperties(Item.Properties properties) {
+        return properties.craftRemainder(Items.BUCKET).stacksTo(1);
+    }
+
+    public static ItemEntry<BucketItem> bucket(String name, Supplier<? extends Fluid> fluid) {
+        return REGISTRATE.item(name, properties -> new BucketItem(fluid, properties))
+                .properties(CDItems::bucketProperties)
+                .tab(FLUID_TAB)
                 .register();
     }
 

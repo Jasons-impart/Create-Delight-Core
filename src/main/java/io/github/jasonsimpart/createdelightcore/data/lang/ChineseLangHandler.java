@@ -104,6 +104,11 @@ public class ChineseLangHandler {
         coin(provider, CDItems.GOLD, "金币", "金");
         coin(provider, CDItems.EMERALD, "绿宝石币", "绿");
         coin(provider, CDItems.NETHERITE, "下界合金币", "下界");
+        provider.addItem(CDItems.HYDROGEN_BUCKET, "氢气桶");
+        provider.addItem(CDItems.OXYGEN_BUCKET, "氧气桶");
+        provider.addItem(CDItems.CARBON_BUCKET, "碳桶");
+        provider.addItem(CDItems.CHLORINE_BUCKET, "氯气桶");
+        provider.addItem(CDItems.SODIUM_BUCKET, "钠桶");
         provider.addBlock(CDBlocks.IRON_COIN_PILE, "铁币堆");
         provider.addBlock(CDBlocks.COPPER_COIN_PILE, "铜币堆");
         provider.addBlock(CDBlocks.GOLD_COIN_PILE, "金币堆");
