@@ -78,6 +78,7 @@
     "quality_food.SpecialContainerMixin",
     "ratatouille.BakeDataMixin",
     "ratatouille.SqueezeBasinBlockEntityMixin",
+    "ratatouille.SqueezingRecipeMixin",
     "ratatouille.ThresherBlockEntityMixin",
     "refurbished_furniture.FryingPanBlockEntityMixin",
     "refurbished_furniture.StoveBlockEntityMixin",
