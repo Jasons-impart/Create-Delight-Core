@@ -1,7 +1,5 @@
 package io.github.jasonsimpart.createdelightcore.mixin.quality_food;
 
-import com.soytutta.mynethersdelight.common.block.PowderyCaneBlock;
-import com.soytutta.mynethersdelight.common.block.PowderyCannonBlock;
 import com.teamabnormals.neapolitan.common.block.MintBlock;
 import com.teamabnormals.neapolitan.common.block.StrawberryBushBlock;
 import de.cadentem.quality_food.capability.LevelData;
@@ -28,8 +26,11 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.satisfy.vinery.core.block.GrapeBush;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -50,6 +51,10 @@ import static de.cadentem.quality_food.util.QualityUtils.isValidQuality;
 public abstract class QualityFoodMixin {
     @Unique
     private static final RandomSource create_Delight_Core$RANDOM = RandomSource.create();
+    @Unique
+    private static final ResourceLocation create_Delight_Core$POWDERY_CANE = new ResourceLocation("mynethersdelight", "powdery_cane");
+    @Unique
+    private static final ResourceLocation create_Delight_Core$POWDERY_CANNON = new ResourceLocation("mynethersdelight", "powdery_cannon");
 
     @Inject(method = "applyQuality(Lnet/minecraft/world/item/ItemStack;Ljava/util/Collection;Lnet/minecraft/world/entity/player/Player;)V", at = @At("HEAD"), cancellable = true, remap = false)
     private static void applyQualityFromIngredientsMixin(ItemStack stack, Collection<ItemStack> ingredients, Player player, CallbackInfo ci) {
@@ -193,10 +198,31 @@ public abstract class QualityFoodMixin {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_4) == 4);
         } else if (block instanceof GrapeBush || block instanceof SweetBerryBushBlock) {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_3) == 3);
-        } else if (block instanceof PowderyCaneBlock) {
-            cir.setReturnValue(state.getValue(PowderyCaneBlock.LIT));
-        } else if (block instanceof PowderyCannonBlock) {
-            cir.setReturnValue(state.getValue(PowderyCannonBlock.LIT));
+        } else {
+            Boolean myNethersDelightCropLit = create_Delight_Core$getMyNethersDelightCropLit(state, block);
+            if (myNethersDelightCropLit != null) {
+                cir.setReturnValue(myNethersDelightCropLit);
+            }
         }
+    }
+
+    @Unique
+    private static Boolean create_Delight_Core$getMyNethersDelightCropLit(BlockState state, Block block) {
+        if (!ModList.get().isLoaded("mynethersdelight")) {
+            return null;
+        }
+
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(block);
+        if (!create_Delight_Core$POWDERY_CANE.equals(blockId)
+                && !create_Delight_Core$POWDERY_CANNON.equals(blockId)) {
+            return null;
+        }
+
+        for (Property<?> property : state.getProperties()) {
+            if (property instanceof BooleanProperty litProperty && "lit".equals(litProperty.getName())) {
+                return state.getValue(litProperty);
+            }
+        }
+        return null;
     }
 }

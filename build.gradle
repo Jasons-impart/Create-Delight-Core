@@ -247,7 +247,8 @@ dependencies {
     // 不需要runData时改为implementation
 //    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
     implementation fg.deobf("curse.maven:create-central-kitchen-820977:6987710")
-    implementation fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
+    // Userdev runClient: this version crashes during its own registry setup; compile only for CDR mixins.
+    compileOnly fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-404465:6164053")
     implementation fg.deobf("curse.maven:ftb-ultimine-386134:5363345")
@@ -278,7 +279,8 @@ dependencies {
     //createbicbit
     implementation fg.deobf("curse.maven:createbicbit-918751:7270573")
     //butchercraft
-    implementation fg.deobf("curse.maven:butchercraft-265715:6058842")
+    // Userdev runClient: this version crashes during its own registry setup; compile only for CDR mixins.
+    compileOnly fg.deobf("curse.maven:butchercraft-265715:6058842")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")

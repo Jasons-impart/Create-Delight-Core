@@ -1,7 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
-import com.gumillea.cosmopolitan.core.reg.CosmoBlocks;
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
 import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -85,7 +84,7 @@ public class CDBlocks {
                     .properties(p -> p.rarity(Rarity.COMMON))
                     .tab(FOOD_TAB)
                     .build()
-                    .initialProperties(CosmoBlocks.ADZUKI_ICE_CREAM_BRICKS::get)
+                    .initialProperties(() -> Blocks.SNOW_BLOCK)
                     .properties(p -> p
                             .mapColor(MapColor.COLOR_ORANGE))
                     .tag(BlockTags.MINEABLE_WITH_SHOVEL)
@@ -96,7 +95,7 @@ public class CDBlocks {
                     .properties(p -> p.rarity(Rarity.COMMON))
                     .tab(FOOD_TAB)
                     .build()
-                    .initialProperties(CosmoBlocks.ADZUKI_ICE_CREAM_BRICKS::get)
+                    .initialProperties(() -> Blocks.SNOW_BLOCK)
                     .properties(p -> p
                             .mapColor(MapColor.COLOR_PINK))
                     .tag(BlockTags.MINEABLE_WITH_SHOVEL)
