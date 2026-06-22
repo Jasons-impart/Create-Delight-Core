@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.mixin.supplementaries;
 
 import net.mehvahdjukaar.moonlight.api.fluids.SoftFluidStack;
 import net.mehvahdjukaar.moonlight.api.fluids.forge.SoftFluidStackImpl;
+import net.mehvahdjukaar.supplementaries.common.block.faucet.FluidOffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -20,22 +21,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
-@Mixin(targets = "net.mehvahdjukaar.supplementaries.common.block.faucet.ForgeFluidTankInteraction", remap = false)
+@Mixin(targets = "net.mehvahdjukaar.supplementaries.common.block.faucet.APIFluidTankInteraction", remap = false)
 public class SupplementariesFaucetFluidPrecisionMixin {
 
     @Unique
     private static final ThreadLocal<Integer> createdelightcore$pendingExactDrainMb = new ThreadLocal<>();
 
     @Inject(
-            method = "fill(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/mehvahdjukaar/moonlight/api/fluids/SoftFluidStack;I)Ljava/lang/Integer;",
+            method = "fill(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/entity/BlockEntity;Lnet/mehvahdjukaar/supplementaries/common/block/faucet/FluidOffer;)Ljava/lang/Integer;",
             at = @At("HEAD"),
             cancellable = true
     )
     private void createdelightcore$fillNonWaterPrecisely(Level level, BlockPos pos, BlockEntity target,
-                                                         SoftFluidStack fluid, int minAmount,
+                                                         FluidOffer offer,
                                                          CallbackInfoReturnable<Integer> cir) {
         createdelightcore$pendingExactDrainMb.remove();
 
+        SoftFluidStack fluid = offer.fluid();
+        int minAmount = offer.minAmount();
         if (!(fluid instanceof SoftFluidStackImpl impl)) return;
 
         FluidStack stack = impl.toForgeFluid();
