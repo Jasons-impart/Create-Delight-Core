@@ -93,6 +93,8 @@
     "vintagedelight.FermentingJarBlockEntityMixin",
     "waystones.WaystoneButtonMixin"
   ],
-  "client": [],
+  "client": [
+    "ponder.StitchedSpriteThreadSafetyMixin"
+  ],
   "minVersion": "0.8"
 }
