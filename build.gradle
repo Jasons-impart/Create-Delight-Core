@@ -230,6 +230,9 @@ dependencies {
 
     // Moonlight soft-fluid bridge used by Supplementaries faucets.
     compileOnly fg.deobf("curse.maven:moonlight-499980:7541536")
+    compileOnly fg.deobf("curse.maven:supplementaries-412082:7431873")
+    runtimeOnly fg.deobf("curse.maven:moonlight-499980:7541536")
+    runtimeOnly fg.deobf("curse.maven:supplementaries-412082:7431873")
 
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
