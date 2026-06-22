@@ -66,6 +66,7 @@
     "Minecraft.HoneyBlockMixin",
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
+    "mmt.EffectLevelEventMixin",
     "mynethersdelight.PowderyCaneBlockMixin",
     "mynethersdelight.PowderyCannonBlockMixin",
     "moonlight.SoftFluidStackImplMixin",

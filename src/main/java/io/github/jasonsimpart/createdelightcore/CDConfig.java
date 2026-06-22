@@ -36,6 +36,10 @@ public class CDConfig
     private static final ForgeConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
             .comment("The chance for luna soil to boost crops grows.")
             .defineInRange("lunaSoilBoostChance", 0.5, 0, 1);
+    private static final ForgeConfigSpec.BooleanValue LOG_MORE_MOD_TETRA_INDEPENDENT_DAMAGE_MULTIPLIERS = BUILDER
+            .comment("Whether to log More Mod Tetra independent damage multipliers.")
+            .comment("Useful for debugging MMT damage stacking; logs only when MMT reports at least one independent multiplier.")
+            .define("logMoreModTetraIndependentDamageMultipliers", false);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -65,6 +69,7 @@ public class CDConfig
     public static int teleportCost;
     public static boolean useMoneyTeleport;
     public static double lunaSoilBoostChance;
+    public static boolean logMoreModTetraIndependentDamageMultipliers;
     public static int surfaceDepthLimit;
     public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
     public static boolean enableOpenEndedPipeLavaDrainFix = true;
@@ -80,6 +85,7 @@ public class CDConfig
             useMoneyTeleport = USE_MONEY_TELEPORT.get();
             teleportCost = TELEPORT_COST.get();
             lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
+            logMoreModTetraIndependentDamageMultipliers = LOG_MORE_MOD_TETRA_INDEPENDENT_DAMAGE_MULTIPLIERS.get();
         }
         if (event.getConfig().getSpec() == SERVER_SPEC) {
             surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();

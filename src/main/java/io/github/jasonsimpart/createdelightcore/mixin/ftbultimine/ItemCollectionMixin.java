@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.mixin.ftbultimine;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import dev.ftb.mods.ftbultimine.ItemCollection;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityFoodHarvestContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -17,6 +18,11 @@ import java.util.List;
 
 @Mixin(ItemCollection.class)
 public class ItemCollectionMixin {
+    @Inject(method = "add", at = @At("HEAD"), remap = false)
+    private void create_Delight_Core$applyQualityBeforeCollect(ItemStack stack, CallbackInfo ci) {
+        QualityFoodHarvestContext.applyQuality(stack);
+    }
+
     @Inject(method = "drop", at = @At(value = "INVOKE", ordinal = 1, target = "Ljava/util/List;iterator()Ljava/util/Iterator;", shift = At.Shift.AFTER), cancellable = true, remap = false)
     public void dropMixin(Level world, BlockPos pos, CallbackInfo ci, @Local List<ItemStack> stacks) {
         //使用直接的产生掉落物来代替使用popResource
