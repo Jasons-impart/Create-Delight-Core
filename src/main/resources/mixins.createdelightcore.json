@@ -67,6 +67,7 @@
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
     "mmt.EffectLevelEventMixin",
+    "mmt.MMTDamageCalculateMixin",
     "mynethersdelight.PowderyCaneBlockMixin",
     "mynethersdelight.PowderyCannonBlockMixin",
     "moonlight.SoftFluidStackImplMixin",

@@ -1,11 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.mixin.mmt;
 
-import io.github.jasonsimpart.createdelightcore.CDConfig;
-import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.spongepowered.asm.mixin.Final;
+import io.github.jasonsimpart.createdelightcore.compat.mmt.MmtDamageLogContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -27,59 +22,36 @@ public class EffectLevelEventMixin {
     @Shadow
     private List<Float> independentMulti;
 
-    @Shadow
-    @Final
-    private LivingEntity attacker;
-
-    @Shadow
-    @Final
-    private LivingEntity target;
-
-    @Shadow
-    @Final
-    public LivingHurtEvent hurtEvent;
-
-    @Inject(method = "addIndependentMulti", at = @At("RETURN"), require = 0)
-    private void createdelightcore$logIndependentDamageMultipliers(float multiplier, CallbackInfo ci) {
-        if (!CDConfig.logMoreModTetraIndependentDamageMultipliers) {
-            return;
-        }
-
-        List<Float> independentMultipliers = List.copyOf(independentMulti);
-        if (independentMultipliers.isEmpty()) {
-            return;
-        }
-
-        float originalDamage = hurtEvent.getAmount();
-        float independentProduct = 1.0F;
-
-        for (float value : independentMultipliers) {
-            independentProduct *= value;
-        }
-
-        float beforeIndependent = (originalDamage + fixedDamage) * (1.0F + normalMulti);
-        float projectedDamage = Math.max(beforeIndependent * independentProduct, 0.0F);
-
-        CreateDelightCore.LOGGER.info(
-                "[CDCore][MMT Damage] attacker={} target={} source={} base={} fixed={} normalMulti={} addedIndependentMultiplier={} independentMultipliers={} independentProduct={} projectedDamageSoFar={}",
-                describe(attacker),
-                describe(target),
-                hurtEvent.getSource().getMsgId(),
-                originalDamage,
-                fixedDamage,
-                normalMulti,
-                multiplier,
-                independentMultipliers,
-                independentProduct,
-                projectedDamage
-        );
+    @Inject(method = "addFixedDamage", at = @At("RETURN"), require = 0)
+    private void createdelightcore$recordFixedDamage(float amount, CallbackInfo ci) {
+        MmtDamageLogContext.recordFixedDamage(amount, fixedDamage, "add");
     }
 
-    private static String describe(LivingEntity entity) {
-        if (entity == null) {
-            return "<none>";
-        }
+    @Inject(method = "setFixedDamage", at = @At("RETURN"), require = 0)
+    private void createdelightcore$recordSetFixedDamage(float amount, CallbackInfo ci) {
+        MmtDamageLogContext.recordFixedDamage(amount, fixedDamage, "set");
+    }
 
-        return entity.getScoreboardName() + "[" + ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()) + "]";
+    @Inject(method = "addNormalMulti", at = @At("RETURN"), require = 0)
+    private void createdelightcore$recordNormalMultiplier(float amount, CallbackInfo ci) {
+        MmtDamageLogContext.recordNormalMultiplier(amount, normalMulti, "add");
+    }
+
+    @Inject(method = "setNormalMulti", at = @At("RETURN"), require = 0)
+    private void createdelightcore$recordSetNormalMultiplier(float amount, CallbackInfo ci) {
+        MmtDamageLogContext.recordNormalMultiplier(amount, normalMulti, "set");
+    }
+
+    @Inject(method = "addIndependentMulti", at = @At("RETURN"), require = 0)
+    private void createdelightcore$recordIndependentDamageMultiplier(float multiplier, CallbackInfo ci) {
+        MmtDamageLogContext.recordIndependentMultiplier(multiplier, product(independentMulti));
+    }
+
+    private static float product(List<Float> values) {
+        float result = 1.0F;
+        for (float value : values) {
+            result *= value;
+        }
+        return result;
     }
 }
