@@ -37,12 +37,6 @@ public class EnglishLangHandler {
         coin(provider, CDItems.GOLD, "Gold Coin", "Gold");
         coin(provider, CDItems.EMERALD, "Emerald Coin", "Emerald");
         coin(provider, CDItems.NETHERITE, "Netherite Coin", "Netherite");
-        provider.addItem(CDItems.HYDROGEN_BUCKET, "Hydrogen Bucket");
-        provider.addItem(CDItems.OXYGEN_BUCKET, "Oxygen Bucket");
-        provider.addItem(CDItems.CARBON_BUCKET, "Carbon Bucket");
-        provider.addItem(CDItems.CHLORINE_BUCKET, "Chlorine Bucket");
-        provider.addItem(CDItems.SODIUM_BUCKET, "Sodium Bucket");
-
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal", "%1$s became a part of the molten metal");
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal.player", "%2$s thought that %1$s was a piece of unmelted metal");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s was frozen into a popsicle because of eating too much ice cream");

@@ -11,6 +11,7 @@ import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.fruitsdelight.content.block.PassableLeavesBlock;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
@@ -20,6 +21,7 @@ import io.github.jasonsimpart.createdelightcore.content.item.JellyBottleItem;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
@@ -179,6 +181,11 @@ public class CDBlocks {
     public static final BlockEntry<PizzaBlock> MEATLOVERS_PIZZA = pizzaBlock("meatlovers");
     public static final BlockEntry<RawPizzaBlock> RAW_NETHER_PIZZA = rawPizzaBlock("nether");
     public static final BlockEntry<PizzaBlock> NETHER_PIZZA = pizzaBlock("nether");
+    // festival delicacies fruit trees
+    public static final BlockEntry<PassableLeavesBlock> JUJUBE_LEAVES = festivalFruitLeaves("jujube");
+    public static final BlockEntry<SaplingBlock> JUJUBE_SAPLING = festivalFruitSapling("jujube");
+    public static final BlockEntry<PassableLeavesBlock> WALNUT_LEAVES = festivalFruitLeaves("walnut");
+    public static final BlockEntry<SaplingBlock> WALNUT_SAPLING = festivalFruitSapling("walnut");
 
 
     public static BlockEntry<CoinPileBlock> simpleCoinPileBlock(String coinTier, ItemEntry<Item> coinItem) {
@@ -371,6 +378,44 @@ public class CDBlocks {
                         .requiresCorrectToolForDrops()
                 )
                 .tag(tool, toolLevel)
+                .register();
+    }
+
+    private static BlockEntry<PassableLeavesBlock> festivalFruitLeaves(String name) {
+        return REGISTRATE.block(name + "_leaves", PassableLeavesBlock::new)
+                .initialProperties(() -> Blocks.OAK_LEAVES)
+                .properties(properties -> properties
+                        .randomTicks()
+                        .noOcclusion()
+                        .isValidSpawn((state, level, pos, entityType) -> false)
+                        .isSuffocating((state, level, pos) -> false)
+                        .isViewBlocking((state, level, pos) -> false))
+                .tag(BlockTags.LEAVES, BlockTags.MINEABLE_WITH_HOE)
+                .item()
+                .tag(ItemTags.LEAVES)
+                .tab(MISC_TAB)
+                .build()
+                .addLayer(() -> RenderType::cutoutMipped)
+                .register();
+    }
+
+    private static BlockEntry<SaplingBlock> festivalFruitSapling(String name) {
+        return REGISTRATE.block(name + "_sapling",
+                        properties -> new SaplingBlock(new CDFruitTreeGrower("tree/" + name + "_tree"), properties))
+                .initialProperties(() -> Blocks.OAK_SAPLING)
+                .properties(properties -> properties
+                        .noCollission()
+                        .randomTicks()
+                        .instabreak()
+                        .sound(SoundType.GRASS))
+                .tag(BlockTags.SAPLINGS)
+                .item()
+                .tag(ItemTags.SAPLINGS)
+                .transform(builder -> builder.model((ctx, provider) ->
+                        provider.generated(ctx, provider.modLoc("block/" + ctx.getName()))))
+                .tab(MISC_TAB)
+                .build()
+                .addLayer(() -> RenderType::cutout)
                 .register();
     }
 

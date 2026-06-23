@@ -92,6 +92,11 @@ public class ChineseLangHandler {
         //ice-cream bricks
         provider.addBlock(CDBlocks.LUCUMA_ICE_CREAM_BRICKS, "蛋黄果味冰淇淋砖");
         provider.addBlock(CDBlocks.PINK_DRAGON_FRUIT_ICE_CREAM_BRICKS, "火龙果味冰淇淋砖");
+        //fruits leaves
+        provider.addBlock(CDBlocks.JUJUBE_LEAVES, "大枣树叶");
+        provider.addBlock(CDBlocks.JUJUBE_SAPLING, "大枣树苗");
+        provider.addBlock(CDBlocks.WALNUT_LEAVES, "核桃树叶");
+        provider.addBlock(CDBlocks.WALNUT_SAPLING, "核桃树苗");
         //jelly bottle
         provider.addBlock(CDBlocks.LUSH_CONFITURE, "繁茂果酱瓶");
         //jelly_block

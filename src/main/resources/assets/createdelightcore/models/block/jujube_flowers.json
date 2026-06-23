@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "createdelightcore:block/jujube_flowers"
+  }
+}

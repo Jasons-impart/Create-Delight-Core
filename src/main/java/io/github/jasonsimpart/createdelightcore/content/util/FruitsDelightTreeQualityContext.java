@@ -4,6 +4,7 @@ import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import de.cadentem.quality_food.util.Utils;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -16,6 +17,10 @@ import java.util.Set;
 
 public final class FruitsDelightTreeQualityContext {
     private static final String FRUITS_DELIGHT_NAMESPACE = "fruitsdelight";
+    private static final Set<String> CDC_FRUIT_TREE_SAPLINGS = Set.of(
+            "jujube_sapling",
+            "walnut_sapling"
+    );
     private static final ThreadLocal<Quality> SAPLING_QUALITY = new ThreadLocal<>();
     private static final ThreadLocal<Set<Long>> CHANGED_TREE_BLOCKS = new ThreadLocal<>();
 
@@ -73,7 +78,10 @@ public final class FruitsDelightTreeQualityContext {
             return false;
         }
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(state.getBlock());
-        return FRUITS_DELIGHT_NAMESPACE.equals(id.getNamespace());
+        if (FRUITS_DELIGHT_NAMESPACE.equals(id.getNamespace())) {
+            return true;
+        }
+        return CreateDelightCore.MODID.equals(id.getNamespace()) && CDC_FRUIT_TREE_SAPLINGS.contains(id.getPath());
     }
 
     private static boolean isTreeGrowthBlock(BlockState state) {
