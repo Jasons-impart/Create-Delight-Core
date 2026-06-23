@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=flowers": {
+      "model": "createdelightcore:block/jujube_flowers"
+    },
+    "type=fruits": {
+      "model": "createdelightcore:block/jujube_fruits"
+    },
+    "type=leaves": {
+      "model": "createdelightcore:block/jujube_leaves"
+    }
+  }
+}

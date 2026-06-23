@@ -286,6 +286,8 @@ dependencies {
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
+    // festival delicate
+    implementation fg.deobf("curse.maven:festival-delicacies-1461231:7618167")
 
     implementation fg.deobf("curse.maven:displaydelight-1144296:7027844")
     implementation fg.deobf("curse.maven:northstar-redux-1318310:7476515")
