@@ -1,0 +1,16 @@
+{
+  "central_body": "northstar:sol",
+  "orbit": {
+    "type": "northstar:simple",
+    "duration_days": 90560.0,
+    "radius": 39.48,
+    "inclination_deg": 17.16,
+    "ascending_node_deg": 110.3,
+    "initial_mean_anomaly_deg": 14.53
+  },
+  "class": "dwarf_planet",
+  "required_science": 9.0,
+  "rotation_period_days": 6.387,
+  "diameter": 2376.6,
+  "renderer": "northstar:solar_system/pluto_sky"
+}

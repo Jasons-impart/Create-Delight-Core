@@ -39,6 +39,7 @@
     "waystones.WaystonesAPIMixin"
   ],
   "client": [
+    "northstar.TelescopeScreenMixin",
     "xaero.MinimapInternetMixin",
     "xaero.PatreonMixin",
     "xaero.WorldMapInternetMixin"

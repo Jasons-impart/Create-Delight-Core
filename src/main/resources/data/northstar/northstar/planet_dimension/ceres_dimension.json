@@ -1,0 +1,18 @@
+{
+  "planet": "northstar:ceres",
+  "name": "surface",
+  "dimension": "createdelightcore:ceres_dimension",
+  "atmosphere": {
+    "fluid": "minecraft:empty",
+    "fluid_nbt": {},
+    "collection_rate": 0.0,
+    "pressure_pa": 0.0
+  },
+  "gravity": 1.56912,
+  "averageTemperature": -173.0,
+  "temperature": -173.0,
+  "wind_multiplier": 0.0,
+  "sun_multiplier": 1.0,
+  "heat_intercept": 0.0,
+  "heat_gradient": 0.0
+}
