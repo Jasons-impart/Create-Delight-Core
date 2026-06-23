@@ -49,6 +49,13 @@ public final class Config {
             )
             .define("enableAlexsCavesDimensionBiomeOverrides", true);
 
+    public static final ModConfigSpec.BooleanValue ENABLE_ALEXSCAVES_DIMENSION_MONSTER_SPAWN_GUARD = BUILDER
+            .comment(
+                    "是否阻止 minecraft 和 quark 的怪物生成在 createdelightcore 的 Alex's Caves 洞穴维度中。只拦截新生成实体，不清理存档已有实体。",
+                    "Prevent minecraft and quark monsters from spawning in createdelightcore's Alex's Caves dimensions. Only new entities are blocked; entities loaded from disk are preserved."
+            )
+            .define("enableAlexsCavesDimensionMonsterSpawnGuard", true);
+
     public static final ModConfigSpec.BooleanValue ENABLE_INVALID_RESOURCE_PATH_FILTERS = BUILDER
             .comment(
                     "是否过滤特定第三方 mod jar 中已知的坏资源/data map 文件。只过滤白名单中的路径，不放宽全局资源路径校验。",
@@ -98,6 +105,62 @@ public final class Config {
             )
             .define("enableEclipticSeasonsChunkAttachmentSyncPatch", true);
 
+    public static final ModConfigSpec.BooleanValue DISABLE_DROP_REPORT = BUILDER
+            .comment(
+                    "是否禁用掉落物报告。报告会低频统计已加载维度中的掉落物，并在区块内数量超过阈值时通知在线玩家。",
+                    "Disable the dropped item report. The report periodically scans loaded levels and notifies online players when a chunk exceeds the threshold."
+            )
+            .define("disableDropReport", false);
+
+    public static final ModConfigSpec.IntValue DROP_REPORT_ITEM_THRESHOLD = BUILDER
+            .comment(
+                    "掉落物报告的区块阈值。统计值超过此数量时报告该区块。",
+                    "Chunk threshold for the dropped item report. Chunks above this count are reported."
+            )
+            .defineInRange("itemThreshold", 100, 0, Integer.MAX_VALUE);
+
+    public static final ModConfigSpec.BooleanValue DROP_REPORT_IGNORE_STACK_COUNT = BUILDER
+            .comment(
+                    "掉落物报告是否按掉落实体数量统计，而不是按物品堆叠数量统计。",
+                    "Count dropped item entities instead of item stack sizes in the dropped item report."
+            )
+            .define("ignoreStackCount", false);
+
+    public static final ModConfigSpec.IntValue DROP_REPORT_INTERVAL_TICKS = BUILDER
+            .comment(
+                    "掉落物报告扫描间隔，单位为 tick。旧 Core 固定为 6000 tick，即 5 分钟。",
+                    "Dropped item report scan interval in ticks. Old Core used 6000 ticks, or 5 minutes."
+            )
+            .defineInRange("dropReportIntervalTicks", 6000, 6000, Integer.MAX_VALUE);
+
+    public static final ModConfigSpec.IntValue DROP_REPORT_MAX_CHUNKS = BUILDER
+            .comment(
+                    "每次掉落物报告最多显示多少个超阈值区块，避免刷屏。",
+                    "Maximum over-threshold chunks shown per dropped item report to avoid chat spam."
+            )
+            .defineInRange("dropReportMaxChunks", 10, 1, 100);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_WAYSTONES_MONEY_TELEPORT = BUILDER
+            .comment(
+                    "是否启用旧 Core 的 Waystones 传送货币消耗：将 Waystones 经验等级/经验点需求换算为 Lightman's Currency 基础币值。",
+                    "Enable old Core Waystones money teleport costs by replacing Waystones XP requirements with Lightman's Currency base coin value costs."
+            )
+            .define("enableWaystonesMoneyTeleport", true);
+
+    public static final ModConfigSpec.ConfigValue<String> WAYSTONES_MONEY_CHAIN = BUILDER
+            .comment(
+                    "Waystones 传送扣款使用的 Lightman's Currency coin chain。",
+                    "Lightman's Currency coin chain used by Waystones teleport money costs."
+            )
+            .define("waystonesMoneyChain", "main");
+
+    public static final ModConfigSpec.IntValue WAYSTONES_TELEPORT_COST_PER_LEVEL = BUILDER
+            .comment(
+                    "每 1 点 Waystones 经验成本换算成多少 Lightman's Currency 基础币值。旧 Core 默认值为 45。",
+                    "Base coin value charged for each Waystones XP cost unit. Old Core default was 45."
+            )
+            .defineInRange("waystonesTeleportCostPerLevel", 45, 1, Integer.MAX_VALUE);
+
     public static final ModConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = BUILDER
             .comment(
                     "Sandpaper polishing recipe IDs to hide from Create: Metallurgy Belt Grinder auto-inheritance and JEI display.",
@@ -109,6 +172,27 @@ public final class Config {
                     value -> value instanceof String
             );
 
+    public static final ModConfigSpec.EnumValue<RecipeRemoveMissingIdMode> RECIPE_REMOVE_MISSING_ID_MODE = BUILDER
+            .comment(
+                    "KubeJS ServerEvents.recipes event.remove({id: ...}) missing recipe handling. OFF keeps KubeJS behavior, WARN logs only, STRICT fails the reload.",
+                    "Only exact ID filters are checked. Broad filters such as mod/input/output/type/regex/predicate are not affected."
+            )
+            .defineEnum("recipeRemoveMissingIdMode", RecipeRemoveMissingIdMode.STRICT);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
+            .comment(
+                    "是否修正 KubeJS Create 在 create:sequenced_assembly.sequence 内生成的 create:filling 流体 ingredient 格式。只改最终 recipe JSON，不改脚本 API。",
+                    "Fix KubeJS Create fluid ingredient JSON generated for create:filling steps inside create:sequenced_assembly.sequence. Only final recipe JSON is normalized; script APIs are unchanged."
+            )
+            .define("enableKubeJsCreateSequencedFluidFix", true);
+
+    public static final ModConfigSpec.BooleanValue DEBUG_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
+            .comment(
+                    "是否记录 KubeJS Create 序列装配流体 recipe JSON 修正命中的 recipe。",
+                    "Log recipes touched by the KubeJS Create sequenced assembly fluid JSON fix."
+            )
+            .define("debugKubeJsCreateSequencedFluidFix", false);
+
     public static final ModConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
             .comment(
                     "月壤和湿润月壤耕地在随机刻促进上方可骨粉催熟方块的概率。",
@@ -117,6 +201,12 @@ public final class Config {
             .defineInRange("lunaSoilBoostChance", 0.5D, 0.0D, 1.0D);
 
     public static final ModConfigSpec SPEC = BUILDER.build();
+
+    public enum RecipeRemoveMissingIdMode {
+        OFF,
+        WARN,
+        STRICT
+    }
 
     private Config() {
     }

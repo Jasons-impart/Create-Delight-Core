@@ -13,9 +13,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 public final class ClientModEvents {
@@ -29,6 +31,7 @@ public final class ClientModEvents {
         modEventBus.addListener(ClientModEvents::registerClientExtensions);
         modEventBus.addListener(ClientModEvents::registerBlockColors);
         modEventBus.addListener(ClientModEvents::registerItemColors);
+        NeoForge.EVENT_BUS.addListener(QuickReloadKeyHandler::onKeyInput);
     }
 
     private static void clientSetup(FMLClientSetupEvent event) {
@@ -41,7 +44,22 @@ public final class ClientModEvents {
                 ItemBlockRenderTypes.setRenderLayer(fluid.source().get(), RenderType.solid());
                 ItemBlockRenderTypes.setRenderLayer(fluid.flowing().get(), RenderType.solid());
             });
+            registerWaystonesMoneyRenderer();
         });
+    }
+
+    private static void registerWaystonesMoneyRenderer() {
+        if (!ModList.get().isLoaded("waystones") || !ModList.get().isLoaded("lightmanscurrency")) {
+            return;
+        }
+
+        try {
+            Class.forName("io.github.jasonsimpart.client.waystones.WaystoneMoneyRequirementRenderer")
+                    .getMethod("register")
+                    .invoke(null);
+        } catch (ReflectiveOperationException exception) {
+            throw new IllegalStateException("Failed to register createdelightcore Waystones money renderer", exception);
+        }
     }
 
     private static void registerConnectedTextures(net.minecraft.world.level.block.Block block, com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry shift) {

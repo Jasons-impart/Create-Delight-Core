@@ -13,12 +13,12 @@ import net.minecraft.world.level.biome.Biome;
 public final class AlexsCavesDimensionOverrides {
     private static final Map<ResourceKey<Level>, ResourceKey<Biome>> DIMENSION_BIOMES =
             Map.of(
-                    dimension("magnetic_caves_dimension"), alexsCavesBiome("magnetic_caves"),
-                    dimension("primordial_caves_dimension"), alexsCavesBiome("primordial_caves"),
-                    dimension("toxic_caves_dimension"), alexsCavesBiome("toxic_caves"),
-                    dimension("abyssal_chasm_dimension"), alexsCavesBiome("abyssal_chasm"),
-                    dimension("forlorn_hollows_dimension"), alexsCavesBiome("forlorn_hollows"),
-                    dimension("candy_cavity_dimension"), alexsCavesBiome("candy_cavity"));
+                    dimension("ceres_dimension"), alexsCavesBiome("candy_cavity"),
+                    dimension("enceladus_dimension"), alexsCavesBiome("abyssal_chasm"),
+                    dimension("pluto_dimension"), alexsCavesBiome("forlorn_hollows"),
+                    northstarDimension("mercury"), alexsCavesBiome("magnetic_caves"),
+                    northstarDimension("venus"), alexsCavesBiome("toxic_caves"),
+                    northstarDimension("mars"), alexsCavesBiome("primordial_caves"));
 
     private AlexsCavesDimensionOverrides() {
     }
@@ -53,6 +53,10 @@ public final class AlexsCavesDimensionOverrides {
 
     private static ResourceKey<Level> dimension(String name) {
         return ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, name));
+    }
+
+    private static ResourceKey<Level> northstarDimension(String name) {
+        return ResourceKey.create(Registries.DIMENSION, ResourceLocation.fromNamespaceAndPath("northstar", name));
     }
 
     private static ResourceKey<Biome> alexsCavesBiome(String name) {
