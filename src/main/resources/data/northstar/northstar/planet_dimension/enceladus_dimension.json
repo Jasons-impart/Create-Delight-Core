@@ -1,0 +1,18 @@
+{
+  "planet": "northstar:enceladus",
+  "name": "surface",
+  "dimension": "createdelightcore:enceladus_dimension",
+  "atmosphere": {
+    "fluid": "minecraft:empty",
+    "fluid_nbt": {},
+    "collection_rate": 0.0,
+    "pressure_pa": 0.0
+  },
+  "gravity": 1.56912,
+  "averageTemperature": -201.0,
+  "temperature": -201.0,
+  "wind_multiplier": 0.0,
+  "sun_multiplier": 0.35,
+  "heat_intercept": 0.0,
+  "heat_gradient": 0.0
+}

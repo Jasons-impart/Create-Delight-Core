@@ -105,6 +105,34 @@ public final class Config {
             )
             .define("enableEclipticSeasonsChunkAttachmentSyncPatch", true);
 
+    public static final ModConfigSpec.BooleanValue ENABLE_NORTHSTAR_TELESCOPE_MIN_SIZE = BUILDER
+            .comment(
+                    "是否让 Northstar 望远镜中已通过其它可见性过滤的天体至少按配置像素大小绘制。只影响望远镜 UI；不改变星球真实直径、距离或火箭逻辑。",
+                    "Render Northstar telescope bodies that pass other visibility checks at least at the configured pixel size. Telescope UI only; real planet diameter, distance, and rocket logic are unchanged."
+            )
+            .define("enableNorthstarTelescopeMinSize", true);
+
+    public static final ModConfigSpec.IntValue NORTHSTAR_TELESCOPE_MIN_SIZE = BUILDER
+            .comment(
+                    "Northstar 望远镜重点天体最小显示半径，单位为像素。当前只对谷神星、冥王星和土卫二使用，其它小天体使用 1 像素保底。",
+                    "Minimum rendered radius for priority Northstar telescope bodies, in pixels. Currently applies only to Ceres, Pluto and Enceladus; other small bodies use a 1 pixel floor."
+            )
+            .defineInRange("northstarTelescopeMinSize", 2, 1, 8);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_NORTHSTAR_TELESCOPE_BODY_SPACING = BUILDER
+            .comment(
+                    "是否在 Northstar 望远镜中把视觉上重叠或过近的天体推开。只影响望远镜 UI 中的绘制和悬停位置；不改变星球轨道或真实位置。",
+                    "Push visually overlapping or very close Northstar telescope bodies apart. Affects telescope render and hover positions only; real orbit and position are unchanged."
+            )
+            .define("enableNorthstarTelescopeBodySpacing", true);
+
+    public static final ModConfigSpec.IntValue NORTHSTAR_TELESCOPE_BODY_SPACING = BUILDER
+            .comment(
+                    "Northstar 望远镜天体之间的最小视觉间距，单位为像素。值越大，卫星群越分散。",
+                    "Minimum visual spacing between Northstar telescope bodies, in pixels. Higher values spread satellite groups farther apart."
+            )
+            .defineInRange("northstarTelescopeBodySpacing", 4, 0, 64);
+
     public static final ModConfigSpec.BooleanValue DISABLE_DROP_REPORT = BUILDER
             .comment(
                     "是否禁用掉落物报告。报告会低频统计已加载维度中的掉落物，并在区块内数量超过阈值时通知在线玩家。",
