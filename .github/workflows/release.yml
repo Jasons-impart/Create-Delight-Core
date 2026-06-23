@@ -1,0 +1,146 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Mod version to build, for example 0.1.0+1.21.1"
+        required: true
+        type: string
+      version_type:
+        description: "CurseForge release channel"
+        required: true
+        default: "beta"
+        type: choice
+        options:
+          - release
+          - beta
+          - alpha
+      release_notes:
+        description: "Release notes body. Leave empty for a short automatic note."
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Set release variables
+        id: vars
+        shell: bash
+        run: |
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            VERSION="$RELEASE_VERSION"
+            VERSION_TYPE="$RELEASE_VERSION_TYPE"
+          else
+            VERSION="${GITHUB_REF_NAME#v}"
+            VERSION_TYPE="release"
+          fi
+
+          VERSION="${VERSION#v}"
+          TAG="v$VERSION"
+          NAME="Create Delight Core $VERSION for Minecraft 1.21.1"
+
+          {
+            echo "version=$VERSION"
+            echo "version_type=$VERSION_TYPE"
+            echo "tag=$TAG"
+            echo "name=$NAME"
+          } >> "$GITHUB_OUTPUT"
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+          RELEASE_VERSION_TYPE: ${{ inputs.version_type }}
+
+      - name: Make Gradle wrapper executable
+        shell: bash
+        run: chmod +x ./gradlew
+
+      - name: Build
+        shell: bash
+        run: ./gradlew clean build -Pmod_version="$RELEASE_VERSION" --console=plain --no-daemon
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.version }}
+
+      - name: Collect release jar
+        id: asset
+        shell: bash
+        run: |
+          mkdir -p release-assets
+          mapfile -t jars < <(find build/libs -maxdepth 1 -type f -name "*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | sort)
+          if [ "${#jars[@]}" -ne 1 ]; then
+            printf 'Expected exactly one primary jar, found %s:\n' "${#jars[@]}"
+            printf '%s\n' "${jars[@]}"
+            exit 1
+          fi
+          cp "${jars[0]}" release-assets/
+          echo "jar=release-assets/$(basename "${jars[0]}")" >> "$GITHUB_OUTPUT"
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          NOTES="$RELEASE_NOTES"
+          if [ -z "$NOTES" ]; then
+            NOTES="Automated build for $RELEASE_VERSION."
+          fi
+          printf '%s\n' "$NOTES" > CHANGELOG_RELEASE.md
+        env:
+          RELEASE_VERSION: ${{ steps.vars.outputs.version }}
+          RELEASE_NOTES: ${{ inputs.release_notes }}
+
+      - name: Publish GitHub and CurseForge release
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          files: ${{ steps.asset.outputs.jar }}
+          name: ${{ steps.vars.outputs.name }}
+          version: ${{ steps.vars.outputs.version }}
+          version-type: ${{ steps.vars.outputs.version_type }}
+          changelog-file: CHANGELOG_RELEASE.md
+          loaders: |
+            neoforge
+          game-versions: |
+            1.21.1
+          java: |
+            21
+
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-tag: ${{ steps.vars.outputs.tag }}
+
+          curseforge-id: 1062344
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          curseforge-dependencies: |
+            328085(required)
+            398521(required)
+            1415723(required)
+            1420348(required)
+            419699(required)
+            1040076(required)
+            649832(required)
+            1007404(required)
+            1103188(required)
+            840734(required)
+            324717(required)
+            531761(required)
+            245755(required)
+            472521(required)
