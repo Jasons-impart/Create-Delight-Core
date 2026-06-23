@@ -1,5 +1,8 @@
 package io.github.jasonsimpart;
 
+import io.github.jasonsimpart.server.AlexCavesDimensionSpawnGuardEvents;
+import io.github.jasonsimpart.server.DropReportEvents;
+import io.github.jasonsimpart.disabled.DisabledContentEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +14,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
@@ -37,6 +41,25 @@ public final class ModCommonEvents {
         modEventBus.addListener(ModCommonEvents::modifyDefaultComponents);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::igniteAfterEatingBlazeCake);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::protectBuddingQuartz);
+        NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onEntityJoinLevel);
+        NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onMobPositionCheck);
+        NeoForge.EVENT_BUS.addListener(DropReportEvents::onServerTick);
+        DisabledContentEvents.register(modEventBus);
+        registerWaystonesMoneyTeleport();
+    }
+
+    private static void registerWaystonesMoneyTeleport() {
+        if (!ModList.get().isLoaded("waystones") || !ModList.get().isLoaded("lightmanscurrency")) {
+            return;
+        }
+
+        try {
+            Class.forName("io.github.jasonsimpart.compat.waystones.WaystonesCurrencyCompat")
+                    .getMethod("register")
+                    .invoke(null);
+        } catch (ReflectiveOperationException exception) {
+            throw new IllegalStateException("Failed to register createdelightcore Waystones currency compat", exception);
+        }
     }
 
     private static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {

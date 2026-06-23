@@ -21,14 +21,22 @@
     "createmetallurgy.CMFluidsMixin",
     "createmetallurgy.CreateMetallurgyJEIMixin",
     "create.CreateRecipeCategoryMixin",
+    "kubejs.EitherRecipeComponentMixin",
+    "kubejs.KubeRecipeMixin",
+    "kubejs.RecipesKubeEventMixin",
+    "kubejs.SizedFluidIngredientComponentMixin",
     "cmr.MixinSnowmanCoolerBlock",
     "cmr.MixinSnowmanCoolerBlockEntity",
     "cmr.SnowmanCoolerAccessor",
+    "minecraft.LevelDisabledBlockMixin",
     "minecraft.SimpleJsonResourceReloadListenerMixin",
+    "minecraft.WorldGenRegionDisabledBlockMixin",
+    "northstar.FluidStateMixin",
     "resourcepack.PathPackResourcesMixin",
     "quark.ContributorRewardHandlerMixin",
     "vintageimprovements.PressurizingRecipeMixin",
-    "vintageimprovements.VacuumizingRecipeMixin"
+    "vintageimprovements.VacuumizingRecipeMixin",
+    "waystones.WaystonesAPIMixin"
   ],
   "client": [
     "xaero.MinimapInternetMixin",

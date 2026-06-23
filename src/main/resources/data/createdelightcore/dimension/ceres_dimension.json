@@ -2,10 +2,10 @@
   "type": "createdelightcore:alexscaves_dimension",
   "generator": {
     "type": "minecraft:noise",
-    "settings": "createdelightcore:abyssal_chasm_dimension",
+    "settings": "createdelightcore:ceres_dimension",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "alexscaves:abyssal_chasm"
+      "biome": "alexscaves:candy_cavity"
     }
   }
 }

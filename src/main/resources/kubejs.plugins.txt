@@ -1,0 +1,1 @@
+io.github.jasonsimpart.compat.kubejs.disabled.CreateDelightCoreKubePlugin

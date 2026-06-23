@@ -39,6 +39,10 @@ repositories {
         name = 'Jared Maven'
         url = 'https://maven.blamejared.com'
     }
+    maven {
+        name = 'Latvian Mods'
+        url = 'https://maven.latvian.dev/releases'
+    }
 }
 
 base {
@@ -148,6 +152,10 @@ dependencies {
     runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
     compileOnly("curse.maven:jade-324717:${jade_file_id}")
     runtimeOnly("curse.maven:jade-324717:${jade_file_id}")
+    implementation("curse.maven:balm-531761:${balm_file_id}")
+    implementation("curse.maven:waystones-245755:${waystones_file_id}")
+    implementation("curse.maven:lightmans-currency-472521:${lightmanscurrency_file_id}")
+    compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
