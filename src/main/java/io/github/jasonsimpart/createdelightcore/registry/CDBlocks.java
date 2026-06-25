@@ -79,6 +79,7 @@ public class CDBlocks {
     public static final BlockEntry<SyrupBlock> VANILLA = simpleSyrupBlock("vanilla");
     public static final BlockEntry<SyrupBlock> MINT = simpleSyrupBlock("mint");
     public static final BlockEntry<SyrupBlock> BANANA = simpleSyrupBlock("banana");
+    public static final BlockEntry<SyrupBlock> COCONUT = simpleSyrupBlock("coconut");
     //ice-cream bricks
     public static final BlockEntry<Block> LUCUMA_ICE_CREAM_BRICKS =
             REGISTRATE.block("lucuma_ice_cream_bricks", Block::new)
