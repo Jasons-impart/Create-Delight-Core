@@ -1,5 +1,5 @@
 {
-  "type": "createdelightcore:alexscaves_dimension",
+  "type": "createdelightcore:pluto_dimension",
   "generator": {
     "type": "minecraft:noise",
     "settings": "createdelightcore:alexscaves_dimension",
