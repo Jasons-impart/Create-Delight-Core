@@ -17,7 +17,7 @@ public final class NorthstarSurfaceFreezeGuard {
     private NorthstarSurfaceFreezeGuard() {
     }
 
-    public static boolean shouldRestoreFrozenWater(Level level, BlockPos pos) {
+    public static boolean shouldKeepWaterLiquid(Level level, BlockPos pos) {
         if (!level.dimension().equals(ENCELADUS_DIMENSION)) {
             return false;
         }
