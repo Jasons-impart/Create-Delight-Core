@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FluidStateMixin {
     @Inject(method = "tick", at = @At("TAIL"))
     private void createdelightcore$keepEnceladusFreezeNearSurface(Level level, BlockPos pos, CallbackInfo ci) {
-        if (level.getBlockState(pos).is(Blocks.ICE) && NorthstarSurfaceFreezeGuard.shouldRestoreFrozenWater(level, pos)) {
+        if (level.getBlockState(pos).is(Blocks.ICE) && NorthstarSurfaceFreezeGuard.shouldKeepWaterLiquid(level, pos)) {
             level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
         }
     }
