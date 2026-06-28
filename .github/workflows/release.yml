@@ -38,6 +38,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate tag release branch
+        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+        shell: bash
+        run: |
+          git fetch --no-tags origin '+refs/heads/1.21.1:refs/remotes/origin/1.21.1'
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/1.21.1; then
+            echo "::error::Tag $GITHUB_REF_NAME points to $GITHUB_SHA, which is not contained in origin/1.21.1."
+            exit 1
+          fi
+
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
