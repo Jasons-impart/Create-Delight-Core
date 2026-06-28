@@ -22,14 +22,6 @@ repositories {
     }
 
     mavenLocal()
-    maven {
-        name = 'Aliyun Public'
-        url = 'https://maven.aliyun.com/repository/public'
-    }
-    maven {
-        name = 'Aliyun Central'
-        url = 'https://maven.aliyun.com/repository/central'
-    }
     mavenCentral()
     maven {
         name = 'NeoForge'

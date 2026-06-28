@@ -14,14 +14,6 @@ pluginManagement {
         }
 
         mavenLocal()
-        maven {
-            name = 'Aliyun Gradle Plugin'
-            url = 'https://maven.aliyun.com/repository/gradle-plugin'
-        }
-        maven {
-            name = 'Aliyun Public'
-            url = 'https://maven.aliyun.com/repository/public'
-        }
         gradlePluginPortal()
     }
 }
