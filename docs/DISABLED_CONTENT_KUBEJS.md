@@ -32,7 +32,7 @@ Default block policy:
 - hide its block item from creative tabs/search
 - block using its block item
 - block player placement
-- replace matching `setBlock` / worldgen placements with air
+- replace matching `setBlock`, chunk writes, and worldgen placements with air
 
 ## Item Rules
 
@@ -114,6 +114,8 @@ Available block policies:
 
 `replaceWith(...)` is an alias for `replaceGeneratedWith(...)`.
 
+`replaceGeneratedWith(...)` only changes the replacement block. By itself it still uses the default block policy set. If you combine it with explicit policies such as `.blockPlace()`, CDC keeps replacement enabled too, regardless of chain order.
+
 如果想把矿石替换成石头，可以写：
 
 ```js
@@ -143,5 +145,6 @@ CDC does not scan player inventories, dropped items, containers, or existing chu
 - 规则存储和匹配：`io.github.jasonsimpart.disabled.DisabledContentManager`
 - NeoForge 事件拦截：`io.github.jasonsimpart.disabled.DisabledContentEvents`
 - 方块替换 mixin：
+  - `io.github.jasonsimpart.mixin.minecraft.ChunkAccessDisabledBlockMixin`
   - `io.github.jasonsimpart.mixin.minecraft.LevelDisabledBlockMixin`
   - `io.github.jasonsimpart.mixin.minecraft.WorldGenRegionDisabledBlockMixin`
