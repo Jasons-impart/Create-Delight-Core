@@ -29,6 +29,7 @@
     "cmr.MixinSnowmanCoolerBlockEntity",
     "cmr.SnowmanCoolerAccessor",
     "minecraft.ChunkAccessDisabledBlockMixin",
+    "minecraft.LevelChunkDisabledBlockMixin",
     "minecraft.LevelDisabledBlockMixin",
     "minecraft.SimpleJsonResourceReloadListenerMixin",
     "minecraft.WorldGenRegionDisabledBlockMixin",

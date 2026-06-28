@@ -17,6 +17,10 @@ public abstract class LevelDisabledBlockMixin {
     @ModifyVariable(method = "setBlock", at = @At("HEAD"), argsOnly = true, ordinal = 0)
     private BlockState createdelightcore$replaceDisabledBlock(BlockState state, BlockPos pos) {
         Level level = (Level) (Object) this;
+        if (level.isClientSide) {
+            return state;
+        }
+
         return DisabledContentManager.replacementFor(keepEnceladusDeepWaterLiquid(state, level, pos), level, pos);
     }
 
