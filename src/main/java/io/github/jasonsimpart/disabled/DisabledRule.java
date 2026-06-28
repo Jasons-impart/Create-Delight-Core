@@ -84,12 +84,17 @@ public final class DisabledRule {
 
     public DisabledRule policy(DisablePolicy policy) {
         policies.add(policy);
+        if (target == DisabledRuleTarget.BLOCK && replacement != null && policy != DisablePolicy.REPLACE_BLOCK) {
+            policies.add(DisablePolicy.REPLACE_BLOCK);
+        }
         return this;
     }
 
     public DisabledRule replacement(BlockState replacement) {
         this.replacement = replacement;
-        policy(DisablePolicy.REPLACE_BLOCK);
+        if (!policies.isEmpty()) {
+            policies.add(DisablePolicy.REPLACE_BLOCK);
+        }
         return this;
     }
 
