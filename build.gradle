@@ -9,6 +9,18 @@ version = mod_version
 group = mod_group_id
 
 repositories {
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = 'CurseMaven'
+                url = 'https://cursemaven.com'
+            }
+        }
+        filter {
+            includeGroup 'curse.maven'
+        }
+    }
+
     mavenLocal()
     maven {
         name = 'Aliyun Public'
@@ -30,10 +42,6 @@ repositories {
     maven {
         name = 'Registrate'
         url = 'https://maven.ithundxr.dev/snapshots'
-    }
-    maven {
-        name = 'CurseMaven'
-        url = 'https://cursemaven.com'
     }
     maven {
         name = 'Jared Maven'
