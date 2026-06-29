@@ -36,6 +36,7 @@
     "create.OpenEndedPipeMixin",
     "create.FluidTagIngredientMixin",
     "create.ProcessingRecipeSerializerMixin",
+    "createdieselgenerators.BulkFermenterBlockEntityMixin",
     "createbicbit.DeepFryingRecipeMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",
@@ -97,6 +98,8 @@
     "vintagedelight.FermentingJarBlockEntityMixin",
     "waystones.WaystoneButtonMixin"
   ],
-  "client": [],
+  "client": [
+    "createdieselgenerators.BulkFermenterRendererMixin"
+  ],
   "minVersion": "0.8"
 }
