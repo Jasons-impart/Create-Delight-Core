@@ -37,6 +37,65 @@ public class ChineseLangHandler {
         provider.add("fluid." + namespace + "." + id, name);
     }
 
+    private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "itemGroup.createdelightcore.coin", "钱币与物品");
+        replace(provider, "item.createdelightcore.iron_coin", "§7铁币");
+        replace(provider, "item.createdelightcore.iron_coin.plural", "§7铁币");
+        replace(provider, "item.createdelightcore.copper_coin", "§e铜币");
+        replace(provider, "item.createdelightcore.copper_coin.plural", "§e铜币");
+        replace(provider, "item.createdelightcore.gold_coin", "§6金币");
+        replace(provider, "item.createdelightcore.gold_coin.plural", "§6金币");
+        replace(provider, "item.createdelightcore.emerald_coin", "§2绿宝石币");
+        replace(provider, "item.createdelightcore.emerald_coin.plural", "§2绿宝石币");
+        replace(provider, "item.createdelightcore.netherite_coin", "§5下界合金币");
+        replace(provider, "item.createdelightcore.netherite_coin.plural", "§5下界合金币");
+        replace(provider, "block.createdelightcore.order_parser", "订单解析器");
+        replace(provider, "block.createdelightcore.order_requester", "订单请求器");
+        replace(provider, "createdelightcore.gui.address", "地址");
+        replace(provider, "createdelightcore.gui.candidates", "候选物品");
+        replace(provider, "createdelightcore.gui.estimate", "预期：%s");
+        replace(provider, "createdelightcore.gui.expected_reward", "预期收益：%s");
+        replace(provider, "createdelightcore.gui.reward_score", "收益评分：%s");
+        replace(provider, "createdelightcore.gui.estimate.incomplete", "未满足");
+        replace(provider, "createdelightcore.gui.estimate.normal", "普通");
+        replace(provider, "createdelightcore.gui.estimate.good", "良好");
+        replace(provider, "createdelightcore.gui.estimate.excellent", "优秀");
+        replace(provider, "createdelightcore.gui.estimate.great", "极佳");
+        replace(provider, "createdelightcore.gui.estimate.great_overflow", "%s %s");
+        replace(provider, "createdelightcore.gui.full", "完整");
+        replace(provider, "createdelightcore.gui.missing", "缺货");
+        replace(provider, "createdelightcore.gui.mode_fixed", "数量");
+        replace(provider, "createdelightcore.gui.mode_ratio", "配比");
+        replace(provider, "createdelightcore.gui.order", "订单");
+        replace(provider, "createdelightcore.gui.partial", "允许部分");
+        replace(provider, "createdelightcore.gui.planned_count", "用%s");
+        replace(provider, "createdelightcore.gui.shortage_count", "缺%s");
+        replace(provider, "createdelightcore.gui.summary_total", "合计");
+        replace(provider, "createdelightcore.gui.ratio_parts_short", "%s份");
+        replace(provider, "createdelightcore.gui.quantity_hint", "点击调整数量，按住 Shift 每次调整 16。");
+        replace(provider, "createdelightcore.gui.weight_hint", "点击调整份数，按住 Shift 每次调整 16。");
+        replace(provider, "createdelightcore.gui.refresh", "刷新");
+        replace(provider, "createdelightcore.gui.save", "保存");
+        replace(provider, "createdelightcore.gui.select_candidates", "选择候选");
+        replace(provider, "createdelightcore.gui.send", "发送");
+        replace(provider, "createdelightcore.gui.help.select", "左键候选会选择最多一组物品。");
+        replace(provider, "createdelightcore.gui.help.multi", "同一条目可以继续选择其他候选混合提交。");
+        replace(provider, "createdelightcore.gui.help.quantity", "使用 - / + 调整已选数量。");
+        replace(provider, "createdelightcore.gui.help.cancel", "右键候选可以取消选择。");
+        replace(provider, "createdelightcore.gui.help.ratio_select", "左键加入候选，右键移除候选。");
+        replace(provider, "createdelightcore.gui.help.ratio_weight", "用 - / + 调整份数；份数越多，这种物品分到的订单需求越多。");
+        replace(provider, "createdelightcore.gui.help.ratio_planned", "每行“用X”表示这张订单预计会消耗 X 个。");
+        replace(provider, "createdelightcore.gui.help.ratio_shortage", "红色行表示库存不足；“缺X”就是还差 X 个。");
+        replace(provider, "createdelightcore.gui.help.ratio_missing", "缺货候选会保留；补货后可继续使用这套配比。");
+        replace(provider, "createdelightcore.gui.help.score", "收益评分越高，完成订单时获得的奖励包和钱币越多。");
+        replace(provider, "createdelightcore.gui.help.redstone", "给机器一个红石脉冲，会按已保存方案发送请求。");
+        replace(provider, "createdelightcore.order_request.no_selection", "请至少选择一个候选物品");
+        replace(provider, "createdelightcore.order_request.saved", "订单请求已保存");
+        replace(provider, "createdelightcore.order_request.sent", "订单请求已发送");
+        replace(provider, "createdelightcore.order_request.not_enough_items", "绑定网络中没有足够的匹配物品");
+        replace(provider, "createdelightcore.order_request.failed", "订单请求失败：请检查物流绑定、地址和包裹网络");
+    }
+
     public static void init(RegistrateCNLangProvider provider) {
         //creativetabs
         provider.add(CDCreativeTabs.MISC.get(), "齿轮盛宴 | 杂项");
@@ -226,6 +285,7 @@ public class ChineseLangHandler {
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");
+        addManualOverrides(provider);
     }
 
     public static void replace(@NotNull RegistrateCNLangProvider provider, @NotNull String key,

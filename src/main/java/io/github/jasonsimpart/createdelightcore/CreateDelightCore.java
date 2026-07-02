@@ -35,7 +35,9 @@ public class CreateDelightCore {
         CDItems.init();
         CDFluids.init();
         CDBlocks.init();
+        CDBlockEntities.init();
         CDCreativeTabs.register(modEventBus);
+        CDMenus.register(modEventBus);
         CDRecipeTypes.register(modEventBus);
 
         REGISTRATE.registerEventListeners(modEventBus);

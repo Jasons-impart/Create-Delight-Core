@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-24T22:10:12.3008731	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
+// 1.20.1	2026-07-02T15:27:38.0792433	Registrate Provider for createdelightcore [Recipes, Advancements, Loot Tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud), Lang (zh_cn)]
 d36e6ca96e25d48b6f98a1ebf1a49f7e45ef75b8 assets/createdelightcore/blockstates/banana_syrup.json
 a08a4bc8382d445a9e8470e6517b58540e9181d4 assets/createdelightcore/blockstates/base_syrup.json
 4e07c3ad714b266389c755f3235c70607fa7988d assets/createdelightcore/blockstates/bronze_block.json
@@ -41,6 +41,8 @@ ba2fbaa1d5f967100552d32ef2281bf38ceae891 assets/createdelightcore/blockstates/mo
 4110b749045686210159f131e570d495d9a48a6d assets/createdelightcore/blockstates/netherite_coin_pile.json
 60ef68e209cff207a3ed1af7fe9c882bddea72dc assets/createdelightcore/blockstates/nether_pizza.json
 a6ba2ee7b96401afba4c3fa3d522e4f774151d0a assets/createdelightcore/blockstates/nuclear_waste.json
+3707f65ec92b8a3bdbcc113f857976758d478be7 assets/createdelightcore/blockstates/order_parser.json
+50ed6ecf2be52bfe88c533fa000dbc50b74900b5 assets/createdelightcore/blockstates/order_requester.json
 561d296677c91b979f66eeb4d6ed0a21d83e9d65 assets/createdelightcore/blockstates/phantom_compost.json
 6dc07dc7093a443e3d353c7c5576eefd2abe533c assets/createdelightcore/blockstates/pink_dragon_fruit_ice_cream_bricks.json
 9cb3fd4b96d4d75fca12840b1fd9aa91e4cfdf3f assets/createdelightcore/blockstates/raw_meatlovers_pizza.json
@@ -58,9 +60,9 @@ b9e423206dd84c634ffe2b320ed7f74004810ea8 assets/createdelightcore/blockstates/ti
 a976123c5fbea002389af9a4aae9c3aaef18edb7 assets/createdelightcore/blockstates/vegetable_pizza.json
 2f0fc01777895f477657a1ad1dd6cd4e5b2bdabd assets/createdelightcore/blockstates/walnut_leaves.json
 db1057f84d29326b785e05d1605cae59d8546226 assets/createdelightcore/blockstates/walnut_sapling.json
-5431fef5b9bd1656a46a2363ceadb3b644ff1d11 assets/createdelightcore/lang/en_ud.json
-8ff546230d93621f7e09dc4c4787fbc5901d5736 assets/createdelightcore/lang/en_us.json
-69199481fb578d5c7f2bbb44294e9b9fefc4d76d assets/createdelightcore/lang/zh_cn.json
+f90809315a95b2fe541cf88f04141be1f1764846 assets/createdelightcore/lang/en_ud.json
+0cef8e4e7471d22e3e1628363617090d1a09e08f assets/createdelightcore/lang/en_us.json
+f583f0f49d69a1a202cea9d5b80f38975c9005fb assets/createdelightcore/lang/zh_cn.json
 a9f3adf9ef4db5e80e37acb6bc78478e3ccd1e4a assets/createdelightcore/models/block/banana_syrup.json
 8d9a4f8f2bf9e1fd6c72917168aa5de152a1d45d assets/createdelightcore/models/block/base_syrup.json
 be5875103605b00b8884ca0433378a9aafe3da3a assets/createdelightcore/models/block/bronze_block.json
@@ -136,6 +138,8 @@ db1c72dfd7a442f09770d85c7c3a0c7a43c67f78 assets/createdelightcore/models/block/n
 0a1cc53d8dfa9745505a09437587a4b8d70713ea assets/createdelightcore/models/block/netherite_coin_pile_height6.json
 a34744c111ea7504eeffe87602256582b3423a3a assets/createdelightcore/models/block/netherite_coin_pile_height8.json
 5611aa8b515523561b8f68ef2b9f25ba7bcbc638 assets/createdelightcore/models/block/nuclear_waste.json
+e1eaf441a26a81f9e71c45de9b418cff42777231 assets/createdelightcore/models/block/order_parser.json
+2f280851b5d20c4f87a618ea52e61e77476f9a61 assets/createdelightcore/models/block/order_requester.json
 f2233a11ccea882c63b09c74a23fcae1380281b5 assets/createdelightcore/models/block/phantom_compost.json
 c50a876acb8755101de7290d3f5823122d30871a assets/createdelightcore/models/block/pink_dragon_fruit_ice_cream_bricks.json
 cef7d795c570abd6ac083c816bc323a643e26997 assets/createdelightcore/models/block/raw_tin_block.json
@@ -208,6 +212,8 @@ b8a5cb0a0f9359f01665b840029aaa94de6214e4 assets/createdelightcore/models/item/ne
 abdf63602b598594202e4f7f5cd50dece90758f1 assets/createdelightcore/models/item/nether_pizza.json
 1d045a92111eded6b63f116b59693ee9c06c40db assets/createdelightcore/models/item/nether_pizza_slice.json
 7c8ec13031cd20398b542a66018d250a85ff5f3f assets/createdelightcore/models/item/nuclear_waste_bucket.json
+7d1de8e3b269bda0def6b552bf37ad6c0e4cecf1 assets/createdelightcore/models/item/order_parser.json
+9887ba39104fd1ecf19705cd4e1d73de7f4553b2 assets/createdelightcore/models/item/order_requester.json
 635b56beae14d30646be1ae9f26885630eda889b assets/createdelightcore/models/item/phantom_compost.json
 94f73956a3dc6d1995fed8c7d583b72d0b435861 assets/createdelightcore/models/item/pink_dragon_fruit_ice_cream_bricks.json
 2793e9603a5735f20f8ec8e2d1c2a89672a01482 assets/createdelightcore/models/item/pink_dragon_fruit_ice_cream_cone.json
@@ -273,6 +279,8 @@ f7267f24f2ce16ea4cd1c26d8d9b889dab12b09e data/createdelightcore/loot_tables/bloc
 b52f1b0ecef29aa95358a5729e2417c04b5fc590 data/createdelightcore/loot_tables/blocks/mint_syrup.json
 92e83dd775cfe532a442f67952378544483ad0c5 data/createdelightcore/loot_tables/blocks/netherite_coin_pile.json
 d865bae4e569ff8c44da76fd56668de77806a5c1 data/createdelightcore/loot_tables/blocks/nether_pizza.json
+37c2f8249e8b4dd0aae01777581b3daee030e7dc data/createdelightcore/loot_tables/blocks/order_parser.json
+3aa330daa87e73596c1464780c596b11f147acbb data/createdelightcore/loot_tables/blocks/order_requester.json
 ca30da45ba8f721bced58c68e3aad0e87da2bd26 data/createdelightcore/loot_tables/blocks/phantom_compost.json
 420c513bc51cfc3a64870419644f3ab06070f783 data/createdelightcore/loot_tables/blocks/pink_dragon_fruit_ice_cream_bricks.json
 0f0f22bb59402243a270bfbf911051d8c36614b3 data/createdelightcore/loot_tables/blocks/raw_meatlovers_pizza.json
@@ -334,7 +342,7 @@ c610159eee458eb6ba32c22e6e47b5fcd5986eeb data/forge/tags/items/storage_blocks/ti
 17dd2040298710f8dd64aef15146b279374720b2 data/minecraft/tags/blocks/dirt.json
 f5142fddaa872f7e96ea223a277e48dec867b755 data/minecraft/tags/blocks/leaves.json
 f5142fddaa872f7e96ea223a277e48dec867b755 data/minecraft/tags/blocks/mineable/hoe.json
-c6602378f9f8a1186c4621958c94092118611a32 data/minecraft/tags/blocks/mineable/pickaxe.json
+845f0003528ccb2e449286aa315ad06db97ef2d5 data/minecraft/tags/blocks/mineable/pickaxe.json
 b191ce835484c15e7a3aaab698e2ceae22514e11 data/minecraft/tags/blocks/mineable/shovel.json
 774f7a6c1c6193ef5654ec2d76cd4f6e186ea8e7 data/minecraft/tags/blocks/needs_diamond_tool.json
 503ebca4c04bbafba701945624fc1e96ce987955 data/minecraft/tags/blocks/needs_iron_tool.json

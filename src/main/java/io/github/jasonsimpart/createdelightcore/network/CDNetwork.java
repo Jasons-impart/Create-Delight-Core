@@ -24,5 +24,26 @@ public class CDNetwork {
                 SyncFuelMapsPacket::decode,
                 SyncFuelMapsPacket::handle
         );
+        CHANNEL.registerMessage(
+                id++,
+                RequestOrderCandidatesPacket.class,
+                RequestOrderCandidatesPacket::encode,
+                RequestOrderCandidatesPacket::decode,
+                RequestOrderCandidatesPacket::handle
+        );
+        CHANNEL.registerMessage(
+                id++,
+                SyncOrderCandidatesPacket.class,
+                SyncOrderCandidatesPacket::encode,
+                SyncOrderCandidatesPacket::decode,
+                SyncOrderCandidatesPacket::handle
+        );
+        CHANNEL.registerMessage(
+                id++,
+                SetOrderRequestPacket.class,
+                SetOrderRequestPacket::encode,
+                SetOrderRequestPacket::decode,
+                SetOrderRequestPacket::handle
+        );
     }
 }

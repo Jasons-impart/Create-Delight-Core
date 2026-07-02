@@ -22,6 +22,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +39,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import vectorwing.farmersdelight.common.block.TomatoVineBlock;
 
 import java.util.Collection;
 
@@ -94,25 +96,27 @@ public abstract class QualityFoodMixin {
         TagKey<Block> crop = TagKey.create(Registries.BLOCK, new ResourceLocation("createdelight", "quality_crops"));
         if (isRelevantCrop(state) || state.is(crop)) {
             Quality selected = Quality.NONE;
-            float growChance = create_Delight_Core$getGrowChance(player, state, blockQuality);
+            Quality chanceQuality = create_Delight_Core$getChanceQuality(state, blockQuality);
+            float growChance = create_Delight_Core$getGrowChance(player, state, chanceQuality);
+            BlockState effectiveFarmland = create_Delight_Core$getEffectiveFarmland(player, state, farmland);
             for (Quality quality : Quality.values()) {
                 if (quality.level() == 0) {
                     continue;
                 }
 
                 double chance;
-                if (blockQuality.level() == 0) {
+                if (chanceQuality.level() == 0) {
                     chance = QualityConfig.getChance(quality);
                 } else {
                     chance = Mth.clamp(
-                            QualityConfig.getChance(quality) * QualityConfig.calculateChance(quality, QualityConfig.getWeight(blockQuality)) * QualityConfig.getWeight(Quality.DIAMOND),
+                            QualityConfig.getChance(quality) * QualityConfig.calculateChance(quality, QualityConfig.getWeight(chanceQuality)) * QualityConfig.getWeight(Quality.DIAMOND),
                             0.0,
                             1.0
                     );
                 }
                 chance = Modification.harvestOrSeedMultiplier(quality, stack).apply(chance);
                 chance = Modification.luck(player).apply(chance);
-                chance = Modification.farmland(state, farmland).apply(chance);
+                chance = Modification.farmland(state, effectiveFarmland).apply(chance);
                 chance = Modification.multiplicative(growChance).apply(chance);
                 if (chance > 0 && chance >= create_Delight_Core$RANDOM.nextDouble()) {
                     selected = quality;
@@ -126,6 +130,57 @@ public abstract class QualityFoodMixin {
             applyQuality(stack, player);
         }
         ci.cancel();
+    }
+
+    @Unique
+    private static Quality create_Delight_Core$getChanceQuality(BlockState state, Quality blockQuality) {
+        if (state.is(Blocks.SUGAR_CANE)) {
+            return Quality.NONE;
+        }
+
+        return blockQuality;
+    }
+
+    @Unique
+    private static BlockState create_Delight_Core$getEffectiveFarmland(Player player, BlockState state, BlockState farmland) {
+        if (player == null) {
+            return farmland;
+        }
+
+        BlockPos cropPos = QualityFoodHarvestContext.getCropPos();
+        if (cropPos == null) {
+            return farmland;
+        }
+
+        BlockPos basePos = create_Delight_Core$getEffectiveCropPos(player, state, cropPos);
+        if (basePos.equals(cropPos)) {
+            return farmland;
+        }
+
+        return player.level().getBlockState(basePos.below());
+    }
+
+    @Unique
+    private static BlockPos create_Delight_Core$getEffectiveCropPos(Player player, BlockState state, BlockPos cropPos) {
+        if (state.is(Blocks.SUGAR_CANE)) {
+            return create_Delight_Core$getBaseCropPos(player, cropPos, Blocks.SUGAR_CANE);
+        }
+
+        if (state.getBlock() instanceof TomatoVineBlock) {
+            return create_Delight_Core$getBaseCropPos(player, cropPos, state.getBlock());
+        }
+
+        return cropPos;
+    }
+
+    @Unique
+    private static BlockPos create_Delight_Core$getBaseCropPos(Player player, BlockPos cropPos, Block cropBlock) {
+        BlockPos basePos = cropPos;
+        while (player.level().getBlockState(basePos.below()).is(cropBlock)) {
+            basePos = basePos.below();
+        }
+
+        return basePos;
     }
 
     @Unique
@@ -143,9 +198,11 @@ public abstract class QualityFoodMixin {
             growPos = player.getOnPos();
         }
 
-        int sourceRank = LevelData.get(player.level(), growPos).level();
+        BlockPos effectiveGrowPos = create_Delight_Core$getEffectiveCropPos(player, state, growPos);
+        BlockState effectiveGrowState = player.level().getBlockState(effectiveGrowPos);
+        int sourceRank = state.is(Blocks.SUGAR_CANE) ? 0 : LevelData.get(player.level(), effectiveGrowPos).level();
         int targetRank = blockQuality.level();
-        float growChance = EclipticSeasonsUtil.getGrowChance(player.level(), growPos, state);
+        float growChance = EclipticSeasonsUtil.getGrowChance(player.level(), effectiveGrowPos, effectiveGrowState);
         float baseGrowChance = create_Delight_Core$removeRankBoost(growChance, sourceRank);
         float correctedGrowChance = create_Delight_Core$applyRankBoost(baseGrowChance, targetRank);
         return Mth.clamp(correctedGrowChance * 1.25F, 0.0F, 1.0F);
