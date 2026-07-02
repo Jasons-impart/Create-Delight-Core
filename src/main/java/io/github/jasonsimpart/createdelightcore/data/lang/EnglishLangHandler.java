@@ -7,7 +7,10 @@ import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.data.LanguageProvider;
 
+import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class EnglishLangHandler {
@@ -23,6 +26,65 @@ public class EnglishLangHandler {
         if (id.startsWith("flowing_"))
             id = id.substring("flowing_".length());
         provider.add("fluid." + namespace + "." + id, name);
+    }
+
+    private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "itemGroup.createdelightcore.coin", "Coins & Items");
+        replace(provider, "item.createdelightcore.iron_coin", "§7Iron Coin");
+        replace(provider, "item.createdelightcore.iron_coin.plural", "§7Iron Coins");
+        replace(provider, "item.createdelightcore.copper_coin", "§eCopper Coin");
+        replace(provider, "item.createdelightcore.copper_coin.plural", "§eCopper Coins");
+        replace(provider, "item.createdelightcore.gold_coin", "§6Gold Coin");
+        replace(provider, "item.createdelightcore.gold_coin.plural", "§6Gold Coins");
+        replace(provider, "item.createdelightcore.emerald_coin", "§2Emerald Coin");
+        replace(provider, "item.createdelightcore.emerald_coin.plural", "§2Emerald Coins");
+        replace(provider, "item.createdelightcore.netherite_coin", "§5Netherite Coin");
+        replace(provider, "item.createdelightcore.netherite_coin.plural", "§5Netherite Coins");
+        replace(provider, "block.createdelightcore.order_parser", "Order Parser");
+        replace(provider, "block.createdelightcore.order_requester", "Order Requester");
+        replace(provider, "createdelightcore.gui.address", "Address");
+        replace(provider, "createdelightcore.gui.candidates", "Candidates");
+        replace(provider, "createdelightcore.gui.estimate", "Expected: %s");
+        replace(provider, "createdelightcore.gui.expected_reward", "Expected Reward: %s");
+        replace(provider, "createdelightcore.gui.reward_score", "Reward Score: %s");
+        replace(provider, "createdelightcore.gui.estimate.incomplete", "Incomplete");
+        replace(provider, "createdelightcore.gui.estimate.normal", "Normal");
+        replace(provider, "createdelightcore.gui.estimate.good", "Good");
+        replace(provider, "createdelightcore.gui.estimate.excellent", "Excellent");
+        replace(provider, "createdelightcore.gui.estimate.great", "Great");
+        replace(provider, "createdelightcore.gui.estimate.great_overflow", "%s %s");
+        replace(provider, "createdelightcore.gui.full", "Full");
+        replace(provider, "createdelightcore.gui.missing", "Missing");
+        replace(provider, "createdelightcore.gui.mode_fixed", "Count");
+        replace(provider, "createdelightcore.gui.mode_ratio", "Mix");
+        replace(provider, "createdelightcore.gui.order", "Order");
+        replace(provider, "createdelightcore.gui.partial", "Partial");
+        replace(provider, "createdelightcore.gui.planned_count", "Use %s");
+        replace(provider, "createdelightcore.gui.shortage_count", "Need %s");
+        replace(provider, "createdelightcore.gui.summary_total", "Total");
+        replace(provider, "createdelightcore.gui.ratio_parts_short", "%s pt");
+        replace(provider, "createdelightcore.gui.quantity_hint", "Click to adjust quantity. Hold Shift for 16.");
+        replace(provider, "createdelightcore.gui.weight_hint", "Click to adjust parts. Hold Shift for 16.");
+        replace(provider, "createdelightcore.gui.refresh", "Refresh");
+        replace(provider, "createdelightcore.gui.save", "Save");
+        replace(provider, "createdelightcore.gui.select_candidates", "Select candidates");
+        replace(provider, "createdelightcore.gui.send", "Send");
+        replace(provider, "createdelightcore.gui.help.select", "Left-click a candidate to select up to one stack.");
+        replace(provider, "createdelightcore.gui.help.multi", "Select more candidates from the same entry to mix items.");
+        replace(provider, "createdelightcore.gui.help.quantity", "Use - / + to adjust selected quantities.");
+        replace(provider, "createdelightcore.gui.help.cancel", "Right-click a candidate to cancel it.");
+        replace(provider, "createdelightcore.gui.help.ratio_select", "Left-click to add a candidate; right-click to remove it.");
+        replace(provider, "createdelightcore.gui.help.ratio_weight", "Use - / + to adjust parts; more parts means more of this order goes to that item.");
+        replace(provider, "createdelightcore.gui.help.ratio_planned", "Each Use X label shows how many items this order will consume.");
+        replace(provider, "createdelightcore.gui.help.ratio_shortage", "Red rows mean stock is short; Need X is how many more items are required.");
+        replace(provider, "createdelightcore.gui.help.ratio_missing", "Missing candidates stay saved and work again after restocking.");
+        replace(provider, "createdelightcore.gui.help.score", "Higher reward score means more reward bundles and coins when the order is completed.");
+        replace(provider, "createdelightcore.gui.help.redstone", "Give the machine a redstone pulse to send the saved request.");
+        replace(provider, "createdelightcore.order_request.no_selection", "Select at least one candidate item");
+        replace(provider, "createdelightcore.order_request.saved", "Order request saved");
+        replace(provider, "createdelightcore.order_request.sent", "Order request sent");
+        replace(provider, "createdelightcore.order_request.not_enough_items", "Not enough matching items in the linked network");
+        replace(provider, "createdelightcore.order_request.failed", "Order request failed: check the link, address, and package network");
     }
 
 
@@ -99,5 +161,18 @@ public class EnglishLangHandler {
         //tooltip
         provider.add("tooltip." + CreateDelightCore.MODID + ".jelly_block", "Sticky, but not connecting to other sticky blocks.");
         provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "Slippery. Sticks to sticky blocks and same jello/jelly blocks.");
+        addManualOverrides(provider);
+    }
+
+    private static void replace(RegistrateLangProvider provider, String key, String value) {
+        try {
+            Field field = LanguageProvider.class.getDeclaredField("data");
+            field.setAccessible(true);
+            // noinspection unchecked
+            Map<String, String> map = (Map<String, String>) field.get(provider);
+            map.put(key, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Error replacing entry in datagen.", e);
+        }
     }
 }

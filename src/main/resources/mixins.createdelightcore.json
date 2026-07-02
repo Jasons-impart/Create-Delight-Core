@@ -43,6 +43,7 @@
     "eclipticseason.CropGrowthHandlerMixin",
     "eclipticseason.GrowthDetectorItemMixin",
     "farmersdelight.DoughRecipeMakerMixin",
+    "farmersdelight.BuddingTomatoBlockMixin",
     "farmersdelight.MushroomColonyBlockMixin",
     "farmersdelight.TomatoVineBlockMixin",
     "festival_delicacies.ModCreativeModeTabsMixin",

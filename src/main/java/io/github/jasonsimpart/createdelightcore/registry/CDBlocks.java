@@ -4,6 +4,7 @@ import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
 import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
+import com.simibubi.create.content.logistics.packagerLink.LogisticallyLinkedBlockItem;
 import com.simibubi.create.foundation.block.connected.CTSpriteShiftEntry;
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
@@ -14,6 +15,8 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.fruitsdelight.content.block.PassableLeavesBlock;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserBlock;
+import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -73,6 +76,41 @@ public class CDBlocks {
     public static final BlockEntry<CasingBlock> FORGE_STEEL_CASING = simpleCasingBlock("forge_steel", Rarity.RARE, CDCSpriteShifts.FORGE_STEEL_CASING);
     public static final BlockEntry<GlassCassing> STEEL_GLASS_CASING = simpleGlassCasingBlock("steel", Rarity.COMMON, CDCSpriteShifts.STEEL_GLASS_CASING);
     public static final BlockEntry<GlassCassing> STEEL_CLEAR_GLASS_CASING = simpleGlassCasingBlock("steel_clear", Rarity.COMMON, CDCSpriteShifts.STEEL_CLEAR_GLASS_CASING);
+    // order automation
+    public static final BlockEntry<OrderParserBlock> ORDER_PARSER =
+            REGISTRATE.block("order_parser", OrderParserBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())
+                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                            pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/steel_casing"))))
+                    .item(LogisticallyLinkedBlockItem::new)
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .register();
+    public static final BlockEntry<OrderRequesterBlock> ORDER_REQUESTER =
+            REGISTRATE.block("order_requester", OrderRequesterBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())
+                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                            pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing"))))
+                    .item(LogisticallyLinkedBlockItem::new)
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .register();
     //syrup
     public static final BlockEntry<SyrupBlock> BASE = simpleSyrupBlock("base");
     public static final BlockEntry<SyrupBlock> STRAWBERRY = simpleSyrupBlock("strawberry");
