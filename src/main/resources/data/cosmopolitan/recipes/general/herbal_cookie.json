@@ -1,0 +1,16 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "forge:false"
+        }
+      ],
+      "recipe": {
+        "type": "cosmopolitan:herbal_cookie",
+        "category": "misc"
+      }
+    }
+  ]
+}
