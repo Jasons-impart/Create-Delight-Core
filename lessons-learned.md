@@ -1,5 +1,15 @@
 # Lessons Learned
 
+## Create Basin 动态流体输出需要执行上下文
+
+**日期**: 2026-07-05
+
+**场景**: `createdelightcore:berry_syrup_fluid_mixing` 需要按本次消耗的浆果动态决定 Cosmopolitan 糖浆流体。
+
+### 规则
+
+Create 普通 mixing JSON 只能声明固定 fluid output；如果输出依赖当前 Basin 输入，需要在 `BasinRecipe.apply(...)` 执行期间传入 Basin 上下文，再由自定义 recipe 从 Basin item handler 读取将被消耗的输入。
+
 ## 糖浆块直接使用 Cosmopolitan 实现
 
 **日期**: 2026-07-05

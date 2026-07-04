@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "cosmopolitan:berry_syrup_block"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "cosmopolitan:berry_syrup"
+    }
+  ]
+}

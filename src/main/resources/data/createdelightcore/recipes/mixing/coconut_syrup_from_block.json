@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heatRequirement": "heated",
+  "ingredients": [
+    {
+      "item": "createdelightcore:coconut_syrup"
+    }
+  ],
+  "results": [
+    {
+      "amount": 1000,
+      "fluid": "createdelightcore:coconut_syrup"
+    }
+  ]
+}

@@ -103,6 +103,7 @@
     "waystones.WaystoneButtonMixin"
   ],
   "client": [
+    "create.BasinCategoryMixin",
     "cosmopolitan.CosmoJEIPluginMixin",
     "createdieselgenerators.BulkFermenterRendererMixin"
   ],
