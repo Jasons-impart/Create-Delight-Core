@@ -149,6 +149,13 @@ public class EnglishLangHandler {
         addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "Taiga White Grape Juice");
         addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "Warped Grape Juice");
         addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "Crimson Grape Juice");
+        //syrup
+        addVirtualFluid(provider, CDFluids.BASE_SYRUP, "Base Syrup");
+        addVirtualFluid(provider, CDFluids.STRAWBERRY_SYRUP, "Strawberry Syrup");
+        addVirtualFluid(provider, CDFluids.VANILLA_SYRUP, "Vanilla Syrup");
+        addVirtualFluid(provider, CDFluids.MINT_SYRUP, "Mint Syrup");
+        addVirtualFluid(provider, CDFluids.BANANA_SYRUP, "Banana Syrup");
+        addVirtualFluid(provider, CDFluids.COCONUT_SYRUP, "Coconut Syrup");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");

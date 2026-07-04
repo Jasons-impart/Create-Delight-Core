@@ -256,6 +256,13 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "针叶林白葡萄汁");
         addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "诡异葡萄汁");
         addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "绯红葡萄汁");
+        //syrup
+        addVirtualFluid(provider, CDFluids.BASE_SYRUP, "基础糖浆");
+        addVirtualFluid(provider, CDFluids.STRAWBERRY_SYRUP, "草莓糖浆");
+        addVirtualFluid(provider, CDFluids.VANILLA_SYRUP, "香草糖浆");
+        addVirtualFluid(provider, CDFluids.MINT_SYRUP, "薄荷糖浆");
+        addVirtualFluid(provider, CDFluids.BANANA_SYRUP, "香蕉糖浆");
+        addVirtualFluid(provider, CDFluids.COCONUT_SYRUP, "椰子糖浆");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

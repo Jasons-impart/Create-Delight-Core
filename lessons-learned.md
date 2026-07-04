@@ -1,5 +1,15 @@
 # Lessons Learned
 
+## 糖浆块直接使用 Cosmopolitan 实现
+
+**日期**: 2026-07-05
+
+**场景**: CDC 糖浆块参考 Cosmopolitan `SyrupBlock` 的薄碰撞面和粘滞逻辑。
+
+### 规则
+
+CDC 糖浆块直接使用 Cosmopolitan 的 `com.gumillea.cosmopolitan.common.block.SyrupBlock` 注册，避免本地行为和参考实现分叉；如果将来改回本地类，再重新评估蹲走速度一致性。
+
 ## Fruit Delight 自定义 fruit 必须走 synthetic lookup 层
 
 **日期**: 2026-07-05
