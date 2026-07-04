@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.gumillea.cosmopolitan.core.reg.CosmoEffects;
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
 import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;
 import com.simibubi.create.content.decoration.encasing.CasingBlock;
@@ -13,7 +14,9 @@ import com.tterrag.registrate.providers.loot.RegistrateBlockLootTables;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.fruitsdelight.content.block.PassableLeavesBlock;
+import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlock;
@@ -44,6 +47,7 @@ import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.function.Supplier;
 
@@ -55,6 +59,7 @@ public class CDBlocks {
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+    public static final TagKey<Item> FRUITS_DELIGHT_JELLIES = ItemTags.create(ResourceLocation.fromNamespaceAndPath("fruitsdelight", "jelly"));
     //coin
     public static final BlockEntry<CoinPileBlock> IRON_COIN_PILE = simpleCoinPileBlock("iron", CDItems.IRON);
     public static final BlockEntry<CoinPileBlock> COPPER_COIN_PILE = simpleCoinPileBlock("copper", CDItems.COPPER);
@@ -83,7 +88,8 @@ public class CDBlocks {
     public static final BlockEntry<SyrupBlock> BANANA = simpleSyrupBlock("banana");
     public static final BlockEntry<SyrupBlock> COCONUT = simpleSyrupBlock("coconut");
     //lush_confiture JellyBottle/Jelly/JelloBlock
-    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", 1, 1, 0XF0612E);
+    public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", LushConfitureFood::food, 5, 0.1F, 0XF0612E,
+            () -> new MobEffectInstance(CosmoEffects.PHOTOTAXIS.get(), 600), () -> new MobEffectInstance(CosmoEffects.TRACER.get(), 600));
     public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
     public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
     //fragment_of_border
@@ -481,7 +487,16 @@ public class CDBlocks {
                 .register();
     }
 
-    public static BlockEntry<JellyBottleBlock> simpleJellyBottleBlock(String name, int nutrition, float saturation, int color){
+    @SafeVarargs
+    public static BlockEntry<JellyBottleBlock> simpleJellyBottleBlock(String name, Supplier<IFDFood> fdFood,
+                                                                      int nutrition, float saturation, int color,
+                                                                      Supplier<MobEffectInstance>... effects){
+        FoodProperties.Builder food = new FoodProperties.Builder()
+                .nutrition(nutrition)
+                .saturationMod(saturation);
+        for (Supplier<MobEffectInstance> effect : effects) {
+            food.effect(effect, 1.0F);
+        }
         return REGISTRATE.block(name + "_jelly_bottle", JellyBottleBlock::new)
                 .blockstate((ctx, pvd) ->pvd.simpleBlock(ctx.get(), pvd.models().getBuilder(ctx.getName())
                         .parent(new ModelFile.UncheckedModelFile(pvd.modLoc("block/jam_bottle_block")))
@@ -491,12 +506,10 @@ public class CDBlocks {
                         .texture("content", pvd.modLoc("block/" + name + "_jam_content"))
                         .renderType("cutout")
                 ))
-                .item(JellyBottleItem::new)
+                .item((block, properties) -> new JellyBottleItem(block, properties, fdFood))
+                .tag(FRUITS_DELIGHT_JELLIES, forgeItemTag("jams"))
                 .properties(p -> p
-                        .food(new FoodProperties.Builder()
-                                .nutrition(nutrition)
-                                .saturationMod(saturation)
-                                .build())
+                        .food(food.build())
                         .rarity(Rarity.COMMON)
                 )
                 .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx,

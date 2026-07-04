@@ -1,5 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.content.item;
 
+import dev.xkmc.fruitsdelight.content.item.IFDFoodItem;
+import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -13,10 +15,19 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
-public class JellyBottleItem extends BlockItem {
+import java.util.function.Supplier;
 
-    public JellyBottleItem(Block pBlock, Properties pProperties) {
+public class JellyBottleItem extends BlockItem implements IFDFoodItem {
+    private final Supplier<IFDFood> food;
+
+    public JellyBottleItem(Block pBlock, Properties pProperties, Supplier<IFDFood> food) {
         super(pBlock, pProperties);
+        this.food = food;
+    }
+
+    @Override
+    public IFDFood food() {
+        return food.get();
     }
 
     @Override

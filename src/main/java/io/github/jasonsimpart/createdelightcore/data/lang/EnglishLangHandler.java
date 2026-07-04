@@ -105,6 +105,7 @@ public class EnglishLangHandler {
         replace(provider, "createdelightcore.order_request.sent", "Order request sent");
         replace(provider, "createdelightcore.order_request.not_enough_items", "Not enough matching items in the linked network");
         replace(provider, "createdelightcore.order_request.failed", "Order request failed: check the link, address, and package network");
+        replace(provider, "block.createdelightcore.lush_confiture_jelly_bottle", "Lush Confiture Jam");
     }
 
 
