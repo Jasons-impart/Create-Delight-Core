@@ -35,7 +35,7 @@ public abstract class OrderMachineBlockEntity extends StockCheckingBlockEntity {
         inventory = new ItemStackHandler(1) {
             @Override
             public boolean isItemValid(int slot, ItemStack stack) {
-                return slot == ORDER_SLOT && OrderInfo.isOrder(stack);
+                return slot == ORDER_SLOT && isValidOrderMachineStack(stack);
             }
 
             @Override
@@ -76,8 +76,12 @@ public abstract class OrderMachineBlockEntity extends StockCheckingBlockEntity {
         return OrderInfo.fromStack(getOrderStack());
     }
 
+    protected boolean isValidOrderMachineStack(ItemStack stack) {
+        return OrderInfo.isOrder(stack);
+    }
+
     public boolean setOrderStack(ItemStack stack) {
-        if (!OrderInfo.isOrder(stack)) {
+        if (!isValidOrderMachineStack(stack)) {
             return false;
         }
         inventory.setStackInSlot(ORDER_SLOT, stack.copyWithCount(1));

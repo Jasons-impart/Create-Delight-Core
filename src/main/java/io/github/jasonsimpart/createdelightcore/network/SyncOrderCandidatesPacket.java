@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore.network;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderCandidate;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntry;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntryCandidates;
+import io.github.jasonsimpart.createdelightcore.content.order.OrderParserLine;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestStrategy;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderMachineClientHandler;
 import net.minecraft.core.BlockPos;
@@ -19,19 +20,28 @@ import java.util.function.Supplier;
 public class SyncOrderCandidatesPacket {
     private final BlockPos pos;
     private final List<OrderEntryCandidates> groups;
+    private final List<OrderParserLine> parserLines;
     private final OrderRequestStrategy strategy;
     private final String targetAddress;
     private final boolean allowPartial;
 
     public SyncOrderCandidatesPacket(BlockPos pos, List<OrderEntryCandidates> groups) {
-        this(pos, groups, OrderRequestStrategy.empty(), "", false);
+        this(pos, groups, List.of(), OrderRequestStrategy.empty(), "", false);
     }
 
     public SyncOrderCandidatesPacket(BlockPos pos, List<OrderEntryCandidates> groups,
                                      OrderRequestStrategy strategy, String targetAddress,
                                      boolean allowPartial) {
+        this(pos, groups, List.of(), strategy, targetAddress, allowPartial);
+    }
+
+    public SyncOrderCandidatesPacket(BlockPos pos, List<OrderEntryCandidates> groups,
+                                     List<OrderParserLine> parserLines,
+                                     OrderRequestStrategy strategy, String targetAddress,
+                                     boolean allowPartial) {
         this.pos = pos;
         this.groups = List.copyOf(groups);
+        this.parserLines = parserLines == null ? List.of() : List.copyOf(parserLines);
         this.strategy = strategy == null ? OrderRequestStrategy.empty() : strategy;
         this.targetAddress = targetAddress == null ? "" : targetAddress;
         this.allowPartial = allowPartial;
@@ -43,6 +53,10 @@ public class SyncOrderCandidatesPacket {
 
     public List<OrderEntryCandidates> groups() {
         return groups;
+    }
+
+    public List<OrderParserLine> parserLines() {
+        return parserLines;
     }
 
     public OrderRequestStrategy strategy() {
@@ -69,6 +83,10 @@ public class SyncOrderCandidatesPacket {
                 buf.writeVarInt(candidate.quality());
             }
         }
+        buf.writeVarInt(parserLines.size());
+        for (OrderParserLine parserLine : parserLines) {
+            parserLine.send(buf);
+        }
         strategy.send(buf);
         buf.writeUtf(targetAddress, 128);
         buf.writeBoolean(allowPartial);
@@ -88,8 +106,13 @@ public class SyncOrderCandidatesPacket {
             }
             groups.add(new OrderEntryCandidates(entry, candidates));
         }
+        int parserLineCount = buf.readVarInt();
+        List<OrderParserLine> parserLines = new ArrayList<>();
+        for (int lineIndex = 0; lineIndex < parserLineCount; lineIndex++) {
+            parserLines.add(OrderParserLine.receive(buf));
+        }
         OrderRequestStrategy strategy = OrderRequestStrategy.receive(buf);
-        return new SyncOrderCandidatesPacket(pos, groups, strategy, buf.readUtf(128), buf.readBoolean());
+        return new SyncOrderCandidatesPacket(pos, groups, parserLines, strategy, buf.readUtf(128), buf.readBoolean());
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {

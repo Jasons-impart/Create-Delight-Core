@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore.content.order.machine;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderCandidate;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntry;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntryCandidates;
+import io.github.jasonsimpart.createdelightcore.content.order.OrderParserLine;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestMode;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestEstimator;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestRatioSelection;
@@ -42,6 +43,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     private final List<OrderRequestSelection> selectedSelections = new ArrayList<>();
     private final List<OrderRequestRatioSelection> ratioSelections = new ArrayList<>();
     private final List<CandidateLine> visibleLines = new ArrayList<>();
+    private final List<OrderParserLine> parserLines = new ArrayList<>();
     private int scrollOffset;
     private EditBox addressBox;
     private Button partialButton;
@@ -107,13 +109,20 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     }
 
     public void acceptCandidateGroups(List<OrderEntryCandidates> groups) {
-        acceptCandidateSync(groups, currentStrategy(), addressBox == null ? "" : addressBox.getValue(), allowPartial);
+        acceptCandidateSync(groups, List.of(), currentStrategy(), addressBox == null ? "" : addressBox.getValue(), allowPartial);
     }
 
     public void acceptCandidateSync(List<OrderEntryCandidates> groups, OrderRequestStrategy strategy,
                                     String targetAddress, boolean allowPartial) {
+        acceptCandidateSync(groups, List.of(), strategy, targetAddress, allowPartial);
+    }
+
+    public void acceptCandidateSync(List<OrderEntryCandidates> groups, List<OrderParserLine> parserLines,
+                                    OrderRequestStrategy strategy, String targetAddress, boolean allowPartial) {
         OrderRequestStrategy incomingStrategy = strategy == null ? OrderRequestStrategy.empty() : strategy;
         menu.setCandidateGroups(groups);
+        this.parserLines.clear();
+        this.parserLines.addAll(parserLines == null ? List.of() : parserLines);
         requestMode = incomingStrategy.mode();
         selectedSelections.clear();
         selectedSelections.addAll(sanitizeSelections(incomingStrategy.fixedSelections()));
@@ -129,7 +138,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
         if (partialButton != null) {
             partialButton.setMessage(partialModeLabel());
         }
-        int maxScroll = Math.max(0, buildLines().size() - VISIBLE_ROWS);
+        int maxScroll = Math.max(0, currentLineCount() - VISIBLE_ROWS);
         scrollOffset = Math.min(scrollOffset, maxScroll);
     }
 
@@ -248,7 +257,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        int maxScroll = Math.max(0, buildLines().size() - VISIBLE_ROWS);
+        int maxScroll = Math.max(0, currentLineCount() - VISIBLE_ROWS);
         if (maxScroll <= 0) {
             return super.mouseScrolled(mouseX, mouseY, delta);
         }
@@ -260,7 +269,11 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
-        renderCandidatePanel(graphics, mouseX, mouseY);
+        if (menu.isRequester()) {
+            renderCandidatePanel(graphics, mouseX, mouseY);
+        } else {
+            renderParserPanel(graphics);
+        }
         renderHelpTooltip(graphics, mouseX, mouseY);
         renderQuantityTooltip(graphics, mouseX, mouseY);
         renderTooltip(graphics, mouseX, mouseY);
@@ -287,7 +300,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
         graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
         graphics.drawString(font, Component.translatable(menu.isRequester()
                         ? "createdelightcore.gui.select_candidates"
-                        : "createdelightcore.gui.candidates"),
+                        : "createdelightcore.gui.parser.rule_view"),
                 PANEL_X, 7, 0x404040, false);
         if (menu.isRequester()) {
             graphics.drawString(font, "?", HELP_X + 3, HELP_Y + 1, 0x404040, false);
@@ -297,6 +310,38 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
             graphics.drawString(font, Component.translatable("createdelightcore.gui.address"),
                     PANEL_X, 139, 0x404040, false);
         }
+    }
+
+    private void renderParserPanel(GuiGraphics graphics) {
+        int end = Math.min(parserLines.size(), scrollOffset + VISIBLE_ROWS);
+        for (int i = scrollOffset; i < end; i++) {
+            OrderParserLine line = parserLines.get(i);
+            int x = leftPos + PANEL_X;
+            int y = topPos + PANEL_Y + (i - scrollOffset) * ROW_HEIGHT;
+            graphics.fill(x, y, x + PANEL_WIDTH, y + ROW_HEIGHT - 1, line.heading() ? 0xFFD0D0D0 : 0xFFB8B8B8);
+            graphics.fill(x, y + ROW_HEIGHT - 1, x + PANEL_WIDTH, y + ROW_HEIGHT, 0xFF707070);
+            Component text = parserLineText(line);
+            graphics.drawString(font, trim(text.getString(), PANEL_WIDTH - 6), x + 3, y + 5, line.color(), false);
+        }
+    }
+
+    private Component parserLineText(OrderParserLine line) {
+        Component value = line.valueTranslationKey().isBlank()
+                ? Component.literal(line.value())
+                : Component.translatable(line.valueTranslationKey());
+        if (!line.suffix().isBlank()) {
+            Component suffix = line.suffixTranslationKey().isBlank()
+                    ? Component.literal(line.suffix())
+                    : Component.translatable(line.suffixTranslationKey(), line.suffix());
+            value = value.copy().append(Component.literal("  ")).append(suffix);
+        }
+        if (line.labelKey().isBlank()) {
+            return value;
+        }
+        if (line.value().isBlank() && line.valueTranslationKey().isBlank() && line.suffix().isBlank()) {
+            return Component.translatable(line.labelKey());
+        }
+        return Component.translatable(line.labelKey()).append(Component.literal(": ")).append(value);
     }
 
     private void renderCandidatePanel(GuiGraphics graphics, int mouseX, int mouseY) {
@@ -520,6 +565,10 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
             }
         }
         return lines;
+    }
+
+    private int currentLineCount() {
+        return menu.isRequester() ? buildLines().size() : parserLines.size();
     }
 
     private CandidateLine getHoveredCandidateLine(double mouseX, double mouseY) {

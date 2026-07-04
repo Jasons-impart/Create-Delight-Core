@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.network;
 
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntryCandidates;
+import io.github.jasonsimpart.createdelightcore.content.order.OrderParserInfo;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderMachineBlockEntity;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderMachineMenu;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlockEntity;
@@ -50,7 +51,14 @@ public class RequestOrderCandidatesPacket {
                 ));
                 return;
             }
-            CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncOrderCandidatesPacket(pos, groups));
+            CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncOrderCandidatesPacket(
+                    pos,
+                    groups,
+                    OrderParserInfo.describe(orderMachine.getOrderStack()),
+                    null,
+                    "",
+                    false
+            ));
         });
         ctx.get().setPacketHandled(true);
     }
