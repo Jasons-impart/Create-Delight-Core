@@ -4,7 +4,6 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 import javax.annotation.Nullable;
 
@@ -19,7 +18,7 @@ public class FlowerClusterBlockItem extends BlockItem
     protected BlockState getPlacementState(BlockPlaceContext context) {
         BlockState originalState = this.getBlock().getStateForPlacement(context);
         if (originalState != null) {
-            BlockState matureState = originalState.setValue(MushroomColonyBlock.COLONY_AGE, 2);
+            BlockState matureState = originalState.setValue(FlowerClusterBlock.CLUSTER_AGE, 2);
             return this.canPlace(context, matureState) ? matureState : null;
         }
         return null;

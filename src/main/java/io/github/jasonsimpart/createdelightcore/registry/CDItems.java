@@ -50,10 +50,7 @@ public class CDItems {
     public static final ItemEntry<ThrownProjectileItem> LUCUMA_ICE_CREAM_SCOOP = iceCreamScoop("lucuma");
     public static final ItemEntry<ThrownProjectileItem> PINK_DRAGON_FRUIT_ICE_CREAM_SCOOP = iceCreamScoop("pink_dragon_fruit");
     //ice-cream sandwich
-    public static final ItemEntry<IceCreamItem> SUNNY_ICE_CREAM_SANDWICH = iceCreamSandwich("sunny_ice_cream_sandwich", 6, 0.3f);
     //ice-cream cone
-    public static final ItemEntry<IceCreamItem> LUCUMA_ICE_CREAM_CONE = iceCreamCone("lucuma_ice_cream_cone", 4, 0.3f);
-    public static final ItemEntry<IceCreamItem> PINK_DRAGON_FRUIT_ICE_CREAM_CONE = iceCreamCone("pink_dragon_fruit_ice_cream_cone", 4, 0.3f);
 
     //chocolate
     public static final ItemEntry<Item> BLACK_CHOCOLATE_MOLD_SOLID = simpleItem("black_chocolate_mold_solid", RATATOUILLE_TAB);

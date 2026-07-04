@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "createdelightcore:block/lucuma_ice_cream_bricks"
-  }
-}

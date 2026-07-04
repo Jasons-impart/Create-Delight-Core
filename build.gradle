@@ -191,16 +191,18 @@ dependencies {
     implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
     compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}"))
     runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}"))
-    implementation(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
+    compileOnly(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
     implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
     implementation fg.deobf("curse.maven:create-morerecipes-1103188:7159787")
 
     // farmer's delight
-    implementation fg.deobf("curse.maven:farmers-delight-398521:6917255")
-
+    implementation fg.deobf("curse.maven:farmers-delight-398521:8083474")
     // ratatouille
     implementation fg.deobf("curse.maven:create-ratatouille-983234:7488626")
+
+    //collectors reap
+    implementation fg.deobf("curse.maven:collectors-reap-807101:7457274")
 
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
@@ -240,7 +242,7 @@ dependencies {
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // quality foods
-    implementation fg.deobf("curse.maven:quality_food-973932:7618171")
+    implementation fg.deobf("curse.maven:quality-food-973932:8243118")
 
     // vinery
     implementation fg.deobf("curse.maven:vinery-704465:6854288")
@@ -249,7 +251,7 @@ dependencies {
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
 //    compileOnly(fg.deobf("curse.maven:create-central-kitchen-820977:6522105"))
-    implementation fg.deobf("curse.maven:create-central-kitchen-820977:6987710")
+    implementation fg.deobf("curse.maven:create-central-kitchen-820977:8204836")
     // Userdev runClient: this version crashes during its own registry setup; compile only for CDR mixins.
     compileOnly fg.deobf("curse.maven:my-nethers-delight-1003673:6529919")
     // ftb ultimine
@@ -259,11 +261,11 @@ dependencies {
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
     implementation fg.deobf("curse.maven:gallery-1173553:6133771")
     implementation fg.deobf("curse.maven:neapolitan-382016:6248885")
-    implementation fg.deobf("curse.maven:cosmopolitan-1259209:6757596")
+    implementation fg.deobf("curse.maven:cosmopolitan-1259209:8069604")
     //fruits delight
-    implementation fg.deobf("blank:fruitsdelight:1.1.1-noregistrate")
+    implementation fg.deobf("curse.maven:fruits-delight-943774:8304691")
     // cuisine Delight (fruits delight需要，否则runData会失败）
-    implementation fg.deobf("blank:cuisinedelight:1.1.18-noregistrate")
+    implementation fg.deobf("curse.maven:cuisine-delight-893541:8214170")
     //functional storage
     implementation fg.deobf("curse.maven:titanium-287342:5468426")
     implementation fg.deobf("curse.maven:functionalstorage-556861:5650296")
@@ -290,7 +292,7 @@ dependencies {
     // festival delicate
     implementation fg.deobf("curse.maven:festival-delicacies-1461231:7618167")
 
-    implementation fg.deobf("curse.maven:displaydelight-1144296:7027844")
+    implementation fg.deobf("curse.maven:display-delight-1144296:8242933")
     implementation fg.deobf("curse.maven:northstar-redux-1318310:7476515")
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
     implementation ("com.eliotlash.mclib:mclib:20")
@@ -301,7 +303,8 @@ dependencies {
     // 运行 runServer 前请临时改为 compileOnly；客户端或完整整合包测试时保持 implementation。
     implementation fg.deobf("curse.maven:jadens-nether-expansion-1111833:6729020")
 
-    implementation fg.deobf("curse.maven:trailandtales_delight-1198527:6526276")
+    //trailandtales_delight
+    implementation fg.deobf("curse.maven:trail-tales-delight-1198527:8048393")
     //refurbished-furniture
     implementation fg.deobf("curse.maven:refurbished-furniture-897116:7110922")
 //    implementation fg.deobf("curse.maven:create-stuff-additions-466792:6412397")

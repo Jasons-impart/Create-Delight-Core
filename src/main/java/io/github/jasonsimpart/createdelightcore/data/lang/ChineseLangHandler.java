@@ -149,9 +149,6 @@ public class ChineseLangHandler {
         provider.addBlock(CDBlocks.MINT, "薄荷糖浆块");
         provider.addBlock(CDBlocks.BANANA, "香蕉糖浆块");
         provider.addBlock(CDBlocks.COCONUT, "椰子糖浆块");
-        //ice-cream bricks
-        provider.addBlock(CDBlocks.LUCUMA_ICE_CREAM_BRICKS, "蛋黄果味冰淇淋砖");
-        provider.addBlock(CDBlocks.PINK_DRAGON_FRUIT_ICE_CREAM_BRICKS, "火龙果味冰淇淋砖");
         //fruits leaves
         provider.addBlock(CDBlocks.JUJUBE_LEAVES, "大枣树叶");
         provider.addBlock(CDBlocks.JUJUBE_SAPLING, "大枣树苗");
@@ -214,9 +211,6 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.PUMPKIN_ICE_CREAM_SCOOP, "南瓜味冰淇淋球");
         provider.addItem(CDItems.LUCUMA_ICE_CREAM_SCOOP, "蛋黄果味冰淇淋球");
         provider.addItem(CDItems.PINK_DRAGON_FRUIT_ICE_CREAM_SCOOP, "火龙果味冰淇淋球");
-        provider.addItem(CDItems.SUNNY_ICE_CREAM_SANDWICH, "阳光风味冰淇淋三明治");
-        provider.addItem(CDItems.LUCUMA_ICE_CREAM_CONE, "蛋黄果味甜筒");
-        provider.addItem(CDItems.PINK_DRAGON_FRUIT_ICE_CREAM_CONE, "火龙果味甜筒");
         //slime
         addFluid(provider, CDFluids.SLIME, "黏液");
         addFluid(provider, CDFluids.FERROUSLIME, "富铁黏液");
