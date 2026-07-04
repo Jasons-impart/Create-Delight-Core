@@ -174,6 +174,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     // Apply Mixin AP
+    compileOnly "org.spongepowered:mixin:0.8.5"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
     // compile against the JEI API but do not include it at runtime
@@ -193,7 +194,6 @@ dependencies {
     runtimeOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-${minecraft_version}:${flywheel_version}"))
     compileOnly(fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}"))
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
     implementation fg.deobf("curse.maven:create-morerecipes-1103188:7159787")
 
     // farmer's delight
@@ -318,9 +318,10 @@ dependencies {
 
 
     //mixin extra
-    implementation(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.4.1")) {
+    implementation("io.github.llamalad7:mixinextras-forge:0.4.1@jar")
+    jarJar("io.github.llamalad7:mixinextras-forge:0.4.1") {
         jarJar.ranged(it, "[0.4.1,)")
+        transitive = false
     }
 
 }
