@@ -8,8 +8,8 @@
     "createdelightcore:forged_steel_block",
     "createdelightcore:steel_casing",
     "createdelightcore:forge_steel_casing",
+    "createdelightcore:fragment_of_border",
     "createdelightcore:order_parser",
-    "createdelightcore:order_requester",
-    "createdelightcore:fragment_of_border"
+    "createdelightcore:order_requester"
   ]
 }

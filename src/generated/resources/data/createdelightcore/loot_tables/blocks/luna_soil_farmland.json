@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createdelightcore:luna_soil_farmland"
+          "name": "createdelightcore:luna_soil"
         }
       ],
       "rolls": 1.0
