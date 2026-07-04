@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
 import io.github.jasonsimpart.createdelightcore.compat.cmr.LiquidCoolerFuelJsonLoader;
+import io.github.jasonsimpart.createdelightcore.content.order.data.OrderDataManager;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.network.SyncFuelMapsPacket;
 import net.minecraftforge.event.AddReloadListenerEvent;
@@ -14,6 +15,7 @@ public class ForgeEventsHandler {
     @SubscribeEvent
     public static void addReloadListeners(AddReloadListenerEvent event) {
         event.addListener(LiquidCoolerFuelJsonLoader.INSTANCE);
+        event.addListener(OrderDataManager.INSTANCE);
     }
 
     @SubscribeEvent
