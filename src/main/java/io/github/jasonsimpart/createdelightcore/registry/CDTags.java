@@ -73,6 +73,7 @@ public class CDTags {
         FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
         PHANTOM_COMPOST_ACTIVATORS(NameSpace.MOD, "phantom_compost_activators"),
         QUALITY_CROPS(NameSpace.MOD, "quality_crops"),
+        QUALITY_HARVEST_CONTROLLERS(NameSpace.MOD, "quality_harvest_controllers"),
 
 
         ;
