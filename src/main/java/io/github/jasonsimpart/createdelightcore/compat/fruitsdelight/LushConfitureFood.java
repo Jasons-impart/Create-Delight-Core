@@ -7,6 +7,7 @@ import dev.xkmc.fruitsdelight.init.food.FoodType;
 import dev.xkmc.fruitsdelight.init.food.FruitType;
 import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
+import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 
 import java.util.List;
 
@@ -29,6 +30,22 @@ public final class LushConfitureFood {
             return new EffectEntry[0];
         }
     };
+    public static final IFDFood JELLO_FOOD = new IFDFood() {
+        @Override
+        public FruitType fruit() {
+            return LushConfitureFood.fruit();
+        }
+
+        @Override
+        public FoodType getType() {
+            return FoodType.JELLO;
+        }
+
+        @Override
+        public EffectEntry[] getEffects() {
+            return new EffectEntry[0];
+        }
+    };
 
     public static FruitType fruit() {
         return Holder.FRUIT;
@@ -36,6 +53,10 @@ public final class LushConfitureFood {
 
     public static IFDFood food() {
         return FOOD;
+    }
+
+    public static IFDFood jelloFood() {
+        return JELLO_FOOD;
     }
 
     public static void bootstrap() {
@@ -50,10 +71,10 @@ public final class LushConfitureFood {
                 CDBlocks.LUSH_CONFITURE::asItem,
                 null,
                 List.of(
-                        new EffectFunc(CosmoEffects.PHOTOTAXIS, level -> level * 600),
-                        new EffectFunc(CosmoEffects.TRACER, level -> level * 600)),
+                        new EffectFunc(CosmoEffects.PHOTOTAXIS, lv -> lv * 30),
+                        new EffectFunc(CosmoEffects.TRACER, lv -> lv * 30)),
                 CDBlocks.LUSH_CONFITURE::asItem,
-                CDBlocks.LUSH_CONFITURE_JELLO::asItem);
+                CDItems.LUSH_CONFITURE_JELLO::get);
     }
 
     private LushConfitureFood() {

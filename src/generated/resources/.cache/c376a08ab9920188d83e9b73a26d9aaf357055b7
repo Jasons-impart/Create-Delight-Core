@@ -1,4 +1,6 @@
-// 1.20.1	2025-10-25T01:02:13.8252399	Create Delight's Processing Recipes
+// 1.20.1	2026-07-05T16:05:31.5094827	Create Delight's Processing Recipes
+7caff8368d7f72c973a15a3017f0b1cc997a229c data/createdelightcore/recipes/emptying/lush_confiture_jello_emptying.json
+e1c8578f60f7d901e53d2f735b60fd67946a72a3 data/createdelightcore/recipes/emptying/lush_confiture_jelly_emptying.json
 2f1f1b0b6a6a93c2cb996f04161d7a181d975e0f data/createdelightcore/recipes/fan_freezing/black_chocolate_mold_filled.json
 b2f82498758addff47317544350af02a97ac3439 data/createdelightcore/recipes/fan_freezing/blaze_cake.json
 cb77749cb239a53a375e54c62d88f0077c37d3db data/createdelightcore/recipes/fan_freezing/chocolate_mold_filled.json
@@ -11,3 +13,7 @@ e9d7030f8d29b969095722c65ad413f505fc3fd1 data/createdelightcore/recipes/fan_free
 8c8578a326818114e9025c88bc4de36a97f1adec data/createdelightcore/recipes/fan_freezing/snowball.json
 24226bd368b66410a38b887456614e11820ca301 data/createdelightcore/recipes/fan_freezing/water_bucket.json
 1df5a7bd547d6d8888dbb7ca940055a62d6e3b31 data/createdelightcore/recipes/fan_freezing/white_chocolate_mold_filled.json
+b378e07c6d1bcc055fefba1fceb06440914b8c4b data/createdelightcore/recipes/filling/lush_confiture_jello.json
+b08a043c4e4a45b4859127091fdddce2fbc26b57 data/createdelightcore/recipes/filling/lush_confiture_jelly.json
+e0dbc7e1c36252aeaabe8c939e087a0e4e178d8f data/createdelightcore/recipes/mixing/flowing_lush_confiture_jello.json
+a601ed442a12da4c2aee0c893098fa0716531513 data/createdelightcore/recipes/mixing/flowing_lush_confiture_jelly.json

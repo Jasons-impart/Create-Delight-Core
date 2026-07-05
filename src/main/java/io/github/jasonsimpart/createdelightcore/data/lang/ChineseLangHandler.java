@@ -134,6 +134,7 @@ public class ChineseLangHandler {
         replace(provider, CDItems.VEGETABLE_PIZZA_SLICE.get().getDescriptionId(), "蔬菜披萨切片");
         replace(provider, CDItems.MEATLOVERS_PIZZA_SLICE.get().getDescriptionId(), "肉披萨切片");
         replace(provider, CDItems.NETHER_PIZZA_SLICE.get().getDescriptionId(), "下界披萨切片");
+        provider.addItem(CDItems.LUSH_CONFITURE_JELLO, "繁茂果冻");
         // chocolate
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_FILLED, "盛满的黑巧克力模具");
         provider.addItem(CDItems.BLACK_CHOCOLATE_MOLD_SOLID, "凝固的黑巧克力");
@@ -179,7 +180,7 @@ public class ChineseLangHandler {
         //jelly_block
         provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLY, "繁茂果酱块");
         //jello_block
-        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLO, "繁茂果冻块");
+        provider.addBlock(CDBlocks.LUSH_CONFITURE_JELLO_BLOCK, "繁茂果冻块");
         //coin
         coin(provider, CDItems.IRON, "铁币", "铁");
         coin(provider, CDItems.COPPER, "铜币", "铜");
@@ -256,6 +257,9 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "针叶林白葡萄汁");
         addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "诡异葡萄汁");
         addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "绯红葡萄汁");
+        //Fruit Delight jelly/jello
+        addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLY, "繁茂果酱");
+        addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLO, "熔化繁茂果冻");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

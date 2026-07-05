@@ -32,6 +32,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
@@ -91,7 +92,7 @@ public class CDBlocks {
     public static final BlockEntry<JellyBottleBlock> LUSH_CONFITURE = simpleJellyBottleBlock("lush_confiture", LushConfitureFood::food, 5, 0.1F, 0XF0612E,
             () -> new MobEffectInstance(CosmoEffects.PHOTOTAXIS.get(), 600), () -> new MobEffectInstance(CosmoEffects.TRACER.get(), 600));
     public static final BlockEntry<JellyBlock> LUSH_CONFITURE_JELLY = simpleJellyBlock("lush_confiture_jelly", "lush_confiture", 0XF0612E);
-    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO = simpleJelloBlock("lush_confiture_jello", "lush_confiture", 0XF0612E);
+    public static final BlockEntry<JelloBlock> LUSH_CONFITURE_JELLO_BLOCK = simpleJelloBlock("lush_confiture_jello_block", "lush_confiture", 0XF0612E);
     //fragment_of_border
     public static final BlockEntry<GlassBlock> FRAGMENT_OF_BORDER = translucentGlassBlock("fragment_of_border", Rarity.RARE, 15, 10.0F);
     //flower_cluster
@@ -511,6 +512,8 @@ public class CDBlocks {
                 .properties(p -> p
                         .food(food.build())
                         .rarity(Rarity.COMMON)
+                        .stacksTo(16)
+                        .craftRemainder(Items.GLASS_BOTTLE)
                 )
                 .transform(b -> b.model((ctx, pvd) -> pvd.generated(ctx,
                                 pvd.modLoc("item/jam_bottle"),

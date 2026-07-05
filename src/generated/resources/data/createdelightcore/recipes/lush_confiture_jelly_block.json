@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jelly_bottle"
+    }
+  ],
+  "result": {
+    "item": "createdelightcore:lush_confiture_jelly"
+  }
+}

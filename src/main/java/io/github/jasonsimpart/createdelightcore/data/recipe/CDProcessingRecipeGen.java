@@ -30,6 +30,9 @@ public abstract class CDProcessingRecipeGen extends BaseRecipeProvider {
 
     public static void registerAll(DataGenerator gen, PackOutput output) {
         GENERATORS.add(new FanFreezingRecipeGen(output));
+        GENERATORS.add(new LushConfitureProcessingRecipeGen.Mixing(output));
+        GENERATORS.add(new LushConfitureProcessingRecipeGen.Filling(output));
+        GENERATORS.add(new LushConfitureProcessingRecipeGen.Emptying(output));
 
         gen.addProvider(true, new DataProvider() {
             @Override

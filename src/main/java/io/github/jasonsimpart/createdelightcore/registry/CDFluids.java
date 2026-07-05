@@ -29,6 +29,8 @@ public class CDFluids {
     public static final ResourceKey<CreativeModeTab> FLUID_TAB = CDCreativeTabs.FLUID.getKey();
     public static final ResourceLocation MILK_STILL = Create.asResource("fluid/milk_still");
     public static final ResourceLocation MILK_FLOW = Create.asResource("fluid/milk_flow");
+    public static final ResourceLocation FD_JELLY = ResourceLocation.fromNamespaceAndPath("fruitsdelight", "block/jelly");
+    public static final ResourceLocation FD_JELLO = ResourceLocation.fromNamespaceAndPath("fruitsdelight", "block/jello");
 
     // all molten metal
     public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = moltenFluid("andesite");
@@ -67,6 +69,9 @@ public class CDFluids {
     public static final FluidEntry<VirtualFluid> TAIGA_WHITE_GRAPE = grapeJuice("taiga_white_grape", 0X77882f);
     public static final FluidEntry<VirtualFluid> WARPED_GRAPE = grapeJuice("warped_grape", 0X005251);
     public static final FluidEntry<VirtualFluid> CRIMSON_GRAPE = grapeJuice("crimson_grape", 0X651114);
+    // Fruit Delight jelly/jello
+    public static final FluidEntry<VirtualFluid> LUSH_CONFITURE_JELLY = fruitDelightFluid("lush_confiture_jelly", FD_JELLY, 0XF0612E);
+    public static final FluidEntry<VirtualFluid> LUSH_CONFITURE_JELLO = fruitDelightFluid("lush_confiture_jello", FD_JELLO, 0XF0612E);
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
 
@@ -172,6 +177,25 @@ public class CDFluids {
     public static FluidEntry<VirtualFluid> grapeJuice(String name, int colorIn) {
         final int color = 0xFF000000 | colorIn;
         return CreateDelightCore.REGISTRATE.virtualFluid(name + "juice", MILK_STILL, MILK_FLOW, ((p, sT, fT) ->
+                        new AllFluids.TintedFluidType(p, sT, fT) {
+                            @Override
+                            protected int getTintColor(FluidStack stack) {
+                                return color;
+                            }
+                            @Override
+                            protected int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
+                                return color;
+                            }
+                        }), VirtualFluid::createSource, VirtualFluid::createFlowing)
+                .properties(b -> b
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
+                .register();
+    }
+
+    public static FluidEntry<VirtualFluid> fruitDelightFluid(String name, ResourceLocation texture, int colorIn) {
+        final int color = 0xFF000000 | colorIn;
+        return CreateDelightCore.REGISTRATE.virtualFluid(name, texture, texture, ((p, sT, fT) ->
                         new AllFluids.TintedFluidType(p, sT, fT) {
                             @Override
                             protected int getTintColor(FluidStack stack) {
