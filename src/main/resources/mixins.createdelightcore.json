@@ -103,6 +103,7 @@
     "waystones.WaystoneButtonMixin"
   ],
   "client": [
+    "ae2.CableBusContainerPonderMixin",
     "cosmopolitan.CosmoJEIPluginMixin",
     "createdieselgenerators.BulkFermenterRendererMixin"
   ],
