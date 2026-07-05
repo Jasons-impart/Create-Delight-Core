@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Ponder 中 AE2 cable bus 连接需要补渲染状态
+
+**日期**: 2026-07-05
+
+**场景**: CDC 给 Ponder 场景展示 AE2 `ae2:cable_bus`。
+
+### 问题
+
+Ponder 使用自己的 `PonderLevel`/schematic world，AE2 cable bus 的 grid 生命周期可能没有正常建立连接，导致 `CableBusContainer#getRenderState()` 里没有邻接连接，视觉上 cable and bus 不会相连。
+
+### 正确做法
+
+在 client mixin 中只针对 `PonderLevel` 修正 `CableBusRenderState`：根据可见邻居补 `connectionTypes`/`cableBusAdjacent`，邻居是 `CableBusBlockEntity` 时直接取 `getCableBus()`，并清掉被 Ponder mask 成空气的方向。
+
 ## Fruit Delight 自定义 fruit 必须走 synthetic lookup 层
 
 **日期**: 2026-07-05
