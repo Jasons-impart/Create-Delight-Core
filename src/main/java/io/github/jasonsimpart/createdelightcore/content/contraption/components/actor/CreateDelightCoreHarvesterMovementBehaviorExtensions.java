@@ -8,6 +8,7 @@ import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.util.DropData;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.block.FlowerClusterBlock;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityHarvestAutomationContext;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import net.brdle.collectorsreap.common.block.CRBlocks;
 import net.minecraft.core.BlockPos;
@@ -73,6 +74,8 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
             return;
         }
 
+        QualityHarvestAutomationContext.HarvestData previousHarvest =
+                QualityHarvestAutomationContext.push(context, pos, state);
         DropData previousDropData = DropData.CURRENT.get();
         DropData.CURRENT.set(new DropData(
                 LevelData.get(level, pos, true),
@@ -86,13 +89,17 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
                     null,
                     ItemStack.EMPTY,
                     1,
-                    stack -> behaviour.dropItem(context, stack));
+                    stack -> {
+                        QualityHarvestAutomationContext.applyQuality(stack);
+                        behaviour.dropItem(context, stack);
+                    });
         } finally {
             if (previousDropData == null) {
                 DropData.CURRENT.remove();
             } else {
                 DropData.CURRENT.set(previousDropData);
             }
+            QualityHarvestAutomationContext.pop(previousHarvest);
         }
 
         if (replant) {
