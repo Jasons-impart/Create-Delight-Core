@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    },
+    {
+      "item": "createdelightcore:lush_confiture_jello"
+    }
+  ],
+  "result": {
+    "item": "createdelightcore:lush_confiture_jello_block"
+  }
+}
