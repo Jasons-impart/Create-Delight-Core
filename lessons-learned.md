@@ -48,3 +48,13 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 ### 规则
 
 > **新增 Fruit Delight 自定义 fruit 时，只通过 `CustomFDFruits` 注册和查询 synthetic `FruitType`；不要硬编码 mixin，不要追加 `FruitType.values()`，不要手写 jelly / jams tag JSON。**
+
+## 外部莓果优先接入已有 Berrfect 风味 tag
+
+**日期**: 2026-07-06
+
+**场景**: `createdelightcore:berry_syrup_fluid_mixing` 需要让外部模组的 `forge:berries` 参与 Cosmopolitan 糖浆风味计算。
+
+### 规则
+
+优先把外部莓果接入 Cosmopolitan 已有的 Berrfect tag，例如 `forge:fruits/blueberries`；关键兼容项也可以在 CDC 命名空间下用 `data/createdelightcore/berrfect/flavors/*.json` 保留显式 item 风味，避免 tag 单复数不匹配、上游 tag 变动或扩大影响到其它模组物品。
