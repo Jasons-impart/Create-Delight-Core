@@ -4,6 +4,9 @@ import com.github.alexmodguy.alexscaves.server.entity.item.ThrownIceCreamScoopEn
 import com.github.alexmodguy.alexscaves.server.item.ThrownProjectileItem;
 import com.gumillea.cosmopolitan.common.item.DrinkItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
+import dev.xkmc.fruitsdelight.init.food.FoodType;
+import dev.xkmc.fruitsdelight.init.food.IFDFood;
+import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
 import net.minecraft.resources.ResourceKey;
@@ -12,6 +15,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import org.forsteri.ratatouille.entry.CRCreativeModeTabs;
+
+import java.util.function.Supplier;
 
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
@@ -34,6 +39,8 @@ public class CDItems {
     public static final ItemEntry<Item> VEGETABLE_PIZZA_SLICE = simpleFood("vegetable_pizza_slice", 2, 0.1f);
     public static final ItemEntry<Item> MEATLOVERS_PIZZA_SLICE = simpleFood("meatlovers_pizza_slice", 2, 0.1f);
     public static final ItemEntry<Item> NETHER_PIZZA_SLICE = simpleFood("nether_pizza_slice", 2, 0.1f);
+    //jello item
+    public static final ItemEntry<Item> LUSH_CONFITURE_JELLO = jelloItem("lush_confiture_jello", LushConfitureFood::jelloFood);
     //ice-cream scoop
     public static final ItemEntry<ThrownProjectileItem> STRAWBERRY_ICE_CREAM_SCOOP = iceCreamScoop("strawberry");
     public static final ItemEntry<ThrownProjectileItem> BANANA_ICE_CREAM_SCOOP = iceCreamScoop("banana");
@@ -135,6 +142,16 @@ public class CDItems {
                                 .nutrition(nutrition)
                                 .saturationMod(saturation)
                                 .build()))
+                .tab(FOOD_TAB)
+                .register();
+    }
+
+    public static ItemEntry<Item> jelloItem(String name, Supplier<IFDFood> food) {
+        return REGISTRATE.item(name, p -> FoodType.JELLO.build(p, food.get()))
+                .tag(FoodType.JELLO.tags)
+                .transform(b ->
+                        b.model((ctx, provider) ->
+                        provider.generated(ctx, provider.modLoc("item/" + name))))
                 .tab(FOOD_TAB)
                 .register();
     }

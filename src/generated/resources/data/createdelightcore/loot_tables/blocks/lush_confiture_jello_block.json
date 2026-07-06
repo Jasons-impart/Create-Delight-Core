@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createdelightcore:lush_confiture_jello"
+          "name": "createdelightcore:lush_confiture_jello_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "createdelightcore:blocks/lush_confiture_jello"
+  "random_sequence": "createdelightcore:blocks/lush_confiture_jello_block"
 }
