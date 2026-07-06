@@ -151,9 +151,9 @@ public final class QualityHarvestAutomationContext {
 
         private @Nullable Settings settingsForTier(int tier) {
             return switch (tier) {
-                case 3 -> new Settings(3, 4, 3, 0.75F);
-                case 2 -> new Settings(2, 2, 2, 0.55F);
-                case 1 -> new Settings(1, 1, 1, 0.35F);
+                case 3 -> new Settings(3, 5, 3, 0.70F);
+                case 2 -> new Settings(2, 3, 2, 0.45F);
+                case 1 -> new Settings(1, 2, 1, 0.25F);
                 default -> null;
             };
         }

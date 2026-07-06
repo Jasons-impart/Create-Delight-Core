@@ -246,7 +246,7 @@ public abstract class QualityFoodMixin {
         float growChance = EclipticSeasonsUtil.getGrowChance(level, effectiveGrowPos, effectiveGrowState);
         float baseGrowChance = create_Delight_Core$removeRankBoost(growChance, sourceRank);
         float correctedGrowChance = create_Delight_Core$applyRankBoost(baseGrowChance, targetRank);
-        return Mth.clamp(correctedGrowChance * 1.25F, 0.0F, 1.0F);
+        return Mth.clamp(correctedGrowChance, 0.0F, 1.0F);
     }
 
     @Unique
