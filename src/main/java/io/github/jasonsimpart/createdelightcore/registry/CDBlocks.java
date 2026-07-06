@@ -19,8 +19,10 @@ import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import io.github.jasonsimpart.createdelightcore.content.quality.harvest.LifeMatterInjectorBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlock;
+import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityHarvestControllerBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -168,6 +170,59 @@ public class CDBlocks {
                     .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
                             pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing"))))
                     .item(LogisticallyLinkedBlockItem::new)
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .register();
+
+    public static final BlockEntry<QualityHarvestControllerBlock> QUALITY_HARVEST_CONTROLLER =
+            REGISTRATE.block("quality_harvest_controller", QualityHarvestControllerBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())
+                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                            pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing"))))
+                    .item()
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE, CDTags.AllBlockTags.QUALITY_HARVEST_CONTROLLERS.tag)
+                    .register();
+
+    public static final BlockEntry<LifeMatterInjectorBlock> LIFE_MATTER_INJECTOR =
+            REGISTRATE.block("life_matter_injector", LifeMatterInjectorBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())
+                    .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state -> {
+                        Direction facing = state.getValue(LifeMatterInjectorBlock.FACING);
+                        int rotationX = switch (facing) {
+                            case DOWN -> 90;
+                            case UP -> 270;
+                            default -> 0;
+                        };
+                        int rotationY = switch (facing) {
+                            case EAST -> 90;
+                            case SOUTH -> 180;
+                            case WEST -> 270;
+                            default -> 0;
+                        };
+                        return ConfiguredModel.builder()
+                                .modelFile(new ModelFile.UncheckedModelFile(pvd.modLoc("block/" + ctx.getName())))
+                                .rotationX(rotationX)
+                                .rotationY(rotationY)
+                                .build();
+                    }))
+                    .item()
                     .transform(b -> b.model((ctx, pvd) ->
                             pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
                     .tab(MISC_TAB)

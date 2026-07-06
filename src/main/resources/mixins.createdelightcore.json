@@ -31,6 +31,8 @@
     "create.AnimatedSpoutMixin",
     "create.BasinRecipeMixin",
     "create.BlazeBurnerBlockMixin",
+    "create.DeployerMovementBehaviourMixin",
+    "create.HarvesterMovementBehaviourMixin",
     "create.ItemDrainCategoryMixin",
     "create.CreateRecipeCategoryMixin",
     "create.FluidIngredientMixin",

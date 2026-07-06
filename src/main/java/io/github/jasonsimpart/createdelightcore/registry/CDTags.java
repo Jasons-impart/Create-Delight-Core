@@ -72,6 +72,8 @@ public class CDTags {
 
         FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
         PHANTOM_COMPOST_ACTIVATORS(NameSpace.MOD, "phantom_compost_activators"),
+        QUALITY_CROPS(NameSpace.MOD, "quality_crops"),
+        QUALITY_HARVEST_CONTROLLERS(NameSpace.MOD, "quality_harvest_controllers"),
 
 
         ;
@@ -126,6 +128,11 @@ public class CDTags {
     public enum AllItemTags {
 
         FREEZABLE,
+        LIFE_MATTER(NameSpace.MOD, "life_matter"),
+        QUALITY_HARVEST_CALIBRATORS(NameSpace.MOD, "quality_harvest_calibrators"),
+        QUALITY_HARVEST_CALIBRATORS_TIER_1(NameSpace.MOD, "quality_harvest_calibrators/tier_1"),
+        QUALITY_HARVEST_CALIBRATORS_TIER_2(NameSpace.MOD, "quality_harvest_calibrators/tier_2"),
+        QUALITY_HARVEST_CALIBRATORS_TIER_3(NameSpace.MOD, "quality_harvest_calibrators/tier_3"),
 
         ;
 

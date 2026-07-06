@@ -5,6 +5,7 @@ import com.simibubi.create.content.contraptions.actors.harvester.HarvesterMoveme
 import com.simibubi.create.content.contraptions.behaviour.MovementContext;
 import com.simibubi.create.foundation.utility.BlockHelper;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityHarvestAutomationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -66,14 +67,20 @@ public class VineryHarvesterMovementBehaviorExtensions {
         if (!partial && age < 3)
             return;
         Level level = context.world;
-        if (replant) {
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(GrapeBush.AGE, 1), 2);
-        } else {
-            BlockHelper.destroyBlock(level, pos, 1, $ -> {});
-        }
+        QualityHarvestAutomationContext.HarvestData previousHarvest =
+                QualityHarvestAutomationContext.push(context, pos, state);
+        try {
+            if (replant) {
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(GrapeBush.AGE, 1), 2);
+            } else {
+                BlockHelper.destroyBlock(level, pos, 1, $ -> {});
+            }
 //        CreateDelightCore.LOGGER.info("fruits: " + bush.type.getFruit() + "seeds:" + bush.type.getSeeds() + "bottle:" + bush.type.getBottle());
-        behaviour.dropItem(context, new ItemStack(bush.type.getFruit(), level.random.nextInt(2) + 1));
+            dropWithQuality(behaviour, context, new ItemStack(bush.type.getFruit(), level.random.nextInt(2) + 1));
+        } finally {
+            QualityHarvestAutomationContext.pop(previousHarvest);
+        }
     }
 
     public static void harvestGrapeVine(HarvesterMovementBehaviour behaviour, MovementContext context, BlockPos
@@ -86,13 +93,19 @@ public class VineryHarvesterMovementBehaviorExtensions {
         if (!partial && age < 3)
             return;
         Level level = context.world;
-        if (replant) {
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(GrapeVineBlock.AGE, 1), 2);
-        } else {
-            BlockHelper.destroyBlock(level, pos, 1, $ -> {});
+        QualityHarvestAutomationContext.HarvestData previousHarvest =
+                QualityHarvestAutomationContext.push(context, pos, state);
+        try {
+            if (replant) {
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(GrapeVineBlock.AGE, 1), 2);
+            } else {
+                BlockHelper.destroyBlock(level, pos, 1, $ -> {});
+            }
+            dropWithQuality(behaviour, context, new ItemStack(vineBlock.type.getFruit(), level.random.nextInt(2) + 1));
+        } finally {
+            QualityHarvestAutomationContext.pop(previousHarvest);
         }
-        behaviour.dropItem(context, new ItemStack(vineBlock.type.getFruit(), level.random.nextInt(2) + 1));
     }
     public static void harvestGrapeStem(HarvesterMovementBehaviour behaviour, MovementContext context, BlockPos
             pos, BlockState state, boolean replant, boolean partial) {
@@ -107,14 +120,25 @@ public class VineryHarvesterMovementBehaviorExtensions {
         Level level = context.world;
         int x = 1 + level.random.nextInt(stemBlock.isMature(state) ? 2 : 1);
         int bonus = stemBlock.isMature(state) ? 2 : 1;
-        behaviour.dropItem(context, new ItemStack(state.getValue(StemBlock.GRAPE).getFruit(), x + bonus));
-        if (replant) {
-            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-            level.setBlock(pos, state.setValue(StemBlock.AGE, 2), 2);
+        QualityHarvestAutomationContext.HarvestData previousHarvest =
+                QualityHarvestAutomationContext.push(context, pos, state);
+        try {
+            dropWithQuality(behaviour, context, new ItemStack(state.getValue(StemBlock.GRAPE).getFruit(), x + bonus));
+            if (replant) {
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(StemBlock.AGE, 2), 2);
 
-        } else {
-            behaviour.dropItem(context, new ItemStack(state.getValue(StemBlock.GRAPE).getSeeds(), 1));
-            level.setBlock(pos, state.setValue(StemBlock.GRAPE, GrapeTypeRegistry.NONE), 2);
+            } else {
+                dropWithQuality(behaviour, context, new ItemStack(state.getValue(StemBlock.GRAPE).getSeeds(), 1));
+                level.setBlock(pos, state.setValue(StemBlock.GRAPE, GrapeTypeRegistry.NONE), 2);
+            }
+        } finally {
+            QualityHarvestAutomationContext.pop(previousHarvest);
         }
+    }
+
+    private static void dropWithQuality(HarvesterMovementBehaviour behaviour, MovementContext context, ItemStack stack) {
+        QualityHarvestAutomationContext.applyQuality(stack);
+        behaviour.dropItem(context, stack);
     }
 }

@@ -11,6 +11,7 @@ import de.cadentem.quality_food.util.Utils;
 import dev.xkmc.fruitsdelight.content.block.DoubleFruitBushBlock;
 import dev.xkmc.fruitsdelight.content.block.FruitBushBlock;
 import io.github.jasonsimpart.createdelightcore.content.util.EclipticSeasonsUtil;
+import io.github.jasonsimpart.createdelightcore.content.util.QualityHarvestAutomationContext;
 import io.github.jasonsimpart.createdelightcore.content.util.QualityFoodHarvestContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
@@ -99,8 +101,12 @@ public abstract class QualityFoodMixin {
             Quality chanceQuality = create_Delight_Core$getChanceQuality(state, blockQuality);
             float growChance = create_Delight_Core$getGrowChance(player, state, chanceQuality);
             BlockState effectiveFarmland = create_Delight_Core$getEffectiveFarmland(player, state, farmland);
+            QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
             for (Quality quality : Quality.values()) {
                 if (quality.level() == 0) {
+                    continue;
+                }
+                if (automation != null && automation.isActive() && quality.level() > automation.settings().maxQuality()) {
                     continue;
                 }
 
@@ -118,6 +124,9 @@ public abstract class QualityFoodMixin {
                 chance = Modification.luck(player).apply(chance);
                 chance = Modification.farmland(state, effectiveFarmland).apply(chance);
                 chance = Modification.multiplicative(growChance).apply(chance);
+                if (automation != null && automation.isActive()) {
+                    chance = Modification.multiplicative(automation.settings().multiplier()).apply(chance);
+                }
                 if (chance > 0 && chance >= create_Delight_Core$RANDOM.nextDouble()) {
                     selected = quality;
                 }
@@ -162,12 +171,17 @@ public abstract class QualityFoodMixin {
 
     @Unique
     private static BlockPos create_Delight_Core$getEffectiveCropPos(Player player, BlockState state, BlockPos cropPos) {
+        return create_Delight_Core$getEffectiveCropPos(player.level(), state, cropPos);
+    }
+
+    @Unique
+    private static BlockPos create_Delight_Core$getEffectiveCropPos(Level level, BlockState state, BlockPos cropPos) {
         if (state.is(Blocks.SUGAR_CANE)) {
-            return create_Delight_Core$getBaseCropPos(player, cropPos, Blocks.SUGAR_CANE);
+            return create_Delight_Core$getBaseCropPos(level, cropPos, Blocks.SUGAR_CANE);
         }
 
         if (state.getBlock() instanceof TomatoVineBlock) {
-            return create_Delight_Core$getBaseCropPos(player, cropPos, state.getBlock());
+            return create_Delight_Core$getBaseCropPos(level, cropPos, state.getBlock());
         }
 
         return cropPos;
@@ -175,8 +189,13 @@ public abstract class QualityFoodMixin {
 
     @Unique
     private static BlockPos create_Delight_Core$getBaseCropPos(Player player, BlockPos cropPos, Block cropBlock) {
+        return create_Delight_Core$getBaseCropPos(player.level(), cropPos, cropBlock);
+    }
+
+    @Unique
+    private static BlockPos create_Delight_Core$getBaseCropPos(Level level, BlockPos cropPos, Block cropBlock) {
         BlockPos basePos = cropPos;
-        while (player.level().getBlockState(basePos.below()).is(cropBlock)) {
+        while (level.getBlockState(basePos.below()).is(cropBlock)) {
             basePos = basePos.below();
         }
 
@@ -185,6 +204,11 @@ public abstract class QualityFoodMixin {
 
     @Unique
     private static float create_Delight_Core$getGrowChance(Player player, BlockState state, Quality blockQuality) {
+        QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
+        if ((player == null || player instanceof FakePlayer) && automation != null && automation.isActive()) {
+            return create_Delight_Core$getAutomatedGrowChance(automation, state, blockQuality);
+        }
+
         if (player == null || player instanceof FakePlayer) {
             return 0.0F;
         }
@@ -206,6 +230,23 @@ public abstract class QualityFoodMixin {
         float baseGrowChance = create_Delight_Core$removeRankBoost(growChance, sourceRank);
         float correctedGrowChance = create_Delight_Core$applyRankBoost(baseGrowChance, targetRank);
         return Mth.clamp(correctedGrowChance * 1.25F, 0.0F, 1.0F);
+    }
+
+    @Unique
+    private static float create_Delight_Core$getAutomatedGrowChance(QualityHarvestAutomationContext.HarvestData automation, BlockState state, Quality blockQuality) {
+        if (!ModList.get().isLoaded("eclipticseasons")) {
+            return 1.0F;
+        }
+
+        Level level = automation.level();
+        BlockPos effectiveGrowPos = create_Delight_Core$getEffectiveCropPos(level, state, automation.pos());
+        BlockState effectiveGrowState = level.getBlockState(effectiveGrowPos);
+        int sourceRank = state.is(Blocks.SUGAR_CANE) ? 0 : LevelData.get(level, effectiveGrowPos).level();
+        int targetRank = blockQuality.level();
+        float growChance = EclipticSeasonsUtil.getGrowChance(level, effectiveGrowPos, effectiveGrowState);
+        float baseGrowChance = create_Delight_Core$removeRankBoost(growChance, sourceRank);
+        float correctedGrowChance = create_Delight_Core$applyRankBoost(baseGrowChance, targetRank);
+        return Mth.clamp(correctedGrowChance, 0.0F, 1.0F);
     }
 
     @Unique

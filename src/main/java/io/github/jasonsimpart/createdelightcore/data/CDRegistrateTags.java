@@ -5,6 +5,7 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.data.TagGen;
 import com.tterrag.registrate.providers.ProviderType;
 import com.tterrag.registrate.providers.RegistrateTagsProvider;
+import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -45,5 +46,8 @@ public class CDRegistrateTags {
 
         prov.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
                 .addTag(CDTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag);
+
+        prov.tag(CDTags.AllBlockTags.QUALITY_HARVEST_CONTROLLERS.tag)
+                .add(CDBlocks.QUALITY_HARVEST_CONTROLLER.get());
     }
 }
