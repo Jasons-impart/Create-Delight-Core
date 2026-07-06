@@ -1,11 +1,13 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import com.simibubi.create.foundation.utility.CreateLang;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.content.recipe.BerrySyrupFluidMixingRecipe;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -25,6 +27,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 public enum CDRecipeTypes implements IRecipeTypeInfo {
+    BERRY_SYRUP_FLUID_MIXING(BerrySyrupFluidMixingRecipe.Serializer::new, AllRecipeTypes.MIXING::getType, false),
     FAN_FREEZING(FanFreezingRecipe::new);
 
     private final ResourceLocation id;

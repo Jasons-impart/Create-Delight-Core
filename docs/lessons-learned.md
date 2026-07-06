@@ -1,5 +1,25 @@
 # Lessons Learned
 
+## Create Basin 动态流体输出需要执行上下文
+
+**日期**: 2026-07-05
+
+**场景**: `createdelightcore:berry_syrup_fluid_mixing` 需要按本次消耗的浆果动态决定 Cosmopolitan 糖浆流体。
+
+### 规则
+
+Create 普通 mixing JSON 只能声明固定 fluid output；如果输出依赖当前 Basin 输入，需要在 `BasinRecipe.apply(...)` 执行期间传入 Basin 上下文，再由自定义 recipe 从 Basin item handler 读取将被消耗的输入。
+
+## 糖浆块直接使用 Cosmopolitan 实现
+
+**日期**: 2026-07-05
+
+**场景**: CDC 糖浆块参考 Cosmopolitan `SyrupBlock` 的薄碰撞面和粘滞逻辑。
+
+### 规则
+
+CDC 糖浆块直接使用 Cosmopolitan 的 `com.gumillea.cosmopolitan.common.block.SyrupBlock` 注册，避免本地行为和参考实现分叉；如果将来改回本地类，再重新评估蹲走速度一致性。
+
 ## Ponder 中 AE2 cable bus 连接需要补渲染状态
 
 **日期**: 2026-07-05
@@ -42,3 +62,23 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 ### 规则
 
 > **新增 Fruit Delight 自定义 fruit 时，只通过 `CustomFDFruits` 注册和查询 synthetic `FruitType`；不要硬编码 mixin，不要追加 `FruitType.values()`，不要手写 jelly / jams tag JSON。**
+
+## 外部莓果优先接入已有 Berrfect 风味 tag
+
+**日期**: 2026-07-06
+
+**场景**: `createdelightcore:berry_syrup_fluid_mixing` 需要让外部模组的 `forge:berries` 参与 Cosmopolitan 糖浆风味计算。
+
+### 规则
+
+优先把外部莓果接入 Cosmopolitan 已有的 Berrfect tag，例如 `forge:fruits/blueberries`；关键兼容项也可以在 CDC 命名空间下用 `data/createdelightcore/berrfect/flavors/*.json` 保留显式 item 风味，避免 tag 单复数不匹配、上游 tag 变动或扩大影响到其它模组物品。
+
+## 虚拟流体显示名要走 fluid 翻译键
+
+**日期**: 2026-07-06
+
+**场景**: CDC syrup 使用 `REGISTRATE.virtualFluid(...)` 注册，JEI tooltip 需要显示“糖浆”而不是“糖浆块”。
+
+### 规则
+
+虚拟流体如果有同名承载方块，`FluidType` 要显式返回 `fluid.<namespace>.<path>` 描述键；否则 `FluidStack#getDisplayName()` 可能落到方块翻译键，显示成块名。

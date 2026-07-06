@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lush_confiture_jello": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "createdelightcore:lush_confiture_jello"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "createdelightcore:lush_confiture_jello_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_lush_confiture_jello",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "createdelightcore:lush_confiture_jello_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

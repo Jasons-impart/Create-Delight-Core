@@ -105,6 +105,7 @@
     "waystones.WaystoneButtonMixin"
   ],
   "client": [
+    "create.BasinCategoryMixin",
     "ae2.CableBusContainerPonderMixin",
     "cosmopolitan.CosmoJEIPluginMixin",
     "createdieselgenerators.BulkFermenterRendererMixin"
