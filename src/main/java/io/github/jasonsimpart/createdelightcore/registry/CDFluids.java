@@ -160,8 +160,7 @@ public class CDFluids {
     private static FluidEntry<VirtualFluid> syrupFluid(String name) {
         String id = name + "_syrup";
         ResourceLocation TEXTURE_RL = CreateDelightCore.id("block/fluid/" + id);
-        return REGISTRATE.virtualFluid(id, TEXTURE_RL, TEXTURE_RL, SyrupFluidType::new,
-                        VirtualFluid::createSource, VirtualFluid::createFlowing)
+        return REGISTRATE.virtualFluid(id, TEXTURE_RL, TEXTURE_RL, SyrupFluidType::new, VirtualFluid::createSource, VirtualFluid::createFlowing)
                 .properties(b -> b
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
