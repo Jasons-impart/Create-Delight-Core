@@ -18,6 +18,7 @@ import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
+import io.github.jasonsimpart.createdelightcore.content.quality.harvest.LifeMatterInjectorBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlock;
 import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityHarvestControllerBlock;
@@ -190,6 +191,26 @@ public class CDBlocks {
                     .tab(MISC_TAB)
                     .build()
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE, CDTags.AllBlockTags.QUALITY_HARVEST_CONTROLLERS.tag)
+                    .register();
+
+    public static final BlockEntry<LifeMatterInjectorBlock> LIFE_MATTER_INJECTOR =
+            REGISTRATE.block("life_matter_injector", LifeMatterInjectorBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.METAL)
+                            .strength(3.0F, 6.0F)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())
+                    .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state ->
+                            ConfiguredModel.builder()
+                                    .modelFile(pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing")))
+                                    .build()))
+                    .item()
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
 
 

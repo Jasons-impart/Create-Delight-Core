@@ -42,6 +42,10 @@ public class EnglishLangHandler {
         replace(provider, "item.createdelightcore.netherite_coin.plural", "§5Netherite Coins");
         replace(provider, "block.createdelightcore.order_parser", "Order Parser");
         replace(provider, "block.createdelightcore.order_requester", "Order Requester");
+        replace(provider, "block.createdelightcore.life_matter_injector", "Life Matter Injector");
+        replace(provider, "createdelightcore.life_matter_injector.powered", "Disabled");
+        replace(provider, "createdelightcore.life_matter_injector.ready", "Ready");
+        replace(provider, "createdelightcore.life_matter_injector.status", "Input: %s | Last injected: %s | %s");
         replace(provider, "block.createdelightcore.quality_harvest_controller", "Quality Harvest Controller");
         replace(provider, "createdelightcore.quality_harvest_controller.no_calibrator", "No calibrator");
         replace(provider, "createdelightcore.quality_harvest_controller.status", "Life Matter: %s/%s | %s");

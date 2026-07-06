@@ -169,4 +169,12 @@ public class QualityHarvestControllerBlockEntity extends BlockEntity {
         copy.putInt(LIFE_MATTER_STORED_TAG, Math.max(0, Math.min(CAPACITY, amount)));
         return copy;
     }
+
+    public static CompoundTag setLifeMatterStored(CompoundTag tag, int amount, ItemStack prototype) {
+        CompoundTag copy = setLifeMatterStored(tag, amount);
+        if (!prototype.isEmpty() && isLifeMatter(prototype)) {
+            copy.put(LIFE_MATTER_ITEM_TAG, prototype.copyWithCount(1).save(new CompoundTag()));
+        }
+        return copy;
+    }
 }

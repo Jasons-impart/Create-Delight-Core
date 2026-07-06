@@ -51,6 +51,10 @@ public class ChineseLangHandler {
         replace(provider, "item.createdelightcore.netherite_coin.plural", "§5下界合金币");
         replace(provider, "block.createdelightcore.order_parser", "订单解析器");
         replace(provider, "block.createdelightcore.order_requester", "订单请求器");
+        replace(provider, "block.createdelightcore.life_matter_injector", "生命质注入器");
+        replace(provider, "createdelightcore.life_matter_injector.powered", "已禁用");
+        replace(provider, "createdelightcore.life_matter_injector.ready", "待命");
+        replace(provider, "createdelightcore.life_matter_injector.status", "输入：%s | 上次注入：%s | %s");
         replace(provider, "block.createdelightcore.quality_harvest_controller", "品控收割控制器");
         replace(provider, "createdelightcore.quality_harvest_controller.no_calibrator", "未安装校准器");
         replace(provider, "createdelightcore.quality_harvest_controller.status", "生命质：%s/%s | %s");

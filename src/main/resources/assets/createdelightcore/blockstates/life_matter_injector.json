@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "createdelightcore:block/life_matter_injector"
+    },
+    "facing=east": {
+      "model": "createdelightcore:block/life_matter_injector"
+    },
+    "facing=north": {
+      "model": "createdelightcore:block/life_matter_injector"
+    },
+    "facing=south": {
+      "model": "createdelightcore:block/life_matter_injector"
+    },
+    "facing=up": {
+      "model": "createdelightcore:block/life_matter_injector"
+    },
+    "facing=west": {
+      "model": "createdelightcore:block/life_matter_injector"
+    }
+  }
+}
