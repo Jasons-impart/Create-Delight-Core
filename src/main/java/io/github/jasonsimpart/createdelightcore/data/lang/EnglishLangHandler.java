@@ -45,7 +45,16 @@ public class EnglishLangHandler {
         replace(provider, "block.createdelightcore.life_matter_injector", "Life Matter Injector");
         replace(provider, "createdelightcore.life_matter_injector.powered", "Disabled");
         replace(provider, "createdelightcore.life_matter_injector.ready", "Ready");
-        replace(provider, "createdelightcore.life_matter_injector.status", "Input: %s | Last injected: %s | %s");
+        replace(provider, "createdelightcore.life_matter_injector.docking.none", "Not aligned");
+        replace(provider, "createdelightcore.life_matter_injector.docking.ready", "Aligned (%s/%s)");
+        replace(provider, "createdelightcore.life_matter_injector.docking.full", "Controller full (%s/%s)");
+        replace(provider, "createdelightcore.life_matter_injector.status", "Input: %s | Last injected: %s | Facing: %s | Docking: %s | %s");
+        replace(provider, "createdelightcore.direction.down", "Down");
+        replace(provider, "createdelightcore.direction.up", "Up");
+        replace(provider, "createdelightcore.direction.north", "North");
+        replace(provider, "createdelightcore.direction.south", "South");
+        replace(provider, "createdelightcore.direction.west", "West");
+        replace(provider, "createdelightcore.direction.east", "East");
         replace(provider, "block.createdelightcore.quality_harvest_controller", "Quality Harvest Controller");
         replace(provider, "createdelightcore.quality_harvest_controller.no_calibrator", "No calibrator");
         replace(provider, "createdelightcore.quality_harvest_controller.status", "Life Matter: %s/%s | %s");

@@ -84,11 +84,32 @@ public class LifeMatterInjectorBlock extends DirectionalBlock implements IBE<Lif
         Component power = blockEntity.isPowered()
                 ? Component.translatable("createdelightcore.life_matter_injector.powered").withStyle(ChatFormatting.RED)
                 : Component.translatable("createdelightcore.life_matter_injector.ready").withStyle(ChatFormatting.GREEN);
+        Component facing = Component.translatable("createdelightcore.direction."
+                + blockEntity.getBlockState().getValue(FACING).getSerializedName());
+        Component docking = dockingStatus(blockEntity);
         serverPlayer.displayClientMessage(Component.translatable(
                 "createdelightcore.life_matter_injector.status",
                 blockEntity.getInputStack().getCount(),
                 blockEntity.getLastTransferred(),
+                facing,
+                docking,
                 power), true);
+    }
+
+    private Component dockingStatus(LifeMatterInjectorBlockEntity blockEntity) {
+        if (!blockEntity.hasControllerInRange()) {
+            return Component.translatable("createdelightcore.life_matter_injector.docking.none")
+                    .withStyle(ChatFormatting.GRAY);
+        }
+        int stored = Math.max(0, blockEntity.getLastTargetStored());
+        if (!blockEntity.hasAcceptingControllerInRange()) {
+            return Component.translatable("createdelightcore.life_matter_injector.docking.full",
+                            stored, QualityHarvestControllerBlockEntity.CAPACITY)
+                    .withStyle(ChatFormatting.YELLOW);
+        }
+        return Component.translatable("createdelightcore.life_matter_injector.docking.ready",
+                        stored, QualityHarvestControllerBlockEntity.CAPACITY)
+                .withStyle(ChatFormatting.GREEN);
     }
 
     @Override

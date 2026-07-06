@@ -1,22 +1,27 @@
 {
   "variants": {
     "facing=down": {
-      "model": "createdelightcore:block/life_matter_injector"
+      "model": "createdelightcore:block/life_matter_injector",
+      "x": 90
     },
     "facing=east": {
-      "model": "createdelightcore:block/life_matter_injector"
+      "model": "createdelightcore:block/life_matter_injector",
+      "y": 90
     },
     "facing=north": {
       "model": "createdelightcore:block/life_matter_injector"
     },
     "facing=south": {
-      "model": "createdelightcore:block/life_matter_injector"
+      "model": "createdelightcore:block/life_matter_injector",
+      "y": 180
     },
     "facing=up": {
-      "model": "createdelightcore:block/life_matter_injector"
+      "model": "createdelightcore:block/life_matter_injector",
+      "x": 270
     },
     "facing=west": {
-      "model": "createdelightcore:block/life_matter_injector"
+      "model": "createdelightcore:block/life_matter_injector",
+      "y": 270
     }
   }
 }

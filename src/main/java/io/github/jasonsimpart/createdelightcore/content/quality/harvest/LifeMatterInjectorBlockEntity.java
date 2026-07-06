@@ -29,6 +29,7 @@ import java.util.Map;
 public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
     public static final int INPUT_SLOT = 0;
     public static final int INJECT_AMOUNT = 16;
+    public static final int INJECT_INTERVAL = 5;
     private static final String INVENTORY_TAG = "Inventory";
 
     private final ItemStackHandler inventory = new ItemStackHandler(1) {
@@ -46,10 +47,14 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
     private final LazyOptional<IItemHandler> itemCapability = LazyOptional.of(() -> inventory);
 
     private int lastTransferred;
+    private int transferCooldown;
+    private boolean controllerInRange;
+    private boolean acceptingControllerInRange;
+    private int lastTargetStored = -1;
 
     public LifeMatterInjectorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
-        setLazyTickRate(20);
+        setLazyTickRate(1);
     }
 
     @Override
@@ -59,11 +64,33 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
     @Override
     public void lazyTick() {
         super.lazyTick();
-        if (level == null || level.isClientSide || isPowered()) {
+        if (level == null || level.isClientSide) {
             return;
         }
-        lastTransferred = tryInject();
-        if (lastTransferred > 0) {
+
+        if (transferCooldown > 0) {
+            transferCooldown--;
+        }
+
+        if (isPowered()) {
+            if (applyScanStatus(DockingScan.none())) {
+                sendData();
+            }
+            return;
+        }
+
+        DockingScan scan = findDockingTarget();
+        boolean changed = applyScanStatus(scan);
+        ItemStack input = getInputStack();
+        if (QualityHarvestControllerBlockEntity.isLifeMatter(input)
+                && scan.controller() != null
+                && transferCooldown <= 0) {
+            lastTransferred = tryInject(scan.controller());
+            transferCooldown = INJECT_INTERVAL;
+            changed = changed || lastTransferred > 0;
+        }
+
+        if (changed) {
             setChanged();
             sendData();
         }
@@ -89,6 +116,18 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
 
     public int getLastTransferred() {
         return lastTransferred;
+    }
+
+    public boolean hasControllerInRange() {
+        return controllerInRange;
+    }
+
+    public boolean hasAcceptingControllerInRange() {
+        return acceptingControllerInRange;
+    }
+
+    public int getLastTargetStored() {
+        return lastTargetStored;
     }
 
     public boolean isPowered() {
@@ -120,14 +159,9 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
         }
     }
 
-    private int tryInject() {
+    private int tryInject(DockedController target) {
         ItemStack input = getInputStack();
         if (!QualityHarvestControllerBlockEntity.isLifeMatter(input)) {
-            return 0;
-        }
-
-        DockedController target = findDockedController();
-        if (target == null) {
             return 0;
         }
 
@@ -145,16 +179,17 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
         StructureTemplate.StructureBlockInfo updatedInfo =
                 new StructureTemplate.StructureBlockInfo(target.info().pos(), target.info().state(), updatedTag);
         target.entity().getContraption().getBlocks().put(target.key(), updatedInfo);
+        lastTargetStored = stored + transferred;
         return transferred;
     }
 
-    private @Nullable DockedController findDockedController() {
+    private DockingScan findDockingTarget() {
         Direction facing = getBlockState().getValue(LifeMatterInjectorBlock.FACING);
         Vec3 injectorCenter = Vec3.atCenterOf(worldPosition);
         AABB searchBox = new AABB(worldPosition).expandTowards(
-                facing.getStepX() * 3.0D,
-                facing.getStepY() * 3.0D,
-                facing.getStepZ() * 3.0D).inflate(2.0D);
+                facing.getStepX() * 4.0D,
+                facing.getStepY() * 4.0D,
+                facing.getStepZ() * 4.0D).inflate(2.5D);
 
         List<AbstractContraptionEntity> entities = level.getEntitiesOfClass(
                 AbstractContraptionEntity.class,
@@ -163,6 +198,7 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
 
         DockedController best = null;
         double bestDistance = Double.MAX_VALUE;
+        int bestStored = -1;
         for (AbstractContraptionEntity entity : entities) {
             for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry
                     : entity.getContraption().getBlocks().entrySet()) {
@@ -179,15 +215,17 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
 
                 CompoundTag tag = info.nbt() == null ? new CompoundTag() : info.nbt();
                 int stored = QualityHarvestControllerBlockEntity.getLifeMatterStored(tag);
-                if (stored >= QualityHarvestControllerBlockEntity.CAPACITY) {
-                    continue;
-                }
-
-                best = new DockedController(entity, entry.getKey(), info, tag);
+                best = stored < QualityHarvestControllerBlockEntity.CAPACITY
+                        ? new DockedController(entity, entry.getKey(), info, tag)
+                        : null;
                 bestDistance = distance;
+                bestStored = stored;
             }
         }
-        return best;
+        if (bestStored < 0) {
+            return DockingScan.none();
+        }
+        return new DockingScan(best, true, best != null, bestStored);
     }
 
     private boolean isController(BlockState state) {
@@ -199,15 +237,25 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
         Vec3 normal = Vec3.atLowerCornerOf(facing.getNormal());
         Vec3 offset = targetCenter.subtract(injectorCenter);
         double along = offset.dot(normal);
-        if (along < 0.5D || along > 2.75D) {
+        if (along < 0.25D || along > 3.25D) {
             return -1.0D;
         }
 
         Vec3 perpendicular = offset.subtract(normal.scale(along));
-        if (perpendicular.lengthSqr() > 0.85D * 0.85D) {
+        if (perpendicular.lengthSqr() > 1.25D * 1.25D) {
             return -1.0D;
         }
         return along;
+    }
+
+    private boolean applyScanStatus(DockingScan scan) {
+        boolean changed = controllerInRange != scan.controllerInRange()
+                || acceptingControllerInRange != scan.acceptingControllerInRange()
+                || lastTargetStored != scan.stored();
+        controllerInRange = scan.controllerInRange();
+        acceptingControllerInRange = scan.acceptingControllerInRange();
+        lastTargetStored = scan.stored();
+        return changed;
     }
 
     @Override
@@ -215,6 +263,10 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
         super.read(tag, clientPacket);
         inventory.deserializeNBT(tag.getCompound(INVENTORY_TAG));
         lastTransferred = tag.getInt("LastTransferred");
+        transferCooldown = tag.getInt("TransferCooldown");
+        controllerInRange = tag.getBoolean("ControllerInRange");
+        acceptingControllerInRange = tag.getBoolean("AcceptingControllerInRange");
+        lastTargetStored = tag.contains("LastTargetStored") ? tag.getInt("LastTargetStored") : -1;
     }
 
     @Override
@@ -222,6 +274,10 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
         super.write(tag, clientPacket);
         tag.put(INVENTORY_TAG, inventory.serializeNBT());
         tag.putInt("LastTransferred", lastTransferred);
+        tag.putInt("TransferCooldown", transferCooldown);
+        tag.putBoolean("ControllerInRange", controllerInRange);
+        tag.putBoolean("AcceptingControllerInRange", acceptingControllerInRange);
+        tag.putInt("LastTargetStored", lastTargetStored);
     }
 
     @Override
@@ -232,5 +288,12 @@ public class LifeMatterInjectorBlockEntity extends SmartBlockEntity {
 
     private record DockedController(AbstractContraptionEntity entity, BlockPos key,
                                     StructureTemplate.StructureBlockInfo info, CompoundTag tag) {
+    }
+
+    private record DockingScan(@Nullable DockedController controller, boolean controllerInRange,
+                               boolean acceptingControllerInRange, int stored) {
+        private static DockingScan none() {
+            return new DockingScan(null, false, false, -1);
+        }
     }
 }

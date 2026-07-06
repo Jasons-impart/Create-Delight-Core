@@ -203,10 +203,25 @@ public class CDBlocks {
                             .strength(3.0F, 6.0F)
                             .sound(SoundType.METAL)
                             .requiresCorrectToolForDrops())
-                    .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state ->
-                            ConfiguredModel.builder()
-                                    .modelFile(pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing")))
-                                    .build()))
+                    .blockstate((ctx, pvd) -> pvd.getVariantBuilder(ctx.get()).forAllStates(state -> {
+                        Direction facing = state.getValue(LifeMatterInjectorBlock.FACING);
+                        int rotationX = switch (facing) {
+                            case DOWN -> 90;
+                            case UP -> 270;
+                            default -> 0;
+                        };
+                        int rotationY = switch (facing) {
+                            case EAST -> 90;
+                            case SOUTH -> 180;
+                            case WEST -> 270;
+                            default -> 0;
+                        };
+                        return ConfiguredModel.builder()
+                                .modelFile(new ModelFile.UncheckedModelFile(pvd.modLoc("block/" + ctx.getName())))
+                                .rotationX(rotationX)
+                                .rotationY(rotationY)
+                                .build();
+                    }))
                     .item()
                     .transform(b -> b.model((ctx, pvd) ->
                             pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
