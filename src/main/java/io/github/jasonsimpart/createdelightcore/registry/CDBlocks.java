@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
+import com.gumillea.cosmopolitan.common.block.SyrupBlock;
 import com.gumillea.cosmopolitan.core.reg.CosmoEffects;
 import com.renyigesai.bakeries.block.pizza.PizzaBlock;
 import com.renyigesai.bakeries.block.pizza.RawPizzaBlock;

@@ -148,6 +148,13 @@ public class EnglishLangHandler {
         addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "Taiga White Grape Juice");
         addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "Warped Grape Juice");
         addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "Crimson Grape Juice");
+        //syrup
+        addVirtualFluid(provider, CDFluids.BASE_SYRUP, "Base Syrup");
+        addVirtualFluid(provider, CDFluids.STRAWBERRY_SYRUP, "Strawberry Syrup");
+        addVirtualFluid(provider, CDFluids.VANILLA_SYRUP, "Vanilla Syrup");
+        addVirtualFluid(provider, CDFluids.MINT_SYRUP, "Mint Syrup");
+        addVirtualFluid(provider, CDFluids.BANANA_SYRUP, "Banana Syrup");
+        addVirtualFluid(provider, CDFluids.COCONUT_SYRUP, "Coconut Syrup");
         //Fruit Delight jelly/jello
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLY, "Lush Confiture Jelly");
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLO, "Melted Lush Confiture Jello");

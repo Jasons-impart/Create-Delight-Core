@@ -74,6 +74,13 @@ public class CDFluids {
     public static final FluidEntry<VirtualFluid> LUSH_CONFITURE_JELLO = fruitDelightFluid("lush_confiture_jello", FD_JELLO, 0XF0612E);
     //radiation fluid
     public static final FluidEntry<ForgeFlowingFluid.Flowing> NUCLEAR_WASTE = radiationFluid("nuclear_waste");
+    // syrup
+    public static final FluidEntry<VirtualFluid> BASE_SYRUP = syrupFluid("base");
+    public static final FluidEntry<VirtualFluid> STRAWBERRY_SYRUP = syrupFluid("strawberry");
+    public static final FluidEntry<VirtualFluid> VANILLA_SYRUP = syrupFluid("vanilla");
+    public static final FluidEntry<VirtualFluid> MINT_SYRUP = syrupFluid("mint");
+    public static final FluidEntry<VirtualFluid> BANANA_SYRUP = syrupFluid("banana");
+    public static final FluidEntry<VirtualFluid> COCONUT_SYRUP = syrupFluid("coconut");
 
 
     public static FluidEntry<ForgeFlowingFluid.Flowing> createFluid(String name) {
@@ -152,6 +159,16 @@ public class CDFluids {
                 .bucket()
                 .tab(FLUID_TAB)
                 .build()
+                .register();
+    }
+
+    private static FluidEntry<VirtualFluid> syrupFluid(String name) {
+        String id = name + "_syrup";
+        ResourceLocation TEXTURE_RL = CreateDelightCore.id("block/fluid/" + id);
+        return REGISTRATE.virtualFluid(id, TEXTURE_RL, TEXTURE_RL, SyrupFluidType::new, VirtualFluid::createSource, VirtualFluid::createFlowing)
+                .properties(b -> b
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
                 .register();
     }
 
