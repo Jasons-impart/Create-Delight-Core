@@ -58,3 +58,13 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 ### 规则
 
 优先把外部莓果接入 Cosmopolitan 已有的 Berrfect tag，例如 `forge:fruits/blueberries`；关键兼容项也可以在 CDC 命名空间下用 `data/createdelightcore/berrfect/flavors/*.json` 保留显式 item 风味，避免 tag 单复数不匹配、上游 tag 变动或扩大影响到其它模组物品。
+
+## 虚拟流体显示名要走 fluid 翻译键
+
+**日期**: 2026-07-06
+
+**场景**: CDC syrup 使用 `REGISTRATE.virtualFluid(...)` 注册，JEI tooltip 需要显示“糖浆”而不是“糖浆块”。
+
+### 规则
+
+虚拟流体如果有同名承载方块，`FluidType` 要显式返回 `fluid.<namespace>.<path>` 描述键；否则 `FluidStack#getDisplayName()` 可能落到方块翻译键，显示成块名。
