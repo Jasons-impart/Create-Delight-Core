@@ -45,6 +45,9 @@ public class PhantomCompostBlock extends Block {
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isClientSide) {
+            if (!CDTags.isAlienPlanet(level))
+                return;
+
             float chance = 0.0F;
             boolean hasEctoplasm = false;
             int maxLight = 0;

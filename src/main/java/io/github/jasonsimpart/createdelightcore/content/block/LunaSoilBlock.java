@@ -1,9 +1,9 @@
 package io.github.jasonsimpart.createdelightcore.content.block;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
-import com.lightning.northstar.Northstar;
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
+import io.github.jasonsimpart.createdelightcore.registry.CDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -34,7 +34,7 @@ public class LunaSoilBlock extends Block {
                 return;
             }
 
-            if (!level.dimension().location().getNamespace().equals(Northstar.MOD_ID))
+            if (!CDTags.isAlienPlanet(level))
                 return;
 
             if (aboveBlock == IafBlockRegistry.FIRE_LILY.get()) {

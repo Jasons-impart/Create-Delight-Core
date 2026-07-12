@@ -1,8 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import com.simibubi.create.foundation.utility.CreateLang;
+import com.lightning.northstar.Northstar;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -14,8 +16,10 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -44,6 +48,18 @@ public class CDTags {
 
     public static TagKey<Fluid> forgeFluidTag(String path) {
         return forgeTag(ForgeRegistries.FLUIDS, path);
+    }
+
+    public static boolean isAlienPlanet(Level level) {
+        if (level.dimension().location().getNamespace().equals(Northstar.MOD_ID)) {
+            return true;
+        }
+
+        return level.registryAccess()
+                .registryOrThrow(Registries.LEVEL_STEM)
+                .getHolder(ResourceKey.create(Registries.LEVEL_STEM, level.dimension().location()))
+                .map(holder -> holder.is(AllDimensionTags.IS_ALIEN_PLANET.tag))
+                .orElse(false);
     }
 
     public enum NameSpace {
@@ -270,6 +286,42 @@ public class CDTags {
 
     }
 
+    public enum AllDimensionTags {
+
+        IS_ALIEN_PLANET(NameSpace.MOD, "is_alien_planet");
+
+        public final TagKey<LevelStem> tag;
+        public final boolean alwaysDatagen;
+
+        AllDimensionTags() {
+            this(NameSpace.MOD);
+        }
+
+        AllDimensionTags(NameSpace namespace) {
+            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+
+        AllDimensionTags(NameSpace namespace, String path) {
+            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
+        }
+
+        AllDimensionTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
+            this(namespace, null, optional, alwaysDatagen);
+        }
+
+        AllDimensionTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
+            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
+            tag = TagKey.create(Registries.LEVEL_STEM, id);
+            this.alwaysDatagen = alwaysDatagen;
+        }
+
+        public boolean matches(Level level) {
+            return isAlienPlanet(level);
+        }
+
+        private static void init() {}
+    }
+
     public enum AllRecipeSerializerTags {
 
         ;
@@ -315,6 +367,7 @@ public class CDTags {
         AllItemTags.init();
         AllFluidTags.init();
         AllEntityTags.init();
+        AllDimensionTags.init();
         AllRecipeSerializerTags.init();
     }
 }

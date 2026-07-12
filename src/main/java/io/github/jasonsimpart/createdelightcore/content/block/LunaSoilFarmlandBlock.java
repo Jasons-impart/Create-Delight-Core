@@ -1,8 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.content.block;
 
-import com.lightning.northstar.Northstar;
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
+import io.github.jasonsimpart.createdelightcore.registry.CDTags;
 import net.jadenxgamer.netherexp.registry.fluid.JNEFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -75,7 +75,7 @@ public class LunaSoilFarmlandBlock extends RichSoilFarmlandBlock {
                 return;
             }
 
-            if (!level.dimension().location().getNamespace().equals(Northstar.MOD_ID))
+            if (!CDTags.isAlienPlanet(level))
                 return;
 
             BlockState aboveState = level.getBlockState(pos.above());
