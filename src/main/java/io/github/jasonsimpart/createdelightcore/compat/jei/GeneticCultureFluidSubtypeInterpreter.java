@@ -4,6 +4,7 @@ import io.github.jasonsimpart.createdelightcore.content.fluid.GeneticCultureFlui
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraftforge.fluids.FluidStack;
 
 public class GeneticCultureFluidSubtypeInterpreter implements IIngredientSubtypeInterpreter<FluidStack> {
@@ -14,8 +15,10 @@ public class GeneticCultureFluidSubtypeInterpreter implements IIngredientSubtype
             return NONE;
         }
 
+        Tag colorTag = tag.get(GeneticCultureFluidType.COLOR_KEY);
+        String color = colorTag == null ? "" : colorTag.getAsString();
         return tag.getString(GeneticCultureFluidType.VARIANT_KEY)
-                + ";" + tag.getInt(GeneticCultureFluidType.COLOR_KEY)
+                + ";" + color
                 + ";" + tag.getString(GeneticCultureFluidType.NAME_KEY)
                 + ";" + tag.getString(GeneticCultureFluidType.CUSTOM_NAME_KEY);
     }

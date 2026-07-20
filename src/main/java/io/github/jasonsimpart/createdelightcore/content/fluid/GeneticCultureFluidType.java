@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * <p>Supported NBT keys:</p>
  * <ul>
- *     <li>{@code Color}: RGB or ARGB integer.</li>
+ *     <li>{@code Color}: RGB/ARGB integer or hexadecimal string.</li>
  *     <li>{@code Name}: translation key used as the display name.</li>
  *     <li>{@code CustomName}: literal text or a serialized JSON component.</li>
  *     <li>{@code Variant}: stable subtype identifier for recipe and JEI use.</li>
@@ -37,11 +37,37 @@ public class GeneticCultureFluidType extends AllFluids.TintedFluidType {
     @Override
     public int getTintColor(FluidStack stack) {
         CompoundTag tag = stack.getTag();
-        if (tag == null || !tag.contains(COLOR_KEY, Tag.TAG_ANY_NUMERIC)) {
+        if (tag == null) {
             return DEFAULT_COLOR;
         }
 
-        int color = tag.getInt(COLOR_KEY);
+        if (tag.contains(COLOR_KEY, Tag.TAG_ANY_NUMERIC)) {
+            return withDefaultAlpha(tag.getInt(COLOR_KEY));
+        }
+
+        if (tag.contains(COLOR_KEY, Tag.TAG_STRING)) {
+            return parseHexColor(tag.getString(COLOR_KEY));
+        }
+
+        return DEFAULT_COLOR;
+    }
+
+    private static int parseHexColor(String value) {
+        String normalized = value.trim();
+        if (normalized.startsWith("#")) {
+            normalized = normalized.substring(1);
+        } else if (normalized.startsWith("0x") || normalized.startsWith("0X")) {
+            normalized = normalized.substring(2);
+        }
+
+        try {
+            return withDefaultAlpha((int) Long.parseUnsignedLong(normalized, 16));
+        } catch (NumberFormatException ignored) {
+            return DEFAULT_COLOR;
+        }
+    }
+
+    private static int withDefaultAlpha(int color) {
         return (color & 0xFF000000) == 0 ? color | 0xFF000000 : color;
     }
 
