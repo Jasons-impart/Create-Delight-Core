@@ -222,6 +222,8 @@ dependencies {
     implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
     // create addition
     implementation fg.deobf("curse.maven:createaddition-439890:6306951")
+    // Create: Enchantment Industry printer API (optional runtime compatibility)
+    compileOnly fg.deobf("curse.maven:create-enchantment-industry-688768:8204334")
     // create utilities j
     implementation fg.deobf("curse.maven:create-utilities-j-1437484:7528356")
     // MMT - More Materials Tetra New
