@@ -81,6 +81,8 @@ public class CDFluids {
     public static final FluidEntry<VirtualFluid> MINT_SYRUP = syrupFluid("mint");
     public static final FluidEntry<VirtualFluid> BANANA_SYRUP = syrupFluid("banana");
     public static final FluidEntry<VirtualFluid> COCONUT_SYRUP = syrupFluid("coconut");
+    // NBT-defined genetic culture variants
+    public static final FluidEntry<VirtualFluid> GENETIC_CULTURE = geneticCultureFluid();
 
 
     public static FluidEntry<ForgeFlowingFluid.Flowing> createFluid(String name) {
@@ -166,6 +168,15 @@ public class CDFluids {
         String id = name + "_syrup";
         ResourceLocation TEXTURE_RL = CreateDelightCore.id("block/fluid/" + id);
         return REGISTRATE.virtualFluid(id, TEXTURE_RL, TEXTURE_RL, SyrupFluidType::new, VirtualFluid::createSource, VirtualFluid::createFlowing)
+                .properties(b -> b
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))
+                .register();
+    }
+
+    private static FluidEntry<VirtualFluid> geneticCultureFluid() {
+        return REGISTRATE.virtualFluid("genetic_culture", MILK_STILL, MILK_FLOW,
+                        GeneticCultureFluidType::new, VirtualFluid::createSource, VirtualFluid::createFlowing)
                 .properties(b -> b
                         .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
                         .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL))

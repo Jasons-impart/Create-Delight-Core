@@ -174,6 +174,7 @@ public class EnglishLangHandler {
         //Fruit Delight jelly/jello
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLY, "Lush Confiture Jelly");
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLO, "Melted Lush Confiture Jello");
+        addVirtualFluid(provider, CDFluids.GENETIC_CULTURE, "Genetic Culture");
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");

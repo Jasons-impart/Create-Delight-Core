@@ -283,6 +283,7 @@ public class ChineseLangHandler {
         //Fruit Delight jelly/jello
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLY, "繁茂果酱(流动中)");
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLO, "繁茂熔融果冻(流动中)");
+        addVirtualFluid(provider, CDFluids.GENETIC_CULTURE, "遗传培养液");
         //recipes
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
         provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");

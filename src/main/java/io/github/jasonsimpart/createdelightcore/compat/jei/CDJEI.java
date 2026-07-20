@@ -31,15 +31,19 @@ import io.github.jasonsimpart.createdelightcore.compat.jei.category.PhantomCompo
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
+import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
 import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.createmod.catnip.config.ConfigBase;
@@ -117,6 +121,14 @@ public class CDJEI implements IModPlugin {
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
         registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
         registration.addRecipeCatalyst(CDBlocks.PHANTOM_COMPOST.asStack(), PhantomCompostingCategory.RECIPE_TYPE);
+    }
+
+    @Override
+    public <T> void registerFluidSubtypes(ISubtypeRegistration registration, IPlatformFluidHelper<T> platformFluidHelper) {
+        GeneticCultureFluidSubtypeInterpreter interpreter = new GeneticCultureFluidSubtypeInterpreter();
+        var geneticCulture = CDFluids.GENETIC_CULTURE.get();
+        registration.registerSubtypeInterpreter(ForgeTypes.FLUID_STACK, geneticCulture.getSource(), interpreter);
+        registration.registerSubtypeInterpreter(ForgeTypes.FLUID_STACK, geneticCulture.getFlowing(), interpreter);
     }
 
     /** Build recipes from the client-side fuel cache (populated via network from server). */
