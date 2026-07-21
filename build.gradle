@@ -177,6 +177,11 @@ dependencies {
     compileOnly "org.spongepowered:mixin:0.8.5"
     annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
 
+    // Optional combat compatibility targets. These are compile-time only;
+    // mixins are gated by CombatMixinPlugin when the target mod is absent.
+    compileOnly fg.deobf("curse.maven:apothic-attributes-898963:5634071")
+    compileOnly fg.deobf("curse.maven:placebo-283644:6274231")
+
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei_version}")

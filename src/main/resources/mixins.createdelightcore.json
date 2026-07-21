@@ -3,6 +3,7 @@
   "package": "io.github.jasonsimpart.createdelightcore.mixin",
   "compatibilityLevel": "JAVA_17",
   "refmap": "mixins.createdelightcore.refmap.json",
+  "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
     "AbstractVillagerMixin",
     "VillagerMixin",
@@ -83,6 +84,10 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.NeapolitanJEIPluginMixin",
     "neapolitan.StrawberryBushBlockMixin",
+    "combat.LivingHurtEventMixin",
+    "combat.apothicattributes.AttributeEventsMixin",
+    "combat.ironsspellbooks.EchoingStrikesEffectMixin",
+    "combat.traveloptics.ShadowedMiasmaSpellMixin",
     "quality_food.BlockDropContextMixin",
     "quality_food.BlockUseContextMixin",
     "quality_food.BlockDataMixin",
