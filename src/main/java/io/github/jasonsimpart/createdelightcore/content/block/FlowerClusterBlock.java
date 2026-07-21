@@ -4,9 +4,12 @@ import de.cadentem.quality_food.capability.LevelData;
 import de.cadentem.quality_food.util.DropData;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -28,13 +31,18 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.ToolAction;
 import net.minecraftforge.common.ToolActions;
-import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.function.Supplier;
 
 public class FlowerClusterBlock extends BushBlock implements BonemealableBlock {
     public static final IntegerProperty CLUSTER_AGE = IntegerProperty.create("age", 0, 2);
+    private static final TagKey<Item> KNIVES = TagKey.create(
+            Registries.ITEM,
+            new ResourceLocation("forge", "tools/knives")
+    );
+    private static final ToolAction KNIFE_HARVEST = ToolAction.get("knife_harvest");
 
     protected static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
             Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
@@ -59,7 +67,7 @@ public class FlowerClusterBlock extends BushBlock implements BonemealableBlock {
         }
 
         ItemStack dropStack = this.getCloneItemStack(level, pos, state);
-        if (ItemUtils.isValidTool(heldStack, ToolActions.SHEARS_HARVEST, Tags.Items.SHEARS)) {
+        if (isShears(heldStack)) {
             level.setBlock(pos, state.setValue(CLUSTER_AGE, age - 1), 2);
             level.playSound(null, pos, SoundEvents.SHEEP_SHEAR, SoundSource.BLOCKS, 1.0F, 1.0F);
             popResourceWithQualityData(state, level, pos, player, dropStack);
@@ -72,7 +80,7 @@ public class FlowerClusterBlock extends BushBlock implements BonemealableBlock {
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (ItemUtils.isKnife(heldStack)) {
+        if (isKnife(heldStack)) {
             dropStack.setCount(age);
             level.setBlock(pos, state.setValue(CLUSTER_AGE, 0), 2);
             level.playSound(null, pos, this.soundType.getBreakSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -147,6 +155,14 @@ public class FlowerClusterBlock extends BushBlock implements BonemealableBlock {
 
     private static boolean isLunaSoil(BlockState state) {
         return state.is(CDBlocks.LUNA_SOIL.get()) || state.is(CDBlocks.LUNA_SOIL_FARMLAND.get());
+    }
+
+    private static boolean isShears(ItemStack stack) {
+        return stack.canPerformAction(ToolActions.SHEARS_HARVEST) || stack.is(Tags.Items.SHEARS);
+    }
+
+    private static boolean isKnife(ItemStack stack) {
+        return stack.canPerformAction(KNIFE_HARVEST) || stack.is(KNIVES);
     }
 
     private static void popResourceWithQualityData(BlockState state, Level level, BlockPos pos, Player player, ItemStack dropStack) {

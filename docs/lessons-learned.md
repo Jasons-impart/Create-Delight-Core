@@ -82,3 +82,13 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 ### 规则
 
 虚拟流体如果有同名承载方块，`FluidType` 要显式返回 `fluid.<namespace>.<path>` 描述键；否则 `FluidStack#getDisplayName()` 可能落到方块翻译键，显示成块名。
+
+## 不要把 Farmer's Delight 辅助方法当作跨版本 API
+
+**日期**: 2026-07-21
+
+**场景**: `FlowerClusterBlock` 同时需要识别剪刀与刀具。Farmer's Delight 1.3.2 提供了 `ItemUtils.isValidTool` / `isKnife`，但整合包使用的 1.2.11 没有这两个方法，会使 Create Deployer 反复抛出 `NoSuchMethodError`。
+
+### 规则
+
+跨 Farmer's Delight 版本的基础工具判断应只使用 Forge/Minecraft 稳定 API：剪刀使用 `ItemStack.canPerformAction(ToolActions.SHEARS_HARVEST)` 或 `forge:shears` 标签；刀具使用 `knife_harvest` 动作或 `forge:tools/knives` 标签。不要直接链接版本新增的 `ItemUtils` 方法。
