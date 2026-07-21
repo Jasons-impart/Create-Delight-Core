@@ -69,6 +69,7 @@
     "functionalstorage.StorageControllerExtensionTileMixin",
     "IAF.EntityGorgonMixin",
     "IAF.EntitySirenMixin",
+    "IAF.IafWorldDataMixin",
     "IAF.TabulaModelHandlerHelperMixin",
     "Minecraft.CarverMixin",
     "Minecraft.HoneyBlockMixin",
