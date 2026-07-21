@@ -47,10 +47,6 @@ public class CDConfig
             .comment("Make Iron's Spells Echoing Strikes record the LivingHurtEvent amount captured at event construction.")
             .comment("This prevents event-based damage multipliers from being sampled once by the hit and again by the echo.")
             .define("echoingStrikesUseOriginalDamage", true);
-    private static final ForgeConfigSpec.IntValue SHADOWED_MIASMA_MAX_ABYSSAL_STRIKE_LEVEL = BUILDER
-            .comment("Maximum Abyssal Strike level granted by Travel Optics Shadowed Miasma.")
-            .comment("Set to 0 to disable the cap. Only used when Travel Optics is installed.")
-            .defineInRange("shadowedMiasmaMaxAbyssalStrikeLevel", 100, 0, 10000);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -83,7 +79,6 @@ public class CDConfig
     public static boolean logMoreModTetraIndependentDamageMultipliers;
     public static boolean enableAdditiveMulticrit = true;
     public static boolean echoingStrikesUseOriginalDamage = true;
-    public static int shadowedMiasmaMaxAbyssalStrikeLevel = 100;
     public static int surfaceDepthLimit;
     public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
     public static boolean enableOpenEndedPipeLavaDrainFix = true;
@@ -102,7 +97,6 @@ public class CDConfig
             logMoreModTetraIndependentDamageMultipliers = LOG_MORE_MOD_TETRA_INDEPENDENT_DAMAGE_MULTIPLIERS.get();
             enableAdditiveMulticrit = ENABLE_ADDITIVE_MULTICRIT.get();
             echoingStrikesUseOriginalDamage = ECHOING_STRIKES_USE_ORIGINAL_DAMAGE.get();
-            shadowedMiasmaMaxAbyssalStrikeLevel = SHADOWED_MIASMA_MAX_ABYSSAL_STRIKE_LEVEL.get();
         }
         if (event.getConfig().getSpec() == SERVER_SPEC) {
             surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();

@@ -1,39 +1,29 @@
 package io.github.jasonsimpart.createdelightcore.mixin.combat.traveloptics;
 
-import io.github.jasonsimpart.createdelightcore.CDConfig;
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import io.github.jasonsimpart.createdelightcore.compat.combat.MiasmaPowerScaling;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Pseudo
 @Mixin(targets = "com.gametechbc.traveloptics.spells.eldritch.ShadowedMiasmaSpell", remap = false)
 public abstract class ShadowedMiasmaSpellMixin {
-    @ModifyArg(
-            method = "onCast",
+    @ModifyExpressionValue(
+            method = {"onCast", "getUniqueInfo"},
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/world/effect/MobEffect;II)V"
+                    target = "Lcom/gametechbc/traveloptics/spells/eldritch/ShadowedMiasmaSpell;getSpellPower(ILnet/minecraft/world/entity/Entity;)F"
             ),
-            index = 2,
             require = 1
     )
-    private int createdelightcore$capAbyssalStrikeAmplifier(int amplifier) {
-        int maxLevel = CDConfig.shadowedMiasmaMaxAbyssalStrikeLevel;
-        return maxLevel > 0 ? Math.min(amplifier, maxLevel - 1) : amplifier;
-    }
-
-    @ModifyArg(
-            method = "getUniqueInfo",
-            at = @At(
-                    value = "INVOKE",
-                    target = "Ljava/lang/Integer;valueOf(I)Ljava/lang/Integer;"
-            ),
-            index = 0,
-            require = 1
-    )
-    private int createdelightcore$showCappedAbyssalStrikeLevel(int level) {
-        int maxLevel = CDConfig.shadowedMiasmaMaxAbyssalStrikeLevel;
-        return maxLevel > 0 ? Math.min(level, maxLevel) : level;
+    private float createdelightcore$useDiminishingMiasmaPower(
+            float originalPower,
+            @Local(argsOnly = true) int spellLevel
+    ) {
+        float base = 2.0F + spellLevel - 1.0F;
+        float rawMultiplier = base == 0.0F ? 0.0F : originalPower / base;
+        return MiasmaPowerScaling.getMiasmaPower(spellLevel, rawMultiplier);
     }
 }
