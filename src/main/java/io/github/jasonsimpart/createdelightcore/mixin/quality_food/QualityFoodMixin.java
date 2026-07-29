@@ -59,6 +59,10 @@ public abstract class QualityFoodMixin {
     private static final ResourceLocation create_Delight_Core$POWDERY_CANE = new ResourceLocation("mynethersdelight", "powdery_cane");
     @Unique
     private static final ResourceLocation create_Delight_Core$POWDERY_CANNON = new ResourceLocation("mynethersdelight", "powdery_cannon");
+    @Unique
+    private static final ResourceLocation create_Delight_Core$CULTURAL_CORN = new ResourceLocation("culturaldelights", "corn");
+    @Unique
+    private static final ResourceLocation create_Delight_Core$CULTURAL_CORN_UPPER = new ResourceLocation("culturaldelights", "corn_upper");
 
     @Inject(method = "applyQuality(Lnet/minecraft/world/item/ItemStack;Ljava/util/Collection;Lnet/minecraft/world/entity/player/Player;)V", at = @At("HEAD"), cancellable = true, remap = false)
     private static void applyQualityFromIngredientsMixin(ItemStack stack, Collection<ItemStack> ingredients, Player player, CallbackInfo ci) {
@@ -98,7 +102,8 @@ public abstract class QualityFoodMixin {
         TagKey<Block> crop = TagKey.create(Registries.BLOCK, new ResourceLocation("createdelight", "quality_crops"));
         if (isRelevantCrop(state) || state.is(crop)) {
             Quality selected = Quality.NONE;
-            Quality chanceQuality = create_Delight_Core$getChanceQuality(state, blockQuality);
+            Quality effectiveBlockQuality = create_Delight_Core$getEffectiveBlockQuality(player, state, blockQuality);
+            Quality chanceQuality = create_Delight_Core$getChanceQuality(state, effectiveBlockQuality);
             float growChance = create_Delight_Core$getGrowChance(player, state, chanceQuality);
             BlockState effectiveFarmland = create_Delight_Core$getEffectiveFarmland(player, state, farmland);
             QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
@@ -151,27 +156,59 @@ public abstract class QualityFoodMixin {
     }
 
     @Unique
-    private static BlockState create_Delight_Core$getEffectiveFarmland(Player player, BlockState state, BlockState farmland) {
-        if (player == null) {
-            return farmland;
+    private static Quality create_Delight_Core$getEffectiveBlockQuality(
+            Player player,
+            BlockState state,
+            Quality blockQuality) {
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+        if (!create_Delight_Core$CULTURAL_CORN.equals(blockId)
+                && !create_Delight_Core$CULTURAL_CORN_UPPER.equals(blockId)) {
+            return blockQuality;
         }
 
+        Level level = player == null ? null : player.level();
         BlockPos cropPos = QualityFoodHarvestContext.getCropPos();
-        if (cropPos == null) {
+        QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
+        if (level == null && automation != null) {
+            level = automation.level();
+        }
+        if (cropPos == null && automation != null) {
+            cropPos = automation.pos();
+        }
+        if (level == null || cropPos == null) {
+            return blockQuality;
+        }
+
+        BlockPos effectivePos = create_Delight_Core$getEffectiveCropPos(level, state, cropPos);
+        return LevelData.get(level, effectivePos);
+    }
+
+    @Unique
+    private static BlockState create_Delight_Core$getEffectiveFarmland(Player player, BlockState state, BlockState farmland) {
+        Level level = player == null ? null : player.level();
+        BlockPos cropPos = QualityFoodHarvestContext.getCropPos();
+        QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
+        if (level == null && automation != null) {
+            level = automation.level();
+        }
+        if (cropPos == null && automation != null) {
+            cropPos = automation.pos();
+        }
+        if (level == null || cropPos == null) {
             return farmland;
         }
 
-        BlockPos basePos = create_Delight_Core$getEffectiveCropPos(player, state, cropPos);
+        BlockPos basePos = create_Delight_Core$getEffectiveCropPos(level, state, cropPos);
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+        if (create_Delight_Core$CULTURAL_CORN.equals(blockId)
+                || create_Delight_Core$CULTURAL_CORN_UPPER.equals(blockId)) {
+            return level.getBlockState(basePos.below());
+        }
         if (basePos.equals(cropPos)) {
             return farmland;
         }
 
-        return player.level().getBlockState(basePos.below());
-    }
-
-    @Unique
-    private static BlockPos create_Delight_Core$getEffectiveCropPos(Player player, BlockState state, BlockPos cropPos) {
-        return create_Delight_Core$getEffectiveCropPos(player.level(), state, cropPos);
+        return level.getBlockState(basePos.below());
     }
 
     @Unique
@@ -182,6 +219,13 @@ public abstract class QualityFoodMixin {
 
         if (state.getBlock() instanceof TomatoVineBlock) {
             return create_Delight_Core$getBaseCropPos(level, cropPos, state.getBlock());
+        }
+
+        ResourceLocation blockId = ForgeRegistries.BLOCKS.getKey(state.getBlock());
+        if (create_Delight_Core$CULTURAL_CORN_UPPER.equals(blockId)
+                && level.getBlockState(cropPos.below()).is(
+                ForgeRegistries.BLOCKS.getValue(create_Delight_Core$CULTURAL_CORN))) {
+            return cropPos.below();
         }
 
         return cropPos;
@@ -222,7 +266,7 @@ public abstract class QualityFoodMixin {
             growPos = player.getOnPos();
         }
 
-        BlockPos effectiveGrowPos = create_Delight_Core$getEffectiveCropPos(player, state, growPos);
+        BlockPos effectiveGrowPos = create_Delight_Core$getEffectiveCropPos(player.level(), state, growPos);
         BlockState effectiveGrowState = player.level().getBlockState(effectiveGrowPos);
         int sourceRank = state.is(Blocks.SUGAR_CANE) ? 0 : LevelData.get(player.level(), effectiveGrowPos).level();
         int targetRank = blockQuality.level();

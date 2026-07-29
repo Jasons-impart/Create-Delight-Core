@@ -99,3 +99,19 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 ### 规则
 
 虚拟流体如果有同名承载方块，`FluidType` 要显式返回 `fluid.<namespace>.<path>` 描述键；否则 `FluidStack#getDisplayName()` 可能落到方块翻译键，显示成块名。
+
+## 双格作物兼容必须归一化下段并同步品质
+
+**日期**: 2026-07-30
+
+**问题**: 收割或生长兼容若把同一 `BlockState` 写入双格作物上下位置，会复制错误的 `DoublePlantBlock.HALF` 并触发整株清除；只给下段写 Quality Food `LevelData` 又会让点击或破坏上段时丢失品质。
+
+**正确做法**: 先归一化到底部坐标，分别写回 `LOWER/UPPER`，并在自然生长与骨粉生长生成上段后把下段 `LevelData` 复制到上段；品质计算仍统一回溯到下段及其下方土壤。
+
+## 第三方配方的 toolNotConsumed 不会自动约束 Create 机械手
+
+**日期**: 2026-07-30
+
+**问题**: `ProcessingRecipeBuilder.toolNotConsumed()` 只保存配方参数，Create `6.0.8` 的 `BeltDeployerCallbacks` 仅通过 `ItemApplicationRecipe.shouldKeepHeldItem()` 决定是否保留机械手工具。
+
+**正确做法**: 对普通 `ProcessingRecipe` 派生的第三方工具配方，在机械手消耗点按明确配方类型跳过手持工具的第二次 `shrink`、`hurtAndBreak` 与 crafting remainder，同时保留传送带原料的第一次 `shrink`。

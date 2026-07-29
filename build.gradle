@@ -208,6 +208,8 @@ dependencies {
 
     //collectors reap
     implementation fg.deobf("curse.maven:collectors-reap-807101:7457274")
+    // cultural delights (compile target for crop quality compatibility)
+    compileOnly fg.deobf("curse.maven:cultural-delights-574622:8126187")
 
     implementation fg.deobf("com.teamresourceful.resourcefullib:resourcefullib-forge-${minecraft_version}:${resourcefullib_version}")
     implementation fg.deobf("com.teamresourceful.resourcefulconfig:resourcefulconfig-forge-${minecraft_version}:${resourcefulconfig_version}")
