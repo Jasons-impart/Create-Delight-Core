@@ -11,11 +11,17 @@ import io.github.jasonsimpart.createdelightcore.content.block.FlowerClusterBlock
 import io.github.jasonsimpart.createdelightcore.content.util.QualityHarvestAutomationContext;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import net.brdle.collectorsreap.common.block.CRBlocks;
+import net.brdle.collectorsreap.common.block.FruitBushBlock;
+import net.brdle.collectorsreap.common.block.LimeBushBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +43,8 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
             registerLootTableHarvest(ModBlocks.RED_MUSHROOM_COLONY.get());
             registerLootTableHarvest(ModBlocks.BROWN_MUSHROOM_COLONY.get());
             registerLootTableHarvest(CRBlocks.PORTOBELLO_COLONY.get());
+            registerCollectorsReapFruitBush(CRBlocks.LIME_BUSH.get());
+            registerCollectorsReapFruitBush(CRBlocks.POMEGRANATE_BUSH.get());
 
         });
     }
@@ -45,6 +53,92 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
         HarvesterMovementBehaviourExtension.REGISTRY.put(
                 block,
                 CreateDelightCoreHarvesterMovementBehaviorExtensions::harvestWithLootTable);
+    }
+
+    private static void registerCollectorsReapFruitBush(Block block) {
+        HarvesterMovementBehaviourExtension.REGISTRY.put(
+                block,
+                CreateDelightCoreHarvesterMovementBehaviorExtensions::harvestCollectorsReapFruitBush);
+    }
+
+    public static void harvestCollectorsReapFruitBush(
+            HarvesterMovementBehaviour behaviour,
+            MovementContext context,
+            BlockPos pos,
+            BlockState state,
+            boolean replant,
+            boolean partial) {
+        if (!(state.getBlock() instanceof FruitBushBlock fruitBush)
+                || state.getValue(FruitBushBlock.STUNTED)) {
+            return;
+        }
+
+        Level level = context.world;
+        if (level.isClientSide) {
+            return;
+        }
+
+        BlockPos lowerPos = state.getValue(DoublePlantBlock.HALF) == DoubleBlockHalf.UPPER
+                ? pos.below()
+                : pos;
+        BlockPos upperPos = lowerPos.above();
+        BlockState lowerState = level.getBlockState(lowerPos);
+        if (!lowerState.is(state.getBlock())
+                || lowerState.getValue(DoublePlantBlock.HALF) != DoubleBlockHalf.LOWER
+                || lowerState.getValue(FruitBushBlock.STUNTED)) {
+            return;
+        }
+
+        int age = lowerState.getValue(FruitBushBlock.AGE);
+        int maxAge = fruitBush.getMaxAge();
+        if (age <= 0 || (!partial && age < maxAge)) {
+            return;
+        }
+
+        QualityHarvestAutomationContext.HarvestData previousHarvest =
+                QualityHarvestAutomationContext.push(context, lowerPos, lowerState);
+        DropData previousDropData = DropData.CURRENT.get();
+        DropData.CURRENT.set(new DropData(
+                LevelData.get(level, lowerPos, true),
+                lowerState,
+                null,
+                level.getBlockState(lowerPos.below())));
+        try {
+            if (age >= maxAge) {
+                int baseCount = fruitBush instanceof LimeBushBlock ? 2 : 1;
+                ItemStack fruit = new ItemStack(fruitBush.getFruit(), baseCount + level.random.nextInt(2));
+                dropWithQuality(behaviour, context, fruit);
+
+                if (replant) {
+                    BlockState upperState = level.getBlockState(upperPos);
+                    if (!upperState.is(lowerState.getBlock())) {
+                        upperState = lowerState.setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER);
+                    }
+
+                    level.setBlock(lowerPos, lowerState
+                            .setValue(FruitBushBlock.AGE, 2)
+                            .setValue(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER), 2);
+                    level.setBlock(upperPos, upperState
+                            .setValue(FruitBushBlock.AGE, 2)
+                            .setValue(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER), 2);
+                    level.playSound(null, lowerPos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES,
+                            SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                    return;
+                }
+            }
+
+            if (partial || age >= maxAge) {
+                BlockHelper.destroyBlock(level, upperPos, 1, stack -> dropWithQuality(behaviour, context, stack));
+                BlockHelper.destroyBlock(level, lowerPos, 1, stack -> dropWithQuality(behaviour, context, stack));
+            }
+        } finally {
+            if (previousDropData == null) {
+                DropData.CURRENT.remove();
+            } else {
+                DropData.CURRENT.set(previousDropData);
+            }
+            QualityHarvestAutomationContext.pop(previousHarvest);
+        }
     }
 
     public static void harvestWithLootTable(
@@ -125,5 +219,13 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
             return colony.getMaxAge();
         }
         return 0;
+    }
+
+    private static void dropWithQuality(
+            HarvesterMovementBehaviour behaviour,
+            MovementContext context,
+            ItemStack stack) {
+        QualityHarvestAutomationContext.applyQuality(stack);
+        behaviour.dropItem(context, stack);
     }
 }
