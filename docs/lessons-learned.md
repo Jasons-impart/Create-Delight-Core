@@ -1,5 +1,22 @@
 # Lessons Learned
 
+## 可选 Mixin 的共享接口不能放在 Mixin 包内
+
+**日期**: 2026-07-21
+
+**场景**: CDC 为 Apothic Attributes、Iron's Spells 和 Travel Optics 添加可选战斗兼容，同时让这些模组缺失时 CDC 仍能启动。
+
+### 问题
+
+Mixin 配置声明 `io.github.jasonsimpart.createdelightcore.mixin` 为专用包后，普通目标类或其他代码直接加载该包下的共享接口会触发 `IllegalClassLoadError`；仅使用 `required: false` 也不能证明存在目标模组时注入点一定命中。
+
+### 正确做法
+
+- 可选目标使用 `@Pseudo`，并由 `IMixinConfigPlugin` 在早期加载阶段按模组 ID 决定 Apply/Skip。
+- 需要被目标类实现或被普通代码引用的接口放在 `compat/` 等非 Mixin 包下。
+- 可选 Mixin 被插件判定为应用后，对关键注入设置 `require = 1`，让目标版本漂移直接在启动验证中暴露。
+- 同时测试“目标模组全部存在”和“目标模组全部缺失”两种启动场景。
+
 ## Create Basin 动态流体输出需要执行上下文
 
 **日期**: 2026-07-05
