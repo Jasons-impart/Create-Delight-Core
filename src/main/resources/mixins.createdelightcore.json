@@ -118,7 +118,8 @@
     "create.BasinCategoryMixin",
     "ae2.CableBusContainerPonderMixin",
     "cosmopolitan.CosmoJEIPluginMixin",
-    "createdieselgenerators.BulkFermenterRendererMixin"
+    "createdieselgenerators.BulkFermenterRendererMixin",
+    "extraholopage.ExtraHoloItemsGuiMixin"
   ],
   "minVersion": "0.8"
 }
