@@ -115,3 +115,11 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 **问题**: `ProcessingRecipeBuilder.toolNotConsumed()` 只保存配方参数，Create `6.0.8` 的 `BeltDeployerCallbacks` 仅通过 `ItemApplicationRecipe.shouldKeepHeldItem()` 决定是否保留机械手工具。
 
 **正确做法**: 对普通 `ProcessingRecipe` 派生的第三方工具配方，在机械手消耗点按明确配方类型跳过手持工具的第二次 `shrink`、`hurtAndBreak` 与 crafting remainder，同时保留传送带原料的第一次 `shrink`。
+
+## Tetra 全息入口分页必须在构造时写入页内坐标
+
+**日期**: 2026-07-31
+
+**问题**: `HoloItemGui` 会在构造时把初始坐标固化进取消选中动画；若分页只在构造后调用 `setX/setY`，从改造详情返回时动画会把入口恢复到未分页坐标并打乱布局。
+
+**正确做法**: 在 `HoloItemGui` 构造调用处把坐标改为页内坐标，再控制各页可见性；升级 Tetra 或 ExtraHoloPage 后复核构造器描述符和 `changeItem` 生命周期。
