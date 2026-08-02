@@ -5,6 +5,7 @@ import io.github.jasonsimpart.createdelightcore.content.order.data.OrderDataMana
 import io.github.jasonsimpart.createdelightcore.content.order.data.OrderDraftSealData;
 import io.github.jasonsimpart.createdelightcore.content.order.data.OrderSpecData;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
@@ -19,12 +20,14 @@ import java.util.Optional;
 public final class OrderParserInfo {
     public static final String DRAFT_ITEM_ID = "createdelight:unopened_order";
     public static final String SEAL_ITEM_ID = "createdelight:order_seal";
+    public static final String CLAUSE_ITEM_ID = "createdelight:order_clause";
 
     private OrderParserInfo() {
     }
 
     public static boolean isParserStack(ItemStack stack) {
-        return OrderInfo.isOrder(stack) || isItem(stack, DRAFT_ITEM_ID) || isItem(stack, SEAL_ITEM_ID);
+        return OrderInfo.isOrder(stack) || isItem(stack, DRAFT_ITEM_ID)
+                || isItem(stack, SEAL_ITEM_ID) || isItem(stack, CLAUSE_ITEM_ID);
     }
 
     public static List<OrderParserLine> describe(ItemStack stack) {
@@ -32,7 +35,7 @@ public final class OrderParserInfo {
             return List.of(line("createdelightcore.gui.parser.insert", "", 0x606060, true));
         }
         if (OrderInfo.isOrder(stack)) {
-            return describeOrder(OrderInfo.fromStack(stack).orElse(null));
+            return describeOrder(stack, OrderInfo.fromStack(stack).orElse(null));
         }
         if (isItem(stack, DRAFT_ITEM_ID)) {
             return describeDraft(stack);
@@ -40,10 +43,13 @@ public final class OrderParserInfo {
         if (isItem(stack, SEAL_ITEM_ID)) {
             return describeSeal(readString(stack, "OrderSeal"));
         }
+        if (isItem(stack, CLAUSE_ITEM_ID)) {
+            return describeClause(readString(stack, "OrderClause"));
+        }
         return List.of(line("createdelightcore.gui.parser.unsupported", "", 0x803030, true));
     }
 
-    private static List<OrderParserLine> describeOrder(OrderInfo order) {
+    private static List<OrderParserLine> describeOrder(ItemStack stack, OrderInfo order) {
         if (order == null) {
             return List.of(line("createdelightcore.gui.parser.no_data", "", 0x803030, true));
         }
@@ -53,6 +59,12 @@ public final class OrderParserInfo {
             lines.add(line("createdelightcore.gui.parser.owner", order.ownerName(), 0x404040, false));
         }
         lines.add(line("createdelightcore.gui.parser.reputation", Integer.toString(order.generatedReputationLevel()), 0x404040, false));
+        CompoundTag info = stack.getOrCreateTag().getCompound(OrderInfo.ORDER_INFO_TAG);
+        int grade = Math.max(1, info.getInt("orderGrade"));
+        lines.add(new OrderParserLine("createdelightcore.gui.parser.order_grade", "",
+                "tooltip.createdelight.order.grade." + grade, "", 0xA06000, false));
+        appendRewardMultipliers(lines, info.getCompound("rewardMultipliers"));
+        appendClauseList(lines, info.getList("modifiers", Tag.TAG_STRING));
         lines.add(line("createdelightcore.gui.parser.order_entries", "", 0x303030, true));
 
         Map<String, EntrySummary> summaries = new LinkedHashMap<>();
@@ -71,8 +83,9 @@ public final class OrderParserInfo {
         CompoundTag draft = stack.hasTag() ? stack.getOrCreateTag().getCompound("OrderDraft") : new CompoundTag();
         String customerSeal = draft.getString("customerSeal");
         String categorySeal = draft.getString("categorySeal");
-        if (customerSeal.isBlank() && categorySeal.isBlank()) {
-            lines.add(line("createdelightcore.gui.parser.no_seal", "", 0x606060, false));
+        ListTag clauses = draft.getList("Clauses", Tag.TAG_STRING);
+        if (customerSeal.isBlank() && categorySeal.isBlank() && clauses.isEmpty()) {
+            lines.add(line("createdelightcore.gui.parser.no_material", "", 0x606060, false));
             return List.copyOf(lines);
         }
         if (!customerSeal.isBlank()) {
@@ -81,6 +94,7 @@ public final class OrderParserInfo {
         if (!categorySeal.isBlank()) {
             appendSeal(lines, categorySeal);
         }
+        appendClauseList(lines, clauses);
         return List.copyOf(lines);
     }
 
@@ -92,6 +106,49 @@ public final class OrderParserInfo {
         }
         appendSeal(lines, key);
         return List.copyOf(lines);
+    }
+
+    private static List<OrderParserLine> describeClause(String key) {
+        if (key.isBlank()) {
+            return List.of(line("createdelightcore.gui.parser.blank_clause", "", 0x606060, true));
+        }
+        List<OrderParserLine> lines = new ArrayList<>();
+        appendClause(lines, key);
+        return List.copyOf(lines);
+    }
+
+    private static void appendClauseList(List<OrderParserLine> lines, ListTag clauses) {
+        if (clauses.isEmpty()) {
+            return;
+        }
+        lines.add(line("createdelightcore.gui.parser.clauses", "", 0x404040, true));
+        for (int i = 0; i < clauses.size(); i++) {
+            appendClause(lines, clauses.getString(i));
+        }
+    }
+
+    private static void appendClause(List<OrderParserLine> lines, String key) {
+        lines.add(new OrderParserLine("", key,
+                "tooltip.createdelight.order_clause." + key + ".name", "", 0x303030, false));
+    }
+
+    private static void appendRewardMultipliers(List<OrderParserLine> lines, CompoundTag multipliers) {
+        if (multipliers.isEmpty()) {
+            return;
+        }
+        appendMultiplier(lines, "createdelightcore.gui.parser.money_multiplier", multipliers, "money");
+        appendMultiplier(lines, "createdelightcore.gui.parser.reputation_multiplier", multipliers, "reputation");
+        appendMultiplier(lines, "createdelightcore.gui.parser.gift_multiplier", multipliers, "gifts");
+    }
+
+    private static void appendMultiplier(List<OrderParserLine> lines, String label, CompoundTag tag, String key) {
+        if (!tag.contains(key, Tag.TAG_ANY_NUMERIC)) {
+            return;
+        }
+        double value = tag.getDouble(key);
+        if (Math.abs(value - 1.0D) > 0.0001D) {
+            lines.add(line(label, multiplier(value), 0x606060, false));
+        }
     }
 
     private static void appendSeal(List<OrderParserLine> lines, String key) {
@@ -165,6 +222,9 @@ public final class OrderParserInfo {
     private static void appendModifiers(List<OrderParserLine> lines, OrderSpecData spec) {
         if (spec.moneyMultiplier() != null) {
             lines.add(line("createdelightcore.gui.parser.money_multiplier", multiplier(spec.moneyMultiplier()), 0x606060, false));
+        }
+        if (spec.reputationMultiplier() != null) {
+            lines.add(line("createdelightcore.gui.parser.reputation_multiplier", multiplier(spec.reputationMultiplier()), 0x606060, false));
         }
         if (spec.entryCountMultiplier() != null) {
             lines.add(line("createdelightcore.gui.parser.entry_count_multiplier", multiplier(spec.entryCountMultiplier()), 0x606060, false));
