@@ -14,6 +14,7 @@ import java.util.Set;
 public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final Logger LOGGER = LogManager.getLogger("CreateDelightCore/CombatMixinPlugin");
     private static final String APOTHIC_ATTRIBUTES_MIXIN = ".combat.apothicattributes.";
+    private static final String BETTER_COMBAT_MIXIN = ".combat.bettercombat.";
     private static final String IRONS_SPELLBOOKS_MIXIN = ".combat.ironsspellbooks.";
     private static final String TRAVELOPTICS_MIXIN = ".combat.traveloptics.";
     private static final String EXTRA_HOLO_PAGE_MIXIN = ".extraholopage.";
@@ -31,6 +32,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.contains(APOTHIC_ATTRIBUTES_MIXIN)) {
             return decide(mixinClassName, "attributeslib");
+        }
+        if (mixinClassName.contains(BETTER_COMBAT_MIXIN)) {
+            return decide(mixinClassName, "bettercombat");
         }
         if (mixinClassName.contains(IRONS_SPELLBOOKS_MIXIN)) {
             return decide(mixinClassName, "irons_spellbooks");

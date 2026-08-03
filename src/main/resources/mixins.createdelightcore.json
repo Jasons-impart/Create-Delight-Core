@@ -91,6 +91,7 @@
     "neapolitan.StrawberryBushBlockMixin",
     "combat.LivingHurtEventMixin",
     "combat.apothicattributes.AttributeEventsMixin",
+    "combat.bettercombat.ServerConfigMixin",
     "combat.ironsspellbooks.EchoingStrikesEffectMixin",
     "combat.traveloptics.ShadowedMiasmaSpellMixin",
     "quality_food.BlockDropContextMixin",
