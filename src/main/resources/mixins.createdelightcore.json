@@ -89,6 +89,7 @@
     "neapolitan.MintBlockMixin",
     "neapolitan.NeapolitanJEIPluginMixin",
     "neapolitan.StrawberryBushBlockMixin",
+    "northstar.CraterFeatureMixin",
     "combat.LivingHurtEventMixin",
     "combat.apothicattributes.AttributeEventsMixin",
     "combat.bettercombat.ServerConfigMixin",
