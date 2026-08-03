@@ -187,6 +187,7 @@ public class CDBlocks {
                             .requiresCorrectToolForDrops())
                     .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
                             pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/forge_steel_casing"))))
+                    .loot((lt, block) -> lt.dropSelf(block))
                     .item()
                     .transform(b -> b.model((ctx, pvd) ->
                             pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
@@ -222,6 +223,7 @@ public class CDBlocks {
                                 .rotationY(rotationY)
                                 .build();
                     }))
+                    .loot((lt, block) -> lt.dropSelf(block))
                     .item()
                     .transform(b -> b.model((ctx, pvd) ->
                             pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))

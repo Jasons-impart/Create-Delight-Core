@@ -123,3 +123,11 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 **问题**: `HoloItemGui` 会在构造时把初始坐标固化进取消选中动画；若分页只在构造后调用 `setX/setY`，从改造详情返回时动画会把入口恢复到未分页坐标并打乱布局。
 
 **正确做法**: 在 `HoloItemGui` 构造调用处把坐标改为页内坐标，再控制各页可见性；升级 Tetra 或 ExtraHoloPage 后复核构造器描述符和 `changeItem` 生命周期。
+
+## Better Combat 零前摇配置受 JAR 下限限制
+
+**日期**: 2026-08-03
+
+**问题**: Better Combat `1.9.0+1.20.1` 的 `ServerConfig.getUpswingMultiplier()` 会把 `upswing_multiplier` 强制夹到至少 `0.2F`，因此整合包配置写成 `0.0` 仍保留前摇。
+
+**正确做法**: 用按 `bettercombat` 模组存在性加载的 `@Pseudo` Mixin 将该常量下限改为 `0.0F`，并保留 `require = 1`；升级 Better Combat 后必须复核方法与常量是否仍匹配。
