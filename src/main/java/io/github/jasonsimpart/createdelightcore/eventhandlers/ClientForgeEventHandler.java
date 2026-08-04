@@ -1,27 +1,34 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
+import com.simibubi.create.AllKeys;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
-import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleKeys;
-import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
-import io.github.jasonsimpart.createdelightcore.network.CycleConfigurationModePacket;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleManager;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModeSnapshot;
+import io.github.jasonsimpart.createdelightcore.content.configuration.RadialConfigurationMenu;
 import net.minecraft.client.Minecraft;
+import net.createmod.catnip.gui.ScreenOpener;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
 
 @Mod.EventBusSubscriber(modid = CreateDelightCore.MODID, value = Dist.CLIENT)
 public class ClientForgeEventHandler {
     @SubscribeEvent
-    public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
-        if (event.getScrollDelta() == 0 || !ConfigurationModuleKeys.MODIFIER.isDown()) {
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        if (event.phase != TickEvent.Phase.END) {
             return;
         }
-        Player player = Minecraft.getInstance().player;
-        if (player == null) {
+        Minecraft minecraft = Minecraft.getInstance();
+        Player player = minecraft.player;
+        if (player == null || player.isSpectator() || minecraft.screen != null
+                || !AllKeys.TOOLBELT.getKeybind().consumeClick()) {
             return;
         }
         InteractionHand hand;
@@ -32,8 +39,12 @@ public class ClientForgeEventHandler {
         } else {
             return;
         }
-        event.setCanceled(true);
-        int direction = event.getScrollDelta() > 0 ? -1 : 1;
-        CDNetwork.CHANNEL.sendToServer(new CycleConfigurationModePacket(hand, direction));
+        ItemStack stack = player.getItemInHand(hand);
+        List<ConfigurationModeSnapshot> modes = ConfigurationModuleManager.getSnapshotAvailableModes(stack);
+        if (modes.size() < 2) {
+            return;
+        }
+        ScreenOpener.open(new RadialConfigurationMenu(hand, stack, modes,
+                ConfigurationModuleManager.getSnapshotModeId(stack).orElse(null)));
     }
 }

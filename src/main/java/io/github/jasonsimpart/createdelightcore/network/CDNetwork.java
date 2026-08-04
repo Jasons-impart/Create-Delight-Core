@@ -52,5 +52,12 @@ public class CDNetwork {
                 CycleConfigurationModePacket::decode,
                 CycleConfigurationModePacket::handle
         );
+        CHANNEL.registerMessage(
+                id++,
+                SelectConfigurationModePacket.class,
+                SelectConfigurationModePacket::encode,
+                SelectConfigurationModePacket::decode,
+                SelectConfigurationModePacket::handle
+        );
     }
 }

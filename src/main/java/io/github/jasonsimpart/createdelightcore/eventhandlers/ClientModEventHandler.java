@@ -3,13 +3,11 @@ package io.github.jasonsimpart.createdelightcore.eventhandlers;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserScreen;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterScreen;
-import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleKeys;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItemDecorator;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import io.github.jasonsimpart.createdelightcore.registry.CDMenus;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.event.RegisterItemDecorationsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,11 +23,6 @@ public class ClientModEventHandler {
         event.register(CDItems.FLUID_CONFIGURATION_MODULE.get(), decorator);
         event.register(CDItems.CONTROL_CONFIGURATION_MODULE.get(), decorator);
         event.register(CDItems.LOGISTICS_CONFIGURATION_MODULE.get(), decorator);
-    }
-
-    @SubscribeEvent
-    public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
-        event.register(ConfigurationModuleKeys.MODIFIER);
     }
 
     @SubscribeEvent

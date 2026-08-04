@@ -6,6 +6,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.ResourceLocationException;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -29,6 +32,7 @@ public final class ConfigurationModuleManager {
     public static final String TAG_TARGET = "Target";
     public static final String TAG_CHARGE = "Charge";
     public static final String TAG_CHARGE_COST = "ChargeCost";
+    public static final String TAG_AVAILABLE_MODES = "AvailableModes";
     private static final String LEGACY_TAG_EXTRA_INGREDIENTS = "ExtraIngredients";
     public static final String TAG_MAX_CHARGE = "MaxCharge";
     public static final String TAG_TIER = "Tier";
@@ -68,6 +72,7 @@ public final class ConfigurationModuleManager {
     public static Optional<ConfigurationMode> getSelectedMode(ItemStack stack) {
         List<ConfigurationMode> available = getAvailableModes(stack);
         if (available.isEmpty()) {
+            stack.getOrCreateTag().remove(TAG_AVAILABLE_MODES);
             return Optional.empty();
         }
         ResourceLocation selectedId = readResourceLocation(stack, TAG_MODE);
@@ -123,6 +128,14 @@ public final class ConfigurationModuleManager {
         return Optional.of(mode);
     }
 
+    public static Optional<ConfigurationMode> select(ItemStack stack, ResourceLocation modeId) {
+        Optional<ConfigurationMode> selected = getAvailableModes(stack).stream()
+                .filter(mode -> mode.id().equals(modeId))
+                .findFirst();
+        selected.ifPresent(mode -> writeSnapshot(stack, mode));
+        return selected;
+    }
+
     public static Optional<BlockItem> getTargetBlockItem(ConfigurationMode mode) {
         Item item = ForgeRegistries.ITEMS.getValue(mode.target());
         return item instanceof BlockItem blockItem ? Optional.of(blockItem) : Optional.empty();
@@ -139,6 +152,29 @@ public final class ConfigurationModuleManager {
 
     public static Optional<ResourceLocation> getSnapshotTargetId(ItemStack stack) {
         return Optional.ofNullable(readResourceLocation(stack, TAG_TARGET));
+    }
+
+    public static Optional<ResourceLocation> getSnapshotModeId(ItemStack stack) {
+        return Optional.ofNullable(readResourceLocation(stack, TAG_MODE));
+    }
+
+    public static List<ConfigurationModeSnapshot> getSnapshotAvailableModes(ItemStack stack) {
+        if (!stack.hasTag() || !stack.getTag().contains(TAG_AVAILABLE_MODES, Tag.TAG_LIST)) {
+            return List.of();
+        }
+        ListTag snapshots = stack.getTag().getList(TAG_AVAILABLE_MODES, Tag.TAG_COMPOUND);
+        List<ConfigurationModeSnapshot> result = new ArrayList<>();
+        for (int index = 0; index < snapshots.size(); index++) {
+            CompoundTag snapshot = snapshots.getCompound(index);
+            ResourceLocation id = readResourceLocation(snapshot, TAG_MODE);
+            ResourceLocation target = readResourceLocation(snapshot, TAG_TARGET);
+            if (id == null || target == null || !(ForgeRegistries.ITEMS.getValue(target) instanceof BlockItem)) {
+                continue;
+            }
+            result.add(new ConfigurationModeSnapshot(id, target,
+                    Math.max(0, snapshot.getInt(TAG_CHARGE_COST))));
+        }
+        return List.copyOf(result);
     }
 
     public static int getSnapshotChargeCost(ItemStack stack) {
@@ -183,9 +219,22 @@ public final class ConfigurationModuleManager {
         stack.getOrCreateTag().putString(TAG_MODE, mode.id().toString());
         stack.getOrCreateTag().putString(TAG_TARGET, mode.target().toString());
         stack.getOrCreateTag().putInt(TAG_CHARGE_COST, mode.chargeCost());
+        writeAvailableModesSnapshot(stack);
         stack.getOrCreateTag().remove(LEGACY_TAG_EXTRA_INGREDIENTS);
         stack.getOrCreateTag().putInt(TAG_DATA_VERSION, DATA_VERSION);
         getDefinition(stack).ifPresent(definition -> applyDefinitionSnapshot(stack, definition));
+    }
+
+    private static void writeAvailableModesSnapshot(ItemStack stack) {
+        ListTag snapshots = new ListTag();
+        for (ConfigurationMode available : getAvailableModes(stack)) {
+            CompoundTag snapshot = new CompoundTag();
+            snapshot.putString(TAG_MODE, available.id().toString());
+            snapshot.putString(TAG_TARGET, available.target().toString());
+            snapshot.putInt(TAG_CHARGE_COST, available.chargeCost());
+            snapshots.add(snapshot);
+        }
+        stack.getOrCreateTag().put(TAG_AVAILABLE_MODES, snapshots);
     }
 
     public static void refreshPlayerModules(net.minecraft.server.level.ServerPlayer player) {
@@ -212,8 +261,12 @@ public final class ConfigurationModuleManager {
         if (!stack.hasTag() || !stack.getTag().contains(key)) {
             return null;
         }
+        return readResourceLocation(stack.getTag(), key);
+    }
+
+    private static ResourceLocation readResourceLocation(CompoundTag tag, String key) {
         try {
-            return ResourceLocation.parse(stack.getTag().getString(key));
+            return ResourceLocation.parse(tag.getString(key));
         } catch (ResourceLocationException ignored) {
             return null;
         }

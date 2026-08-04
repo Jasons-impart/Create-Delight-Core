@@ -145,7 +145,6 @@ public class ChineseLangHandler {
         provider.add(CDCreativeTabs.FLUID.get(), "齿轮盛宴 | 流体");
         provider.add(CDCreativeTabs.FOOD.get(), "齿轮盛宴 | 食物");
         provider.add("key.categories.createdelightcore", "齿轮盛宴");
-        provider.add("key.createdelightcore.configuration_module_modifier", "构形模块切换修饰键");
         provider.addItem(CDItems.KINETIC_CONFIGURATION_MODULE, "传动构形模块");
         provider.addItem(CDItems.STRUCTURAL_CONFIGURATION_MODULE, "结构构形模块");
         provider.addItem(CDItems.FLUID_CONFIGURATION_MODULE, "流体构形模块");
@@ -156,13 +155,16 @@ public class ChineseLangHandler {
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "目标 ID：%s");
         provider.add("item.createdelightcore.configuration_module.tooltip.charge", "构形量：%s / %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.cost", "单次消耗：%s 点构形量");
-        provider.add("item.createdelightcore.configuration_module.tooltip.control", "按住 %s 并滚动滚轮切换构形");
+        provider.add("item.createdelightcore.configuration_module.tooltip.control", "按住 %s 打开构形选择轮盘");
         provider.add("item.createdelightcore.configuration_module.tooltip.auto_refill", "构形量不足时自动消耗背包中的充填组件");
         provider.add("item.createdelightcore.configuration_module.message.mode", "已切换为：%s");
         provider.add("item.createdelightcore.configuration_module.message.auto_refill", "自动充填 %s 次，补充 %s 点构形量");
         provider.add("item.createdelightcore.configuration_module.error.no_modes", "当前没有可用构形");
         provider.add("item.createdelightcore.configuration_module.error.invalid_target", "所选构形无法放置");
+        provider.add("item.createdelightcore.configuration_module.error.invalid_mode", "所选构形已不可用");
         provider.add("item.createdelightcore.configuration_module.error.no_charge", "构形量不足，且背包中没有足够的充填组件");
+        provider.add("menu.createdelightcore.configuration_module.title", "选择构形");
+        provider.add("menu.createdelightcore.configuration_module.release_to_select", "松开 %s 选择构形");
         // food
         provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
         provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");

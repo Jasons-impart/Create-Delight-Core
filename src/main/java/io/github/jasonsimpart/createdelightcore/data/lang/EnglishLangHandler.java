@@ -136,7 +136,6 @@ public class EnglishLangHandler {
         provider.add(CDCreativeTabs.FLUID.get(), "Create Delight | Fluid");
         provider.add(CDCreativeTabs.FOOD.get(), "Create Delight | Food");
         provider.add("key.categories.createdelightcore", "Create Delight");
-        provider.add("key.createdelightcore.configuration_module_modifier", "Configuration Module Modifier");
         provider.addItem(CDItems.KINETIC_CONFIGURATION_MODULE, "Kinetic Configuration Module");
         provider.addItem(CDItems.STRUCTURAL_CONFIGURATION_MODULE, "Structural Configuration Module");
         provider.addItem(CDItems.FLUID_CONFIGURATION_MODULE, "Fluid Configuration Module");
@@ -147,13 +146,16 @@ public class EnglishLangHandler {
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "Target ID: %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.charge", "Configuration charge: %s / %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.cost", "Placement cost: %s charge");
-        provider.add("item.createdelightcore.configuration_module.tooltip.control", "Hold %s and scroll to switch forms");
+        provider.add("item.createdelightcore.configuration_module.tooltip.control", "Hold %s to open the configuration wheel");
         provider.add("item.createdelightcore.configuration_module.tooltip.auto_refill", "Automatically consumes refill components when charge is insufficient");
         provider.add("item.createdelightcore.configuration_module.message.mode", "Selected: %s");
         provider.add("item.createdelightcore.configuration_module.message.auto_refill", "Refilled %s time(s) and restored %s charge");
         provider.add("item.createdelightcore.configuration_module.error.no_modes", "No configuration forms are available");
         provider.add("item.createdelightcore.configuration_module.error.invalid_target", "The selected form cannot be placed");
+        provider.add("item.createdelightcore.configuration_module.error.invalid_mode", "The selected form is no longer available");
         provider.add("item.createdelightcore.configuration_module.error.no_charge", "Not enough charge or refill components");
+        provider.add("menu.createdelightcore.configuration_module.title", "Select Configuration");
+        provider.add("menu.createdelightcore.configuration_module.release_to_select", "Release %s to select a form");
 
         coin(provider, CDItems.IRON, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER, "Copper Coin", "Copper");

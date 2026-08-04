@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.content.configuration;
 
+import com.simibubi.create.AllKeys;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -230,7 +231,7 @@ public class ConfigurationModuleItem extends Item {
         tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.cost",
                 ConfigurationModuleManager.getSnapshotChargeCost(stack)).withStyle(ChatFormatting.BLUE));
         tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.control",
-                        ConfigurationModuleKeys.MODIFIER.getTranslatedKeyMessage())
+                        AllKeys.TOOLBELT.getKeybind().getTranslatedKeyMessage())
                 .withStyle(ChatFormatting.DARK_GRAY));
         tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.auto_refill")
                 .withStyle(ChatFormatting.DARK_GRAY));
