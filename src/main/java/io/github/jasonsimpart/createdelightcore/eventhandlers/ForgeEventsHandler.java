@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
 import io.github.jasonsimpart.createdelightcore.compat.cmr.LiquidCoolerFuelJsonLoader;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleManager;
 import io.github.jasonsimpart.createdelightcore.content.order.data.OrderDataManager;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.network.SyncFuelMapsPacket;
@@ -16,10 +17,17 @@ public class ForgeEventsHandler {
     public static void addReloadListeners(AddReloadListenerEvent event) {
         event.addListener(LiquidCoolerFuelJsonLoader.INSTANCE);
         event.addListener(OrderDataManager.INSTANCE);
+        event.addListener(ConfigurationModuleManager.MODULE_RELOAD_LISTENER);
+        event.addListener(ConfigurationModuleManager.MODE_RELOAD_LISTENER);
     }
 
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
+        if (event.getPlayer() != null) {
+            ConfigurationModuleManager.refreshPlayerModules(event.getPlayer());
+        } else {
+            event.getPlayerList().getPlayers().forEach(ConfigurationModuleManager::refreshPlayerModules);
+        }
         SyncFuelMapsPacket packet = new SyncFuelMapsPacket();
         if (event.getPlayer() != null) {
             CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), packet);

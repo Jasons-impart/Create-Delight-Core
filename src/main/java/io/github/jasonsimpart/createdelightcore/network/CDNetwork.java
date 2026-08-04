@@ -6,7 +6,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class CDNetwork {
-    private static final String PROTOCOL_VERSION = "1";
+    private static final String PROTOCOL_VERSION = "2";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, "main"),
@@ -44,6 +44,20 @@ public class CDNetwork {
                 SetOrderRequestPacket::encode,
                 SetOrderRequestPacket::decode,
                 SetOrderRequestPacket::handle
+        );
+        CHANNEL.registerMessage(
+                id++,
+                CycleConfigurationModePacket.class,
+                CycleConfigurationModePacket::encode,
+                CycleConfigurationModePacket::decode,
+                CycleConfigurationModePacket::handle
+        );
+        CHANNEL.registerMessage(
+                id++,
+                SelectConfigurationModePacket.class,
+                SelectConfigurationModePacket::encode,
+                SelectConfigurationModePacket::decode,
+                SelectConfigurationModePacket::handle
         );
     }
 }

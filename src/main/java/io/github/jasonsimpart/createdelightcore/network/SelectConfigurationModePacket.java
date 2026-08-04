@@ -1,0 +1,56 @@
+package io.github.jasonsimpart.createdelightcore.network;
+
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationMode;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleManager;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.Optional;
+import java.util.function.Supplier;
+
+public record SelectConfigurationModePacket(InteractionHand hand, ResourceLocation modeId) {
+    public void encode(FriendlyByteBuf buffer) {
+        buffer.writeEnum(hand);
+        buffer.writeResourceLocation(modeId);
+    }
+
+    public static SelectConfigurationModePacket decode(FriendlyByteBuf buffer) {
+        return new SelectConfigurationModePacket(buffer.readEnum(InteractionHand.class),
+                buffer.readResourceLocation());
+    }
+
+    public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
+        NetworkEvent.Context context = contextSupplier.get();
+        context.enqueueWork(() -> {
+            ServerPlayer player = context.getSender();
+            if (player == null) {
+                return;
+            }
+            ItemStack stack = player.getItemInHand(hand);
+            if (!(stack.getItem() instanceof ConfigurationModuleItem)) {
+                return;
+            }
+            Optional<ConfigurationMode> selected = ConfigurationModuleManager.select(stack, modeId);
+            if (selected.isEmpty()) {
+                player.displayClientMessage(Component.translatable(
+                        "item.createdelightcore.configuration_module.error.invalid_mode"), true);
+                return;
+            }
+            Item target = ForgeRegistries.ITEMS.getValue(selected.get().target());
+            player.displayClientMessage(Component.translatable(
+                    "item.createdelightcore.configuration_module.message.mode",
+                    target == null ? selected.get().target().toString() : target.getDescription()), true);
+            player.getInventory().setChanged();
+            player.containerMenu.broadcastChanges();
+        });
+        context.setPacketHandled(true);
+    }
+}

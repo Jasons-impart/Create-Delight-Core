@@ -292,5 +292,17 @@
   "createdelightcore.direction.north": "北",
   "createdelightcore.direction.south": "南",
   "createdelightcore.direction.up": "上",
-  "createdelightcore.direction.west": "西"
+  "createdelightcore.direction.west": "西",
+  "item.createdelightcore.kinetic_configuration_module": "传动构形模块",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.mode": "当前构形：%s",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.unselected": "当前构形：未选择",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.charge": "构形量：%s / %s",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.control": "按住 Ctrl 并滚动滚轮切换构形",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.auto_refill": "构形量不足时自动消耗背包中的充填组件",
+  "item.createdelightcore.kinetic_configuration_module.message.mode": "已切换为：%s",
+  "item.createdelightcore.kinetic_configuration_module.message.auto_refill": "自动消耗 %s 个充填组件，补充 %s 点构形量",
+  "item.createdelightcore.kinetic_configuration_module.error.no_modes": "当前没有可用构形",
+  "item.createdelightcore.kinetic_configuration_module.error.invalid_target": "所选构形无法放置",
+  "item.createdelightcore.kinetic_configuration_module.error.no_charge": "构形量不足",
+  "item.createdelightcore.kinetic_configuration_module.error.ingredients": "缺少该构形所需的附加材料"
 }

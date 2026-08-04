@@ -121,7 +121,8 @@
     "ae2.CableBusContainerPonderMixin",
     "cosmopolitan.CosmoJEIPluginMixin",
     "createdieselgenerators.BulkFermenterRendererMixin",
-    "extraholopage.ExtraHoloItemsGuiMixin"
+    "extraholopage.ExtraHoloItemsGuiMixin",
+    "create.ToolboxHandlerClientMixin"
   ],
   "minVersion": "0.8"
 }
