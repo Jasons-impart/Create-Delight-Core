@@ -6,11 +6,13 @@ import com.gumillea.cosmopolitan.common.item.DrinkItem;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.fruitsdelight.init.food.FoodType;
 import dev.xkmc.fruitsdelight.init.food.IFDFood;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -81,11 +83,16 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_INGOT = simpleIngot("bronze");
     public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
 
-    public static final ItemEntry<ConfigurationModuleItem> KINETIC_CONFIGURATION_MODULE = REGISTRATE
-            .item("kinetic_configuration_module", ConfigurationModuleItem::new)
-            .properties(properties -> properties.stacksTo(1))
-            .tab(MISC_TAB)
-            .register();
+    public static final ItemEntry<ConfigurationModuleItem> KINETIC_CONFIGURATION_MODULE = configurationModule(
+            "kinetic_configuration_module", "shaft", "create:shaft", 4, 1);
+    public static final ItemEntry<ConfigurationModuleItem> STRUCTURAL_CONFIGURATION_MODULE = configurationModule(
+            "structural_configuration_module", "andesite_casing", "create:andesite_casing", 4, 2);
+    public static final ItemEntry<ConfigurationModuleItem> FLUID_CONFIGURATION_MODULE = configurationModule(
+            "fluid_configuration_module", "fluid_pipe", "create:fluid_pipe", 8, 1);
+    public static final ItemEntry<ConfigurationModuleItem> CONTROL_CONFIGURATION_MODULE = configurationModule(
+            "control_configuration_module", "sequenced_gearshift", "create:sequenced_gearshift", 4, 3);
+    public static final ItemEntry<ConfigurationModuleItem> LOGISTICS_CONFIGURATION_MODULE = configurationModule(
+            "logistics_configuration_module", "chute", "create:chute", 4, 1);
 
 
     public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation, boolean bowl, int tFrozen){
@@ -166,6 +173,15 @@ public class CDItems {
 
     public static ItemEntry<Item> simpleItem(String name) {
         return simpleItem(name, MISC_TAB);
+    }
+
+    private static ItemEntry<ConfigurationModuleItem> configurationModule(String name, String mode, String target,
+                                                                          int initialCharge, int chargeCost) {
+        return REGISTRATE.item(name, properties -> new ConfigurationModuleItem(properties,
+                        CreateDelightCore.id(mode), ResourceLocation.parse(target), initialCharge, chargeCost, 64))
+                .properties(properties -> properties.stacksTo(1))
+                .tab(MISC_TAB)
+                .register();
     }
 
     public static ItemEntry<Item> simpleItem(String name, ResourceKey<CreativeModeTab> tab) {

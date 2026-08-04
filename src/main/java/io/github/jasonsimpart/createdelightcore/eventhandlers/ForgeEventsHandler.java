@@ -23,6 +23,11 @@ public class ForgeEventsHandler {
 
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
+        if (event.getPlayer() != null) {
+            ConfigurationModuleManager.refreshPlayerModules(event.getPlayer());
+        } else {
+            event.getPlayerList().getPlayers().forEach(ConfigurationModuleManager::refreshPlayerModules);
+        }
         SyncFuelMapsPacket packet = new SyncFuelMapsPacket();
         if (event.getPlayer() != null) {
             CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(event::getPlayer), packet);

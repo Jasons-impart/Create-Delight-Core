@@ -39,12 +39,12 @@ public record CycleConfigurationModePacket(InteractionHand hand, int direction) 
             Optional<ConfigurationMode> selected = ConfigurationModuleManager.cycle(stack, direction);
             if (selected.isEmpty()) {
                 player.displayClientMessage(Component.translatable(
-                        "item.createdelightcore.kinetic_configuration_module.error.no_modes"), true);
+                        "item.createdelightcore.configuration_module.error.no_modes"), true);
                 return;
             }
             Item target = ForgeRegistries.ITEMS.getValue(selected.get().target());
             player.displayClientMessage(Component.translatable(
-                    "item.createdelightcore.kinetic_configuration_module.message.mode",
+                    "item.createdelightcore.configuration_module.message.mode",
                     target == null ? selected.get().target().toString() : target.getDescription()), true);
             player.getInventory().setChanged();
             player.containerMenu.broadcastChanges();

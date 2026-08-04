@@ -2,10 +2,10 @@ package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleKeys;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.network.CycleConfigurationModePacket;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientForgeEventHandler {
     @SubscribeEvent
     public static void onMouseScroll(InputEvent.MouseScrollingEvent event) {
-        if (event.getScrollDelta() == 0 || !Screen.hasControlDown()) {
+        if (event.getScrollDelta() == 0 || !ConfigurationModuleKeys.MODIFIER.isDown()) {
             return;
         }
         Player player = Minecraft.getInstance().player;

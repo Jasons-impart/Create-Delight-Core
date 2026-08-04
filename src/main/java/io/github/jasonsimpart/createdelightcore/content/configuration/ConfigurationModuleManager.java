@@ -7,6 +7,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.ResourceLocationException;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -31,6 +34,7 @@ public final class ConfigurationModuleManager {
     public static final String TAG_TARGET = "Target";
     public static final String TAG_CHARGE = "Charge";
     public static final String TAG_CHARGE_COST = "ChargeCost";
+    public static final String TAG_EXTRA_INGREDIENTS = "ExtraIngredients";
     public static final String TAG_MAX_CHARGE = "MaxCharge";
     public static final String TAG_TIER = "Tier";
     public static final String TAG_DATA_VERSION = "DataVersion";
@@ -85,6 +89,16 @@ public final class ConfigurationModuleManager {
         if (available.isEmpty()) {
             return Optional.empty();
         }
+        Optional<ConfigurationModuleDefinition> definition = getDefinition(stack);
+        if (definition.isPresent()) {
+            ConfigurationModuleDefinition value = definition.get();
+            Optional<ConfigurationMode> preferred = findMode(available, value.defaultMode())
+                    .or(() -> findMode(available, value.fallbackMode()));
+            if (preferred.isPresent()) {
+                writeSnapshot(stack, preferred.get());
+                return preferred;
+            }
+        }
         ConfigurationMode first = available.get(0);
         writeSnapshot(stack, first);
         return Optional.of(first);
@@ -120,12 +134,16 @@ public final class ConfigurationModuleManager {
     }
 
     public static Optional<BlockItem> getSnapshotTarget(ItemStack stack) {
-        ResourceLocation targetId = readResourceLocation(stack, TAG_TARGET);
+        ResourceLocation targetId = getSnapshotTargetId(stack).orElse(null);
         if (targetId == null) {
             return Optional.empty();
         }
         Item item = ForgeRegistries.ITEMS.getValue(targetId);
         return item instanceof BlockItem blockItem ? Optional.of(blockItem) : Optional.empty();
+    }
+
+    public static Optional<ResourceLocation> getSnapshotTargetId(ItemStack stack) {
+        return Optional.ofNullable(readResourceLocation(stack, TAG_TARGET));
     }
 
     public static int getSnapshotChargeCost(ItemStack stack) {
@@ -170,8 +188,53 @@ public final class ConfigurationModuleManager {
         stack.getOrCreateTag().putString(TAG_MODE, mode.id().toString());
         stack.getOrCreateTag().putString(TAG_TARGET, mode.target().toString());
         stack.getOrCreateTag().putInt(TAG_CHARGE_COST, mode.chargeCost());
+        ListTag ingredientSnapshots = new ListTag();
+        for (ConfigurationRequirement requirement : mode.extraIngredients()) {
+            ItemStack[] matchingStacks = requirement.ingredient().getItems();
+            if (matchingStacks.length == 0) {
+                continue;
+            }
+            ItemStack representative = matchingStacks[0].copyWithCount(requirement.count());
+            ingredientSnapshots.add(representative.save(new CompoundTag()));
+        }
+        stack.getOrCreateTag().put(TAG_EXTRA_INGREDIENTS, ingredientSnapshots);
         stack.getOrCreateTag().putInt(TAG_DATA_VERSION, DATA_VERSION);
         getDefinition(stack).ifPresent(definition -> applyDefinitionSnapshot(stack, definition));
+    }
+
+    public static List<ItemStack> getSnapshotExtraIngredients(ItemStack stack) {
+        if (!stack.hasTag() || !stack.getTag().contains(TAG_EXTRA_INGREDIENTS)) {
+            return List.of();
+        }
+        ListTag list = stack.getTag().getList(TAG_EXTRA_INGREDIENTS, Tag.TAG_COMPOUND);
+        List<ItemStack> result = new ArrayList<>();
+        for (int index = 0; index < list.size(); index++) {
+            ItemStack ingredient = ItemStack.of(list.getCompound(index));
+            if (!ingredient.isEmpty()) {
+                result.add(ingredient);
+            }
+        }
+        return List.copyOf(result);
+    }
+
+    public static void refreshPlayerModules(net.minecraft.server.level.ServerPlayer player) {
+        for (int slot = 0; slot < player.getInventory().getContainerSize(); slot++) {
+            ItemStack stack = player.getInventory().getItem(slot);
+            if (!(stack.getItem() instanceof ConfigurationModuleItem)) {
+                continue;
+            }
+            getDefinition(stack).ifPresent(definition -> applyDefinitionSnapshot(stack, definition));
+            ensureSelectedMode(stack);
+        }
+        player.getInventory().setChanged();
+        player.containerMenu.broadcastChanges();
+    }
+
+    private static Optional<ConfigurationMode> findMode(List<ConfigurationMode> available, ResourceLocation id) {
+        if (id == null) {
+            return Optional.empty();
+        }
+        return available.stream().filter(mode -> mode.id().equals(id)).findFirst();
     }
 
     private static ResourceLocation readResourceLocation(ItemStack stack, String key) {
@@ -208,9 +271,18 @@ public final class ConfigurationModuleManager {
                 try {
                     JsonObject object = GsonHelper.convertToJsonObject(entry.getValue(), entry.getKey().toString());
                     ResourceLocation item = ResourceLocation.parse(GsonHelper.getAsString(object, "item"));
+                    Item registeredItem = ForgeRegistries.ITEMS.getValue(item);
+                    if (!(registeredItem instanceof ConfigurationModuleItem)) {
+                        throw new JsonParseException("Item is not a registered configuration module: " + item);
+                    }
                     int maxCharge = GsonHelper.getAsInt(object, "max_charge", 64);
                     int initialCharge = GsonHelper.getAsInt(object, "initial_charge", 0);
-                    loaded.put(item, new ConfigurationModuleDefinition(item, maxCharge, initialCharge));
+                    ResourceLocation defaultMode = object.has("default_mode")
+                            ? ResourceLocation.parse(GsonHelper.getAsString(object, "default_mode")) : null;
+                    ResourceLocation fallbackMode = object.has("fallback_mode")
+                            ? ResourceLocation.parse(GsonHelper.getAsString(object, "fallback_mode")) : defaultMode;
+                    loaded.put(item, new ConfigurationModuleDefinition(item, maxCharge, initialCharge,
+                            defaultMode, fallbackMode));
                 } catch (JsonParseException | ResourceLocationException | IllegalArgumentException ex) {
                     CreateDelightCore.LOGGER.error("Failed to load configuration module {}", entry.getKey(), ex);
                 }
@@ -233,6 +305,10 @@ public final class ConfigurationModuleManager {
                 try {
                     JsonObject object = GsonHelper.convertToJsonObject(entry.getValue(), entry.getKey().toString());
                     ResourceLocation module = ResourceLocation.parse(GsonHelper.getAsString(object, "module"));
+                    Item moduleItem = ForgeRegistries.ITEMS.getValue(module);
+                    if (!(moduleItem instanceof ConfigurationModuleItem)) {
+                        throw new JsonParseException("Module is not a registered configuration module: " + module);
+                    }
                     ResourceLocation target = ResourceLocation.parse(GsonHelper.getAsString(object, "target"));
                     int chargeCost = GsonHelper.getAsInt(object, "charge_cost", 0);
                     int requiredTier = GsonHelper.getAsInt(object, "required_tier", 0);
@@ -258,6 +334,23 @@ public final class ConfigurationModuleManager {
             }
             loaded.sort(MODE_ORDER);
             modes = List.copyOf(loaded);
+            for (ConfigurationModuleDefinition definition : definitions.values()) {
+                List<ConfigurationMode> moduleModes = modes.stream()
+                        .filter(mode -> mode.module().equals(definition.item()))
+                        .toList();
+                if (moduleModes.isEmpty()) {
+                    CreateDelightCore.LOGGER.warn("Configuration module {} has no valid modes", definition.item());
+                    continue;
+                }
+                if (definition.defaultMode() != null && findMode(moduleModes, definition.defaultMode()).isEmpty()) {
+                    CreateDelightCore.LOGGER.warn("Configuration module {} has missing default mode {}",
+                            definition.item(), definition.defaultMode());
+                }
+                if (definition.fallbackMode() != null && findMode(moduleModes, definition.fallbackMode()).isEmpty()) {
+                    CreateDelightCore.LOGGER.warn("Configuration module {} has missing fallback mode {}",
+                            definition.item(), definition.fallbackMode());
+                }
+            }
             CreateDelightCore.LOGGER.info("Loaded {} configuration module modes", modes.size());
         }
     }

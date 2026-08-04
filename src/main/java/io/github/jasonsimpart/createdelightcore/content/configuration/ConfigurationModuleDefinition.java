@@ -5,7 +5,9 @@ import net.minecraft.resources.ResourceLocation;
 public record ConfigurationModuleDefinition(
         ResourceLocation item,
         int maxCharge,
-        int initialCharge
+        int initialCharge,
+        ResourceLocation defaultMode,
+        ResourceLocation fallbackMode
 ) {
     public ConfigurationModuleDefinition {
         if (maxCharge < 1) {
