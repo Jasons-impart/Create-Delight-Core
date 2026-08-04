@@ -2,9 +2,9 @@ package io.github.jasonsimpart.createdelightcore.content.configuration;
 
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
-import com.mojang.blaze3d.platform.InputConstants;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.network.SelectConfigurationModePacket;
+import net.createmod.catnip.gui.element.GuiGameElement;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -19,6 +19,7 @@ import java.util.List;
 
 public class RadialConfigurationMenu extends Screen {
     private static final float SLOT_RADIUS = 52.0F;
+    private static final float OPEN_ANIMATION_TICKS = 8.0F;
     private static final double INNER_SELECTION_RADIUS_SQUARED = 18.0D * 18.0D;
     private static final double OUTER_SELECTION_RADIUS_SQUARED = 96.0D * 96.0D;
 
@@ -42,17 +43,9 @@ public class RadialConfigurationMenu extends Screen {
     @Override
     public void tick() {
         ticksOpen++;
-        if (ticksOpen > 1 && !isSelectionKeyPhysicallyDown()) {
+        if (ticksOpen > 1 && !ConfigurationModuleClientInput.isToolbeltKeyPhysicallyDown(minecraft)) {
             finishSelection();
         }
-    }
-
-    private boolean isSelectionKeyPhysicallyDown() {
-        InputConstants.Key key = AllKeys.TOOLBELT.getKeybind().getKey();
-        if (key.getType() == InputConstants.Type.MOUSE) {
-            return AllKeys.isMouseButtonDown(key.getValue());
-        }
-        return InputConstants.isKeyDown(minecraft.getWindow().getWindow(), key.getValue());
     }
 
     @Override
@@ -61,29 +54,37 @@ public class RadialConfigurationMenu extends Screen {
         int centerY = height / 2;
         updateHoveredSlot(mouseX - centerX, mouseY - centerY);
 
-        float progress = Mth.clamp((ticksOpen + partialTick) / 5.0F, 0.0F, 1.0F);
-        float radius = SLOT_RADIUS * progress;
+        float progress = Mth.clamp((ticksOpen + partialTick) / OPEN_ANIMATION_TICKS, 0.0F, 1.0F);
+        float remaining = 1.0F - progress;
+        float easedProgress = 1.0F - remaining * remaining * remaining;
+        float radius = SLOT_RADIUS * easedProgress;
         for (int index = 0; index < modes.size(); index++) {
             double angle = -Math.PI / 2.0D + Math.PI * 2.0D * index / modes.size();
-            int slotX = centerX + Mth.floor(Math.cos(angle) * radius);
-            int slotY = centerY + Mth.floor(Math.sin(angle) * radius);
+            float slotX = centerX + (float) Math.cos(angle) * radius - 11.0F;
+            float slotY = centerY + (float) Math.sin(angle) * radius - 11.0F;
             ConfigurationModeSnapshot mode = modes.get(index);
 
+            graphics.pose().pushPose();
+            graphics.pose().translate(slotX, slotY, 0.0F);
             if (mode.id().equals(selectedMode)) {
-                graphics.fill(slotX - 13, slotY - 13, slotX + 13, slotY + 13, 0xA0D89B24);
+                graphics.fill(-2, -2, 24, 24, 0xA0D89B24);
             }
-            AllGuiTextures.TOOLBELT_SLOT.render(graphics, slotX - 12, slotY - 12);
+            AllGuiTextures.TOOLBELT_SLOT.render(graphics, 0, 0);
             if (index == hoveredSlot) {
-                AllGuiTextures.TOOLBELT_SLOT_HIGHLIGHT.render(graphics, slotX - 13, slotY - 13);
+                AllGuiTextures.TOOLBELT_SLOT_HIGHLIGHT.render(graphics, -1, -1);
             }
             Item target = ForgeRegistries.ITEMS.getValue(mode.target());
             if (target != null) {
-                graphics.renderItem(new ItemStack(target), slotX - 8, slotY - 8);
+                GuiGameElement.of(new ItemStack(target)).at(3, 3).render(graphics);
             }
+            graphics.pose().popPose();
         }
 
-        graphics.fill(centerX - 12, centerY - 12, centerX + 12, centerY + 12, 0xA0202020);
-        graphics.renderItem(moduleStack, centerX - 8, centerY - 8);
+        graphics.pose().pushPose();
+        graphics.pose().translate(centerX - 12.0F, centerY - 12.0F, 0.0F);
+        AllGuiTextures.TOOLBELT_MAIN_SLOT.render(graphics, 0, 0);
+        GuiGameElement.of(moduleStack).at(4, 4).render(graphics);
+        graphics.pose().popPose();
 
         ConfigurationModeSnapshot displayed = getDisplayedMode();
         if (displayed != null) {

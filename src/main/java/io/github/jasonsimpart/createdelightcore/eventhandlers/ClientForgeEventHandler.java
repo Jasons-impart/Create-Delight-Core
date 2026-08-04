@@ -1,8 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
-import com.simibubi.create.AllKeys;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleClientInput;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleManager;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModeSnapshot;
 import io.github.jasonsimpart.createdelightcore.content.configuration.RadialConfigurationMenu;
@@ -26,9 +26,9 @@ public class ClientForgeEventHandler {
             return;
         }
         Minecraft minecraft = Minecraft.getInstance();
+        ConfigurationModuleClientInput.tick(minecraft);
         Player player = minecraft.player;
-        if (player == null || player.isSpectator() || minecraft.screen != null
-                || !AllKeys.TOOLBELT.getKeybind().consumeClick()) {
+        if (player == null || player.isSpectator() || minecraft.screen != null) {
             return;
         }
         InteractionHand hand;
@@ -42,6 +42,9 @@ public class ClientForgeEventHandler {
         ItemStack stack = player.getItemInHand(hand);
         List<ConfigurationModeSnapshot> modes = ConfigurationModuleManager.getSnapshotAvailableModes(stack);
         if (modes.size() < 2) {
+            return;
+        }
+        if (!ConfigurationModuleClientInput.consumeOpenClick(minecraft)) {
             return;
         }
         ScreenOpener.open(new RadialConfigurationMenu(hand, stack, modes,
