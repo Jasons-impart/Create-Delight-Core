@@ -1,7 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.content.configuration;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,13 +19,11 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.createmod.catnip.placement.PlacementOffset;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public class ConfigurationModuleItem extends Item {
     private final ResourceLocation defaultMode;
@@ -76,7 +73,6 @@ public class ConfigurationModuleItem extends Item {
 
         BlockItem target;
         int chargeCost;
-        List<ConfigurationRequirement> requirements;
         if (context.getLevel().isClientSide) {
             Optional<BlockItem> snapshotTarget = ConfigurationModuleManager.getSnapshotTarget(moduleStack);
             if (snapshotTarget.isEmpty()) {
@@ -84,7 +80,6 @@ public class ConfigurationModuleItem extends Item {
             }
             target = snapshotTarget.get();
             chargeCost = ConfigurationModuleManager.getSnapshotChargeCost(moduleStack);
-            requirements = List.of();
         } else {
             Optional<ConfigurationMode> selected = ConfigurationModuleManager.ensureSelectedMode(moduleStack);
             if (selected.isEmpty()) {
@@ -98,27 +93,19 @@ public class ConfigurationModuleItem extends Item {
             }
             target = targetItem.get();
             chargeCost = selected.get().chargeCost();
-            requirements = selected.get().extraIngredients();
         }
 
         boolean creative = player.getAbilities().instabuild;
-        int[] removalPlan = null;
         AutoRefillPlan autoRefill = null;
         if (!creative && !context.getLevel().isClientSide) {
-            removalPlan = new int[player.getInventory().getContainerSize()];
-            if (!reserveRequirements(player.getInventory(), moduleStack, requirements, removalPlan)) {
-                player.displayClientMessage(Component.translatable("item.createdelightcore.configuration_module.error.ingredients"), true);
-                return InteractionResult.FAIL;
-            }
             int currentCharge = ConfigurationModuleManager.getCharge(moduleStack);
             if (currentCharge < chargeCost) {
                 autoRefill = findAutoRefillPlan(context.getLevel(), player.getInventory(), moduleStack,
-                        chargeCost, currentCharge, removalPlan);
+                        chargeCost, currentCharge);
                 if (autoRefill == null) {
                     player.displayClientMessage(Component.translatable("item.createdelightcore.configuration_module.error.no_charge"), true);
                     return InteractionResult.FAIL;
                 }
-                removalPlan = autoRefill.removals();
             }
         }
 
@@ -140,8 +127,8 @@ public class ConfigurationModuleItem extends Item {
                         charge + autoRefill.chargeAdded());
             }
             ConfigurationModuleManager.setCharge(moduleStack, charge - chargeCost);
-            consumeRemovalPlan(player.getInventory(), removalPlan);
             if (autoRefill != null) {
+                consumeRemovalPlan(player.getInventory(), autoRefill.removals());
                 player.displayClientMessage(Component.translatable(
                         "item.createdelightcore.configuration_module.message.auto_refill",
                         autoRefill.refillCount(), autoRefill.chargeAdded()), true);
@@ -154,18 +141,8 @@ public class ConfigurationModuleItem extends Item {
         return result;
     }
 
-    private static boolean reserveRequirements(Inventory inventory, ItemStack moduleStack,
-                                               List<ConfigurationRequirement> requirements, int[] removals) {
-        for (ConfigurationRequirement requirement : requirements) {
-            if (!reserveIngredient(inventory, moduleStack, requirement.ingredient(), requirement.count(), removals)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private static AutoRefillPlan findAutoRefillPlan(Level level, Inventory inventory, ItemStack moduleStack,
-                                                     int chargeCost, int currentCharge, int[] baseRemovals) {
+                                                     int chargeCost, int currentCharge) {
         int maxCharge = ConfigurationModuleManager.getMaxCharge(moduleStack);
         if (chargeCost > maxCharge) {
             return null;
@@ -183,7 +160,7 @@ public class ConfigurationModuleItem extends Item {
         int missingCharge = chargeCost - currentCharge;
         for (ConfigurationModuleRefillRecipe recipe : recipes) {
             int refillCount = (missingCharge + recipe.refillCharge() - 1) / recipe.refillCharge();
-            int[] trialRemovals = baseRemovals.clone();
+            int[] trialRemovals = new int[inventory.getContainerSize()];
             boolean ingredientsAvailable = true;
             for (ConfigurationRequirement requirement : recipe.refillRequirements()) {
                 if (!reserveIngredient(inventory, moduleStack, requirement.ingredient(),
@@ -252,10 +229,6 @@ public class ConfigurationModuleItem extends Item {
                 .withStyle(ChatFormatting.AQUA));
         tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.cost",
                 ConfigurationModuleManager.getSnapshotChargeCost(stack)).withStyle(ChatFormatting.BLUE));
-        for (ItemStack ingredient : ConfigurationModuleManager.getSnapshotExtraIngredients(stack)) {
-            tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.ingredient",
-                    ingredient.getHoverName(), ingredient.getCount()).withStyle(ChatFormatting.GRAY));
-        }
         tooltip.add(Component.translatable("item.createdelightcore.configuration_module.tooltip.control",
                         ConfigurationModuleKeys.MODIFIER.getTranslatedKeyMessage())
                 .withStyle(ChatFormatting.DARK_GRAY));
@@ -279,17 +252,5 @@ public class ConfigurationModuleItem extends Item {
         int maxCharge = ConfigurationModuleManager.getMaxCharge(stack);
         float ratio = maxCharge <= 0 ? 0.0F : (float) ConfigurationModuleManager.getCharge(stack) / maxCharge;
         return Mth.hsvToRgb(Math.max(0.0F, ratio) / 3.0F, 1.0F, 1.0F);
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            private final ConfigurationModuleItemRenderer renderer = new ConfigurationModuleItemRenderer();
-
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return renderer;
-            }
-        });
     }
 }

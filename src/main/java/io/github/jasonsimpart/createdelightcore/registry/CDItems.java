@@ -90,7 +90,7 @@ public class CDItems {
     public static final ItemEntry<ConfigurationModuleItem> FLUID_CONFIGURATION_MODULE = configurationModule(
             "fluid_configuration_module", "fluid_pipe", "create:fluid_pipe", 8, 1);
     public static final ItemEntry<ConfigurationModuleItem> CONTROL_CONFIGURATION_MODULE = configurationModule(
-            "control_configuration_module", "sequenced_gearshift", "create:sequenced_gearshift", 4, 3);
+            "control_configuration_module", "redstone_link", "create:redstone_link", 4, 4);
     public static final ItemEntry<ConfigurationModuleItem> LOGISTICS_CONFIGURATION_MODULE = configurationModule(
             "logistics_configuration_module", "chute", "create:chute", 4, 1);
 

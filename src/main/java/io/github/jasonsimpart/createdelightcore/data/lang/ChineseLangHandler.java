@@ -156,7 +156,6 @@ public class ChineseLangHandler {
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "目标 ID：%s");
         provider.add("item.createdelightcore.configuration_module.tooltip.charge", "构形量：%s / %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.cost", "单次消耗：%s 点构形量");
-        provider.add("item.createdelightcore.configuration_module.tooltip.ingredient", "附加材料：%s ×%s");
         provider.add("item.createdelightcore.configuration_module.tooltip.control", "按住 %s 并滚动滚轮切换构形");
         provider.add("item.createdelightcore.configuration_module.tooltip.auto_refill", "构形量不足时自动消耗背包中的充填组件");
         provider.add("item.createdelightcore.configuration_module.message.mode", "已切换为：%s");
@@ -164,7 +163,6 @@ public class ChineseLangHandler {
         provider.add("item.createdelightcore.configuration_module.error.no_modes", "当前没有可用构形");
         provider.add("item.createdelightcore.configuration_module.error.invalid_target", "所选构形无法放置");
         provider.add("item.createdelightcore.configuration_module.error.no_charge", "构形量不足，且背包中没有足够的充填组件");
-        provider.add("item.createdelightcore.configuration_module.error.ingredients", "缺少该构形所需的附加材料");
         // food
         provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
         provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");

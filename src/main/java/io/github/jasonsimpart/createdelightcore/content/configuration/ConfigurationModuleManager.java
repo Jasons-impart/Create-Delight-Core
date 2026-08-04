@@ -1,15 +1,11 @@
 package io.github.jasonsimpart.createdelightcore.content.configuration;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.ResourceLocationException;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -18,7 +14,6 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +29,7 @@ public final class ConfigurationModuleManager {
     public static final String TAG_TARGET = "Target";
     public static final String TAG_CHARGE = "Charge";
     public static final String TAG_CHARGE_COST = "ChargeCost";
-    public static final String TAG_EXTRA_INGREDIENTS = "ExtraIngredients";
+    private static final String LEGACY_TAG_EXTRA_INGREDIENTS = "ExtraIngredients";
     public static final String TAG_MAX_CHARGE = "MaxCharge";
     public static final String TAG_TIER = "Tier";
     public static final String TAG_DATA_VERSION = "DataVersion";
@@ -188,33 +183,9 @@ public final class ConfigurationModuleManager {
         stack.getOrCreateTag().putString(TAG_MODE, mode.id().toString());
         stack.getOrCreateTag().putString(TAG_TARGET, mode.target().toString());
         stack.getOrCreateTag().putInt(TAG_CHARGE_COST, mode.chargeCost());
-        ListTag ingredientSnapshots = new ListTag();
-        for (ConfigurationRequirement requirement : mode.extraIngredients()) {
-            ItemStack[] matchingStacks = requirement.ingredient().getItems();
-            if (matchingStacks.length == 0) {
-                continue;
-            }
-            ItemStack representative = matchingStacks[0].copyWithCount(requirement.count());
-            ingredientSnapshots.add(representative.save(new CompoundTag()));
-        }
-        stack.getOrCreateTag().put(TAG_EXTRA_INGREDIENTS, ingredientSnapshots);
+        stack.getOrCreateTag().remove(LEGACY_TAG_EXTRA_INGREDIENTS);
         stack.getOrCreateTag().putInt(TAG_DATA_VERSION, DATA_VERSION);
         getDefinition(stack).ifPresent(definition -> applyDefinitionSnapshot(stack, definition));
-    }
-
-    public static List<ItemStack> getSnapshotExtraIngredients(ItemStack stack) {
-        if (!stack.hasTag() || !stack.getTag().contains(TAG_EXTRA_INGREDIENTS)) {
-            return List.of();
-        }
-        ListTag list = stack.getTag().getList(TAG_EXTRA_INGREDIENTS, Tag.TAG_COMPOUND);
-        List<ItemStack> result = new ArrayList<>();
-        for (int index = 0; index < list.size(); index++) {
-            ItemStack ingredient = ItemStack.of(list.getCompound(index));
-            if (!ingredient.isEmpty()) {
-                result.add(ingredient);
-            }
-        }
-        return List.copyOf(result);
     }
 
     public static void refreshPlayerModules(net.minecraft.server.level.ServerPlayer player) {
@@ -246,16 +217,6 @@ public final class ConfigurationModuleManager {
         } catch (ResourceLocationException ignored) {
             return null;
         }
-    }
-
-    private static ConfigurationRequirement parseRequirement(JsonElement element) {
-        if (!element.isJsonObject()) {
-            return new ConfigurationRequirement(Ingredient.fromJson(element), 1);
-        }
-        JsonObject object = element.getAsJsonObject();
-        int count = GsonHelper.getAsInt(object, "count", 1);
-        JsonElement ingredientElement = object.has("ingredient") ? object.get("ingredient") : object;
-        return new ConfigurationRequirement(Ingredient.fromJson(ingredientElement), count);
     }
 
     private static final class ModuleReloadListener extends SimpleJsonResourceReloadListener {
@@ -317,17 +278,12 @@ public final class ConfigurationModuleManager {
                     if (!placement.equals("createdelightcore:block_item")) {
                         throw new JsonParseException("Unsupported placement handler: " + placement);
                     }
-                    List<ConfigurationRequirement> requirements = new ArrayList<>();
-                    JsonArray ingredients = GsonHelper.getAsJsonArray(object, "extra_ingredients", new JsonArray());
-                    for (JsonElement ingredient : ingredients) {
-                        requirements.add(parseRequirement(ingredient));
-                    }
                     Item targetItem = ForgeRegistries.ITEMS.getValue(target);
                     if (!(targetItem instanceof BlockItem)) {
                         throw new JsonParseException("Target is not a registered BlockItem: " + target);
                     }
                     loaded.add(new ConfigurationMode(entry.getKey(), module, target, chargeCost, requiredTier,
-                            sortIndex, requirements));
+                            sortIndex));
                 } catch (JsonParseException | ResourceLocationException | IllegalArgumentException ex) {
                     CreateDelightCore.LOGGER.error("Failed to load configuration mode {}", entry.getKey(), ex);
                 }

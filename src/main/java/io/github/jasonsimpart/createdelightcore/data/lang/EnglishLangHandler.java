@@ -147,7 +147,6 @@ public class EnglishLangHandler {
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "Target ID: %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.charge", "Configuration charge: %s / %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.cost", "Placement cost: %s charge");
-        provider.add("item.createdelightcore.configuration_module.tooltip.ingredient", "Additional material: %s x%s");
         provider.add("item.createdelightcore.configuration_module.tooltip.control", "Hold %s and scroll to switch forms");
         provider.add("item.createdelightcore.configuration_module.tooltip.auto_refill", "Automatically consumes refill components when charge is insufficient");
         provider.add("item.createdelightcore.configuration_module.message.mode", "Selected: %s");
@@ -155,7 +154,6 @@ public class EnglishLangHandler {
         provider.add("item.createdelightcore.configuration_module.error.no_modes", "No configuration forms are available");
         provider.add("item.createdelightcore.configuration_module.error.invalid_target", "The selected form cannot be placed");
         provider.add("item.createdelightcore.configuration_module.error.no_charge", "Not enough charge or refill components");
-        provider.add("item.createdelightcore.configuration_module.error.ingredients", "Missing additional ingredients for this form");
 
         coin(provider, CDItems.IRON, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER, "Copper Coin", "Copper");
