@@ -11,12 +11,15 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Comparator;
 
 public class ConfigurationModuleItem extends Item {
     public ConfigurationModuleItem(Properties properties) {
@@ -72,19 +75,23 @@ public class ConfigurationModuleItem extends Item {
         }
 
         boolean creative = player.getAbilities().instabuild;
-        if (!creative && ConfigurationModuleManager.getCharge(moduleStack) < chargeCost) {
-            if (!context.getLevel().isClientSide) {
-                player.displayClientMessage(Component.translatable("item.createdelightcore.kinetic_configuration_module.error.no_charge"), true);
-            }
-            return InteractionResult.FAIL;
-        }
-
         int[] removalPlan = null;
+        AutoRefillPlan autoRefill = null;
         if (!creative && !context.getLevel().isClientSide) {
-            removalPlan = createRemovalPlan(player.getInventory(), moduleStack, requirements);
-            if (removalPlan == null) {
+            removalPlan = new int[player.getInventory().getContainerSize()];
+            if (!reserveRequirements(player.getInventory(), moduleStack, requirements, removalPlan)) {
                 player.displayClientMessage(Component.translatable("item.createdelightcore.kinetic_configuration_module.error.ingredients"), true);
                 return InteractionResult.FAIL;
+            }
+            int currentCharge = ConfigurationModuleManager.getCharge(moduleStack);
+            if (currentCharge < chargeCost) {
+                autoRefill = findAutoRefillPlan(context.getLevel(), player.getInventory(), moduleStack,
+                        chargeCost, currentCharge, removalPlan);
+                if (autoRefill == null) {
+                    player.displayClientMessage(Component.translatable("item.createdelightcore.kinetic_configuration_module.error.no_charge"), true);
+                    return InteractionResult.FAIL;
+                }
+                removalPlan = autoRefill.removals();
             }
         }
 
@@ -95,9 +102,18 @@ public class ConfigurationModuleItem extends Item {
         InteractionResult result = target.useOn(targetContext);
 
         if (!context.getLevel().isClientSide && result.consumesAction() && !creative) {
-            ConfigurationModuleManager.setCharge(moduleStack,
-                    ConfigurationModuleManager.getCharge(moduleStack) - chargeCost);
+            int charge = ConfigurationModuleManager.getCharge(moduleStack);
+            if (autoRefill != null) {
+                charge = Math.min(ConfigurationModuleManager.getMaxCharge(moduleStack),
+                        charge + autoRefill.chargeAdded());
+            }
+            ConfigurationModuleManager.setCharge(moduleStack, charge - chargeCost);
             consumeRemovalPlan(player.getInventory(), removalPlan);
+            if (autoRefill != null) {
+                player.displayClientMessage(Component.translatable(
+                        "item.createdelightcore.kinetic_configuration_module.message.auto_refill",
+                        autoRefill.refillCount(), autoRefill.chargeAdded()), true);
+            }
             player.getInventory().setChanged();
             if (player instanceof ServerPlayer serverPlayer) {
                 serverPlayer.containerMenu.broadcastChanges();
@@ -106,29 +122,67 @@ public class ConfigurationModuleItem extends Item {
         return result;
     }
 
-    private static int[] createRemovalPlan(Inventory inventory, ItemStack moduleStack,
-                                           List<ConfigurationRequirement> requirements) {
-        int[] removals = new int[inventory.getContainerSize()];
+    private static boolean reserveRequirements(Inventory inventory, ItemStack moduleStack,
+                                               List<ConfigurationRequirement> requirements, int[] removals) {
         for (ConfigurationRequirement requirement : requirements) {
-            int remaining = requirement.count();
-            for (int slot = 0; slot < inventory.getContainerSize() && remaining > 0; slot++) {
-                ItemStack candidate = inventory.getItem(slot);
-                if (candidate == moduleStack || candidate.isEmpty() || !requirement.ingredient().test(candidate)) {
-                    continue;
-                }
-                int available = candidate.getCount() - removals[slot];
-                if (available <= 0) {
-                    continue;
-                }
-                int taken = Math.min(available, remaining);
-                removals[slot] += taken;
-                remaining -= taken;
-            }
-            if (remaining > 0) {
-                return null;
+            if (!reserveIngredient(inventory, moduleStack, requirement.ingredient(), requirement.count(), removals)) {
+                return false;
             }
         }
-        return removals;
+        return true;
+    }
+
+    private static AutoRefillPlan findAutoRefillPlan(Level level, Inventory inventory, ItemStack moduleStack,
+                                                     int chargeCost, int currentCharge, int[] baseRemovals) {
+        int maxCharge = ConfigurationModuleManager.getMaxCharge(moduleStack);
+        if (chargeCost > maxCharge) {
+            return null;
+        }
+        List<ConfigurationModuleRefillRecipe> recipes = level.getRecipeManager()
+                .getAllRecipesFor(RecipeType.CRAFTING)
+                .stream()
+                .filter(ConfigurationModuleRefillRecipe.class::isInstance)
+                .map(ConfigurationModuleRefillRecipe.class::cast)
+                .filter(recipe -> recipe.supportsModule(moduleStack))
+                .sorted(Comparator.comparing(recipe -> recipe.getId().toString()))
+                .toList();
+
+        AutoRefillPlan best = null;
+        int missingCharge = chargeCost - currentCharge;
+        for (ConfigurationModuleRefillRecipe recipe : recipes) {
+            int refillCount = (missingCharge + recipe.refillCharge() - 1) / recipe.refillCharge();
+            int[] trialRemovals = baseRemovals.clone();
+            if (!reserveIngredient(inventory, moduleStack, recipe.refillIngredient(), refillCount, trialRemovals)) {
+                continue;
+            }
+            int added = refillCount * recipe.refillCharge();
+            if (Math.min(maxCharge, currentCharge + added) < chargeCost) {
+                continue;
+            }
+            if (best == null || refillCount < best.refillCount()) {
+                best = new AutoRefillPlan(trialRemovals, refillCount, added);
+            }
+        }
+        return best;
+    }
+
+    private static boolean reserveIngredient(Inventory inventory, ItemStack moduleStack, Ingredient ingredient,
+                                             int count, int[] removals) {
+        int remaining = count;
+        for (int slot = 0; slot < inventory.getContainerSize() && remaining > 0; slot++) {
+            ItemStack candidate = inventory.getItem(slot);
+            if (candidate == moduleStack || candidate.isEmpty() || !ingredient.test(candidate)) {
+                continue;
+            }
+            int available = candidate.getCount() - removals[slot];
+            if (available <= 0) {
+                continue;
+            }
+            int taken = Math.min(available, remaining);
+            removals[slot] += taken;
+            remaining -= taken;
+        }
+        return remaining == 0;
     }
 
     private static void consumeRemovalPlan(Inventory inventory, int[] removals) {
@@ -137,6 +191,9 @@ public class ConfigurationModuleItem extends Item {
                 inventory.getItem(slot).shrink(removals[slot]);
             }
         }
+    }
+
+    private record AutoRefillPlan(int[] removals, int refillCount, int chargeAdded) {
     }
 
     @Override
@@ -151,6 +208,8 @@ public class ConfigurationModuleItem extends Item {
                 ConfigurationModuleManager.getCharge(stack), ConfigurationModuleManager.getMaxCharge(stack))
                 .withStyle(ChatFormatting.AQUA));
         tooltip.add(Component.translatable("item.createdelightcore.kinetic_configuration_module.tooltip.control")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        tooltip.add(Component.translatable("item.createdelightcore.kinetic_configuration_module.tooltip.auto_refill")
                 .withStyle(ChatFormatting.DARK_GRAY));
     }
 }

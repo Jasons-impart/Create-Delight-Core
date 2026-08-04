@@ -140,7 +140,9 @@ public class EnglishLangHandler {
         provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.unselected", "Current form: unselected");
         provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.charge", "Configuration charge: %s / %s");
         provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.control", "Hold Ctrl and scroll to switch forms");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.auto_refill", "Automatically consumes refill components when charge is insufficient");
         provider.add("item.createdelightcore.kinetic_configuration_module.message.mode", "Selected: %s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.message.auto_refill", "Consumed %s refill component(s) and restored %s charge");
         provider.add("item.createdelightcore.kinetic_configuration_module.error.no_modes", "No configuration forms are available");
         provider.add("item.createdelightcore.kinetic_configuration_module.error.invalid_target", "The selected form cannot be placed");
         provider.add("item.createdelightcore.kinetic_configuration_module.error.no_charge", "Not enough configuration charge");

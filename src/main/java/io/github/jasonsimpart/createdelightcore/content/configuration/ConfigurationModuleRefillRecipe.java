@@ -106,6 +106,18 @@ public class ConfigurationModuleRefillRecipe implements CraftingRecipe {
         return category;
     }
 
+    public boolean supportsModule(ItemStack stack) {
+        return stack.getItem() instanceof ConfigurationModuleItem && moduleIngredient.test(stack);
+    }
+
+    public Ingredient refillIngredient() {
+        return refillIngredient;
+    }
+
+    public int refillCharge() {
+        return refillCharge;
+    }
+
     public static class Serializer implements RecipeSerializer<ConfigurationModuleRefillRecipe> {
         @Override
         public ConfigurationModuleRefillRecipe fromJson(ResourceLocation recipeId, JsonObject object) {
