@@ -135,6 +135,16 @@ public class EnglishLangHandler {
         provider.add(CDCreativeTabs.COIN.get(), "Create Delight | Coin");
         provider.add(CDCreativeTabs.FLUID.get(), "Create Delight | Fluid");
         provider.add(CDCreativeTabs.FOOD.get(), "Create Delight | Food");
+        provider.addItem(CDItems.KINETIC_CONFIGURATION_MODULE, "Kinetic Configuration Module");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.mode", "Current form: %s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.unselected", "Current form: unselected");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.charge", "Configuration charge: %s / %s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.control", "Hold Ctrl and scroll to switch forms");
+        provider.add("item.createdelightcore.kinetic_configuration_module.message.mode", "Selected: %s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.no_modes", "No configuration forms are available");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.invalid_target", "The selected form cannot be placed");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.no_charge", "Not enough configuration charge");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.ingredients", "Missing additional ingredients for this form");
 
         coin(provider, CDItems.IRON, "Iron Coin", "Iron");
         coin(provider, CDItems.COPPER, "Copper Coin", "Copper");

@@ -7,6 +7,7 @@ import com.tterrag.registrate.util.entry.ItemEntry;
 import dev.xkmc.fruitsdelight.init.food.FoodType;
 import dev.xkmc.fruitsdelight.init.food.IFDFood;
 import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
 import net.minecraft.resources.ResourceKey;
@@ -79,6 +80,12 @@ public class CDItems {
     // bronze
     public static final ItemEntry<Item> BRONZE_INGOT = simpleIngot("bronze");
     public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
+
+    public static final ItemEntry<ConfigurationModuleItem> KINETIC_CONFIGURATION_MODULE = REGISTRATE
+            .item("kinetic_configuration_module", ConfigurationModuleItem::new)
+            .properties(properties -> properties.stacksTo(1))
+            .tab(MISC_TAB)
+            .register();
 
 
     public static ItemEntry<IceCreamItem> iceCreamItem(String name, int nutrition, float saturation, boolean bowl, int tFrozen){

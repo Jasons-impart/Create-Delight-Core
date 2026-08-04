@@ -144,6 +144,16 @@ public class ChineseLangHandler {
         provider.add(CDCreativeTabs.COIN.get(), "齿轮盛宴 | 货币");
         provider.add(CDCreativeTabs.FLUID.get(), "齿轮盛宴 | 流体");
         provider.add(CDCreativeTabs.FOOD.get(), "齿轮盛宴 | 食物");
+        provider.addItem(CDItems.KINETIC_CONFIGURATION_MODULE, "传动构形模块");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.mode", "当前构形：%s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.unselected", "当前构形：未选择");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.charge", "构形量：%s / %s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.tooltip.control", "按住 Ctrl 并滚动滚轮切换构形");
+        provider.add("item.createdelightcore.kinetic_configuration_module.message.mode", "已切换为：%s");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.no_modes", "当前没有可用构形");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.invalid_target", "所选构形无法放置");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.no_charge", "构形量不足");
+        provider.add("item.createdelightcore.kinetic_configuration_module.error.ingredients", "缺少该构形所需的附加材料");
         // food
         provider.addItem(CDItems.UNFRIED_SHRIMP, "生炸虾仁");
         provider.addItem(CDItems.UNFRIED_CHICKEN_CHIP, "生炸鸡块");

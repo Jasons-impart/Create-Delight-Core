@@ -292,5 +292,15 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r",
   "tooltip.createdelightcore.jello_block": "Slippery. Sticks to sticky blocks and same jello/jelly blocks.",
   "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks.",
-  "tooltip.createdelightcore.superHeat": "Super Heating"
+  "tooltip.createdelightcore.superHeat": "Super Heating",
+  "item.createdelightcore.kinetic_configuration_module": "Kinetic Configuration Module",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.mode": "Current form: %s",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.unselected": "Current form: unselected",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.charge": "Configuration charge: %s / %s",
+  "item.createdelightcore.kinetic_configuration_module.tooltip.control": "Hold Ctrl and scroll to switch forms",
+  "item.createdelightcore.kinetic_configuration_module.message.mode": "Selected: %s",
+  "item.createdelightcore.kinetic_configuration_module.error.no_modes": "No configuration forms are available",
+  "item.createdelightcore.kinetic_configuration_module.error.invalid_target": "The selected form cannot be placed",
+  "item.createdelightcore.kinetic_configuration_module.error.no_charge": "Not enough configuration charge",
+  "item.createdelightcore.kinetic_configuration_module.error.ingredients": "Missing additional ingredients for this form"
 }

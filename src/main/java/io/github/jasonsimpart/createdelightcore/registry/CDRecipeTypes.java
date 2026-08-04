@@ -9,6 +9,7 @@ import com.simibubi.create.foundation.utility.CreateLang;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.content.recipe.BerrySyrupFluidMixingRecipe;
 import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
+import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleRefillRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -28,7 +29,12 @@ import java.util.function.Supplier;
 
 public enum CDRecipeTypes implements IRecipeTypeInfo {
     BERRY_SYRUP_FLUID_MIXING(BerrySyrupFluidMixingRecipe.Serializer::new, AllRecipeTypes.MIXING::getType, false),
-    FAN_FREEZING(FanFreezingRecipe::new);
+    FAN_FREEZING(FanFreezingRecipe::new),
+    CONFIGURATION_MODULE_REFILL(
+            ConfigurationModuleRefillRecipe.Serializer::new,
+            () -> RecipeType.CRAFTING,
+            false
+    );
 
     private final ResourceLocation id;
     private final RegistryObject<RecipeSerializer<?>> serializerObject;
