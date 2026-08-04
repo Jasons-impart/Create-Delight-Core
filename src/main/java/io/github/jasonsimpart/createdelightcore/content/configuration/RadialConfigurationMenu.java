@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.content.configuration;
 
 import com.simibubi.create.AllKeys;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
+import com.mojang.blaze3d.platform.InputConstants;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.network.SelectConfigurationModePacket;
 import net.minecraft.client.gui.GuiGraphics;
@@ -41,9 +42,17 @@ public class RadialConfigurationMenu extends Screen {
     @Override
     public void tick() {
         ticksOpen++;
-        if (ticksOpen > 1 && !AllKeys.TOOLBELT.isPressed()) {
+        if (ticksOpen > 1 && !isSelectionKeyPhysicallyDown()) {
             finishSelection();
         }
+    }
+
+    private boolean isSelectionKeyPhysicallyDown() {
+        InputConstants.Key key = AllKeys.TOOLBELT.getKeybind().getKey();
+        if (key.getType() == InputConstants.Type.MOUSE) {
+            return AllKeys.isMouseButtonDown(key.getValue());
+        }
+        return InputConstants.isKeyDown(minecraft.getWindow().getWindow(), key.getValue());
     }
 
     @Override
