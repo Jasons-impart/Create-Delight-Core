@@ -1,88 +1,40 @@
-# CDC MOD KNOWLEDGE BASE
+# CDC MOD
 
-Create Delight Core (CDC) is the custom Forge Java mod for Create-Delight Remake.
+Create Delight Core（`createdelightcore`）是 Create-Delight Remake 的 Forge 1.20.1 自定义模组。
 
-## STACK
+## Essentials
 
-- Minecraft: `1.20.1`
-- Forge: `47.4.10`
-- Java toolchain: `17`
-- Build: Gradle wrapper + ForgeGradle `[6.0,6.2)` + Parchment mappings
-- Mod id: `createdelightcore`
-- Main class: `src/main/java/io/github/jasonsimpart/createdelightcore/CreateDelightCore.java`
-- Version source: `gradle.properties` -> `mod_version`
+- Java 17；Forge `47.4.16`；ForgeGradle `[6.0,6.2)`；Parchment mappings。
+- 入口：`src/main/java/io/github/jasonsimpart/createdelightcore/CreateDelightCore.java`。
+- 版本唯一来源：`gradle.properties` 的 `mod_version`；其必须以数字开头。
+- 构建：`./gradlew build --no-daemon`；数据生成：`./gradlew runData --no-daemon`。
+- 运行客户端/服务端：`./gradlew runClient --no-daemon` / `./gradlew runServer --no-daemon`。
+- 产物：`build/libs/CDC-mod-src-1.20.1-<mod_version>.jar`；向父整合包提供非 `-all` 的 reobf jar。
 
-## KNOWLEDGE ROUTING
+## Where to work
 
-| Knowledge | Location |
-|---|---|
-| Stable CDC facts and repository-wide constraints | `AGENTS.md` |
-| Implemented feature map and current technical how-to notes | `docs/dev-knowledge/` |
-| Historical bugs, root causes, and workarounds | `docs/lessons-learned.md` |
-| Registry rules | `src/main/java/io/github/jasonsimpart/createdelightcore/registry/AGENTS.md` |
-| Datagen rules | `src/main/java/io/github/jasonsimpart/createdelightcore/data/AGENTS.md` |
-| Compatibility rules | `src/main/java/io/github/jasonsimpart/createdelightcore/compat/AGENTS.md` |
-| Mixin rules | `src/main/java/io/github/jasonsimpart/createdelightcore/mixin/AGENTS.md` |
-| Resource and datapack rules | `src/main/resources/AGENTS.md` |
+- 注册：`src/main/java/io/github/jasonsimpart/createdelightcore/registry/`
+- 内容与逻辑：`src/main/java/io/github/jasonsimpart/createdelightcore/content/`
+- 兼容、Mixin、数据生成：同级的 `compat/`、`mixin/`、`data/`
+- 资源与手写数据：`src/main/resources/`；生成资源：`src/generated/resources/`
 
-## STRUCTURE
+进入 `registry/`、`compat/`、`mixin/`、`data/` 或 `src/main/resources/` 前，先阅读其中的 `AGENTS.md`。稳定约束留在此文件；实现地图和 how-to 在 `docs/dev-knowledge/`，历史问题在 `docs/lessons-learned.md`，避免重复记录。
 
-| Path | Purpose |
-|---|---|
-| `src/main/java/io/github/jasonsimpart/createdelightcore/registry/` | Registries for items, blocks, fluids, tabs, recipes, tags |
-| `src/main/java/io/github/jasonsimpart/createdelightcore/content/` | Blocks, items, fluids, recipes, events, contraption logic |
-| `src/main/java/io/github/jasonsimpart/createdelightcore/compat/` | Integration logic for JEI, Jade, CMR, Create Metallurgy, Fruit Delight, etc. |
-| `src/main/java/io/github/jasonsimpart/createdelightcore/mixin/` | Compatibility and behavior patches for Minecraft and other mods |
-| `src/main/java/io/github/jasonsimpart/createdelightcore/data/` | Data generation providers and language handlers |
-| `src/main/resources/assets/createdelightcore/` | Textures, models, blockstates, OptiFine CIT assets |
-| `src/main/resources/data/` | Hand-written datapack resources for CDC and compat namespaces |
-| `src/generated/resources/` | Generated assets/data included by `sourceSets.main.resources` |
-| `libs/` | Local flatDir dependency jars used by Gradle |
+## Hard rules
 
-## COMMANDS
+- 注册经 `CreateDelightCore.REGISTRATE` 与 `registry/` 中的类完成。
+- 新增 Mixin 必须同步登记到 `src/main/resources/mixins.createdelightcore.json`。
+- `src/generated/resources/` 是主资源集的一部分，不能当作可忽略构建产物。
+- `META-INF/mods.toml` 与 `pack.mcmeta` 从 `gradle.properties` 展开占位符。
+- 父仓更新 CDC 子模块指针时，必须核对源码版本与打包的 CDC jar 一致。
+- CDC 任务不得顺带编辑父整合包的 Packwiz、CI 或根知识库文件。
 
-```bash
-./gradlew build --no-daemon
-./gradlew runData --no-daemon
-./gradlew runClient --no-daemon
-./gradlew runServer --no-daemon
-```
+## Git and maintenance
 
-- Build output: `build/libs/CDC-mod-src-1.20.1-<mod_version>.jar`.
-- Use the non-`-all` jar for the parent modpack unless packaging tooling explicitly says otherwise.
-- `jar` is finalized by `reobfJar`, so `build` produces the reobfuscated runtime jar.
+- `1.20.1` 是受保护分支：从最新 `origin/1.20.1` 新建英文或拼音分支，走 PR 合并，禁止直接推送。
+- 提交信息用中文，并在正文说明改动、原因、影响与验证；提交前检查 diff 并运行与改动匹配的验证。
+- 为避免上下文膨胀，此文件保持为入口和硬约束；领域细节写入对应目录的 `AGENTS.md` 或上述知识文档。
 
-## GIT WORKFLOW
+## Dependency note
 
-- Remote `1.20.1` is protected; never push changes to it directly.
-- For every project commit, branch from the latest `origin/1.20.1` using an English or pinyin name such as `codex/fix-recipe-data`.
-- Before committing, inspect the diff and run validation appropriate to the changed files.
-- Commit messages must be written in Chinese.
-- Commit messages must include a detailed body covering what changed, why it changed, impact scope, and validation performed.
-- Push the working branch and merge back to `1.20.1` through a pull request.
-
-## HARD RULES
-
-- Keep `gradle.properties` `mod_version` aligned with the CDC jar used by the parent modpack.
-- `mod_version` must start with a digit because Forge expands it into `META-INF/mods.toml` and rejects non-numeric-leading versions.
-- When updating the parent submodule pointer, verify the CDC source version and packaged CDC mod version are the same.
-- Registrations flow through `CreateDelightCore.REGISTRATE` and the classes in `registry/`.
-- New mixin classes must also be listed in `src/main/resources/mixins.createdelightcore.json`.
-- Datagen writes to `src/generated/resources`; this directory is source because Gradle includes it in main resources.
-- Resource metadata expands placeholders from `gradle.properties` in `META-INF/mods.toml` and `pack.mcmeta`.
-- Do not edit parent packwiz, CI workflow, or root knowledge files from inside this submodule task.
-
-## NOTES
-
-- `build.gradle` uses network Maven repositories plus local `libs/`; dependency resolution may fail if Maven hosts are blocked.
-- The JEI primary Maven is intentionally disabled in `build.gradle` because it can return HTTP 523 in some regions.
-- Central Kitchen is documented in `build.gradle`: switch it to `compileOnly` only when needed for `runData`, then restore `implementation`.
-
-## KNOWLEDGE MAINTENANCE
-
-- Keep root `AGENTS.md` at or below 150 lines; move domain details into focused files when it grows.
-- Keep any subdirectory `AGENTS.md` at or below 80 lines; each subdirectory file should cover only that domain.
-- Do not duplicate facts across knowledge files; link to the owning file instead.
-- Put current rules in `AGENTS.md` files, technical how-to notes in `docs/dev-knowledge/`, and historical fixes in `docs/lessons-learned.md`.
-- After fixing a non-obvious bug or workaround, add a short entry to `docs/lessons-learned.md`.
-- This submodule currently has no knowledge-maintenance scripts; do not reference parent-pack scripts unless matching scripts are added here.
+`build.gradle` 同时使用远程 Maven 与 `libs/` 本地依赖；网络受阻时依赖解析可能失败。JEI 主 Maven 被有意禁用；Central Kitchen 仅在需要 `runData` 时按 `build.gradle` 注释临时调整，并在完成后恢复。
