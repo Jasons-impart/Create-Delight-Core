@@ -122,6 +122,13 @@ repositories {
      flatDir {
          dir 'libs'
      }
+    // ForgeGradle downloads userdev artifacts through project repositories.
+    // Keep this before broad third-party Maven repositories.
+    maven {
+        name = 'MinecraftForge'
+        url = 'https://maven.minecraftforge.net/'
+        content { includeGroup 'net.minecraftforge' }
+    }
     maven {
         name = 'Architectury API'
         url = "https://maven.architectury.dev"
@@ -143,6 +150,8 @@ repositories {
     // maven { url = "https://dvs1.progwml6.com/files/maven/" }
     maven {
         url = "https://modmaven.dev"
+        // ModMaven returns a 200 HTML redirect for Forge userdev coordinates.
+        content { excludeGroup 'net.minecraftforge' }
     }
     maven {
         url = "https://cursemaven.com"

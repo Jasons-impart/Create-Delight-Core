@@ -1,5 +1,13 @@
 # Lessons Learned
 
+## ForgeGradle userdev 必须优先命中官方 Forge Maven
+
+**日期**: 2026-08-06
+
+**问题**: ForgeGradle 下载 `net.minecraftforge:forge:*:userdev` 时遍历 `build.gradle` 的项目仓库，不使用 `settings.gradle` 的插件仓库。宽泛的 ModMaven 会对该坐标返回 HTTP 200 的 630 字节 HTML 跳转页，ForgeGradle 将其缓存后报 `Invalid patcher dependency`。
+
+**正确做法**: 在项目仓库中把 `maven.minecraftforge.net`（仅 `net.minecraftforge`）放在第三方仓库之前，并从 ModMaven 排除该 group；出现旧缓存时删除 `~/.gradle/caches/forge_gradle/maven_downloader/net/minecraftforge/forge/<version>/` 下的 userdev jar 和 md5，再执行 `./gradlew help --no-daemon` 与 `./gradlew build --no-daemon`。
+
 ## 可选 Mixin 的共享接口不能放在 Mixin 包内
 
 **日期**: 2026-07-21
