@@ -79,6 +79,7 @@
     "IAF.TabulaModelHandlerHelperMixin",
     "Minecraft.CarverMixin",
     "Minecraft.HoneyBlockMixin",
+    "Minecraft.OEITagMirrorMixin",
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
     "mmt.EffectLevelEventMixin",
