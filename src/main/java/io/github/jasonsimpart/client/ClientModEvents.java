@@ -2,6 +2,8 @@ package io.github.jasonsimpart.client;
 
 import com.simibubi.create.foundation.block.connected.SimpleCTBehaviour;
 import com.simibubi.create.foundation.data.CreateRegistrate;
+import io.github.jasonsimpart.CreateDelightCore;
+import io.github.jasonsimpart.client.tetra.TetraEnergyBarRenderer;
 import io.github.jasonsimpart.registry.ModBlocks;
 import io.github.jasonsimpart.registry.ModFluids;
 import io.github.jasonsimpart.registry.ModItems;
@@ -14,11 +16,12 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 public final class ClientModEvents {
     private static final int LUSH_CONFITURE_COLOR = 0xF0612E;
@@ -31,6 +34,7 @@ public final class ClientModEvents {
         modEventBus.addListener(ClientModEvents::registerClientExtensions);
         modEventBus.addListener(ClientModEvents::registerBlockColors);
         modEventBus.addListener(ClientModEvents::registerItemColors);
+        modEventBus.addListener(ClientModEvents::registerItemDecorations);
         NeoForge.EVENT_BUS.addListener(QuickReloadKeyHandler::onKeyInput);
     }
 
@@ -45,7 +49,24 @@ public final class ClientModEvents {
                 ItemBlockRenderTypes.setRenderLayer(fluid.flowing().get(), RenderType.solid());
             });
             registerWaystonesMoneyRenderer();
+            registerEclipticSeasonsGrowthDetectorParticles();
         });
+    }
+
+    private static void registerItemDecorations(RegisterItemDecorationsEvent event) {
+        TetraEnergyBarRenderer.register(event);
+
+        if (!ModList.get().isLoaded("extendedae") || !ModList.get().isLoaded("ae2")) {
+            return;
+        }
+
+        try {
+            Class.forName("io.github.jasonsimpart.client.extendedae.ExtendedAeInfinityCellRenderer")
+                    .getMethod("register", RegisterItemDecorationsEvent.class)
+                    .invoke(null, event);
+        } catch (ReflectiveOperationException | LinkageError exception) {
+            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore ExtendedAE infinity cell renderer", exception);
+        }
     }
 
     private static void registerWaystonesMoneyRenderer() {
@@ -59,6 +80,20 @@ public final class ClientModEvents {
                     .invoke(null);
         } catch (ReflectiveOperationException exception) {
             throw new IllegalStateException("Failed to register createdelightcore Waystones money renderer", exception);
+        }
+    }
+
+    private static void registerEclipticSeasonsGrowthDetectorParticles() {
+        if (!ModList.get().isLoaded("eclipticseasons")) {
+            return;
+        }
+
+        try {
+            Class.forName("io.github.jasonsimpart.client.eclipticseasons.EclipticSeasonsGrowthDetectorParticles")
+                    .getMethod("register")
+                    .invoke(null);
+        } catch (ReflectiveOperationException | LinkageError exception) {
+            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore Ecliptic Seasons growth detector particles", exception);
         }
     }
 

@@ -46,6 +46,7 @@ public final class ModCommonEvents {
         NeoForge.EVENT_BUS.addListener(DropReportEvents::onServerTick);
         DisabledContentEvents.register(modEventBus);
         registerWaystonesMoneyTeleport();
+        registerQualityFoodCurrencyCompat();
     }
 
     private static void registerWaystonesMoneyTeleport() {
@@ -59,6 +60,20 @@ public final class ModCommonEvents {
                     .invoke(null);
         } catch (ReflectiveOperationException exception) {
             throw new IllegalStateException("Failed to register createdelightcore Waystones currency compat", exception);
+        }
+    }
+
+    private static void registerQualityFoodCurrencyCompat() {
+        if (!ModList.get().isLoaded("quality_food") || !ModList.get().isLoaded("lightmanscurrency")) {
+            return;
+        }
+
+        try {
+            Class.forName("io.github.jasonsimpart.compat.qualityfood.QualityFoodCurrencyCompat")
+                    .getMethod("register")
+                    .invoke(null);
+        } catch (ReflectiveOperationException | LinkageError exception) {
+            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore Quality Food currency compat", exception);
         }
     }
 
