@@ -155,6 +155,9 @@ dependencies {
     implementation("curse.maven:balm-531761:${balm_file_id}")
     implementation("curse.maven:waystones-245755:${waystones_file_id}")
     implementation("curse.maven:lightmans-currency-472521:${lightmanscurrency_file_id}")
+    compileOnly("curse.maven:quality-food-973932:${qualityfood_file_id}")
+    compileOnly("curse.maven:applied-energistics-2-223794:${ae2_file_id}")
+    compileOnly("curse.maven:extendedae-892005:${extendedae_file_id}")
     compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
 
     // Example mod dependency with JEI

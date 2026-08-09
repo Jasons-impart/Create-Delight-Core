@@ -182,6 +182,13 @@ public final class Config {
             )
             .define("waystonesMoneyChain", "main");
 
+    public static final ModConfigSpec.ConfigValue<String> QUALITY_FOOD_MONEY_CHAIN = BUILDER
+            .comment(
+                    "Quality Food 品质兑换使用的 Lightman's Currency coin chain。",
+                    "Lightman's Currency coin chain used when converting Quality Food quality into money."
+            )
+            .define("qualityFoodMoneyChain", "main");
+
     public static final ModConfigSpec.IntValue WAYSTONES_TELEPORT_COST_PER_LEVEL = BUILDER
             .comment(
                     "每 1 点 Waystones 经验成本换算成多少 Lightman's Currency 基础币值。旧 Core 默认值为 45。",
