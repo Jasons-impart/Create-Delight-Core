@@ -18,6 +18,7 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String IRONS_SPELLBOOKS_MIXIN = ".combat.ironsspellbooks.";
     private static final String TRAVELOPTICS_MIXIN = ".combat.traveloptics.";
     private static final String EXTRA_HOLO_PAGE_MIXIN = ".extraholopage.";
+    private static final String SOPHISTICATED_BACKPACKS_MIXIN = ".sophisticatedbackpacks.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -44,6 +45,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.contains(EXTRA_HOLO_PAGE_MIXIN)) {
             return decide(mixinClassName, "extraholopage");
+        }
+        if (mixinClassName.contains(SOPHISTICATED_BACKPACKS_MIXIN)) {
+            return decide(mixinClassName, "sophisticatedbackpacks");
         }
         return true;
     }

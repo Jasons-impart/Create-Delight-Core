@@ -190,6 +190,9 @@ dependencies {
     // mixins are gated by CombatMixinPlugin when the target mod is absent.
     compileOnly fg.deobf("curse.maven:apothic-attributes-898963:5634071")
     compileOnly fg.deobf("curse.maven:placebo-283644:6274231")
+    // Optional Sophisticated Backpacks refill-upgrade compatibility.
+    compileOnly fg.deobf("curse.maven:sophisticated-backpacks-422301:8503063")
+    compileOnly fg.deobf("curse.maven:sophisticated-core-618298:8503031")
 
     // compile against the JEI API but do not include it at runtime
     compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")

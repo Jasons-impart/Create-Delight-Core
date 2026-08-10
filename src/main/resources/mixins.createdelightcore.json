@@ -108,6 +108,8 @@
     "refurbished_furniture.FryingPanBlockEntityMixin",
     "refurbished_furniture.StoveBlockEntityMixin",
     "solapplepie.BenefitsHandlerMixin",
+    "sophisticatedbackpacks.RefillUpgradeWrapperMixin",
+    "sophisticatedbackpacks.UpgradeWrapperBaseAccessor",
     "solapplepie.FoodListMixin",
     "solapplepie.FoodTrackerMixin",
     "solcarrot.FoodListMixin",
