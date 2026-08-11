@@ -41,11 +41,8 @@ public class CDRegistrateTags {
     private static void genBlockTags(RegistrateTagsProvider<Block> provIn) {
         TagGen.CreateTagsProvider<Block> prov = new TagGen.CreateTagsProvider<>(provIn, Block::builtInRegistryHolder);
 
-        prov.tag(CDTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag)
-                .add(Blocks.POWDER_SNOW);
-
         prov.tag(AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
-                .addTag(CDTags.AllBlockTags.FAN_PROCESSING_CATALYSTS_FREEZING.tag);
+                .add(Blocks.POWDER_SNOW);
 
         prov.tag(CDTags.AllBlockTags.QUALITY_HARVEST_CONTROLLERS.tag)
                 .add(CDBlocks.QUALITY_HARVEST_CONTROLLER.get());

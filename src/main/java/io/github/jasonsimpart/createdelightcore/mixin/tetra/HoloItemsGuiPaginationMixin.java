@@ -116,7 +116,11 @@ public abstract class HoloItemsGuiPaginationMixin extends GuiElement {
     )
     private void createdelightcore$updateControlsForSelection(String key, CallbackInfo ci) {
         this.createdelightcore$showingItemList = key == null;
-        createdelightcore$applyPage();
+        if (this.createdelightcore$showingItemList) {
+            createdelightcore$restoreCurrentPage();
+        } else {
+            createdelightcore$setControlsVisible(false);
+        }
     }
 
     @Unique
@@ -132,6 +136,11 @@ public abstract class HoloItemsGuiPaginationMixin extends GuiElement {
 
     @Unique
     private void createdelightcore$applyPage() {
+        if (!this.createdelightcore$showingItemList) {
+            createdelightcore$setControlsVisible(false);
+            return;
+        }
+
         int firstEntry = this.createdelightcore$currentPage * CREATEDelightCore$PAGE_SIZE;
         int lastEntry = Math.min(
                 firstEntry + CREATEDelightCore$PAGE_SIZE,
@@ -140,15 +149,41 @@ public abstract class HoloItemsGuiPaginationMixin extends GuiElement {
         for (int index = 0; index < this.createdelightcore$pageEntries.size(); index++) {
             HoloItemGui entry = this.createdelightcore$pageEntries.get(index);
             boolean onCurrentPage = index >= firstEntry && index < lastEntry;
-            entry.setVisible(this.createdelightcore$showingItemList && onCurrentPage);
+            entry.setVisible(onCurrentPage);
         }
 
+        createdelightcore$updateControls();
+    }
+
+    @Unique
+    private void createdelightcore$restoreCurrentPage() {
+        int firstEntry = this.createdelightcore$currentPage * CREATEDelightCore$PAGE_SIZE;
+        int lastEntry = Math.min(
+                firstEntry + CREATEDelightCore$PAGE_SIZE,
+                this.createdelightcore$pageEntries.size());
+
+        for (int index = 0; index < this.createdelightcore$pageEntries.size(); index++) {
+            HoloItemGui entry = this.createdelightcore$pageEntries.get(index);
+            boolean onCurrentPage = index >= firstEntry && index < lastEntry;
+            entry.setVisible(onCurrentPage);
+            if (onCurrentPage) {
+                // HoloItemGui#setVisible stops its active show animation before delegating to
+                // GuiElement. During a detail -> list transition that otherwise leaves the
+                // restored entries visible but fully transparent until another page refresh.
+                entry.setOpacity(1.0F);
+            }
+        }
+
+        createdelightcore$updateControls();
+    }
+
+    @Unique
+    private void createdelightcore$updateControls() {
         if (this.createdelightcore$previousPageButton == null) {
             return;
         }
 
-        boolean showControls = this.createdelightcore$showingItemList
-                && this.createdelightcore$pageCount > 1;
+        boolean showControls = this.createdelightcore$pageCount > 1;
         createdelightcore$setControlsVisible(showControls);
         this.createdelightcore$previousPageButton.setEnabled(
                 this.createdelightcore$currentPage > 0);

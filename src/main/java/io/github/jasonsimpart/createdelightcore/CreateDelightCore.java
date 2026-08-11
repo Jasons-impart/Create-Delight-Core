@@ -4,7 +4,6 @@ import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.compat.createenchantmentindustry.TetraScrollPrinterCompat;
 import io.github.jasonsimpart.createdelightcore.content.event.TeleportHandler;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
-import io.github.jasonsimpart.createdelightcore.content.recipe.CDFanProcessingTypes;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ForgeEventsHandler;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ModEventHandler;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
@@ -35,7 +34,7 @@ public class CreateDelightCore {
         modEventBus.register(ModEventHandler.class);
         MinecraftForge.EVENT_BUS.register(new TeleportHandler());
         if (ModList.get().isLoaded("create_enchantment_industry") && ModList.get().isLoaded("tetra")) {
-            MinecraftForge.EVENT_BUS.addListener(TetraScrollPrinterCompat::registerPrintEntry);
+            TetraScrollPrinterCompat.register(modEventBus);
         }
         CDItems.init();
         CDFluids.init();
@@ -50,7 +49,6 @@ public class CreateDelightCore {
         CDTags.init();
         CDCoreDatagen.init();
 
-        CDFanProcessingTypes.register();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CDConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CDConfig.SERVER_SPEC);
     }

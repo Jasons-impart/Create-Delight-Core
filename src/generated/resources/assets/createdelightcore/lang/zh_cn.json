@@ -136,8 +136,6 @@
   "createdelightcore.order_request.sent": "订单请求已发送",
   "createdelightcore.quality_harvest_controller.no_calibrator": "未安装校准器",
   "createdelightcore.quality_harvest_controller.status": "生命质：%s/%s | %s",
-  "createdelightcore.recipe.fan_freezing": "批量冷冻",
-  "createdelightcore.recipe.fan_freezing.fan": "在细雪后放置鼓风机",
   "death.attack.createdelightcore.ice_cream": "%1$s因为吃掉过多的冰淇淋而冻成了冰棍",
   "death.attack.createdelightcore.ice_cream.player": "%1$s因为吃掉过多的冰淇淋而冻成了冰棍",
   "death.attack.createdelightcore.molten_metal": "%1$s变成了熔融金属的一部分",

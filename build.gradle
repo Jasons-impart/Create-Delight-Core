@@ -239,11 +239,11 @@ dependencies {
     // create addition
     implementation fg.deobf("curse.maven:createaddition-439890:6306951")
     // Create: Enchantment Industry printer API (optional runtime compatibility)
-    compileOnly fg.deobf("curse.maven:create-enchantment-industry-688768:8204334")
+    compileOnly fg.deobf("curse.maven:create-enchantment-industry-688768:8616814")
     // create utilities j
     implementation fg.deobf("curse.maven:create-utilities-j-1437484:7528356")
     // MMT - More Materials Tetra New
-    compileOnly fg.deobf("curse.maven:mmt-more-materials-tetra-new-1547763:8236384")
+    compileOnly fg.deobf("curse.maven:mmt-more-materials-tetra-new-1547763:8430092")
     // Tetra/Mutil 6.17 GUI types used by native holosphere pagination.
     compileOnly fg.deobf("curse.maven:tetra-289712:8570756")
     compileOnly fg.deobf("curse.maven:mutil-351914:7772906")

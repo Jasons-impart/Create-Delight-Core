@@ -123,6 +123,8 @@
     "cosmopolitan.CosmoJEIPluginMixin",
     "createdieselgenerators.BulkFermenterRendererMixin",
     "create.ToolboxHandlerClientMixin",
+    "jeitetra.ImprovementDataIngredientMixin",
+    "jeitetra.ImprovementRecipeIngredientRendererMixin",
     "tetra.HoloItemsGuiPaginationMixin"
   ],
   "minVersion": "0.8"

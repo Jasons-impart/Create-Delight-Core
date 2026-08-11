@@ -17,6 +17,8 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String BETTER_COMBAT_MIXIN = ".combat.bettercombat.";
     private static final String IRONS_SPELLBOOKS_MIXIN = ".combat.ironsspellbooks.";
     private static final String TRAVELOPTICS_MIXIN = ".combat.traveloptics.";
+    private static final String JEI_TETRA_MIXIN = ".jeitetra.";
+    private static final String MMT_MIXIN = ".mmt.";
     private static final String TETRA_MIXIN = ".tetra.";
 
     @Override
@@ -41,6 +43,12 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.contains(TRAVELOPTICS_MIXIN)) {
             return decide(mixinClassName, "traveloptics");
+        }
+        if (mixinClassName.contains(JEI_TETRA_MIXIN)) {
+            return decide(mixinClassName, "jeitetra");
+        }
+        if (mixinClassName.contains(MMT_MIXIN)) {
+            return decide(mixinClassName, "more_mod_tetra");
         }
         if (mixinClassName.contains(TETRA_MIXIN)) {
             return decide(mixinClassName, "tetra");
