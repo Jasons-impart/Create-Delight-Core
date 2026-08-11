@@ -43,7 +43,7 @@
           }
         },
         {
-          "biome": "alexscaves:magnetic_caves",
+          "biome": "alexscavesup:magnetic_caves",
           "parameters": {
             "temperature": [-0.4, 1.2],
             "humidity": [-0.25, 0.9],

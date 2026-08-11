@@ -2,10 +2,8 @@ package io.github.jasonsimpart.mixin.alexscaves;
 
 import io.github.jasonsimpart.compat.alexscaves.AlexsCavesDimensionOverrides;
 import java.util.concurrent.CompletableFuture;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.GenerationChunkHolder;
 import net.minecraft.util.StaticCache2D;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.status.ChunkStatusTasks;
 import net.minecraft.world.level.chunk.status.ChunkStep;
@@ -19,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ChunkStatusTasks.class)
 public class ChunkStatusTasksMixin {
     @Unique
-    private static final ThreadLocal<ResourceKey<Level>> CDC_PREVIOUS_DIMENSION = new ThreadLocal<>();
+    private static final ThreadLocal<AlexsCavesDimensionOverrides.WorldgenContext> CDC_WORLDGEN_CONTEXT = new ThreadLocal<>();
 
     @Inject(
             method = "generateStructureStarts(Lnet/minecraft/world/level/chunk/status/WorldGenContext;Lnet/minecraft/world/level/chunk/status/ChunkStep;Lnet/minecraft/util/StaticCache2D;Lnet/minecraft/world/level/chunk/ChunkAccess;)Ljava/util/concurrent/CompletableFuture;",
@@ -30,12 +28,10 @@ public class ChunkStatusTasksMixin {
             StaticCache2D<GenerationChunkHolder> cache,
             ChunkAccess chunk,
             CallbackInfoReturnable<CompletableFuture<ChunkAccess>> cir) {
-        ResourceKey<Level> previousDimension = AlexsCavesDimensionOverrides.pushWorldgenContext(
+        AlexsCavesDimensionOverrides.WorldgenContext context = AlexsCavesDimensionOverrides.pushWorldgenContext(
                 worldGenContext.level().dimension(),
                 worldGenContext.level().getSeed());
-        if (previousDimension != null) {
-            CDC_PREVIOUS_DIMENSION.set(previousDimension);
-        }
+        CDC_WORLDGEN_CONTEXT.set(context);
     }
 
     @Inject(
@@ -47,8 +43,8 @@ public class ChunkStatusTasksMixin {
             StaticCache2D<GenerationChunkHolder> cache,
             ChunkAccess chunk,
             CallbackInfoReturnable<CompletableFuture<ChunkAccess>> cir) {
-        AlexsCavesDimensionOverrides.popWorldgenContext(CDC_PREVIOUS_DIMENSION.get());
-        CDC_PREVIOUS_DIMENSION.remove();
+        AlexsCavesDimensionOverrides.popWorldgenContext(CDC_WORLDGEN_CONTEXT.get());
+        CDC_WORLDGEN_CONTEXT.remove();
     }
 
 }

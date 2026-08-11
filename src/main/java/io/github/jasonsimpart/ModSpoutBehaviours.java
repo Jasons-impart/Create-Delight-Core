@@ -44,8 +44,8 @@ public final class ModSpoutBehaviours {
     private static final ResourceLocation SPENT_LIQUOR = id(CreateDelightCore.MODID, "spent_liquor");
     private static final ResourceLocation FUEL_MIXTURES = id(CreateDelightCore.MODID, "fuel_mixtures");
     private static final ResourceLocation FLOWING_FUEL_MIXTURES = id(CreateDelightCore.MODID, "flowing_fuel_mixtures");
-    private static final ResourceLocation ALEX_CAVES_ACID = id("alexscaves", "acid");
-    private static final ResourceLocation ALEX_CAVES_FLOWING_ACID = id("alexscaves", "flowing_acid");
+    private static final ResourceLocation ALEX_CAVES_ACID = id("alexscavesup", "acid");
+    private static final ResourceLocation ALEX_CAVES_FLOWING_ACID = id("alexscavesup", "flowing_acid");
 
     private static final TagKey<Item> FILLABLE_ITEMS = TagKey.create(Registries.ITEM, CREATE_SA_FILLABLE);
     private static final TagKey<Item> FUELABLE_ITEMS = TagKey.create(Registries.ITEM, CREATE_SA_FUELABLE);
@@ -85,7 +85,7 @@ public final class ModSpoutBehaviours {
         }
 
         if (Config.ENABLE_ALEXSCAVES_SULFUR_SPOUT.get()) {
-            registerBlock(id("alexscaves", "sulfur"), ModSpoutBehaviours::fillSulfur);
+            registerBlock(id("alexscavesup", "sulfur"), ModSpoutBehaviours::fillSulfur);
         }
     }
 
@@ -224,7 +224,7 @@ public final class ModSpoutBehaviours {
         BlockPos budPos = pos.above();
         BlockState budState = level.getBlockState(budPos);
         ResourceLocation budId = BuiltInRegistries.BLOCK.getKey(budState.getBlock());
-        if (id("alexscaves", "sulfur_cluster").equals(budId)) {
+        if (id("alexscavesup", "sulfur_cluster").equals(budId)) {
             return 0;
         }
 
@@ -247,14 +247,14 @@ public final class ModSpoutBehaviours {
 
     private static Optional<ResourceLocation> nextSulfurBud(BlockState budState) {
         if (budState.isAir()) {
-            return Optional.of(id("alexscaves", "sulfur_bud_small"));
+            return Optional.of(id("alexscavesup", "sulfur_bud_small"));
         }
 
         ResourceLocation currentId = BuiltInRegistries.BLOCK.getKey(budState.getBlock());
         return switch (currentId.toString()) {
-            case "alexscaves:sulfur_bud_small" -> Optional.of(id("alexscaves", "sulfur_bud_medium"));
-            case "alexscaves:sulfur_bud_medium" -> Optional.of(id("alexscaves", "sulfur_bud_large"));
-            case "alexscaves:sulfur_bud_large" -> Optional.of(id("alexscaves", "sulfur_cluster"));
+            case "alexscavesup:sulfur_bud_small" -> Optional.of(id("alexscavesup", "sulfur_bud_medium"));
+            case "alexscavesup:sulfur_bud_medium" -> Optional.of(id("alexscavesup", "sulfur_bud_large"));
+            case "alexscavesup:sulfur_bud_large" -> Optional.of(id("alexscavesup", "sulfur_cluster"));
             default -> Optional.empty();
         };
     }

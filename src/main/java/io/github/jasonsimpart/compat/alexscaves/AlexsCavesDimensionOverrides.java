@@ -1,6 +1,5 @@
 package io.github.jasonsimpart.compat.alexscaves;
 
-import com.github.alexmodguy.alexscaves.server.level.biome.ACWorldSeedHolder;
 import io.github.jasonsimpart.Config;
 import io.github.jasonsimpart.CreateDelightCore;
 import java.util.Map;
@@ -11,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
 public final class AlexsCavesDimensionOverrides {
+    private static final ThreadLocal<ResourceKey<Level>> WORLDGEN_DIMENSION = new ThreadLocal<>();
     private static final Map<ResourceKey<Level>, ResourceKey<Biome>> DIMENSION_BIOMES =
             Map.of(
                     dimension("ceres_dimension"), alexsCavesBiome("candy_cavity"),
@@ -34,21 +34,28 @@ public final class AlexsCavesDimensionOverrides {
         return biomeForDimension(dimension) != null;
     }
 
-    public static ResourceKey<Level> pushWorldgenContext(ResourceKey<Level> dimension, long seed) {
-        if (!isAlexsCavesDimension(dimension)) {
-            return null;
+    public static WorldgenContext pushWorldgenContext(ResourceKey<Level> dimension, long seed) {
+        ResourceKey<Level> previousDimension = WORLDGEN_DIMENSION.get();
+        boolean replaced = isAlexsCavesDimension(dimension);
+        if (replaced) {
+            WORLDGEN_DIMENSION.set(dimension);
         }
-
-        ResourceKey<Level> previousDimension = ACWorldSeedHolder.getDimension();
-        ACWorldSeedHolder.setSeed(seed);
-        ACWorldSeedHolder.setDimension(dimension);
-        return previousDimension;
+        return new WorldgenContext(previousDimension, replaced);
     }
 
-    public static void popWorldgenContext(ResourceKey<Level> previousDimension) {
-        if (previousDimension != null) {
-            ACWorldSeedHolder.setDimension(previousDimension);
+    public static void popWorldgenContext(WorldgenContext context) {
+        if (!context.replaced()) {
+            return;
         }
+        if (context.previousDimension() == null) {
+            WORLDGEN_DIMENSION.remove();
+        } else {
+            WORLDGEN_DIMENSION.set(context.previousDimension());
+        }
+    }
+
+    public static ResourceKey<Biome> biomeForCurrentWorldgenContext() {
+        return biomeForDimension(WORLDGEN_DIMENSION.get());
     }
 
     private static ResourceKey<Level> dimension(String name) {
@@ -60,6 +67,9 @@ public final class AlexsCavesDimensionOverrides {
     }
 
     private static ResourceKey<Biome> alexsCavesBiome(String name) {
-        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("alexscaves", name));
+        return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath("alexscavesup", name));
+    }
+
+    public record WorldgenContext(ResourceKey<Level> previousDimension, boolean replaced) {
     }
 }

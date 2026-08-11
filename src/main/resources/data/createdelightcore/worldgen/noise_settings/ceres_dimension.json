@@ -5,10 +5,10 @@
     "ore_veins_enabled": false,
     "legacy_random_source": false,
     "default_block": {
-      "Name": "alexscaves:cake_layer"
+      "Name": "alexscavesup:cake_layer"
     },
     "default_fluid": {
-      "Name": "alexscaves:purple_soda",
+      "Name": "alexscavesup:purple_soda",
       "Properties": {
         "level": "0"
       }

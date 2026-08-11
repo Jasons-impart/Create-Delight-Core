@@ -43,7 +43,7 @@
           }
         },
         {
-          "biome": "alexscaves:toxic_caves",
+          "biome": "alexscavesup:toxic_caves",
           "parameters": {
             "temperature": [-0.8, 0.8],
             "humidity": [-1, 1],

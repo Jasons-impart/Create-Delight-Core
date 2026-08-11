@@ -5,8 +5,8 @@
   "plugin": "io.github.jasonsimpart.mixin.CDCMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "alexscaves.ACBiomeRarityMixin",
     "alexscaves.ChunkStatusTasksMixin",
+    "alexscaves.MultiNoiseBiomeSourceMixin",
     "datamap.DataMapLoaderMixin",
     "eclipticseasons.PlayerChunkSenderMixin",
     "eclipticseasons.ServerGamePacketListenerImplMixin",
