@@ -5,7 +5,7 @@
     "settings": "createdelightcore:enceladus_dimension",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "alexscaves:abyssal_chasm"
+      "biome": "alexscavesup:abyssal_chasm"
     }
   }
 }

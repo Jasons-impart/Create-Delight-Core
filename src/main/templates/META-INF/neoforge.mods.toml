@@ -87,16 +87,16 @@ ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
-modId = "citadel"
+modId = "citadelup"
 type = "required"
-versionRange = "[2.7.6,)"
+versionRange = "[0.1.9,)"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
-modId = "alexscaves"
+modId = "alexscavesup"
 type = "required"
-versionRange = "[2.0.10,)"
+versionRange = "[0.1.1,)"
 ordering = "AFTER"
 side = "BOTH"
 

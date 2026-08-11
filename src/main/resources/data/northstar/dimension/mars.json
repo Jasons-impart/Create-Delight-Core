@@ -79,7 +79,7 @@
           }
         },
         {
-          "biome": "alexscaves:primordial_caves",
+          "biome": "alexscavesup:primordial_caves",
           "parameters": {
             "temperature": [-2, 1],
             "humidity": [-1, 2],

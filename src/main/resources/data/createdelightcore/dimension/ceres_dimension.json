@@ -5,7 +5,7 @@
     "settings": "createdelightcore:ceres_dimension",
     "biome_source": {
       "type": "minecraft:fixed",
-      "biome": "alexscaves:candy_cavity"
+      "biome": "alexscavesup:candy_cavity"
     }
   }
 }

@@ -33,7 +33,7 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.startsWith(ALEXSCAVES_MIXIN_PACKAGE)) {
-            return isModLoaded("alexscaves");
+            return isModLoaded("alexscavesup");
         }
         if (mixinClassName.startsWith(ECLIPTICSEASONS_MIXIN_PACKAGE)) {
             return isModLoaded("eclipticseasons");
