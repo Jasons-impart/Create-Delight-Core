@@ -1,6 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.content.configuration;
 
 import com.simibubi.create.AllKeys;
+import io.github.jasonsimpart.createdelightcore.compat.sophisticatedbackpacks.SophisticatedBackpacksCompat;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.fml.ModList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -98,12 +102,19 @@ public class ConfigurationModuleItem extends Item {
 
         boolean creative = player.getAbilities().instabuild;
         AutoRefillPlan autoRefill = null;
+        SophisticatedBackpacksCompat.RefillReservation backpackRefill = null;
         if (!creative && !context.getLevel().isClientSide) {
             int currentCharge = ConfigurationModuleManager.getCharge(moduleStack);
             if (currentCharge < chargeCost) {
-                autoRefill = findAutoRefillPlan(context.getLevel(), player.getInventory(), moduleStack,
+                IItemHandler playerInventory = new InvWrapper(player.getInventory());
+                autoRefill = findAutoRefillPlan(context.getLevel(), playerInventory, moduleStack,
                         chargeCost, currentCharge);
-                if (autoRefill == null) {
+                if (autoRefill == null && ModList.get().isLoaded("sophisticatedbackpacks")
+                        && ModList.get().isLoaded("sophisticatedcore")) {
+                    backpackRefill = SophisticatedBackpacksCompat.reserveRefillForUse(player, moduleStack,
+                            context.getHand(), chargeCost, playerInventory).orElse(null);
+                }
+                if (backpackRefill == null && autoRefill == null) {
                     player.displayClientMessage(Component.translatable("item.createdelightcore.configuration_module.error.no_charge"), true);
                     return InteractionResult.FAIL;
                 }
@@ -123,13 +134,19 @@ public class ConfigurationModuleItem extends Item {
 
         if (!context.getLevel().isClientSide && result.consumesAction() && !creative) {
             int charge = ConfigurationModuleManager.getCharge(moduleStack);
-            if (autoRefill != null) {
+            if (backpackRefill != null) {
+                backpackRefill.commit(moduleStack);
+                charge = ConfigurationModuleManager.getCharge(moduleStack);
+                player.displayClientMessage(Component.translatable(
+                        "item.createdelightcore.configuration_module.message.auto_refill",
+                        backpackRefill.plan().refillCount(), backpackRefill.plan().chargeAdded()), true);
+            } else if (autoRefill != null) {
                 charge = Math.min(ConfigurationModuleManager.getMaxCharge(moduleStack),
                         charge + autoRefill.chargeAdded());
             }
             ConfigurationModuleManager.setCharge(moduleStack, charge - chargeCost);
             if (autoRefill != null) {
-                consumeRemovalPlan(player.getInventory(), autoRefill.removals());
+                consumeRemovalPlan(new InvWrapper(player.getInventory()), autoRefill.removals());
                 player.displayClientMessage(Component.translatable(
                         "item.createdelightcore.configuration_module.message.auto_refill",
                         autoRefill.refillCount(), autoRefill.chargeAdded()), true);
@@ -142,7 +159,86 @@ public class ConfigurationModuleItem extends Item {
         return result;
     }
 
-    private static AutoRefillPlan findAutoRefillPlan(Level level, Inventory inventory, ItemStack moduleStack,
+    /**
+     * Consumes as many complete refill batches as fit in the remaining charge capacity.
+     * A partial batch is never consumed, so components are not wasted to fill a remainder.
+     */
+    public static Optional<RefillPlan> planRefillToCapacityWithoutOverflow(Level level, IItemHandler inventory,
+                                                                             ItemStack moduleStack) {
+        return planRefillToCapacityWithoutOverflow(level, List.of(inventory), moduleStack);
+    }
+
+    /**
+     * Plans complete refill batches across inventories in priority order, without consuming ingredients.
+     * Each ingredient is reserved from an earlier inventory before trying the next one.
+     */
+    public static Optional<RefillPlan> planRefillToCapacityWithoutOverflow(Level level,
+                                                                             List<IItemHandler> inventories,
+                                                                             ItemStack moduleStack) {
+        if (inventories.isEmpty()) {
+            return Optional.empty();
+        }
+        int currentCharge = ConfigurationModuleManager.getCharge(moduleStack);
+        int maxCharge = ConfigurationModuleManager.getMaxCharge(moduleStack);
+        if (currentCharge >= maxCharge) {
+            return Optional.empty();
+        }
+        List<ConfigurationModuleRefillRecipe> recipes = level.getRecipeManager()
+                .getAllRecipesFor(RecipeType.CRAFTING)
+                .stream()
+                .filter(ConfigurationModuleRefillRecipe.class::isInstance)
+                .map(ConfigurationModuleRefillRecipe.class::cast)
+                .filter(recipe -> recipe.supportsModule(moduleStack))
+                .sorted(Comparator.comparing(recipe -> recipe.getId().toString()))
+                .toList();
+
+        RefillPlan plan = null;
+        for (ConfigurationModuleRefillRecipe recipe : recipes) {
+            int maxRefillCount = (maxCharge - currentCharge) / recipe.refillCharge();
+            for (int refillCount = maxRefillCount; refillCount > 0; refillCount--) {
+                List<int[]> removals = inventories.stream()
+                        .map(inventory -> new int[inventory.getSlots()])
+                        .toList();
+                boolean ingredientsAvailable = true;
+                for (ConfigurationRequirement requirement : recipe.refillRequirements()) {
+                    if (!reserveIngredient(inventories, moduleStack, requirement.ingredient(),
+                            requirement.count() * refillCount, removals)) {
+                        ingredientsAvailable = false;
+                        break;
+                    }
+                }
+                if (!ingredientsAvailable) {
+                    continue;
+                }
+                int addedCharge = refillCount * recipe.refillCharge();
+                if (plan == null || addedCharge > plan.chargeAdded()) {
+                    plan = new RefillPlan(List.copyOf(inventories), removals, refillCount, addedCharge);
+                }
+                break;
+            }
+        }
+        if (plan == null) {
+            return Optional.empty();
+        }
+        return Optional.of(plan);
+    }
+
+    public static int applyRefillPlan(ItemStack moduleStack, RefillPlan plan) {
+        for (int inventoryIndex = 0; inventoryIndex < plan.inventories().size(); inventoryIndex++) {
+            consumeRemovalPlan(plan.inventories().get(inventoryIndex), plan.removals().get(inventoryIndex));
+        }
+        ConfigurationModuleManager.setCharge(moduleStack,
+                ConfigurationModuleManager.getCharge(moduleStack) + plan.chargeAdded());
+        return plan.chargeAdded();
+    }
+
+    public static int refillToCapacityWithoutOverflow(Level level, IItemHandler inventory, ItemStack moduleStack) {
+        return planRefillToCapacityWithoutOverflow(level, inventory, moduleStack)
+                .map(plan -> applyRefillPlan(moduleStack, plan))
+                .orElse(0);
+    }
+
+    private static AutoRefillPlan findAutoRefillPlan(Level level, IItemHandler inventory, ItemStack moduleStack,
                                                      int chargeCost, int currentCharge) {
         int maxCharge = ConfigurationModuleManager.getMaxCharge(moduleStack);
         if (chargeCost > maxCharge) {
@@ -161,7 +257,10 @@ public class ConfigurationModuleItem extends Item {
         int missingCharge = chargeCost - currentCharge;
         for (ConfigurationModuleRefillRecipe recipe : recipes) {
             int refillCount = (missingCharge + recipe.refillCharge() - 1) / recipe.refillCharge();
-            int[] trialRemovals = new int[inventory.getContainerSize()];
+            if (refillCount > (maxCharge - currentCharge) / recipe.refillCharge()) {
+                continue;
+            }
+            int[] trialRemovals = new int[inventory.getSlots()];
             boolean ingredientsAvailable = true;
             for (ConfigurationRequirement requirement : recipe.refillRequirements()) {
                 if (!reserveIngredient(inventory, moduleStack, requirement.ingredient(),
@@ -174,7 +273,7 @@ public class ConfigurationModuleItem extends Item {
                 continue;
             }
             int added = refillCount * recipe.refillCharge();
-            if (Math.min(maxCharge, currentCharge + added) < chargeCost) {
+            if (currentCharge + added < chargeCost) {
                 continue;
             }
             if (best == null || refillCount < best.refillCount()) {
@@ -184,34 +283,46 @@ public class ConfigurationModuleItem extends Item {
         return best;
     }
 
-    private static boolean reserveIngredient(Inventory inventory, ItemStack moduleStack, Ingredient ingredient,
+    private static boolean reserveIngredient(IItemHandler inventory, ItemStack moduleStack, Ingredient ingredient,
                                              int count, int[] removals) {
+        return reserveIngredient(List.of(inventory), moduleStack, ingredient, count, List.of(removals));
+    }
+
+    private static boolean reserveIngredient(List<IItemHandler> inventories, ItemStack moduleStack,
+                                             Ingredient ingredient, int count, List<int[]> removals) {
         int remaining = count;
-        for (int slot = 0; slot < inventory.getContainerSize() && remaining > 0; slot++) {
-            ItemStack candidate = inventory.getItem(slot);
-            if (candidate == moduleStack || candidate.isEmpty() || !ingredient.test(candidate)) {
-                continue;
+        for (int inventoryIndex = 0; inventoryIndex < inventories.size() && remaining > 0; inventoryIndex++) {
+            IItemHandler inventory = inventories.get(inventoryIndex);
+            int[] inventoryRemovals = removals.get(inventoryIndex);
+            for (int slot = 0; slot < inventory.getSlots() && remaining > 0; slot++) {
+                ItemStack candidate = inventory.getStackInSlot(slot);
+                if (candidate == moduleStack || candidate.isEmpty() || !ingredient.test(candidate)) {
+                    continue;
+                }
+                int available = candidate.getCount() - inventoryRemovals[slot];
+                if (available <= 0) {
+                    continue;
+                }
+                int taken = Math.min(available, remaining);
+                inventoryRemovals[slot] += taken;
+                remaining -= taken;
             }
-            int available = candidate.getCount() - removals[slot];
-            if (available <= 0) {
-                continue;
-            }
-            int taken = Math.min(available, remaining);
-            removals[slot] += taken;
-            remaining -= taken;
         }
         return remaining == 0;
     }
 
-    private static void consumeRemovalPlan(Inventory inventory, int[] removals) {
+    private static void consumeRemovalPlan(IItemHandler inventory, int[] removals) {
         for (int slot = 0; slot < removals.length; slot++) {
             if (removals[slot] > 0) {
-                inventory.getItem(slot).shrink(removals[slot]);
+                inventory.extractItem(slot, removals[slot], false);
             }
         }
     }
 
     private record AutoRefillPlan(int[] removals, int refillCount, int chargeAdded) {
+    }
+
+    public record RefillPlan(List<IItemHandler> inventories, List<int[]> removals, int refillCount, int chargeAdded) {
     }
 
     @Override
