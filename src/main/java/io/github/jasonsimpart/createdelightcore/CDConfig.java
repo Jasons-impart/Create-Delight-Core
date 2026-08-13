@@ -66,6 +66,9 @@ public class CDConfig
             .comment("Whether Create open-ended pipes should safely drain lavalogged source blocks, such as Quark grates with lava.")
             .comment("Disable this only if a pack intentionally wants Create's original lava-draining behavior.")
             .define("enableOpenEndedPipeLavaDrainFix", true);
+    private static final ForgeConfigSpec.BooleanValue ENABLE_SPONSOR_TITLES = SERVER_BUILDER
+            .comment("Whether to automatically grant sponsor titles through FTB Ranks from donate_list.json.")
+            .define("enableSponsorTitles", true);
     static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
 
 
@@ -82,6 +85,7 @@ public class CDConfig
     public static int surfaceDepthLimit;
     public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
     public static boolean enableOpenEndedPipeLavaDrainFix = true;
+    public static boolean enableSponsorTitles = true;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
@@ -102,6 +106,7 @@ public class CDConfig
             surfaceDepthLimit = SURFACE_DEPTH_LIMIT.get();
             beltGrinderBlockedSandpaperRecipes = new ArrayList<>(BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES.get());
             enableOpenEndedPipeLavaDrainFix = ENABLE_OPEN_ENDED_PIPE_LAVA_DRAIN_FIX.get();
+            enableSponsorTitles = ENABLE_SPONSOR_TITLES.get();
         }
     }
 }
