@@ -100,7 +100,7 @@ public final class FTBRanksCompat {
 
         String rankId = "createdelight_sponsor_" + normalizedName;
         return manager.getRank(rankId)
-                .orElseGet(() -> manager.createRank(rankId, "Create Delight Sponsor " + playerName, 0));
+                .orElseGet(() -> manager.createRank(rankId, "Create Delight Sponsor " + playerName, 1));
     }
 
     private static String normalizeRankId(String name) {
