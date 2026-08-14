@@ -1,9 +1,5 @@
 package io.github.jasonsimpart.createdelightcore.compat.ftbranks;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import dev.ftb.mods.ftbranks.api.FTBRanksAPI;
 import dev.ftb.mods.ftbranks.api.PermissionValue;
 import dev.ftb.mods.ftbranks.api.Rank;
@@ -11,23 +7,20 @@ import dev.ftb.mods.ftbranks.api.RankManager;
 import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Locale;
 import java.util.Optional;
 
 /** Integrates the pack's sponsor title list with FTB Ranks when that mod is installed. */
 public final class FTBRanksCompat {
-    private static final Gson GSON = new Gson();
-    private static final String DONATE_LIST_FILE = "donate_list.json";
     private static final String NAME_FORMAT_NODE = "ftbranks.name_format";
+    private static SponsorTitleStore sponsorTitleStore;
 
     private FTBRanksCompat() {
     }
@@ -38,20 +31,69 @@ public final class FTBRanksCompat {
     }
 
     @SubscribeEvent
+    public static void onServerStarted(ServerStartedEvent event) {
+        if (!CDConfig.enableSponsorTitles) {
+            return;
+        }
+        synchronized (FTBRanksCompat.class) {
+            if (sponsorTitleStore != null) {
+                sponsorTitleStore.close();
+            }
+            sponsorTitleStore = new SponsorTitleStore(event.getServer());
+            sponsorTitleStore.refreshAsync();
+        }
+    }
+
+    @SubscribeEvent
+    public static void onServerStopping(ServerStoppingEvent event) {
+        synchronized (FTBRanksCompat.class) {
+            if (sponsorTitleStore != null) {
+                sponsorTitleStore.close();
+                sponsorTitleStore = null;
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
         if (!CDConfig.enableSponsorTitles || !(event.getEntity() instanceof ServerPlayer player)) {
             return;
         }
 
-        try {
-            Optional<String> title = readTitle(player);
-            if (title.isEmpty()) {
+        applyTitle(player, currentStore(player.getServer()));
+    }
+
+    static void applyTitlesToOnlinePlayers(MinecraftServer server, SponsorTitleStore store) {
+        synchronized (FTBRanksCompat.class) {
+            if (sponsorTitleStore != store) {
                 return;
             }
+        }
+        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+            applyTitle(player, store);
+        }
+    }
 
+    private static SponsorTitleStore currentStore(MinecraftServer server) {
+        synchronized (FTBRanksCompat.class) {
+            if (sponsorTitleStore == null) {
+                sponsorTitleStore = new SponsorTitleStore(server);
+                sponsorTitleStore.refreshAsync();
+            }
+            return sponsorTitleStore;
+        }
+    }
+
+    private static void applyTitle(ServerPlayer player, SponsorTitleStore store) {
+        Optional<String> title = store.findTitle(player.getGameProfile().getName());
+        if (title.isEmpty()) {
+            return;
+        }
+
+        try {
             FTBRanksAPI api = FTBRanksAPI.getInstance();
             if (api == null) {
-                CreateDelightCore.LOGGER.warn("Cannot apply sponsor title for {}: FTB Ranks API is not ready", player.getGameProfile().getName());
+                CreateDelightCore.LOGGER.debug("Cannot apply sponsor title for {}: FTB Ranks API is not ready", player.getGameProfile().getName());
                 return;
             }
 
@@ -61,33 +103,8 @@ public final class FTBRanksCompat {
             PermissionValue permission = api.parsePermissionValue(formattedName);
             rank.setPermission(NAME_FORMAT_NODE, permission);
             rank.add(player.getGameProfile());
-        } catch (IOException | JsonParseException | IllegalStateException | IllegalArgumentException exception) {
+        } catch (RuntimeException exception) {
             CreateDelightCore.LOGGER.error("Failed to apply sponsor title for {}", player.getGameProfile().getName(), exception);
-        }
-    }
-
-    private static Optional<String> readTitle(ServerPlayer player) throws IOException {
-        Path path = player.getServer().getServerDirectory().toPath().resolve(DONATE_LIST_FILE);
-        if (!Files.isRegularFile(path)) {
-            return Optional.empty();
-        }
-
-        try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-            JsonObject list = GSON.fromJson(reader, JsonObject.class);
-            if (list == null) {
-                return Optional.empty();
-            }
-
-            JsonElement title = list.get(player.getGameProfile().getName());
-            if (title == null || title.isJsonNull()) {
-                return Optional.empty();
-            }
-            if (!title.isJsonPrimitive() || !title.getAsJsonPrimitive().isString()) {
-                throw new JsonParseException("Sponsor title must be a string");
-            }
-
-            String value = title.getAsString();
-            return value.isBlank() ? Optional.empty() : Optional.of(value);
         }
     }
 
