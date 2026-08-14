@@ -24,15 +24,12 @@ import com.simibubi.create.AllBlocks;
 import fr.iglee42.cmr.init.CMRRegistries;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
-import io.github.jasonsimpart.createdelightcore.compat.jei.category.FanFreezingCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategorySnowmanCoolerFluid;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.PhantomCompostingCategory;
-import io.github.jasonsimpart.createdelightcore.content.recipe.FanFreezingRecipe;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
-import io.github.jasonsimpart.createdelightcore.registry.CDRecipeTypes;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -68,12 +65,6 @@ public class CDJEI implements IModPlugin {
     private void loadCategories() {
         allCategories.clear();
 
-        CreateRecipeCategory<?> fan_freezing = builder(FanFreezingRecipe.class)
-                .addTypedRecipes(CDRecipeTypes.FAN_FREEZING)
-                .catalystStack(CDProcessingViaFanCategory.getFan("fan_freezing"))
-                .doubleItemIcon(AllItems.PROPELLER.get(), Items.POWDER_SNOW_BUCKET)
-                .emptyBackground(178, 72)
-                .build("fan_freezing", FanFreezingCategory::new);
     }
 
     private <T extends Recipe<?>> CategoryBuilder<T> builder(Class<? extends T> recipeClass) {

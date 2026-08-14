@@ -312,8 +312,6 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.LUSH_CONFITURE_JELLO, "繁茂熔融果冻(流动中)");
         addVirtualFluid(provider, CDFluids.GENETIC_CULTURE, "遗传培养液");
         //recipes
-        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "在细雪后放置鼓风机");
-        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "批量冷冻");
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal", "%1$s变成了熔融金属的一部分");
         provider.add("death.attack." + CreateDelightCore.MODID + ".molten_metal.player", "%2$s以为%1$s是一块没有融化的金属");
         provider.add("death.attack." + CreateDelightCore.MODID + ".ice_cream", "%1$s因为吃掉过多的冰淇淋而冻成了冰棍");

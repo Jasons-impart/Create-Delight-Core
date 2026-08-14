@@ -86,7 +86,6 @@ public class CDTags {
 
     public enum AllBlockTags {
 
-        FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing"),
         PHANTOM_COMPOST_ACTIVATORS(NameSpace.MOD, "phantom_compost_activators"),
         QUALITY_CROPS(NameSpace.MOD, "quality_crops"),
         QUALITY_HARVEST_CONTROLLERS(NameSpace.MOD, "quality_harvest_controllers"),
@@ -189,52 +188,6 @@ public class CDTags {
 
         public boolean matches(ItemStack stack) {
             return stack.is(tag);
-        }
-
-        private static void init() {}
-
-    }
-
-    public enum AllFluidTags {
-
-        FAN_PROCESSING_CATALYSTS_FREEZING(NameSpace.MOD, "fan_processing_catalysts/freezing");
-
-        public final TagKey<Fluid> tag;
-        public final boolean alwaysDatagen;
-
-        AllFluidTags() {
-            this(NameSpace.MOD);
-        }
-
-        AllFluidTags(NameSpace namespace) {
-            this(namespace, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
-
-        AllFluidTags(NameSpace namespace, String path) {
-            this(namespace, path, namespace.optionalDefault, namespace.alwaysDatagenDefault);
-        }
-
-        AllFluidTags(NameSpace namespace, boolean optional, boolean alwaysDatagen) {
-            this(namespace, null, optional, alwaysDatagen);
-        }
-
-        AllFluidTags(NameSpace namespace, String path, boolean optional, boolean alwaysDatagen) {
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(namespace.id, path == null ? CreateLang.asId(name()) : path);
-            if (optional) {
-                tag = optionalTag(ForgeRegistries.FLUIDS, id);
-            } else {
-                tag = FluidTags.create(id);
-            }
-            this.alwaysDatagen = alwaysDatagen;
-        }
-
-        @SuppressWarnings("deprecation")
-        public boolean matches(Fluid fluid) {
-            return fluid.is(tag);
-        }
-
-        public boolean matches(FluidState state) {
-            return state.is(tag);
         }
 
         private static void init() {}
@@ -365,7 +318,6 @@ public class CDTags {
     public static void init() {
         AllBlockTags.init();
         AllItemTags.init();
-        AllFluidTags.init();
         AllEntityTags.init();
         AllDimensionTags.init();
         AllRecipeSerializerTags.init();

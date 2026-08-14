@@ -170,8 +170,6 @@ public class EnglishLangHandler {
         provider.add("death.attack." + CreateDelightCore.MODID + ".radiation.player", "%1$s rotted away from radiation exposure");
 
 
-        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing.fan", "Fan behind Powdered Snow");
-        provider.add(CreateDelightCore.MODID + ".recipe.fan_freezing", "Bulk Freezing");
         //milkshake
         addVirtualFluid(provider, CDFluids.APPLE, "Apple Milkshake");
         addVirtualFluid(provider, CDFluids.GLOW_BERRY, "Glow Berry Milkshake");

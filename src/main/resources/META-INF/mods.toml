@@ -71,9 +71,16 @@ description='''${mod_description}'''
     side="BOTH"
 
 [[dependencies.${mod_id}]]
+    modId="create_dragons_plus"
+    mandatory=true
+    versionRange="[1.11.6,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
     modId="create_enchantment_industry"
     mandatory=false
-    versionRange="[1.4.0,)"
+    versionRange="[2.5.0b,)"
     ordering="AFTER"
     side="BOTH"
 

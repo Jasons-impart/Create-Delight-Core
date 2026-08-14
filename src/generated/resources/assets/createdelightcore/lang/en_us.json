@@ -145,8 +145,6 @@
   "createdelightcore.order_request.sent": "Order request sent",
   "createdelightcore.quality_harvest_controller.no_calibrator": "No calibrator",
   "createdelightcore.quality_harvest_controller.status": "Life Matter: %s/%s | %s",
-  "createdelightcore.recipe.fan_freezing": "Bulk Freezing",
-  "createdelightcore.recipe.fan_freezing.fan": "Fan behind Powdered Snow",
   "death.attack.createdelightcore.ice_cream": "%1$s was frozen into a popsicle because of eating too much ice cream",
   "death.attack.createdelightcore.ice_cream.player": "%1$s was frozen into a popsicle because of eating too much ice cream",
   "death.attack.createdelightcore.molten_metal": "%1$s became a part of the molten metal",

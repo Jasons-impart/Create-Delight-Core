@@ -130,7 +130,7 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 
 **问题**: `HoloItemGui` 会在构造时把初始坐标固化进取消选中动画；若分页只在构造后调用 `setX/setY`，从改造详情返回时动画会把入口恢复到未分页坐标并打乱布局。
 
-**正确做法**: 在 `HoloItemGui` 构造调用处把坐标改为页内坐标，再控制各页可见性；升级 Tetra 或 ExtraHoloPage 后复核构造器描述符和 `changeItem` 生命周期。
+**正确做法**: 在 Tetra `6.16` 原生 `HoloItemsGui#createItem(entry, index)` 入口把 `index` 改成页内索引，再控制各页可见性；升级 Tetra 后复核 `createItem` 描述符、`HoloItemGui` 构造器和 `changeItem` 生命周期。
 
 ## Better Combat 零前摇配置受 JAR 下限限制
 
