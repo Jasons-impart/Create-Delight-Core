@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.compat.ftbranks;
 
+import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -38,6 +39,10 @@ public final class SponsorRewardHandler {
         synchronized (SponsorRewardHandler.class) {
             if (sponsorTitleStore != null) {
                 sponsorTitleStore.close();
+                sponsorTitleStore = null;
+            }
+            if (!CDConfig.enableSponsorTitles) {
+                return;
             }
             sponsorTitleStore = new SponsorTitleStore(event.getServer());
             sponsorTitleStore.refreshAsync();
@@ -56,13 +61,18 @@ public final class SponsorRewardHandler {
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            tryGiveSponsorMedal(player, currentStore(player.getServer()));
+        if (!CDConfig.enableSponsorTitles || !(event.getEntity() instanceof ServerPlayer player)) {
+            return;
         }
+
+        tryGiveSponsorMedal(player, currentStore(player.getServer()));
     }
 
     static SponsorTitleStore currentStore(MinecraftServer server) {
         synchronized (SponsorRewardHandler.class) {
+            if (!CDConfig.enableSponsorTitles) {
+                return null;
+            }
             if (sponsorTitleStore == null) {
                 sponsorTitleStore = new SponsorTitleStore(server);
                 sponsorTitleStore.refreshAsync();
@@ -72,6 +82,9 @@ public final class SponsorRewardHandler {
     }
 
     static void onStoreRefreshed(MinecraftServer server, SponsorTitleStore store) {
+        if (!CDConfig.enableSponsorTitles) {
+            return;
+        }
         synchronized (SponsorRewardHandler.class) {
             if (sponsorTitleStore != store) {
                 return;
@@ -90,7 +103,8 @@ public final class SponsorRewardHandler {
     }
 
     private static void tryGiveSponsorMedal(ServerPlayer player, SponsorTitleStore store) {
-        if (player.getPersistentData().getBoolean(MEDAL_GIVEN_TAG)
+        if (store == null || !CDConfig.enableSponsorTitles
+                || player.getPersistentData().getBoolean(MEDAL_GIVEN_TAG)
                 || store.findTitle(player.getGameProfile().getName()).isEmpty()) {
             return;
         }

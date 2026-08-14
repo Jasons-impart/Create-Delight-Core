@@ -67,7 +67,7 @@ public class CDConfig
             .comment("Disable this only if a pack intentionally wants Create's original lava-draining behavior.")
             .define("enableOpenEndedPipeLavaDrainFix", true);
     private static final ForgeConfigSpec.BooleanValue ENABLE_SPONSOR_TITLES = SERVER_BUILDER
-            .comment("Whether to automatically grant sponsor titles through FTB Ranks from the built-in or remote sponsor list.")
+            .comment("Whether to enable sponsor titles, medals, and background synchronization of the built-in or remote sponsor list.")
             .define("enableSponsorTitles", true);
     static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
 
