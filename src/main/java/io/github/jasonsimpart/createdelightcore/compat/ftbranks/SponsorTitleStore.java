@@ -33,7 +33,6 @@ final class SponsorTitleStore {
     private static final URI REMOTE_URI = URI.create(
             "https://raw.githubusercontent.com/Jasons-impart/Create-Delight-Remake/main/docs/sponsors.json");
     private static final String DEFAULT_RESOURCE = "/createdelightcore/sponsors.json";
-    private static final String LEGACY_FILE = "donate_list.json";
     private static final int MAX_FILE_BYTES = 1024 * 1024;
     private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
             .connectTimeout(Duration.ofSeconds(5))
@@ -76,11 +75,6 @@ final class SponsorTitleStore {
         Optional<Map<String, String>> cached = readFile(cachePath);
         if (cached.isPresent()) {
             return cached.get();
-        }
-
-        Optional<Map<String, String>> legacy = readFile(server.getServerDirectory().toPath().resolve(LEGACY_FILE));
-        if (legacy.isPresent()) {
-            return legacy.get();
         }
 
         try (var stream = SponsorTitleStore.class.getResourceAsStream(DEFAULT_RESOURCE)) {
