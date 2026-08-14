@@ -31,7 +31,7 @@ import java.util.concurrent.atomic.AtomicReference;
 final class SponsorTitleStore {
     private static final Gson GSON = new Gson();
     private static final URI REMOTE_URI = URI.create(
-            "https://raw.githubusercontent.com/Jasons-impart/Create-Delight-Remake/main/docs/sponsors.json");
+            "https://raw.githubusercontent.com/Jasons-impart/Create-Delight-Remake/test-server/docs/sponsors.json");
     private static final String DEFAULT_RESOURCE = "/createdelightcore/sponsors.json";
     private static final int MAX_FILE_BYTES = 1024 * 1024;
     private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder()
