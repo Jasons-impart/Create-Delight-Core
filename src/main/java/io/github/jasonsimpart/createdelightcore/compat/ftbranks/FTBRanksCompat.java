@@ -8,6 +8,7 @@ import io.github.jasonsimpart.createdelightcore.CDConfig;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,7 +31,9 @@ public final class FTBRanksCompat {
 
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-        if (!CDConfig.enableSponsorTitles || !(event.getEntity() instanceof ServerPlayer player)) {
+        if (!CDConfig.enableSponsorTitles
+                || !(event.getEntity() instanceof ServerPlayer player)
+                || !(player.getServer() instanceof DedicatedServer)) {
             return;
         }
 
@@ -38,7 +41,7 @@ public final class FTBRanksCompat {
     }
 
     static void applyTitlesToOnlinePlayers(MinecraftServer server, SponsorTitleStore store) {
-        if (!CDConfig.enableSponsorTitles) {
+        if (!CDConfig.enableSponsorTitles || !(server instanceof DedicatedServer)) {
             return;
         }
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
