@@ -123,7 +123,7 @@ final class SponsorTitleStore {
             writeCache(remoteTitles);
             titles.set(remoteTitles);
             try {
-                server.execute(() -> FTBRanksCompat.applyTitlesToOnlinePlayers(server, this));
+                server.execute(() -> SponsorRewardHandler.onStoreRefreshed(server, this));
             } catch (RuntimeException exception) {
                 CreateDelightCore.LOGGER.debug("Sponsor title refresh completed after server shutdown");
             }

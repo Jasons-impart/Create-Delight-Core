@@ -10,8 +10,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.Locale;
@@ -20,38 +18,14 @@ import java.util.Optional;
 /** Integrates the pack's sponsor title list with FTB Ranks when that mod is installed. */
 public final class FTBRanksCompat {
     private static final String NAME_FORMAT_NODE = "ftbranks.name_format";
-    private static SponsorTitleStore sponsorTitleStore;
 
     private FTBRanksCompat() {
     }
 
     public static void register() {
+        SponsorRewardHandler.registerRefreshListener(FTBRanksCompat::applyTitlesToOnlinePlayers);
         MinecraftForge.EVENT_BUS.register(FTBRanksCompat.class);
         CreateDelightCore.LOGGER.info("FTB Ranks sponsor title compatibility enabled");
-    }
-
-    @SubscribeEvent
-    public static void onServerStarted(ServerStartedEvent event) {
-        if (!CDConfig.enableSponsorTitles) {
-            return;
-        }
-        synchronized (FTBRanksCompat.class) {
-            if (sponsorTitleStore != null) {
-                sponsorTitleStore.close();
-            }
-            sponsorTitleStore = new SponsorTitleStore(event.getServer());
-            sponsorTitleStore.refreshAsync();
-        }
-    }
-
-    @SubscribeEvent
-    public static void onServerStopping(ServerStoppingEvent event) {
-        synchronized (FTBRanksCompat.class) {
-            if (sponsorTitleStore != null) {
-                sponsorTitleStore.close();
-                sponsorTitleStore = null;
-            }
-        }
     }
 
     @SubscribeEvent
@@ -60,27 +34,15 @@ public final class FTBRanksCompat {
             return;
         }
 
-        applyTitle(player, currentStore(player.getServer()));
+        applyTitle(player, SponsorRewardHandler.currentStore(player.getServer()));
     }
 
     static void applyTitlesToOnlinePlayers(MinecraftServer server, SponsorTitleStore store) {
-        synchronized (FTBRanksCompat.class) {
-            if (sponsorTitleStore != store) {
-                return;
-            }
+        if (!CDConfig.enableSponsorTitles) {
+            return;
         }
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             applyTitle(player, store);
-        }
-    }
-
-    private static SponsorTitleStore currentStore(MinecraftServer server) {
-        synchronized (FTBRanksCompat.class) {
-            if (sponsorTitleStore == null) {
-                sponsorTitleStore = new SponsorTitleStore(server);
-                sponsorTitleStore.refreshAsync();
-            }
-            return sponsorTitleStore;
         }
     }
 

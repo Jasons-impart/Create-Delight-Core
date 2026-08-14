@@ -3,6 +3,7 @@ package io.github.jasonsimpart.createdelightcore;
 import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.createdelightcore.compat.createenchantmentindustry.TetraScrollPrinterCompat;
 import io.github.jasonsimpart.createdelightcore.compat.ftbranks.FTBRanksCompat;
+import io.github.jasonsimpart.createdelightcore.compat.ftbranks.SponsorRewardHandler;
 import io.github.jasonsimpart.createdelightcore.content.event.TeleportHandler;
 import io.github.jasonsimpart.createdelightcore.data.CDCoreDatagen;
 import io.github.jasonsimpart.createdelightcore.eventhandlers.ForgeEventsHandler;
@@ -34,6 +35,7 @@ public class CreateDelightCore {
         MinecraftForge.EVENT_BUS.register(ForgeEventsHandler.class);
         modEventBus.register(ModEventHandler.class);
         MinecraftForge.EVENT_BUS.register(new TeleportHandler());
+        SponsorRewardHandler.register();
         if (ModList.get().isLoaded("create_enchantment_industry") && ModList.get().isLoaded("tetra")) {
             TetraScrollPrinterCompat.register(modEventBus);
         }
