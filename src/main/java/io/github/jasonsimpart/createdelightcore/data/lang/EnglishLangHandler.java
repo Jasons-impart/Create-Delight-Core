@@ -141,6 +141,8 @@ public class EnglishLangHandler {
         provider.addItem(CDItems.FLUID_CONFIGURATION_MODULE, "Fluid Configuration Module");
         provider.addItem(CDItems.CONTROL_CONFIGURATION_MODULE, "Control Configuration Module");
         provider.addItem(CDItems.LOGISTICS_CONFIGURATION_MODULE, "Logistics Configuration Module");
+        provider.addItem(CDItems.SPONSOR_MEDAL, "§dJSI Sponsor Medal");
+        provider.add("item.createdelightcore.sponsor_medal.desc", "Thank you for supporting the JSI Team");
         provider.add("item.createdelightcore.configuration_module.tooltip.mode", "Current form: %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.unselected", "Current form: unselected");
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "Target ID: %s");

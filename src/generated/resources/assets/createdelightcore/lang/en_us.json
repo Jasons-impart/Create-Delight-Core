@@ -302,5 +302,7 @@
   "item.createdelightcore.kinetic_configuration_module.error.no_modes": "No configuration forms are available",
   "item.createdelightcore.kinetic_configuration_module.error.invalid_target": "The selected form cannot be placed",
   "item.createdelightcore.kinetic_configuration_module.error.no_charge": "Not enough configuration charge",
-  "item.createdelightcore.kinetic_configuration_module.error.ingredients": "Missing additional ingredients for this form"
+  "item.createdelightcore.kinetic_configuration_module.error.ingredients": "Missing additional ingredients for this form",
+  "item.createdelightcore.sponsor_medal": "§dJSI Sponsor Medal",
+  "item.createdelightcore.sponsor_medal.desc": "Thank you for supporting the JSI Team"
 }
