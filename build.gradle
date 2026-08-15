@@ -281,6 +281,8 @@ dependencies {
     // ftb ultimine
     implementation fg.deobf("curse.maven:ftb-library-forge-404465:5925398")
     implementation fg.deobf("curse.maven:ftb-ultimine-forge-386134:7880472")
+    // FTB Ranks sponsor title compatibility; the mod itself remains optional at runtime.
+    compileOnly fg.deobf("curse.maven:ftb-ranks-forge-314905:6522073")
     //abnormal
     implementation fg.deobf("curse.maven:abnormal-core-382216:6408581")
     implementation fg.deobf("curse.maven:gallery-1173553:6133771")

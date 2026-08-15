@@ -83,6 +83,14 @@ public class CDItems {
     public static final ItemEntry<Item> BRONZE_INGOT = simpleIngot("bronze");
     public static final ItemEntry<Item> BRONZE_NUGGET = simpleNugget("bronze");
 
+    public static final ItemEntry<Item> SPONSOR_MEDAL = REGISTRATE.item("sponsor_medal", Item::new)
+            .properties(properties -> properties
+                    .rarity(Rarity.EPIC)
+                    .stacksTo(1)
+                    .fireResistant())
+            .tab(MISC_TAB)
+            .register();
+
     public static final ItemEntry<ConfigurationModuleItem> KINETIC_CONFIGURATION_MODULE = configurationModule(
             "kinetic_configuration_module", "shaft", "create:shaft", 4, 1);
     public static final ItemEntry<ConfigurationModuleItem> STRUCTURAL_CONFIGURATION_MODULE = configurationModule(

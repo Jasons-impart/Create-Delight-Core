@@ -150,6 +150,8 @@ public class ChineseLangHandler {
         provider.addItem(CDItems.FLUID_CONFIGURATION_MODULE, "流体构形模块");
         provider.addItem(CDItems.CONTROL_CONFIGURATION_MODULE, "控制构形模块");
         provider.addItem(CDItems.LOGISTICS_CONFIGURATION_MODULE, "物流构形模块");
+        provider.addItem(CDItems.SPONSOR_MEDAL, "§dJSI赞助纪念章");
+        provider.addTooltip(CDItems.SPONSOR_MEDAL, "感谢你对JSI制作组的支持");
         provider.add("item.createdelightcore.configuration_module.tooltip.mode", "当前构形：%s");
         provider.add("item.createdelightcore.configuration_module.tooltip.unselected", "当前构形：未选择");
         provider.add("item.createdelightcore.configuration_module.tooltip.target", "目标 ID：%s");
