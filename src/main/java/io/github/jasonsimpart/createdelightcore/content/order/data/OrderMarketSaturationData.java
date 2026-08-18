@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.content.order.data;
 
 public record OrderMarketSaturationData(String storageKey, double decayPerDay,
-                                        double categoryPenalty, double customerPenalty, double maxPenalty,
+                                        double categoryPenalty, double customerPenalty, double maxBonus,
                                         double categoryCompletionGain, double categoryCompletionScaleMax,
                                         double customerCompletionGain,
                                         double categoryCrossRecovery, double customerCrossRecovery) {

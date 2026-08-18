@@ -9,7 +9,6 @@
     "createdelightcore:steel_casing",
     "createdelightcore:forge_steel_casing",
     "createdelightcore:fragment_of_border",
-    "createdelightcore:order_parser",
     "createdelightcore:order_requester",
     "createdelightcore:quality_harvest_controller",
     "createdelightcore:life_matter_injector"

@@ -9,6 +9,7 @@ public record OrderData(Map<String, OrderTypeData> orderTypes,
                         Map<String, String> customerGroupPrefixes,
                         Map<String, OrderDraftSealData> draftSeals,
                         Map<String, OrderCustomerData> customers,
+                        Map<String, OrderSupplyData> supplyCatalog,
                         OrderMarketSaturationData marketSaturation) {
     public OrderData {
         orderTypes = immutableCopy(orderTypes);
@@ -16,6 +17,7 @@ public record OrderData(Map<String, OrderTypeData> orderTypes,
         customerGroupPrefixes = immutableCopy(customerGroupPrefixes);
         draftSeals = immutableCopy(draftSeals);
         customers = immutableCopy(customers);
+        supplyCatalog = immutableCopy(supplyCatalog);
         marketSaturation = marketSaturation == null ? OrderMarketSaturationData.DEFAULT : marketSaturation;
     }
 
@@ -48,6 +50,7 @@ public record OrderData(Map<String, OrderTypeData> orderTypes,
         private final Map<String, String> customerGroupPrefixes = new LinkedHashMap<>();
         private final Map<String, OrderDraftSealData> draftSeals = new LinkedHashMap<>();
         private final Map<String, OrderCustomerData> customers = new LinkedHashMap<>();
+        private final Map<String, OrderSupplyData> supplyCatalog = new LinkedHashMap<>();
         private OrderMarketSaturationData marketSaturation = OrderMarketSaturationData.DEFAULT;
 
         public void putOrderType(String key, OrderTypeData value) {
@@ -70,12 +73,17 @@ public record OrderData(Map<String, OrderTypeData> orderTypes,
             customers.put(key, value);
         }
 
+        public void putSupply(String key, OrderSupplyData value) {
+            supplyCatalog.put(key, value);
+        }
+
         public void setMarketSaturation(OrderMarketSaturationData value) {
             marketSaturation = value == null ? OrderMarketSaturationData.DEFAULT : value;
         }
 
         public OrderData build() {
-            return new OrderData(orderTypes, categoryGroups, customerGroupPrefixes, draftSeals, customers, marketSaturation);
+            return new OrderData(orderTypes, categoryGroups, customerGroupPrefixes, draftSeals, customers,
+                    supplyCatalog, marketSaturation);
         }
     }
 }

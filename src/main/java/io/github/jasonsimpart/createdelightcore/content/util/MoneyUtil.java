@@ -18,6 +18,18 @@ public class MoneyUtil {
         return MoneyAPI.getApi().GetPlayersMoneyHandler(player).getStoredMoney().containsValue(coinValue);
     }
 
+    public static boolean extractPlayerMoney(Player player, MoneyValue coinValue) {
+        if (!playerCanAfford(player, coinValue)) {
+            return false;
+        }
+        MoneyValue remainder = MoneyAPI.getApi().GetPlayersMoneyHandler(player).extractMoney(coinValue, false);
+        return remainder != null && remainder.isEmpty();
+    }
+
+    public static void insertPlayerMoney(Player player, MoneyValue coinValue) {
+        MoneyAPI.getApi().GetPlayersMoneyHandler(player).insertMoney(coinValue, false);
+    }
+
     public static MoneyValue baseCoinNumberToCoinValue(int number) {
         return  CoinValue.fromNumber(CDConfig.moneyChain, number);
     }

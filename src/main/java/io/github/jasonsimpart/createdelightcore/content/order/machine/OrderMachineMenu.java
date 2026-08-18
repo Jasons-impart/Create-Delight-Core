@@ -64,10 +64,6 @@ public abstract class OrderMachineMenu extends AbstractContainerMenu {
         this.candidateGroups = List.copyOf(candidateGroups);
     }
 
-    public boolean isRequester() {
-        return false;
-    }
-
     @Override
     public boolean stillValid(Player player) {
         return blockEntity != null && !blockEntity.isRemoved()

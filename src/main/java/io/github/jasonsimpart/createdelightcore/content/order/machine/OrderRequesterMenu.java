@@ -18,9 +18,4 @@ public class OrderRequesterMenu extends OrderMachineMenu {
     public OrderRequesterMenu(int containerId, Inventory playerInventory, OrderRequesterBlockEntity blockEntity) {
         super(CDMenus.ORDER_REQUESTER.get(), containerId, playerInventory, blockEntity);
     }
-
-    @Override
-    public boolean isRequester() {
-        return true;
-    }
 }
