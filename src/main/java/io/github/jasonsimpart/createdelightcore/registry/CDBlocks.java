@@ -20,8 +20,9 @@ import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitureFood;
 import io.github.jasonsimpart.createdelightcore.content.block.*;
 import io.github.jasonsimpart.createdelightcore.content.quality.harvest.LifeMatterInjectorBlock;
-import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserBlock;
+import io.github.jasonsimpart.createdelightcore.content.order.board.OrderBoardBlock;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlock;
+import io.github.jasonsimpart.createdelightcore.content.order.supply.SupplyCommissionBlock;
 import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityHarvestControllerBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.Direction;
@@ -142,23 +143,6 @@ public class CDBlocks {
                     .build()
                     .register();
     // order automation
-    public static final BlockEntry<OrderParserBlock> ORDER_PARSER =
-            REGISTRATE.block("order_parser", OrderParserBlock::new)
-                    .initialProperties(() -> Blocks.IRON_BLOCK)
-                    .properties(p -> p
-                            .mapColor(MapColor.METAL)
-                            .strength(3.0F, 6.0F)
-                            .sound(SoundType.METAL)
-                            .requiresCorrectToolForDrops())
-                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
-                            pvd.models().cubeAll(ctx.getName(), pvd.modLoc("block/steel_casing"))))
-                    .item(LogisticallyLinkedBlockItem::new)
-                    .transform(b -> b.model((ctx, pvd) ->
-                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
-                    .tab(MISC_TAB)
-                    .build()
-                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                    .register();
     public static final BlockEntry<OrderRequesterBlock> ORDER_REQUESTER =
             REGISTRATE.block("order_requester", OrderRequesterBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
@@ -176,7 +160,43 @@ public class CDBlocks {
                     .build()
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .register();
-
+    public static final BlockEntry<OrderBoardBlock> ORDER_BOARD =
+            REGISTRATE.block("order_board", OrderBoardBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(p -> p
+                            .mapColor(MapColor.WOOD)
+                            .strength(2.5F, 6.0F)
+                            .sound(SoundType.WOOD))
+                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                            pvd.models().cubeAll(ctx.getName(), pvd.mcLoc("block/spruce_planks"))))
+                    .loot((lt, block) -> lt.dropSelf(block))
+                    .item(LogisticallyLinkedBlockItem::new)
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_AXE)
+                    .register();
+    public static final BlockEntry<SupplyCommissionBlock> SUPPLY_COMMISSION_TABLE =
+            REGISTRATE.block("supply_commission_table", SupplyCommissionBlock::new)
+                    .initialProperties(() -> Blocks.CARTOGRAPHY_TABLE)
+                    .properties(p -> p
+                            .mapColor(MapColor.WOOD)
+                            .strength(3.0F, 1200.0F)
+                            .sound(SoundType.WOOD))
+                    .blockstate((ctx, pvd) -> pvd.simpleBlock(ctx.get(),
+                            pvd.models().cubeBottomTop(ctx.getName(),
+                                    pvd.mcLoc("block/cartography_table_side3"),
+                                    pvd.mcLoc("block/dark_oak_planks"),
+                                    pvd.mcLoc("block/cartography_table_top"))))
+                    .loot((lt, block) -> lt.dropSelf(block))
+                    .item()
+                    .transform(b -> b.model((ctx, pvd) ->
+                            pvd.withExistingParent(ctx.getName(), pvd.modLoc("block/" + ctx.getName()))))
+                    .tab(MISC_TAB)
+                    .build()
+                    .tag(BlockTags.MINEABLE_WITH_AXE)
+                    .register();
     public static final BlockEntry<QualityHarvestControllerBlock> QUALITY_HARVEST_CONTROLLER =
             REGISTRATE.block("quality_harvest_controller", QualityHarvestControllerBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)

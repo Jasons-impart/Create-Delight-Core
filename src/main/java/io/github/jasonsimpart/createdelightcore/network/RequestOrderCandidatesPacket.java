@@ -1,8 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.network;
 
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntryCandidates;
-import io.github.jasonsimpart.createdelightcore.content.order.OrderParserInfo;
-import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderMachineBlockEntity;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderMachineMenu;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -37,27 +35,16 @@ public class RequestOrderCandidatesPacket {
                 return;
             }
             BlockEntity blockEntity = player.level().getBlockEntity(pos);
-            if (!(blockEntity instanceof OrderMachineBlockEntity orderMachine)) {
+            if (!(blockEntity instanceof OrderRequesterBlockEntity requester)) {
                 return;
             }
-            List<OrderEntryCandidates> groups = orderMachine.getAccurateCandidateGroups();
-            if (orderMachine instanceof OrderRequesterBlockEntity requester) {
-                CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncOrderCandidatesPacket(
-                        pos,
-                        groups,
-                        requester.getRequestStrategy(),
-                        requester.getTargetAddress(),
-                        requester.isAllowPartialRequests()
-                ));
-                return;
-            }
+            List<OrderEntryCandidates> groups = requester.getAccurateCandidateGroups();
             CDNetwork.CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), new SyncOrderCandidatesPacket(
                     pos,
                     groups,
-                    OrderParserInfo.describe(orderMachine.getOrderStack()),
-                    null,
-                    "",
-                    false
+                    requester.getRequestStrategy(),
+                    requester.getTargetAddress(),
+                    requester.isAllowPartialRequests()
             ));
         });
         ctx.get().setPacketHandled(true);

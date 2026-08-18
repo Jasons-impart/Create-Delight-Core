@@ -3,7 +3,6 @@ package io.github.jasonsimpart.createdelightcore.content.order.machine;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderCandidate;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntry;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderEntryCandidates;
-import io.github.jasonsimpart.createdelightcore.content.order.OrderParserLine;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestMode;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestEstimator;
 import io.github.jasonsimpart.createdelightcore.content.order.OrderRequestRatioSelection;
@@ -43,7 +42,6 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     private final List<OrderRequestSelection> selectedSelections = new ArrayList<>();
     private final List<OrderRequestRatioSelection> ratioSelections = new ArrayList<>();
     private final List<CandidateLine> visibleLines = new ArrayList<>();
-    private final List<OrderParserLine> parserLines = new ArrayList<>();
     private int scrollOffset;
     private EditBox addressBox;
     private Button partialButton;
@@ -69,29 +67,27 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
                 .bounds(leftPos + 12, topPos + 92, 44, 20)
                 .build());
 
-        if (menu.isRequester()) {
-            modeButton = addRenderableWidget(Button.builder(modeLabel(), button -> toggleMode())
-                    .bounds(leftPos + PANEL_X + 52, topPos + 3, 42, 16)
-                    .build());
+        modeButton = addRenderableWidget(Button.builder(modeLabel(), button -> toggleMode())
+                .bounds(leftPos + PANEL_X + 52, topPos + 3, 42, 16)
+                .build());
 
-            addressBox = new EditBox(font, leftPos + PANEL_X, topPos + 150, 106, 16,
-                    Component.translatable("createdelightcore.gui.address"));
-            addressBox.setMaxLength(128);
-            addressBox.setHint(Component.translatable("createdelightcore.gui.address"));
-            addRenderableWidget(addressBox);
+        addressBox = new EditBox(font, leftPos + PANEL_X, topPos + 150, 106, 16,
+                Component.translatable("createdelightcore.gui.address"));
+        addressBox.setMaxLength(128);
+        addressBox.setHint(Component.translatable("createdelightcore.gui.address"));
+        addRenderableWidget(addressBox);
 
-            partialButton = addRenderableWidget(Button.builder(partialModeLabel(), button -> togglePartial())
-                    .bounds(leftPos + 176, topPos + 148, 64, 20)
-                    .build());
-            addRenderableWidget(Button.builder(Component.translatable("createdelightcore.gui.save"),
-                            button -> sendSelection(false))
-                    .bounds(leftPos + PANEL_X, topPos + 171, 84, 20)
-                    .build());
-            addRenderableWidget(Button.builder(Component.translatable("createdelightcore.gui.send"),
-                            button -> sendSelection(true))
-                    .bounds(leftPos + 156, topPos + 171, 84, 20)
-                    .build());
-        }
+        partialButton = addRenderableWidget(Button.builder(partialModeLabel(), button -> togglePartial())
+                .bounds(leftPos + 176, topPos + 148, 64, 20)
+                .build());
+        addRenderableWidget(Button.builder(Component.translatable("createdelightcore.gui.save"),
+                        button -> sendSelection(false))
+                .bounds(leftPos + PANEL_X, topPos + 171, 84, 20)
+                .build());
+        addRenderableWidget(Button.builder(Component.translatable("createdelightcore.gui.send"),
+                        button -> sendSelection(true))
+                .bounds(leftPos + 156, topPos + 171, 84, 20)
+                .build());
 
         requestCandidates();
     }
@@ -109,20 +105,13 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     }
 
     public void acceptCandidateGroups(List<OrderEntryCandidates> groups) {
-        acceptCandidateSync(groups, List.of(), currentStrategy(), addressBox == null ? "" : addressBox.getValue(), allowPartial);
+        acceptCandidateSync(groups, currentStrategy(), addressBox == null ? "" : addressBox.getValue(), allowPartial);
     }
 
     public void acceptCandidateSync(List<OrderEntryCandidates> groups, OrderRequestStrategy strategy,
                                     String targetAddress, boolean allowPartial) {
-        acceptCandidateSync(groups, List.of(), strategy, targetAddress, allowPartial);
-    }
-
-    public void acceptCandidateSync(List<OrderEntryCandidates> groups, List<OrderParserLine> parserLines,
-                                    OrderRequestStrategy strategy, String targetAddress, boolean allowPartial) {
         OrderRequestStrategy incomingStrategy = strategy == null ? OrderRequestStrategy.empty() : strategy;
         menu.setCandidateGroups(groups);
-        this.parserLines.clear();
-        this.parserLines.addAll(parserLines == null ? List.of() : parserLines);
         requestMode = incomingStrategy.mode();
         selectedSelections.clear();
         selectedSelections.addAll(sanitizeSelections(incomingStrategy.fixedSelections()));
@@ -190,7 +179,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (menu.isRequester() && handleCandidateClick(mouseX, mouseY, button)) {
+        if (handleCandidateClick(mouseX, mouseY, button)) {
             return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
@@ -269,11 +258,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
         super.render(graphics, mouseX, mouseY, partialTick);
-        if (menu.isRequester()) {
-            renderCandidatePanel(graphics, mouseX, mouseY);
-        } else {
-            renderParserPanel(graphics);
-        }
+        renderCandidatePanel(graphics, mouseX, mouseY);
         renderHelpTooltip(graphics, mouseX, mouseY);
         renderQuantityTooltip(graphics, mouseX, mouseY);
         renderTooltip(graphics, mouseX, mouseY);
@@ -298,50 +283,14 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
         graphics.drawString(font, trim(title.getString(), 64), 8, 7, 0x404040, false);
         graphics.drawString(font, Component.translatable("createdelightcore.gui.order"), 12, 26, 0x404040, false);
         graphics.drawString(font, playerInventoryTitle, inventoryLabelX, inventoryLabelY, 0x404040, false);
-        graphics.drawString(font, Component.translatable(menu.isRequester()
-                        ? "createdelightcore.gui.select_candidates"
-                        : "createdelightcore.gui.parser.rule_view"),
+        graphics.drawString(font, Component.translatable("createdelightcore.gui.select_candidates"),
                 PANEL_X, 7, 0x404040, false);
-        if (menu.isRequester()) {
-            graphics.drawString(font, "?", HELP_X + 3, HELP_Y + 1, 0x404040, false);
-            graphics.drawString(font, Component.translatable("createdelightcore.gui.reward_score",
-                            scoreLabel(estimateOrder())),
-                    PANEL_X + 96, 7, 0x404040, false);
-            graphics.drawString(font, Component.translatable("createdelightcore.gui.address"),
-                    PANEL_X, 139, 0x404040, false);
-        }
-    }
-
-    private void renderParserPanel(GuiGraphics graphics) {
-        int end = Math.min(parserLines.size(), scrollOffset + VISIBLE_ROWS);
-        for (int i = scrollOffset; i < end; i++) {
-            OrderParserLine line = parserLines.get(i);
-            int x = leftPos + PANEL_X;
-            int y = topPos + PANEL_Y + (i - scrollOffset) * ROW_HEIGHT;
-            graphics.fill(x, y, x + PANEL_WIDTH, y + ROW_HEIGHT - 1, line.heading() ? 0xFFD0D0D0 : 0xFFB8B8B8);
-            graphics.fill(x, y + ROW_HEIGHT - 1, x + PANEL_WIDTH, y + ROW_HEIGHT, 0xFF707070);
-            Component text = parserLineText(line);
-            graphics.drawString(font, trim(text.getString(), PANEL_WIDTH - 6), x + 3, y + 5, line.color(), false);
-        }
-    }
-
-    private Component parserLineText(OrderParserLine line) {
-        Component value = line.valueTranslationKey().isBlank()
-                ? Component.literal(line.value())
-                : Component.translatable(line.valueTranslationKey());
-        if (!line.suffix().isBlank()) {
-            Component suffix = line.suffixTranslationKey().isBlank()
-                    ? Component.literal(line.suffix())
-                    : Component.translatable(line.suffixTranslationKey(), line.suffix());
-            value = value.copy().append(Component.literal("  ")).append(suffix);
-        }
-        if (line.labelKey().isBlank()) {
-            return value;
-        }
-        if (line.value().isBlank() && line.valueTranslationKey().isBlank() && line.suffix().isBlank()) {
-            return Component.translatable(line.labelKey());
-        }
-        return Component.translatable(line.labelKey()).append(Component.literal(": ")).append(value);
+        graphics.drawString(font, "?", HELP_X + 3, HELP_Y + 1, 0x404040, false);
+        graphics.drawString(font, Component.translatable("createdelightcore.gui.reward_score",
+                        scoreLabel(estimateOrder())),
+                PANEL_X + 96, 7, 0x404040, false);
+        graphics.drawString(font, Component.translatable("createdelightcore.gui.address"),
+                PANEL_X, 139, 0x404040, false);
     }
 
     private void renderCandidatePanel(GuiGraphics graphics, int mouseX, int mouseY) {
@@ -475,18 +424,16 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
         String heading = line.entry.id() + " " + selected + "/" + line.entry.count() + " Q" + line.entry.minQuality();
         int color = failed ? 0x803030 : selected >= line.entry.count() ? 0x305030 : 0x707000;
         graphics.drawString(font, trim(heading, 128), x + 2, y + 5, color, false);
-        if (menu.isRequester()) {
-            Component scoreText;
-            if (failed) {
-                scoreText = Component.translatable("createdelightcore.gui.estimate.incomplete");
-            } else {
-                OrderRequestEstimator.EntryScore score =
-                        OrderRequestEstimator.estimateEntry(line.entry, currentDisplaySelections());
-                scoreText = Component.literal(score.complete() ? scoreLabel(score.score()) : "--");
-            }
-            String text = scoreText.getString();
-            graphics.drawString(font, text, x + PANEL_WIDTH - font.width(text) - 3, y + 5, 0x404040, false);
+        Component scoreText;
+        if (failed) {
+            scoreText = Component.translatable("createdelightcore.gui.estimate.incomplete");
+        } else {
+            OrderRequestEstimator.EntryScore score =
+                    OrderRequestEstimator.estimateEntry(line.entry, currentDisplaySelections());
+            scoreText = Component.literal(score.complete() ? scoreLabel(score.score()) : "--");
         }
+        String text = scoreText.getString();
+        graphics.drawString(font, text, x + PANEL_WIDTH - font.width(text) - 3, y + 5, 0x404040, false);
     }
 
     private void renderSummaryHeading(GuiGraphics graphics, int x, int y, int mouseX, int mouseY) {
@@ -547,7 +494,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     private List<CandidateLine> buildLines() {
         List<CandidateLine> lines = new ArrayList<>();
         List<OrderEntryCandidates> groups = menu.getCandidateGroups();
-        if (menu.isRequester() && !groups.isEmpty()) {
+        if (!groups.isEmpty()) {
             lines.add(CandidateLine.summaryLine());
         }
         for (int groupIndex = 0; groupIndex < groups.size(); groupIndex++) {
@@ -568,7 +515,7 @@ public abstract class OrderMachineScreen<M extends OrderMachineMenu> extends Abs
     }
 
     private int currentLineCount() {
-        return menu.isRequester() ? buildLines().size() : parserLines.size();
+        return buildLines().size();
     }
 
     private CandidateLine getHoveredCandidateLine(double mouseX, double mouseY) {

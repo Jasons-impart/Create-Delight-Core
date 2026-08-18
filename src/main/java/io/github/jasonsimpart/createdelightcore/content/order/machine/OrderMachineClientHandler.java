@@ -10,7 +10,7 @@ public final class OrderMachineClientHandler {
     public static void handleCandidateSync(SyncOrderCandidatesPacket packet) {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.screen instanceof OrderMachineScreen<?> screen && screen.getMenu().getPos().equals(packet.pos())) {
-            screen.acceptCandidateSync(packet.groups(), packet.parserLines(), packet.strategy(), packet.targetAddress(), packet.allowPartial());
+            screen.acceptCandidateSync(packet.groups(), packet.strategy(), packet.targetAddress(), packet.allowPartial());
         }
     }
 }

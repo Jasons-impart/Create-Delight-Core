@@ -1,8 +1,9 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
-import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderParserScreen;
+import io.github.jasonsimpart.createdelightcore.content.order.board.OrderBoardScreen;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterScreen;
+import io.github.jasonsimpart.createdelightcore.content.order.supply.SupplyCommissionScreen;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItemDecorator;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import io.github.jasonsimpart.createdelightcore.registry.CDMenus;
@@ -28,8 +29,9 @@ public class ClientModEventHandler {
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            MenuScreens.register(CDMenus.ORDER_PARSER.get(), OrderParserScreen::new);
             MenuScreens.register(CDMenus.ORDER_REQUESTER.get(), OrderRequesterScreen::new);
+            MenuScreens.register(CDMenus.ORDER_BOARD.get(), OrderBoardScreen::new);
+            MenuScreens.register(CDMenus.SUPPLY_COMMISSION_TABLE.get(), SupplyCommissionScreen::new);
         });
     }
 }

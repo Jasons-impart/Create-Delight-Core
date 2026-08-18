@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "createdelightcore:order_parser"
+          "name": "createdelightcore:supply_commission_table"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "createdelightcore:blocks/order_parser"
+  "random_sequence": "createdelightcore:blocks/supply_commission_table"
 }

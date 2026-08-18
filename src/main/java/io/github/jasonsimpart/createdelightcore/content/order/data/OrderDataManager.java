@@ -72,6 +72,14 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
         return data.customers();
     }
 
+    public static Optional<OrderSupplyData> supply(ResourceLocation item) {
+        return item == null ? Optional.empty() : Optional.ofNullable(data.supplyCatalog().get(item.toString()));
+    }
+
+    public static Map<String, OrderSupplyData> supplyCatalog() {
+        return data.supplyCatalog();
+    }
+
     public static String customerGroupPrefix(String id) {
         return data.customerGroupPrefixes().get(id);
     }
@@ -116,14 +124,16 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
                 case "customer_groups" -> builder.putCustomerGroupPrefix(key, GsonHelper.getAsString(object, "prefix"));
                 case "draft_seals" -> builder.putDraftSeal(key, parseDraftSeal(id, object));
                 case "customers" -> builder.putCustomer(key, parseCustomer(id, object));
+                case "supply_catalog" -> builder.putSupply(key, parseSupply(key, id, object));
                 case "market_saturation" -> builder.setMarketSaturation(parseMarketSaturation(object));
                 default -> CreateDelightCore.LOGGER.warn("Ignoring unknown order data type {} from {}", type, id);
             }
         });
         data = builder.build();
         version++;
-        CreateDelightCore.LOGGER.info("Loaded {} order types, {} category groups, {} draft seals and {} order customers",
-                data.orderTypes().size(), data.categoryGroups().size(), data.draftSeals().size(), data.customers().size());
+        CreateDelightCore.LOGGER.info("Loaded {} order types, {} category groups, {} draft seals, {} order customers and {} supply entries",
+                data.orderTypes().size(), data.categoryGroups().size(), data.draftSeals().size(), data.customers().size(),
+                data.supplyCatalog().size());
     }
 
     private static void parseAggregate(OrderData.Builder builder, ResourceLocation id, String type, JsonObject object) {
@@ -146,6 +156,11 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
                     entry.getKey(),
                     parseCustomer(childId(id, type, entry.getKey()), GsonHelper.convertToJsonObject(entry.getValue(), entry.getKey()))
             ));
+            case "supply_catalog" -> object.entrySet().forEach(entry -> builder.putSupply(
+                    entry.getKey(),
+                    parseSupply(entry.getKey(), id,
+                            GsonHelper.convertToJsonObject(entry.getValue(), entry.getKey()))
+            ));
             case "market_saturation" -> builder.setMarketSaturation(parseMarketSaturation(object));
             default -> CreateDelightCore.LOGGER.warn("Ignoring unknown aggregate order data type {} from {}", type, id);
         }
@@ -164,7 +179,11 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
         for (int i = 0; i < array.size(); i++) {
             diversity[i] = array.get(i).getAsDouble();
         }
-        return new OrderTypeData(diversity, GsonHelper.getAsInt(object, "base_count"));
+        return new OrderTypeData(
+                diversity,
+                GsonHelper.getAsInt(object, "base_count"),
+                GsonHelper.getAsDouble(object, "reward_weight", 1.0D)
+        );
     }
 
     private static OrderDraftSealData parseDraftSeal(ResourceLocation id, JsonObject object) {
@@ -199,6 +218,21 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
         );
     }
 
+    private static OrderSupplyData parseSupply(String key, ResourceLocation id, JsonObject object) {
+        ResourceLocation item = ResourceLocation.tryParse(key);
+        if (item == null) {
+            throw new JsonParseException("Supply catalog key " + key + " from " + id + " is not an item id");
+        }
+        return new OrderSupplyData(
+                item,
+                GsonHelper.getAsString(object, "race"),
+                GsonHelper.getAsInt(object, "count"),
+                GsonHelper.getAsInt(object, "tickets"),
+                GsonHelper.getAsInt(object, "money"),
+                GsonHelper.getAsInt(object, "days")
+        );
+    }
+
     private static Map<String, Double> parseWeightedMap(ResourceLocation id, JsonObject object, String field) {
         JsonObject entries = GsonHelper.getAsJsonObject(object, field);
         Map<String, Double> result = new LinkedHashMap<>();
@@ -213,6 +247,7 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
         return new OrderSpecData(
                 stringList(object, "customer_groups"),
                 stringList(object, "category_groups"),
+                stringList(object, "required_categories"),
                 doubleMap(object, "customer_weight_bonus"),
                 doubleMap(object, "category_weight_bonus"),
                 nullableDouble(object, "count_multiplier"),
@@ -229,7 +264,8 @@ public final class OrderDataManager extends SimpleJsonResourceReloadListener {
                 GsonHelper.getAsDouble(object, "decay_per_day", 0.72),
                 GsonHelper.getAsDouble(object, "category_penalty", 0.08),
                 GsonHelper.getAsDouble(object, "customer_penalty", 0.05),
-                GsonHelper.getAsDouble(object, "max_penalty", 0.35),
+                GsonHelper.getAsDouble(object, "max_bonus",
+                        GsonHelper.getAsDouble(object, "max_penalty", 0.35)),
                 GsonHelper.getAsDouble(object, "category_completion_gain", 0.35),
                 GsonHelper.getAsDouble(object, "category_completion_scale_max", 2.0),
                 GsonHelper.getAsDouble(object, "customer_completion_gain", 0.4),
