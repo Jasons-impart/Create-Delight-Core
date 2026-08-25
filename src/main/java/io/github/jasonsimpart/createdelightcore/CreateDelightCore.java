@@ -11,11 +11,14 @@ import io.github.jasonsimpart.createdelightcore.eventhandlers.ModEventHandler;
 import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.registry.*;
 import io.github.jasonsimpart.createdelightcore.server.ItemEntityEvent;
+import io.github.jasonsimpart.createdelightcore.util.FancyMenuAssetExporter;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -41,6 +44,9 @@ public class CreateDelightCore {
         }
         if (ModList.get().isLoaded("ftbranks")) {
             FTBRanksCompat.register();
+        }
+        if (FMLEnvironment.dist == Dist.CLIENT && ModList.get().isLoaded("fancymenu")) {
+            FancyMenuAssetExporter.export();
         }
         CDItems.init();
         CDFluids.init();
