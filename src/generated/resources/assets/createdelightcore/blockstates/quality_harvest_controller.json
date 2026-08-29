@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createdelightcore:block/quality_harvest_controller"
+    }
+  }
+}
