@@ -128,7 +128,9 @@
     "create.ToolboxHandlerClientMixin",
     "jeitetra.ImprovementDataIngredientMixin",
     "jeitetra.ImprovementRecipeIngredientRendererMixin",
-    "tetra.HoloItemsGuiPaginationMixin"
+    "tetra.HoloItemsGuiPaginationMixin",
+    "tetra.HoloGuiSyntheticFocusMixin",
+    "ponderer.ClientInputHandlerMixin"
   ],
   "minVersion": "0.8"
 }
