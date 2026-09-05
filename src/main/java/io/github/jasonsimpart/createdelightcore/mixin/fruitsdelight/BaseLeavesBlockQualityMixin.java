@@ -31,7 +31,7 @@ public abstract class BaseLeavesBlockQualityMixin {
         if (DropData.CURRENT.get() != null) {
             return;
         }
-        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), pos, state, player, level.getBlockState(pos.below())));
         createdRef.set(Boolean.TRUE);
     }
 

@@ -21,7 +21,7 @@ public abstract class PassableLeavesBlockQualityMixin {
         if (DropData.CURRENT.get() != null) {
             return;
         }
-        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, null, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), pos, state, null, level.getBlockState(pos.below())));
         createdRef.set(Boolean.TRUE);
     }
 

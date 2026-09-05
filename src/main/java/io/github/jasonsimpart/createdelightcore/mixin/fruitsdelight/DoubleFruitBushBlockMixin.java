@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class DoubleFruitBushBlockMixin {
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Ldev/xkmc/fruitsdelight/content/block/DoubleFruitBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V"))
     public void setDropData(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result, CallbackInfoReturnable<InteractionResult> cir) {
-        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state,  player, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), pos, state, player, level.getBlockState(pos.below())));
     }
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Ldev/xkmc/fruitsdelight/content/block/DoubleFruitBushBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))

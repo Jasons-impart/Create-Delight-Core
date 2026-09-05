@@ -38,6 +38,7 @@ public class FruitingCropBlockQualityMixin {
         previousRef.set(DropData.CURRENT.get());
         DropData.CURRENT.set(new DropData(
                 LevelData.get(level, pos, true),
+                pos,
                 state,
                 player,
                 level.getBlockState(pos.below())));

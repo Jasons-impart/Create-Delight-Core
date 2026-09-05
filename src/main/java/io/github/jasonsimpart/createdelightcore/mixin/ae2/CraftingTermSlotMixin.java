@@ -50,7 +50,7 @@ public abstract class CraftingTermSlotMixin {
             ic.setItem(x, itemHandlerLocalRef.get().getStackInSlot(x));
         }
         Recipe<CraftingContainer> r = this.findRecipe(ic, p.level());
-        QualityUtils.handleConversion(itemStack, ic, r, p.level().registryAccess());
+        QualityUtils.handleConversion(itemStack, ic, r, p.level());
         cir.setReturnValue(itemStack);
     }
 

@@ -18,9 +18,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public final class QualityHarvestAutomationContext {
     private static final ThreadLocal<HarvestData> CURRENT = new ThreadLocal<>();
+    private static final ThreadLocal<IItemHandlerModifiable> ACTIVE_ITEMS = new ThreadLocal<>();
 
     private QualityHarvestAutomationContext() {
     }
@@ -29,9 +31,38 @@ public final class QualityHarvestAutomationContext {
         return CURRENT.get();
     }
 
+    public static @Nullable IItemHandlerModifiable getActiveItems() {
+        return ACTIVE_ITEMS.get();
+    }
+
+    public static <T> T withActiveItems(IItemHandlerModifiable items, Supplier<T> action) {
+        IItemHandlerModifiable previous = ACTIVE_ITEMS.get();
+        ACTIVE_ITEMS.set(items);
+        try {
+            return action.get();
+        } finally {
+            if (previous == null) {
+                ACTIVE_ITEMS.remove();
+            } else {
+                ACTIVE_ITEMS.set(previous);
+            }
+        }
+    }
+
     public static @Nullable HarvestData push(MovementContext context, BlockPos pos, BlockState state) {
         HarvestData previous = CURRENT.get();
-        CURRENT.set(new HarvestData(context, pos.immutable(), state));
+        CURRENT.set(new HarvestData(context, context.world, pos.immutable(), state,
+                context.contraption.getStorage().getAllItems()));
+        return previous;
+    }
+
+    public static @Nullable HarvestData push(
+            Level level,
+            BlockPos pos,
+            BlockState state,
+            IItemHandlerModifiable items) {
+        HarvestData previous = CURRENT.get();
+        CURRENT.set(new HarvestData(null, level, pos.immutable(), state, items));
         return previous;
     }
 
@@ -65,21 +96,30 @@ public final class QualityHarvestAutomationContext {
     }
 
     public static final class HarvestData {
-        private final MovementContext context;
+        private final @Nullable MovementContext context;
+        private final Level level;
         private final BlockPos pos;
         private final BlockState state;
+        private final IItemHandlerModifiable items;
         private boolean consumptionTried;
         private boolean active;
         private Settings settings;
 
-        private HarvestData(MovementContext context, BlockPos pos, BlockState state) {
+        private HarvestData(
+                @Nullable MovementContext context,
+                Level level,
+                BlockPos pos,
+                BlockState state,
+                IItemHandlerModifiable items) {
             this.context = context;
+            this.level = level;
             this.pos = pos;
             this.state = state;
+            this.items = items;
         }
 
         public Level level() {
-            return context.world;
+            return level;
         }
 
         public BlockPos pos() {
@@ -130,7 +170,6 @@ public final class QualityHarvestAutomationContext {
                 return null;
             }
 
-            IItemHandlerModifiable items = context.contraption.getStorage().getAllItems();
             int tier = 0;
             for (int slot = 0; slot < items.getSlots(); slot++) {
                 ItemStack stack = items.getStackInSlot(slot);
@@ -168,7 +207,6 @@ public final class QualityHarvestAutomationContext {
                 return false;
             }
 
-            IItemHandlerModifiable items = context.contraption.getStorage().getAllItems();
             int available = 0;
             for (int slot = 0; slot < items.getSlots(); slot++) {
                 ItemStack stack = items.getStackInSlot(slot);
@@ -197,6 +235,9 @@ public final class QualityHarvestAutomationContext {
         }
 
         private boolean hasController() {
+            if (context == null) {
+                return false;
+            }
             for (StructureTemplate.StructureBlockInfo info : context.contraption.getBlocks().values()) {
                 if (isController(info.state())) {
                     return true;
@@ -206,6 +247,9 @@ public final class QualityHarvestAutomationContext {
         }
 
         private @Nullable ControllerSelection findControllerSelection() {
+            if (context == null) {
+                return null;
+            }
             List<ControllerSelection> candidates = new ArrayList<>();
             for (Map.Entry<BlockPos, StructureTemplate.StructureBlockInfo> entry : context.contraption.getBlocks().entrySet()) {
                 StructureTemplate.StructureBlockInfo info = entry.getValue();
