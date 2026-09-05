@@ -34,6 +34,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".createliquidfuel.")) {
+            return decide(mixinClassName, "createliquidfuel");
+        }
         if (mixinClassName.contains(APOTHIC_ATTRIBUTES_MIXIN)) {
             return decide(mixinClassName, "attributeslib");
         }

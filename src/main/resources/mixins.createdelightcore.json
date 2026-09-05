@@ -5,6 +5,7 @@
   "refmap": "mixins.createdelightcore.refmap.json",
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
+    "createliquidfuel.BurnerStomachHandlerMixin",
     "AbstractVillagerMixin",
     "VillagerMixin",
     "ae2.AEBaseMenuAccessor",
