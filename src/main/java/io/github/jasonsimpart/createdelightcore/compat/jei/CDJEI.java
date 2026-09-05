@@ -87,7 +87,9 @@ public class CDJEI implements IModPlugin {
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         loadCategories();
-        registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+        if (!allCategories.isEmpty()) {
+            registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
+        }
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
         registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
         registration.addRecipeCategories(new PhantomCompostingCategory(registration.getJeiHelpers().getGuiHelper()));
