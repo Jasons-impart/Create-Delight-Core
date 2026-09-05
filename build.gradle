@@ -206,6 +206,7 @@ dependencies {
     implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
     // create
     implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
+    compileOnly fg.deobf("curse.maven:create-integrated-farming-1600926:8647456")
     implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))
     runtimeOnly fg.deobf("curse.maven:create-dragons-plus-1216624:8623168")
     compileOnly(fg.deobf("dev.engine-room.flywheel:flywheel-forge-api-${minecraft_version}:${flywheel_version}"))
@@ -267,7 +268,7 @@ dependencies {
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // quality foods
-    implementation fg.deobf("curse.maven:quality-food-973932:8243118")
+    implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 
     // vinery
     implementation fg.deobf("curse.maven:vinery-704465:6854288")

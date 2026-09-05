@@ -20,8 +20,8 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String JEI_TETRA_MIXIN = ".jeitetra.";
     private static final String MMT_MIXIN = ".mmt.";
     private static final String TETRA_MIXIN = ".tetra.";
-    private static final String PONDERER_MIXIN = ".ponderer.";
     private static final String SOPHISTICATED_BACKPACKS_MIXIN = ".sophisticatedbackpacks.";
+    private static final String CREATE_INTEGRATED_FARMING_MIXIN = ".createintegratedfarming.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -55,11 +55,11 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains(TETRA_MIXIN)) {
             return decide(mixinClassName, "tetra");
         }
-        if (mixinClassName.contains(PONDERER_MIXIN)) {
-            return decide(mixinClassName, "ponderer");
-        }
         if (mixinClassName.contains(SOPHISTICATED_BACKPACKS_MIXIN)) {
             return decide(mixinClassName, "sophisticatedbackpacks");
+        }
+        if (mixinClassName.contains(CREATE_INTEGRATED_FARMING_MIXIN)) {
+            return decide(mixinClassName, "create_integrated_farming");
         }
         return true;
     }

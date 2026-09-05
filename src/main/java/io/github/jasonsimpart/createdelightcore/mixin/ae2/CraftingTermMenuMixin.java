@@ -31,7 +31,7 @@ public abstract class CraftingTermMenuMixin extends AEBaseMenu {
     public ItemStack updateCurrentRecipeAndOutput(ItemStack stack) {
         if (!stack.isEmpty()) {
             Level level = ((AEBaseMenuAccessor) this).getPlayerInventory().player.level();
-            QualityUtils.handleConversion(stack, recipeTestContainer, currentRecipe, level.registryAccess());
+            QualityUtils.handleConversion(stack, recipeTestContainer, currentRecipe, level);
         }
         return stack;
     }

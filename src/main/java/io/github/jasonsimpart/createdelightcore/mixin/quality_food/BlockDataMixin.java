@@ -15,35 +15,47 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Comparator;
+import java.util.Deque;
 import java.util.Set;
+import java.util.TreeSet;
 
+/** Keeps CDR's cooking quality roll while following Quality Food's 2.4 cooking queue API. */
 @Mixin(value = BlockData.class, remap = false)
 public class BlockDataMixin {
     @Final
     @Shadow
-    private Set<Quality> cookedQualities;
+    private Deque<BlockData.CookingEntry> cookingQueue;
 
     @Final
     @Shadow
     private static RandomSource RANDOM;
 
-    @Shadow
-    private double qualityBonus;
-
     @Inject(method = "useQuality", at = @At("HEAD"), cancellable = true)
-    public void useQualityMixin(ItemStack stack, Player player, CallbackInfo ci) {
-        Quality selected = null;
+    private void useQualityMixin(ItemStack stack, Player player, CallbackInfo ci) {
+        if (cookingQueue.isEmpty()) {
+            return;
+        }
 
-        for (Quality quality : cookedQualities) {
-            if (selected == null || quality.level() < selected.level()) {
-                selected = quality;
+        Set<Quality> qualities = new TreeSet<>(Comparator.comparingInt(Quality::level));
+        double qualityBonus = 0;
+
+        for (int i = 0; i < stack.getCount(); i++) {
+            BlockData.CookingEntry entry = cookingQueue.poll();
+
+            // Ignore entries whose quality can no longer be resolved by Quality Food.
+            if (entry != null) {
+                qualityBonus += entry.bonus();
+                qualities.add(entry.quality());
             }
         }
 
-        if (selected != null) {
+        double finalBonus = stack.getCount() == 0 ? 0 : qualityBonus / stack.getCount();
+        Quality selected = qualities.stream().findFirst().orElse(Quality.NONE);
+
+        // Use the lowest stored ingredient quality as the base quality.
+        if (selected != Quality.NONE) {
             QualityUtils.applyQuality(stack, selected);
-        } else {
-            selected = Quality.NONE;
         }
 
         for (Quality quality : Quality.values()) {
@@ -53,18 +65,17 @@ public class BlockDataMixin {
 
             double chance = RANDOM.nextDouble();
             chance = Modification.luck(player).apply(chance);
-            chance = Modification.additive((float) qualityBonus).apply(chance);
+            chance = Modification.additive((float) finalBonus / (quality.level() * quality.level())).apply(chance);
 
-            if (chance >= 1 - QualityConfig.getChance(quality)) {
+            if (chance > 1 - QualityConfig.getChance(quality)) {
                 selected = quality;
             }
         }
 
-        QualityUtils.applyQuality(stack, selected, true);
+        if (selected != Quality.NONE) {
+            QualityUtils.applyQuality(stack, selected, true);
+        }
 
-        qualityBonus = 0;
-        cookedQualities.clear();
         ci.cancel();
     }
-
 }

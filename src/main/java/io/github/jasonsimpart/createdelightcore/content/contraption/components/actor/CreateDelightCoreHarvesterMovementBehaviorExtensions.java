@@ -100,6 +100,7 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
         DropData previousDropData = DropData.CURRENT.get();
         DropData.CURRENT.set(new DropData(
                 LevelData.get(level, lowerPos, true),
+                lowerPos,
                 lowerState,
                 null,
                 level.getBlockState(lowerPos.below())));
@@ -173,6 +174,7 @@ public class CreateDelightCoreHarvesterMovementBehaviorExtensions {
         DropData previousDropData = DropData.CURRENT.get();
         DropData.CURRENT.set(new DropData(
                 LevelData.get(level, pos, true),
+                pos,
                 state,
                 null,
                 level.getBlockState(pos.below())));

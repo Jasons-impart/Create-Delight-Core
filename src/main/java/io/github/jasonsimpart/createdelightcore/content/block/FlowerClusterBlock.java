@@ -150,7 +150,7 @@ public class FlowerClusterBlock extends BushBlock implements BonemealableBlock {
     }
 
     private static void popResourceWithQualityData(BlockState state, Level level, BlockPos pos, Player player, ItemStack dropStack) {
-        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(pos.below())));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), pos, state, player, level.getBlockState(pos.below())));
         try {
             popResource(level, pos, dropStack);
         } finally {

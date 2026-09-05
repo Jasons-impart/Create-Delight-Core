@@ -23,7 +23,7 @@ public class PowderyCannonBlockMixin {
         BlockPos farmlandPos = pos.below();
         while (level.getBlockState(farmlandPos).is(MNDBlocks.POWDERY_CANNON.get()))
             farmlandPos = farmlandPos.below();
-        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), state, player, level.getBlockState(farmlandPos)));
+        DropData.CURRENT.set(new DropData(LevelData.get(level, pos, true), pos, state, player, level.getBlockState(farmlandPos)));
     }
 
     @Inject(method = "use", at = @At(value = "INVOKE", target = "Lcom/soytutta/mynethersdelight/common/block/PowderyCannonBlock;popResource(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/item/ItemStack;)V", shift = At.Shift.AFTER))

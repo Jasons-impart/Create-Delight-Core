@@ -45,6 +45,7 @@ public class FruitBushBlockQualityMixin {
         previousRef.set(DropData.CURRENT.get());
         DropData.CURRENT.set(new DropData(
                 LevelData.get(level, lowerPos, true),
+                lowerPos,
                 lowerState,
                 player,
                 level.getBlockState(lowerPos.below())));
