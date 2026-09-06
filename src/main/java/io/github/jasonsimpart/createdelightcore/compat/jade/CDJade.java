@@ -20,7 +20,7 @@ public class CDJade implements IWailaPlugin {
 
     public CDJade() {
         Map<String, Supplier<Supplier<IWailaPlugin>>> loaders = Maps.newHashMap();
-        loaders.put("createdelightcore", () -> CDPlugin::new);
+        loaders.put("cmr", () -> CDPlugin::new);
         loaders.forEach((modid, loader) -> {
             if (!CommonProxy.isModLoaded(modid)) {
                 return;

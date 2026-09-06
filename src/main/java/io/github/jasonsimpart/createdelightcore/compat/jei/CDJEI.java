@@ -109,7 +109,9 @@ public class CDJEI implements IModPlugin {
             registration.addRecipeCategories(allCategories.toArray(IRecipeCategory[]::new));
         }
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
-        registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
+        if (ModList.get().isLoaded("cmr")) {
+            registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
+        }
         if (ModList.get().isLoaded("fluidlogistics")) {
             registration.addRecipeCategories(new JeiCategoryBlazeCoolerFluid(registration.getJeiHelpers()));
         }
@@ -124,7 +126,9 @@ public class CDJEI implements IModPlugin {
 
         registration.addRecipes(RecipeTypes.CRAFTING, ToolboxColoringRecipeMaker.createRecipes().toList());
         registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
-        registration.addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+        if (ModList.get().isLoaded("cmr")) {
+            registration.addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+        }
         if (ModList.get().isLoaded("fluidlogistics")) {
             blazeCoolerRecipes = buildBlazeCoolerFluidRecipeList();
             registration.addRecipes(JeiCategoryBlazeCoolerFluid.RECIPE_TYPE, blazeCoolerRecipes);
@@ -137,7 +141,9 @@ public class CDJEI implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
-        registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
+        if (ModList.get().isLoaded("cmr")) {
+            registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
+        }
         if (ModList.get().isLoaded("fluidlogistics")) {
             registration.addRecipeCatalyst(com.yision.fluidlogistics.registry.AllBlocks.BLAZE_COOLER.asStack(),
                     JeiCategoryBlazeCoolerFluid.RECIPE_TYPE);
@@ -177,12 +183,17 @@ public class CDJEI implements IModPlugin {
         hideHiddenFluidFillingRecipes();
         if (jeiRuntime != null) {
             jeiRuntime.getRecipeManager().addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
-            jeiRuntime.getRecipeManager().addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+            if (ModList.get().isLoaded("cmr")) {
+                jeiRuntime.getRecipeManager().addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+            }
         }
     }
 
     /** Build recipes from the client-side cooler cache (populated via network from server). */
     public static List<JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe> buildCoolerFluidRecipeList() {
+        if (!ModList.get().isLoaded("cmr")) {
+            return List.of();
+        }
         List<JeiCategorySnowmanCoolerFluid.SnowmanCoolerFluidRecipe> recipes = new ArrayList<>();
         ClientFuelCache.COOLER_MAP.forEach((fluid, triplet) -> {
             Integer coolTime = triplet.getFirst();
