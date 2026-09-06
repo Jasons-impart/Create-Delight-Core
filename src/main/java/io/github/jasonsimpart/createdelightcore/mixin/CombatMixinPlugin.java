@@ -37,9 +37,6 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains(".cmr.")) {
             return decide(mixinClassName, "cmr");
         }
-        if (mixinClassName.contains(".createliquidfuel.")) {
-            return decide(mixinClassName, "createliquidfuel");
-        }
         if (mixinClassName.contains(APOTHIC_ATTRIBUTES_MIXIN)) {
             return decide(mixinClassName, "attributeslib");
         }
