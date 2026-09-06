@@ -35,13 +35,15 @@ public class SyncFuelMapsPacket {
         });
 
         this.coolerData = new HashMap<>();
-        CoolerStomachHandler.LIQUID_COOLER_FUEL_MAP.forEach((fluid, pair) -> {
-            ResourceLocation rl = ForgeRegistries.FLUIDS.getKey(fluid);
-            if (rl != null && pair != null && pair.getSecond() != null) {
-                var t = pair.getSecond();
-                coolerData.put(rl, Triplet.of(t.getFirst(), t.getSecond(), t.getThird()));
-            }
-        });
+        if (ModList.get().isLoaded("cmr")) {
+            CoolerStomachHandler.LIQUID_COOLER_FUEL_MAP.forEach((fluid, pair) -> {
+                ResourceLocation rl = ForgeRegistries.FLUIDS.getKey(fluid);
+                if (rl != null && pair != null && pair.getSecond() != null) {
+                    var t = pair.getSecond();
+                    coolerData.put(rl, Triplet.of(t.getFirst(), t.getSecond(), t.getThird()));
+                }
+            });
+        }
     }
 
     private SyncFuelMapsPacket(Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData,
