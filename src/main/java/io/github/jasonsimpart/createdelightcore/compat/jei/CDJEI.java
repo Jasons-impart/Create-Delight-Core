@@ -13,6 +13,10 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.simibubi.create.AllItems;
+import com.simibubi.create.content.fluids.transfer.FillingRecipe;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.material.Fluid;
 import com.simibubi.create.Create;
 import com.simibubi.create.compat.jei.*;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
@@ -25,6 +29,8 @@ import fr.iglee42.cmr.init.CMRRegistries;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessingViaFanCategory;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
+import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeCoolerFluid;
+import net.minecraftforge.fml.ModList;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategorySnowmanCoolerFluid;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.PhantomCompostingCategory;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
@@ -57,7 +63,10 @@ import net.minecraft.world.level.ItemLike;
 @ParametersAreNonnullByDefault
 public class CDJEI implements IModPlugin {
     private static final ResourceLocation ID = CreateDelightCore.id("jei_plugin");
+    private static final TagKey<Fluid> HIDDEN_FLUIDS = FluidTags.create(
+            ResourceLocation.fromNamespaceAndPath("c", "hidden_from_recipe_viewers"));
     public static IJeiRuntime jeiRuntime = null;
+    private static List<JeiCategoryBlazeCoolerFluid.BlazeCoolerFluidRecipe> blazeCoolerRecipes = List.of();
 
     private final List<CreateRecipeCategory<?>> allCategories = new ArrayList<>();
     private IIngredientManager ingredientManager;
@@ -82,6 +91,15 @@ public class CDJEI implements IModPlugin {
         jeiRuntime = runtime;
         // Register callback so SyncFuelMapsPacket can trigger a JEI update
         ClientFuelCache.onUpdate = CDJEI::onFuelCacheUpdated;
+        updateBlazeCoolerRecipes();
+        hideHiddenFluidFillingRecipes();
+    }
+
+    @Override
+    public void onRuntimeUnavailable() {
+        jeiRuntime = null;
+        ClientFuelCache.onUpdate = null;
+        blazeCoolerRecipes = List.of();
     }
 
     @Override
@@ -92,6 +110,9 @@ public class CDJEI implements IModPlugin {
         }
         registration.addRecipeCategories(new JeiCategoryBlazeBurnerFluid(registration.getJeiHelpers()));
         registration.addRecipeCategories(new JeiCategorySnowmanCoolerFluid(registration.getJeiHelpers()));
+        if (ModList.get().isLoaded("fluidlogistics")) {
+            registration.addRecipeCategories(new JeiCategoryBlazeCoolerFluid(registration.getJeiHelpers()));
+        }
         registration.addRecipeCategories(new PhantomCompostingCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
@@ -104,6 +125,10 @@ public class CDJEI implements IModPlugin {
         registration.addRecipes(RecipeTypes.CRAFTING, ToolboxColoringRecipeMaker.createRecipes().toList());
         registration.addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
         registration.addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
+        if (ModList.get().isLoaded("fluidlogistics")) {
+            blazeCoolerRecipes = buildBlazeCoolerFluidRecipeList();
+            registration.addRecipes(JeiCategoryBlazeCoolerFluid.RECIPE_TYPE, blazeCoolerRecipes);
+        }
         registration.addRecipes(PhantomCompostingCategory.RECIPE_TYPE,
                 List.of(new PhantomCompostingCategory.PhantomCompostingRecipe()));
     }
@@ -113,6 +138,10 @@ public class CDJEI implements IModPlugin {
         allCategories.forEach(c -> c.registerCatalysts(registration));
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
         registration.addRecipeCatalyst(CMRRegistries.SNOWMAN_COOLER.asStack(), JeiCategorySnowmanCoolerFluid.RECIPE_TYPE);
+        if (ModList.get().isLoaded("fluidlogistics")) {
+            registration.addRecipeCatalyst(com.yision.fluidlogistics.registry.AllBlocks.BLAZE_COOLER.asStack(),
+                    JeiCategoryBlazeCoolerFluid.RECIPE_TYPE);
+        }
         registration.addRecipeCatalyst(CDBlocks.PHANTOM_COMPOST.asStack(), PhantomCompostingCategory.RECIPE_TYPE);
     }
 
@@ -144,6 +173,8 @@ public class CDJEI implements IModPlugin {
      * (covers the case where the server packet arrives after JEI has initialized).
      */
     public static void onFuelCacheUpdated() {
+        updateBlazeCoolerRecipes();
+        hideHiddenFluidFillingRecipes();
         if (jeiRuntime != null) {
             jeiRuntime.getRecipeManager().addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
             jeiRuntime.getRecipeManager().addRecipes(JeiCategorySnowmanCoolerFluid.RECIPE_TYPE, buildCoolerFluidRecipeList());
@@ -162,6 +193,45 @@ public class CDJEI implements IModPlugin {
             }
         });
         return recipes;
+    }
+
+    public static List<JeiCategoryBlazeCoolerFluid.BlazeCoolerFluidRecipe> buildBlazeCoolerFluidRecipeList() {
+        return ClientFuelCache.BLAZE_COOLER_MAP.entrySet().stream()
+                .filter(entry -> !entry.getKey().is(HIDDEN_FLUIDS))
+                .sorted(java.util.Comparator.comparing(entry ->
+                        net.minecraftforge.registries.ForgeRegistries.FLUIDS.getKey(entry.getKey())))
+                .map(entry -> new JeiCategoryBlazeCoolerFluid.BlazeCoolerFluidRecipe(entry.getKey(),
+                        entry.getValue().getSecond(), entry.getValue().getFirst(), entry.getValue().getThird()))
+                .toList();
+    }
+
+    private static void updateBlazeCoolerRecipes() {
+        if (jeiRuntime == null || !ModList.get().isLoaded("fluidlogistics")) {
+            return;
+        }
+        var manager = jeiRuntime.getRecipeManager();
+        var currentRecipes = buildBlazeCoolerFluidRecipeList();
+        var newRecipes = currentRecipes.stream().filter(recipe -> !blazeCoolerRecipes.contains(recipe)).toList();
+        manager.hideRecipes(JeiCategoryBlazeCoolerFluid.RECIPE_TYPE, blazeCoolerRecipes);
+        manager.addRecipes(JeiCategoryBlazeCoolerFluid.RECIPE_TYPE, newRecipes);
+        manager.unhideRecipes(JeiCategoryBlazeCoolerFluid.RECIPE_TYPE, currentRecipes);
+        var registeredRecipes = new ArrayList<>(blazeCoolerRecipes);
+        registeredRecipes.addAll(newRecipes);
+        blazeCoolerRecipes = registeredRecipes;
+    }
+
+    private static void hideHiddenFluidFillingRecipes() {
+        if (jeiRuntime == null) {
+            return;
+        }
+        var manager = jeiRuntime.getRecipeManager();
+        manager.getRecipeType(Create.asResource("spout_filling"), FillingRecipe.class).ifPresent(type -> {
+            var hiddenRecipes = manager.createRecipeLookup(type).get().filter(recipe -> {
+                var fluids = recipe.getRequiredFluid().getMatchingFluidStacks();
+                return !fluids.isEmpty() && fluids.stream().allMatch(stack -> stack.getFluid().is(HIDDEN_FLUIDS));
+            }).toList();
+            manager.hideRecipes(type, hiddenRecipes);
+        });
     }
 
     private class CategoryBuilder<T extends Recipe<?>> {

@@ -320,6 +320,7 @@
   "itemGroup.createdelightcore.food": "齿轮盛宴 | 食物",
   "itemGroup.createdelightcore.misc": "齿轮盛宴 | 杂项",
   "jei.createdelightcore.BlazeBurnerFluid": "烈焰人液体燃料配方",
+  "jei.createdelightcore.BlazeCoolerFluid": "烈焰人冷却室液体冷却剂配方",
   "jei.createdelightcore.SnowmanCoolerFluid": "雪傀儡液体冷却剂配方",
   "jei.createdelightcore.amountConsume": "消耗%smB",
   "jei.createdelightcore.amountConsumeCool": "消耗%smB",

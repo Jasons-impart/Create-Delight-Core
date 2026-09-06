@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClientFuelCache {
+    public static final Map<Fluid, Triplet<Integer, Boolean, Integer>> BLAZE_COOLER_MAP = new HashMap<>();
     public static Map<Fluid, Triplet<Integer, Boolean, Integer>> BURNER_MAP = new HashMap<>();
     public static Map<Fluid, Triplet<Integer, Boolean, Integer>> COOLER_MAP = new HashMap<>();
     /** Callback invoked after the cache is refreshed from a server sync packet. Set by JEI compat code. */

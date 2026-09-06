@@ -329,6 +329,7 @@
   "itemGroup.createdelightcore.food": "Create Delight | Food",
   "itemGroup.createdelightcore.misc": "Create Delight | Misc",
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid Recipe",
+  "jei.createdelightcore.BlazeCoolerFluid": "Blaze Cooler Fluid Coolants",
   "jei.createdelightcore.SnowmanCoolerFluid": "Snowman Cooler Fluid Recipe",
   "jei.createdelightcore.amountConsume": "Consumes %smB",
   "jei.createdelightcore.amountConsumeCool": "Consumes %smB",
