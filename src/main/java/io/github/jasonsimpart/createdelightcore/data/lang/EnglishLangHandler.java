@@ -236,6 +236,7 @@ public class EnglishLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");
         provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "Snowman Cooler Fluid Recipe");
+        provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "Blaze Cooler Fluid Coolants");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "Consumes %smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "Phantom Composting");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "Transforms in outer planet dimensions");

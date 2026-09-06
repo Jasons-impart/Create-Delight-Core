@@ -353,6 +353,7 @@ public class ChineseLangHandler {
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人液体燃料配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗%smB");
         provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "雪傀儡液体冷却剂配方");
+        provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "烈焰人冷却室液体冷却剂配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "消耗%smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "在外星球中幻化");
