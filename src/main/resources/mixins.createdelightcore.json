@@ -11,6 +11,7 @@
     "ae2.CraftingTermMenuMixin",
     "ae2.CraftingTermSlotMixin",
     "alexscaves.AcidFluidTypeMixin",
+    "alexscaves.NuclearExplosionEntityMixin",
     "alexscaves.SackOfSatingMixin",
     "bakeries.PizzaFlatbreadBlockMixin",
     "bakeries.PizzaBlockMixin",

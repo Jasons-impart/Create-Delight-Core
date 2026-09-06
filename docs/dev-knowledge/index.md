@@ -7,6 +7,7 @@ This directory stores CDC development knowledge that is useful for future work b
 | Knowledge type | File |
 |---|---|
 | Implemented CDC features, visible behavior, implementation outline, and main code locations | `docs/dev-knowledge/content-map.md` |
+| Compatibility and bugfix records, including validation and review conditions | `docs/dev-knowledge/compatibility-patches.md` |
 | Lightweight technical "how do I change this kind of thing" notes | `docs/dev-knowledge/how-to-index.md` |
 | Current repository-wide constraints and route pointers | `AGENTS.md` or a directory-level `AGENTS.md` |
 | Historical bugs, root causes, and workarounds | `docs/lessons-learned.md` |
