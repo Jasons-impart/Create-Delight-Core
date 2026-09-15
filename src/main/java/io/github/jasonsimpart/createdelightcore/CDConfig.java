@@ -47,6 +47,10 @@ public class CDConfig
             .comment("Make Iron's Spells Echoing Strikes record the LivingHurtEvent amount captured at event construction.")
             .comment("This prevents event-based damage multipliers from being sampled once by the hit and again by the echo.")
             .define("echoingStrikesUseOriginalDamage", true);
+    private static final ForgeConfigSpec.BooleanValue LOG_NON_FINITE_DAMAGE = BUILDER
+            .comment("Trace non-finite damage writes and actual MMT float operations without changing damage.")
+            .comment("Temporary diagnostics: bounded histories, at most 20 reported traces per minute.")
+            .define("logNonFiniteDamage", false);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -80,6 +84,7 @@ public class CDConfig
     public static boolean useMoneyTeleport;
     public static double lunaSoilBoostChance;
     public static boolean logMoreModTetraIndependentDamageMultipliers;
+    public static boolean logNonFiniteDamage;
     public static boolean enableAdditiveMulticrit = true;
     public static boolean echoingStrikesUseOriginalDamage = true;
     public static int surfaceDepthLimit;
@@ -99,6 +104,7 @@ public class CDConfig
             teleportCost = TELEPORT_COST.get();
             lunaSoilBoostChance = LUNA_SOIL_BOOST_CHANCE.get();
             logMoreModTetraIndependentDamageMultipliers = LOG_MORE_MOD_TETRA_INDEPENDENT_DAMAGE_MULTIPLIERS.get();
+            logNonFiniteDamage = LOG_NON_FINITE_DAMAGE.get();
             enableAdditiveMulticrit = ENABLE_ADDITIVE_MULTICRIT.get();
             echoingStrikesUseOriginalDamage = ECHOING_STRIKES_USE_ORIGINAL_DAMAGE.get();
         }

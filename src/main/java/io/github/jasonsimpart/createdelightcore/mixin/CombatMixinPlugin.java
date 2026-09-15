@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.mixin;
 
+import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageArithmeticTransformer;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
@@ -34,6 +35,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".tetrawear.")) {
+            return decide(mixinClassName, "tetrawear");
+        }
         if (mixinClassName.contains(".cmr.")) {
             return decide(mixinClassName, "cmr");
         }
@@ -96,5 +100,16 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+        if (mixinClassName.endsWith(".mmt.MMTDamageCalculateMixin")) {
+            int count = DamageArithmeticTransformer.instrument(targetClass, "hurt")
+                    + DamageArithmeticTransformer.instrument(targetClass, "onLivingDamage");
+            LOGGER.info("[DamageDiagnostics] Instrumented {} actual float operations in {}", count, targetClassName);
+            if (count != 10) LOGGER.warn("[DamageDiagnostics] Expected 10 MMT 2.4.15 float operations; recheck target version/other mixins");
+        }
+        if (mixinClassName.endsWith(".tetrawear.ArmorHoningDiagnosticsMixin")) {
+            int count = DamageArithmeticTransformer.instrument(targetClass, "onLivingHurt");
+            LOGGER.info("[DamageDiagnostics] Instrumented {} actual float operations in {}", count, targetClassName);
+            if (count != 1) LOGGER.warn("[DamageDiagnostics] Expected 1 TetraWear 1.0.0 float operation; recheck target version/other mixins");
+        }
     }
 }

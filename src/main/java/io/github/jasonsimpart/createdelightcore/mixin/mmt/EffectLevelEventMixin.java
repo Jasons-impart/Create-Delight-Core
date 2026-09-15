@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.mixin.mmt;
 
 import io.github.jasonsimpart.createdelightcore.compat.mmt.MmtDamageLogContext;
+import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageDiagnostics;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.Shadow;
@@ -25,26 +26,32 @@ public class EffectLevelEventMixin {
     @Inject(method = "addFixedDamage", at = @At("RETURN"), require = 0)
     private void createdelightcore$recordFixedDamage(float amount, CallbackInfo ci) {
         MmtDamageLogContext.recordFixedDamage(amount, fixedDamage, "add");
+        DamageDiagnostics.contribution("fixed.add", amount, fixedDamage);
     }
 
     @Inject(method = "setFixedDamage", at = @At("RETURN"), require = 0)
     private void createdelightcore$recordSetFixedDamage(float amount, CallbackInfo ci) {
         MmtDamageLogContext.recordFixedDamage(amount, fixedDamage, "set");
+        DamageDiagnostics.contribution("fixed.set", amount, fixedDamage);
     }
 
     @Inject(method = "addNormalMulti", at = @At("RETURN"), require = 0)
     private void createdelightcore$recordNormalMultiplier(float amount, CallbackInfo ci) {
         MmtDamageLogContext.recordNormalMultiplier(amount, normalMulti, "add");
+        DamageDiagnostics.contribution("normal.add", amount, normalMulti);
     }
 
     @Inject(method = "setNormalMulti", at = @At("RETURN"), require = 0)
     private void createdelightcore$recordSetNormalMultiplier(float amount, CallbackInfo ci) {
         MmtDamageLogContext.recordNormalMultiplier(amount, normalMulti, "set");
+        DamageDiagnostics.contribution("normal.set", amount, normalMulti);
     }
 
     @Inject(method = "addIndependentMulti", at = @At("RETURN"), require = 0)
     private void createdelightcore$recordIndependentDamageMultiplier(float multiplier, CallbackInfo ci) {
         MmtDamageLogContext.recordIndependentMultiplier(multiplier, product(independentMulti));
+        // Record the appended operand, not the separate diagnostic product of the entire list.
+        DamageDiagnostics.contribution("independent.append", multiplier, multiplier);
     }
 
     private static float product(List<Float> values) {

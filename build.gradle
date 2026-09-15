@@ -18,6 +18,18 @@ base {
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+tasks.register('damageDiagnosticsTest', JavaExec) {
+    dependsOn tasks.named('testClasses')
+    // This suite validates bytecode and arithmetic without bootstrapping Minecraft.
+    classpath = files(sourceSets.test.output, sourceSets.main.output,
+            configurations.compileClasspath.filter { it.name.startsWith('asm-') })
+    mainClass = 'io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageDiagnosticsTest'
+    if (project.hasProperty('damageDiagnosticTargets')) {
+        args project.property('damageDiagnosticTargets')
+    }
+}
+tasks.named('check') { dependsOn tasks.named('damageDiagnosticsTest') }
+
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
