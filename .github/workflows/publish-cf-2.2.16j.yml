@@ -1,0 +1,95 @@
+name: Publish CDR 050x CDC 2.2.16j to CurseForge
+
+on:
+  push:
+    branches: [codex/publish-cf-2.2.16j]
+    paths: [.github/workflows/publish-cf-2.2.16j.yml]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: curseforge-cdc-2.2.16j
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download and verify the original CDR 050x release artifact
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: Jasons-impart/Create-Delight-Core
+        run: |
+          import hashlib
+          import json
+          import pathlib
+          import subprocess
+          import tomllib
+          import zipfile
+
+          def gh(*args):
+              return subprocess.check_output(['gh', *args], text=True)
+
+          expected = 'de9e0ddad0b13bc34a9f1a7caaa79256d4403af9af0488e9dcef15e5800d9e36'
+          filename = 'Create-Delight-Core-1.20.1-2.2.16j.jar'
+          ref = json.loads(gh('api', 'repos/Jasons-impart/Create-Delight-Core/git/ref/tags/2.2.16j'))['object']
+          while ref['type'] == 'tag':
+              ref = json.loads(gh('api', 'repos/Jasons-impart/Create-Delight-Core/git/tags/' + ref['sha']))['object']
+          assert ref['type'] == 'commit' and ref['sha'] == '5623ce2d050f320a4ea6a33daea32bd676fc8360', ref
+          release = json.loads(gh('release', 'view', '2.2.16j', '--json', 'isDraft,assets,body'))
+          assert not release['isDraft']
+          asset = next(a for a in release['assets'] if a['name'] == filename)
+          assert asset['digest'] == 'sha256:' + expected, asset['digest']
+          subprocess.run(['gh', 'release', 'download', '2.2.16j', '--pattern', filename, '--dir', 'dist'], check=True)
+          artifact = pathlib.Path('dist') / filename
+          digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
+          assert digest == expected, digest
+          with zipfile.ZipFile(artifact) as jar:
+              assert jar.testzip() is None
+              metadata = tomllib.loads(jar.read('META-INF/mods.toml').decode())
+              mod = next(m for m in metadata['mods'] if m['modId'] == 'createdelightcore')
+              assert mod['version'] == '2.2.16j'
+              assert 'META-INF/jarjar/mixinextras-forge-0.4.1.jar' in jar.namelist()
+          pathlib.Path('changelog.md').write_text(release['body'], encoding='utf-8')
+          print('Verified tag commit, mod version, embedded MixinExtras and SHA-256: ' + digest)
+
+      # Same publisher and repository secret as release.yml on the 1.21.1 branch.
+      # Upload the verified existing artifact; do not rebuild or republish GitHub.
+      - name: Publish Forge 1.20.1 artifact to CurseForge
+        id: publish
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          files: dist/Create-Delight-Core-1.20.1-2.2.16j.jar
+          name: Create Delight Core 2.2.16j for Minecraft 1.20.1
+          version: 2.2.16j
+          version-type: release
+          changelog-file: changelog.md
+          loaders: forge
+          game-versions: 1.20.1
+          java: 17
+          curseforge-id: 1062344
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          # Mandatory mod dependencies declared in the uploaded JAR.
+          dependencies: |
+            328085(required){curseforge}
+            1216624(required){curseforge}
+
+      - name: Record publication receipt
+        shell: python
+        env:
+          CF_FILE_ID: ${{ steps.publish.outputs.curseforge-version }}
+          CF_URL: ${{ steps.publish.outputs.curseforge-url }}
+          CF_FILES: ${{ steps.publish.outputs.curseforge-files }}
+        run: |
+          import json
+          import os
+          import pathlib
+          receipt = {k: os.environ[k] for k in ('CF_FILE_ID', 'CF_URL', 'CF_FILES')}
+          print(json.dumps(receipt, indent=2))
+          with pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as summary:
+              summary.write('Published CDR 050x original CDC 2.2.16j artifact.\n\n')
+              summary.write(json.dumps(receipt, indent=2) + '\n')
+              summary.write('SHA-256: de9e0ddad0b13bc34a9f1a7caaa79256d4403af9af0488e9dcef15e5800d9e36\n')
