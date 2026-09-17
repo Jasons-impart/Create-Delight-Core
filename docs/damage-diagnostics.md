@@ -20,6 +20,33 @@
 
 本地失败日志与导出类保存在 `tmp-opencode/damage-diagnostics-repro-20260918-0013/`，不随 Git 分发。修正后的真实启动与捕食验证仍待完成；下一轮必须同时检查成功标记、先除后乘与后续数值。
 
+## 2026-09-18 00:34 回归：抗性修复命中，暴击触发原异常链
+
+运行源码 `a095011`，JAR SHA-256 为 `34f029cfb6027d26c213a3aa08255f7d5d4bdb62be79fdab8ab990a22d446d1b`。00:31:49 出现 `Applied ratio-first ... before probes`。父 Trace #4、#12、#15、#18、#21、#24 的已记录非暴击捕食均为 `firstNonFinite=none observed`，实际记录 `25 / 25 = 1` 后 `MAX * 1 = MAX`，Damage 事件保持 MAX，零吸收路径保持有限。健康减法为有限的 `11 - MAX = -MAX`，随后原有 clamp 归零。这验证了当前样本的抗性修复和后续处理，不代表所有属性组合安全。
+
+00:34:29 父 Trace #10 / Hurt 子 Trace #11 则复现了 Neruina 暂停，目标为主世界绯红蚊，攻击者为诡异蟾蜍：
+
+```text
+MMT: MAX + 0 = MAX; 0 + 1 = 1; MAX * 1 = MAX
+攻击者属性返回：CRIT_CHANCE = 0.05，CRIT_DAMAGE = 1.5
+EVENT_FINITE_TO_NONFINITE: MAX -> Infinity
+caller: AttributeEvents.handler$...$createdelightcore$useAdditiveMulticrit
+TetraWear.ArmorHoning input = Infinity
+AttributesLib.getAValue input = Infinity
+NumberFormatException: Infinite or NaN
+BigDecimal.<init> -> ALCombatRules.getAValue:109
+  -> getArmorDamageReduction:128 -> CombatRules -> ArmorHoning.onLivingHurt:24
+Neruina 暂停攻击者诡异蟾蜍
+```
+
+写入者是 CDC 的 `mixin/combat/apothicattributes/AttributeEventsMixin.java`，不是 MMT 算术。源码 `modifiedDamage += originalDamage * (critDamage - 1.0F)` 结合该次属性与事件前后值，可定位为首次暴击加法 `MAX + MAX * 0.5` 溢出；乘积本身有限。当前探针直接观察的是事件写入与属性返回，内部加法由源码推导，不能伪称已经逐指令插桩记录。这一分支约 5% 概率触发，符合多次捕食才出现的现象。
+
+该异常发生在 Hurt 监听器内，早于抗性处理；它与此前每次普通捕食都会遇到的抗性中间溢出是两个独立问题。当前 main 基线已重现原反馈相同的异常类型、消费端调用链与暂停实体，不能据此倒推未重跑的 0.5.0.11 使用完全相同的生产者。
+
+与抗性先乘后除不同，暴击后的数学结果本就超过 float 范围；调整括号或暂用 double 再转 float 不足以修复。后续需明确选择捕食特殊极值的语义，或对暴击输出采用局部有限饱和策略，并评估其他增伤路径；本轮只记录证据，未增加全局钳制、实体范围过滤或修改暴击规则。
+
+完整本地证据保存在 `tmp-opencode/damage-diagnostics-repro-20260918-0034/`（日志、LivingEntity 和 AttributeEvents 导出类），不随 Git 分发。失败子 Trace 的非有限值不会自动汇入父 Trace 的首个异常字段，分析时须结合 parentTrace，不能把父记录的 `none observed` 当作整条链安全。
+
 ## 本地测试
 
 1. 在实例 `config/createdelightcore-common.toml` 设置 `logNonFiniteDamage = true`，重启当前实例。默认值为 false；也可用 JVM 参数 `-Dcreatedelightcore.damageDiagnostics=true` 开启。
