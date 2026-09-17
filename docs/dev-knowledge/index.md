@@ -6,6 +6,7 @@ This directory stores CDC development knowledge that is useful for future work b
 
 | Knowledge type | File |
 |---|---|
+| 外部模组缺陷和交互兼容补丁、验证及复核条件 | [兼容补丁台账](compatibility-patches.md) |
 | Implemented CDC features, visible behavior, implementation outline, and main code locations | `docs/dev-knowledge/content-map.md` |
 | Lightweight technical "how do I change this kind of thing" notes | `docs/dev-knowledge/how-to-index.md` |
 | Current repository-wide constraints and route pointers | `AGENTS.md` or a directory-level `AGENTS.md` |

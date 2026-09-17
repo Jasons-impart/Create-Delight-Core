@@ -21,6 +21,7 @@ public final class DamageDiagnosticsTest {
         intermediateOverflowIsNotFinalDamage();
         firstFailureSurvivesBoundedHistory();
         DamagePipelineTest.run();
+        ResistanceDamageTest.run();
         if (args.length > 0) checkInstalledTargets(Path.of(args[0]));
         if (args.length > 1) DamagePipelineTest.checkMinecraftJar(Path.of(args[1]));
         if (args.length > 2) DamagePipelineTest.checkMergedClass(Path.of(args[2]));

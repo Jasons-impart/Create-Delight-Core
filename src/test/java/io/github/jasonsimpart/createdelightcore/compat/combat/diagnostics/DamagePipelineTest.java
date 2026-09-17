@@ -124,6 +124,7 @@ public final class DamagePipelineTest {
     }
 
     private static void checkRealNode(ClassNode node, boolean all) throws Exception {
+        ResistanceDamageTest.checkRealClass(node);
         DamagePipelineTransformer.Result result = DamagePipelineTransformer.instrument(node, all);
         check(result.roots() > 0 && result.probes() > 0, "No real damage roots matched: " + node.name);
         if (node.name.endsWith("/LivingEntity")) {

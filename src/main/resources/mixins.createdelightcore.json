@@ -5,6 +5,7 @@
   "refmap": "mixins.createdelightcore.refmap.json",
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
+    "combat.ResistanceDamageMixin",
     "combat.LivingDamagePipelineScopeMixin",
     "combat.LivingDamagePipelineArithmeticMixin",
     "combat.CombatRulesDiagnosticsMixin",

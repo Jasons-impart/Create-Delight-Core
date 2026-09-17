@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.mixin;
 
 import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageArithmeticTransformer;
 import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamagePipelineTransformer;
+import io.github.jasonsimpart.createdelightcore.compat.combat.ResistanceDamageTransformer;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
@@ -101,6 +102,10 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+        if (mixinClassName.endsWith(".combat.ResistanceDamageMixin")) {
+            ResistanceDamageTransformer.apply(targetClass);
+            LOGGER.info("[CDCore][ResistanceDamage] Applied ratio-first damage * (factor / 25.0F) in {}", targetClassName);
+        }
         if (mixinClassName.endsWith(".combat.LivingDamagePipelineArithmeticMixin")
                 || mixinClassName.endsWith(".combat.CombatRulesDiagnosticsMixin")
                 || mixinClassName.endsWith(".combat.apothicattributes.ArmorFormulaDiagnosticsMixin")) {
