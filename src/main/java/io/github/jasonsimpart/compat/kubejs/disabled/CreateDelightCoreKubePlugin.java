@@ -5,8 +5,10 @@ import dev.latvian.mods.kubejs.core.RecipeManagerKJS;
 import dev.latvian.mods.kubejs.event.EventGroupRegistry;
 import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.RecipesKubeEvent;
+import dev.latvian.mods.kubejs.script.ScriptManager;
 import dev.latvian.mods.kubejs.script.ScriptType;
 import io.github.jasonsimpart.disabled.DisabledContentManager;
+import io.github.jasonsimpart.disabled.DisabledCreativeTabs;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Iterator;
@@ -16,6 +18,17 @@ public final class CreateDelightCoreKubePlugin implements KubeJSPlugin {
     @Override
     public void registerEvents(EventGroupRegistry registry) {
         registry.register(CreateDelightCoreKubeEvents.GROUP);
+    }
+
+    @Override
+    public void afterScriptsLoaded(ScriptManager manager) {
+        if (manager.scriptType != ScriptType.SERVER) {
+            return;
+        }
+        // This hook also runs without ServerEvents.recipes listeners and when the script is deleted.
+        DisabledCreativeTabsKubeEvent tabs = new DisabledCreativeTabsKubeEvent();
+        CreateDelightCoreKubeEvents.DISABLED_CREATIVE_TABS.post(ScriptType.SERVER, tabs);
+        DisabledCreativeTabs.replace(tabs.snapshot());
     }
 
     @Override

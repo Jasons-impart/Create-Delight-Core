@@ -36,6 +36,7 @@ public final class ClientModEvents {
         modEventBus.addListener(ClientModEvents::registerItemColors);
         modEventBus.addListener(ClientModEvents::registerItemDecorations);
         NeoForge.EVENT_BUS.addListener(QuickReloadKeyHandler::onKeyInput);
+        DisabledCreativeTabsClient.register();
     }
 
     private static void clientSetup(FMLClientSetupEvent event) {

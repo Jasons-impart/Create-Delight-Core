@@ -8,4 +8,5 @@ public interface CreateDelightCoreKubeEvents {
 
     EventHandler DISABLED_ITEMS = GROUP.server("disabledItems", () -> DisabledItemsKubeEvent.class);
     EventHandler DISABLED_BLOCKS = GROUP.server("disabledBlocks", () -> DisabledBlocksKubeEvent.class);
+    EventHandler DISABLED_CREATIVE_TABS = GROUP.server("disabledCreativeTabs", () -> DisabledCreativeTabsKubeEvent.class);
 }

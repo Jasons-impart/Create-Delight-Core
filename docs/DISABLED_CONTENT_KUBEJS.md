@@ -2,7 +2,7 @@
 
 本文档记录 CDC 提供给 KubeJS 的禁用物品/方块 API。目标是给整合包脚本一个统一入口，处理“拿不到、放不了、配方消失、创造栏隐藏、世界生成替换”等需求，同时避免玩家背包、掉落物、容器、历史区块这类高成本扫描。
 
-Create Delight Core exposes two server-script KubeJS events. 这两个事件写在 server script 中：
+Create Delight Core exposes server-script KubeJS events. 以下事件写在 `kubejs/server_scripts/` 中：
 
 ```js
 CreateDelightCoreEvents.disabledItems(event => {
@@ -123,6 +123,30 @@ CreateDelightCoreEvents.disabledBlocks(event => {
   event.block("some_mod:bad_ore").replaceGeneratedWith("minecraft:stone")
 })
 ```
+
+## Creative Tab Rules
+
+按创造模式 Tab 的注册 ID 隐藏整个标签页：
+
+```js
+// kubejs/server_scripts/disabled_creative_tabs.js
+CreateDelightCoreEvents.disabledCreativeTabs(event => {
+  event.tab('tacz:other')
+  event.tabs(['example:tab_a', 'example:tab_b'])
+})
+```
+
+- `tab(id)` 添加一个 ID；`tabs(ids)` 添加多个 ID，重复 ID 自动去重。
+- 使用 Tab 注册 ID，不是显示名称、物品 ID 或模组 ID。无效格式会警告并跳过。
+- 保留 Tab 注册、排序关系及内容，只过滤创造模式界面的分页列表和可见标签。普通 Tab 隐藏后不占用分页位置。
+- 不禁用该 Tab 的物品，不移除配方，也不控制 JEI 物品列表。彻底禁用物品/方块仍用 `disabledItems` / `disabledBlocks`。
+- 规则由服务端执行，玩家入服及 `/reload` 后同步完整快照；客户端无需重复放置此脚本，但须安装支持此 API 的 CDC。
+- `/reload` 会重新收集规则。删除一条规则或整个事件脚本后，对应 Tab 恢复；已打开的创造模式界面会重新初始化分页，当前 Tab 被隐藏时选择仍可见的 Tab。
+- 特殊 Tab（如 `minecraft:search`、`minecraft:hotbar`、`minecraft:inventory`）也支持隐藏。如果所有可见 Tab 都被隐藏，创造模式界面会关闭，避免空列表导致崩溃。
+- 退服清理客户端快照；单人内置服务端与客户端也使用独立快照。
+- 服务端找不到 ID 时在 KubeJS 服务端日志中警告，但仍下发 ID，以支持仅客户端注册的 Tab。客户端也找不到时记录明确警告并忽略，不会崩溃。
+
+这里的网络同步仅针对 `disabledCreativeTabs`，不改变已有物品/方块禁用规则的同步行为。
 
 ## Matching Notes
 
