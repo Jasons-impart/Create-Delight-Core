@@ -5,6 +5,9 @@
   "refmap": "mixins.createdelightcore.refmap.json",
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
+    "combat.LivingDamagePipelineScopeMixin",
+    "combat.LivingDamagePipelineArithmeticMixin",
+    "combat.CombatRulesDiagnosticsMixin",
     "AbstractVillagerMixin",
     "VillagerMixin",
     "ae2.AEBaseMenuAccessor",

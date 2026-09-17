@@ -28,6 +28,21 @@ public final class FloatArithmetic {
         };
     }
 
+    public static double apply(double left, double right, int operation) {
+        return switch (operation) {
+            case ADD -> left + right;
+            case SUBTRACT -> left - right;
+            case MULTIPLY -> left * right;
+            case DIVIDE -> left / right;
+            case REMAINDER -> left % right;
+            default -> throw new IllegalArgumentException("Unknown double operation " + operation);
+        };
+    }
+
+    public static String format(double value) {
+        return Double.toString(value) + " [0x" + Long.toHexString(Double.doubleToRawLongBits(value)) + "]";
+    }
+
     public static String format(float value) {
         return Float.toString(value) + " [0x" + Integer.toHexString(Float.floatToRawIntBits(value)) + "]";
     }

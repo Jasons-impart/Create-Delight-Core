@@ -25,7 +25,8 @@ public final class DamageDiagnostics {
         if (!enabled()) return null;
         DamageTrace trace = new DamageTrace(phase, () -> describe(entity, source), CURRENT.get());
         CURRENT.set(trace);
-        observe(trace, "ForgeHooks input=" + FloatArithmetic.format(amount), amount);
+        observe(trace, phase.endsWith(".actuallyHurt") ? "pipeline input=" + FloatArithmetic.format(amount)
+                : "ForgeHooks input=" + FloatArithmetic.format(amount), amount);
         return trace;
     }
 
@@ -96,6 +97,53 @@ public final class DamageDiagnostics {
             trace = new DamageTrace("outside ForgeHooks scope", () -> "source/target unavailable", null);
         }
         if (trace != null) observe(trace, site + "=" + FloatArithmetic.format(value), value);
+    }
+
+    /** Pipeline probes are silent outside an active damage scope, even for nonfinite results. */
+    public static float pipelineArithmetic(float left, float right, int operation, String site) {
+        float result = FloatArithmetic.apply(left, right, operation);
+        if (!enabled() || CURRENT.get() == null) return result;
+        pipelineObserve("ACTUAL_FLOAT_OP " + site + ": " + FloatArithmetic.format(left) + " "
+                + FloatArithmetic.symbol(operation) + " " + FloatArithmetic.format(right)
+                + " = " + FloatArithmetic.format(result), result);
+        return result;
+    }
+
+    public static double pipelineArithmetic(double left, double right, int operation, String site) {
+        double result = FloatArithmetic.apply(left, right, operation);
+        if (!enabled() || CURRENT.get() == null) return result;
+        pipelineObserve("ACTUAL_DOUBLE_OP " + site + ": " + FloatArithmetic.format(left) + " "
+                + FloatArithmetic.symbol(operation) + " " + FloatArithmetic.format(right)
+                + " = " + FloatArithmetic.format(result), result);
+        return result;
+    }
+
+    public static float pipelineNarrow(double value, String site) {
+        float result = (float) value;
+        if (!enabled() || CURRENT.get() == null) return result;
+        pipelineObserve("ACTUAL_D2F " + site + ": " + FloatArithmetic.format(value)
+                + " -> " + FloatArithmetic.format(result), result);
+        return result;
+    }
+
+    public static float pipelineValue(float value, String site) {
+        if (!enabled() || CURRENT.get() == null) return value;
+        pipelineObserve("PIPELINE_VALUE " + site + "=" + FloatArithmetic.format(value), value);
+        return value;
+    }
+
+    public static double pipelineValue(double value, String site) {
+        if (!enabled() || CURRENT.get() == null) return value;
+        pipelineObserve("PIPELINE_VALUE " + site + "=" + FloatArithmetic.format(value), value);
+        return value;
+    }
+
+    private static void pipelineObserve(String entry, double value) {
+        if (!enabled()) return;
+        DamageTrace trace = CURRENT.get();
+        if (trace != null && trace.observe(entry, value)) {
+            report(trace, "FIRST_NONFINITE_OBSERVED", new Throwable("observation stack"));
+        }
     }
 
     public static void contribution(String operation, float argument, float total) {

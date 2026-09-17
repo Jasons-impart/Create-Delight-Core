@@ -36,9 +36,13 @@ public final class DamageTrace {
     }
 
     public boolean observe(String entry, float result) {
+        return observe(entry, (double) result);
+    }
+
+    public boolean observe(String entry, double result) {
         add(entry);
-        suspicious |= !Float.isFinite(result) || Math.abs(result) >= 1.0E30F;
-        if (!Float.isFinite(result) && firstNonFinite == null) {
+        suspicious |= !Double.isFinite(result) || Math.abs(result) >= 1.0E30;
+        if (!Double.isFinite(result) && firstNonFinite == null) {
             firstNonFinite = entry;
             return true;
         }
@@ -47,7 +51,8 @@ public final class DamageTrace {
 
     public String snapshot() {
         StringBuilder text = new StringBuilder(1024);
-        text.append("phase=").append(phase).append(", firstNonFinite=")
+        text.append("phase=").append(phase).append(", parentTrace=")
+                .append(parent == null ? "none" : parent.id).append(", firstNonFinite=")
                 .append(firstNonFinite == null ? "none observed" : firstNonFinite).append('\n');
         if (omitted > 0) text.append("  earlierEntriesOmitted=").append(omitted).append('\n');
         history.forEach(line -> text.append("  ").append(line).append('\n'));

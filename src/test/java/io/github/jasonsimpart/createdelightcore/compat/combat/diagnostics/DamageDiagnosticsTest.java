@@ -20,7 +20,10 @@ public final class DamageDiagnosticsTest {
         arithmeticIsUnchanged();
         intermediateOverflowIsNotFinalDamage();
         firstFailureSurvivesBoundedHistory();
+        DamagePipelineTest.run();
         if (args.length > 0) checkInstalledTargets(Path.of(args[0]));
+        if (args.length > 1) DamagePipelineTest.checkMinecraftJar(Path.of(args[1]));
+        if (args.length > 2) DamagePipelineTest.checkMergedClass(Path.of(args[2]));
         System.out.println("Damage diagnostics regression tests passed");
     }
 
@@ -88,6 +91,7 @@ public final class DamageDiagnosticsTest {
     }
 
     private static void checkInstalledTargets(Path mods) throws Exception {
+        DamagePipelineTest.checkAttributesJar(mods.resolve("ApothicAttributes-1.20.1-1.3.7.jar"));
         checkTarget(mods.resolve("more_mod_tetra-2.4.15-all.jar"),
                 "com/inolia_zaicek/more_mod_tetra/Event/MMTDamageCalculate.class",
                 new String[]{"hurt", "onLivingDamage"}, 10);

@@ -26,6 +26,12 @@ tasks.register('damageDiagnosticsTest', JavaExec) {
     mainClass = 'io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageDiagnosticsTest'
     if (project.hasProperty('damageDiagnosticTargets')) {
         args project.property('damageDiagnosticTargets')
+        if (project.hasProperty('damageDiagnosticMinecraft')) {
+            args project.property('damageDiagnosticMinecraft')
+            if (project.hasProperty('damageDiagnosticMerged')) {
+                args project.property('damageDiagnosticMerged')
+            }
+        }
     }
 }
 tasks.named('check') { dependsOn tasks.named('damageDiagnosticsTest') }

@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
-@Mixin(targets = "dev.shadowsoffire.attributeslib.api.ALCombatRules", remap = false)
+@Mixin(targets = "dev.shadowsoffire.attributeslib.api.ALCombatRules", remap = false, priority = 1)
 public abstract class ArmorFormulaDiagnosticsMixin {
     @Inject(method = "getAValue", at = @At("HEAD"), require = 1)
     private static void createdelightcore$observeAValueInput(float damage, CallbackInfoReturnable<Float> cir) {
