@@ -2,7 +2,7 @@ package io.github.jasonsimpart.createdelightcore.mixin;
 
 import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamageArithmeticTransformer;
 import io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics.DamagePipelineTransformer;
-import io.github.jasonsimpart.createdelightcore.compat.combat.ResistanceDamageTransformer;
+import io.github.jasonsimpart.createdelightcore.compat.combat.DamagePipelinePreparation;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
@@ -102,15 +102,14 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
-        if (mixinClassName.endsWith(".combat.ResistanceDamageMixin")) {
-            ResistanceDamageTransformer.apply(targetClass);
-            LOGGER.info("[CDCore][ResistanceDamage] Applied ratio-first damage * (factor / 25.0F) in {}", targetClassName);
-        }
         if (mixinClassName.endsWith(".combat.LivingDamagePipelineArithmeticMixin")
                 || mixinClassName.endsWith(".combat.CombatRulesDiagnosticsMixin")
                 || mixinClassName.endsWith(".combat.apothicattributes.ArmorFormulaDiagnosticsMixin")) {
             boolean rules = !mixinClassName.endsWith(".combat.LivingDamagePipelineArithmeticMixin");
-            DamagePipelineTransformer.Result result = DamagePipelineTransformer.instrument(targetClass, rules);
+            DamagePipelineTransformer.Result result = DamagePipelinePreparation.apply(targetClass, rules);
+            if (targetClass.name.equals("net/minecraft/world/entity/LivingEntity")) {
+                LOGGER.info("[CDCore][ResistanceDamage] Applied ratio-first damage * (factor / 25.0F) before probes in {}", targetClassName);
+            }
             LOGGER.info("[DamageDiagnostics] Pipeline {} roots={} methods={} probes={} sites={}",
                     targetClassName, result.roots(), result.methods(), result.probes(), result.sites());
             if (result.roots() == 0 || result.probes() == 0) {

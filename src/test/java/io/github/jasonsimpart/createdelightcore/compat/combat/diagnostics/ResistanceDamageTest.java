@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics;
 
 import io.github.jasonsimpart.createdelightcore.compat.combat.ResistanceDamageTransformer;
+import io.github.jasonsimpart.createdelightcore.compat.combat.DamagePipelinePreparation;
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 import org.objectweb.asm.tree.analysis.Analyzer;
@@ -21,7 +22,17 @@ public final class ResistanceDamageTest {
         for (MethodNode method : node.methods) {
             if (method.name.equals("getDamageAfterMagicAbsorb")) method.desc = "(L" + DAMAGE_SOURCE + ";F)F";
         }
-        ResistanceDamageTransformer.apply(node);
+        // Reproduce the failed runtime order on a copy: observers destroy the raw match.
+        ClassNode wrongOrder = new ClassNode();
+        node.accept(wrongOrder);
+        DamagePipelineTransformer.instrument(wrongOrder, true);
+        rejects(wrongOrder);
+        // Exercise the exact production composition, then JVM-execute its observed bytecode.
+        String fixtureName = node.name;
+        node.name = "net/minecraft/world/entity/LivingEntity";
+        check(DamagePipelinePreparation.apply(node, true,
+                Type.getInternalName(DamagePipelineTest.class)).probes() > 0, "Missing composed probes");
+        node.name = fixtureName;
         verify(node);
         rejects(node); // A second application must fail rather than double-divide the damage.
         ClassNode noMatch = new ClassNode();
@@ -83,7 +94,7 @@ public final class ResistanceDamageTest {
     }
 
     /** The exported class already has probes; strip only our numeric observers in the test copy. */
-    public static void checkRealClass(ClassNode node) throws Exception {
+    public static void restoreRawTestCopy(ClassNode node) throws Exception {
         if (!node.name.equals("net/minecraft/world/entity/LivingEntity")) return;
         for (MethodNode method : node.methods) for (AbstractInsnNode instruction : method.instructions.toArray()) {
             if (!(instruction instanceof MethodInsnNode call)
@@ -105,9 +116,7 @@ public final class ResistanceDamageTest {
             method.instructions.remove(site);
             method.instructions.remove(call);
         }
-        ResistanceDamageTransformer.apply(node);
         verify(node);
-        System.out.println("Verified ratio-first rewrite of real " + node.name);
     }
 
     private static AbstractInsnNode previousOpcode(AbstractInsnNode instruction) {

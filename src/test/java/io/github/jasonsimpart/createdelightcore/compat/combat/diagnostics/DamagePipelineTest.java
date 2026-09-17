@@ -1,5 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.compat.combat.diagnostics;
 
+import io.github.jasonsimpart.createdelightcore.compat.combat.DamagePipelinePreparation;
+
 import org.objectweb.asm.*;
 import org.objectweb.asm.tree.*;
 import org.objectweb.asm.tree.analysis.Analyzer;
@@ -124,8 +126,8 @@ public final class DamagePipelineTest {
     }
 
     private static void checkRealNode(ClassNode node, boolean all) throws Exception {
-        ResistanceDamageTest.checkRealClass(node);
-        DamagePipelineTransformer.Result result = DamagePipelineTransformer.instrument(node, all);
+        ResistanceDamageTest.restoreRawTestCopy(node);
+        DamagePipelineTransformer.Result result = DamagePipelinePreparation.apply(node, all);
         check(result.roots() > 0 && result.probes() > 0, "No real damage roots matched: " + node.name);
         if (node.name.endsWith("/LivingEntity")) {
             check(result.sites().stream().anyMatch(site -> site.startsWith("getDamageAfterMagicAbsorb(")

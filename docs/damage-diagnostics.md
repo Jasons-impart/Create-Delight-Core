@@ -6,11 +6,19 @@
 
 原表达式 `damage * factor / 25.0F` 改为 `damage * (factor / 25.0F)`。`factor = 25 - 5 * (amplifier + 1)` 保持不变，不使用整数除法。无抗性时系数为 25，MAX 乘 1 仍有限；抗性 I～V 对应比例 0.8～0，有限非负输入不会在这一步溢出。
 
-实现为 `ResistanceDamageMixin`（priority 2）和 `compat/combat/ResistanceDamageTransformer`：匹配 LivingEntity 抗性方法中唯一的“乘法临时值/除以25”指令对，将浮点除法移到乘法前，移除原后置除法；保留原始伤害副本、伤害标签旁路、Sundering、统计、附魔保护与后续流程。玩家继承此方法。修复独立于诊断开关生效，priority 1 探针观察的是修复后的真实运算。启动应出现 `[CDCore][ResistanceDamage] Applied ratio-first`，匹配不是恰好一处时明确失败，避免升级后静默失效。
+实现由 `LivingDamagePipelineArithmeticMixin` 的单个 postApply 调用 `compat/combat/DamagePipelinePreparation`：先执行 `ResistanceDamageTransformer`，再安装管线探针，顺序由同一方法保证，不依赖两个 Mixin 的相对优先级。补丁匹配 LivingEntity 抗性方法中唯一的“乘法临时值/除以25”指令对，将浮点除法移到乘法前，移除原后置除法；保留原始伤害副本、伤害标签旁路、Sundering、统计、附魔保护与后续流程。玩家继承此方法。修复独立于诊断开关生效。启动应出现 `[CDCore][ResistanceDamage] Applied ratio-first ... before probes`；匹配不是恰好一处时抛出明确错误。当前 Mixin 配置为非 required，失败可能只报警后继续启动，因此进入游戏不等于补丁生效，必须核对成功标记与运算日志。
 
 用户已接受运算顺序改变造成的浮点舍入差异，不承诺普通结果逐位等同旧公式。5000 个 0～10000 普通伤害采样中，相对旧公式的最大相对舍入差为约 `1.59E-7`（约 0.000016%）；这不是所有 float 输入的误差上界。测试覆盖 MAX、零/负值、非有限输入、抗性等级、旁路分支和 Sundering，直接在 JVM 执行改写后的 fixture，并验证实际 mapped/SRG 与游戏合并类的匹配及栈正确性。
 
 修复不钳制已有 Infinity/NaN，也不改 Sundering 后续增伤或异常等级。Sundering 与 MAX 组合仍可能在后续运算溢出，因此继续保留全管线探针。下一轮以新的绯红蚊重复捕食，确认日志先出现 `25 / 25 = 1`、再出现 `MAX * 1 = MAX`，并检查 Damage 入参、吸收与生命处理是否又出现非有限值。源码/构建测试通过后仍需真实重启验证补丁命中及后续行为。
+
+## 2026-09-18 修复版启动失败与执行顺序修正
+
+00:09:14 启动日志先记录 LivingEntity 管线探针，随后 `ResistanceDamageMixin` 失败：`Expected exactly one resistance damage*factor/25 sequence ... found 0`。00:13:10—00:13:24 的 7 个独立父 Trace（#1、#4、#7、#10、#13、#16、#19）仍首次出现 `MAX * 25 = Infinity`；这是旧公式仍在执行，不能归为新发现的后续溢出。没有 `ORIGINAL_EXCEPTION` 或 BigDecimal `NumberFormatException`。失败版本源码为 `cc8bdc6`，JAR SHA-256 为 `20f1d7fd7ab9f038c577d70a958bad465384227e2bee8b3308714e3b1739a641`。
+
+原实现假定两个 marker 的 priority 2/1 保证修复先于插桩，实际 postApply 顺序未满足此假定。探针已消耗原 FMUL/FDIV，因此匹配为零。旧测试先移除观察器，再单独执行补丁，遗漏了入口组合错误。现移除独立 `ResistanceDamageMixin`，由同一个入口顺序执行修复和观察；测试复现“先观察后修复”必然失败，并直接 JVM 执行生产组合入口生成的 fixture，真实类校验也使用该入口。还原导出类的观察器仅用于生成测试输入，不是运行时去除探针。
+
+本地失败日志与导出类保存在 `tmp-opencode/damage-diagnostics-repro-20260918-0013/`，不随 Git 分发。修正后的真实启动与捕食验证仍待完成；下一轮必须同时检查成功标记、先除后乘与后续数值。
 
 ## 本地测试
 
