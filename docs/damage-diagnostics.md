@@ -54,4 +54,25 @@ ForgeHooks.onLivingDamage input / returned = Infinity
 
 同次启动导出的 LivingEntity 字节码显示：AttributesLib 的 `apoth_sunderingHasEffect` 恒为 true，空抗性效果的 amplifier 返回 -1，导致原抗性公式仍执行 `damage * 25 / 25`。`Float.MAX_VALUE * 25` 是很强的候选生产者，但两次旧日志没有记录该指令，须在补充探针下再次捕食确认，而不是据此宣布原下界 BigDecimal 崩溃根因已闭环。
 
-补充版已构建并部署本地运行目录，尚待新一轮真实启动、父作用域/新探针命中及游戏复现。仍未修改伤害规则，也未发布 Packwiz 产物。
+## 2026-09-17 补充版实测：首个溢出操作已确认
+
+补充版（源码 `5fde0d2`，运行 JAR SHA-256 `ecc403739126e4e7f96202d9ed2dba5ecc76565b088b509e8587fa5d7d2b5507`）已经真实启动并完成多次主世界捕食测试。新日志覆盖清单为 LivingEntity 59、Player 18、CombatRules 6、ALCombatRules 46 个探针；后两类在首次战斗使用时加载。它们与未合并/旧合并类计数不同，不能机械要求完全相同。
+
+23:07:33—23:07:48 的父 Trace #1、#4、#7、#10、#13、#16、#19 均记录同一首个非有限操作：
+
+```text
+phase=LivingEntity.actuallyHurt
+getDamageAfterArmorAbsorb / m_21161_ returned = 3.4028235E38 [0x7f7fffff]
+getDamageAfterMagicAbsorb / m_6515_ (LivingEntity.java:1587), insn=39:
+3.4028235E38 [0x7f7fffff] * 25.0 [0x41c80000] = Infinity [0x7f800000]
+同方法 LivingEntity.java:1589, insn=45:
+Infinity [0x7f800000] / 25.0 [0x41c80000] = Infinity [0x7f800000]
+```
+
+该操作现在有真实运行证据，不再只是静态候选。结合上节的 AttributesLib 重定向字节码，当前捕食的故障机制是：极值伤害进入始终执行的抗性分支，中间乘法先溢出，后续除法无法恢复有限值。MMT、TetraWear 和护甲阶段在这些记录中均不是首次溢出点。
+
+后续实际日志还出现 `Infinity - Infinity = NaN`，吸收值 getter 返回 NaN；生命减法得到 -Infinity 后被原有健康值 clamp 到 0。因此目标死亡不能作为伤害链数值安全的证明。
+
+父作用域与子事件的关联已经运行验证。仍没有本轮 `ORIGINAL_EXCEPTION` / BigDecimal `NumberFormatException` 证据，不能把主世界抗性溢出当作原下界 Hurt 阶段 BigDecimal 崩溃的完整复现。下一步评审并定点修复已确认的抗性算术，同时保留对原报告差异的追踪；尚未改伤害规则或发布 Packwiz 产物。
+
+作者本地完整日志与导出类保存在 `tmp-opencode/damage-diagnostics-repro-20260917-2307/`，不随 Git 分发。本页保留可复核的精简数值证据；报告限流可能省略更多捕食记录，不以日志条数推断总攻击次数。
