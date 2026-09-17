@@ -41,6 +41,8 @@
     "waystones.WaystonesAPIMixin"
   ],
   "client": [
+    "minecraft.CreativeModeInventoryScreenMixin",
+    "minecraft.CreativeTabsScreenPageMixin",
     "northstar.TelescopeScreenMixin",
     "xaero.MinimapInternetMixin",
     "xaero.PatreonMixin",
