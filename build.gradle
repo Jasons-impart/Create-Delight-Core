@@ -452,3 +452,18 @@ tasks.register('kubeJsLazyRegression', JavaExec) {
         args project.file(project.property('kubejsLazyJar')).absolutePath
     }
 }
+
+tasks.register('kubeJsLazyLockOrderProbe', JavaExec) {
+    dependsOn testClasses
+    workingDir layout.buildDirectory.dir('kubejs-lazy-lock-order').get().asFile
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'io.github.jasonsimpart.createdelightcore.KubeJsLazyLockOrderProbe'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(17) }
+    doFirst {
+        if (!project.hasProperty('kubejsLazyJar')) {
+            throw new GradleException('Supply -PkubejsLazyJar=/path/to/kubejs.jar')
+        }
+        workingDir.mkdirs()
+        args project.file(project.property('kubejsLazyJar')).absolutePath
+    }
+}

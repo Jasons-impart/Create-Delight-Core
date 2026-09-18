@@ -38,13 +38,18 @@ public final class KubeJsLazyRegression {
         ClassNode baseline = read(original);
         for (int i = 0; i < node.methods.size(); i++) {
             var method = node.methods.get(i);
-            if ((method.name.equals("get") && method.desc.equals("()Ljava/lang/Object;"))
-                    || (method.name.equals("forget") && method.desc.equals("()V"))) {
-                check((method.access & Opcodes.ACC_SYNCHRONIZED) != 0, "Missing synchronized flag");
-                method.access = baseline.methods.get(i).access;
+            if (method.name.equals("get") || method.name.equals("forget")) {
+                check((method.access & Opcodes.ACC_SYNCHRONIZED) == 0, "Factory would run under a method monitor");
+                for (var instruction : method.instructions) {
+                    check(instruction.getOpcode() != Opcodes.MONITORENTER, "Unexpected monitor in cache bridge");
+                }
+            }
+            if (method.name.equals("get") || method.name.equals("forget") || method.name.equals("<init>")) {
+                node.methods.set(i, baseline.methods.get(i));
             }
         }
-        check(Arrays.equals(normalized, write(node)), "Patch changed more than the two access flags");
+        check(node.fields.removeIf(field -> field.name.equals("createdelightcore$lazyCache")), "Missing cache field");
+        check(Arrays.equals(normalized, write(node)), "Patch changed unrelated class contents");
         var incompatible = read(original);
         incompatible.methods.removeIf(method -> method.name.equals("forget"));
         byte[] beforeFailure = write(incompatible);
@@ -56,10 +61,15 @@ public final class KubeJsLazyRegression {
         }
         Class<?> patchedClass = define(patched);
         semantics(patchedClass);
+        invalidationDuringComputation(patchedClass, false);
+        invalidationDuringComputation(patchedClass, true);
+        concurrentMisses(patchedClass);
+        callbackCanWaitForForget(patchedClass);
         long originalNulls = race(define(original));
         long patchedNulls = race(patchedClass);
         check(patchedNulls == 0, "Patched get returned null " + patchedNulls + " times");
-        System.out.println("PASS: flags-only, idempotency, shape guard, cache, forget, expiration, supplier retry, concurrency");
+        System.out.println("PASS: bridge scope, idempotency, shape guard, cache, null, expiration, supplier retry,");
+        System.out.println("      invalidation during computation, concurrent misses, callback waiting for forget, concurrency");
         System.out.println("8 threads x 250000 iterations: original nulls=" + originalNulls + ", patched nulls=" + patchedNulls);
     }
 
@@ -74,6 +84,11 @@ public final class KubeJsLazyRegression {
         check(first != get.invoke(lazy) && calls.get() == 2, "forget did not invalidate cache");
         Object expired = type.getMethod("of", Supplier.class, long.class).invoke(null, supplier, -1000L);
         check(get.invoke(expired) != get.invoke(expired), "Expired cache was retained");
+        AtomicInteger nullCalls = new AtomicInteger();
+        Supplier<Object> nullable = () -> { nullCalls.incrementAndGet(); return null; };
+        Object nullLazy = type.getMethod("of", Supplier.class).invoke(null, nullable);
+        check(get.invoke(nullLazy) == null && get.invoke(nullLazy) == null && nullCalls.get() == 1,
+                "A legitimate null must still be cached");
         AtomicInteger attempts = new AtomicInteger();
         Supplier<Object> throwing = () -> {
             if (attempts.getAndIncrement() == 0) throw new IllegalStateException("expected supplier failure");
@@ -86,12 +101,104 @@ public final class KubeJsLazyRegression {
         } catch (InvocationTargetException expected) {
             check(expected.getCause() instanceof IllegalStateException, "Wrong supplier exception");
         }
-        // Retry on another thread also verifies that exceptional exit released the monitor.
+        // Retry on another thread must remain possible after a callback fails.
         var executor = Executors.newSingleThreadExecutor();
         try {
             check(executor.submit(() -> get.invoke(retry)).get(10, TimeUnit.SECONDS) != null, "Retry failed");
         } finally {
             executor.shutdownNow();
+        }
+    }
+
+    private static void invalidationDuringComputation(Class<?> type, boolean refillBeforeCompletion) throws Exception {
+        var started = new CountDownLatch(1);
+        var resume = new CountDownLatch(1);
+        AtomicInteger calls = new AtomicInteger();
+        Object oldValue = new Object();
+        Object newValue = new Object();
+        Supplier<Object> factory = () -> {
+            if (calls.incrementAndGet() == 1) {
+                started.countDown();
+                await(resume);
+                return oldValue;
+            }
+            return newValue;
+        };
+        Object lazy = type.getMethod("of", Supplier.class).invoke(null, factory);
+        var get = type.getMethod("get");
+        var forget = type.getMethod("forget");
+        var executor = Executors.newSingleThreadExecutor();
+        try {
+            var computing = executor.submit(() -> get.invoke(lazy));
+            await(started);
+            forget.invoke(lazy);
+            forget.invoke(lazy); // Repeated invalidations must not reuse an earlier empty state identity.
+            if (refillBeforeCompletion) check(get.invoke(lazy) == newValue, "New generation failed to publish");
+            resume.countDown();
+            check(computing.get(5, TimeUnit.SECONDS) == oldValue, "In-flight caller lost its own result");
+            check(get.invoke(lazy) == newValue && calls.get() == 2, "Old computation repopulated the cache");
+        } finally {
+            resume.countDown();
+            executor.shutdownNow();
+        }
+    }
+
+    private static void concurrentMisses(Class<?> type) throws Exception {
+        var started = new CountDownLatch(1);
+        var resume = new CountDownLatch(1);
+        AtomicInteger calls = new AtomicInteger();
+        Object slowValue = new Object();
+        Object fastValue = new Object();
+        Supplier<Object> factory = () -> {
+            if (calls.incrementAndGet() == 1) {
+                started.countDown();
+                await(resume);
+                return slowValue;
+            }
+            return fastValue;
+        };
+        Object lazy = type.getMethod("of", Supplier.class).invoke(null, factory);
+        var get = type.getMethod("get");
+        var executor = Executors.newSingleThreadExecutor();
+        try {
+            var slow = executor.submit(() -> get.invoke(lazy));
+            await(started);
+            check(get.invoke(lazy) == fastValue, "Concurrent miss was blocked");
+            resume.countDown();
+            check(slow.get(5, TimeUnit.SECONDS) == slowValue, "Slow caller lost its own result");
+            check(get.invoke(lazy) == fastValue && calls.get() == 2, "CAS winner was overwritten");
+        } finally {
+            resume.countDown();
+            executor.shutdownNow();
+        }
+    }
+
+    private static void callbackCanWaitForForget(Class<?> type) throws Exception {
+        var executor = Executors.newSingleThreadExecutor();
+        var holder = new Object[1];
+        var forget = type.getMethod("forget");
+        Supplier<Object> factory = () -> {
+            try {
+                executor.submit(() -> forget.invoke(holder[0])).get(5, TimeUnit.SECONDS);
+                return new Object();
+            } catch (Exception error) {
+                throw new AssertionError("Callback cannot wait for another thread to invalidate the same Lazy", error);
+            }
+        };
+        try {
+            holder[0] = type.getMethod("of", Supplier.class).invoke(null, factory);
+            check(type.getMethod("get").invoke(holder[0]) != null, "Cross-thread callback returned null");
+        } finally {
+            executor.shutdownNow();
+        }
+    }
+
+    private static void await(CountDownLatch latch) {
+        try {
+            check(latch.await(5, TimeUnit.SECONDS), "Fixture coordination timed out");
+        } catch (InterruptedException error) {
+            Thread.currentThread().interrupt();
+            throw new AssertionError(error);
         }
     }
 
@@ -125,7 +232,7 @@ public final class KubeJsLazyRegression {
     }
 
     private static Class<?> define(byte[] bytes) {
-        return new ClassLoader(ClassLoader.getPlatformClassLoader()) {
+        return new ClassLoader(KubeJsLazyRegression.class.getClassLoader()) {
             Class<?> loadLazy() { return defineClass(NAME, bytes, 0, bytes.length); }
         }.loadLazy();
     }
