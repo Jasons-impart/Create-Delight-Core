@@ -1,0 +1,524 @@
+{
+  definition: {
+    multiblockSettings: {
+      showUIOnlyFormed: 1b,
+      showUIWhenClickStructure: 0b,
+      catalyst: {
+        isWhitelist: 1b,
+        consumeItemAmount: 0,
+        filterTags: [],
+        candidates: {
+          value: [],
+          _enable: 0b
+        },
+        matchNBT: 0b,
+        consumeDurabilityValue: 1,
+        filterItems: [],
+        _enable: 0b
+      }
+    },
+    machineSettings: {
+      dropMachineItem: 1b,
+      hasUI: 1b,
+      signalConnection: {
+        topConnection: 0b,
+        bottomConnection: 0b,
+        leftConnection: 0b,
+        rightConnection: 0b,
+        frontConnection: 0b,
+        backConnection: 0b
+      },
+      traitDefinitions: [
+        {
+          itemRendererSettings: {
+            isWhiteList: 0b,
+            renderStack: 1b,
+            spin: 0.0f,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          priority: 0,
+          recipeHandlerIO: "OUT",
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capabilityIO: {
+            bottomIO: "OUT",
+            frontIO: "OUT",
+            leftIO: "OUT",
+            backIO: "OUT",
+            internal: "OUT",
+            rightIO: "OUT",
+            topIO: "OUT"
+          },
+          slotNames: [],
+          slotSize: 27,
+          name: "item_slot",
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            matchNBT: 0b,
+            filterItems: [],
+            _enable: 0b
+          },
+          slotLimit: 64,
+          guiIO: "OUT",
+          isDistinct: 0b,
+          type: "item_slot",
+          autoWorldInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          },
+          autoWorldOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          }
+        }
+      ],
+      machineLevel: 0
+    },
+    itemProperties: {
+      maxStackSize: 64,
+      creativeTab: {
+        value: "createdelightcore:machines",
+        _enable: 1b
+      },
+      isGui3d: 1b,
+      rarity: "COMMON",
+      itemTooltips: [],
+      useBlockLight: 1b,
+      renderer: {
+        value: {},
+        _enable: 0b
+      }
+    },
+    id: "createdelightcore:assembly_line",
+    recipeLogicSettings: {
+      recipeDampingValue: 20,
+      consumeInputsAfterWorking: 1b,
+      alwaysSearchRecipe: 0b,
+      alwaysModifyRecipe: 0b,
+      recipeType: "createdelightcore:assembly_line",
+      recipeModifiers: [],
+      _enable: 1b
+    },
+    stateMachine: {
+      root: {
+        isGlobalVisible: 0b,
+        lightLevel: {
+          value: 0,
+          _enable: 1b
+        },
+        children: [
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [
+                  {
+                    isGlobalVisible: 0b,
+                    lightLevel: {
+                      value: 0,
+                      _enable: 0b
+                    },
+                    children: [],
+                    name: "waiting",
+                    renderingBox: {
+                      value: {
+                        min: [0.0d, 0.0d, 0.0d],
+                        max: [1.0d, 1.0d, 1.0d]
+                      },
+                      _enable: 0b
+                    },
+                    shape: {
+                      _enable: 0b,
+                      aabbs: [
+                        {
+                          min: [0.0d, 0.0d, 0.0d],
+                          max: [1.0d, 1.0d, 1.0d]
+                        }
+                      ]
+                    },
+                    renderer: {
+                      value: {},
+                      _enable: 0b
+                    },
+                    machineSound: {
+                      pitch: 1.0f,
+                      volume: 1.0f,
+                      loop: 1b,
+                      loopWithShuffle: 0b,
+                      soundSource: "BLOCKS",
+                      sound: "minecraft:block.furnace.fire_crackle",
+                      _enable: 0b,
+                      delay: 0
+                    },
+                    renderingRadius: 0
+                  }
+                ],
+                name: "working",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 0
+              },
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [],
+                name: "suspend",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 0
+              }
+            ],
+            name: "formed",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 0
+          }
+        ],
+        name: "base",
+        renderingBox: {
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          },
+          _enable: 0b
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        renderer: {
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "minecraft:block/furnace"
+            }
+          },
+          _enable: 1b
+        },
+        machineSound: {
+          pitch: 1.0f,
+          volume: 1.0f,
+          loop: 1b,
+          loopWithShuffle: 0b,
+          soundSource: "BLOCKS",
+          sound: "minecraft:block.furnace.fire_crackle",
+          _enable: 0b,
+          delay: 0
+        },
+        renderingRadius: 0
+      }
+    },
+    blockProperties: {
+      noParticleOnBreak: 0b,
+      hasCollision: 1b,
+      friction: 0.6000000238418579f,
+      isSuffocating: 0b,
+      transparent: 0b,
+      forceSolid: 0b,
+      explosionResistance: 6.0f,
+      speedFactor: 1.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutoutMipped: 0b,
+        cutout: 1b
+      },
+      isAir: 0b,
+      useAO: 1b,
+      ignitedByLava: 0b,
+      rotationState: "NON_Y_AXIS",
+      blockSound: {
+        breakSound: "minecraft:block.stone.break",
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        hitSound: "minecraft:block.stone.hit",
+        stepSound: "minecraft:block.stone.step",
+        volumeIn: 1.0f,
+        fallSound: "minecraft:block.stone.fall"
+      },
+      destroyTime: 1.5f,
+      emissive: 0b,
+      canOcclude: 1b,
+      jumpFactor: 1.0f,
+      collisionShapeFullBlock: 0b,
+      replaceable: 0b,
+      canBeWaterlogged: 0b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 180,
+    x: 150,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 92
+      }
+    ]
+  },
+  pattern: {
+    size: [I; 7, 5, 5],
+    cells: [I; 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 3, 0, 0, 0, 1, 4, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 3, 0, 0, 0, 1, 4, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 3, 0, 0, 0, 1, 4, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 3, 0, 0, 0, 1, 4, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 4, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+    holders: [
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["any"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:forge_steel_casing"]
+      },
+      {
+        controller: 1b,
+        facing: 4,
+        predicates: []
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:assembly_import_hatch"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:assemble_import_bus"]
+      }
+    ],
+    axis: "X",
+    repetitions: [I; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1],
+    predicates: {
+      air: {
+        type: "air",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:assembly_import_hatch": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:assembly_import_hatch"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:assemble_import_bus": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:assemble_import_bus"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      any: {
+        type: "any",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:forge_steel_casing": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forge_steel_casing"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      }
+    }
+  }
+}

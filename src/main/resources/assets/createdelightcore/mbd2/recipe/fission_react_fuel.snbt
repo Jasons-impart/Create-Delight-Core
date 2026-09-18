@@ -1,0 +1,111 @@
+{
+  ui: {
+    type: "group",
+    id: "",
+    width: 103,
+    height: 86,
+    x: 306,
+    y: 100,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "fluid_slot",
+        id: "@fluid_export_0",
+        width: 12,
+        height: 54,
+        x: 60,
+        y: 22,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "progress",
+        id: "@forge_energy_export_0",
+        width: 12,
+        height: 54,
+        x: 79,
+        y: 22,
+        background: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        empty: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        filled: {
+          image: "mbd2:textures/gui/energy_base.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        direction: "DOWN_TO_UP",
+        children: []
+      },
+      {
+        type: "progress",
+        id: "@progress_bar",
+        width: 18,
+        height: 18,
+        x: 33,
+        y: 40,
+        empty: {},
+        filled: {
+          image: "mbd2:textures/gui/nuclear_reactor.png",
+          rect: [I; 0, 0, 16, 16]
+        },
+        direction: "LEFT_TO_RIGHT",
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_0",
+        width: 12,
+        height: 54,
+        x: 13,
+        y: 22,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "text_texture",
+        id: "",
+        width: 79,
+        height: 12,
+        x: 12,
+        y: 7,
+        text: "单个燃料组件配方",
+        component: '{"translate":"message.createdelight.fission_reactor.recipe"}',
+        children: []
+      }
+    ]
+  },
+  visible: 0b,
+  proxyVisible: 0b
+}

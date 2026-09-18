@@ -1,0 +1,19 @@
+{
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 100,
+    x: 200,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: []
+  },
+  visible: 0b,
+  proxyVisible: 0b,
+  proxies: []
+}

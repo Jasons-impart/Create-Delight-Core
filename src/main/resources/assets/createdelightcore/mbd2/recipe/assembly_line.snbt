@@ -1,0 +1,318 @@
+{
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 100,
+    x: 200,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "item_slot",
+        id: "@item_import_0",
+        width: 18,
+        height: 18,
+        x: 5,
+        y: 5,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_1",
+        width: 18,
+        height: 18,
+        x: 23,
+        y: 5,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_2",
+        width: 18,
+        height: 18,
+        x: 41,
+        y: 5,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_3",
+        width: 18,
+        height: 18,
+        x: 59,
+        y: 5,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_4",
+        width: 18,
+        height: 18,
+        x: 5,
+        y: 23,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_5",
+        width: 18,
+        height: 18,
+        x: 23,
+        y: 23,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_6",
+        width: 18,
+        height: 18,
+        x: 41,
+        y: 23,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_7",
+        width: 18,
+        height: 18,
+        x: 59,
+        y: 23,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_0",
+        width: 18,
+        height: 18,
+        x: 5,
+        y: 70,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_1",
+        width: 18,
+        height: 18,
+        x: 23,
+        y: 70,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_2",
+        width: 18,
+        height: 18,
+        x: 41,
+        y: 70,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_3",
+        width: 18,
+        height: 18,
+        x: 59,
+        y: 70,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "progress",
+        id: "@progress_bar",
+        width: 18,
+        height: 18,
+        x: 85,
+        y: 38,
+        empty: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 0, 20, 20]
+        },
+        filled: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 20, 20, 20]
+        },
+        direction: "LEFT_TO_RIGHT",
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_8",
+        width: 18,
+        height: 18,
+        x: 5,
+        y: 41,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_9",
+        width: 18,
+        height: 18,
+        x: 23,
+        y: 41,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_10",
+        width: 18,
+        height: 18,
+        x: 41,
+        y: 41,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_11",
+        width: 18,
+        height: 18,
+        x: 59,
+        y: 41,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "label",
+        id: "@duration",
+        width: 62,
+        height: 9,
+        x: 92,
+        y: 76,
+        text: "持续时间：100t",
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_export_0",
+        width: 18,
+        height: 18,
+        x: 110,
+        y: 38,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      }
+    ]
+  },
+  visible: 0b,
+  proxyVisible: 0b,
+  proxies: ["create:sequenced_assembly"]
+}

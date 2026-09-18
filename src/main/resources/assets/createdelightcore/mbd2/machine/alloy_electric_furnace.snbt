@@ -1,0 +1,963 @@
+{
+  definition: {
+    multiblockSettings: {
+      showUIOnlyFormed: 1b,
+      showUIWhenClickStructure: 0b,
+      catalyst: {
+        isWhitelist: 1b,
+        consumeItemAmount: 0,
+        filterTags: [],
+        candidates: {
+          value: [],
+          _enable: 1b
+        },
+        matchNBT: 0b,
+        consumeDurabilityValue: 1,
+        filterItems: [],
+        _enable: 0b
+      }
+    },
+    machineSettings: {
+      dropMachineItem: 1b,
+      hasUI: 1b,
+      signalConnection: {
+        topConnection: 0b,
+        bottomConnection: 0b,
+        leftConnection: 0b,
+        rightConnection: 0b,
+        frontConnection: 0b,
+        backConnection: 0b
+      },
+      traitDefinitions: [
+        {
+          itemRendererSettings: {
+            isWhiteList: 0b,
+            renderStack: 1b,
+            spin: 0.0f,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          priority: 0,
+          recipeHandlerIO: "IN",
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capabilityIO: {
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            internal: "IN",
+            rightIO: "NONE",
+            topIO: "NONE"
+          },
+          slotNames: [],
+          slotSize: 2,
+          name: "forged_steel_import_item_slot",
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            matchNBT: 0b,
+            filterItems: [],
+            _enable: 0b
+          },
+          slotLimit: 64,
+          guiIO: "BOTH",
+          isDistinct: 0b,
+          type: "item_slot",
+          autoWorldInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          },
+          autoWorldOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          }
+        },
+        {
+          itemRendererSettings: {
+            isWhiteList: 0b,
+            renderStack: 1b,
+            spin: 0.5f,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.5f, 1.5f, 1.5f],
+            _enable: 0b,
+            scale: [0.6000000238418579f, 0.6000000238418579f, 0.6000000238418579f]
+          },
+          priority: 0,
+          recipeHandlerIO: "OUT",
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capabilityIO: {
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            internal: "OUT",
+            rightIO: "NONE",
+            topIO: "NONE"
+          },
+          slotNames: [],
+          slotSize: 2,
+          name: "forged_steel_export_item_slot",
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            matchNBT: 0b,
+            filterItems: [],
+            _enable: 0b
+          },
+          slotLimit: 64,
+          guiIO: "OUT",
+          isDistinct: 0b,
+          type: "item_slot",
+          autoWorldInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          },
+          autoWorldOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          }
+        },
+        {
+          maxReceive: 8000,
+          priority: 0,
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          recipeHandlerIO: "IN",
+          capacity: 800000,
+          capabilityIO: {
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            internal: "IN",
+            rightIO: "NONE",
+            topIO: "NONE"
+          },
+          slotNames: [],
+          name: "forged_steel_import_forge_energy_storage",
+          maxExtract: 8000,
+          guiIO: "BOTH",
+          fancyRendererSettings: {
+            isWhiteList: 0b,
+            percentHeight: 0b,
+            color: -1431699439,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          isDistinct: 0b,
+          type: "forge_energy_storage"
+        }
+      ],
+      machineLevel: 0
+    },
+    itemProperties: {
+      maxStackSize: 64,
+      creativeTab: {
+        value: "createdelightcore:machines",
+        _enable: 1b
+      },
+      isGui3d: 1b,
+      rarity: "COMMON",
+      itemTooltips: [],
+      useBlockLight: 1b,
+      renderer: {
+        value: {},
+        _enable: 0b
+      }
+    },
+    id: "createdelightcore:alloy_electric_furnace",
+    recipeLogicSettings: {
+      recipeDampingValue: 1,
+      consumeInputsAfterWorking: 0b,
+      alwaysSearchRecipe: 0b,
+      alwaysModifyRecipe: 0b,
+      recipeType: "createdelightcore:alloy_electric_furnace",
+      recipeModifiers: [
+        {
+          targetContent: "IN",
+          contentModifier: {
+            addition: 0.0d,
+            multiplier: 1.0d
+          },
+          maxParallel: {
+            addition: 0.0d,
+            multiplier: 4.0d
+          },
+          durationModifier: {
+            addition: 0.0d,
+            multiplier: 0.5d
+          },
+          recipeConditions: [
+            {
+              blocks: ["createdelightcore:copper_coil"],
+              minCount: 2,
+              maxCount: 3,
+              type: "block",
+              isReverse: 0b
+            }
+          ]
+        },
+        {
+          targetContent: "BOTH",
+          contentModifier: {
+            addition: 0.0d,
+            multiplier: 1.0d
+          },
+          maxParallel: {
+            addition: 0.0d,
+            multiplier: 8.0d
+          },
+          durationModifier: {
+            addition: 0.0d,
+            multiplier: 1.0d
+          },
+          recipeConditions: []
+        }
+      ],
+      _enable: 1b
+    },
+    stateMachine: {
+      root: {
+        isGlobalVisible: 0b,
+        lightLevel: {
+          value: 0,
+          _enable: 1b
+        },
+        children: [
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 15,
+              _enable: 0b
+            },
+            children: [
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 10,
+                  _enable: 0b
+                },
+                children: [
+                  {
+                    isGlobalVisible: 0b,
+                    lightLevel: {
+                      value: 0,
+                      _enable: 0b
+                    },
+                    children: [],
+                    name: "waiting",
+                    renderingBox: {
+                      value: {
+                        min: [0.0d, 0.0d, 0.0d],
+                        max: [1.0d, 1.0d, 1.0d]
+                      },
+                      _enable: 0b
+                    },
+                    shape: {
+                      _enable: 0b,
+                      aabbs: [
+                        {
+                          min: [0.0d, 0.0d, 0.0d],
+                          max: [1.0d, 1.0d, 1.0d]
+                        }
+                      ]
+                    },
+                    renderer: {
+                      value: {
+                        type: "json_model",
+                        data: {
+                          modelLocation: "mbd2:alloy_electric_furnace_base"
+                        }
+                      },
+                      _enable: 1b
+                    },
+                    machineSound: {
+                      pitch: 1.0f,
+                      volume: 1.0f,
+                      loop: 1b,
+                      loopWithShuffle: 0b,
+                      soundSource: "BLOCKS",
+                      sound: "minecraft:block.furnace.fire_crackle",
+                      _enable: 0b,
+                      delay: 0
+                    },
+                    renderingRadius: 64
+                  }
+                ],
+                name: "working",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {
+                    type: "json_model",
+                    data: {
+                      modelLocation: "mbd2:alloy_electric_furnace_running"
+                    }
+                  },
+                  _enable: 1b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 64
+              },
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [],
+                name: "suspend",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 64
+              }
+            ],
+            name: "formed",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 64
+          }
+        ],
+        name: "base",
+        renderingBox: {
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          },
+          _enable: 0b
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        renderer: {
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:alloy_electric_furnace_base"
+            }
+          },
+          _enable: 1b
+        },
+        machineSound: {
+          pitch: 1.0f,
+          volume: 1.0f,
+          loop: 1b,
+          loopWithShuffle: 0b,
+          soundSource: "BLOCKS",
+          sound: "minecraft:block.furnace.fire_crackle",
+          _enable: 0b,
+          delay: 0
+        },
+        renderingRadius: 64
+      }
+    },
+    blockProperties: {
+      noParticleOnBreak: 0b,
+      hasCollision: 1b,
+      friction: 0.6000000238418579f,
+      isSuffocating: 1b,
+      transparent: 0b,
+      forceSolid: 0b,
+      explosionResistance: 6.0f,
+      speedFactor: 1.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutoutMipped: 0b,
+        cutout: 1b
+      },
+      isAir: 0b,
+      useAO: 1b,
+      ignitedByLava: 0b,
+      rotationState: "NON_Y_AXIS",
+      blockSound: {
+        breakSound: "minecraft:block.stone.break",
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        hitSound: "minecraft:block.stone.hit",
+        stepSound: "minecraft:block.stone.step",
+        volumeIn: 1.0f,
+        fallSound: "minecraft:block.stone.fall"
+      },
+      destroyTime: 1.5f,
+      emissive: 0b,
+      canOcclude: 1b,
+      jumpFactor: 1.0f,
+      collisionShapeFullBlock: 0b,
+      replaceable: 0b,
+      canBeWaterlogged: 0b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 164,
+    x: 153,
+    y: 65,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 74
+      },
+      {
+        type: "text_texture",
+        id: "",
+        width: 48,
+        height: 11,
+        x: 64,
+        y: 4,
+        text: "合金电炉",
+        component: '{"translate":"block.createdelightcore.alloy_electric_furnace"}',
+        children: []
+      },
+      {
+        type: "progress",
+        id: "ui:progress_bar",
+        width: 18,
+        height: 18,
+        x: 79,
+        y: 34,
+        empty: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 0, 20, 20]
+        },
+        filled: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 20, 20, 20]
+        },
+        direction: "LEFT_TO_RIGHT",
+        children: []
+      },
+      {
+        type: "button",
+        id: "ui:xei_lookup",
+        width: 18,
+        height: 18,
+        x: 78,
+        y: 34,
+        background: {},
+        tooltips: ['{"translate":"editor.machine.recipe_type_ui_view.xei_lookup.hover"}'],
+        children: []
+      },
+      {
+        type: "progress",
+        id: "ui:forged_steel_import_forge_energy_storage",
+        width: 12,
+        height: 54,
+        x: 18,
+        y: 17,
+        background: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        empty: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        filled: {
+          image: "mbd2:textures/gui/energy_base.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        direction: "DOWN_TO_UP",
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:forged_steel_import_item_slot_0",
+        width: 18,
+        height: 18,
+        x: 43,
+        y: 26,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:forged_steel_import_item_slot_1",
+        width: 18,
+        height: 18,
+        x: 43,
+        y: 44,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:forged_steel_export_item_slot_0",
+        width: 18,
+        height: 18,
+        x: 115,
+        y: 34,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:forged_steel_export_item_slot_1",
+        width: 18,
+        height: 18,
+        x: 133,
+        y: 34,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 4, 4]
+        },
+        children: []
+      }
+    ]
+  },
+  pattern: {
+    size: [I; 5, 8, 5],
+    cells: [I; 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 3, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 5, 1, 0, 0, 2, 6, 2, 0, 0, 2, 5, 2, 0, 0, 1, 7, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 2, 0, 0, 0, 1, 3, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    holders: [
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["any"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:forge_steel_casing", "createdelightcore:forged_steel_import_bus", "createdelightcore:forged_steel_export_bus"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["create_fantasizing:sturdy_girder"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 6", "new 4"]
+      },
+      {
+        controller: 1b,
+        facing: 2,
+        predicates: []
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdeco:industrial_iron_hull", "new 4"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 7"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["minecraft:campfire"]
+      }
+    ],
+    axis: "Y",
+    repetitions: [I; 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1],
+    predicates: {
+      "createdelightcore:forged_steel_import_bus": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forged_steel_import_bus"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "create_fantasizing:sturdy_girder": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["create_fantasizing:sturdy_girder"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 7": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:copper_coil"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 6": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "createdeco:industrial_iron_hull",
+            Properties: {
+              facing: "west"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 4": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdeco:industrial_iron_hull"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:forged_steel_export_bus": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forged_steel_export_bus"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      air: {
+        type: "air",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      any: {
+        type: "any",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "create:industrial_iron_block": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["create:industrial_iron_block"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdeco:industrial_iron_hull": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "createdeco:industrial_iron_hull",
+            Properties: {
+              facing: "up"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "minecraft:campfire": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["minecraft:campfire"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:forge_steel_casing": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forge_steel_casing"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      }
+    }
+  }
+}
