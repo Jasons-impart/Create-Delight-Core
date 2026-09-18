@@ -48,6 +48,7 @@ public final class MbdReactorTests {
             recipes.removeIf(r -> r.id().equals(fuel.id));
             recipes.add(new RecipeHolder<>(fuel.id, fuel));
             helper.getLevel().getRecipeManager().replaceRecipes(recipes);
+            MbdRecipeValidation.started(new net.neoforged.neoforge.event.server.ServerStartedEvent(helper.getLevel().getServer()));
             input.storage.setStackInSlot(0, new ItemStack(Items.COAL));
             helper.assertTrue(machine.modifyFuelRecipe(fuel) == null, "Inserted control rods forbid new fuel");
             var recipe = MBDRecipeBuilder.of(MbdCompat.id("test/reactor_water"), type)
