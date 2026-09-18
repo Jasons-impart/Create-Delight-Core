@@ -10,6 +10,7 @@ This directory stores CDC development knowledge that is useful for future work b
 | Lightweight technical "how do I change this kind of thing" notes | `docs/dev-knowledge/how-to-index.md` |
 | Current repository-wide constraints and route pointers | `AGENTS.md` or a directory-level `AGENTS.md` |
 | Historical bugs, root causes, and workarounds | `docs/lessons-learned.md` |
+| 外部模组缺陷或兼容差异的定向补丁、验证及升级复核条件 | [compatibility-patches.md](compatibility-patches.md) |
 
 ## Entry Rules
 
