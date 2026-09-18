@@ -56,6 +56,9 @@ public final class MbdCompat {
         MbdReactor.register();
         NeoForge.EVENT_BUS.addListener(MbdHydropower::formed);
         NeoForge.EVENT_BUS.addListener(MbdHydropower::invalid);
+        if (Boolean.getBoolean("createdelightcore.verifyMbdRecipes")) {
+            NeoForge.EVENT_BUS.addListener(MbdRecipeValidation::started);
+        }
     }
 
     private static void structureFormed(MachineStructureFormedEvent event) {
