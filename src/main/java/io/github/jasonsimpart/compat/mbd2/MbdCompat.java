@@ -31,7 +31,8 @@ public final class MbdCompat {
             "hydropower_station", "hydropower_amplifier", "wooden_fan", "steel_fan", "forge_steel_fan", "dragon_steel_fan",
             "butchery_room", "create_in", "andesite_import_bus", "andesite_export_bus",
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
-            "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus"
+            "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
+            "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller"
     };
 
     private MbdCompat() {}
@@ -52,6 +53,7 @@ public final class MbdCompat {
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         MbdAssembly.register();
         MbdCentrifuge.register();
+        MbdReactor.register();
         NeoForge.EVENT_BUS.addListener(MbdHydropower::formed);
         NeoForge.EVENT_BUS.addListener(MbdHydropower::invalid);
     }
@@ -72,7 +74,7 @@ public final class MbdCompat {
     }
 
     private static void registerRecipeTypes(MBDRegistryEvent.MBDRecipeType event) {
-        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel")) {
+        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel", "fission_react", "fission_react_fuel")) {
             var project = read("recipe/" + name);
             var proxies = project.getList("proxies", Tag.TAG_STRING).stream()
                     .map(raw -> ResourceLocation.parse(raw.getAsString())).toArray(ResourceLocation[]::new);
