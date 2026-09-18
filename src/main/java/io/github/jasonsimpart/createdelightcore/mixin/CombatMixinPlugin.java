@@ -37,6 +37,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".alexsmobs.")) {
+            return decide(mixinClassName, "alexsmobs");
+        }
         if (mixinClassName.contains(".tetrawear.")) {
             return decide(mixinClassName, "tetrawear");
         }
@@ -102,6 +105,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+        if (mixinClassName.endsWith(".alexsmobs.WarpedToadPredationDamageMixin")) {
+            LOGGER.info("[CDCore][PredationDamage] Applied crimson-mosquito predation damage 10000 in {}", targetClassName);
+        }
         if (mixinClassName.endsWith(".combat.LivingDamagePipelineArithmeticMixin")
                 || mixinClassName.endsWith(".combat.CombatRulesDiagnosticsMixin")
                 || mixinClassName.endsWith(".combat.apothicattributes.ArmorFormulaDiagnosticsMixin")) {

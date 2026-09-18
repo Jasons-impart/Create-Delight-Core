@@ -24,6 +24,15 @@ public final class DamageDiagnostics {
     public static DamageTrace begin(String phase, LivingEntity entity, DamageSource source, float amount) {
         if (!enabled()) return null;
         DamageTrace trace = new DamageTrace(phase, () -> describe(entity, source), CURRENT.get());
+        // Finite predation is now below the extreme-value threshold. Keep bounded success
+        // samples for the pending in-game regression instead of treating silence as success.
+        Entity attacker = source.getEntity();
+        if (attacker != null
+                && "alexsmobs:warped_toad".equals(String.valueOf(ForgeRegistries.ENTITY_TYPES.getKey(attacker.getType())))
+                && "alexsmobs:crimson_mosquito".equals(String.valueOf(ForgeRegistries.ENTITY_TYPES.getKey(entity.getType())))) {
+            trace.suspicious = true;
+            trace.add("PREDATION_SAMPLE input=" + FloatArithmetic.format(amount));
+        }
         CURRENT.set(trace);
         observe(trace, phase.endsWith(".actuallyHurt") ? "pipeline input=" + FloatArithmetic.format(amount)
                 : "ForgeHooks input=" + FloatArithmetic.format(amount), amount);
