@@ -2,6 +2,7 @@ package io.github.jasonsimpart;
 
 import io.github.jasonsimpart.server.AlexCavesDimensionSpawnGuardEvents;
 import io.github.jasonsimpart.server.DropReportEvents;
+import io.github.jasonsimpart.compat.tetra.TetraCombatCompat;
 import io.github.jasonsimpart.disabled.DisabledContentEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
@@ -47,6 +48,9 @@ public final class ModCommonEvents {
         DisabledContentEvents.register(modEventBus);
         registerWaystonesMoneyTeleport();
         registerQualityFoodCurrencyCompat();
+        if (ModList.get().isLoaded("tetra")) {
+            TetraCombatCompat.register();
+        }
     }
 
     private static void registerWaystonesMoneyTeleport() {

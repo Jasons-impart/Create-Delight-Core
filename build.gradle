@@ -9,6 +9,19 @@ version = mod_version
 group = mod_group_id
 
 repositories {
+    // The pack's NeoForge Tetra port is published as a flat artifact, not a Maven module.
+    // Keep it remote and compile-only; never resolve against a developer's mods directory.
+    exclusiveContent {
+        forRepository {
+            ivy {
+                name = 'CDPRPorts'
+                url = 'https://logistics.aisaveworld.tech/d/share/maven'
+                patternLayout { artifact '[artifact]-[revision].[ext]' }
+                metadataSources { artifact() }
+            }
+        }
+        filter { includeGroup 'cdpr.ports' }
+    }
     exclusiveContent {
         forRepository {
             maven {
@@ -128,6 +141,7 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    compileOnly('cdpr.ports:tetra:1.21.1-6.13.0')
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") {
         transitive = false
     }
