@@ -181,7 +181,22 @@ public final class ModFluids {
     public static final SimpleFluid YEAST = simpleLavaTexturedFluid("yeast", 0x9B897E);
 
     // 创造栏、客户端颜色和批量数据生成共用的流体清单。
-    public static final List<SimpleFluid> SIMPLE_FLUIDS = List.of(
+    // Legacy CCK/Cosmopolitan fluids required by the migrated centrifuge recipes.
+    // Source attribution and MIT notices: META-INF/licenses/mbd-food-fluids.txt.
+    public static final List<SimpleFluid> MBD_FOOD_FLUIDS = List.of(
+            milkshakeRecipeFluid("chocolate", 0xD39576), milkshakeRecipeFluid("strawberry", 0xFCBFFA),
+            milkshakeRecipeFluid("vanilla", 0xFCE8E5), milkshakeRecipeFluid("banana", 0xFCE797),
+            milkshakeRecipeFluid("mint", 0xD1F7D8), milkshakeRecipeFluid("adzuki", 0xFCA8AE),
+            milkshakeRecipeFluid("pumpkin", 0xF49F49), milkshakeRecipeFluid("sweet_berry", 0xE57283),
+            milkshakeRecipeFluid("lime", 0xD7F7AC), milkshakeRecipeFluid("pomegranate", 0xFB7C90),
+            iceCreamRecipeFluid("chocolate"), iceCreamRecipeFluid("adzuki"), iceCreamRecipeFluid("vanilla"),
+            iceCreamRecipeFluid("banana"), iceCreamRecipeFluid("strawberry"), iceCreamRecipeFluid("mint"),
+            iceCreamRecipeFluid("lime"), iceCreamRecipeFluid("pomegranate"), iceCreamRecipeFluid("sweet_berry"),
+            iceCreamRecipeFluid("pumpkin"), iceCreamRecipeFluid("apple"), iceCreamRecipeFluid("carrot"),
+            iceCreamRecipeFluid("enchanted_fruit"), iceCreamRecipeFluid("glow_berry"), iceCreamRecipeFluid("beetroot")
+    );
+
+    public static final List<SimpleFluid> SIMPLE_FLUIDS = java.util.stream.Stream.concat(List.of(
             FUEL_MIXTURES,
             LIGHT_CRUDE_OIL,
             ETHYLENE_FLUID,
@@ -305,7 +320,7 @@ public final class ModFluids {
             SKY_SOLUTION,
             UNFERMENTED_PAPER_PULP,
             YEAST
-    );
+    ).stream(), MBD_FOOD_FLUIDS.stream()).toList();
 
     private ModFluids() {
     }
@@ -340,6 +355,19 @@ public final class ModFluids {
         return simpleFluid(name, 0xFFFFFF, stillTexture, stillTexture, null, 5, false, false);
     }
 
+    private static SimpleFluid milkshakeRecipeFluid(String flavor, int rgb) {
+        return simpleFluid(flavor + "_milkshake", rgb, ResourceLocation.parse("create:fluid/milk_still"),
+                ResourceLocation.parse("create:fluid/milk_flow"), null, 5, false, false);
+    }
+
+    private static SimpleFluid iceCreamRecipeFluid(String flavor) {
+        var texture = ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, "block/fluid/" + flavor + "_ice_cream");
+        return simpleFluid(flavor + "_ice_cream", 0xFFFFFF, texture, texture, null, 5, false, false,
+                FluidType.Properties.create().sound(SoundActions.BUCKET_FILL, SoundEvents.SNOW_BREAK)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.SNOW_PLACE)
+                        .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.SNOW_BREAK));
+    }
+
     private static SimpleFluid waterLikeRecipeFluid(String name, int rgb) {
         return simpleFluid(name, rgb, WATER_STILL, WATER_FLOWING, WATER_OVERLAY, 5, false, false);
     }
@@ -353,15 +381,18 @@ public final class ModFluids {
     }
 
     private static SimpleFluid simpleFluid(String name, int rgb, ResourceLocation stillTexture, ResourceLocation flowingTexture, ResourceLocation overlayTexture, int tickRate, boolean hasBlock, boolean hasBucket) {
+        return simpleFluid(name, rgb, stillTexture, flowingTexture, overlayTexture, tickRate, hasBlock, hasBucket,
+                FluidType.Properties.create().canExtinguish(true).canHydrate(true).supportsBoating(true)
+                        .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                        .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY));
+    }
+
+    private static SimpleFluid simpleFluid(String name, int rgb, ResourceLocation stillTexture, ResourceLocation flowingTexture,
+                                          ResourceLocation overlayTexture, int tickRate, boolean hasBlock, boolean hasBucket,
+                                          FluidType.Properties typeProperties) {
         SimpleFluidReferences references = new SimpleFluidReferences(tickRate);
-        DeferredHolder<FluidType, FluidType> fluidType = FLUID_TYPES.register(name, () -> new FluidType(FluidType.Properties.create()
-                .descriptionId("fluid." + CreateDelightCore.MODID + "." + name)
-                .canExtinguish(true)
-                .canHydrate(true)
-                .supportsBoating(true)
-                .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
-                .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
-        ));
+        DeferredHolder<FluidType, FluidType> fluidType = FLUID_TYPES.register(name, () -> new FluidType(
+                typeProperties.descriptionId("fluid." + CreateDelightCore.MODID + "." + name)));
 
         DeferredHolder<Fluid, BaseFlowingFluid.Source> source = FLUIDS.register(name, () -> new BaseFlowingFluid.Source(references.properties()));
         DeferredHolder<Fluid, BaseFlowingFluid.Flowing> flowing = FLUIDS.register("flowing_" + name, () -> new BaseFlowingFluid.Flowing(references.properties()));
