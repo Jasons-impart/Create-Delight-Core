@@ -33,6 +33,7 @@ public final class MbdMachineTests {
         }
         event.register(MbdMachineTests.class);
         event.register(MbdHydropowerTests.class);
+        if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) event.register(MbdButcheryTests.class);
     }
 
     @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", timeoutTicks = 200)

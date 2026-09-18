@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "butchercraft:cow_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:sheep_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:pig_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:goat_carcass",
+      "required": false
+    }
+  ]
+}

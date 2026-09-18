@@ -28,7 +28,8 @@ public final class MbdCompat {
     private static final List<Runnable> SETUP = new ArrayList<>();
     private static final String[] MACHINES = {
             "alloy_electric_furnace", "copper_coil", "forged_steel_import_bus", "forged_steel_export_bus",
-            "hydropower_station", "hydropower_amplifier", "wooden_fan", "steel_fan", "forge_steel_fan", "dragon_steel_fan"
+            "hydropower_station", "hydropower_amplifier", "wooden_fan", "steel_fan", "forge_steel_fan", "dragon_steel_fan",
+            "butchery_room", "create_in", "andesite_import_bus", "andesite_export_bus"
     };
 
     private MbdCompat() {}
@@ -45,6 +46,7 @@ public final class MbdCompat {
         bus.addListener(MbdCompat::registerMachines);
         bus.addListener(MbdCompat::setup);
         bus.addListener(MbdMachineTests::register);
+        if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         NeoForge.EVENT_BUS.addListener(MbdHydropower::formed);
         NeoForge.EVENT_BUS.addListener(MbdHydropower::invalid);
@@ -66,7 +68,7 @@ public final class MbdCompat {
     }
 
     private static void registerRecipeTypes(MBDRegistryEvent.MBDRecipeType event) {
-        for (var name : List.of("alloy_electric_furnace", "hydropower_station")) {
+        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery")) {
             var project = read("recipe/" + name);
             var proxies = project.getList("proxies", Tag.TAG_STRING).stream()
                     .map(raw -> ResourceLocation.parse(raw.getAsString())).toArray(ResourceLocation[]::new);
