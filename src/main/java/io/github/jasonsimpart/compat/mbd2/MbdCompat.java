@@ -29,7 +29,9 @@ public final class MbdCompat {
     private static final String[] MACHINES = {
             "alloy_electric_furnace", "copper_coil", "forged_steel_import_bus", "forged_steel_export_bus",
             "hydropower_station", "hydropower_amplifier", "wooden_fan", "steel_fan", "forge_steel_fan", "dragon_steel_fan",
-            "butchery_room", "create_in", "andesite_import_bus", "andesite_export_bus"
+            "butchery_room", "create_in", "andesite_import_bus", "andesite_export_bus",
+            "assembly_line", "assembly_import_hatch", "assemble_import_bus",
+            "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus"
     };
 
     private MbdCompat() {}
@@ -48,6 +50,8 @@ public final class MbdCompat {
         bus.addListener(MbdMachineTests::register);
         if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
+        MbdAssembly.register();
+        MbdCentrifuge.register();
         NeoForge.EVENT_BUS.addListener(MbdHydropower::formed);
         NeoForge.EVENT_BUS.addListener(MbdHydropower::invalid);
     }
@@ -68,11 +72,28 @@ public final class MbdCompat {
     }
 
     private static void registerRecipeTypes(MBDRegistryEvent.MBDRecipeType event) {
-        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery")) {
+        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel")) {
             var project = read("recipe/" + name);
             var proxies = project.getList("proxies", Tag.TAG_STRING).stream()
                     .map(raw -> ResourceLocation.parse(raw.getAsString())).toArray(ResourceLocation[]::new);
             var type = new MBDRecipeType(id(name), proxies) {
+                @Override
+                public com.lowdragmc.mbd2.api.recipe.MBDRecipe toMBDrecipe(
+                        net.minecraft.world.item.crafting.RecipeType<?> sourceType, ResourceLocation sourceId,
+                        net.minecraft.world.item.crafting.Recipe<?> source) {
+                    if (!name.equals("big_centrifugation") && !name.equals("assembly_line")) {
+                        return super.toMBDrecipe(sourceType, sourceId, source);
+                    }
+                    // Upstream's generic item conversion throws for fluid-only Create outputs
+                    // before posting the proxy event. Our converters understand these recipes.
+                    var sourceTypeId = net.minecraft.core.registries.BuiltInRegistries.RECIPE_TYPE.getKey(sourceType);
+                    if (sourceTypeId == null) return null;
+                    var converted = new com.lowdragmc.mbd2.api.recipe.event.TransferProxyRecipeEvent(
+                            this, sourceTypeId, sourceType, sourceId, source, null);
+                    NeoForge.EVENT_BUS.post(converted.postCustomEvent());
+                    return converted.isCanceled() ? null : converted.mbdRecipe;
+                }
+
                 @Override
                 public List<net.minecraft.world.item.crafting.RecipeHolder<com.lowdragmc.mbd2.api.recipe.MBDRecipe>> searchFuelRecipe(
                         net.minecraft.world.item.crafting.RecipeManager manager,
