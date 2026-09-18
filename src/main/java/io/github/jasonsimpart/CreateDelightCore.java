@@ -3,6 +3,7 @@ package io.github.jasonsimpart;
 import com.mojang.logging.LogUtils;
 import io.github.jasonsimpart.compat.cmr.CmrCompat;
 import io.github.jasonsimpart.compat.createliquidfuel.CreateLiquidFuelCompat;
+import io.github.jasonsimpart.compat.mbd2.MbdCompat;
 import io.github.jasonsimpart.network.ModNetwork;
 import io.github.jasonsimpart.registry.ModBlocks;
 import io.github.jasonsimpart.registry.ModCreativeTabs;
@@ -16,6 +17,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -42,6 +44,9 @@ public class CreateDelightCore {
         CmrCompat.register(modEventBus);
         CreateLiquidFuelCompat.register(modEventBus);
         ModNetwork.register(modEventBus);
+        if (ModList.get().isLoaded("mbd2")) {
+            MbdCompat.register(modEventBus);
+        }
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             registerClientEvents(modEventBus);
