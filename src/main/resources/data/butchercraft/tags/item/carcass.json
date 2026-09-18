@@ -1,0 +1,93 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "butchercraft:cow_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:sheep_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:pig_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:goat_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:chicken_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:black_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:brown_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:white_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:splotched_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:gold_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:salt_rabbit_carcass",
+      "required": false
+    },
+    {
+      "id": "butchercraft:cow_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:sheep_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:pig_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:chicken_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:goat_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_salt_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_splotched_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_white_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_black_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_brown_head_item",
+      "required": false
+    },
+    {
+      "id": "butchercraft:rabbit_gold_head_item",
+      "required": false
+    }
+  ]
+}
