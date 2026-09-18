@@ -4,7 +4,9 @@ import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.MethodNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 public final class CombatMixinPlugin implements IMixinConfigPlugin {
+    private static final String KUBEJS_LAZY_MIXIN = "io.github.jasonsimpart.createdelightcore.mixin.kubejs.LazyMixin";
     private static final Logger LOGGER = LogManager.getLogger("CreateDelightCore/CombatMixinPlugin");
     private static final String APOTHIC_ATTRIBUTES_MIXIN = ".combat.apothicattributes.";
     private static final String BETTER_COMBAT_MIXIN = ".combat.bettercombat.";
@@ -34,6 +37,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (KUBEJS_LAZY_MIXIN.equals(mixinClassName)) {
+            return decide(mixinClassName, "kubejs");
+        }
         if (mixinClassName.contains(".alexsmobs.")) {
             return decide(mixinClassName, "alexsmobs");
         }
@@ -99,8 +105,35 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+        if (KUBEJS_LAZY_MIXIN.equals(mixinClassName)) {
+            synchronizeKubeJsLazy(targetClass);
+            LOGGER.info("[CDCore][KubeJSLazy] Synchronized get() and forget() in {}", targetClassName);
+        }
         if (mixinClassName.endsWith(".alexsmobs.WarpedToadPredationDamageMixin")) {
             LOGGER.info("[CDCore][PredationDamage] Applied crimson-mosquito predation damage 10000 in {}", targetClassName);
         }
+    }
+
+    private static void synchronizeKubeJsLazy(ClassNode targetClass) {
+        if (!"dev/latvian/mods/kubejs/util/Lazy".equals(targetClass.name)) {
+            throw new IllegalStateException("Unexpected KubeJS Lazy target: " + targetClass.name);
+        }
+        MethodNode get = null;
+        MethodNode forget = null;
+        for (MethodNode method : targetClass.methods) {
+            if ("get".equals(method.name) && "()Ljava/lang/Object;".equals(method.desc)) {
+                get = method;
+            } else if ("forget".equals(method.name) && "()V".equals(method.desc)) {
+                forget = method;
+            }
+        }
+        int unsupported = Opcodes.ACC_STATIC | Opcodes.ACC_ABSTRACT | Opcodes.ACC_NATIVE;
+        if (get == null || forget == null || (get.access & unsupported) != 0 || (forget.access & unsupported) != 0) {
+            throw new IllegalStateException("KubeJS Lazy method shape changed; review the synchronization patch");
+        }
+        // Both methods lock the same Lazy instance. The JVM also releases the monitor on exceptions.
+        // Preserve the upstream bodies, including expiration, supplier failures and forget semantics.
+        get.access |= Opcodes.ACC_SYNCHRONIZED;
+        forget.access |= Opcodes.ACC_SYNCHRONIZED;
     }
 }

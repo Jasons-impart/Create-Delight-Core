@@ -436,3 +436,19 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+// Explicit opt-in: exercises the production Mixin plugin against a local upstream KubeJS JAR.
+tasks.register('kubeJsLazyRegression', JavaExec) {
+    dependsOn testClasses
+    workingDir layout.buildDirectory.dir('kubejs-lazy-regression').get().asFile
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'io.github.jasonsimpart.createdelightcore.KubeJsLazyRegression'
+    javaLauncher = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(17) }
+    doFirst {
+        if (!project.hasProperty('kubejsLazyJar')) {
+            throw new GradleException('Supply -PkubejsLazyJar=/path/to/kubejs.jar')
+        }
+        workingDir.mkdirs()
+        args project.file(project.property('kubejsLazyJar')).absolutePath
+    }
+}
