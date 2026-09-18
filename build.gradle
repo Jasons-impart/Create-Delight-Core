@@ -158,6 +158,23 @@ dependencies {
     compileOnly("curse.maven:applied-energistics-2-223794:${ae2_file_id}")
     compileOnly("curse.maven:extendedae-892005:${extendedae_file_id}")
     compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
+    compileOnly("curse.maven:butchercraft-265715:7777338")
+    runtimeOnly("curse.maven:butchercraft-265715:7777338")
+    runtimeOnly("curse.maven:create-prismatic-shine-1355767:8036049")
+    compileOnly("curse.maven:multiblocked2-1104057:8351447")
+    compileOnly("curse.maven:ldlib-626676:8364073")
+    compileOnly("org.appliedenergistics.yoga:yoga:1.0.0")
+    compileOnly("dev.vfyjxf:taffy:1.1.4")
+    runtimeOnly("curse.maven:multiblocked2-1104057:8351447")
+    runtimeOnly("curse.maven:ldlib-626676:8364073")
+    // Pack-matched structure and worldgen dependencies for development runs.
+    runtimeOnly("curse.maven:create-deco-509285:7943181")
+    runtimeOnly("curse.maven:create-new-age-905861:7388244")
+    runtimeOnly("curse.maven:create-fantasizing-1279337:8036095")
+    runtimeOnly("curse.maven:northstar-redux-1318310:8307391")
+    runtimeOnly("curse.maven:geckolib-388172:7707149")
+    runtimeOnly("curse.maven:applied-energistics-2-223794:7027323")
+    runtimeOnly("curse.maven:guideme-1173950:7127444")
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
