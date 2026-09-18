@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class CDCMixinPlugin implements IMixinConfigPlugin {
     private static final String ALEXSCAVES_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.alexscaves.";
+    private static final String CMR_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.cmr.";
     private static final String ECLIPTICSEASONS_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.eclipticseasons.";
     private static final String ICEANDFIRE_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.iceandfire.";
     private static final String CREATE_METALLURGY_MIXIN_PACKAGE = "io.github.jasonsimpart.mixin.createmetallurgy.";
@@ -34,6 +35,9 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (mixinClassName.startsWith(ALEXSCAVES_MIXIN_PACKAGE)) {
             return isModLoaded("alexscavesup");
+        }
+        if (mixinClassName.startsWith(CMR_MIXIN_PACKAGE)) {
+            return isModLoaded("cmr");
         }
         if (mixinClassName.startsWith(ECLIPTICSEASONS_MIXIN_PACKAGE)) {
             return isModLoaded("eclipticseasons");
