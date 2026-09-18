@@ -35,6 +35,7 @@ public final class MbdMachineTests {
         event.register(MbdHydropowerTests.class);
         event.register(MbdAssemblyTests.class);
         event.register(MbdCentrifugeTests.class);
+        event.register(MbdReactorTests.class);
         if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) event.register(MbdButcheryTests.class);
     }
 
