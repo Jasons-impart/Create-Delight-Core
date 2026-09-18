@@ -1,0 +1,1625 @@
+{
+  definition: {
+    multiblockSettings: {
+      showUIOnlyFormed: 1b,
+      showUIWhenClickStructure: 0b,
+      catalyst: {
+        isWhitelist: 1b,
+        consumeItemAmount: 0,
+        filterTags: [],
+        candidates: {
+          value: [],
+          _enable: 0b
+        },
+        matchNBT: 0b,
+        consumeDurabilityValue: 1,
+        filterItems: [],
+        _enable: 0b
+      }
+    },
+    machineSettings: {
+      dropMachineItem: 1b,
+      hasUI: 1b,
+      signalConnection: {
+        topConnection: 0b,
+        bottomConnection: 0b,
+        leftConnection: 0b,
+        rightConnection: 0b,
+        frontConnection: 0b,
+        backConnection: 0b
+      },
+      traitDefinitions: [
+        {
+          itemRendererSettings: {
+            isWhiteList: 0b,
+            renderStack: 1b,
+            spin: 0.0f,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          priority: 0,
+          recipeHandlerIO: "IN",
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capabilityIO: {
+            bottomIO: "BOTH",
+            frontIO: "BOTH",
+            leftIO: "BOTH",
+            backIO: "BOTH",
+            internal: "BOTH",
+            rightIO: "BOTH",
+            topIO: "BOTH"
+          },
+          slotNames: ["fuel"],
+          slotSize: 1,
+          name: "forged_steel_import_item_slot",
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            matchNBT: 0b,
+            filterItems: [],
+            _enable: 0b
+          },
+          slotLimit: 64,
+          guiIO: "BOTH",
+          isDistinct: 0b,
+          type: "item_slot",
+          autoWorldInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          },
+          autoWorldOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 64,
+            _enable: 0b
+          }
+        },
+        {
+          type: "fluid_tank",
+          priority: 0,
+          fluidFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            filterFluids: [],
+            matchNBT: 0b,
+            _enable: 0b
+          },
+          autoInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capacity: 8000,
+          recipeHandlerIO: "IN",
+          tankSize: 1,
+          capabilityIO: {
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            internal: "IN",
+            rightIO: "NONE",
+            topIO: "NONE"
+          },
+          slotNames: [],
+          autoOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          name: "forged_steel_import_fluid_tank",
+          allowSameFluids: 0b,
+          guiIO: "BOTH",
+          fancyRendererSettings: {
+            isWhiteList: 0b,
+            percentHeight: 1b,
+            rotateOrientation: 1b,
+            filters: ["base"],
+            rotation: [0.0f, -45.0f, 0.0f],
+            position: [0.0f, 1.0f, 5.0f],
+            _enable: 0b,
+            scale: [4.5f, 1.0f, 4.5f]
+          },
+          isDistinct: 0b
+        },
+        {
+          type: "fluid_tank",
+          priority: 0,
+          fluidFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            filterFluids: [],
+            matchNBT: 0b,
+            _enable: 0b
+          },
+          autoInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capacity: 8000,
+          recipeHandlerIO: "OUT",
+          tankSize: 1,
+          capabilityIO: {
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            internal: "OUT",
+            rightIO: "NONE",
+            topIO: "NONE"
+          },
+          slotNames: [],
+          autoOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          name: "forged_steel_export_fluid_tank",
+          allowSameFluids: 0b,
+          guiIO: "OUT",
+          fancyRendererSettings: {
+            isWhiteList: 0b,
+            percentHeight: 0b,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          isDistinct: 0b
+        },
+        {
+          maxReceive: 2147483647,
+          priority: 0,
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          recipeHandlerIO: "OUT",
+          capacity: 10000000,
+          capabilityIO: {
+            bottomIO: "OUT",
+            frontIO: "OUT",
+            leftIO: "OUT",
+            backIO: "OUT",
+            internal: "OUT",
+            rightIO: "OUT",
+            topIO: "OUT"
+          },
+          slotNames: [],
+          name: "forged_steel_export_energy_storage",
+          maxExtract: 2147483647,
+          guiIO: "BOTH",
+          fancyRendererSettings: {
+            isWhiteList: 0b,
+            percentHeight: 0b,
+            color: -1431699439,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          isDistinct: 0b,
+          type: "forge_energy_storage"
+        }
+      ],
+      machineLevel: 0
+    },
+    itemProperties: {
+      maxStackSize: 64,
+      creativeTab: {
+        value: "createdelightcore:machines",
+        _enable: 1b
+      },
+      isGui3d: 1b,
+      rarity: "COMMON",
+      itemTooltips: [],
+      useBlockLight: 1b,
+      renderer: {
+        value: {},
+        _enable: 0b
+      }
+    },
+    id: "createdelightcore:fission_reactor",
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      consumeInputsAfterWorking: 0b,
+      alwaysSearchRecipe: 0b,
+      alwaysModifyRecipe: 0b,
+      recipeType: "createdelightcore:fission_react",
+      recipeModifiers: [],
+      _enable: 1b
+    },
+    stateMachine: {
+      root: {
+        isGlobalVisible: 0b,
+        lightLevel: {
+          value: 0,
+          _enable: 1b
+        },
+        children: [
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [
+                  {
+                    isGlobalVisible: 0b,
+                    lightLevel: {
+                      value: 0,
+                      _enable: 0b
+                    },
+                    children: [],
+                    name: "waiting",
+                    renderingBox: {
+                      value: {
+                        min: [0.0d, 0.0d, 0.0d],
+                        max: [1.0d, 1.0d, 1.0d]
+                      },
+                      _enable: 0b
+                    },
+                    shape: {
+                      _enable: 0b,
+                      aabbs: [
+                        {
+                          min: [0.0d, 0.0d, 0.0d],
+                          max: [1.0d, 1.0d, 1.0d]
+                        }
+                      ]
+                    },
+                    renderer: {
+                      value: {},
+                      _enable: 0b
+                    },
+                    machineSound: {
+                      pitch: 1.0f,
+                      volume: 1.0f,
+                      loop: 1b,
+                      loopWithShuffle: 0b,
+                      soundSource: "BLOCKS",
+                      sound: "minecraft:block.furnace.fire_crackle",
+                      _enable: 0b,
+                      delay: 0
+                    },
+                    renderingRadius: 64
+                  }
+                ],
+                name: "working",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {
+                    type: "json_model",
+                    data: {
+                      modelLocation: "mbd2:active_fission_reactor"
+                    }
+                  },
+                  _enable: 1b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "createdelightcore:machine.fission_reactor",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 0
+              },
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [],
+                name: "suspend",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 0
+              }
+            ],
+            name: "formed",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 0
+          }
+        ],
+        name: "base",
+        renderingBox: {
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          },
+          _enable: 0b
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        renderer: {
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:fission_reactor"
+            }
+          },
+          _enable: 1b
+        },
+        machineSound: {
+          pitch: 1.0f,
+          volume: 1.0f,
+          loop: 1b,
+          loopWithShuffle: 0b,
+          soundSource: "BLOCKS",
+          sound: "createdelightcore:machine.fission_reactor",
+          _enable: 0b,
+          delay: 0
+        },
+        renderingRadius: 0
+      }
+    },
+    blockProperties: {
+      noParticleOnBreak: 0b,
+      hasCollision: 1b,
+      friction: 0.6000000238418579f,
+      isSuffocating: 1b,
+      transparent: 0b,
+      forceSolid: 0b,
+      explosionResistance: 6.0f,
+      speedFactor: 1.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutoutMipped: 0b,
+        cutout: 1b
+      },
+      isAir: 0b,
+      useAO: 1b,
+      ignitedByLava: 0b,
+      rotationState: "NON_Y_AXIS",
+      blockSound: {
+        breakSound: "minecraft:block.stone.break",
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        hitSound: "minecraft:block.stone.hit",
+        stepSound: "minecraft:block.stone.step",
+        volumeIn: 1.0f,
+        fallSound: "minecraft:block.stone.fall"
+      },
+      destroyTime: 1.5f,
+      emissive: 0b,
+      canOcclude: 1b,
+      jumpFactor: 1.0f,
+      collisionShapeFullBlock: 0b,
+      replaceable: 0b,
+      canBeWaterlogged: 0b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 196,
+    x: 275,
+    y: 64,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "tab_group",
+        id: "",
+        width: 176,
+        height: 196,
+        x: 0,
+        y: 0,
+        background: {
+          image: "ldlib:textures/gui/background.png",
+          rect: [I; 0, 0, 16, 16],
+          border: [I; 4, 4]
+        },
+        tabs: [
+          {
+            button: {
+              type: "switch",
+              id: "",
+              width: 32,
+              height: 32,
+              x: -28,
+              y: 0,
+              background: {},
+              baseTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/tabs_left.png",
+                    rect: [I; 0, 0, 32, 28],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    textures: [
+                      {
+                        image: "ldlib:textures/gui/button.png",
+                        rect: [I; 0, 0, 32, 32],
+                        border: [I; 0, 0]
+                      },
+                      {
+                        image: "mbd2:textures/gui/nuclear_reactor.png",
+                        rect: [I; 0, 0, 16, 16]
+                      }
+                    ]
+                  }
+                ]
+              },
+              pressedTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/tabs_left.png",
+                    rect: [I; 32, 0, 32, 28],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    textures: [
+                      {
+                        image: "ldlib:textures/gui/button.png",
+                        rect: [I; 0, 0, 32, 32],
+                        border: [I; 0, 0]
+                      },
+                      {
+                        image: "mbd2:textures/gui/nuclear_reactor.png",
+                        rect: [I; 0, 0, 16, 16]
+                      }
+                    ]
+                  }
+                ]
+              },
+              hoverTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/button.png",
+                    rect: [I; 0, 0, 32, 32],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    image: "mbd2:textures/gui/nuclear_reactor.png",
+                    rect: [I; 0, 0, 16, 16]
+                  }
+                ]
+              },
+              pressed: 1b,
+              tooltips: ['{"translate":"message.createdelight.fission_reactor.state"}'],
+              children: []
+            },
+            group: {
+              type: "group",
+              id: "",
+              width: 0,
+              height: 0,
+              x: 0,
+              y: 0,
+              children: [
+                {
+                  type: "item_slot",
+                  id: "ui:forged_steel_import_item_slot_0",
+                  width: 18,
+                  height: 18,
+                  x: 79,
+                  y: 74,
+                  background: {
+                    image: "ldlib:textures/gui/slot.png",
+                    rect: [I; 0, 0, 18, 18],
+                    border: [I; 1, 1]
+                  },
+                  children: []
+                },
+                {
+                  type: "fluid_slot",
+                  id: "ui:forged_steel_import_fluid_tank_0",
+                  width: 12,
+                  height: 74,
+                  x: 28,
+                  y: 18,
+                  background: {
+                    image: "ldlib:textures/gui/slot.png",
+                    rect: [I; 0, 0, 18, 18],
+                    border: [I; 4, 4]
+                  },
+                  allowClickFilled: 1b,
+                  allowClickDrained: 1b,
+                  showAmount: 0b,
+                  fillDirection: "DOWN_TO_UP",
+                  overlay: {
+                    image: "mbd2:textures/gui/fluid_tank_overlay.png",
+                    rect: [I; 0, 0, 20, 58]
+                  },
+                  children: []
+                },
+                {
+                  type: "fluid_slot",
+                  id: "ui:forged_steel_export_fluid_tank_0",
+                  width: 12,
+                  height: 74,
+                  x: 136,
+                  y: 18,
+                  background: {
+                    image: "ldlib:textures/gui/slot.png",
+                    rect: [I; 0, 0, 18, 18],
+                    border: [I; 4, 4]
+                  },
+                  allowClickFilled: 1b,
+                  allowClickDrained: 1b,
+                  showAmount: 0b,
+                  fillDirection: "DOWN_TO_UP",
+                  overlay: {
+                    image: "mbd2:textures/gui/fluid_tank_overlay.png",
+                    rect: [I; 0, 0, 20, 58]
+                  },
+                  children: []
+                },
+                {
+                  type: "progress",
+                  id: "ui:forged_steel_export_energy_storage",
+                  width: 12,
+                  height: 74,
+                  x: 154,
+                  y: 18,
+                  background: {
+                    image: "mbd2:textures/gui/energy_background.png",
+                    rect: [I; 0, 0, 14, 42]
+                  },
+                  empty: {
+                    image: "mbd2:textures/gui/energy_background.png",
+                    rect: [I; 0, 0, 14, 42]
+                  },
+                  filled: {
+                    image: "mbd2:textures/gui/energy_base.png",
+                    rect: [I; 0, 0, 14, 42]
+                  },
+                  direction: "DOWN_TO_UP",
+                  children: []
+                },
+                {
+                  type: "text_texture",
+                  id: "",
+                  width: 106,
+                  height: 13,
+                  x: 35,
+                  y: 6,
+                  text: "核裂变反应堆",
+                  component: '{"translate":"block.createdelightcore.fission_reactor"}',
+                  children: []
+                },
+                {
+                  type: "group",
+                  id: "",
+                  width: 86,
+                  height: 47,
+                  x: 45,
+                  y: 23,
+                  background: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  children: [
+                    {
+                      type: "text_texture",
+                      id: "switch",
+                      width: 76,
+                      height: 12,
+                      x: 5,
+                      y: 4,
+                      text: "状态:禁用",
+                      component: '{"translate":"状态:禁用"}',
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "temperature",
+                      width: 78,
+                      height: 12,
+                      x: 5,
+                      y: 17,
+                      background: {},
+                      text: "温度:2000K",
+                      component: '{"translate":"温度:2000K"}',
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "degree_of_damage",
+                      width: 78,
+                      height: 12,
+                      x: 5,
+                      y: 30,
+                      text: "损坏:100.0％",
+                      component: '{"translate":"损坏:100.0％"}',
+                      children: []
+                    }
+                  ]
+                },
+                {
+                  type: "button",
+                  id: "ui:xei_lookup",
+                  width: 86,
+                  height: 47,
+                  x: 45,
+                  y: 23,
+                  background: {},
+                  tooltips: ['{"translate":"editor.machine.recipe_type_ui_view.xei_lookup.hover"}'],
+                  children: []
+                },
+                {
+                  type: "switch",
+                  id: "reactor_off",
+                  width: 78,
+                  height: 12,
+                  x: 90,
+                  y: 96,
+                  baseTexture: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  pressedTexture: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  hoverTexture: {
+                    color: -1,
+                    borderWidth: 1
+                  },
+                  pressed: 0b,
+                  children: []
+                },
+                {
+                  type: "switch",
+                  id: "reactor_on",
+                  width: 78,
+                  height: 12,
+                  x: 7,
+                  y: 96,
+                  baseTexture: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  pressedTexture: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  hoverTexture: {
+                    color: -1,
+                    borderWidth: 1
+                  },
+                  pressed: 0b,
+                  children: []
+                },
+                {
+                  type: "text_texture",
+                  id: "",
+                  width: 78,
+                  height: 2,
+                  x: 90,
+                  y: 101,
+                  text: "紧急关闭",
+                  component: '{"translate":"message.createdelight.fission_reactor.emergency_stop"}',
+                  children: []
+                },
+                {
+                  type: "text_texture",
+                  id: "",
+                  width: 78,
+                  height: 2,
+                  x: 7,
+                  y: 101,
+                  text: "启动",
+                  component: '{"translate":"message.createdelight.fission_reactor.start_reactor"}',
+                  children: []
+                },
+                {
+                  type: "player_inventory",
+                  id: "",
+                  width: 167,
+                  height: 81,
+                  x: 2,
+                  y: 108
+                }
+              ]
+            }
+          },
+          {
+            button: {
+              type: "switch",
+              id: "",
+              width: 32,
+              height: 32,
+              x: -28,
+              y: 32,
+              baseTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/tabs_left.png",
+                    rect: [I; 0, 28, 32, 28],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    textures: [
+                      {
+                        image: "ldlib:textures/gui/button.png",
+                        rect: [I; 0, 0, 32, 32],
+                        border: [I; 0, 0]
+                      },
+                      {
+                        image: "mbd2:textures/gui/fission_reactor.png",
+                        rect: [I; 0, 0, 16, 16]
+                      }
+                    ]
+                  }
+                ]
+              },
+              pressedTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/tabs_left.png",
+                    rect: [I; 32, 29, 32, 28],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    textures: [
+                      {
+                        image: "ldlib:textures/gui/button.png",
+                        rect: [I; 0, 0, 32, 32],
+                        border: [I; 0, 0]
+                      },
+                      {
+                        image: "mbd2:textures/gui/fission_reactor.png",
+                        rect: [I; 0, 0, 16, 16]
+                      }
+                    ]
+                  }
+                ]
+              },
+              hoverTexture: {
+                textures: [
+                  {
+                    image: "ldlib:textures/gui/button.png",
+                    rect: [I; 0, 0, 32, 32],
+                    border: [I; 0, 0]
+                  },
+                  {
+                    image: "mbd2:textures/gui/fission_reactor.png",
+                    rect: [I; 0, 0, 16, 16]
+                  }
+                ]
+              },
+              pressed: 0b,
+              tooltips: ['{"translate":"message.createdelight.fission_reactor.specifications"}'],
+              children: []
+            },
+            group: {
+              type: "group",
+              id: "",
+              width: 0,
+              height: 0,
+              x: 0,
+              y: 0,
+              children: [
+                {
+                  type: "text_texture",
+                  id: "",
+                  width: 106,
+                  height: 13,
+                  x: 35,
+                  y: 6,
+                  text: "核反应堆详细信息",
+                  component: '{"translate":"message.createdelight.fission_reactor.specifications"}',
+                  children: []
+                },
+                {
+                  type: "group",
+                  id: "",
+                  width: 141,
+                  height: 160,
+                  x: 18,
+                  y: 23,
+                  background: {
+                    image: "ldlib:textures/gui/button_common.png",
+                    rect: [I; 0, 0, 198, 18],
+                    border: [I; 1, 1]
+                  },
+                  children: [
+                    {
+                      type: "text_texture",
+                      id: "",
+                      width: 106,
+                      height: 13,
+                      x: 17,
+                      y: 3,
+                      text: "热管理信息",
+                      component: '{"translate":"message.createdelight.fission_reactor.heat_specifications"}',
+                      tooltips: ['{"translate":"message.createdelight.fission_reactor.heat_specifications.desc"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "",
+                      width: 106,
+                      height: 13,
+                      x: 17,
+                      y: 56,
+                      text: "运行信息",
+                      component: '{"translate":"message.createdelight.fission_reactor.working_specifications"}',
+                      tooltips: ['{"translate":"message.createdelight.fission_reactor.working_specifications.desc"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "heatProduced",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 17,
+                      text: "裂变产热:  0.03 K/t",
+                      component: '{"translate":"裂变产热:  0.03 K/t"}',
+                      tooltips: ['{"translate":"0.08αN(1-(T-298.15)×0.0005)"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "cooling",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 30,
+                      text: "液冷散热: -0.03 K/t",
+                      component: '{"translate":"液冷散热: -0.03 K/t"}',
+                      tooltips: ['{"translate":"0.024αCN "}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "ambientCooling",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 43,
+                      text: "环境散热: -0.01 K/t",
+                      component: '{"translate":"环境散热: -0.01 K/t"}',
+                      tooltips: ['{"translate":"0.05+0.0001(T-298.15)"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "inputFluid",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 70,
+                      text: "液冷需求: 20.00 mB/t",
+                      component: '{"translate":"液冷需求: 20.00 mB/t"}',
+                      tooltips: ['{"translate":"0.08(T-750)×1.0415^N"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "outputEnergy",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 96,
+                      text: "能量产出: 40.96 KFE/t",
+                      component: '{"translate":"能量产出: 40.96 KFE/t"}',
+                      tooltips: ['{"translate":"T<1000 => 0; T>=1000 => (4096/25)(T-750)×1.0415^N"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "outputFluid",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 83,
+                      text: "废液产出: 20.00 mB/t",
+                      component: '{"translate":"废液产出: 20.00 mB/t"}',
+                      tooltips: ['{"translate":"T<1000 => 0; T>=1000 => 0.08(T-750)×1.0415^N"}'],
+                      children: []
+                    },
+                    {
+                      type: "text_field",
+                      id: "modify_burning_rate",
+                      width: 66,
+                      height: 15,
+                      x: 59,
+                      y: 136,
+                      background: {},
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "",
+                      width: 106,
+                      height: 13,
+                      x: 17,
+                      y: 109,
+                      text: "反应速率",
+                      component: '{"translate":"message.createdelight.fission_reactor.setting"}',
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "burningRate",
+                      width: 130,
+                      height: 12,
+                      x: 5,
+                      y: 124,
+                      text: "当前燃烧速率: 100％",
+                      component: '{"translate":"当前燃烧速率: 100％"}',
+                      children: []
+                    },
+                    {
+                      type: "text_texture",
+                      id: "",
+                      width: 56,
+                      height: 12,
+                      x: 5,
+                      y: 138,
+                      text: "设置燃烧速率:",
+                      component: '{"translate":"message.createdelight.fission_reactor.set_burning_rate"}',
+                      children: []
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
+        children: []
+      }
+    ]
+  },
+  pattern: {
+    size: [I; 9, 10, 10],
+    cells: [I; 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 3, 1, 1, 1, 3, 2, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 2, 3, 5, 5, 5, 3, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 5, 5, 5, 5, 5, 1, 0, 2, 1, 5, 5, 5, 5, 5, 1, 2, 0, 0, 1, 5, 7, 7, 7, 5, 1, 0, 0, 0, 1, 5, 7, 7, 7, 5, 1, 0, 0, 2, 1, 5, 0, 0, 0, 5, 1, 2, 0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 5, 5, 5, 5, 5, 1, 0, 8, 5, 5, 5, 5, 5, 5, 5, 8, 0, 0, 5, 7, 7, 7, 7, 7, 5, 0, 0, 0, 5, 7, 7, 7, 7, 7, 5, 0, 0, 8, 5, 0, 0, 0, 0, 0, 5, 8, 0, 0, 1, 5, 0, 8, 0, 5, 1, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 9, 9, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 0, 4, 7, 7, 7, 7, 7, 7, 7, 4, 0, 4, 7, 7, 7, 7, 7, 7, 7, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 5, 0, 0, 8, 0, 0, 5, 1, 0, 0, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 10, 5, 5, 5, 10, 0, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 0, 4, 7, 7, 7, 12, 7, 7, 7, 4, 0, 4, 7, 7, 7, 12, 7, 7, 7, 4, 0, 5, 0, 0, 0, 13, 0, 0, 0, 5, 0, 1, 5, 3, 3, 2, 3, 3, 5, 1, 0, 6, 5, 5, 0, 14, 0, 5, 5, 6, 0, 0, 0, 10, 5, 5, 5, 10, 0, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 5, 5, 5, 5, 5, 5, 5, 1, 5, 5, 5, 5, 5, 5, 5, 5, 5, 1, 0, 4, 7, 7, 7, 7, 7, 7, 7, 4, 0, 4, 7, 7, 7, 7, 7, 7, 7, 4, 0, 5, 0, 0, 0, 0, 0, 0, 0, 5, 0, 1, 5, 0, 0, 8, 0, 0, 5, 1, 0, 0, 5, 5, 0, 0, 0, 5, 5, 0, 0, 0, 0, 10, 5, 5, 5, 10, 0, 0, 0, 0, 0, 0, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 5, 5, 5, 5, 5, 1, 0, 8, 5, 5, 5, 5, 5, 5, 5, 8, 0, 0, 5, 7, 7, 7, 7, 7, 5, 0, 0, 0, 5, 7, 7, 7, 7, 7, 5, 0, 0, 8, 5, 0, 0, 0, 0, 0, 5, 8, 0, 0, 1, 5, 0, 8, 0, 5, 1, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 0, 0, 0, 0, 5, 9, 9, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 5, 5, 5, 5, 5, 5, 1, 0, 2, 1, 5, 5, 5, 5, 5, 1, 2, 0, 0, 1, 5, 7, 7, 7, 5, 1, 0, 0, 0, 1, 5, 7, 7, 7, 5, 1, 0, 0, 2, 1, 5, 0, 0, 0, 5, 1, 2, 0, 0, 1, 1, 5, 5, 5, 1, 1, 0, 0, 0, 0, 5, 5, 5, 5, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2, 3, 1, 1, 1, 3, 2, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 0, 0, 0, 0, 0, 2, 3, 5, 5, 5, 3, 2, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    holders: [
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["any"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:forge_steel_casing", "createdelightcore:forged_steel_import_bus", "createdelightcore:forged_steel_export_bus", "new 4"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 2", "create:metal_girder"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 3", "create:metal_girder"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["create_new_age:reactor_glass", "create_new_age:reactor_casing"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["create_new_age:reactor_casing"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["alexscavesup:siren_light"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["air", "createdelightcore:fission_fuel_assembly"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 1", "create:metal_girder"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdeco:industrial_iron_hull"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["new 0", "createdeco:industrial_iron_hull"]
+      },
+      {
+        controller: 1b,
+        facing: 2,
+        predicates: []
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["createdelightcore:fission_fuel_assembly"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["minecraft:lodestone"]
+      },
+      {
+        controller: 0b,
+        facing: 2,
+        predicates: ["create:metal_girder"]
+      }
+    ],
+    axis: "Y",
+    repetitions: [I; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    predicates: {
+      "createdelightcore:forged_steel_import_bus": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forged_steel_import_bus"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 2": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "create:metal_girder",
+            Properties: {
+              waterlogged: "false",
+              bottom: "false",
+              z: "true",
+              x: "true",
+              axis: "y",
+              top: "false"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 3": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "create:metal_girder",
+            Properties: {
+              waterlogged: "false",
+              bottom: "false",
+              z: "true",
+              x: "false",
+              axis: "y",
+              top: "false"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "create_new_age:reactor_glass": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["create_new_age:reactor_glass"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "minecraft:lodestone": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["minecraft:lodestone"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "create_new_age:reactor_casing": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["create_new_age:reactor_casing"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 0": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "createdeco:industrial_iron_hull",
+            Properties: {
+              facing: "west"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 4": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:fission_reactor_controller"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:forged_steel_export_bus": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forged_steel_export_bus"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "new 1": {
+        type: "blockstates",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        states: [
+          {
+            Name: "create:metal_girder",
+            Properties: {
+              waterlogged: "false",
+              bottom: "false",
+              z: "false",
+              x: "true",
+              axis: "x",
+              top: "false"
+            }
+          }
+        ],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:fission_fuel_assembly": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:fission_fuel_assembly"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "alexscavesup:siren_light": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["alexscavesup:siren_light"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      air: {
+        type: "air",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "create:metal_girder": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["create:metal_girder"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      any: {
+        type: "any",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "alexscavesup:nuclear_siren": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["alexscavesup:nuclear_siren"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:fission_reactor": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:fission_reactor"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdeco:industrial_iron_hull": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdeco:industrial_iron_hull"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      },
+      "createdelightcore:forge_steel_casing": {
+        type: "blocks",
+        io: "BOTH",
+        previewCount: -1,
+        maxLayerCount: -1,
+        minLayerCount: -1,
+        blocks: ["createdelightcore:forge_steel_casing"],
+        allowOpenUI: 1b,
+        toolTips: [],
+        nbt: {},
+        minCount: -1,
+        disableRenderFormed: 0b,
+        controllerNbt: {},
+        controllerFront: {
+          value: "north",
+          _enable: 0b
+        },
+        maxCount: -1
+      }
+    }
+  }
+}

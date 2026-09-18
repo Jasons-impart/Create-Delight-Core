@@ -1,0 +1,564 @@
+{
+  definition: {
+    machineSettings: {
+      dropMachineItem: 1b,
+      hasUI: 1b,
+      signalConnection: {
+        topConnection: 0b,
+        bottomConnection: 0b,
+        leftConnection: 0b,
+        rightConnection: 0b,
+        frontConnection: 0b,
+        backConnection: 1b
+      },
+      traitDefinitions: [],
+      machineLevel: 0
+    },
+    itemProperties: {
+      maxStackSize: 64,
+      creativeTab: {
+        value: "createdelightcore:machines",
+        _enable: 1b
+      },
+      isGui3d: 1b,
+      rarity: "COMMON",
+      itemTooltips: [],
+      useBlockLight: 1b,
+      renderer: {
+        value: {},
+        _enable: 0b
+      }
+    },
+    partSettings: {
+      proxyControllerCapabilities: [],
+      canShare: 1b,
+      recipeModifiers: [],
+      _enable: 0b
+    },
+    id: "createdelightcore:fission_reactor_controller",
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      consumeInputsAfterWorking: 0b,
+      alwaysSearchRecipe: 0b,
+      alwaysModifyRecipe: 0b,
+      recipeType: "mbd2:dummy",
+      recipeModifiers: [],
+      _enable: 0b
+    },
+    stateMachine: {
+      root: {
+        isGlobalVisible: 0b,
+        lightLevel: {
+          value: 0,
+          _enable: 1b
+        },
+        children: [
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [
+              {
+                isGlobalVisible: 0b,
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [],
+                name: "waiting",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: 64
+              }
+            ],
+            name: "working",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 64
+          },
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [],
+            name: "suspend",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 64
+          },
+          {
+            isGlobalVisible: 0b,
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [],
+            name: "formed",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: 64
+          }
+        ],
+        name: "base",
+        renderingBox: {
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          },
+          _enable: 0b
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        renderer: {
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:forged_steel_import_bus"
+            }
+          },
+          _enable: 1b
+        },
+        machineSound: {
+          pitch: 1.0f,
+          volume: 1.0f,
+          loop: 1b,
+          loopWithShuffle: 0b,
+          soundSource: "BLOCKS",
+          sound: "minecraft:block.furnace.fire_crackle",
+          _enable: 0b,
+          delay: 0
+        },
+        renderingRadius: 64
+      }
+    },
+    blockProperties: {
+      noParticleOnBreak: 0b,
+      hasCollision: 1b,
+      friction: 0.6000000238418579f,
+      isSuffocating: 0b,
+      transparent: 0b,
+      forceSolid: 0b,
+      explosionResistance: 6.0f,
+      speedFactor: 1.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutoutMipped: 0b,
+        cutout: 1b
+      },
+      isAir: 0b,
+      useAO: 1b,
+      ignitedByLava: 0b,
+      rotationState: "NON_Y_AXIS",
+      blockSound: {
+        breakSound: "minecraft:block.stone.break",
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        hitSound: "minecraft:block.stone.hit",
+        stepSound: "minecraft:block.stone.step",
+        volumeIn: 1.0f,
+        fallSound: "minecraft:block.stone.fall"
+      },
+      destroyTime: 1.5f,
+      emissive: 0b,
+      canOcclude: 1b,
+      jumpFactor: 1.0f,
+      collisionShapeFullBlock: 0b,
+      replaceable: 0b,
+      canBeWaterlogged: 0b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 180,
+    x: 291,
+    y: 79,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 92
+      },
+      {
+        type: "text_texture",
+        id: "ui:machine_name",
+        width: 100,
+        height: 18,
+        x: 38,
+        y: 3,
+        text: "机器名称",
+        component: '{"translate":"editor.machine.name"}',
+        children: []
+      },
+      {
+        type: "draggable_scrollable_group",
+        id: "",
+        width: 122,
+        height: 73,
+        x: 29,
+        y: 19,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: [
+          {
+            type: "switch",
+            id: "off",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 5,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 0b,
+            children: []
+          },
+          {
+            type: "switch",
+            id: "on",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 26,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 0b,
+            children: []
+          },
+          {
+            type: "switch",
+            id: "high_temp",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 47,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 0b,
+            children: []
+          },
+          {
+            type: "switch",
+            id: "output_fluid_choke",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 68,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 1b,
+            children: []
+          },
+          {
+            type: "switch",
+            id: "output_energy_choke",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 89,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 1b,
+            children: []
+          },
+          {
+            type: "switch",
+            id: "lack_of_fuel",
+            width: 102,
+            height: 20,
+            x: 5,
+            y: 110,
+            baseTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            pressedTexture: {
+              image: "ldlib:textures/gui/button.png",
+              rect: [I; 0, 0, 32, 32],
+              border: [I; 2, 2]
+            },
+            hoverTexture: {
+              color: -1,
+              borderWidth: 1
+            },
+            pressed: 0b,
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 5,
+            height: 6,
+            x: 1,
+            y: 129,
+            text: "",
+            component: '{"translate":""}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 14,
+            text: "关闭",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.off"}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 35,
+            text: "红石控制",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.on"}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 56,
+            text: "温度过高",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.high_temp"}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 77,
+            text: "废液输出受阻",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.output_fluid_choke"}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 98,
+            text: "能量输出受阻",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.output_energy_choke"}',
+            children: []
+          },
+          {
+            type: "text_texture",
+            id: "",
+            width: 102,
+            height: 2,
+            x: 5,
+            y: 119,
+            text: "燃料缺乏",
+            component: '{"translate":"message.createdelight.fission_reactor.mode.lack_of_fuel"}',
+            children: []
+          }
+        ]
+      }
+    ]
+  }
+}

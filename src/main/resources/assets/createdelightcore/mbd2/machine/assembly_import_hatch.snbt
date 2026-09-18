@@ -1,0 +1,366 @@
+{
+  definition: {
+    machineSettings: {
+      dropMachineItem: 1b,
+      hasUI: 1b,
+      signalConnection: {
+        topConnection: 0b,
+        bottomConnection: 0b,
+        leftConnection: 0b,
+        rightConnection: 0b,
+        frontConnection: 0b,
+        backConnection: 0b
+      },
+      traitDefinitions: [
+        {
+          type: "fluid_tank",
+          priority: 0,
+          fluidFilterSettings: {
+            isWhitelist: 1b,
+            filterTags: [],
+            filterFluids: [],
+            matchNBT: 0b,
+            _enable: 0b
+          },
+          autoInput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          autoIO: {
+            interval: 20,
+            bottomIO: "NONE",
+            frontIO: "NONE",
+            leftIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            _enable: 0b,
+            topIO: "NONE"
+          },
+          capacity: 64000,
+          recipeHandlerIO: "IN",
+          tankSize: 1,
+          capabilityIO: {
+            bottomIO: "IN",
+            frontIO: "IN",
+            leftIO: "IN",
+            backIO: "IN",
+            internal: "IN",
+            rightIO: "IN",
+            topIO: "IN"
+          },
+          slotNames: [],
+          autoOutput: {
+            interval: 20,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            speed: 1,
+            _enable: 0b
+          },
+          name: "fluid_tank",
+          allowSameFluids: 1b,
+          guiIO: "BOTH",
+          fancyRendererSettings: {
+            isWhiteList: 0b,
+            percentHeight: 0b,
+            rotateOrientation: 1b,
+            filters: [],
+            rotation: [0.0f, 0.0f, 0.0f],
+            position: [0.0f, 0.0f, 0.0f],
+            _enable: 0b,
+            scale: [1.0f, 1.0f, 1.0f]
+          },
+          isDistinct: 0b
+        }
+      ],
+      machineLevel: 0
+    },
+    itemProperties: {
+      maxStackSize: 64,
+      creativeTab: {
+        value: "createdelightcore:machines",
+        _enable: 1b
+      },
+      isGui3d: 1b,
+      rarity: "COMMON",
+      itemTooltips: [],
+      useBlockLight: 1b,
+      renderer: {
+        value: {},
+        _enable: 0b
+      }
+    },
+    partSettings: {
+      proxyControllerCapabilities: [],
+      canShare: 1b,
+      recipeModifiers: [],
+      _enable: 1b
+    },
+    id: "createdelightcore:assembly_import_hatch",
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      consumeInputsAfterWorking: 0b,
+      alwaysSearchRecipe: 0b,
+      alwaysModifyRecipe: 0b,
+      recipeType: "mbd2:dummy",
+      recipeModifiers: [],
+      _enable: 1b
+    },
+    stateMachine: {
+      root: {
+        isGlobalVisible: {},
+        lightLevel: {
+          value: 0,
+          _enable: 1b
+        },
+        children: [
+          {
+            isGlobalVisible: {},
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [
+              {
+                isGlobalVisible: {},
+                lightLevel: {
+                  value: 0,
+                  _enable: 0b
+                },
+                children: [],
+                name: "waiting",
+                renderingBox: {
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  },
+                  _enable: 0b
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                renderer: {
+                  value: {},
+                  _enable: 0b
+                },
+                machineSound: {
+                  pitch: 1.0f,
+                  volume: 1.0f,
+                  loop: 1b,
+                  loopWithShuffle: 0b,
+                  soundSource: "BLOCKS",
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  _enable: 0b,
+                  delay: 0
+                },
+                renderingRadius: {}
+              }
+            ],
+            name: "working",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: {}
+          },
+          {
+            isGlobalVisible: {},
+            lightLevel: {
+              value: 0,
+              _enable: 0b
+            },
+            children: [],
+            name: "suspend",
+            renderingBox: {
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              },
+              _enable: 0b
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            renderer: {
+              value: {},
+              _enable: 0b
+            },
+            machineSound: {
+              pitch: 1.0f,
+              volume: 1.0f,
+              loop: 1b,
+              loopWithShuffle: 0b,
+              soundSource: "BLOCKS",
+              sound: "minecraft:block.furnace.fire_crackle",
+              _enable: 0b,
+              delay: 0
+            },
+            renderingRadius: {}
+          }
+        ],
+        name: "base",
+        renderingBox: {
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          },
+          _enable: 0b
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        renderer: {
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "minecraft:block/furnace"
+            }
+          },
+          _enable: 1b
+        },
+        machineSound: {
+          pitch: 1.0f,
+          volume: 1.0f,
+          loop: 1b,
+          loopWithShuffle: 0b,
+          soundSource: "BLOCKS",
+          sound: "minecraft:block.furnace.fire_crackle",
+          _enable: 0b,
+          delay: 0
+        },
+        renderingRadius: {}
+      }
+    },
+    blockProperties: {
+      noParticleOnBreak: 0b,
+      hasCollision: 1b,
+      friction: 0.6000000238418579f,
+      isSuffocating: 0b,
+      transparent: 0b,
+      forceSolid: 0b,
+      explosionResistance: 6.0f,
+      speedFactor: 1.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutoutMipped: 0b,
+        cutout: 1b
+      },
+      isAir: 0b,
+      useAO: 1b,
+      ignitedByLava: 0b,
+      rotationState: "NON_Y_AXIS",
+      blockSound: {
+        breakSound: "minecraft:block.stone.break",
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        hitSound: "minecraft:block.stone.hit",
+        stepSound: "minecraft:block.stone.step",
+        volumeIn: 1.0f,
+        fallSound: "minecraft:block.stone.fall"
+      },
+      destroyTime: 1.5f,
+      emissive: 0b,
+      canOcclude: 1b,
+      jumpFactor: 1.0f,
+      collisionShapeFullBlock: 0b,
+      replaceable: 0b,
+      canBeWaterlogged: 0b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 180,
+    x: 150,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 92
+      },
+      {
+        type: "fluid_slot",
+        id: "ui:fluid_tank_0",
+        width: 20,
+        height: 58,
+        x: 78,
+        y: 10,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      }
+    ]
+  }
+}

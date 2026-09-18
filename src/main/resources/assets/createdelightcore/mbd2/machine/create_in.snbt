@@ -1,0 +1,295 @@
+{
+  definition: {
+    stateMachine: {
+      root: {
+        lightLevel: {
+          _enable: 1b,
+          value: 0
+        },
+        renderer: {
+          _enable: 1b,
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:create_in"
+            }
+          }
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        rotationRenderer: {
+          _enable: 1b,
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "create:block/shaft"
+            }
+          }
+        },
+        children: [
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 0b,
+              value: {}
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            rotationRenderer: {
+              _enable: 0b,
+              value: {}
+            },
+            children: [
+              {
+                lightLevel: {
+                  _enable: 0b,
+                  value: 0
+                },
+                renderer: {
+                  _enable: 0b,
+                  value: {}
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                rotationRenderer: {
+                  _enable: 0b,
+                  value: {}
+                },
+                children: [],
+                renderingBox: {
+                  _enable: 0b,
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  }
+                },
+                name: "waiting",
+                machineSound: {
+                  volume: 1.0f,
+                  delay: 0,
+                  _enable: 0b,
+                  loop: 1b,
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  soundSource: "BLOCKS",
+                  loopWithShuffle: 0b,
+                  pitch: 1.0f
+                }
+              }
+            ],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "working",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          },
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 0b,
+              value: {}
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            rotationRenderer: {
+              _enable: 0b,
+              value: {}
+            },
+            children: [],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "suspend",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          }
+        ],
+        renderingBox: {
+          _enable: 0b,
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          }
+        },
+        name: "base",
+        machineSound: {
+          volume: 1.0f,
+          delay: 0,
+          _enable: 0b,
+          loop: 1b,
+          sound: "minecraft:block.furnace.fire_crackle",
+          soundSource: "BLOCKS",
+          loopWithShuffle: 0b,
+          pitch: 1.0f
+        }
+      }
+    },
+    partSettings: {
+      _enable: 0b,
+      recipeModifiers: [],
+      canShare: 1b,
+      proxyControllerCapabilities: []
+    },
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      recipeType: "mbd2:dummy",
+      recipeModifiers: [],
+      alwaysSearchRecipe: 0b
+    },
+    blockProperties: {
+      ignitedByLava: 0b,
+      isSuffocating: 1b,
+      blockSound: {
+        volumeIn: 1.0f,
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.stone.place",
+        stepSound: "minecraft:block.stone.step",
+        breakSound: "minecraft:block.stone.break",
+        hitSound: "minecraft:block.stone.hit",
+        fallSound: "minecraft:block.stone.fall"
+      },
+      emissive: 0b,
+      explosionResistance: 6.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutout: 1b,
+        cutoutMipped: 0b
+      },
+      replaceable: 0b,
+      noParticleOnBreak: 0b,
+      speedFactor: 1.0f,
+      friction: 0.6000000238418579f,
+      transparent: 0b,
+      rotationState: "ALL",
+      canOcclude: 1b,
+      destroyTime: 1.5f,
+      useAO: 1b,
+      isAir: 0b,
+      canBeWaterlogged: 0b,
+      forceSolid: 0b,
+      hasCollision: 1b,
+      jumpFactor: 1.0f
+    },
+    itemProperties: {
+      itemTooltips: [],
+      renderer: {
+        _enable: 0b,
+        value: {}
+      },
+      maxStackSize: 64,
+      creativeTab: {
+        _enable: 1b,
+        value: "createdelightcore:machines"
+      },
+      isGui3d: 1b,
+      useBlockLight: 1b,
+      rarity: "COMMON"
+    },
+    kineticMachineSettings: {
+      useFlywheel: 0b,
+      renderLayer: "SOLID",
+      maxRPM: 256,
+      torque: 8.0f,
+      frontRotation: "FRONT",
+      isGenerator: 0b,
+      hasBackRotation: 1b
+    },
+    id: "createdelightcore:create_in",
+    machineSettings: {
+      machineLevel: 0,
+      traitDefinitions: [],
+      hasUI: 0b,
+      signalConnection: {
+        leftConnection: 0b,
+        backConnection: 0b,
+        topConnection: 0b,
+        frontConnection: 0b,
+        bottomConnection: 0b,
+        rightConnection: 0b
+      },
+      dropMachineItem: 1b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 180,
+    x: 150,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 92
+      }
+    ]
+  }
+}
