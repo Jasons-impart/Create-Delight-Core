@@ -54,6 +54,17 @@ public final class CreateDelightJeiPlugin implements IModPlugin {
         jeiRuntime = runtime;
         ClientFuelCache.onUpdate = CreateDelightJeiPlugin::onFuelCacheUpdated;
 
+        var manager = runtime.getIngredientManager();
+        var hiddenCoins = List.of("gold_coinstack", "netherite_coinstack", "brass_coin", "brass_coinstack",
+                "iron_coinstack", "copper_coinstack", "industrial_iron_coin", "industrial_iron_coinstack", "zinc_coin", "zinc_coinstack")
+                .stream().map(path -> ResourceLocation.fromNamespaceAndPath("createdeco", path))
+                .flatMap(id -> net.minecraft.core.registries.BuiltInRegistries.ITEM.getOptional(id).stream())
+                .map(ItemStack::new).toList();
+        manager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, hiddenCoins);
+        net.minecraft.core.registries.BuiltInRegistries.FLUID.getOptional(ResourceLocation.parse("minecraft:milk"))
+                .ifPresent(fluid -> manager.addIngredientsAtRuntime(mezz.jei.api.neoforge.NeoForgeTypes.FLUID_STACK,
+                        List.of(new net.neoforged.neoforge.fluids.FluidStack(fluid, 1000))));
+
         if (!shouldHideIntermediates()) {
             return;
         }
@@ -73,6 +84,8 @@ public final class CreateDelightJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
+        registration.addIngredientInfo(io.github.jasonsimpart.registry.ModBlocks.FRAGMENT_OF_BORDER.get().asItem().getDefaultInstance(), VanillaTypes.ITEM_STACK,
+                Component.translatable("jei.createdelightcore.fragment_of_border"));
         createCategories.forEach(category -> category.registerRecipes(registration));
         visibleBlazeRecipes = buildBlazeBurnerFluidRecipes();
         visibleCoolerRecipes = buildSnowmanCoolerFluidRecipes();
