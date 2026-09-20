@@ -47,7 +47,8 @@
     "vintageimprovements.VacuumizingRecipeMixin",
     "waystones.WaystonesAPIMixin",
     "vintageimprovements.VibratingOutputLimitMixin",
-    "vintageimprovements.VacuumizingOutputLimitMixin"
+    "vintageimprovements.VacuumizingOutputLimitMixin",
+    "lightmanscurrency.LegacySlotWeightsMixin"
   ],
   "client": [
     "minecraft.CreativeModeInventoryScreenMixin",

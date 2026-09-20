@@ -87,6 +87,10 @@ public final class TetraCombatCompat {
         }
     }
 
+    public static int greedyLevel(ItemStack stack) {
+        return stack.getItem() instanceof IModularItem item ? item.getEffectLevel(stack, effect("greedy")) : 0;
+    }
+
     private static ItemEffect effect(String name) {
         return ItemEffect.get(CreateDelightCore.MODID + ":" + name);
     }

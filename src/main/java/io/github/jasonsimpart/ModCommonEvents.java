@@ -58,6 +58,15 @@ public final class ModCommonEvents {
         if (ModList.get().isLoaded("improvedmobs")) {
             io.github.jasonsimpart.compat.improvedmobs.ImprovedMobsCompat.register();
         }
+        if (ModList.get().isLoaded("lightmanscurrency")) {
+            io.github.jasonsimpart.compat.lightmanscurrency.MobCurrencyDrops.register();
+            io.github.jasonsimpart.compat.lightmanscurrency.TraderWhitelist.register();
+            io.github.jasonsimpart.compat.lightmanscurrency.WalletUpgradeGuard.register();
+        }
+        if (ModList.get().isLoaded("improvedmobs") && ModList.get().isLoaded("lightmanscurrency")) {
+            modEventBus.addListener((net.neoforged.neoforge.event.RegisterGameTestsEvent event) ->
+                    event.register(io.github.jasonsimpart.compat.improvedmobs.MechanicsTests.class));
+        }
         registerWaystonesMoneyTeleport();
         registerQualityFoodCurrencyCompat();
         if (ModList.get().isLoaded("tetra")) {
