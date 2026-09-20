@@ -31,7 +31,7 @@ final class MbdMachineUI {
             case "text_texture", "label" -> label(data);
             case "button" -> new Button().noText().buttonStyle(style -> style
                     .baseTexture(IGuiTexture.EMPTY).hoverTexture(IGuiTexture.EMPTY).pressedTexture(IGuiTexture.EMPTY));
-            case "group" -> new UIElement();
+            case "group", "image" -> new UIElement();
             case "tab_group" -> tabs(data);
             case "switch" -> toggle(data);
             case "text_field" -> new TextField();
@@ -44,6 +44,7 @@ final class MbdMachineUI {
             layout.width(data.getInt("width")).height(data.getInt("height")).paddingAll(0).marginAll(0);
             if (!root) layout.positionType(YogaPositionType.ABSOLUTE).left(data.getInt("x")).top(data.getInt("y"));
         });
+        if (element instanceof TextField) element.layout(layout -> layout.paddingAll(2));
         if (element instanceof InventorySlots inventory) {
             inventory.layout(layout -> layout.paddingAll(5));
             inventory.hotbar.layout(layout -> layout.marginTop(4));
@@ -135,6 +136,11 @@ final class MbdMachineUI {
 
     static IGuiTexture texture(CompoundTag data) {
         if (data.isEmpty()) return IGuiTexture.EMPTY;
+        if (data.contains("text")) {
+            var text = new com.lowdragmc.lowdraglib2.gui.texture.TextTexture(data.getString("text"), data.getInt("color"));
+            if (!com.lowdragmc.lowdraglib2.LDLib2.isClient()) text.text = data.getString("text");
+            return text;
+        }
         if (data.contains("borderWidth")) return new com.lowdragmc.lowdraglib2.gui.texture.ColorBorderTexture(
                 data.getInt("borderWidth"), data.getInt("color"));
         if (data.contains("textures")) {

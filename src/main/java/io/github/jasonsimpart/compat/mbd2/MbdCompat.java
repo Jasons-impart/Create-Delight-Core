@@ -32,7 +32,8 @@ public final class MbdCompat {
             "butchery_room", "create_in", "andesite_import_bus", "andesite_export_bus",
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
             "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
-            "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller"
+            "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller",
+            "contract_executor", "electrolyzer", "mortar", "quality_destroyer", "small_centrifugation"
     };
 
     private MbdCompat() {}
@@ -52,6 +53,7 @@ public final class MbdCompat {
         if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         MbdAssembly.register();
+        MbdSmallProcessing.register();
         MbdCentrifuge.register();
         MbdReactor.register();
         NeoForge.EVENT_BUS.addListener(MbdHydropower::formed);
@@ -77,7 +79,8 @@ public final class MbdCompat {
     }
 
     private static void registerRecipeTypes(MBDRegistryEvent.MBDRecipeType event) {
-        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel", "fission_react", "fission_react_fuel")) {
+        for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel", "fission_react", "fission_react_fuel",
+                "contract_executor", "electrolyzer", "mortar", "small_centrifugation")) {
             var project = read("recipe/" + name);
             var proxies = project.getList("proxies", Tag.TAG_STRING).stream()
                     .map(raw -> ResourceLocation.parse(raw.getAsString())).toArray(ResourceLocation[]::new);
@@ -86,7 +89,7 @@ public final class MbdCompat {
                 public com.lowdragmc.mbd2.api.recipe.MBDRecipe toMBDrecipe(
                         net.minecraft.world.item.crafting.RecipeType<?> sourceType, ResourceLocation sourceId,
                         net.minecraft.world.item.crafting.Recipe<?> source) {
-                    if (!name.equals("big_centrifugation") && !name.equals("assembly_line")) {
+                    if (!java.util.Set.of("big_centrifugation", "assembly_line", "small_centrifugation", "mortar").contains(name)) {
                         return super.toMBDrecipe(sourceType, sourceId, source);
                     }
                     // Upstream's generic item conversion throws for fluid-only Create outputs
