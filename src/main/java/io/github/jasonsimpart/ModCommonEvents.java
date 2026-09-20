@@ -55,6 +55,9 @@ public final class ModCommonEvents {
         if (ModList.get().isLoaded("fruitsdelight")) {
             io.github.jasonsimpart.compat.fruitsdelight.CauldronFeedback.register();
         }
+        if (ModList.get().isLoaded("improvedmobs")) {
+            io.github.jasonsimpart.compat.improvedmobs.ImprovedMobsCompat.register();
+        }
         registerWaystonesMoneyTeleport();
         registerQualityFoodCurrencyCompat();
         if (ModList.get().isLoaded("tetra")) {
