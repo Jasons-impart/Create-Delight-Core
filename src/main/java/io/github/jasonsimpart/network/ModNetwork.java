@@ -28,6 +28,7 @@ public final class ModNetwork {
     private static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         event.registrar(CreateDelightCore.MODID)
                 .versioned(PROTOCOL_VERSION)
+                .playToServer(ChainCasingModifierPayload.TYPE, ChainCasingModifierPayload.STREAM_CODEC, ChainCasingModifierPayload::handle)
                 .playToClient(SyncFuelMapsPayload.TYPE, SyncFuelMapsPayload.STREAM_CODEC, SyncFuelMapsPayload::handle)
                 .playToClient(SyncDisabledCreativeTabsPayload.TYPE, SyncDisabledCreativeTabsPayload.STREAM_CODEC,
                         SyncDisabledCreativeTabsPayload::handle);

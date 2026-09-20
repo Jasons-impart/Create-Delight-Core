@@ -46,6 +46,13 @@ public final class ModCommonEvents {
         NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onMobPositionCheck);
         NeoForge.EVENT_BUS.addListener(DropReportEvents::onServerTick);
         DisabledContentEvents.register(modEventBus);
+        io.github.jasonsimpart.compat.create.BasicInteractions.register();
+        if (ModList.get().isLoaded("alexsmobsup")) {
+            io.github.jasonsimpart.compat.alexsmobs.PackBlockInteractions.register();
+        }
+        if (ModList.get().isLoaded("fruitsdelight")) {
+            io.github.jasonsimpart.compat.fruitsdelight.CauldronFeedback.register();
+        }
         registerWaystonesMoneyTeleport();
         registerQualityFoodCurrencyCompat();
         if (ModList.get().isLoaded("tetra")) {
