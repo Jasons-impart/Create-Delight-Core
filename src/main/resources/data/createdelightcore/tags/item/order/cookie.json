@@ -1,0 +1,69 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "farmersrespite:green_tea_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:honey_cookie",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:persimmon_cookie",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_cookie",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:cranberry_cookie",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_cookie",
+      "required": false
+    },
+    {
+      "id": "minecraft:cookie",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:oatmeal_cookie",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:lime_cookie",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cookie",
+      "required": false
+    },
+    {
+      "id": "ends_delight:chorus_cookie",
+      "required": false
+    },
+    {
+      "id": "cavedelight:star_cookie",
+      "required": false
+    },
+    {
+      "id": "minersdelight:bat_cookie",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:birch_cookie",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:paw_cookie",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:herbal_cookie",
+      "required": false
+    }
+  ]
+}

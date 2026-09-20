@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#fruitsdelight:jello",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexsdelight:bison_burger",
+      "required": false
+    },
+    {
+      "id": "alexsmobsup:kangaroo_burger",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:eggplant_burger",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:hamburger",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:nether_burger",
+      "required": false
+    },
+    {
+      "id": "silentsdelight:heartburger",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:cheese_burger",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:deluxe_burger",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:portobello_burger",
+      "required": false
+    },
+    {
+      "id": "minersdelight:vegan_hamburger",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:land_and_sea_burger",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:donkey_burger",
+      "required": false
+    }
+  ]
+}

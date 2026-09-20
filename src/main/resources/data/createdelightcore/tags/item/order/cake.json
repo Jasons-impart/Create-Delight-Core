@@ -1,0 +1,93 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fruitsdelight:mangosteen_cake",
+      "required": false
+    },
+    {
+      "id": "trailandtales_delight:cherry_cake_slice",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:coffee_cake_slice",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:magma_cake_slice",
+      "required": false
+    },
+    {
+      "id": "oceanic_delight:sponge_cake_slice",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:berry_cheesecake_bar",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:wheatgrass_cubecake",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:glow_berry_cubecake",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:vanilla_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:chocolate_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:strawberry_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:banana_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:mint_cake_slice",
+      "required": false
+    },
+    {
+      "id": "abnormals_delight:adzuki_cake_slice",
+      "required": false
+    },
+    {
+      "id": "seasonals:pumpkin_cake_slice",
+      "required": false
+    },
+    {
+      "id": "seasonals:sweet_berry_cake_slice",
+      "required": false
+    },
+    {
+      "id": "seasonals:beetroot_cake_slice",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:lime_cake_slice",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:pomegranate_cake_slice",
+      "required": false
+    },
+    {
+      "id": "create_central_kitchen:honey_cake_slice",
+      "required": false
+    },
+    {
+      "id": "seasonals:red_velvet_cupcake",
+      "required": false
+    }
+  ]
+}

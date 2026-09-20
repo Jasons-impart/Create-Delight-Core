@@ -1,0 +1,141 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "corn_delight:cornbread",
+      "required": false
+    },
+    {
+      "id": "bakeries:scone",
+      "required": false
+    },
+    {
+      "id": "bakeries:bagel",
+      "required": false
+    },
+    {
+      "id": "bakeries:whole_wheat_bagel",
+      "required": false
+    },
+    {
+      "id": "bakeries:round_bread",
+      "required": false
+    },
+    {
+      "id": "bakeries:berry_bread",
+      "required": false
+    },
+    {
+      "id": "bakeries:brown_sugar_roll",
+      "required": false
+    },
+    {
+      "id": "bakeries:pineapple_bun",
+      "required": false
+    },
+    {
+      "id": "bakeries:meat_floss_bread",
+      "required": false
+    },
+    {
+      "id": "bakeries:croissant",
+      "required": false
+    },
+    {
+      "id": "bakeries:berry_bagel",
+      "required": false
+    },
+    {
+      "id": "bakeries:baguette_with_filling",
+      "required": false
+    },
+    {
+      "id": "bakeries:tomato_cheese_croissant_sandwich",
+      "required": false
+    },
+    {
+      "id": "bakeries:cup_cake",
+      "required": false
+    },
+    {
+      "id": "bakeries:cake_roll",
+      "required": false
+    },
+    {
+      "id": "bakeries:sliced_pound_cake",
+      "required": false
+    },
+    {
+      "id": "bakeries:salt_croissant",
+      "required": false
+    },
+    {
+      "id": "bakeries:sliced_toast",
+      "required": false
+    },
+    {
+      "id": "bakeries:honey_butter_spread_toast",
+      "required": false
+    },
+    {
+      "id": "bakeries:sliced_cheese_cocoa_toast",
+      "required": false
+    },
+    {
+      "id": "bakeries:baguette",
+      "required": false
+    },
+    {
+      "id": "bakeries:ciabatta",
+      "required": false
+    },
+    {
+      "id": "bakeries:focaccia",
+      "required": false
+    },
+    {
+      "id": "bakeries:country_bread_slice",
+      "required": false
+    },
+    {
+      "id": "bakeries:honey_butter_spread_country_bread",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:yorkshire_pudding",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:nether_wart_sourdough",
+      "required": false
+    },
+    {
+      "id": "oceanic_delight:caviar_toast",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:strawberry_vanilla_cream_bun",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:adzuki_mint_cream_bun",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:cream_bun",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:chocolate_banana_cream_bun",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:avocado_toast",
+      "required": false
+    },
+    {
+      "id": "alexsdelight:gongylidia_bruschetta",
+      "required": false
+    }
+  ]
+}

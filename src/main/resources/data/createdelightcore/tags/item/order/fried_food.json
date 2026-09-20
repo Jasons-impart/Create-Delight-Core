@@ -1,0 +1,229 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "casualnessdelight:tonkatsu",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:fried_fish",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:fried_chicken_chip",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:fried_dumpling",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:kroket",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:bitterballen",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:eggball",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:frikandel",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:enderball",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:coated_honey_berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:coated_chocolate_berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:apfelkuchle",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:deepfried_chocolate_bar",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:fried_chicken",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:lava_chicken",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:onion_rings",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:blooming_onion",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:panzerotto",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:chocolate_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:sweet_berry_honey_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:sweet_berry_chocolate_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:glow_berry_honey_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:glow_berry_chocolate_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:honey_filled_berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:chocolate_filled_berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:coated_berliner",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:yuca_fries",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:calamari",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:coated_churros",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:corn_dog",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:cheese_curd",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:tempura",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:coated_donut",
+      "required": false
+    },
+    {
+      "id": "create_deepfried:honey_glazed_donut",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:potato_chip",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:spring_roll",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:fries",
+      "required": false
+    },
+    {
+      "id": "frycooks_delight:fried_potato",
+      "required": false
+    },
+    {
+      "id": "frycooks_delight:fried_chicken_leg",
+      "required": false
+    },
+    {
+      "id": "frycooks_delight:plain_donut",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:cheese_souffle",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:churros",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:oliebollen",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:oily_bean_curd",
+      "required": false
+    },
+    {
+      "id": "oceanic_delight:fried_shrimp",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:fries_ghasta",
+      "required": false
+    },
+    {
+      "id": "dungeonsdelight:fried_ghast_calamari",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:potato_pancakes",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:fish_and_chips",
+      "required": false
+    },
+    {
+      "id": "corn_delight:classic_corn_dog",
+      "required": false
+    },
+    {
+      "id": "oceanic_delight:shrimp_chips",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:coated_oliebollen",
+      "required": false
+    },
+    {
+      "id": "create_bic_bit:kruidnoten",
+      "required": false
+    },
+    {
+      "id": "culturaldelights:empanada",
+      "required": false
+    }
+  ]
+}

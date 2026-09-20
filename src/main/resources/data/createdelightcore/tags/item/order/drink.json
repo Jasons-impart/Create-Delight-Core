@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#createdelightcore:order/western_wine",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/eastern_wine",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/tea",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/milk_tea",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/coffee",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/juice",
+      "required": false
+    },
+    {
+      "id": "alexcaves_delight:jellyfish_soda",
+      "required": false
+    },
+    {
+      "id": "corn_delight:creamy_corn_drink",
+      "required": false
+    },
+    {
+      "id": "ends_delight:dragon_breath_soda",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:blueberry_custard",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:strong_hot_cocoa",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:pomegranate_custard",
+      "required": false
+    }
+  ]
+}
