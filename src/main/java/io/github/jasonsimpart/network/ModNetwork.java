@@ -29,6 +29,7 @@ public final class ModNetwork {
         event.registrar(CreateDelightCore.MODID)
                 .versioned(PROTOCOL_VERSION)
                 .playToServer(ChainCasingModifierPayload.TYPE, ChainCasingModifierPayload.STREAM_CODEC, ChainCasingModifierPayload::handle)
+                .playToClient(SyncFoodValuesPayload.TYPE, SyncFoodValuesPayload.STREAM_CODEC, SyncFoodValuesPayload::handle)
                 .playToClient(SyncFuelMapsPayload.TYPE, SyncFuelMapsPayload.STREAM_CODEC, SyncFuelMapsPayload::handle)
                 .playToClient(SyncDisabledCreativeTabsPayload.TYPE, SyncDisabledCreativeTabsPayload.STREAM_CODEC,
                         SyncDisabledCreativeTabsPayload::handle);
