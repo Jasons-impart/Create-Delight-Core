@@ -42,6 +42,62 @@ public final class MbdEconomyTests {
         helper.succeed();
     }
     @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void deliveryCatchesUpAfterMissedDeadline(GameTestHelper helper) {
+        var pos = new BlockPos(4, 2, 4);
+        var machine = MbdSingleMachineTests.place(helper, "order_deliverer", pos);
+        var tablePos = pos.east();
+        helper.setBlock(tablePos.below(), net.minecraft.world.level.block.Blocks.STONE);
+        helper.setBlock(tablePos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:white_table_cloth")).defaultBlockState()
+                .setValue(com.simibubi.create.content.logistics.tableCloth.TableClothBlock.HAS_BE, true));
+        helper.startSequence().thenWaitUntil(() -> helper.assertTrue(helper.getLevel().getGameTime() % 20 == 0,
+                "Wait for the bounded settlement retry interval")).thenExecute(() -> {
+            var cloth = (TableClothBlockEntity) helper.getBlockEntity(tablePos);
+            var order = ModItems.ORDER.toStack();
+            var data = new CompoundTag();
+            data.put("createdelightOrderInfo", fruitOrder(4));
+            order.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
+            cloth.manuallyAddedItems.add(order);
+            cloth.manuallyAddedItems.add(PackageItem.containing(List.of(new ItemStack(Items.APPLE, 4))));
+            helper.setBlock(pos.west().below(), net.minecraft.world.level.block.Blocks.STONE);
+            helper.setBlock(pos.west(), helper.getBlockState(tablePos));
+            var pendingCloth = (TableClothBlockEntity) helper.getBlockEntity(pos.west());
+            var pendingOrder = ModItems.ORDER.toStack();
+            var owned = fruitOrder(4);
+            owned.putString("ownerUUID", java.util.UUID.randomUUID().toString());
+            var pendingData = new CompoundTag();
+            pendingData.put("createdelightOrderInfo", owned);
+            pendingOrder.set(DataComponents.CUSTOM_DATA, CustomData.of(pendingData));
+            pendingCloth.manuallyAddedItems.add(pendingOrder);
+            pendingCloth.manuallyAddedItems.add(PackageItem.containing(List.of(new ItemStack(Items.APPLE, 4))));
+            long previous = helper.getLevel().getDayTime();
+            try {
+                helper.getLevel().setDayTime(2000);
+                var tick = new com.lowdragmc.mbd2.common.machine.definition.config.event.MachineTickEvent(machine);
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(tick);
+                helper.assertTrue(!machine.getCustomData().contains("settledDay") && !cloth.manuallyAddedItems.contains(order)
+                        && pendingCloth.manuallyAddedItems.contains(pendingOrder),
+                        "A ready segment settles after the deadline without preventing an offline segment from retrying");
+                var replenished = order.copy();
+                cloth.manuallyAddedItems.clear();
+                cloth.manuallyAddedItems.add(replenished);
+                cloth.manuallyAddedItems.add(PackageItem.containing(List.of(new ItemStack(Items.APPLE, 4))));
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(tick);
+                helper.assertTrue(cloth.manuallyAddedItems.contains(replenished) && !machine.getCustomData().contains("settledDay"),
+                        "Replenishing a completed row must not pay it again while another row is pending");
+                pendingData.put("createdelightOrderInfo", fruitOrder(4));
+                pendingOrder.set(DataComponents.CUSTOM_DATA, CustomData.of(pendingData));
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(tick);
+                helper.assertTrue(machine.getCustomData().contains("settledDay") && !pendingCloth.manuallyAddedItems.contains(pendingOrder),
+                        "A previously pending segment can complete on the same day");
+                cloth.manuallyAddedItems.add(ModItems.ORDER.toStack());
+                int size = cloth.manuallyAddedItems.size();
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(tick);
+                helper.assertTrue(cloth.manuallyAddedItems.size() == size, "A successful day's delivery must not repeat");
+            } finally { helper.getLevel().setDayTime(previous); }
+            helper.succeed();
+        });
+    }
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
     public static void frozenDaylightSchedulesOneAuction(GameTestHelper helper) {
         helper.assertTrue(MbdEconomyEvents.auctionDue(4800000), "First scheduled interval is eligible");
         for (int tick = 0; tick < 100; tick++)
@@ -97,6 +153,87 @@ public final class MbdEconomyTests {
         helper.succeed();
     }
 
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void deliveryPreservesFailedOrderAndReplacesSuccessfulParcels(GameTestHelper helper) {
+        var pos = new BlockPos(4, 2, 4);
+        helper.setBlock(pos.below(), net.minecraft.world.level.block.Blocks.STONE);
+        helper.setBlock(pos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:white_table_cloth")).defaultBlockState().setValue(com.simibubi.create.content.logistics.tableCloth.TableClothBlock.HAS_BE, true));
+        helper.runAfterDelay(2, () -> {
+            var cloth = (TableClothBlockEntity) helper.getBlockEntity(pos);
+            var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+            player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, ModItems.ORDER_DELIVERER_ITEM.toStack());
+            var denied = new net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock(player,
+                    net.minecraft.world.InteractionHand.MAIN_HAND, helper.absolutePos(pos),
+                    new net.minecraft.world.phys.BlockHitResult(helper.absolutePos(pos).getCenter(), net.minecraft.core.Direction.UP,
+                            helper.absolutePos(pos), false));
+            denied.setUseBlock(net.neoforged.neoforge.common.util.TriState.FALSE);
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.post(denied);
+            helper.assertTrue(helper.getBlockEntity(pos) == cloth && player.getMainHandItem().getCount() == 1,
+                    "Denied block use preserves both the table cloth and deliverer item");
+            var order = ModItems.ORDER.toStack();
+            var data = new CompoundTag();
+            data.put("createdelightOrderInfo", fruitOrder(4));
+            order.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
+            var parcel = PackageItem.containing(List.of(new ItemStack(Items.APPLE, 3)));
+            cloth.manuallyAddedItems.add(order);
+            cloth.manuallyAddedItems.add(parcel);
+            helper.assertTrue(!MbdOrderDelivery.settleSegment(helper.getLevel(), List.of(cloth), order), "Missing goods must reject settlement");
+            helper.assertTrue(cloth.manuallyAddedItems.size() == 2 && cloth.manuallyAddedItems.get(0) == order,
+                    "Rejected settlement must preserve the order and parcels");
+            cloth.manuallyAddedItems.set(1, PackageItem.containing(List.of(new ItemStack(Items.APPLE, 7), new ItemStack(Items.DIAMOND, 2))));
+            PackageItem.addAddress(cloth.manuallyAddedItems.get(1), "Return address");
+            var decoration = new ItemStack(Items.EMERALD);
+            var otherOrder = ModItems.ORDER.toStack();
+            cloth.manuallyAddedItems.add(decoration);
+            cloth.manuallyAddedItems.add(otherOrder);
+            var owned = fruitOrder(4);
+            owned.putString("ownerUUID", java.util.UUID.randomUUID().toString());
+            data.put("createdelightOrderInfo", owned);
+            order.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
+            helper.assertTrue(!MbdOrderDelivery.settleSegment(helper.getLevel(), List.of(cloth), order)
+                    && cloth.manuallyAddedItems.size() == 4, "An offline owner's order must wait without consuming goods or reputation");
+            data.put("createdelightOrderInfo", fruitOrder(4));
+            order.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
+            helper.assertTrue(MbdOrderDelivery.settleSegment(helper.getLevel(), List.of(cloth), order), "Complete order must settle");
+            helper.assertTrue(cloth.manuallyAddedItems.contains(decoration) && cloth.manuallyAddedItems.contains(otherOrder),
+                    "Unrelated display items and orders must survive successful settlement");
+            var leftovers = PackageItem.getContents(cloth.manuallyAddedItems.getFirst());
+            helper.assertTrue(PackageItem.getAddress(cloth.manuallyAddedItems.getFirst()).equals("Return address"),
+                    "Partially consumed parcels retain their original address");
+            int apples = 0, diamonds = 0;
+            for (int slot = 0; slot < leftovers.getSlots(); slot++) {
+                var stack = leftovers.getStackInSlot(slot);
+                if (stack.is(Items.APPLE)) apples += stack.getCount();
+                if (stack.is(Items.DIAMOND)) diamonds += stack.getCount();
+            }
+            helper.assertTrue(apples == 3 && diamonds == 2, "Return surplus goods and unrelated parcel contents exactly");
+            // A full first display routes rewards to entities; cancellation must preserve all submitted goods.
+            cloth.manuallyAddedItems.clear();
+            for (int i = 0; i < 4; i++) cloth.manuallyAddedItems.add(new ItemStack(Items.EMERALD));
+            var nextPos = pos.east();
+            helper.setBlock(nextPos.below(), net.minecraft.world.level.block.Blocks.STONE);
+            helper.setBlock(nextPos, helper.getBlockState(pos));
+            var next = (TableClothBlockEntity) helper.getBlockEntity(nextPos);
+            var overflowOrder = ModItems.ORDER.toStack();
+            overflowOrder.set(DataComponents.CUSTOM_DATA, CustomData.of(data));
+            var submitted = PackageItem.containing(List.of(new ItemStack(Items.APPLE, 4)));
+            next.manuallyAddedItems.add(overflowOrder);
+            next.manuallyAddedItems.add(submitted);
+            java.util.function.Consumer<net.neoforged.neoforge.event.entity.EntityJoinLevelEvent> reject = event -> {
+                if (event.getEntity() instanceof com.simibubi.create.content.logistics.box.PackageEntity) event.setCanceled(true);
+            };
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(reject);
+            try {
+                helper.assertTrue(!MbdOrderDelivery.settleSegment(helper.getLevel(), List.of(cloth, next), overflowOrder),
+                        "Rejected overflow reward spawning must reject settlement");
+                helper.assertTrue(next.manuallyAddedItems.contains(overflowOrder) && next.manuallyAddedItems.contains(submitted)
+                        && cloth.manuallyAddedItems.size() == 4, "Payout failure preserves original orders, parcels, and displays");
+            } finally { net.neoforged.neoforge.common.NeoForge.EVENT_BUS.unregister(reject); }
+            helper.assertTrue(MbdOrderDelivery.settleSegment(helper.getLevel(), List.of(cloth, next), overflowOrder),
+                    "Settlement may retry once overflow reward spawning is permitted");
+            helper.succeed();
+        });
+    }
     @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
     public static void sellBinPaysForConsumedItemsOnly(GameTestHelper helper) {
         var machine = MbdSingleMachineTests.place(helper, "sell_bin", new BlockPos(4, 2, 4));
