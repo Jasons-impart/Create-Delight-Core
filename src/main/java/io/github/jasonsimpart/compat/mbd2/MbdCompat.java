@@ -33,7 +33,7 @@ public final class MbdCompat {
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
             "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
             "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller",
-            "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "quality_destroyer", "small_centrifugation"
+            "mechanic_grinding_wheel", "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "quality_destroyer", "small_centrifugation"
     };
 
     private MbdCompat() {}
@@ -55,6 +55,7 @@ public final class MbdCompat {
         MbdAssembly.register();
         MbdCraftEncoder.register();
         MbdSmallProcessing.register();
+        MbdGrinding.register();
         MbdGreenhouse.register();
         MbdCentrifuge.register();
         MbdReactor.register();
