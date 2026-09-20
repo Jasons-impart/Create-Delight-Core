@@ -33,11 +33,20 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.startsWith("io.github.jasonsimpart.mixin.lightmanscurrency.")) {
+            return isModLoaded("lightmanscurrency");
+        }
+        if (mixinClassName.startsWith("io.github.jasonsimpart.mixin.createconnected.")) {
+            return isModLoaded("create_connected");
+        }
         if (mixinClassName.startsWith(ALEXSCAVES_MIXIN_PACKAGE)) {
             return isModLoaded("alexscavesup");
         }
         if (mixinClassName.startsWith(CMR_MIXIN_PACKAGE)) {
             return isModLoaded("cmr");
+        }
+        if (mixinClassName.startsWith(ECLIPTICSEASONS_MIXIN_PACKAGE + "Quality")) {
+            return isModLoaded("eclipticseasons") && isModLoaded("quality_food");
         }
         if (mixinClassName.startsWith(ECLIPTICSEASONS_MIXIN_PACKAGE)) {
             return isModLoaded("eclipticseasons");
@@ -52,7 +61,7 @@ public class CDCMixinPlugin implements IMixinConfigPlugin {
             return isModLoaded("createmetallurgy");
         }
         if (mixinClassName.startsWith(CREATE_MIXIN_PACKAGE)) {
-            return isModLoaded("create") && isModLoaded("jei");
+            return isModLoaded("create") && (!mixinClassName.endsWith("CategoryMixin") || isModLoaded("jei"));
         }
         if (mixinClassName.startsWith(KUBEJS_MIXIN_PACKAGE)) {
             return isModLoaded("kubejs");
