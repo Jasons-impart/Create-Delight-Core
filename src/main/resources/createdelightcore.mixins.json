@@ -5,6 +5,7 @@
   "plugin": "io.github.jasonsimpart.mixin.CDCMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "createconnected.FreezingCatalystConditionMixin",
     "alexscaves.ChunkStatusTasksMixin",
     "alexscaves.MultiNoiseBiomeSourceMixin",
     "datamap.DataMapLoaderMixin",
@@ -22,6 +23,11 @@
     "createmetallurgy.FoundryBasinRecipeMixin",
     "createmetallurgy.CreateMetallurgyJEIMixin",
     "create.CreateRecipeCategoryMixin",
+    "create.EmptyingOutputLimitMixin",
+    "create.ItemDrainOutputsMixin",
+    "create.ItemDrainBlockOutputsMixin",
+    "create.ItemDrainCategoryMixin",
+    "create.FluidHelperOutputsMixin",
     "kubejs.EitherRecipeComponentMixin",
     "kubejs.KubeRecipeMixin",
     "kubejs.RecipesKubeEventMixin",
@@ -39,7 +45,9 @@
     "quark.ContributorRewardHandlerMixin",
     "vintageimprovements.PressurizingRecipeMixin",
     "vintageimprovements.VacuumizingRecipeMixin",
-    "waystones.WaystonesAPIMixin"
+    "waystones.WaystonesAPIMixin",
+    "vintageimprovements.VibratingOutputLimitMixin",
+    "vintageimprovements.VacuumizingOutputLimitMixin"
   ],
   "client": [
     "minecraft.CreativeModeInventoryScreenMixin",
