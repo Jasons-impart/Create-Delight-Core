@@ -352,7 +352,6 @@ public class ChineseLangHandler {
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人液体燃料配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗%smB");
-        provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "雪傀儡液体冷却剂配方");
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "烈焰人冷却室液体冷却剂配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "消耗%smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
@@ -380,7 +379,6 @@ public class ChineseLangHandler {
         provider.add("tooltip." + CreateDelightCore.MODID + ".jello_block", "光滑，但是能和相同果酱/果冻方块粘黏");
         //jade
         provider.add("config.jade.plugin_balm.jade", "Jade");
-        provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "雪傀儡冷却器");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "需要：");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "免费");

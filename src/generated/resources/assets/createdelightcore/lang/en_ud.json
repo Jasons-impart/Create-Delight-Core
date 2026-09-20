@@ -58,7 +58,6 @@
   "block.createdelightcore.walnut_leaves": "sǝʌɐǝꞀ ʇnuןɐM",
   "block.createdelightcore.walnut_sapling": "buıןdɐS ʇnuןɐM",
   "config.jade.plugin_balm.jade": "ǝpɐſ",
-  "config.jade.plugin_createdelightcore.cmr.snowman_cooler": "ɹǝןooƆ uɐɯʍouS",
   "death.attack.createdelightcore.ice_cream": "ɯɐǝɹɔ ǝɔı ɥɔnɯ ooʇ buıʇɐǝ ɟo ǝsnɐɔǝq ǝןɔısdod ɐ oʇuı uǝzoɹɟ sɐʍ %1$s",
   "death.attack.createdelightcore.ice_cream.player": "ɯɐǝɹɔ ǝɔı ɥɔnɯ ooʇ buıʇɐǝ ɟo ǝsnɐɔǝq ǝןɔısdod ɐ oʇuı uǝzoɹɟ sɐʍ %1$s",
   "death.attack.createdelightcore.molten_metal": "ןɐʇǝɯ uǝʇןoɯ ǝɥʇ ɟo ʇɹɐd ɐ ǝɯɐɔǝq %1$s",
@@ -183,7 +182,6 @@
   "itemGroup.createdelightcore.misc": "ɔsıW | ʇɥbıןǝᗡ ǝʇɐǝɹƆ",
   "jei.createdelightcore.BlazeBurnerFluid": "ǝdıɔǝᴚ pınןℲ ɹǝuɹnᗺ ǝzɐןᗺ",
   "jei.createdelightcore.BlazeCoolerFluid": "sʇuɐןooƆ pınןℲ ɹǝןooƆ ǝzɐןᗺ",
-  "jei.createdelightcore.SnowmanCoolerFluid": "ǝdıɔǝᴚ pınןℲ ɹǝןooƆ uɐɯʍouS",
   "jei.createdelightcore.amountConsume": "ᗺɯ%s sǝɯnsuoƆ",
   "jei.createdelightcore.amountConsumeCool": "ᗺɯ%s sǝɯnsuoƆ",
   "jei.createdelightcore.phantomComposting": "buıʇsodɯoƆ ɯoʇuɐɥԀ",
@@ -205,5 +203,10 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "ɹ§uoıʇɐɯɹoɟuı buıʇɐǝɥ ǝzɐןᗺ ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSㄥ§ɹ§[ pןoH8§ɹ§",
   "tooltip.createdelightcore.jello_block": "˙sʞɔoןq ʎןןǝظ/oןןǝظ ǝɯɐs puɐ sʞɔoןq ʎʞɔıʇs oʇ sʞɔıʇS ˙ʎɹǝddıןS",
   "tooltip.createdelightcore.jelly_block": "˙sʞɔoןq ʎʞɔıʇs ɹǝɥʇo oʇ buıʇɔǝuuoɔ ʇou ʇnq 'ʎʞɔıʇS",
-  "tooltip.createdelightcore.superHeat": "buıʇɐǝH ɹǝdnS"
+  "tooltip.createdelightcore.superHeat": "buıʇɐǝH ɹǝdnS",
+  "item.createdelightcore.kinetic_configuration_module": "ǝןnpoW uoıʇɐɹnbıɟuoƆ ɔıʇǝuıʞ",
+  "item.createdelightcore.structural_configuration_module": "ǝןnpoW uoıʇɐɹnbıɟuoƆ ןɐɹnʇɔnɹʇS",
+  "item.createdelightcore.fluid_configuration_module": "ǝןnpoW uoıʇɐɹnbıɟuoƆ pınןℲ",
+  "item.createdelightcore.control_configuration_module": "ǝןnpoW uoıʇɐɹnbıɟuoƆ ןoɹʇuoƆ",
+  "item.createdelightcore.logistics_configuration_module": "ǝןnpoW uoıʇɐɹnbıɟuoƆ sɔıʇsıboꞀ"
 }

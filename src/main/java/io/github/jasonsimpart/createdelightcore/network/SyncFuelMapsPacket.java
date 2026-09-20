@@ -1,7 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.network;
 
 import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
-import io.github.jasonsimpart.createdelightcore.compat.cmr.CoolerStomachHandler;
 import io.github.jasonsimpart.createdelightcore.compat.fluidlogistics.BlazeCoolerFuels;
 import net.minecraftforge.fml.ModList;
 import io.github.jasonsimpart.createdelightcore.util.Triplet;
@@ -18,7 +17,6 @@ import java.util.function.Supplier;
 public class SyncFuelMapsPacket {
 
     private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData;
-    private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData;
     private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> blazeCoolerData;
 
     /** Server-side constructor: snapshot current server maps. */
@@ -33,24 +31,11 @@ public class SyncFuelMapsPacket {
                 burnerData.put(rl, Triplet.of(t.getFirst(), t.getSecond(), t.getThird()));
             }
         });
-
-        this.coolerData = new HashMap<>();
-        if (ModList.get().isLoaded("cmr")) {
-            CoolerStomachHandler.LIQUID_COOLER_FUEL_MAP.forEach((fluid, pair) -> {
-                ResourceLocation rl = ForgeRegistries.FLUIDS.getKey(fluid);
-                if (rl != null && pair != null && pair.getSecond() != null) {
-                    var t = pair.getSecond();
-                    coolerData.put(rl, Triplet.of(t.getFirst(), t.getSecond(), t.getThird()));
-                }
-            });
-        }
     }
 
     private SyncFuelMapsPacket(Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData,
-                              Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData,
                               Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> blazeCoolerData) {
         this.burnerData = burnerData;
-        this.coolerData = coolerData;
         this.blazeCoolerData = blazeCoolerData;
     }
 
@@ -65,11 +50,6 @@ public class SyncFuelMapsPacket {
             b.writeBoolean(t.getSecond());
             b.writeInt(t.getThird());
         });
-        buf.writeMap(coolerData, FriendlyByteBuf::writeResourceLocation, (b, t) -> {
-            b.writeInt(t.getFirst());
-            b.writeBoolean(t.getSecond());
-            b.writeInt(t.getThird());
-        });
     }
 
     public static SyncFuelMapsPacket decode(FriendlyByteBuf buf) {
@@ -80,11 +60,7 @@ public class SyncFuelMapsPacket {
                 FriendlyByteBuf::readResourceLocation,
                 b -> Triplet.of(b.readInt(), b.readBoolean(), b.readInt())
         );
-        Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData = buf.readMap(
-                FriendlyByteBuf::readResourceLocation,
-                b -> Triplet.of(b.readInt(), b.readBoolean(), b.readInt())
-        );
-        return new SyncFuelMapsPacket(burnerData, coolerData, blazeCoolerData);
+        return new SyncFuelMapsPacket(burnerData, blazeCoolerData);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
@@ -101,14 +77,6 @@ public class SyncFuelMapsPacket {
                 Fluid fluid = ForgeRegistries.FLUIDS.getValue(rl);
                 if (fluid != null) {
                     ClientFuelCache.BURNER_MAP.put(fluid, triplet);
-                }
-            });
-
-            ClientFuelCache.COOLER_MAP.clear();
-            coolerData.forEach((rl, triplet) -> {
-                Fluid fluid = ForgeRegistries.FLUIDS.getValue(rl);
-                if (fluid != null) {
-                    ClientFuelCache.COOLER_MAP.put(fluid, triplet);
                 }
             });
 

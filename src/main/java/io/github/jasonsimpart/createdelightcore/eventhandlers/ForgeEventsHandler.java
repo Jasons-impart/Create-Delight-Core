@@ -1,7 +1,5 @@
 package io.github.jasonsimpart.createdelightcore.eventhandlers;
 
-import io.github.jasonsimpart.createdelightcore.compat.cmr.LiquidCoolerFuelJsonLoader;
-import net.minecraftforge.fml.ModList;
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleManager;
 import io.github.jasonsimpart.createdelightcore.content.order.data.OrderDataManager;
 import io.github.jasonsimpart.createdelightcore.content.order.supply.SupplyCommissionBlockEntity;
@@ -58,9 +56,6 @@ public class ForgeEventsHandler {
 
     @SubscribeEvent
     public static void addReloadListeners(AddReloadListenerEvent event) {
-        if (ModList.get().isLoaded("cmr")) {
-            event.addListener(LiquidCoolerFuelJsonLoader.INSTANCE);
-        }
         event.addListener(OrderDataManager.INSTANCE);
         event.addListener(ConfigurationModuleManager.MODULE_RELOAD_LISTENER);
         event.addListener(ConfigurationModuleManager.MODE_RELOAD_LISTENER);

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = CreateDelightCore.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class TooltipEvent {
-    // formatTime 已迁移至 JeiCategoryBlazeBurnerFluid / JeiCategorySnowmanCoolerFluid
+    // formatTime 已迁移至 JeiCategoryBlazeBurnerFluid
 //    public static String formatTime(int ticks) {
 //        if (ticks >= 20 * 60)
 //            return (ticks / (20 * 60)) + " m";
@@ -49,29 +49,6 @@ public class TooltipEvent {
 //                    }
 //                    else{
 //                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdShiftToSeeHeat"));
-//                    }
-//                }
-//            }
-            // 雪傀儡冷却剂桶提示 —— 已迁移至 JEI，Tooltip 不再重复显示
-//            Triplet<Integer, Boolean, Integer> coolerInfo = ClientFuelCache.COOLER_MAP.get(fluid);
-//            if(coolerInfo != null){
-//                Integer coolTime = coolerInfo.getFirst();
-//                Boolean isSuperCool = coolerInfo.getSecond();
-//                Integer amountConsume = coolerInfo.getThird();
-//                if(coolTime != null && isSuperCool != null && amountConsume != null){
-//                    if( Screen.hasControlDown()) {
-//                        var coolType = isSuperCool
-//                                ? Component.translatable("tooltip." + CreateDelightCore.MODID + ".Frozen").withStyle(ChatFormatting.BLUE)
-//                                : Component.translatable("tooltip." + CreateDelightCore.MODID + ".Cooled").withStyle(ChatFormatting.AQUA);
-//                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdControlCool"));
-//                        var coolTimeComponent = Component.literal(formatTime(coolTime)).withStyle(ChatFormatting.GOLD);
-//                        var amountConsumeComponent = Component.literal(amountConsume.toString() + " mB").withStyle(ChatFormatting.GOLD);
-//                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".coolTime").append(coolTimeComponent));
-//                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".amountConsume").append(amountConsumeComponent));
-//                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".coolType").append(coolType));
-//                    }
-//                    else{
-//                        event.getToolTip().add(Component.translatable("tooltip." + CreateDelightCore.MODID + ".holdControlToSeeCool"));
 //                    }
 //                }
 //            }

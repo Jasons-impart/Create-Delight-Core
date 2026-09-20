@@ -62,7 +62,6 @@
   "block.createdelightcore.walnut_leaves": "Walnut Leaves",
   "block.createdelightcore.walnut_sapling": "Walnut Sapling",
   "config.jade.plugin_balm.jade": "Jade",
-  "config.jade.plugin_createdelightcore.cmr.snowman_cooler": "Snowman Cooler",
   "createdelightcore.gui.address": "Address",
   "createdelightcore.gui.candidates": "Candidates",
   "createdelightcore.gui.estimate": "Expected: %s",
@@ -330,7 +329,6 @@
   "itemGroup.createdelightcore.misc": "Create Delight | Misc",
   "jei.createdelightcore.BlazeBurnerFluid": "Blaze Burner Fluid Recipe",
   "jei.createdelightcore.BlazeCoolerFluid": "Blaze Cooler Fluid Coolants",
-  "jei.createdelightcore.SnowmanCoolerFluid": "Snowman Cooler Fluid Recipe",
   "jei.createdelightcore.amountConsume": "Consumes %smB",
   "jei.createdelightcore.amountConsumeCool": "Consumes %smB",
   "jei.createdelightcore.phantomComposting": "Phantom Composting",
@@ -366,5 +364,9 @@
   "item.createdelightcore.kinetic_configuration_module.error.no_charge": "Not enough configuration charge",
   "item.createdelightcore.kinetic_configuration_module.error.ingredients": "Missing additional ingredients for this form",
   "item.createdelightcore.sponsor_medal": "§dJSI Sponsor Medal",
-  "item.createdelightcore.sponsor_medal.desc": "Thank you for supporting the JSI Team"
+  "item.createdelightcore.sponsor_medal.desc": "Thank you for supporting the JSI Team",
+  "item.createdelightcore.structural_configuration_module": "Structural Configuration Module",
+  "item.createdelightcore.fluid_configuration_module": "Fluid Configuration Module",
+  "item.createdelightcore.control_configuration_module": "Control Configuration Module",
+  "item.createdelightcore.logistics_configuration_module": "Logistics Configuration Module"
 }
