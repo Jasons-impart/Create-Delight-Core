@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#c:ingots/tin",
-    "#c:ingots/bronze",
     "createdelightcore:forged_steel_ingot"
   ]
 }

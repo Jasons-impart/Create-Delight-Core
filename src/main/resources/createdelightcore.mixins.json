@@ -19,6 +19,7 @@
     "iceandfire.SirenIslandPieceMixin",
     "createmetallurgy.BeltGrinderBlockEntityMixin",
     "createmetallurgy.CMFluidsMixin",
+    "createmetallurgy.FoundryBasinRecipeMixin",
     "createmetallurgy.CreateMetallurgyJEIMixin",
     "create.CreateRecipeCategoryMixin",
     "kubejs.EitherRecipeComponentMixin",

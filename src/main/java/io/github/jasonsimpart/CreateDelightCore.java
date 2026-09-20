@@ -34,6 +34,7 @@ public class CreateDelightCore {
         ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
+        io.github.jasonsimpart.compat.dreadsteel.DreadsteelFallback.register(modEventBus);
         ModMobEffects.register(modEventBus);
         ModSoundEvents.register(modEventBus);
         ModRecipeTypes.register(modEventBus);
