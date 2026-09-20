@@ -1,0 +1,713 @@
+{
+  definition: {
+    stateMachine: {
+      root: {
+        lightLevel: {
+          _enable: 1b,
+          value: 0
+        },
+        renderer: {
+          _enable: 1b,
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:electrolyzer_off"
+            }
+          }
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        children: [
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 1b,
+              value: {
+                type: "json_model",
+                data: {
+                  modelLocation: "mbd2:electrolyzer_on"
+                }
+              }
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            children: [
+              {
+                lightLevel: {
+                  _enable: 0b,
+                  value: 0
+                },
+                renderer: {
+                  _enable: 0b,
+                  value: {}
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                children: [],
+                renderingBox: {
+                  _enable: 0b,
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  }
+                },
+                name: "waiting",
+                machineSound: {
+                  volume: 1.0f,
+                  delay: 0,
+                  _enable: 0b,
+                  loop: 1b,
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  soundSource: "BLOCKS",
+                  loopWithShuffle: 0b,
+                  pitch: 1.0f
+                }
+              }
+            ],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "working",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          },
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 0b,
+              value: {}
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            children: [],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "suspend",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          }
+        ],
+        renderingBox: {
+          _enable: 0b,
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          }
+        },
+        name: "base",
+        machineSound: {
+          volume: 1.0f,
+          delay: 0,
+          _enable: 0b,
+          loop: 1b,
+          sound: "minecraft:block.furnace.fire_crackle",
+          soundSource: "BLOCKS",
+          loopWithShuffle: 0b,
+          pitch: 1.0f
+        }
+      }
+    },
+    partSettings: {
+      _enable: 0b,
+      recipeModifiers: [],
+      canShare: 1b,
+      proxyControllerCapabilities: []
+    },
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      recipeType: "createdelightcore:electrolyzer",
+      _enable: 1b,
+      alwaysModifyRecipe: 0b,
+      recipeModifiers: [],
+      alwaysSearchRecipe: 0b
+    },
+    blockProperties: {
+      ignitedByLava: 0b,
+      isSuffocating: 0b,
+      blockSound: {
+        volumeIn: 1.0f,
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.metal.place",
+        stepSound: "minecraft:block.metal.step",
+        breakSound: "minecraft:block.metal.break",
+        hitSound: "minecraft:block.metal.hit",
+        fallSound: "minecraft:block.metal.fall"
+      },
+      emissive: 0b,
+      explosionResistance: 6.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 1b,
+        cutout: 0b,
+        cutoutMipped: 0b
+      },
+      replaceable: 0b,
+      noParticleOnBreak: 0b,
+      speedFactor: 1.0f,
+      friction: 0.6000000238418579f,
+      transparent: 0b,
+      rotationState: "NON_Y_AXIS",
+      canOcclude: 1b,
+      destroyTime: 1.5f,
+      useAO: 1b,
+      isAir: 0b,
+      canBeWaterlogged: 0b,
+      forceSolid: 0b,
+      hasCollision: 1b,
+      jumpFactor: 1.0f
+    },
+    itemProperties: {
+      itemTooltips: [],
+      renderer: {
+        _enable: 0b,
+        value: {}
+      },
+      maxStackSize: 64,
+      creativeTab: {
+        _enable: 1b,
+        value: "createdelightcore:machines"
+      },
+      isGui3d: 1b,
+      useBlockLight: 1b,
+      rarity: "COMMON"
+    },
+    id: "createdelightcore:electrolyzer",
+    machineSettings: {
+      machineLevel: 0,
+      traitDefinitions: [
+        {
+          guiIO: "BOTH",
+          fluidFilterSettings: {
+            isWhitelist: 1b,
+            _enable: 0b,
+            matchNBT: 0b,
+            filterTags: [],
+            filterFluids: []
+          },
+          recipeHandlerIO: "IN",
+          type: "fluid_tank",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "IN",
+            leftIO: "IN",
+            frontIO: "IN",
+            backIO: "IN",
+            rightIO: "IN",
+            topIO: "IN",
+            bottomIO: "IN"
+          },
+          priority: 0,
+          tankSize: 1,
+          capacity: 4000,
+          slotNames: [],
+          name: "fluid_tank_in",
+          allowSameFluids: 1b,
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          fancyRendererSettings: {
+            percentHeight: 0b,
+            _enable: 0b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            scale: [1.0f, 1.0f, 1.0f],
+            filters: [],
+            position: [0.0f, 0.0f, 0.0f],
+            rotateOrientation: 1b
+          }
+        },
+        {
+          guiIO: "BOTH",
+          maxReceive: 50000,
+          recipeHandlerIO: "IN",
+          type: "forge_energy_storage",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "BOTH",
+            leftIO: "BOTH",
+            frontIO: "BOTH",
+            backIO: "BOTH",
+            rightIO: "BOTH",
+            topIO: "BOTH",
+            bottomIO: "BOTH"
+          },
+          priority: 0,
+          capacity: 100000,
+          slotNames: [],
+          maxExtract: 50000,
+          name: "forge_energy_storage",
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          fancyRendererSettings: {
+            color: -1431699439,
+            percentHeight: 0b,
+            _enable: 0b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            scale: [1.0f, 1.0f, 1.0f],
+            filters: [],
+            position: [0.0f, 0.0f, 0.0f],
+            rotateOrientation: 1b
+          }
+        },
+        {
+          guiIO: "BOTH",
+          fluidFilterSettings: {
+            isWhitelist: 1b,
+            _enable: 0b,
+            matchNBT: 0b,
+            filterTags: [],
+            filterFluids: []
+          },
+          recipeHandlerIO: "OUT",
+          type: "fluid_tank",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "OUT",
+            leftIO: "OUT",
+            frontIO: "OUT",
+            backIO: "OUT",
+            rightIO: "OUT",
+            topIO: "OUT",
+            bottomIO: "OUT"
+          },
+          priority: 0,
+          tankSize: 2,
+          capacity: 4000,
+          slotNames: [],
+          name: "fluid_tank_out",
+          allowSameFluids: 0b,
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          fancyRendererSettings: {
+            percentHeight: 0b,
+            _enable: 0b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            scale: [1.0f, 1.0f, 1.0f],
+            filters: [],
+            position: [0.0f, 0.0f, 0.0f],
+            rotateOrientation: 1b
+          }
+        },
+        {
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            _enable: 0b,
+            filterItems: [],
+            matchNBT: 0b,
+            filterTags: []
+          },
+          guiIO: "BOTH",
+          slotSize: 2,
+          itemRendererSettings: {
+            _enable: 0b,
+            renderStack: 1b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            spin: 0.0f,
+            scale: [1.0f, 1.0f, 1.0f],
+            filters: [],
+            position: [0.0f, 0.0f, 0.0f],
+            rotateOrientation: 1b
+          },
+          recipeHandlerIO: "OUT",
+          type: "item_slot",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "BOTH",
+            leftIO: "BOTH",
+            frontIO: "BOTH",
+            backIO: "BOTH",
+            rightIO: "BOTH",
+            topIO: "BOTH",
+            bottomIO: "BOTH"
+          },
+          priority: 0,
+          slotNames: [],
+          name: "item_slot_out",
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          slotLimit: 64,
+          autoWorldInput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          },
+          autoWorldOutput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          }
+        },
+        {
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            _enable: 0b,
+            filterItems: [],
+            matchNBT: 0b,
+            filterTags: []
+          },
+          guiIO: "BOTH",
+          slotSize: 1,
+          itemRendererSettings: {
+            _enable: 0b,
+            renderStack: 1b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            spin: 0.0f,
+            scale: [1.0f, 1.0f, 1.0f],
+            filters: [],
+            position: [0.0f, 0.0f, 0.0f],
+            rotateOrientation: 1b
+          },
+          recipeHandlerIO: "IN",
+          type: "item_slot",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "BOTH",
+            leftIO: "BOTH",
+            frontIO: "BOTH",
+            backIO: "BOTH",
+            rightIO: "BOTH",
+            topIO: "BOTH",
+            bottomIO: "BOTH"
+          },
+          priority: 0,
+          slotNames: [],
+          name: "item_slot_in",
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          slotLimit: 64,
+          autoWorldInput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          },
+          autoWorldOutput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          }
+        }
+      ],
+      hasUI: 1b,
+      signalConnection: {
+        leftConnection: 0b,
+        backConnection: 0b,
+        topConnection: 0b,
+        frontConnection: 0b,
+        bottomConnection: 0b,
+        rightConnection: 0b
+      },
+      dropMachineItem: 1b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 180,
+    x: 150,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 92
+      },
+      {
+        type: "fluid_slot",
+        id: "ui:fluid_tank_in_0",
+        width: 12,
+        height: 54,
+        x: 29,
+        y: 27,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "ui:fluid_tank_out_0",
+        width: 12,
+        height: 54,
+        x: 139,
+        y: 27,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "ui:fluid_tank_out_1",
+        width: 12,
+        height: 54,
+        x: 151,
+        y: 27,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "progress",
+        id: "ui:forge_energy_storage",
+        width: 12,
+        height: 54,
+        x: 11,
+        y: 27,
+        background: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        empty: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        filled: {
+          image: "mbd2:textures/gui/energy_base.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        direction: "DOWN_TO_UP",
+        children: []
+      },
+      {
+        type: "progress",
+        id: "ui:progress_bar",
+        width: 18,
+        height: 18,
+        x: 79,
+        y: 46,
+        empty: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 0, 20, 20]
+        },
+        filled: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 20, 20, 20]
+        },
+        direction: "LEFT_TO_RIGHT",
+        children: []
+      },
+      {
+        type: "button",
+        id: "ui:xei_lookup",
+        width: 18,
+        height: 18,
+        x: 78,
+        y: 46,
+        background: {},
+        tooltips: ['{"translate":"editor.machine.recipe_type_ui_view.xei_lookup.hover"}'],
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_out_0",
+        width: 18,
+        height: 18,
+        x: 107,
+        y: 36,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_out_1",
+        width: 18,
+        height: 18,
+        x: 107,
+        y: 54,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_in_0",
+        width: 18,
+        height: 18,
+        x: 54,
+        y: 46,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "text_texture",
+        id: "",
+        width: 160,
+        height: 14,
+        x: 8,
+        y: 5,
+        text: "block.createdelightcore.electrolyzer",
+        component: '{"translate": "block.createdelightcore.electrolyzer"}',
+        children: []
+      }
+    ]
+  }
+}

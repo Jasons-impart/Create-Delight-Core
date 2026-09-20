@@ -1,0 +1,183 @@
+{
+  ui: {
+    type: "group",
+    id: "",
+    width: 172,
+    height: 91,
+    x: 122,
+    y: 80,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "progress",
+        id: "@forge_energy_import_0",
+        width: 12,
+        height: 54,
+        x: 11,
+        y: 18,
+        background: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        empty: {
+          image: "mbd2:textures/gui/energy_background.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        filled: {
+          image: "mbd2:textures/gui/energy_base.png",
+          rect: [I; 0, 0, 14, 42]
+        },
+        direction: "DOWN_TO_UP",
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_import_0",
+        width: 12,
+        height: 54,
+        x: 28,
+        y: 18,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "progress",
+        id: "@progress_bar",
+        width: 18,
+        height: 18,
+        x: 78,
+        y: 36,
+        empty: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 0, 20, 20]
+        },
+        filled: {
+          image: "mbd2:textures/gui/arrow_bar.png",
+          rect: [I; 0, 20, 20, 20]
+        },
+        direction: "LEFT_TO_RIGHT",
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_export_0",
+        width: 12,
+        height: 54,
+        x: 136,
+        y: 18,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "fluid_slot",
+        id: "@fluid_export_1",
+        width: 12,
+        height: 54,
+        x: 148,
+        y: 18,
+        background: {
+          image: "ldlib:textures/gui/fluid_slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        allowClickFilled: 1b,
+        allowClickDrained: 1b,
+        showAmount: 0b,
+        fillDirection: "DOWN_TO_UP",
+        overlay: {
+          image: "mbd2:textures/gui/fluid_tank_overlay.png",
+          rect: [I; 0, 0, 20, 58]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_import_0",
+        width: 18,
+        height: 18,
+        x: 49,
+        y: 36,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_export_0",
+        width: 18,
+        height: 18,
+        x: 108,
+        y: 27,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "@item_export_1",
+        width: 18,
+        height: 18,
+        x: 108,
+        y: 45,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "text_texture",
+        id: "",
+        width: 50,
+        height: 14,
+        x: 61,
+        y: 4,
+        text: "电解",
+        component: '{"translate":"电解"}',
+        children: []
+      }
+    ]
+  },
+  visible: 1b,
+  proxyVisible: 0b,
+  proxies: [],
+  icon: {
+    image: "mbd2:textures/gui/forge_energy.png",
+    rect: [I; 0, 0, 32, 32]
+  }
+}

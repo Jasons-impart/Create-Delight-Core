@@ -1,0 +1,469 @@
+{
+  definition: {
+    stateMachine: {
+      root: {
+        lightLevel: {
+          _enable: 1b,
+          value: 0
+        },
+        renderer: {
+          _enable: 1b,
+          value: {
+            type: "json_model",
+            data: {
+              modelLocation: "mbd2:sell_bin"
+            }
+          }
+        },
+        shape: {
+          _enable: 1b,
+          aabbs: [
+            {
+              min: [0.0d, 0.0d, 0.0d],
+              max: [1.0d, 1.0d, 1.0d]
+            }
+          ]
+        },
+        children: [
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 0b,
+              value: {}
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            children: [
+              {
+                lightLevel: {
+                  _enable: 0b,
+                  value: 0
+                },
+                renderer: {
+                  _enable: 0b,
+                  value: {}
+                },
+                shape: {
+                  _enable: 0b,
+                  aabbs: [
+                    {
+                      min: [0.0d, 0.0d, 0.0d],
+                      max: [1.0d, 1.0d, 1.0d]
+                    }
+                  ]
+                },
+                children: [],
+                renderingBox: {
+                  _enable: 0b,
+                  value: {
+                    min: [0.0d, 0.0d, 0.0d],
+                    max: [1.0d, 1.0d, 1.0d]
+                  }
+                },
+                name: "waiting",
+                machineSound: {
+                  volume: 1.0f,
+                  delay: 0,
+                  _enable: 0b,
+                  loop: 1b,
+                  sound: "minecraft:block.furnace.fire_crackle",
+                  soundSource: "BLOCKS",
+                  loopWithShuffle: 0b,
+                  pitch: 1.0f
+                }
+              }
+            ],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "working",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          },
+          {
+            lightLevel: {
+              _enable: 0b,
+              value: 0
+            },
+            renderer: {
+              _enable: 0b,
+              value: {}
+            },
+            shape: {
+              _enable: 0b,
+              aabbs: [
+                {
+                  min: [0.0d, 0.0d, 0.0d],
+                  max: [1.0d, 1.0d, 1.0d]
+                }
+              ]
+            },
+            children: [],
+            renderingBox: {
+              _enable: 0b,
+              value: {
+                min: [0.0d, 0.0d, 0.0d],
+                max: [1.0d, 1.0d, 1.0d]
+              }
+            },
+            name: "suspend",
+            machineSound: {
+              volume: 1.0f,
+              delay: 0,
+              _enable: 0b,
+              loop: 1b,
+              sound: "minecraft:block.furnace.fire_crackle",
+              soundSource: "BLOCKS",
+              loopWithShuffle: 0b,
+              pitch: 1.0f
+            }
+          }
+        ],
+        renderingBox: {
+          _enable: 0b,
+          value: {
+            min: [0.0d, 0.0d, 0.0d],
+            max: [1.0d, 1.0d, 1.0d]
+          }
+        },
+        name: "base",
+        machineSound: {
+          volume: 1.0f,
+          delay: 0,
+          _enable: 0b,
+          loop: 1b,
+          sound: "minecraft:block.furnace.fire_crackle",
+          soundSource: "BLOCKS",
+          loopWithShuffle: 0b,
+          pitch: 1.0f
+        }
+      }
+    },
+    partSettings: {
+      _enable: 0b,
+      recipeModifiers: [],
+      canShare: 1b,
+      proxyControllerCapabilities: []
+    },
+    recipeLogicSettings: {
+      recipeDampingValue: 2,
+      recipeType: "mbd2:dummy",
+      recipeModifiers: [],
+      alwaysSearchRecipe: 0b
+    },
+    blockProperties: {
+      ignitedByLava: 0b,
+      isSuffocating: 1b,
+      blockSound: {
+        volumeIn: 1.0f,
+        pitchIn: 1.0f,
+        placeSound: "minecraft:block.wood.place",
+        stepSound: "minecraft:block.wood.step",
+        breakSound: "minecraft:block.wood.break",
+        hitSound: "minecraft:block.wood.hit",
+        fallSound: "minecraft:block.wood.fall"
+      },
+      emissive: 0b,
+      explosionResistance: 6.0f,
+      renderTypes: {
+        translucent: 0b,
+        solid: 0b,
+        cutout: 1b,
+        cutoutMipped: 0b
+      },
+      replaceable: 0b,
+      noParticleOnBreak: 0b,
+      speedFactor: 1.0f,
+      friction: 0.6000000238418579f,
+      transparent: 0b,
+      rotationState: "NON_Y_AXIS",
+      canOcclude: 1b,
+      destroyTime: 1.5f,
+      useAO: 1b,
+      isAir: 0b,
+      canBeWaterlogged: 0b,
+      forceSolid: 0b,
+      hasCollision: 1b,
+      jumpFactor: 1.0f
+    },
+    itemProperties: {
+      itemTooltips: [],
+      renderer: {
+        _enable: 0b,
+        value: {}
+      },
+      maxStackSize: 64,
+      creativeTab: {
+        _enable: 1b,
+        value: "createdelightcore:machines"
+      },
+      isGui3d: 1b,
+      useBlockLight: 1b,
+      rarity: "COMMON"
+    },
+    id: "createdelightcore:sell_bin",
+    machineSettings: {
+      machineLevel: 0,
+      traitDefinitions: [
+        {
+          itemFilterSettings: {
+            isWhitelist: 1b,
+            _enable: 0b,
+            filterItems: [],
+            matchNBT: 0b,
+            filterTags: []
+          },
+          guiIO: "BOTH",
+          slotSize: 9,
+          itemRendererSettings: {
+            _enable: 1b,
+            renderStack: 1b,
+            isWhiteList: 0b,
+            rotation: [0.0f, 0.0f, 0.0f],
+            spin: 0.0f,
+            scale: [0.5f, 0.5f, 0.5f],
+            filters: [],
+            position: [0.5f, 0.8999999761581421f, 0.5f],
+            rotateOrientation: 1b
+          },
+          recipeHandlerIO: "IN",
+          type: "item_slot",
+          isDistinct: 0b,
+          capabilityIO: {
+            internal: "IN",
+            leftIO: "NONE",
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          priority: 0,
+          slotNames: [],
+          name: "item_slot",
+          autoIO: {
+            _enable: 0b,
+            leftIO: "NONE",
+            interval: 20,
+            frontIO: "NONE",
+            backIO: "NONE",
+            rightIO: "NONE",
+            topIO: "NONE",
+            bottomIO: "NONE"
+          },
+          slotLimit: 64,
+          autoWorldInput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          },
+          autoWorldOutput: {
+            _enable: 0b,
+            range: {
+              min: [-1.0d, -1.0d, -1.0d],
+              max: [2.0d, 2.0d, 2.0d]
+            },
+            interval: 20,
+            speed: 64
+          }
+        }
+      ],
+      hasUI: 1b,
+      signalConnection: {
+        leftConnection: 0b,
+        backConnection: 0b,
+        topConnection: 0b,
+        frontConnection: 0b,
+        bottomConnection: 0b,
+        rightConnection: 0b
+      },
+      dropMachineItem: 1b
+    }
+  },
+  ui: {
+    type: "group",
+    id: "",
+    width: 176,
+    height: 161,
+    x: 150,
+    y: 50,
+    background: {
+      image: "ldlib:textures/gui/background.png",
+      rect: [I; 0, 0, 16, 16],
+      border: [I; 4, 4]
+    },
+    children: [
+      {
+        type: "player_inventory",
+        id: "",
+        width: 172,
+        height: 86,
+        x: 2,
+        y: 72
+      },
+      {
+        type: "text_texture",
+        id: "",
+        width: 160,
+        height: 13,
+        x: 8,
+        y: 4,
+        text: "block.createdelightcore.sell_bin",
+        component: '{"translate": "block.createdelightcore.sell_bin"}',
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_0",
+        width: 18,
+        height: 18,
+        x: 61,
+        y: 19,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_1",
+        width: 18,
+        height: 18,
+        x: 79,
+        y: 19,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_2",
+        width: 18,
+        height: 18,
+        x: 97,
+        y: 19,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_3",
+        width: 18,
+        height: 18,
+        x: 61,
+        y: 37,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_4",
+        width: 18,
+        height: 18,
+        x: 79,
+        y: 37,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_5",
+        width: 18,
+        height: 18,
+        x: 97,
+        y: 37,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_6",
+        width: 18,
+        height: 18,
+        x: 61,
+        y: 55,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_7",
+        width: 18,
+        height: 18,
+        x: 79,
+        y: 55,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      },
+      {
+        type: "item_slot",
+        id: "ui:item_slot_8",
+        width: 18,
+        height: 18,
+        x: 97,
+        y: 55,
+        background: {
+          image: "ldlib:textures/gui/slot.png",
+          rect: [I; 0, 0, 18, 18],
+          border: [I; 1, 1]
+        },
+        children: []
+      }
+    ]
+  }
+}
