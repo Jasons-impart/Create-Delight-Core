@@ -31,6 +31,7 @@ public final class MbdCentrifugeTests {
 
     @GameTest(template = "mbd_centrifuge", templateNamespace = "createdelightcore", timeoutTicks = 500)
     public static void centrifugeFuelAndProcessing(GameTestHelper helper) {
+        MbdMachineTests.preloadPatternChunks(helper, CONTROLLER);
         var type = MBDRegistries.RECIPE_TYPES.get(MbdCompat.id("big_centrifugation"));
         var fuelType = MBDRegistries.RECIPE_TYPES.get(MbdCompat.id("big_centrifugation_fuel"));
         var fuel = MBDRecipeBuilder.of(MbdCompat.id("test/centrifuge_fuel"), fuelType)
@@ -42,7 +43,7 @@ public final class MbdCentrifugeTests {
             helper.setBlock(MOTOR, AllBlocks.CREATIVE_MOTOR.getDefaultState().setValue(BlockStateProperties.FACING, Direction.UP));
             ((CreativeMotorBlockEntity) helper.getBlockEntity(MOTOR)).generatedSpeed.setValue(16);
         });
-        helper.runAfterDelay(120, () -> {
+        MbdMachineTests.whenFormed(helper, CONTROLLER, () -> {
             var machine = (MBDMultiblockMachine) ((IMachineBlockEntity) helper.getBlockEntity(CONTROLLER)).getMetaMachine();
             helper.assertTrue(machine.checkPattern() && machine.isFormed(), "Legacy centrifuge must form automatically");
             var input = (ItemSlotCapabilityTrait) machine.getTraitByName("steel_import_item_slot");

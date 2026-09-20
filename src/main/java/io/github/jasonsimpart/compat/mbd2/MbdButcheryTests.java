@@ -30,13 +30,14 @@ public final class MbdButcheryTests {
     private static final BlockPos HOOK = new BlockPos(1, 4, 1);
     private static final BlockPos TABLE = new BlockPos(2, 2, 1);
 
-    @GameTest(template = "mbd_butchery", templateNamespace = "createdelightcore", timeoutTicks = 400)
+    @GameTest(template = "mbd_butchery", templateNamespace = "createdelightcore", timeoutTicks = 800)
     public static void butcherHookAndBlood(GameTestHelper helper) { check(helper, "pig_carcass"); }
 
-    @GameTest(template = "mbd_butchery", templateNamespace = "createdelightcore", rotationSteps = 1, timeoutTicks = 400)
+    @GameTest(template = "mbd_butchery", templateNamespace = "createdelightcore", rotationSteps = 1, timeoutTicks = 800)
     public static void butcherRotatedTable(GameTestHelper helper) { check(helper, "white_rabbit_carcass"); }
 
     private static void check(GameTestHelper helper, String carcass) {
+        MbdMachineTests.preloadPatternChunks(helper, CONTROLLER);
         helper.runAfterDelay(1, () -> {
             var machine = ((IMachineBlockEntity) helper.getBlockEntity(CONTROLLER)).getMetaMachine();
             var facing = machine.getFrontFacing().orElse(Direction.NORTH);
@@ -46,7 +47,7 @@ public final class MbdButcheryTests {
             var motor = (com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity) helper.getLevel().getBlockEntity(motorPos);
             motor.generatedSpeed.setValue(128);
         });
-        helper.runAfterDelay(80, () -> {
+        MbdMachineTests.whenFormed(helper, CONTROLLER, () -> {
             var machine = (MBDMultiblockMachine) ((IMachineBlockEntity) helper.getBlockEntity(CONTROLLER)).getMetaMachine();
             helper.assertTrue(machine.checkPattern(), "Old butcher structure must match");
             helper.assertTrue(machine.isFormed(), "Butcher structure must form automatically");

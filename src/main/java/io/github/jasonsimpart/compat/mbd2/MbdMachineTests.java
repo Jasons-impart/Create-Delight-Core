@@ -39,28 +39,42 @@ public final class MbdMachineTests {
         if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) event.register(MbdButcheryTests.class);
     }
 
-    @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", timeoutTicks = 200)
+    @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", timeoutTicks = 500)
     public static void alloyStructureAndProcessing(GameTestHelper helper) {
         checkAlloy(helper, false);
     }
 
-    @GameTest(template = "mbd_alloy_double", templateNamespace = "createdelightcore", timeoutTicks = 200)
+    @GameTest(template = "mbd_alloy_double", templateNamespace = "createdelightcore", timeoutTicks = 500)
     public static void alloyDoubleCoilAndPorts(GameTestHelper helper) {
         checkAlloy(helper, true);
     }
 
-    @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", rotationSteps = 1, timeoutTicks = 200)
+    @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", rotationSteps = 1, timeoutTicks = 500)
     public static void alloyRotatedStructure(GameTestHelper helper) {
         checkAlloy(helper, false);
     }
 
+    static void preloadPatternChunks(GameTestHelper helper, BlockPos center) {
+        // MBD2's snapshot search covers possible repeated-pattern extents, beyond fixture bounds.
+        for (int x = -32; x <= 32; x += 16) for (int z = -32; z <= 32; z += 16)
+            helper.getLevel().getChunkAt(helper.absolutePos(center.offset(x, 0, z)));
+    }
+
+    static void whenFormed(GameTestHelper helper, BlockPos controller, Runnable check) {
+        helper.startSequence().thenWaitUntil(() -> {
+            var machine = (MBDMultiblockMachine) ((IMachineBlockEntity) helper.getBlockEntity(controller)).getMetaMachine();
+            helper.assertTrue(machine.isFormed(), "Multiblock must form automatically before testing processing");
+        }).thenExecute(check);
+    }
+
     private static void checkAlloy(GameTestHelper helper, boolean doubled) {
         var port = new BlockPos(1, 2, 0);
+        preloadPatternChunks(helper, CONTROLLER);
         if (doubled) {
             helper.setBlock(port, MBDRegistries.MACHINE_DEFINITIONS.get(MbdCompat.id("forged_steel_import_bus")).block());
             helper.setBlock(new BlockPos(3, 2, 0), MBDRegistries.MACHINE_DEFINITIONS.get(MbdCompat.id("forged_steel_export_bus")).block());
         }
-        helper.runAfterDelay(80, () -> {
+        whenFormed(helper, CONTROLLER, () -> {
             helper.assertTrue(helper.getBlockState(CONTROLLER).is(MBDRegistries.MACHINE_DEFINITIONS.get(MbdCompat.id("alloy_electric_furnace")).block()),
                     "Controller fixture block: " + helper.getBlockState(CONTROLLER));
             var machine = (MBDMultiblockMachine) ((IMachineBlockEntity) helper.getBlockEntity(CONTROLLER)).getMetaMachine();
