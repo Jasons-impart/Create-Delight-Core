@@ -1,0 +1,37 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#forge:jams",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:gearo_berry_mason_jar",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:sweet_berry_mason_jar",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:glow_berry_mason_jar",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:apple_sauce_bottle",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:gearo_berry_jam_bottle",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:sweet_berry_jam_bottle",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:glow_berry_jam_bottle",
+      "required": false
+    }
+  ]
+}

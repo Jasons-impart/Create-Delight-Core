@@ -1,0 +1,85 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#createdelightcore:order/jello",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/ice_cream",
+      "required": false
+    },
+    {
+      "id": "#createdelightcore:order/cookie",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:cocoa_fudge",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:pickled_pickles",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:jerky",
+      "required": false
+    },
+    {
+      "id": "corn_delight:caramel_popcorn",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:roast_gluten",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:chicken_bobo_chicken",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:cabbage_bobo_chicken",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:potato_bobo_chicken",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:kinako_dango",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:mitarashi_dango",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:assorted_dango",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:peach_yatsuhashi",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:hawberry_stick",
+      "required": false
+    },
+    {
+      "id": "cavedelight:honey_glazed_dino_nugget",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:chocolate_nut_granola_bar",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:fruity_granola_bar",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:deluxe_granola_bar",
+      "required": false
+    }
+  ]
+}

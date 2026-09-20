@@ -1,0 +1,27 @@
+{
+  "default": 1.0,
+  "items": {
+    "minecraft:cooked_porkchop": 2.0,
+    "minecraft:cooked_beef": 2.0,
+    "minecraft:golden_carrot": 2.0,
+    "minecraft:golden_apple": 4.0,
+    "minecraft:enchanted_golden_apple": 10.0,
+    "largemeals:sweet_berry_custard": 5.0,
+    "largemeals:pufferfish_broth": 5.0,
+    "largemeals:mushroom_pot_pie": 5.0,
+    "largemeals:hearty_lunch": 6.0,
+    "farmersrespite:green_tea": 3.0,
+    "farmersrespite:yellow_tea": 3.0,
+    "farmersrespite:coffee": 3.0,
+    "farmersrespite:black_tea": 3.0,
+    "farmersrespite:rose_hip_tea": 3.0,
+    "farmersrespite:dandelion_tea": 3.0,
+    "farmersrespite:rose_hip_pie_slice": 4.0,
+    "farmersrespite:coffee_cake_slice": 4.0,
+    "farmersrespite:blazing_chili": 5.0,
+    "farmersdelight:cake_slice": 4.0,
+    "farmersdelight:chocolate_pie_slice": 4.0,
+    "farmersdelight:apple_pie_slice": 4.0,
+    "farmersdelight:sweet_berry_cheesecake_slice": 4.0
+  }
+}

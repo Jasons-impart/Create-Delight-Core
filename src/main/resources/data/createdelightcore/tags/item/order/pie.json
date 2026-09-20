@@ -1,0 +1,65 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "casualnessdelight:quiche_lorraine",
+      "required": false
+    },
+    {
+      "id": "casualnessdelight:quiche_lorraine_slice",
+      "required": false
+    },
+    {
+      "id": "ends_delight:chorus_fruit_pie_slice",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:tarte_lune_slice",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pineapple_pie",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:durian_pie",
+      "required": false
+    },
+    {
+      "id": "trailandtales_delight:cherry_cheese_pie_slice",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:rose_hip_pie_slice",
+      "required": false
+    },
+    {
+      "id": "silentsdelight:sculk_catalyst_pie_slice",
+      "required": false
+    },
+    {
+      "id": "cosmopolitan:water_pie_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:sweet_berry_cheesecake_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:apple_pie_slice",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chocolate_pie_slice",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:portobello_quiche_slice",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:lime_pie_slice",
+      "required": false
+    }
+  ]
+}

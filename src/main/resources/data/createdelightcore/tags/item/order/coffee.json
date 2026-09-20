@@ -1,0 +1,73 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "createcafe:iced_coffee",
+      "required": false
+    },
+    {
+      "id": "createcafe:iced_coffee_milk",
+      "required": false
+    },
+    {
+      "id": "createcafe:strawberry_iced_coffee",
+      "required": false
+    },
+    {
+      "id": "createcafe:vanilla_iced_coffee",
+      "required": false
+    },
+    {
+      "id": "createcafe:mint_iced_coffee",
+      "required": false
+    },
+    {
+      "id": "createcafe:caramel_iced_coffee",
+      "required": false
+    },
+    {
+      "id": "createcafe:banana_iced_coffee",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:espresso",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:americano",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:ristretto",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:latte",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:affogato",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:con_panna",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:cappuccino",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:macchiato",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:mocha",
+      "required": false
+    },
+    {
+      "id": "trailandtales_delight:ancient_coffee",
+      "required": false
+    }
+  ]
+}

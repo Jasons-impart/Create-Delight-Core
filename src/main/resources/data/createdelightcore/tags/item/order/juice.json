@@ -1,0 +1,57 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fruitsdelight:hamimelon_juice",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_juice",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:lemon_juice",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_juice",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:bayberry_soup",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:kiwi_juice",
+      "required": false
+    },
+    {
+      "id": "farmersrespite:strong_melon_juice",
+      "required": false
+    },
+    {
+      "id": "oceanic_delight:nautilus_juice",
+      "required": false
+    },
+    {
+      "id": "crabbersdelight:sea_pickle_juice",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:limeade",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:berry_limeade",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:pink_limeade",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:mint_limeade",
+      "required": false
+    }
+  ]
+}

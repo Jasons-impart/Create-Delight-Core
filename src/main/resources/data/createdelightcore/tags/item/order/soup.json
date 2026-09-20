@@ -1,0 +1,141 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "alexcaves_delight:uraniumsoup",
+      "required": false
+    },
+    {
+      "id": "alexcaves_delight:tripodfishsoup",
+      "required": false
+    },
+    {
+      "id": "corn_delight:corn_soup",
+      "required": false
+    },
+    {
+      "id": "ends_delight:dragon_breath_and_chorus_soup",
+      "required": false
+    },
+    {
+      "id": "ends_delight:shulker_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:avgolemono",
+      "required": false
+    },
+    {
+      "id": "brewinandchewin:creamy_onion_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:borscht",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:miso_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:seafood_miso_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:poor_god_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:higan_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:mushroom_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:power_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:potato_soup",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:signature_mushroom_stew",
+      "required": false
+    },
+    {
+      "id": "youkaishomecoming:peach_tapioca",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:pear_with_rock_sugar",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_chicken",
+      "required": false
+    },
+    {
+      "id": "fruitsdelight:orange_marinated_pork",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:egg_soup",
+      "required": false
+    },
+    {
+      "id": "mynethersdelight:rock_soup",
+      "required": false
+    },
+    {
+      "id": "minersdelight:cave_soup",
+      "required": false
+    },
+    {
+      "id": "silentsdelight:sculk_soup",
+      "required": false
+    },
+    {
+      "id": "crabbersdelight:bisque",
+      "required": false
+    },
+    {
+      "id": "crabbersdelight:seafood_gumbo",
+      "required": false
+    },
+    {
+      "id": "crabbersdelight:clam_chowder",
+      "required": false
+    },
+    {
+      "id": "vintagedelight:pickle_soup",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:chicken_soup",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:bone_broth",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:vegetable_soup",
+      "required": false
+    },
+    {
+      "id": "farmersdelight:pumpkin_soup",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:portobello_rice_soup",
+      "required": false
+    },
+    {
+      "id": "alexsdelight:acacia_blossom_soup",
+      "required": false
+    }
+  ]
+}
