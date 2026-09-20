@@ -1,0 +1,113 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "createdelightcore:andesite_export_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:andesite_import_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:copper_coil",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:electrolyzer",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:fission_fuel_assembly",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:fission_reactor_controller",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:forged_steel_export_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:forged_steel_import_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:hydropower_amplifier",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:mechanical_craft_encoder",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:sprinkler",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:steel_export_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:steel_import_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:alloy_electric_furnace",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:big_centrifuge",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:butchery_room",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:fission_reactor",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:hydropower_station",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:centrifuge_rotor",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:create_in",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:dryer",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:wooden_fan",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:steel_fan",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:forge_steel_fan",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:dragon_steel_fan",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:mechanic_grinding_wheel",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:small_centrifugation",
+      "required": false
+    }
+  ]
+}

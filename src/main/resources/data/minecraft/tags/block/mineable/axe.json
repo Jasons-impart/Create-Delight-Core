@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "createdelightcore:andesite_import_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:andesite_export_bus",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:create_in",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:butchery_room",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:wooden_fan",
+      "required": false
+    },
+    {
+      "id": "createdelightcore:sell_bin",
+      "required": false
+    }
+  ]
+}
