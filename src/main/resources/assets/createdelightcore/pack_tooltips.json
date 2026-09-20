@@ -1,0 +1,23 @@
+{
+  "ratatouille:frozen_block": "shift",
+  "ratatouille:mechanical_demolder": "shift",
+  "createdieselgenerators:distillation_controller": "shift",
+  "createdelightcore:dread_heart": "shift",
+  "vintagedelight:cheese_curds": "shift",
+  "createdelightcore:unactivated_crystalline_flower": "shift",
+  "createdelightcore:fission_reactor": "shift",
+  "eclipticseasons:growth_detector": "shift",
+  "createdelightcore:sprinkler": "ctrl",
+  "createdelightcore:dryer": "ctrl",
+  "createdelightcore:order_deliverer_item": "ctrl",
+  "createdelightcore:contract_executor": "ctrl",
+  "createdelightcore:mechanical_craft_encoder": "ctrl",
+  "vintagedelight:cheese_mold": "ctrl",
+  "createdelightcore:fuel_hotcream": "ctrl",
+  "createdelightcore:blood_collection_device": "ctrl",
+  "luncheonmeatsdelight:luncheon_meat_can": "ctrl",
+  "luncheonmeatsdelight:can_shell_small_toast": "ctrl",
+  "bakeries:mould_toast": "ctrl",
+  "bakeries:mould_cheese_cocoa_toast": "ctrl",
+  "brewinandchewin:keg": "shift,ctrl"
+}

@@ -38,6 +38,9 @@ public final class ClientModEvents {
         NeoForge.EVENT_BUS.addListener(QuickReloadKeyHandler::onKeyInput);
         DisabledCreativeTabsClient.register();
         ChainCasingInput.register();
+        NeoForge.EVENT_BUS.addListener(MigrationTooltips::append);
+        NeoForge.EVENT_BUS.addListener(PackItemTooltips::append);
+        NeoForge.EVENT_BUS.addListener(PackInputHints::tick);
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingIn event) ->
                 io.github.jasonsimpart.network.SyncFoodValuesPayload.clearClientValues());
         NeoForge.EVENT_BUS.addListener((net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent.LoggingOut event) ->

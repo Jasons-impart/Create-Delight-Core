@@ -28,6 +28,7 @@ public final class ModNetwork {
     private static void registerPayloadHandlers(RegisterPayloadHandlersEvent event) {
         event.registrar(CreateDelightCore.MODID)
                 .versioned(PROTOCOL_VERSION)
+                .playToServer(MiningKeyHintPayload.TYPE, MiningKeyHintPayload.STREAM_CODEC, MiningKeyHintPayload::handle)
                 .playToServer(ChainCasingModifierPayload.TYPE, ChainCasingModifierPayload.STREAM_CODEC, ChainCasingModifierPayload::handle)
                 .playToClient(SyncFoodValuesPayload.TYPE, SyncFoodValuesPayload.STREAM_CODEC, SyncFoodValuesPayload::handle)
                 .playToClient(SyncFuelMapsPayload.TYPE, SyncFuelMapsPayload.STREAM_CODEC, SyncFuelMapsPayload::handle)
