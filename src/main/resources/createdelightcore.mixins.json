@@ -12,6 +12,8 @@
     "eclipticseasons.PlayerChunkSenderMixin",
     "eclipticseasons.ServerGamePacketListenerImplMixin",
     "eclipticseasons.SnowyStatusHandlerMixin",
+    "eclipticseasons.QualityCropGrowthMixin",
+    "eclipticseasons.QualityGrowthDetectorMixin",
     "iceandfire.CyclopsCavePieceMixin",
     "iceandfire.DragonCavePieceMixin",
     "iceandfire.DragonRoostPieceMixin",
