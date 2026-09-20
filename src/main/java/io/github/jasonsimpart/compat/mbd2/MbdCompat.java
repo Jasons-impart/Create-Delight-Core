@@ -33,7 +33,7 @@ public final class MbdCompat {
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
             "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
             "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller",
-            "contract_executor", "electrolyzer", "mortar", "quality_destroyer", "small_centrifugation"
+            "contract_executor", "electrolyzer", "mechanical_craft_encoder", "mortar", "quality_destroyer", "small_centrifugation"
     };
 
     private MbdCompat() {}
@@ -53,6 +53,7 @@ public final class MbdCompat {
         if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         MbdAssembly.register();
+        MbdCraftEncoder.register();
         MbdSmallProcessing.register();
         MbdCentrifuge.register();
         MbdReactor.register();

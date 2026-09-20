@@ -29,6 +29,50 @@ public final class MbdSingleMachineTests {
         return (MBDMachine) ((IMachineBlockEntity) helper.getBlockEntity(position)).getMetaMachine();
     }
 
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void encoderPackagesAndBlockedOutput(GameTestHelper helper) {
+        var machine = place(helper, "mechanical_craft_encoder", new BlockPos(4, 2, 4));
+        helper.runAfterDelay(2, () -> {
+            var input = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_input_slot")).storage;
+            var output = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_output_slot")).storage;
+            var recipe = new MechanicalCraftingRecipe("", CraftingBookCategory.MISC,
+                    ShapedRecipePattern.of(Map.of('A', Ingredient.of(Items.IRON_INGOT)), "AA", " A"), new ItemStack(Items.DIAMOND), false);
+            var recipes = List.of(new RecipeHolder<>(MbdCompat.id("test/encoder"), recipe));
+            input.setStackInSlot(0, new ItemStack(Items.IRON_INGOT, 2));
+            helper.assertTrue(!MbdCraftEncoder.encode(machine, recipes), "Incomplete ingredients cannot encode");
+            helper.assertTrue(input.getStackInSlot(0).getCount() == 2, "Failed match must preserve all inputs");
+            input.setStackInSlot(0, new ItemStack(Items.IRON_INGOT, 3));
+            for (int slot = 0; slot < output.getSlots(); slot++) output.setStackInSlot(slot, new ItemStack(Items.STONE, 64));
+            helper.assertTrue(!MbdCraftEncoder.encode(machine, recipes), "Blocked output cannot encode");
+            helper.assertTrue(input.getStackInSlot(0).getCount() == 3, "Blocked output must preserve inputs");
+            output.setStackInSlot(0, ItemStack.EMPTY);
+            machine.getCustomData().putInt("width", 1);
+            helper.assertTrue(!MbdCraftEncoder.encode(machine, recipes), "A recipe wider than the selected crafter grid cannot encode");
+            machine.getCustomData().putInt("width", 5);
+            helper.assertTrue(MbdCraftEncoder.encode(machine, recipes), "Complete ingredients must produce a parcel");
+            helper.assertTrue(input.getStackInSlot(0).isEmpty(), "Consume exactly three ingredients");
+            var parcel = output.getStackInSlot(0);
+            helper.assertTrue(PackageItem.isPackage(parcel), "Output must be a Create parcel");
+            var grid = PackageItem.getOrderContext(parcel).getCraftingInformation();
+            helper.assertTrue(grid.size() == 10 && grid.get(0).stack.is(Items.IRON_INGOT)
+                    && grid.get(1).stack.is(Items.IRON_INGOT) && grid.get(5).stack.isEmpty()
+                    && grid.get(6).stack.is(Items.IRON_INGOT), "Preserve recipe holes and five-wide grid padding");
+            var overlap = new MechanicalCraftingRecipe("", CraftingBookCategory.MISC,
+                    ShapedRecipePattern.of(Map.of('A', Ingredient.of(Items.OAK_PLANKS, Items.BIRCH_PLANKS),
+                            'B', Ingredient.of(Items.OAK_PLANKS)), "AB"), new ItemStack(Items.DIAMOND), false);
+            var overlappingRecipes = List.of(new RecipeHolder<>(MbdCompat.id("test/overlap"), overlap));
+            for (boolean reverse : new boolean[]{false, true}) {
+                output.setStackInSlot(0, ItemStack.EMPTY);
+                input.setStackInSlot(0, new ItemStack(reverse ? Items.BIRCH_PLANKS : Items.OAK_PLANKS));
+                input.setStackInSlot(1, new ItemStack(reverse ? Items.OAK_PLANKS : Items.BIRCH_PLANKS));
+                helper.assertTrue(MbdCraftEncoder.encode(machine, overlappingRecipes), "Overlapping ingredients must match in either slot order");
+                var matched = PackageItem.getOrderContext(output.getStackInSlot(0)).getCraftingInformation();
+                helper.assertTrue(matched.get(0).stack.is(Items.BIRCH_PLANKS) && matched.get(1).stack.is(Items.OAK_PLANKS),
+                        "The broad ingredient must leave oak for the specific ingredient");
+            }
+            helper.succeed();
+        });
+    }
 
     @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore", timeoutTicks = 100)
     public static void mortarRequiresClicksAndCompletes(GameTestHelper helper) {
