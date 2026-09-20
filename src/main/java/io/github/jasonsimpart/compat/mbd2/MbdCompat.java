@@ -33,7 +33,7 @@ public final class MbdCompat {
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
             "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
             "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller",
-            "dryer", "mechanic_grinding_wheel", "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "order_generator", "quality_destroyer", "sell_bin", "small_centrifugation", "sprinkler"
+            "dryer", "mechanic_grinding_wheel", "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "order_deliverer", "order_generator", "quality_destroyer", "sell_bin", "small_centrifugation", "sprinkler"
     };
 
     private MbdCompat() {}

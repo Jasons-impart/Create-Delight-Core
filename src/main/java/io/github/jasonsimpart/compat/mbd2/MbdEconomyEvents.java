@@ -24,6 +24,7 @@ final class MbdEconomyEvents {
     private MbdEconomyEvents() {}
     static void register() {
         MbdSellBin.register();
+        MbdOrderDelivery.register();
         NeoForge.EVENT_BUS.addListener(MbdEconomyEvents::open);
         NeoForge.EVENT_BUS.addListener(MbdEconomyEvents::auction);
         NeoForge.EVENT_BUS.addListener(MbdEconomyEvents::started);
