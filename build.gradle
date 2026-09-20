@@ -122,6 +122,15 @@ repositories {
      flatDir {
          dir 'libs'
      }
+    // Resolve Mojang libraries before broad third-party Maven repositories.
+    maven {
+        name = 'Minecraft Libraries'
+        url = 'https://libraries.minecraft.net/'
+        content {
+            includeGroup 'com.mojang'
+        }
+    }
+
     // ForgeGradle downloads userdev artifacts through project repositories.
     // Keep this before broad third-party Maven repositories.
     maven {
