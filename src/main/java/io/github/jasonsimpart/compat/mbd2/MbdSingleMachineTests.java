@@ -24,6 +24,32 @@ import java.util.Map;
 
 @PrefixGameTestTemplate(false)
 public final class MbdSingleMachineTests {
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void greenhouseRetainsRejectedRefunds(GameTestHelper helper) {
+        var pos = new BlockPos(4, 2, 4);
+        var machine = place(helper, "greenhouse_builder", pos);
+        var outputOnly = new net.neoforged.neoforge.items.ItemStackHandler(1) {
+            @Override public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) { return stack; }
+        };
+        java.util.function.Consumer<net.neoforged.neoforge.event.entity.EntityJoinLevelEvent> reject = event -> {
+            if (event.getEntity() instanceof net.minecraft.world.entity.item.ItemEntity) event.setCanceled(true);
+        };
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(reject);
+        try {
+            MbdGreenhouse.refund(machine, outputOnly, 0, new ItemStack(Items.GLASS, 7));
+            MbdGreenhouse.flushRefunds(machine);
+            helper.assertTrue(helper.getBlockEntity(pos).saveWithoutMetadata(helper.getLevel().registryAccess()).toString()
+                    .contains("createdelightcorePendingRefunds"), "Undeliverable refunds must be included in saved machine data");
+        } finally { net.neoforged.neoforge.common.NeoForge.EVENT_BUS.unregister(reject); }
+        MbdGreenhouse.flushRefunds(machine);
+        MbdGreenhouse.flushRefunds(machine);
+        int returned = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                        new net.minecraft.world.phys.AABB(helper.absolutePos(pos)).inflate(1)).stream()
+                .filter(entity -> entity.getItem().is(Items.GLASS)).mapToInt(entity -> entity.getItem().getCount()).sum();
+        helper.assertTrue(returned == 7 && !machine.getCustomData().contains("createdelightcorePendingRefunds"),
+                "Retained refunds are delivered exactly once when spawning becomes available");
+        helper.succeed();
+    }
     static MBDMachine place(GameTestHelper helper, String name, BlockPos position) {
         helper.setBlock(position, MBDRegistries.MACHINE_DEFINITIONS.get(MbdCompat.id(name)).block());
         return (MBDMachine) ((IMachineBlockEntity) helper.getBlockEntity(position)).getMetaMachine();
@@ -74,6 +100,75 @@ public final class MbdSingleMachineTests {
         });
     }
 
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void greenhouseConsumesOnlyAdjacentMaterials(GameTestHelper helper) {
+        var pos = new BlockPos(5, 2, 5);
+        var machine = place(helper, "greenhouse_builder", pos);
+        helper.setBlock(pos.east(), Blocks.CHEST);
+        helper.runAfterDelay(2, () -> {
+            var sample = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_slot")).storage;
+            sample.setStackInSlot(0, new ItemStack(Items.GLASS));
+            for (var key : List.of("houseLength", "houseWidth", "houseHeight")) machine.getCustomData().putInt(key, 3);
+            var chest = (ChestBlockEntity) helper.getBlockEntity(pos.east());
+            chest.setItem(0, new ItemStack(Items.GLASS, 24));
+            helper.assertTrue(MbdGreenhouse.build(machine, null) == 0, "Missing material must not partially build");
+            helper.assertTrue(chest.getItem(0).getCount() == 24, "Failed build must preserve inventory");
+            chest.setItem(0, new ItemStack(Items.GLASS, 30));
+            helper.assertTrue(MbdGreenhouse.build(machine, null) == 25, "Build the 26-block shell while preserving its occupied chest position");
+            helper.assertTrue(chest.getItem(0).getCount() == 5 && sample.getStackInSlot(0).getCount() == 1,
+                    "Consume 25 building materials without consuming the sample");
+            helper.assertBlockPresent(Blocks.GLASS, pos.below());
+            helper.assertBlockPresent(Blocks.GLASS, pos.above());
+            helper.assertBlockPresent(Blocks.CHEST, pos.east());
+            helper.assertTrue(MbdGreenhouse.build(machine, null) == 0 && chest.getItem(0).getCount() == 5,
+                    "Rebuilding an occupied shell must consume nothing");
+            helper.succeed();
+        });
+    }
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void greenhouseRejectsUnsafeMaterialsAndProtectedPlacement(GameTestHelper helper) {
+        var pos = new BlockPos(5, 2, 5);
+        var machine = place(helper, "greenhouse_builder", pos);
+        helper.setBlock(pos.east(), Blocks.CHEST);
+        helper.runAfterDelay(2, () -> {
+            var sample = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_slot")).storage;
+            var chest = (ChestBlockEntity) helper.getBlockEntity(pos.east());
+            for (var key : List.of("houseLength", "houseWidth", "houseHeight")) machine.getCustomData().putInt(key, 3);
+            for (var item : List.of(Items.SHULKER_BOX, Items.OAK_DOOR, Items.SPONGE, Items.TNT)) {
+                sample.setStackInSlot(0, new ItemStack(item));
+                for (int slot = 0; slot < chest.getContainerSize(); slot++) chest.setItem(slot, new ItemStack(item));
+                helper.assertTrue(MbdGreenhouse.build(machine, null) == 0
+                                && java.util.stream.IntStream.range(0, chest.getContainerSize()).map(slot -> chest.getItem(slot).getCount()).sum() == 27,
+                        "Unsupported containers and multipart blocks cannot be consumed");
+            }
+            chest.clearContent();
+            sample.setStackInSlot(0, new ItemStack(Items.GLASS));
+            chest.setItem(0, new ItemStack(Items.GLASS, 30));
+            for (var key : List.of("houseLength", "houseWidth", "houseHeight")) machine.getCustomData().putInt(key, 64);
+            helper.assertTrue(MbdGreenhouse.build(machine, null) == 0 && chest.getItem(0).getCount() == 30,
+                    "Oversized synchronous builds must be rejected before inspecting or consuming world resources");
+            for (var key : List.of("houseLength", "houseWidth", "houseHeight")) machine.getCustomData().putInt(key, 3);
+            java.util.function.Consumer<net.neoforged.neoforge.event.level.BlockEvent.EntityPlaceEvent> protection = event -> {
+                if (event.getLevel() == helper.getLevel()) event.setCanceled(true);
+            };
+            net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(protection);
+            var tileDrops = helper.getLevel().getGameRules().getRule(net.minecraft.world.level.GameRules.RULE_DOBLOCKDROPS);
+            boolean previous = tileDrops.get();
+            tileDrops.set(false, helper.getLevel().getServer());
+            try {
+                helper.assertTrue(MbdGreenhouse.build(machine, null) == 0, "Denied placements must all be restored");
+                helper.assertBlockPresent(Blocks.AIR, pos.above());
+                int refunded = helper.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,
+                        new net.minecraft.world.phys.AABB(helper.absolutePos(pos)).inflate(1)).stream()
+                        .filter(entity -> entity.getItem().is(Items.GLASS)).mapToInt(entity -> entity.getItem().getCount()).sum();
+                helper.assertTrue(chest.getItem(0).getCount() + refunded == 30, "Refund all materials denied by protection");
+            } finally {
+                net.neoforged.neoforge.common.NeoForge.EVENT_BUS.unregister(protection);
+                tileDrops.set(previous, helper.getLevel().getServer());
+            }
+            helper.succeed();
+        });
+    }
     @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore", timeoutTicks = 100)
     public static void mortarRequiresClicksAndCompletes(GameTestHelper helper) {
         var machine = place(helper, "mortar", new BlockPos(4, 2, 4));
