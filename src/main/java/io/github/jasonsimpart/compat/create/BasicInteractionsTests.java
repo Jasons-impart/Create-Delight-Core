@@ -64,6 +64,20 @@ public final class BasicInteractionsTests {
         helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin);
         helper.succeed();
     }
+    @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void structureLootPreservesPools(GameTestHelper helper) {
+        var table = net.minecraft.world.level.storage.loot.LootTable.lootTable().build();
+        var name = net.minecraft.resources.ResourceLocation.parse("northstar:chests/martian_base_seed_chest");
+        io.github.jasonsimpart.server.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
+                helper.getLevel().registryAccess(), name, table));
+        helper.assertTrue(table.getPool("createdelightcore_legacy_0") != null, "Tech salvage pool loaded");
+        helper.assertTrue(table.getPool("createdelightcore_legacy_5") != null, "Martian biology pool retained separately");
+        var unrelated = net.minecraft.world.level.storage.loot.LootTable.lootTable().build();
+        io.github.jasonsimpart.server.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
+                helper.getLevel().registryAccess(), net.minecraft.resources.ResourceLocation.parse("minecraft:empty"), unrelated));
+        helper.assertTrue(unrelated.getPool("createdelightcore_legacy_0") == null, "Unlisted tables remain unchanged");
+        helper.succeed();
+    }
 
     @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
     public static void vintageAllOutputsSurvive(GameTestHelper helper) throws Exception {

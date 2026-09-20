@@ -39,12 +39,14 @@ public final class ModCommonEvents {
     }
 
     public static void register(IEventBus modEventBus) {
+        io.github.jasonsimpart.server.PackVillagerTrades.register();
         modEventBus.addListener(ModCommonEvents::modifyDefaultComponents);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::igniteAfterEatingBlazeCake);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::protectBuddingQuartz);
         NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onEntityJoinLevel);
         NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onMobPositionCheck);
         NeoForge.EVENT_BUS.addListener(DropReportEvents::onServerTick);
+        NeoForge.EVENT_BUS.addListener(io.github.jasonsimpart.server.LegacyStructureLoot::onLoad);
         DisabledContentEvents.register(modEventBus);
         io.github.jasonsimpart.compat.create.BasicInteractions.register();
         if (ModList.get().isLoaded("alexsmobsup")) {
