@@ -14,6 +14,56 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @GameTestHolder("createdelightcore")
 @PrefixGameTestTemplate(false)
 public final class BasicInteractionsTests {
+    @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void chainCasingHonorsBlockUseDenial(GameTestHelper helper) {
+        var origin = new BlockPos(3, 3, 3);
+        var shaft = AllBlocks.SHAFT.getDefaultState().setValue(BlockStateProperties.AXIS, Direction.Axis.X);
+        helper.setBlock(origin, shaft);
+        helper.setBlock(origin.east(), shaft);
+        var denied = helper.absolutePos(origin.east());
+        java.util.function.Consumer<net.neoforged.neoforge.event.entity.player.PlayerInteractEvent.RightClickBlock> protection = event -> {
+            if (event.getPos().equals(denied)) event.setUseBlock(net.neoforged.neoforge.common.util.TriState.FALSE);
+        };
+        net.neoforged.neoforge.common.NeoForge.EVENT_BUS.addListener(net.neoforged.bus.api.EventPriority.HIGHEST, protection);
+        try {
+            BasicInteractions.caseShaft(helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL),
+                    helper.absolutePos(origin), AllBlocks.ANDESITE_ENCASED_SHAFT.get());
+            helper.assertBlockPresent(AllBlocks.ANDESITE_ENCASED_SHAFT.get(), origin);
+            helper.assertTrue(helper.getBlockState(origin).getValue(BlockStateProperties.AXIS) == Direction.Axis.X, "Casing preserves shared shaft properties");
+            helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin.east());
+            BasicInteractions.caseShaft(helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL),
+                    helper.absolutePos(origin), AllBlocks.SHAFT.get());
+            helper.assertTrue(helper.getBlockState(origin).getValue(BlockStateProperties.AXIS) == Direction.Axis.X, "Uncasing preserves shared shaft properties");
+        } finally { net.neoforged.neoforge.common.NeoForge.EVENT_BUS.unregister(protection); }
+        helper.succeed();
+    }
+    @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void pipeOpeningsAndShaftBoundaries(GameTestHelper helper) {
+        var state = AllBlocks.FLUID_PIPE.getDefaultState();
+        for (var property : PipeBlock.PROPERTY_BY_DIRECTION.values()) state = state.setValue(property, false);
+        state = state.setValue(PipeBlock.NORTH, true).setValue(PipeBlock.SOUTH, true);
+        helper.assertTrue(BasicInteractions.togglePipe(state, Direction.NORTH) == state, "Two openings cannot be reduced");
+        var three = BasicInteractions.togglePipe(state, Direction.UP);
+        helper.assertTrue(three.getValue(PipeBlock.UP), "A third opening can be added");
+        helper.assertTrue(!BasicInteractions.togglePipe(three, Direction.NORTH).getValue(PipeBlock.NORTH), "A third opening allows closing another side");
+        var origin = new BlockPos(3, 3, 3);
+        var shaft = AllBlocks.SHAFT.getDefaultState().setValue(BlockStateProperties.AXIS, Direction.Axis.X);
+        helper.setBlock(origin, shaft);
+        helper.setBlock(origin.east(), shaft);
+        helper.setBlock(origin.west(), shaft);
+        helper.setBlock(origin.east(2), shaft.setValue(BlockStateProperties.AXIS, Direction.Axis.Z));
+        helper.setBlock(origin.east(3), shaft);
+        var player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        BasicInteractions.caseShaft(player, helper.absolutePos(origin), AllBlocks.ANDESITE_ENCASED_SHAFT.get());
+        helper.assertBlockPresent(AllBlocks.ANDESITE_ENCASED_SHAFT.get(), origin);
+        helper.assertBlockPresent(AllBlocks.ANDESITE_ENCASED_SHAFT.get(), origin.east());
+        helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin.east(2));
+        helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin.east(3));
+        BasicInteractions.caseShaft(player, helper.absolutePos(origin), AllBlocks.SHAFT.get());
+        helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin.west());
+        helper.assertBlockPresent(AllBlocks.SHAFT.get(), origin);
+        helper.succeed();
+    }
 
     @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
     public static void vintageAllOutputsSurvive(GameTestHelper helper) throws Exception {
