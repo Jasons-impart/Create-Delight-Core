@@ -250,5 +250,21 @@ public final class MbdSingleMachineTests {
         });
     }
 
+    @GameTest(batch = "mbd_single_machines", template = "mbd_single", templateNamespace = "createdelightcore")
+    public static void grindingWheelPreservesBlockedInput(GameTestHelper helper) {
+        var machine = place(helper, "mechanic_grinding_wheel", new BlockPos(4, 2, 4));
+        helper.runAfterDelay(2, () -> {
+            var input = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_input_slot")).storage;
+            var output = ((ItemSlotCapabilityTrait) machine.getTraitByName("item_output_slot")).storage;
+            input.setStackInSlot(0, new ItemStack(Items.APPLE, 8));
+            for (int slot = 0; slot < output.getSlots(); slot++) output.setStackInSlot(slot, new ItemStack(Items.STONE, 64));
+            MbdGrinding.transfer(machine);
+            helper.assertTrue(input.getStackInSlot(0).getCount() == 8, "Blocked output must preserve input");
+            output.setStackInSlot(0, ItemStack.EMPTY);
+            MbdGrinding.transfer(machine);
+            helper.assertTrue(input.getStackInSlot(0).isEmpty() && output.getStackInSlot(0).getCount() == 8, "Transfer whole stack once output has room");
+            helper.succeed();
+        });
+    }
 
 }
