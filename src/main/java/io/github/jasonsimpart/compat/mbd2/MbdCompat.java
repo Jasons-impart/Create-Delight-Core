@@ -33,7 +33,7 @@ public final class MbdCompat {
             "assembly_line", "assembly_import_hatch", "assemble_import_bus",
             "big_centrifuge", "centrifuge_rotor", "steel_import_bus", "steel_export_bus",
             "fission_reactor", "fission_fuel_assembly", "fission_reactor_controller",
-            "mechanic_grinding_wheel", "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "quality_destroyer", "small_centrifugation"
+            "dryer", "mechanic_grinding_wheel", "contract_executor", "electrolyzer", "greenhouse_builder", "mechanical_craft_encoder", "mortar", "quality_destroyer", "small_centrifugation", "sprinkler"
     };
 
     private MbdCompat() {}
@@ -56,6 +56,7 @@ public final class MbdCompat {
         MbdCraftEncoder.register();
         MbdSmallProcessing.register();
         MbdGrinding.register();
+        if (net.neoforged.fml.ModList.get().isLoaded("eclipticseasons")) MbdClimate.register();
         MbdGreenhouse.register();
         MbdCentrifuge.register();
         MbdReactor.register();
@@ -83,7 +84,7 @@ public final class MbdCompat {
 
     private static void registerRecipeTypes(MBDRegistryEvent.MBDRecipeType event) {
         for (var name : List.of("alloy_electric_furnace", "hydropower_station", "butchery", "assembly_line", "big_centrifugation", "big_centrifugation_fuel", "fission_react", "fission_react_fuel",
-                "contract_executor", "electrolyzer", "mortar", "small_centrifugation")) {
+                "contract_executor", "electrolyzer", "mortar", "small_centrifugation", "sprinkler")) {
             var project = read("recipe/" + name);
             var proxies = project.getList("proxies", Tag.TAG_STRING).stream()
                     .map(raw -> ResourceLocation.parse(raw.getAsString())).toArray(ResourceLocation[]::new);
