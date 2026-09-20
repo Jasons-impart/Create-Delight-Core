@@ -141,7 +141,12 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
+    compileOnly('curse.maven:improved-mobs-282639:7239326')
+    compileOnly('curse.maven:tenshilib-312040:7370246')
+    compileOnly('curse.maven:tacz-1-21-1-1353462:7955596')
     compileOnly('cdpr.ports:tetra:1.21.1-6.13.0')
+    compileOnly('curse.maven:ecliptic-seasons-1118306:8350852')
+    runtimeOnly('curse.maven:ecliptic-seasons-1118306:8350852')
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") {
         transitive = false
     }
@@ -155,7 +160,7 @@ dependencies {
     implementation("curse.maven:architectury-api-419699:${architectury_file_id}")
     implementation("curse.maven:iceandfire-ce-1040076:${iceandfire_file_id}")
     implementation("curse.maven:create-ore-excavation-649832:${createoreexcavation_file_id}")
-    runtimeOnly("curse.maven:uranus-1010827:${uranus_file_id}")
+    implementation("curse.maven:uranus-1010827:${uranus_file_id}")
     runtimeOnly("curse.maven:jupiter-1072905:${jupiter_file_id}")
     implementation("curse.maven:create-metallurgy-1007404:${createmetallurgy_file_id}")
     implementation("curse.maven:create-morerecipes-1103188:${cmr_file_id}")
