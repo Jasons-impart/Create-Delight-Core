@@ -163,6 +163,7 @@ public final class ModCreativeTabs {
         output.accept(ModItems.DRY_YEAST);
         output.accept(ModItems.STEEL_SHEET);
         output.accept(ModItems.FORGED_STEEL_SHEET);
+        output.accept(ModItems.FORGED_STEEL_INGOT);
         output.accept(ModItems.BLOOD_COLLECTION_DEVICE);
         output.accept(ModItems.NEEDLE);
         output.accept(ModItems.ORDER);

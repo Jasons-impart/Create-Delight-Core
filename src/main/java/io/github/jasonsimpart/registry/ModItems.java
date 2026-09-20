@@ -117,6 +117,7 @@ public final class ModItems {
     public static final DeferredItem<Item> BRONZE_NUGGET = simpleItem("bronze_nugget");
 
     // 材料、粉末、板材和普通中间件。
+    public static final DeferredItem<Item> PALE_STEEL_NEEDLE = simpleItem("pale_steel_needle");
     public static final DeferredItem<Item> CARBON_DUST = simpleItem("carbon_dust");
     public static final DeferredItem<Item> TIN_DUST = simpleItem("tin_dust");
     public static final DeferredItem<Item> DIRTY_TIN_DUST = simpleItem("dirty_tin_dust");
@@ -157,7 +158,9 @@ public final class ModItems {
     public static final DeferredItem<Item> DRY_YEAST = simpleItem("dry_yeast");
     public static final DeferredItem<Item> STEEL_SHEET = simpleItem("steel_sheet");
     public static final DeferredItem<Item> FORGED_STEEL_SHEET = simpleItem("forged_steel_sheet");
+    public static final DeferredItem<Item> FORGED_STEEL_INGOT = simpleItem("forged_steel_ingot");
     public static final DeferredItem<Item> BLOOD_COLLECTION_DEVICE = simpleItem("blood_collection_device");
+    public static final DeferredItem<Item> ROLLED_POLYMER_SHEET = simpleItem("rolled_polymer_sheet");
     public static final DeferredItem<Item> NEEDLE = simpleItem("needle");
     public static final DeferredItem<Item> ORDER = simpleItem("order");
     public static final DeferredItem<Item> UNOPENED_ORDER = simpleItem("unopened_order");
