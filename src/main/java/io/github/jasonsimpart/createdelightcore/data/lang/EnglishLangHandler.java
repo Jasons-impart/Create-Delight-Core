@@ -4,7 +4,6 @@ import com.tterrag.registrate.providers.RegistrateLangProvider;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.registry.CDCreativeTabs;
-import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
 import io.github.jasonsimpart.createdelightcore.registry.CDFluids;
 import io.github.jasonsimpart.createdelightcore.registry.CDItems;
 import net.minecraft.world.item.Item;
@@ -165,13 +164,8 @@ public class EnglishLangHandler {
         provider.add(CDCreativeTabs.FLUID.get(), "Create Delight | Fluid");
         provider.add(CDCreativeTabs.FOOD.get(), "Create Delight | Food");
         provider.add("key.categories.createdelightcore", "Create Delight");
-        provider.addItem(CDItems.KINETIC_CONFIGURATION_MODULE, "Kinetic Configuration Module");
-        provider.addItem(CDItems.STRUCTURAL_CONFIGURATION_MODULE, "Structural Configuration Module");
-        provider.addItem(CDItems.FLUID_CONFIGURATION_MODULE, "Fluid Configuration Module");
-        provider.addItem(CDItems.CONTROL_CONFIGURATION_MODULE, "Control Configuration Module");
-        provider.addItem(CDItems.LOGISTICS_CONFIGURATION_MODULE, "Logistics Configuration Module");
-        provider.addItem(CDItems.SPONSOR_MEDAL, "§dJSI Sponsor Medal");
-        provider.addBlock(CDBlocks.SUPPLY_COMMISSION_TABLE, "Supply Commission Table");
+        // Registrate already supplies the module and supply table names.
+        replace(provider, CDItems.SPONSOR_MEDAL.get().getDescriptionId(), "§dJSI Sponsor Medal");
         provider.add("item.createdelightcore.sponsor_medal.desc", "Thank you for supporting the JSI Team");
         provider.add("item.createdelightcore.configuration_module.tooltip.mode", "Current form: %s");
         provider.add("item.createdelightcore.configuration_module.tooltip.unselected", "Current form: unselected");
@@ -235,7 +229,6 @@ public class EnglishLangHandler {
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");
-        provider.add("jei." + CreateDelightCore.MODID + ".SnowmanCoolerFluid", "Snowman Cooler Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "Blaze Cooler Fluid Coolants");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "Consumes %smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "Phantom Composting");
@@ -259,7 +252,6 @@ public class EnglishLangHandler {
         provider.add("tooltip." + CreateDelightCore.MODID + ".Cooled", "Cooled");
         //jade
         provider.add("config.jade.plugin_balm.jade", "Jade");
-        provider.add("config.jade.plugin_createdelightcore.cmr.snowman_cooler", "Snowman Cooler");
         //waystone
         provider.add("gui." + CreateDelightCore.MODID + ".need", "Need ");
         provider.add("gui." + CreateDelightCore.MODID + ".free", "Free");

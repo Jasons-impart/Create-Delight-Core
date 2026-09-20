@@ -188,6 +188,9 @@ public class CDItems {
         return REGISTRATE.item(name, properties -> new ConfigurationModuleItem(properties,
                         CreateDelightCore.id(mode), ResourceLocation.parse(target), initialCharge, chargeCost, 64))
                 .properties(properties -> properties.stacksTo(1))
+                .model((ctx, provider) -> {
+                    // Hand-written models reuse the modpack's component textures.
+                })
                 .tab(MISC_TAB)
                 .register();
     }
