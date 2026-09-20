@@ -32,6 +32,7 @@ public final class MbdMachineTests {
             }
         }
         event.register(MbdMachineTests.class);
+        event.register(MbdSingleMachineTests.class);
         event.register(MbdHydropowerTests.class);
         event.register(MbdAssemblyTests.class);
         event.register(MbdCentrifugeTests.class);
