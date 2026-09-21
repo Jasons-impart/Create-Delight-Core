@@ -22,26 +22,8 @@ public final class MbdMachineTests {
     // GameTest's origin is the structure block, one block below the template.
     private static final BlockPos CONTROLLER = new BlockPos(2, 2, 0);
 
-    static void register(net.neoforged.neoforge.event.RegisterGameTestsEvent event) {
-        // NeoForge 21.1 discovers holders before filtering namespaces. MBD2's bundled
-        // optional integration tests therefore crash discovery without their mods.
-        // For an explicitly Core-only development test run, omit those foreign holders.
-        if ("createdelightcore".equals(System.getProperty("neoforge.enabledGameTestNamespaces"))) {
-            for (var scan : net.neoforged.fml.ModList.get().getAllScanData()) {
-                scan.getAnnotations().removeIf(annotation -> annotation.clazz().getClassName().startsWith("com.lowdragmc.mbd2.test.")
-                        && annotation.annotationType().getClassName().equals("net.neoforged.neoforge.gametest.GameTestHolder"));
-            }
-        }
-        event.register(MbdMachineTests.class);
-        event.register(MbdSingleMachineTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.ECLIPTIC_SEASONS)) event.register(MbdClimateTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.LIGHTMANS_CURRENCY)) event.register(MbdEconomyTests.class);
-        event.register(MbdHydropowerTests.class);
-        event.register(MbdAssemblyTests.class);
-        event.register(MbdCentrifugeTests.class);
-        event.register(MbdReactorTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.BUTCHERCRAFT)) event.register(MbdButcheryTests.class);
-    }
+    // Registration moved to io.github.jasonsimpart.test.GametestBootstrap so test classes
+    // can be excluded from the published jar without a production code reference.
 
     @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", timeoutTicks = 500)
     public static void alloyStructureAndProcessing(GameTestHelper helper) {
