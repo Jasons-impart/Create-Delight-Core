@@ -248,6 +248,10 @@ tasks.named('jar', Jar) {
         into 'META-INF'
         rename { 'LICENSE_createdelightcore' }
     }
+    // GameTest classes and their bootstrap are development-only; keep them out of the published jar.
+    exclude 'io/github/jasonsimpart/test/**'
+    exclude '**/*Tests.class'
+    exclude '**/*Tests$*.class'
 }
 
 // Example configuration to allow publishing using the maven-publish plugin

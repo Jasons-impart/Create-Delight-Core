@@ -53,7 +53,6 @@ public final class MbdCompat {
         bus.addListener(MbdCompat::registerRecipeTypes);
         bus.addListener(MbdCompat::registerMachines);
         bus.addListener(MbdCompat::setup);
-        bus.addListener(MbdMachineTests::register);
         if (OptionalMods.isLoaded(ModIds.BUTCHERCRAFT)) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         MbdAssembly.register();
