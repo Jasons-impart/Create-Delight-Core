@@ -42,6 +42,7 @@ public final class ModCommonEvents {
 
     public static void register(IEventBus modEventBus) {
         io.github.jasonsimpart.server.PackVillagerTrades.register();
+        io.github.jasonsimpart.content.event.FluidInteractions.register(modEventBus);
         modEventBus.addListener(ModCommonEvents::modifyDefaultComponents);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::igniteAfterEatingBlazeCake);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::protectBuddingQuartz);
