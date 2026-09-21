@@ -235,6 +235,13 @@ public final class Config {
             )
             .defineInRange("lunaSoilBoostChance", 0.5D, 0.0D, 1.0D);
 
+    public static final ModConfigSpec.IntValue SURFACE_CAVE_OPTIMIZATION_DEPTH = BUILDER
+            .comment(
+                    "主世界浅层洞穴优化深度。会减少接近地表的地形开口，降低可渲染洞穴面积；0 禁用。只影响新生成区块；修改后需重进世界生效。",
+                    "Reduce overworld cave openings this many blocks below the surface to reduce renderable cave area. Set to 0 to disable. Only affects newly generated chunks."
+            )
+            .defineInRange("surfaceCaveOptimizationDepth", 16, 0, 256);
+
     public static final ModConfigSpec SPEC = BUILDER.build();
 
     public enum RecipeRemoveMissingIdMode {
