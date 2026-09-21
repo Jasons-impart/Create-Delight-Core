@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
+import io.github.jasonsimpart.util.ModIds;
 
 /** A notification request only; cannot toggle combat or grant permissions. */
 public record MiningKeyHintPayload() implements CustomPacketPayload {
@@ -17,7 +18,7 @@ public record MiningKeyHintPayload() implements CustomPacketPayload {
 
     public static void handle(MiningKeyHintPayload payload, IPayloadContext context) {
         context.enqueueWork(() -> {
-            if (!ModList.get().isLoaded("bettercombat")) return;
+            if (!ModList.get().isLoaded(ModIds.BETTERCOMBAT)) return;
             var data = context.player().getPersistentData();
             var persisted = data.getCompound(Player.PERSISTED_NBT_TAG);
             if (persisted.getBoolean("createdelightcore:mine_key_hint") || data.getBoolean("betterCombatMineKey")) return;

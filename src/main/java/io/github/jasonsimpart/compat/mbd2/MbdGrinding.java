@@ -13,6 +13,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
+import io.github.jasonsimpart.util.ModIds;
 
 final class MbdGrinding {
     private MbdGrinding() {}
@@ -39,7 +40,7 @@ final class MbdGrinding {
             var original = input.getStackInSlot(slot);
             if (original.isEmpty()) continue;
             var cleaned = original.copy();
-            if (ModList.get().isLoaded("quality_food") && !QualityFoodCompat.clearQuality(cleaned).success()) continue;
+            if (ModList.get().isLoaded(ModIds.QUALITY_FOOD) && !QualityFoodCompat.clearQuality(cleaned).success()) continue;
             if (!ItemHandlerHelper.insertItemStacked(output, cleaned, true).isEmpty()) continue;
             // Simulate using the cleaned stack so differently graded food can merge correctly.
             ItemHandlerHelper.insertItemStacked(output, cleaned, false);
@@ -56,7 +57,7 @@ final class MbdGrinding {
         event.setItemInteractionResult(ItemInteractionResult.SUCCESS);
         if (machine.getLevel().isClientSide) return;
         int damage = (int) Math.floor(Math.sqrt(Math.abs(kinetic.getSpeed())) / 4 + .5);
-        if (ModList.get().isLoaded("tetra")) MbdTetraGrinding.hone(event.player, held, damage);
+        if (ModList.get().isLoaded(ModIds.TETRA)) MbdTetraGrinding.hone(event.player, held, damage);
         held.hurtAndBreak(damage, event.player, event.hand == net.minecraft.world.InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
         machine.getLevel().playSound(null, machine.getPos(), SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 1);
         event.player.swing(event.hand, true);

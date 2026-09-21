@@ -1,7 +1,7 @@
 package io.github.jasonsimpart.network;
 
 import io.github.jasonsimpart.CreateDelightCore;
-import io.github.jasonsimpart.disabled.DisabledCreativeTabs;
+import io.github.jasonsimpart.content.disabled.DisabledCreativeTabs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;

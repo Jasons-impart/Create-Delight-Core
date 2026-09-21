@@ -14,6 +14,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Legacy reactor thermodynamics and protection, independent of pack recipe definitions. */
 final class MbdReactor {
@@ -167,7 +168,7 @@ final class MbdReactor {
 
     static void explode(MBDMachine machine) {
         if (machine.getLevel().isClientSide || machine.getCustomData().getBoolean("meltdown_started")) return;
-        if (!ModList.get().isLoaded("alexscavesup")) return;
+        if (!ModList.get().isLoaded(ModIds.ALEXSCAVES)) return;
         machine.getCustomData().putBoolean("meltdown_started", true);
         NuclearExplosion.spawn(machine);
     }

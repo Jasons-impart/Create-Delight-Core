@@ -11,13 +11,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import io.github.jasonsimpart.util.ModIds;
 
 @EventBusSubscriber(modid = "createdelightcore", value = Dist.CLIENT)
 public final class MbdEconomyTooltip {
     private MbdEconomyTooltip() {}
     @SubscribeEvent
     public static void tooltip(ItemTooltipEvent event) {
-        if (!ModList.get().isLoaded("mbd2") || !ModList.get().isLoaded("lightmanscurrency")) return;
+        if (!ModList.get().isLoaded(ModIds.MBD2) || !ModList.get().isLoaded(ModIds.LIGHTMANS_CURRENCY)) return;
         var stack = event.getItemStack();
         var lines = event.getToolTip();
         double price = MbdFoodEconomy.price(stack, true);

@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.server;
+package io.github.jasonsimpart.content.event;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

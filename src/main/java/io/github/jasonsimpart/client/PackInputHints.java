@@ -11,6 +11,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Set;
+import io.github.jasonsimpart.util.ModIds;
 
 public final class PackInputHints {
     private static boolean mineDown;
@@ -23,7 +24,7 @@ public final class PackInputHints {
         var mc = Minecraft.getInstance();
         if (mc.player == null || mc.screen != null || !mc.isWindowActive()) { mineDown = false; return; }
         boolean down = false;
-        if (ModList.get().isLoaded("bettercombat")) {
+        if (ModList.get().isLoaded(ModIds.BETTERCOMBAT)) {
             for (var mapping : mc.options.keyMappings)
                 if (mapping.getName().equals("keybinds.bettercombat.toggle_mine_with_weapons")) down = mapping.isDown();
             if (down && !mineDown) PacketDistributor.sendToServer(new MiningKeyHintPayload());

@@ -7,8 +7,8 @@ import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.recipe.RecipesKubeEvent;
 import dev.latvian.mods.kubejs.script.ScriptManager;
 import dev.latvian.mods.kubejs.script.ScriptType;
-import io.github.jasonsimpart.disabled.DisabledContentManager;
-import io.github.jasonsimpart.disabled.DisabledCreativeTabs;
+import io.github.jasonsimpart.content.disabled.DisabledContentManager;
+import io.github.jasonsimpart.content.disabled.DisabledCreativeTabs;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Iterator;

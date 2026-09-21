@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.disabled;
+package io.github.jasonsimpart.content.disabled;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

@@ -11,6 +11,8 @@ import com.lowdragmc.mbd2.common.machine.definition.config.event.MachineStructur
 import com.lowdragmc.mbd2.common.trait.item.ItemSlotCapabilityTrait;
 import com.lowdragmc.mbd2.integration.create.machine.CreateKineticMachineDefinition;
 import io.github.jasonsimpart.CreateDelightCore;
+import io.github.jasonsimpart.util.ModIds;
+import io.github.jasonsimpart.util.OptionalMods;
 import net.minecraft.nbt.*;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -52,14 +54,14 @@ public final class MbdCompat {
         bus.addListener(MbdCompat::registerMachines);
         bus.addListener(MbdCompat::setup);
         bus.addListener(MbdMachineTests::register);
-        if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) MbdButchery.register(bus);
+        if (OptionalMods.isLoaded(ModIds.BUTCHERCRAFT)) MbdButchery.register(bus);
         NeoForge.EVENT_BUS.addListener(MbdCompat::structureFormed);
         MbdAssembly.register();
         MbdCraftEncoder.register();
         MbdSmallProcessing.register();
         MbdGrinding.register();
-        if (net.neoforged.fml.ModList.get().isLoaded("lightmanscurrency")) MbdEconomyEvents.register();
-        if (net.neoforged.fml.ModList.get().isLoaded("eclipticseasons")) MbdClimate.register();
+        if (OptionalMods.isLoaded(ModIds.LIGHTMANS_CURRENCY)) MbdEconomyEvents.register();
+        if (OptionalMods.isLoaded(ModIds.ECLIPTIC_SEASONS)) MbdClimate.register();
         MbdGreenhouse.register();
         MbdCentrifuge.register();
         MbdReactor.register();

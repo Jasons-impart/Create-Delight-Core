@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.server;
+package io.github.jasonsimpart.compat.alexscaves;
 
 import io.github.jasonsimpart.Config;
 import io.github.jasonsimpart.CreateDelightCore;

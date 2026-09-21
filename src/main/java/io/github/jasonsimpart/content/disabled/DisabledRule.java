@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.disabled;
+package io.github.jasonsimpart.content.disabled;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
