@@ -13,6 +13,7 @@ import io.github.jasonsimpart.registry.ModMobEffects;
 import io.github.jasonsimpart.registry.ModRecipeTypes;
 import io.github.jasonsimpart.registry.ModSoundEvents;
 import io.github.jasonsimpart.content.recipe.CDFanProcessingTypes;
+import io.github.jasonsimpart.content.worldgen.ShallowCaveDensityFunction;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +29,13 @@ public class CreateDelightCore {
     public static final String MODID = "createdelightcore";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final net.neoforged.neoforge.registries.DeferredRegister<com.mojang.serialization.MapCodec<? extends net.minecraft.world.level.levelgen.DensityFunction>> DENSITY_FUNCTION_TYPES =
+            net.neoforged.neoforge.registries.DeferredRegister.create(net.minecraft.core.registries.Registries.DENSITY_FUNCTION_TYPE, MODID);
+
+    static {
+        DENSITY_FUNCTION_TYPES.register("shallow_cave_suppression", () -> ShallowCaveDensityFunction.CODEC.codec());
+    }
+
     public CreateDelightCore(IEventBus modEventBus, ModContainer modContainer) {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
@@ -41,6 +49,7 @@ public class CreateDelightCore {
         ModCreativeTabs.register(modEventBus);
         modEventBus.addListener(EventPriority.HIGHEST, CDFanProcessingTypes::register);
         ModCommonEvents.register(modEventBus);
+        DENSITY_FUNCTION_TYPES.register(modEventBus);
         ModSpoutBehaviours.register(modEventBus);
         CmrCompat.register(modEventBus);
         CreateLiquidFuelCompat.register(modEventBus);
