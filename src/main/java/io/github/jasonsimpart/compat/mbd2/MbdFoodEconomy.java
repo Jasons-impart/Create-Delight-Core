@@ -11,6 +11,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.fml.ModList;
 import java.util.List;
+import io.github.jasonsimpart.util.ModIds;
 
 final class MbdFoodEconomy {
     private static final TagKey<net.minecraft.world.item.Item> MATERIALS = TagKey.create(Registries.ITEM, ResourceLocation.parse("quality_food:material_whitelist"));
@@ -41,7 +42,7 @@ final class MbdFoodEconomy {
             double saturation = food.nutrition() > 0 ? food.saturation() / (2 * food.nutrition()) : 0;
             value = Math.max(food.nutrition(), 1) / 6d * Math.max(saturation, .1) / .6 * 5 * Math.sqrt(effects);
         }
-        if (ModList.get().isLoaded("quality_food")) value *= qualityMultiplier(stack);
+        if (ModList.get().isLoaded(ModIds.QUALITY_FOOD)) value *= qualityMultiplier(stack);
         return value;
     }
     private static double qualityMultiplier(ItemStack stack) {

@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.server;
+package io.github.jasonsimpart.content.event;
 
 import io.github.jasonsimpart.Config;
 import net.minecraft.network.chat.Component;

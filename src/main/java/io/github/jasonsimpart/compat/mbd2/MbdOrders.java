@@ -22,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Legacy order arithmetic, independent of the table-cloth delivery transport. */
 public final class MbdOrders {
@@ -63,7 +64,7 @@ public final class MbdOrders {
             if (complexity <= threshold.getAsDouble()) break;
             level++;
         }
-        if (ModList.get().isLoaded("quality_food")) level += QualityFoodCompat.getQualityLevel(stack).level();
+        if (ModList.get().isLoaded(ModIds.QUALITY_FOOD)) level += QualityFoodCompat.getQualityLevel(stack).level();
         return Math.clamp(level, 1, 3);
     }
 
@@ -110,7 +111,7 @@ public final class MbdOrders {
             // Do not issue impossible requests for absent optional food mods.
             boolean available = BuiltInRegistries.ITEM.getTag(tag(entry.getKey())).map(items -> items.stream().anyMatch(item ->
                     quality(item.value().getDefaultInstance(), entry.getKey()) >= minimum
-                            || ModList.get().isLoaded("quality_food"))).orElse(false);
+                            || ModList.get().isLoaded(ModIds.QUALITY_FOOD))).orElse(false);
             if (available) choices.put(entry.getKey(), value.isJsonArray() ? value.getAsJsonArray().get(0).getAsDouble() : value.getAsDouble());
         });
         return choices;

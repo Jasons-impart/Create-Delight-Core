@@ -7,6 +7,10 @@ import java.util.List;
 public final class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
+    static {
+        BUILDER.push("patches");
+    }
+
     public static final ModConfigSpec.BooleanValue ENABLE_BLAZE_CAKE_FOOD_PATCH = BUILDER
             .comment(
                     "是否启用从 KubeJS 迁移来的机械动力烈焰蛋糕食物属性与吃后点燃补丁。修改后需要重启游戏。",
@@ -14,12 +18,76 @@ public final class Config {
             )
             .define("enableBlazeCakeFoodPatch", true);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_AE2_BUDDING_QUARTZ_PROTECTION = BUILDER
+    public static final ModConfigSpec.BooleanValue ENABLE_INVALID_RESOURCE_PATH_FILTERS = BUILDER
             .comment(
-                    "是否保护 AE2 赛特斯石英母岩：玩家未潜行时禁止破坏。",
-                    "Protect AE2 budding certus quartz blocks by preventing break attempts unless the player is sneaking."
+                    "是否过滤特定第三方 mod jar 中已知的坏资源/data map 文件。只过滤白名单中的路径，不放宽全局资源路径校验。",
+                    "Filter known bad resource/data map files from specific third-party mod jars only. This does not loosen global resource path validation."
             )
-            .define("enableAe2BuddingQuartzProtection", true);
+            .define("enableInvalidResourcePathFilters", true);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_DATA_MAP_MISSING_KEY_FILTERS = BUILDER
+            .comment(
+                    "是否过滤已知会引用缺失注册对象的 NeoForge DataMap 键。只过滤白名单中的坏键，不屏蔽其它 DataMap 错误。",
+                    "Filter known NeoForge DataMap keys that reference missing registry objects only. Other DataMap errors remain visible."
+            )
+            .define("enableDataMapMissingKeyFilters", true);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_QUARK_CONTRIBUTOR_REWARD_PATCH = BUILDER
+            .comment(
+                    "是否禁用 Quark 贡献者奖励加载和等级判定。Mixin 仅在 Quark 存在时应用；修改后需要重启游戏。",
+                    "Disable Quark contributor reward loading and tier checks. The mixin only applies when Quark is present. Requires restart."
+            )
+            .define("enableQuarkContributorRewardPatch", true);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_XAERO_UPDATE_CHECK_BLOCK = BUILDER
+            .comment(
+                    "是否禁用 Xaero Minimap / World Map / XaeroLib 的启动联网检查，包括更新检查、Patreon 数据和在线组件加载。Mixin 仅在对应 Xaero mod 存在时应用；修改后需要重启游戏。",
+                    "Disable Xaero Minimap / World Map / XaeroLib startup internet checks, including update checks, Patreon data and online widget loading. The mixins only apply when matching Xaero mods are present. Requires restart."
+            )
+            .define("enableXaeroUpdateCheckBlock", true);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_ECLIPTIC_SEASONS_CHUNK_ATTACHMENT_SYNC_PATCH = BUILDER
+            .comment(
+                    "是否修正 Ecliptic Seasons 雪状态区块附件同步时序：增量同步只发送给已确认收到该区块的客户端。Mixin 仅在 Ecliptic Seasons 存在时应用；修改后需要重启游戏。",
+                    "Fix Ecliptic Seasons snowy chunk attachment sync timing by sending incremental updates only to clients that have acknowledged the chunk. The mixins only apply when Ecliptic Seasons is present. Requires restart."
+            )
+            .define("enableEclipticSeasonsChunkAttachmentSyncPatch", true);
+
+    public static final ModConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = BUILDER
+            .comment(
+                    "Sandpaper polishing recipe IDs to hide from Create: Metallurgy Belt Grinder auto-inheritance and JEI display.",
+                    "Example: [\"createdelightcore:sandpaper_polishing/rose_quartz\"]"
+            )
+            .defineListAllowEmpty(
+                    "beltGrinderBlockedSandpaperRecipes",
+                    List.of("createdelightcore:sandpaper_polishing/rose_quartz"),
+                    value -> value instanceof String
+            );
+
+    public static final ModConfigSpec.EnumValue<RecipeRemoveMissingIdMode> RECIPE_REMOVE_MISSING_ID_MODE = BUILDER
+            .comment(
+                    "KubeJS ServerEvents.recipes event.remove({id: ...}) missing recipe handling. OFF keeps KubeJS behavior, WARN logs only, STRICT fails the reload.",
+                    "Only exact ID filters are checked. Broad filters such as mod/input/output/type/regex/predicate are not affected."
+            )
+            .defineEnum("recipeRemoveMissingIdMode", RecipeRemoveMissingIdMode.STRICT);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
+            .comment(
+                    "是否修正 KubeJS Create 在 create:sequenced_assembly.sequence 内生成的 create:filling 流体 ingredient 格式。只改最终 recipe JSON，不改脚本 API。",
+                    "Fix KubeJS Create fluid ingredient JSON generated for create:filling steps inside create:sequenced_assembly.sequence. Only final recipe JSON is normalized; script APIs are unchanged."
+            )
+            .define("enableKubeJsCreateSequencedFluidFix", true);
+
+    public static final ModConfigSpec.BooleanValue DEBUG_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
+            .comment(
+                    "是否记录 KubeJS Create 序列装配流体 recipe JSON 修正命中的 recipe。",
+                    "Log recipes touched by the KubeJS Create sequenced assembly fluid JSON fix."
+            )
+            .define("debugKubeJsCreateSequencedFluidFix", false);
+
+    static {
+        BUILDER.pop().push("spout");
+    }
 
     public static final ModConfigSpec.BooleanValue ENABLE_CREATE_SA_SPOUT_FILLING = BUILDER
             .comment(
@@ -42,6 +110,21 @@ public final class Config {
             )
             .define("enableAlexsCavesSulfurSpout", true);
 
+    static {
+        BUILDER.pop().push("ae2");
+    }
+
+    public static final ModConfigSpec.BooleanValue ENABLE_AE2_BUDDING_QUARTZ_PROTECTION = BUILDER
+            .comment(
+                    "是否保护 AE2 赛特斯石英母岩：玩家未潜行时禁止破坏。",
+                    "Protect AE2 budding certus quartz blocks by preventing break attempts unless the player is sneaking."
+            )
+            .define("enableAe2BuddingQuartzProtection", true);
+
+    static {
+        BUILDER.pop().push("alexscaves");
+    }
+
     public static final ModConfigSpec.BooleanValue ENABLE_ALEXSCAVES_DIMENSION_BIOME_OVERRIDES = BUILDER
             .comment(
                     "是否让 createdelightcore 的 Alex's Caves 独立维度在 Alex's Caves 结构判定中视为对应洞穴生物群系。只影响白名单维度。",
@@ -56,19 +139,9 @@ public final class Config {
             )
             .define("enableAlexsCavesDimensionMonsterSpawnGuard", true);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_INVALID_RESOURCE_PATH_FILTERS = BUILDER
-            .comment(
-                    "是否过滤特定第三方 mod jar 中已知的坏资源/data map 文件。只过滤白名单中的路径，不放宽全局资源路径校验。",
-                    "Filter known bad resource/data map files from specific third-party mod jars only. This does not loosen global resource path validation."
-            )
-            .define("enableInvalidResourcePathFilters", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_DATA_MAP_MISSING_KEY_FILTERS = BUILDER
-            .comment(
-                    "是否过滤已知会引用缺失注册对象的 NeoForge DataMap 键。只过滤白名单中的坏键，不屏蔽其它 DataMap 错误。",
-                    "Filter known NeoForge DataMap keys that reference missing registry objects only. Other DataMap errors remain visible."
-            )
-            .define("enableDataMapMissingKeyFilters", true);
+    static {
+        BUILDER.pop().push("particles");
+    }
 
     public static final ModConfigSpec.BooleanValue ENABLE_PHANTOM_COMPOST_PARTICLES = BUILDER
             .comment(
@@ -84,26 +157,9 @@ public final class Config {
             )
             .define("enableJellyBlockParticles", true);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_QUARK_CONTRIBUTOR_REWARD_PATCH = BUILDER
-            .comment(
-                    "是否禁用 Quark 贡献者奖励加载和等级判定。Mixin 仅在 Quark 存在时应用；修改后需要重启游戏。",
-                    "Disable Quark contributor reward loading and tier checks. The mixin only applies when Quark is present. Requires restart."
-            )
-            .define("enableQuarkContributorRewardPatch", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_XAERO_UPDATE_CHECK_BLOCK = BUILDER
-            .comment(
-                    "是否禁用 Xaero Minimap / World Map / XaeroLib 的启动联网检查，包括更新检查、Patreon 数据和在线组件加载。Mixin 仅在对应 Xaero mod 存在时应用；修改后需要重启游戏。",
-                    "Disable Xaero Minimap / World Map / XaeroLib startup internet checks, including update checks, Patreon data and online widget loading. The mixins only apply when matching Xaero mods are present. Requires restart."
-            )
-            .define("enableXaeroUpdateCheckBlock", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_ECLIPTIC_SEASONS_CHUNK_ATTACHMENT_SYNC_PATCH = BUILDER
-            .comment(
-                    "是否修正 Ecliptic Seasons 雪状态区块附件同步时序：增量同步只发送给已确认收到该区块的客户端。Mixin 仅在 Ecliptic Seasons 存在时应用；修改后需要重启游戏。",
-                    "Fix Ecliptic Seasons snowy chunk attachment sync timing by sending incremental updates only to clients that have acknowledged the chunk. The mixins only apply when Ecliptic Seasons is present. Requires restart."
-            )
-            .define("enableEclipticSeasonsChunkAttachmentSyncPatch", true);
+    static {
+        BUILDER.pop().push("northstar");
+    }
 
     public static final ModConfigSpec.BooleanValue ENABLE_NORTHSTAR_TELESCOPE_MIN_SIZE = BUILDER
             .comment(
@@ -132,6 +188,10 @@ public final class Config {
                     "Minimum visual spacing between Northstar telescope bodies, in pixels. Higher values spread satellite groups farther apart."
             )
             .defineInRange("northstarTelescopeBodySpacing", 4, 0, 64);
+
+    static {
+        BUILDER.pop().push("dropReport");
+    }
 
     public static final ModConfigSpec.BooleanValue DISABLE_DROP_REPORT = BUILDER
             .comment(
@@ -168,6 +228,10 @@ public final class Config {
             )
             .defineInRange("dropReportMaxChunks", 10, 1, 100);
 
+    static {
+        BUILDER.pop().push("economy");
+    }
+
     public static final ModConfigSpec.BooleanValue ENABLE_WAYSTONES_MONEY_TELEPORT = BUILDER
             .comment(
                     "是否启用旧 Core 的 Waystones 传送货币消耗：将 Waystones 经验等级/经验点需求换算为 Lightman's Currency 基础币值。",
@@ -196,37 +260,9 @@ public final class Config {
             )
             .defineInRange("waystonesTeleportCostPerLevel", 45, 1, Integer.MAX_VALUE);
 
-    public static final ModConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = BUILDER
-            .comment(
-                    "Sandpaper polishing recipe IDs to hide from Create: Metallurgy Belt Grinder auto-inheritance and JEI display.",
-                    "Example: [\"createdelightcore:sandpaper_polishing/rose_quartz\"]"
-            )
-            .defineListAllowEmpty(
-                    "beltGrinderBlockedSandpaperRecipes",
-                    List.of("createdelightcore:sandpaper_polishing/rose_quartz"),
-                    value -> value instanceof String
-            );
-
-    public static final ModConfigSpec.EnumValue<RecipeRemoveMissingIdMode> RECIPE_REMOVE_MISSING_ID_MODE = BUILDER
-            .comment(
-                    "KubeJS ServerEvents.recipes event.remove({id: ...}) missing recipe handling. OFF keeps KubeJS behavior, WARN logs only, STRICT fails the reload.",
-                    "Only exact ID filters are checked. Broad filters such as mod/input/output/type/regex/predicate are not affected."
-            )
-            .defineEnum("recipeRemoveMissingIdMode", RecipeRemoveMissingIdMode.STRICT);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
-            .comment(
-                    "是否修正 KubeJS Create 在 create:sequenced_assembly.sequence 内生成的 create:filling 流体 ingredient 格式。只改最终 recipe JSON，不改脚本 API。",
-                    "Fix KubeJS Create fluid ingredient JSON generated for create:filling steps inside create:sequenced_assembly.sequence. Only final recipe JSON is normalized; script APIs are unchanged."
-            )
-            .define("enableKubeJsCreateSequencedFluidFix", true);
-
-    public static final ModConfigSpec.BooleanValue DEBUG_KUBEJS_CREATE_SEQUENCED_FLUID_FIX = BUILDER
-            .comment(
-                    "是否记录 KubeJS Create 序列装配流体 recipe JSON 修正命中的 recipe。",
-                    "Log recipes touched by the KubeJS Create sequenced assembly fluid JSON fix."
-            )
-            .define("debugKubeJsCreateSequencedFluidFix", false);
+    static {
+        BUILDER.pop().push("worldgen");
+    }
 
     public static final ModConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
             .comment(
@@ -241,6 +277,10 @@ public final class Config {
                     "Reduce overworld cave openings this many blocks below the surface to reduce renderable cave area. Set to 0 to disable. Only affects newly generated chunks."
             )
             .defineInRange("surfaceCaveOptimizationDepth", 16, 0, 256);
+
+    static {
+        BUILDER.pop();
+    }
 
     public static final ModConfigSpec SPEC = BUILDER.build();
 

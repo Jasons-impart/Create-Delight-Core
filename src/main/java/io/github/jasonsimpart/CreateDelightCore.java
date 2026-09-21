@@ -14,11 +14,12 @@ import io.github.jasonsimpart.registry.ModRecipeTypes;
 import io.github.jasonsimpart.registry.ModSoundEvents;
 import io.github.jasonsimpart.content.recipe.CDFanProcessingTypes;
 import io.github.jasonsimpart.content.worldgen.ShallowCaveDensityFunction;
+import io.github.jasonsimpart.util.ModIds;
+import io.github.jasonsimpart.util.OptionalMods;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
@@ -54,22 +55,14 @@ public class CreateDelightCore {
         CmrCompat.register(modEventBus);
         CreateLiquidFuelCompat.register(modEventBus);
         ModNetwork.register(modEventBus);
-        if (ModList.get().isLoaded("mbd2")) {
+        if (OptionalMods.isLoaded(ModIds.MBD2)) {
             MbdCompat.register(modEventBus);
         }
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            registerClientEvents(modEventBus);
-        }
-    }
-
-    private static void registerClientEvents(IEventBus modEventBus) {
-        try {
-            Class.forName("io.github.jasonsimpart.client.ClientModEvents")
-                    .getMethod("register", IEventBus.class)
-                    .invoke(null, modEventBus);
-        } catch (ReflectiveOperationException exception) {
-            throw new IllegalStateException("Failed to register createdelightcore client events", exception);
+            OptionalMods.invoke(
+                    "io.github.jasonsimpart.client.ClientModEvents",
+                    "register", new Class<?>[]{IEventBus.class}, modEventBus);
         }
     }
 }

@@ -16,6 +16,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import io.github.jasonsimpart.util.ModIds;
 
 public final class MobCurrencyDrops {
     private MobCurrencyDrops() {}
@@ -39,7 +40,7 @@ public final class MobCurrencyDrops {
                 || (!(mob instanceof Enemy) && !mob.isAggressive())) return;
         // The latest legacy pack fixes mobs (notably bosses) lacking ATTACK_DAMAGE.
         double fallback = mob instanceof EnderDragon ? 10 : mob instanceof WitherBoss ? 8 : 4.5;
-        int greedy = ModList.get().isLoaded("tetra") ? TetraCombatCompat.greedyLevel(player.getMainHandItem()) : 0;
+        int greedy = ModList.get().isLoaded(ModIds.TETRA) ? TetraCombatCompat.greedyLevel(player.getMainHandItem()) : 0;
         long amount = value(mob.getMaxHealth(), attribute(mob, Attributes.ATTACK_DAMAGE, fallback),
                 attribute(mob, Attributes.ARMOR, 0), attribute(mob, Attributes.ARMOR_TOUGHNESS, 0), greedy);
         if (amount <= 0) return;

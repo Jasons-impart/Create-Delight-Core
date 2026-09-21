@@ -1,9 +1,9 @@
 package io.github.jasonsimpart.compat.kubejs.disabled;
 
 import dev.latvian.mods.kubejs.util.ID;
-import io.github.jasonsimpart.disabled.DisablePolicy;
-import io.github.jasonsimpart.disabled.DisabledContentManager;
-import io.github.jasonsimpart.disabled.DisabledRule;
+import io.github.jasonsimpart.content.disabled.DisablePolicy;
+import io.github.jasonsimpart.content.disabled.DisabledContentManager;
+import io.github.jasonsimpart.content.disabled.DisabledRule;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

@@ -8,6 +8,8 @@ import io.github.jasonsimpart.registry.ModBlocks;
 import io.github.jasonsimpart.registry.ModFluids;
 import io.github.jasonsimpart.registry.ModItems;
 import io.github.jasonsimpart.registry.ModSpriteShifts;
+import io.github.jasonsimpart.util.ModIds;
+import io.github.jasonsimpart.util.OptionalMods;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -15,7 +17,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterItemDecorationsEvent;
@@ -65,44 +66,22 @@ public final class ClientModEvents {
     private static void registerItemDecorations(RegisterItemDecorationsEvent event) {
         TetraEnergyBarRenderer.register(event);
 
-        if (!ModList.get().isLoaded("extendedae") || !ModList.get().isLoaded("ae2")) {
-            return;
-        }
-
-        try {
-            Class.forName("io.github.jasonsimpart.client.extendedae.ExtendedAeInfinityCellRenderer")
-                    .getMethod("register", RegisterItemDecorationsEvent.class)
-                    .invoke(null, event);
-        } catch (ReflectiveOperationException | LinkageError exception) {
-            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore ExtendedAE infinity cell renderer", exception);
+        if (OptionalMods.allLoaded(ModIds.EXTENDED_AE, ModIds.AE2)) {
+            OptionalMods.invokeSoft(
+                    "io.github.jasonsimpart.client.extendedae.ExtendedAeInfinityCellRenderer",
+                    "register", new Class<?>[]{RegisterItemDecorationsEvent.class}, event);
         }
     }
 
     private static void registerWaystonesMoneyRenderer() {
-        if (!ModList.get().isLoaded("waystones") || !ModList.get().isLoaded("lightmanscurrency")) {
-            return;
-        }
-
-        try {
-            Class.forName("io.github.jasonsimpart.client.waystones.WaystoneMoneyRequirementRenderer")
-                    .getMethod("register")
-                    .invoke(null);
-        } catch (ReflectiveOperationException exception) {
-            throw new IllegalStateException("Failed to register createdelightcore Waystones money renderer", exception);
+        if (OptionalMods.allLoaded(ModIds.WAYSTONES, ModIds.LIGHTMANS_CURRENCY)) {
+            OptionalMods.invokeRegister("io.github.jasonsimpart.client.waystones.WaystoneMoneyRequirementRenderer");
         }
     }
 
     private static void registerEclipticSeasonsGrowthDetectorParticles() {
-        if (!ModList.get().isLoaded("eclipticseasons")) {
-            return;
-        }
-
-        try {
-            Class.forName("io.github.jasonsimpart.client.eclipticseasons.EclipticSeasonsGrowthDetectorParticles")
-                    .getMethod("register")
-                    .invoke(null);
-        } catch (ReflectiveOperationException | LinkageError exception) {
-            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore Ecliptic Seasons growth detector particles", exception);
+        if (OptionalMods.isLoaded(ModIds.ECLIPTIC_SEASONS)) {
+            OptionalMods.invokeRegisterSoft("io.github.jasonsimpart.client.eclipticseasons.EclipticSeasonsGrowthDetectorParticles");
         }
     }
 

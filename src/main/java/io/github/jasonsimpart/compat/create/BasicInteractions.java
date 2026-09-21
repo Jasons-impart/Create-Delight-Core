@@ -41,7 +41,7 @@ public final class BasicInteractions {
         player.getPersistentData().remove(ChainCasingModifierPayload.KEY);
         player.sendSystemMessage(Component.translatable("message.createdelightcore.log_in", player.getName()));
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)
-            io.github.jasonsimpart.server.DonorLogin.apply(serverPlayer);
+            io.github.jasonsimpart.content.event.DonorLogin.apply(serverPlayer);
     }
 
     private static void interact(PlayerInteractEvent.RightClickBlock event) {
