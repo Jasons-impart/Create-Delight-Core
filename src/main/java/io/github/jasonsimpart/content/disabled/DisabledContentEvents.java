@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.disabled;
+package io.github.jasonsimpart.content.disabled;
 
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.CreativeModeTab;

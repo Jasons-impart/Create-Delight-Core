@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import io.github.jasonsimpart.util.ModIds;
 
 public final class MigrationTooltips {
     private MigrationTooltips() {}
@@ -17,7 +18,7 @@ public final class MigrationTooltips {
         if (!(stack.getItem() instanceof SequencedAssemblyItem) && stack.has(AllDataComponents.SEQUENCED_ASSEMBLY)) {
             event.getToolTip().add(Component.translatable("tooltip.createdelightcore.sequenced_assembly_explanation"));
         }
-        if (!ModList.get().isLoaded("improvedmobs")) return;
+        if (!ModList.get().isLoaded(ModIds.IMPROVED_MOBS)) return;
         var id = BuiltInRegistries.ITEM.getKey(stack.getItem());
         if (!id.getNamespace().equals("iceandfire")) return;
         for (var rule : DifficultyLootRules.RULES) {

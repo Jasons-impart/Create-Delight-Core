@@ -19,6 +19,7 @@ import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.List;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Temporary item identities; the actual Dreadsteel mod always owns its namespace when installed. */
 public final class DreadsteelFallback {
@@ -31,7 +32,7 @@ public final class DreadsteelFallback {
     private DreadsteelFallback() {}
 
     public static void register(IEventBus bus) {
-        if (ModList.get().isLoaded("dreadsteel")) return;
+        if (ModList.get().isLoaded(ModIds.DREADSTEEL)) return;
         bus.addListener(EventPriority.LOWEST, DreadsteelFallback::registerItem);
         bus.addListener(DreadsteelFallback::addResources);
     }

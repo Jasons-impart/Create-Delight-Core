@@ -13,6 +13,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.FakePlayer;
 import java.util.ArrayList;
+import io.github.jasonsimpart.util.ModIds;
 
 final class MbdSellBin {
     private MbdSellBin() {}
@@ -63,7 +64,7 @@ final class MbdSellBin {
             slots.add(slot);
             amount += price;
             String stars = "";
-            if (net.neoforged.fml.ModList.get().isLoaded("quality_food")) {
+            if (net.neoforged.fml.ModList.get().isLoaded(ModIds.QUALITY_FOOD)) {
                 var quality = io.github.jasonsimpart.compat.qualityfood.QualityFoodCompat.getQualityData(stack);
                 if (quality != null && quality.level() > 0) stars = " " + "★".repeat(Math.min(quality.level(), 3));
             }

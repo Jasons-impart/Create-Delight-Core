@@ -1,11 +1,13 @@
 package io.github.jasonsimpart;
 
-import io.github.jasonsimpart.server.AlexCavesDimensionSpawnGuardEvents;
-import io.github.jasonsimpart.server.DropReportEvents;
+import io.github.jasonsimpart.compat.alexscaves.AlexCavesDimensionSpawnGuardEvents;
+import io.github.jasonsimpart.content.event.DropReportEvents;
 import io.github.jasonsimpart.compat.tetra.TetraCombatCompat;
 import io.github.jasonsimpart.compat.iceandfire.DragonBloodCollectionCompat;
 import io.github.jasonsimpart.compat.tacz.TaczEnergyReloadCompat;
-import io.github.jasonsimpart.disabled.DisabledContentEvents;
+import io.github.jasonsimpart.content.disabled.DisabledContentEvents;
+import io.github.jasonsimpart.util.ModIds;
+import io.github.jasonsimpart.util.OptionalMods;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,7 +19,6 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
@@ -41,7 +42,7 @@ public final class ModCommonEvents {
     }
 
     public static void register(IEventBus modEventBus) {
-        io.github.jasonsimpart.server.PackVillagerTrades.register();
+        io.github.jasonsimpart.content.event.PackVillagerTrades.register();
         io.github.jasonsimpart.content.event.FluidInteractions.register(modEventBus);
         modEventBus.addListener(ModCommonEvents::modifyDefaultComponents);
         NeoForge.EVENT_BUS.addListener(ModCommonEvents::igniteAfterEatingBlazeCake);
@@ -49,65 +50,37 @@ public final class ModCommonEvents {
         NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onEntityJoinLevel);
         NeoForge.EVENT_BUS.addListener(AlexCavesDimensionSpawnGuardEvents::onMobPositionCheck);
         NeoForge.EVENT_BUS.addListener(DropReportEvents::onServerTick);
-        NeoForge.EVENT_BUS.addListener(io.github.jasonsimpart.server.LegacyStructureLoot::onLoad);
+        NeoForge.EVENT_BUS.addListener(io.github.jasonsimpart.content.event.LegacyStructureLoot::onLoad);
         DisabledContentEvents.register(modEventBus);
         io.github.jasonsimpart.compat.create.BasicInteractions.register();
-        if (ModList.get().isLoaded("alexsmobsup")) {
+        if (OptionalMods.isLoaded(ModIds.ALEXSMOBS)) {
             io.github.jasonsimpart.compat.alexsmobs.PackBlockInteractions.register();
         }
-        if (ModList.get().isLoaded("fruitsdelight")) {
+        if (OptionalMods.isLoaded(ModIds.FRUITS_DELIGHT)) {
             io.github.jasonsimpart.compat.fruitsdelight.CauldronFeedback.register();
         }
-        if (ModList.get().isLoaded("improvedmobs")) {
+        if (OptionalMods.isLoaded(ModIds.IMPROVED_MOBS)) {
             io.github.jasonsimpart.compat.improvedmobs.ImprovedMobsCompat.register();
         }
-        if (ModList.get().isLoaded("lightmanscurrency")) {
+        if (OptionalMods.isLoaded(ModIds.LIGHTMANS_CURRENCY)) {
             io.github.jasonsimpart.compat.lightmanscurrency.MobCurrencyDrops.register();
             io.github.jasonsimpart.compat.lightmanscurrency.TraderWhitelist.register();
             io.github.jasonsimpart.compat.lightmanscurrency.WalletUpgradeGuard.register();
         }
-        if (ModList.get().isLoaded("improvedmobs") && ModList.get().isLoaded("lightmanscurrency")) {
-            modEventBus.addListener((net.neoforged.neoforge.event.RegisterGameTestsEvent event) ->
-                    event.register(io.github.jasonsimpart.compat.improvedmobs.MechanicsTests.class));
+        if (OptionalMods.allLoaded(ModIds.WAYSTONES, ModIds.LIGHTMANS_CURRENCY)) {
+            OptionalMods.invokeRegister("io.github.jasonsimpart.compat.waystones.WaystonesCurrencyCompat");
         }
-        registerWaystonesMoneyTeleport();
-        registerQualityFoodCurrencyCompat();
-        if (ModList.get().isLoaded("tetra")) {
+        if (OptionalMods.allLoaded(ModIds.QUALITY_FOOD, ModIds.LIGHTMANS_CURRENCY)) {
+            OptionalMods.invokeRegisterSoft("io.github.jasonsimpart.compat.qualityfood.QualityFoodCurrencyCompat");
+        }
+        if (OptionalMods.isLoaded(ModIds.TETRA)) {
             TetraCombatCompat.register();
         }
-        if (ModList.get().isLoaded("iceandfire")) {
+        if (OptionalMods.isLoaded(ModIds.ICE_AND_FIRE)) {
             DragonBloodCollectionCompat.register();
         }
-        if (ModList.get().isLoaded("tacz") && ModList.get().isLoaded("ae2")) {
+        if (OptionalMods.allLoaded(ModIds.TACZ, ModIds.AE2)) {
             TaczEnergyReloadCompat.register();
-        }
-    }
-
-    private static void registerWaystonesMoneyTeleport() {
-        if (!ModList.get().isLoaded("waystones") || !ModList.get().isLoaded("lightmanscurrency")) {
-            return;
-        }
-
-        try {
-            Class.forName("io.github.jasonsimpart.compat.waystones.WaystonesCurrencyCompat")
-                    .getMethod("register")
-                    .invoke(null);
-        } catch (ReflectiveOperationException exception) {
-            throw new IllegalStateException("Failed to register createdelightcore Waystones currency compat", exception);
-        }
-    }
-
-    private static void registerQualityFoodCurrencyCompat() {
-        if (!ModList.get().isLoaded("quality_food") || !ModList.get().isLoaded("lightmanscurrency")) {
-            return;
-        }
-
-        try {
-            Class.forName("io.github.jasonsimpart.compat.qualityfood.QualityFoodCurrencyCompat")
-                    .getMethod("register")
-                    .invoke(null);
-        } catch (ReflectiveOperationException | LinkageError exception) {
-            CreateDelightCore.LOGGER.warn("Failed to register createdelightcore Quality Food currency compat", exception);
         }
     }
 

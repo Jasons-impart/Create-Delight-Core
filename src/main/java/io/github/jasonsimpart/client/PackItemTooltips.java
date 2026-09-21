@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Pack descriptions use current components and preserve the item's original name and diagnostics. */
 public final class PackItemTooltips {
@@ -56,7 +57,7 @@ public final class PackItemTooltips {
         var quality = BuiltInRegistries.DATA_COMPONENT_TYPE.get(ResourceLocation.parse("quality_food:quality"));
         if (quality != null && stack.has(quality)) {
             if (stack.has(DataComponents.FOOD)) lines.add(Component.translatable("tooltip.createdelightcore.pack.quality_food_eaten"));
-            if (ModList.get().isLoaded("eclipticseasons") && ModList.get().isLoaded("quality_food")
+            if (ModList.get().isLoaded(ModIds.ECLIPTIC_SEASONS) && ModList.get().isLoaded(ModIds.QUALITY_FOOD)
                     && QualityCropGrowth.isQualityCrop(stack)) {
                 lines.add(Component.translatable("tooltip.createdelightcore.pack.quality_crop_resistance"));
             }

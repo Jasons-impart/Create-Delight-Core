@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Integration checks against a fixture exported independently from the old editor grid. */
 @PrefixGameTestTemplate(false)
@@ -33,13 +34,13 @@ public final class MbdMachineTests {
         }
         event.register(MbdMachineTests.class);
         event.register(MbdSingleMachineTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded("eclipticseasons")) event.register(MbdClimateTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded("lightmanscurrency")) event.register(MbdEconomyTests.class);
+        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.ECLIPTIC_SEASONS)) event.register(MbdClimateTests.class);
+        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.LIGHTMANS_CURRENCY)) event.register(MbdEconomyTests.class);
         event.register(MbdHydropowerTests.class);
         event.register(MbdAssemblyTests.class);
         event.register(MbdCentrifugeTests.class);
         event.register(MbdReactorTests.class);
-        if (net.neoforged.fml.ModList.get().isLoaded("butchercraft")) event.register(MbdButcheryTests.class);
+        if (net.neoforged.fml.ModList.get().isLoaded(ModIds.BUTCHERCRAFT)) event.register(MbdButcheryTests.class);
     }
 
     @GameTest(template = "mbd_alloy", templateNamespace = "createdelightcore", timeoutTicks = 500)

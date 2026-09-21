@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.PipeBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+import io.github.jasonsimpart.util.ModIds;
 
 @GameTestHolder("createdelightcore")
 @PrefixGameTestTemplate(false)
@@ -68,12 +69,12 @@ public final class BasicInteractionsTests {
     public static void structureLootPreservesPools(GameTestHelper helper) {
         var table = net.minecraft.world.level.storage.loot.LootTable.lootTable().build();
         var name = net.minecraft.resources.ResourceLocation.parse("northstar:chests/martian_base_seed_chest");
-        io.github.jasonsimpart.server.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
+        io.github.jasonsimpart.content.event.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
                 helper.getLevel().registryAccess(), name, table));
         helper.assertTrue(table.getPool("createdelightcore_legacy_0") != null, "Tech salvage pool loaded");
         helper.assertTrue(table.getPool("createdelightcore_legacy_5") != null, "Martian biology pool retained separately");
         var unrelated = net.minecraft.world.level.storage.loot.LootTable.lootTable().build();
-        io.github.jasonsimpart.server.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
+        io.github.jasonsimpart.content.event.LegacyStructureLoot.onLoad(new net.neoforged.neoforge.event.LootTableLoadEvent(
                 helper.getLevel().registryAccess(), net.minecraft.resources.ResourceLocation.parse("minecraft:empty"), unrelated));
         helper.assertTrue(unrelated.getPool("createdelightcore_legacy_0") == null, "Unlisted tables remain unchanged");
         helper.succeed();
@@ -81,7 +82,7 @@ public final class BasicInteractionsTests {
 
     @GameTest(template = "mbd_single", templateNamespace = "createdelightcore")
     public static void vintageAllOutputsSurvive(GameTestHelper helper) throws Exception {
-        if (!net.neoforged.fml.ModList.get().isLoaded("vintageimprovements")) { helper.succeed(); return; }
+        if (!net.neoforged.fml.ModList.get().isLoaded(ModIds.VINTAGE_IMPROVEMENTS)) { helper.succeed(); return; }
         var json = new com.google.gson.JsonObject();
         json.addProperty("type", "vintageimprovements:vibrating");
         json.add("ingredients", com.google.gson.JsonParser.parseString("[{\"item\":\"minecraft:gravel\"}]"));

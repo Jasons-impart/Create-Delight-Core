@@ -1,4 +1,4 @@
-package io.github.jasonsimpart.server;
+package io.github.jasonsimpart.content.event;
 
 import com.google.gson.JsonParser;
 import com.mojang.authlib.GameProfile;
@@ -9,6 +9,7 @@ import net.neoforged.fml.loading.FMLPaths;
 
 import java.nio.file.Files;
 import java.util.Optional;
+import io.github.jasonsimpart.util.ModIds;
 
 /** Optional 0488 donor titles. Old quest-book grants are intentionally not migrated. */
 public final class DonorLogin {
@@ -16,7 +17,7 @@ public final class DonorLogin {
     private DonorLogin() {}
 
     public static void apply(ServerPlayer player) {
-        if (!ModList.get().isLoaded("ftbranks") || player.getPersistentData().getBoolean(APPLIED)) return;
+        if (!ModList.get().isLoaded(ModIds.FTB_RANKS) || player.getPersistentData().getBoolean(APPLIED)) return;
         var file = FMLPaths.GAMEDIR.get().resolve("donate_list.json");
         if (!Files.isRegularFile(file)) return;
         try (var reader = Files.newBufferedReader(file)) {
