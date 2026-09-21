@@ -24,7 +24,7 @@ public final class AlexsCavesDimensionOverrides {
     }
 
     public static ResourceKey<Biome> biomeForDimension(ResourceKey<Level> dimension) {
-        if (!Config.ENABLE_ALEXSCAVES_DIMENSION_BIOME_OVERRIDES.get()) {
+        if (dimension == null || !Config.ENABLE_ALEXSCAVES_DIMENSION_BIOME_OVERRIDES.get()) {
             return null;
         }
         return DIMENSION_BIOMES.get(dimension);
