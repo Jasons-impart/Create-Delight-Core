@@ -82,6 +82,22 @@ public final class ModCommonEvents {
         if (OptionalMods.allLoaded(ModIds.TACZ, ModIds.AE2)) {
             TaczEnergyReloadCompat.register();
         }
+        modEventBus.addListener(ModCommonEvents::registerHarvesterBehaviours);
+    }
+
+    private static void registerHarvesterBehaviours(net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            var clusterBehaviour = new io.github.jasonsimpart.compat.create.FlowerClusterHarvesterBehaviour();
+            com.simibubi.create.api.behaviour.movement.MovementBehaviour.REGISTRY.register(
+                    io.github.jasonsimpart.registry.ModBlocks.FIRE_LILY_CLUSTER.get(), clusterBehaviour);
+            com.simibubi.create.api.behaviour.movement.MovementBehaviour.REGISTRY.register(
+                    io.github.jasonsimpart.registry.ModBlocks.FROST_LILY_CLUSTER.get(), clusterBehaviour);
+            com.simibubi.create.api.behaviour.movement.MovementBehaviour.REGISTRY.register(
+                    io.github.jasonsimpart.registry.ModBlocks.LIGHTNING_LILY_CLUSTER.get(), clusterBehaviour);
+            if (OptionalMods.isLoaded(ModIds.VINERY)) {
+                io.github.jasonsimpart.compat.create.VineryHarvesterBehaviour.registerBlocks();
+            }
+        });
     }
 
     private static void modifyDefaultComponents(ModifyDefaultComponentsEvent event) {
