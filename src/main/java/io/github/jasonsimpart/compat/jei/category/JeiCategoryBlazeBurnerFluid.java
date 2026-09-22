@@ -1,7 +1,6 @@
 package io.github.jasonsimpart.compat.jei.category;
 
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.compat.jei.EmptyBackground;
 import com.simibubi.create.content.processing.recipe.HeatCondition;
 import com.simibubi.create.foundation.gui.AllGuiTextures;
 import io.github.jasonsimpart.CreateDelightCore;
@@ -25,9 +24,11 @@ public class JeiCategoryBlazeBurnerFluid implements IRecipeCategory<JeiCategoryB
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, "blaze_burner");
     public static final RecipeType<BlazeBurnerFluidRecipe> RECIPE_TYPE = new RecipeType<>(UID, BlazeBurnerFluidRecipe.class);
 
+    private static final int WIDTH = 177;
+    private static final int HEIGHT = 53;
+
     private final IJeiHelpers helpers;
     private final AnimatedBlazeBurner heater = new AnimatedBlazeBurner();
-    private final IDrawable background = new EmptyBackground(177, 53);
 
     public JeiCategoryBlazeBurnerFluid(IJeiHelpers helpers) {
         this.helpers = helpers;
@@ -44,8 +45,13 @@ public class JeiCategoryBlazeBurnerFluid implements IRecipeCategory<JeiCategoryB
     }
 
     @Override
-    public IDrawable getBackground() {
-        return background;
+    public int getWidth() {
+        return WIDTH;
+    }
+
+    @Override
+    public int getHeight() {
+        return HEIGHT;
     }
 
     @Override
@@ -55,14 +61,14 @@ public class JeiCategoryBlazeBurnerFluid implements IRecipeCategory<JeiCategoryB
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, BlazeBurnerFluidRecipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, background.getWidth() / 2 - 16, 3)
+        builder.addSlot(RecipeIngredientRole.INPUT, WIDTH / 2 - 16, 3)
                 .addFluidStack(recipe.fluid(), recipe.amountConsume());
     }
 
     @Override
     public void draw(BlazeBurnerFluidRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         HeatCondition heat = recipe.isSuperHeated() ? HeatCondition.SUPERHEATED : HeatCondition.HEATED;
-        graphics.drawString(Minecraft.getInstance().font, formatTime(recipe.burnTime()), background.getWidth() / 2 + 48, 36, 0x404040, false);
+        graphics.drawString(Minecraft.getInstance().font, formatTime(recipe.burnTime()), WIDTH / 2 + 48, 36, 0x404040, false);
         AllGuiTextures.JEI_LIGHT.render(graphics, 81, 38);
         AllGuiTextures.JEI_HEAT_BAR.render(graphics, 4, 30);
         graphics.drawString(
@@ -73,8 +79,8 @@ public class JeiCategoryBlazeBurnerFluid implements IRecipeCategory<JeiCategoryB
                 heat.getColor(),
                 false
         );
-        heater.withHeat(heat.visualizeAsBlazeBurner()).draw(graphics, background.getWidth() / 2 + 3, 5);
-        AllGuiTextures.JEI_DOWN_ARROW.render(graphics, background.getWidth() / 2 + 3, 8);
+        heater.withHeat(heat.visualizeAsBlazeBurner()).draw(graphics, WIDTH / 2 + 3, 5);
+        AllGuiTextures.JEI_DOWN_ARROW.render(graphics, WIDTH / 2 + 3, 8);
     }
 
     public record BlazeBurnerFluidRecipe(Fluid fluid, boolean isSuperHeated, int burnTime, int amountConsume) {
