@@ -180,7 +180,7 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "mbd2"
 type = "optional"
-versionRange = "[21.0.6,21.1)"
+versionRange = "[21.0.6,)"
 ordering = "AFTER"
 side = "BOTH"
 
