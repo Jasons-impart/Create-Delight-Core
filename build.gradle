@@ -197,7 +197,7 @@ dependencies {
     runtimeOnly("curse.maven:create-deco-509285:7943181")
     runtimeOnly("curse.maven:create-new-age-905861:7388244")
     runtimeOnly("curse.maven:create-fantasizing-1279337:8036095")
-    runtimeOnly("curse.maven:northstar-redux-1318310:8307391")
+    runtimeOnly("curse.maven:northstar-redux-1318310:8844708")
     runtimeOnly("curse.maven:geckolib-388172:7707149")
     runtimeOnly("curse.maven:applied-energistics-2-223794:7027323")
     runtimeOnly("curse.maven:guideme-1173950:7127444")
