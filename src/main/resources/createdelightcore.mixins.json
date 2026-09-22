@@ -38,6 +38,7 @@
     "create.BlazeBurnerBlockMixin",
     "create.CreateRecipeCategoryMixin",
     "create.EmptyingOutputLimitMixin",
+    "create.ContraptionActorMixin",
     "create.ItemDrainOutputsMixin",
     "create.ItemDrainBlockOutputsMixin",
     "create.ItemDrainCategoryMixin",

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "createdelightcore:block/forge_steel_casing",
+    "particle": "createdelightcore:block/forge_steel_casing"
+  }
+}

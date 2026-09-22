@@ -173,7 +173,8 @@ dependencies {
     implementation("curse.maven:balm-531761:${balm_file_id}")
     implementation("curse.maven:waystones-245755:${waystones_file_id}")
     implementation("curse.maven:lightmans-currency-472521:${lightmanscurrency_file_id}")
-    compileOnly("curse.maven:quality-food-973932:${qualityfood_file_id}")
+    // CDPR fork "Quality Food J"（curseforge project 1623542）；pack 实际运行这个，不是上游 quality-food
+    compileOnly("curse.maven:quality-food-j-1623542:${qualityfoodj_file_id}")
     compileOnly("curse.maven:applied-energistics-2-223794:${ae2_file_id}")
     compileOnly("curse.maven:extendedae-892005:${extendedae_file_id}")
     compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")

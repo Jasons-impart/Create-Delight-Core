@@ -103,6 +103,9 @@ public final class ModBlocks {
     public static final DeferredBlock<LunaSoilFarmlandBlock> LUNA_SOIL_FARMLAND = registerBlock("luna_soil_farmland", () -> new LunaSoilFarmlandBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND).randomTicks().strength(0.6F).sound(SoundType.GRAVEL)));
     public static final DeferredBlock<PhantomCompostBlock> PHANTOM_COMPOST = registerBlock("phantom_compost", () -> new PhantomCompostBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).randomTicks().strength(1.2F).sound(SoundType.CROP)));
 
+    public static final DeferredBlock<io.github.jasonsimpart.content.quality.harvest.QualityHarvestControllerBlock> QUALITY_HARVEST_CONTROLLER = registerBlock("quality_harvest_controller", () -> new io.github.jasonsimpart.content.quality.harvest.QualityHarvestControllerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()));
+    public static final DeferredBlock<io.github.jasonsimpart.content.quality.harvest.LifeMatterInjectorBlock> LIFE_MATTER_INJECTOR = registerBlock("life_matter_injector", () -> new io.github.jasonsimpart.content.quality.harvest.LifeMatterInjectorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL).requiresCorrectToolForDrops()));
+
     private ModBlocks() {
     }
 

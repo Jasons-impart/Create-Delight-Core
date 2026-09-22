@@ -83,6 +83,13 @@ public final class ModCommonEvents {
             TaczEnergyReloadCompat.register();
         }
         modEventBus.addListener(ModCommonEvents::registerHarvesterBehaviours);
+        modEventBus.addListener(ModCommonEvents::registerCapabilities);
+    }
+
+    private static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,
+                io.github.jasonsimpart.registry.ModBlockEntities.LIFE_MATTER_INJECTOR.get(),
+                (blockEntity, side) -> blockEntity.getInventory());
     }
 
     private static void registerHarvesterBehaviours(net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) {
