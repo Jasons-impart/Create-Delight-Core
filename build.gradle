@@ -141,12 +141,12 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    compileOnly('curse.maven:improved-mobs-282639:7239326')
-    compileOnly('curse.maven:tenshilib-312040:7370246')
-    compileOnly('curse.maven:tacz-1-21-1-1353462:7955596')
+    compileOnly('curse.maven:improved-mobs-282639:8706227')
+    compileOnly('curse.maven:tenshilib-312040:8706217')
+    compileOnly('curse.maven:tacz-1-21-1-1353462:8547439')
     compileOnly('cdpr.ports:tetra:1.21.1-6.13.0')
-    compileOnly('curse.maven:ecliptic-seasons-1118306:8350852')
-    runtimeOnly('curse.maven:ecliptic-seasons-1118306:8350852')
+    compileOnly('curse.maven:ecliptic-seasons-1118306:8849038')
+    runtimeOnly('curse.maven:ecliptic-seasons-1118306:8849038')
     implementation("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") {
         transitive = false
     }
@@ -192,15 +192,15 @@ dependencies {
     compileOnly("org.appliedenergistics.yoga:yoga:1.0.0")
     compileOnly("dev.vfyjxf:taffy:1.1.4")
     runtimeOnly("curse.maven:multiblocked2-1104057:8351447")
-    runtimeOnly("curse.maven:ldlib-626676:8364073")
+    runtimeOnly("curse.maven:ldlib-626676:8866144")
     // Pack-matched structure and worldgen dependencies for development runs.
     runtimeOnly("curse.maven:create-deco-509285:7943181")
-    runtimeOnly("curse.maven:create-new-age-905861:7388244")
+    runtimeOnly("curse.maven:create-new-age-905861:8215216")
     runtimeOnly("curse.maven:create-fantasizing-1279337:8036095")
     runtimeOnly("curse.maven:northstar-redux-1318310:8844708")
-    runtimeOnly("curse.maven:geckolib-388172:7707149")
+    runtimeOnly("curse.maven:geckolib-388172:8893490")
     runtimeOnly("curse.maven:applied-energistics-2-223794:7027323")
-    runtimeOnly("curse.maven:guideme-1173950:7127444")
+    runtimeOnly("curse.maven:guideme-1173950:8897145")
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
