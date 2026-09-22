@@ -107,6 +107,8 @@ public final class ModCreativeTabs {
         output.accept(ModBlocks.FORGE_STEEL_CASING.get());
         output.accept(ModBlocks.STEEL_GLASS_CASING.get());
         output.accept(ModBlocks.STEEL_CLEAR_GLASS_CASING.get());
+        output.accept(ModBlocks.QUALITY_HARVEST_CONTROLLER.get());
+        output.accept(ModBlocks.LIFE_MATTER_INJECTOR.get());
         output.accept(ModBlocks.COW_ZIP.get());
         output.accept(ModBlocks.SHEEP_ZIP.get());
         output.accept(ModBlocks.PIG_ZIP.get());
