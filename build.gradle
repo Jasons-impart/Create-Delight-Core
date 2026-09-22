@@ -275,7 +275,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:supplementaries-412082:7431873")
 
     // EclipticSeasons
-    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
+    compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8798549") // 0.15.0-rc-3
     // quality foods
     implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 
