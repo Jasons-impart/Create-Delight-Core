@@ -943,6 +943,8 @@
   "message.createdelightcore.tacz.energy_reload": "Recharged %s rounds from energy cells (%s)",
   "item.createdelightcore.forged_steel_ingot": "Forged Steel Ingot",
   "message.createdelightcore.log_in": "Welcome back, %s!",
+  "message.createdelightcore.early_test_warning": "§eThis is a very early development test build. Expect issues, including broken progression and integrations. The current experience does not reflect final quality.§r",
+  "message.createdelightcore.feedback": "Report issues here: %s",
   "message.createdelightcore.pipe": "A pipe must retain at least two openings",
   "message.createdelightcore.difficulty.decreased": "Difficulty decreased by %s!",
   "message.createdelightcore.difficulty.increased": "Difficulty increased by %s!",

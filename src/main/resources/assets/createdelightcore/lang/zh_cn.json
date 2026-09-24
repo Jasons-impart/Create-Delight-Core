@@ -947,6 +947,8 @@
   "message.createdelightcore.tacz.energy_reload": "已从能量元件补充 %s 发弹药（%s）",
   "item.createdelightcore.forged_steel_ingot": "锻钢锭",
   "message.createdelightcore.log_in": "欢迎回来，%s！",
+  "message.createdelightcore.early_test_warning": "§e当前是非常早期的开发测试版本，问题可能很多，包括流程中断、联动失效等；当前体验不代表最终质量。§r",
+  "message.createdelightcore.feedback": "遇到问题请反馈：%s",
   "message.createdelightcore.pipe": "管道至少需要保留两个开口",
   "message.createdelightcore.difficulty.decreased": "难度降低了%s！",
   "message.createdelightcore.difficulty.increased": "难度提升了%s！",
