@@ -26,6 +26,7 @@
     "createmetallurgy.CrucibleAlloyingMixin",
     "createmetallurgy.CrucibleGaugeCacheMixin",
     "collectorsreap.PortobelloColonyBlockMixin",
+    "collectorsreap.FruitBushBlockMixin",
     "collectorsreap.FruitBushBlockQualityMixin",
     "collectorsreap.TallBushCropBlockQualityMixin",
     "constructionwand.WandUtilMixin",
