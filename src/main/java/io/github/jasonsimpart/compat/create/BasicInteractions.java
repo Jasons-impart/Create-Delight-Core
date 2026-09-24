@@ -8,6 +8,7 @@ import io.github.jasonsimpart.network.ChainCasingModifierPayload;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 /** 0488 pipe editing and Alt chain casing, with no KubeJS/client-script dependency. */
 public final class BasicInteractions {
+    private static final String FEEDBACK_URL = "https://cdpr.jsi-team.com/feedback/";
     private static final ThreadLocal<Boolean> CHECKING_PERMISSION = ThreadLocal.withInitial(() -> false);
     private BasicInteractions() {}
 
@@ -40,6 +42,12 @@ public final class BasicInteractions {
         Player player = event.getEntity();
         player.getPersistentData().remove(ChainCasingModifierPayload.KEY);
         player.sendSystemMessage(Component.translatable("message.createdelightcore.log_in", player.getName()));
+        player.sendSystemMessage(Component.translatable("message.createdelightcore.early_test_warning"));
+        Component feedbackLink = Component.literal(FEEDBACK_URL).withStyle(style -> style
+                .withColor(ChatFormatting.AQUA)
+                .withUnderlined(true)
+                .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, FEEDBACK_URL)));
+        player.sendSystemMessage(Component.translatable("message.createdelightcore.feedback", feedbackLink));
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer)
             io.github.jasonsimpart.content.event.DonorLogin.apply(serverPlayer);
     }
