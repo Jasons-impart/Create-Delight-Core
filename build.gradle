@@ -323,6 +323,9 @@ dependencies {
     //butchercraft
     // Userdev runClient: this version crashes during its own registry setup; compile only for CDR mixins.
     compileOnly fg.deobf("curse.maven:butchercraft-265715:6058842")
+    // multiblocked2 / ldlib — compile only for MBD2 recipe quality-transfer mixins
+    compileOnly fg.deobf("curse.maven:multiblocked2-1104057:7415529")
+    compileOnly fg.deobf("curse.maven:ldlib-626676:7809449")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
