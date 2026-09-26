@@ -24,6 +24,7 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String CREATE_INTEGRATED_FARMING_MIXIN = ".createintegratedfarming.";
     private static final String BUTCHERCRAFT_MIXIN = ".butchercraft.";
     private static final String MBD2_MIXIN = ".mbd2.";
+    private static final String FLUIDLOGISTICS_MIXIN = ".fluidlogistics.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -71,6 +72,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.contains(MBD2_MIXIN)) {
             return decide(mixinClassName, "mbd2");
+        }
+        if (mixinClassName.contains(FLUIDLOGISTICS_MIXIN)) {
+            return decide(mixinClassName, "fluidlogistics");
         }
         return true;
     }

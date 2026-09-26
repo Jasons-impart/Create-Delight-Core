@@ -67,6 +67,10 @@ public class ChineseLangHandler {
         replace(provider, "block.createdelightcore.quality_harvest_controller", "品控收割控制器");
         replace(provider, "createdelightcore.quality_harvest_controller.no_calibrator", "未安装校准器");
         replace(provider, "createdelightcore.quality_harvest_controller.status", "生命质：%s/%s | %s");
+        replace(provider, "createdelightcore.tooltip.coolerState", "冷却状态：");
+        replace(provider, "createdelightcore.tooltip.burnerState", "燃烧室状态：");
+        replace(provider, "createdelightcore.tooltip.leftTime", "剩余时间：");
+        replace(provider, "createdelightcore.tooltip.seconds", "秒");
         replace(provider, "createdelightcore.gui.address", "地址");
         replace(provider, "createdelightcore.gui.candidates", "候选物品");
         replace(provider, "createdelightcore.gui.estimate", "预期：%s");

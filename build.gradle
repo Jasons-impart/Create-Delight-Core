@@ -326,6 +326,8 @@ dependencies {
     // multiblocked2 / ldlib — compile only for MBD2 recipe quality-transfer mixins
     compileOnly fg.deobf("curse.maven:multiblocked2-1104057:7415529")
     compileOnly fg.deobf("curse.maven:ldlib-626676:7809449")
+    // fluidlogistics — compile only for BlazeCooler goggle tooltip mixin
+    compileOnly files("${rootDir}/../mods/fluidlogistics-1.3.0-mc1.20.1.jar")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")

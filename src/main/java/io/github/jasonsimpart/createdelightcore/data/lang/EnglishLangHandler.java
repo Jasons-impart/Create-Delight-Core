@@ -58,6 +58,10 @@ public class EnglishLangHandler {
         replace(provider, "block.createdelightcore.quality_harvest_controller", "Quality Harvest Controller");
         replace(provider, "createdelightcore.quality_harvest_controller.no_calibrator", "No calibrator");
         replace(provider, "createdelightcore.quality_harvest_controller.status", "Life Matter: %s/%s | %s");
+        replace(provider, "createdelightcore.tooltip.coolerState", "Cooler State:");
+        replace(provider, "createdelightcore.tooltip.burnerState", "Burner State:");
+        replace(provider, "createdelightcore.tooltip.leftTime", "Remaining Time:");
+        replace(provider, "createdelightcore.tooltip.seconds", "s");
         replace(provider, "createdelightcore.gui.address", "Address");
         replace(provider, "createdelightcore.gui.candidates", "Candidates");
         replace(provider, "createdelightcore.gui.estimate", "Expected: %s");

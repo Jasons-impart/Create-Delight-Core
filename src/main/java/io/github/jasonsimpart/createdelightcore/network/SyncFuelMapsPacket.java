@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.network;
 
-import com.forsteri.createliquidfuel.core.BurnerStomachHandler;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.compat.createliquidfuel.BlazeBurnerFuels;
 import io.github.jasonsimpart.createdelightcore.compat.fluidlogistics.BlazeCoolerFuels;
 import net.minecraftforge.fml.ModList;
 import io.github.jasonsimpart.createdelightcore.util.Triplet;
@@ -10,7 +11,6 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -21,16 +21,36 @@ public class SyncFuelMapsPacket {
 
     /** Server-side constructor: snapshot current server maps. */
     public SyncFuelMapsPacket() {
-        this.blazeCoolerData = ModList.get().isLoaded("fluidlogistics")
-                ? BlazeCoolerFuels.snapshot() : Map.of();
-        this.burnerData = new HashMap<>();
-        BurnerStomachHandler.LIQUID_BURNER_FUEL_MAP.forEach((fluid, pair) -> {
-            ResourceLocation rl = ForgeRegistries.FLUIDS.getKey(fluid);
-            if (rl != null && pair != null && pair.getSecond() != null) {
-                var t = pair.getSecond();
-                burnerData.put(rl, Triplet.of(t.getFirst(), t.getSecond(), t.getThird()));
-            }
-        });
+        this.blazeCoolerData = snapshotBlazeCoolerFuels();
+        this.burnerData = snapshotBurnerFuels();
+    }
+
+    /**
+     * Optional-mod compat must never break player login: a missing or partially
+     * loaded BlazeCooler class degrades to an empty map instead of killing the server.
+     */
+    private static Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> snapshotBlazeCoolerFuels() {
+        if (!ModList.get().isLoaded("fluidlogistics")) {
+            return Map.of();
+        }
+        try {
+            return BlazeCoolerFuels.snapshot();
+        } catch (Throwable t) {
+            CreateDelightCore.LOGGER.warn("Skipping BlazeCooler fuel sync because snapshot failed", t);
+            return Map.of();
+        }
+    }
+
+    private static Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> snapshotBurnerFuels() {
+        if (!ModList.get().isLoaded("createliquidfuel")) {
+            return Map.of();
+        }
+        try {
+            return BlazeBurnerFuels.snapshot();
+        } catch (Throwable t) {
+            CreateDelightCore.LOGGER.warn("Skipping burner fuel sync because snapshot failed", t);
+            return Map.of();
+        }
     }
 
     private SyncFuelMapsPacket(Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData,
