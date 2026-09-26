@@ -106,6 +106,7 @@
     "quality_food.BlockDropContextMixin",
     "quality_food.BlockUseContextMixin",
     "quality_food.BlockDataMixin",
+    "quality_food.LevelDataMixin",
     "quality_food.QualityFoodMixin",
     "ratatouille.BakeDataMixin",
     "ratatouille.SqueezeBasinBlockEntityMixin",
