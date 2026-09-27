@@ -146,6 +146,32 @@ public abstract class QualityFoodMixin {
         ci.cancel();
     }
 
+    /**
+     * Quality Food 的 BlockMixin（popResource 掉落）与 SweetBerryBushBlockMixin（use 收获参数）
+     * 直接调用 applyHarvestQuality，绕过 applyQuality 外壳，CDC 对自动化收割的限制
+     * （无生命质/校准器不产品质）因此失效：机械手收割甜浆果、葡萄等右键收获作物仍会摇出品质。
+     * 当存在自动化收割上下文时改为取消上游处理并走 QualityHarvestAutomationContext.applyQuality。
+     * 玩家手动收获没有自动化上下文，保持上游行为（自然品质）。
+     */
+    @Inject(method = "applyHarvestQuality(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;Lde/cadentem/quality_food/core/Quality;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/state/BlockState;)V", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void applyHarvestQualityMixin(ItemStack stack, BlockState state, Quality blockQuality, Player player, BlockState farmland, CallbackInfo ci) {
+        QualityHarvestAutomationContext.HarvestData automation = QualityHarvestAutomationContext.get();
+        if (automation != null) {
+            // 动态结构上的收割（机械手/收割机等）：取消上游处理，走生命质自动化通道
+            // （未装校准器或生命质不足时不产品质）。
+            ci.cancel();
+            QualityHarvestAutomationContext.applyQuality(stack);
+            return;
+        }
+
+        // 固定式机械手等非玩家收获：QF 的 popResource/use 挂钩会以 null/FakePlayer
+        // 玩家调用本方法，上游仍按自然概率摇品质（Modification.luck 对无运气属性者
+        // 返回恒等变换而非乘 0），取消以确保非玩家收获不产品质。
+        if (player == null || player instanceof FakePlayer) {
+            ci.cancel();
+        }
+    }
+
     @Unique
     private static Quality create_Delight_Core$getChanceQuality(BlockState state, Quality blockQuality) {
         if (state.is(Blocks.SUGAR_CANE)) {
@@ -326,6 +352,13 @@ public abstract class QualityFoodMixin {
 
     @Inject(method = "isRelevantCrop", at = @At("HEAD"), cancellable = true, remap = false)
     private static void isRelevantCropMixin(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+        // 上游 isRelevantCrop 开头有 state == null 防护；重写 HEAD 时必须保留。
+        // QF 的 SweetBerryBushBlockMixin 构建的 HarvestContext 不带 position/state，
+        // state 可能为 null，缺失防护会在右键/机械手收获甜浆果时抛 NPE（Create-Delight-Remake#2363）。
+        if (state == null) {
+            cir.setReturnValue(false);
+            return;
+        }
         Block block = state.getBlock();
         if (block instanceof CropBlock cropBlock) {
             if (cropBlock.isMaxAge(state)) {
