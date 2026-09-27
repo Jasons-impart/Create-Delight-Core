@@ -50,7 +50,7 @@
     "createintegratedfarming.VacuumHarvesterBlockEntityMixin",
     "culturaldelights.CornBlockQualityMixin",
     "createdieselgenerators.BulkFermenterBlockEntityMixin",
-    "createbicbit.DeepFryingRecipeMixin",
+    "createbicbit.MechanicalFryerEntityMixin",
     "CU.VoidBatteryMixin",
     "displaydelight.InterationManagerMixin",
     "eclipticseason.CropGrowthHandlerMixin",
