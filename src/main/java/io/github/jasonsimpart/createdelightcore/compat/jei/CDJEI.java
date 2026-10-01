@@ -30,6 +30,7 @@ import io.github.jasonsimpart.createdelightcore.compat.jei.category.CDProcessing
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeBurnerFluid;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.JeiCategoryBlazeCoolerFluid;
 import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.ForgeRegistries;
 import io.github.jasonsimpart.createdelightcore.compat.jei.category.PhantomCompostingCategory;
 import io.github.jasonsimpart.createdelightcore.network.ClientFuelCache;
 import io.github.jasonsimpart.createdelightcore.registry.CDBlocks;
@@ -51,10 +52,12 @@ import net.createmod.catnip.config.ConfigBase;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ItemLike;
+import plus.dragons.createdragonsplus.integration.jei.category.FanFreezingCategory;
 
 @JeiPlugin
 @SuppressWarnings("unused")
@@ -91,6 +94,7 @@ public class CDJEI implements IModPlugin {
         ClientFuelCache.onUpdate = CDJEI::onFuelCacheUpdated;
         updateBlazeCoolerRecipes();
         hideHiddenFluidFillingRecipes();
+        hideFluidLogisticsFanCoolingCategory();
     }
 
     @Override
@@ -132,7 +136,32 @@ public class CDJEI implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         allCategories.forEach(c -> c.registerCatalysts(registration));
+        if (ModList.get().isLoaded("casualness_delight")) {
+            var deepFryingType = com.va11halla.casualness_delight.integration.jei.JEIPlugin.INFUSION_TYPE;
+            Item deepFryingPan = ForgeRegistries.ITEMS.getValue(
+                    ResourceLocation.fromNamespaceAndPath("casualness_delight", "deep_frying_pan"));
+            if (deepFryingPan != null && deepFryingPan != Items.AIR) {
+                registration.addRecipeCatalyst(deepFryingPan.getDefaultInstance(), deepFryingType);
+            }
+            Item stove = ForgeRegistries.ITEMS.getValue(
+                    ResourceLocation.fromNamespaceAndPath("farmersdelight", "stove"));
+            if (stove != null && stove != Items.AIR) {
+                registration.addRecipeCatalyst(stove.getDefaultInstance(), deepFryingType);
+            }
+        }
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
+        if (ModList.get().isLoaded("create_dragons_plus")) {
+            registration.addRecipeCatalyst(Items.POWDER_SNOW_BUCKET.getDefaultInstance(), FanFreezingCategory.TYPE);
+            Item connectedFreezer = ForgeRegistries.ITEMS.getValue(
+                    ResourceLocation.fromNamespaceAndPath("create_connected", "fan_freezing_catalyst"));
+            if (connectedFreezer != null && connectedFreezer != Items.AIR) {
+                registration.addRecipeCatalyst(connectedFreezer.getDefaultInstance(), FanFreezingCategory.TYPE);
+            }
+            if (ModList.get().isLoaded("fluidlogistics")) {
+                registration.addRecipeCatalyst(com.yision.fluidlogistics.registry.AllBlocks.BLAZE_COOLER.asStack(),
+                        FanFreezingCategory.TYPE);
+            }
+        }
         if (ModList.get().isLoaded("fluidlogistics")) {
             registration.addRecipeCatalyst(com.yision.fluidlogistics.registry.AllBlocks.BLAZE_COOLER.asStack(),
                     JeiCategoryBlazeCoolerFluid.RECIPE_TYPE);
@@ -170,6 +199,7 @@ public class CDJEI implements IModPlugin {
     public static void onFuelCacheUpdated() {
         updateBlazeCoolerRecipes();
         hideHiddenFluidFillingRecipes();
+        hideFluidLogisticsFanCoolingCategory();
         if (jeiRuntime != null) {
             jeiRuntime.getRecipeManager().addRecipes(JeiCategoryBlazeBurnerFluid.RECIPE_TYPE, buildFluidRecipeList());
         }
@@ -212,6 +242,15 @@ public class CDJEI implements IModPlugin {
             }).toList();
             manager.hideRecipes(type, hiddenRecipes);
         });
+    }
+
+    private static void hideFluidLogisticsFanCoolingCategory() {
+        if (jeiRuntime == null) {
+            return;
+        }
+        var manager = jeiRuntime.getRecipeManager();
+        manager.getRecipeType(ResourceLocation.fromNamespaceAndPath("fluidlogistics", "fan_cooling"))
+                .ifPresent(manager::hideRecipeCategory);
     }
 
     private class CategoryBuilder<T extends Recipe<?>> {
