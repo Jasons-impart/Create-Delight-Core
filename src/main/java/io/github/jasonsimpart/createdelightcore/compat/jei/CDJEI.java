@@ -12,6 +12,16 @@ import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.CuttingBoardCombiningCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.CuttingBoardSlicingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.FreezerSolidifyingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.FryingPanCookingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.GrillCookingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.MicrowaveHeatingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.OvenBakingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.ToasterToastingCategory;
+import com.mrcrayfish.furniture.refurbished.compat.jei.categories.WorkbenchConstructingCategory;
+import com.mrcrayfish.furniture.refurbished.core.ModBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
 import net.minecraft.tags.FluidTags;
@@ -148,6 +158,17 @@ public class CDJEI implements IModPlugin {
             if (stove != null && stove != Items.AIR) {
                 registration.addRecipeCatalyst(stove.getDefaultInstance(), deepFryingType);
             }
+        }
+        if (ModList.get().isLoaded("refurbished_furniture")) {
+            registration.addRecipeCatalyst(ModBlocks.WORKBENCH.get(), WorkbenchConstructingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.FREEZER_LIGHT.get(), FreezerSolidifyingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.STOVE_LIGHT.get(), OvenBakingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.FRYING_PAN.get(), FryingPanCookingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.CUTTING_BOARD_OAK.get(),
+                    CuttingBoardSlicingCategory.TYPE, CuttingBoardCombiningCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.GRILL_WHITE.get(), GrillCookingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.MICROWAVE_LIGHT.get(), MicrowaveHeatingCategory.TYPE);
+            registration.addRecipeCatalyst(ModBlocks.TOASTER_LIGHT.get(), ToasterToastingCategory.TYPE);
         }
         registration.addRecipeCatalyst(AllBlocks.BLAZE_BURNER.asStack(), JeiCategoryBlazeBurnerFluid.RECIPE_TYPE);
         if (ModList.get().isLoaded("create_dragons_plus")) {
