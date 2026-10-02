@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_fluid_tank": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "create:fluid_tank"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "createdelightcore:sprinkler"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_fluid_tank",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "createdelightcore:sprinkler"
+    ]
+  },
+  "sends_telemetry_event": false
+}

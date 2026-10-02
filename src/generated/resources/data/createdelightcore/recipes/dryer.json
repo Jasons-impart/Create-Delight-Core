@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:copper_bars"
+    },
+    "B": {
+      "item": "create:shaft"
+    },
+    "C": {
+      "item": "minecraft:magma_block"
+    },
+    "D": {
+      "item": "create:nozzle"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "ADA"
+  ],
+  "result": {
+    "item": "createdelightcore:dryer"
+  },
+  "show_notification": true
+}

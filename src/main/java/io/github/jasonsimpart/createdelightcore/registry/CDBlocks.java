@@ -1,5 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineBlock;
+
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.gumillea.cosmopolitan.common.block.SyrupBlock;
 import com.gumillea.cosmopolitan.core.reg.CosmoEffects;
@@ -61,6 +63,25 @@ import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeBloc
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 
 public class CDBlocks {
+    public static final BlockEntry<HumidityMachineBlock> SPRINKLER =
+            humidityMachine("sprinkler", false);
+    public static final BlockEntry<HumidityMachineBlock> DRYER =
+            humidityMachine("dryer", true);
+
+    private static BlockEntry<HumidityMachineBlock> humidityMachine(String name, boolean dryer) {
+        return REGISTRATE.block(name, properties -> new HumidityMachineBlock(properties, dryer))
+                .initialProperties(() -> Blocks.IRON_BLOCK)
+                .properties(properties -> properties.strength(3.0F, 6.0F).noOcclusion())
+                .blockstate((context, provider) -> provider.simpleBlock(context.get(),
+                        provider.models().getExistingFile(provider.modLoc("block/" + name))))
+                .loot((provider, block) -> provider.dropSelf(block))
+                .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .item()
+                .tab(CDCreativeTabs.MISC.getKey())
+                .build()
+                .register();
+    }
+
     public static final ResourceKey<CreativeModeTab> MISC_TAB = CDCreativeTabs.MISC.getKey();
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();

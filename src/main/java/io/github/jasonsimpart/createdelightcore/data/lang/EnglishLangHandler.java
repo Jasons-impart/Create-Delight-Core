@@ -29,6 +29,12 @@ public class EnglishLangHandler {
     }
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "block.createdelightcore.sprinkler", "Sprinkler");
+        replace(provider, "block.createdelightcore.dryer", "Dehumidifier");
+        replace(provider, "createdelightcore.humidity.sprinkler", "Consumes 500 mB water per 100 ticks to raise humidity by 1; capacity: 1000 mB.");
+        replace(provider, "createdelightcore.humidity.sprinkler_range", "Affects a radius of 4 around the first non-air block within 10 blocks below.");
+        replace(provider, "createdelightcore.humidity.dryer", "Connect power above or below. Reduces humidity by 1 at an absolute speed greater than 8 RPM.");
+        replace(provider, "createdelightcore.humidity.dryer_range", "Affects a radius of 4 around the machine; stress impact: 1.");
         replace(provider, "itemGroup.createdelightcore.coin", "Coins & Items");
         replace(provider, "item.createdelightcore.iron_coin", "§7Iron Coin");
         replace(provider, "item.createdelightcore.iron_coin.plural", "§7Iron Coins");

@@ -38,6 +38,12 @@ public class ChineseLangHandler {
     }
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "block.createdelightcore.sprinkler", "加湿器");
+        replace(provider, "block.createdelightcore.dryer", "除湿器");
+        replace(provider, "createdelightcore.humidity.sprinkler", "每 100 tick 消耗 500 mB 水，提高 1 级湿度；储水容量 1000 mB。");
+        replace(provider, "createdelightcore.humidity.sprinkler_range", "以正下方 10 格内首个非空气方块为中心，作用半径 4 格。");
+        replace(provider, "createdelightcore.humidity.dryer", "从顶部或底部接入动力，转速绝对值大于 8 RPM 时降低 1 级湿度。");
+        replace(provider, "createdelightcore.humidity.dryer_range", "以机器自身为中心，作用半径 4 格；应力系数为 1。");
         replace(provider, "itemGroup.createdelightcore.coin", "钱币与物品");
         replace(provider, "item.createdelightcore.iron_coin", "§7铁币");
         replace(provider, "item.createdelightcore.iron_coin.plural", "§7铁币");

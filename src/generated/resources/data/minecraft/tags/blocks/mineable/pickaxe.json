@@ -1,5 +1,7 @@
 {
   "values": [
+    "createdelightcore:sprinkler",
+    "createdelightcore:dryer",
     "createdelightcore:tin_ore",
     "createdelightcore:deepslate_tin_ore",
     "createdelightcore:raw_tin_block",
