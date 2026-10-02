@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "create:fluid_pipe"
+    },
+    "B": {
+      "item": "create:fluid_tank"
+    }
+  },
+  "pattern": [
+    " A ",
+    "ABA",
+    " A "
+  ],
+  "result": {
+    "item": "createdelightcore:sprinkler"
+  },
+  "show_notification": true
+}

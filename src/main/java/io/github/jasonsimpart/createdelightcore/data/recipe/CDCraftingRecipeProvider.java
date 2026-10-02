@@ -8,6 +8,8 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import com.simibubi.create.AllBlocks;
 import net.minecraft.world.item.Items;
 
 import java.util.function.Consumer;
@@ -19,6 +21,22 @@ public class CDCraftingRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CDBlocks.SPRINKLER.get())
+                .pattern(" A ").pattern("ABA").pattern(" A ")
+                .define('A', AllBlocks.FLUID_PIPE.get())
+                .define('B', AllBlocks.FLUID_TANK.get())
+                .unlockedBy("has_fluid_tank", has(AllBlocks.FLUID_TANK.get()))
+                .save(writer, CreateDelightCore.id("sprinkler"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CDBlocks.DRYER.get())
+                .pattern("ABA").pattern("ACA").pattern("ADA")
+                .define('A', AllBlocks.COPPER_BARS.get())
+                .define('B', AllBlocks.SHAFT.get())
+                .define('C', Items.MAGMA_BLOCK)
+                .define('D', AllBlocks.NOZZLE.get())
+                .unlockedBy("has_shaft", has(AllBlocks.SHAFT.get()))
+                .save(writer, CreateDelightCore.id("dryer"));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, CDBlocks.LUSH_CONFITURE.asItem(), 8)
                 .requires(CDBlocks.LUSH_CONFITURE_JELLY.get())
                 .requires(Items.GLASS_BOTTLE, 8)

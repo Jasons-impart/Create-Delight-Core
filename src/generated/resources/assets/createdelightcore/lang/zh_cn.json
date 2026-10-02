@@ -6,6 +6,7 @@
   "block.createdelightcore.coconut_syrup": "椰子糖浆块",
   "block.createdelightcore.copper_coin_pile": "铜币堆",
   "block.createdelightcore.deepslate_tin_ore": "深层锡矿石",
+  "block.createdelightcore.dryer": "除湿器",
   "block.createdelightcore.emerald_coin_pile": "绿宝石币堆",
   "block.createdelightcore.ferrouslime": "富铁黏液",
   "block.createdelightcore.fire_lily_cluster": "烈焰百合簇",
@@ -50,6 +51,7 @@
   "block.createdelightcore.raw_tin_block": "粗锡块",
   "block.createdelightcore.raw_vegetable_pizza": "生蔬菜披萨",
   "block.createdelightcore.slime": "黏液",
+  "block.createdelightcore.sprinkler": "加湿器",
   "block.createdelightcore.steel_casing": "钢制机壳",
   "block.createdelightcore.steel_clear_glass_casing": "钢制通透玻璃机壳",
   "block.createdelightcore.steel_glass_casing": "钢制玻璃机壳",
@@ -106,6 +108,10 @@
   "createdelightcore.gui.shortage_count": "缺%s",
   "createdelightcore.gui.summary_total": "合计",
   "createdelightcore.gui.weight_hint": "点击调整份数，按住 Shift 每次调整 16。",
+  "createdelightcore.humidity.dryer": "从顶部或底部接入动力，转速绝对值大于 8 RPM 时降低 1 级湿度。",
+  "createdelightcore.humidity.dryer_range": "以机器自身为中心，作用半径 4 格；应力系数为 1。",
+  "createdelightcore.humidity.sprinkler": "每 100 tick 消耗 500 mB 水，提高 1 级湿度；储水容量 1000 mB。",
+  "createdelightcore.humidity.sprinkler_range": "以正下方 10 格内首个非空气方块为中心，作用半径 4 格。",
   "createdelightcore.life_matter_injector.docking.full": "控制器已满（%s/%s）",
   "createdelightcore.life_matter_injector.docking.none": "未对准",
   "createdelightcore.life_matter_injector.docking.ready": "已对准（%s/%s）",
@@ -173,6 +179,7 @@
   "createdelightcore.supply_commission.submit.success": "供货委托已确认",
   "createdelightcore.supply_commission.submit.vouchers_missing": "委托台中的订单商会凭证不足",
   "createdelightcore.supply_commission.vouchers": "商会凭证",
+  "createdelightcore.tooltip.burnerState": "燃烧室状态：",
   "createdelightcore.tooltip.coolerState": "冷却状态：",
   "createdelightcore.tooltip.leftTime": "剩余时间：",
   "createdelightcore.tooltip.seconds": "秒",
@@ -344,6 +351,5 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r",
   "tooltip.createdelightcore.jello_block": "光滑，但是能和相同果酱/果冻方块粘黏",
   "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏",
-  "tooltip.createdelightcore.superHeat": "超级燃烧",
-  "createdelightcore.tooltip.burnerState": "燃烧室状态："
+  "tooltip.createdelightcore.superHeat": "超级燃烧"
 }

@@ -1,5 +1,8 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
+import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineBlockEntity;
+import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineRenderer;
+
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import io.github.jasonsimpart.createdelightcore.content.order.board.OrderBoardBlockEntity;
 import io.github.jasonsimpart.createdelightcore.content.order.machine.OrderRequesterBlockEntity;
@@ -10,6 +13,12 @@ import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityH
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 
 public class CDBlockEntities {
+    public static final BlockEntityEntry<HumidityMachineBlockEntity> HUMIDITY_MACHINE =
+            REGISTRATE.blockEntity("humidity_machine", HumidityMachineBlockEntity::new)
+                    .validBlocks(CDBlocks.SPRINKLER, CDBlocks.DRYER)
+                    .renderer(() -> HumidityMachineRenderer::new)
+                    .register();
+
     public static final BlockEntityEntry<OrderBoardBlockEntity> ORDER_BOARD =
             REGISTRATE.<OrderBoardBlockEntity>blockEntity("order_board", OrderBoardBlockEntity::new)
                     .validBlock(CDBlocks.ORDER_BOARD)
