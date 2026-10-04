@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore.registry;
 
 import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineBlock;
+import io.github.jasonsimpart.createdelightcore.content.humidity.SmartHumidityRegulatorBlock;
 
 import com.github.alexthe666.iceandfire.block.IafBlockRegistry;
 import com.gumillea.cosmopolitan.common.block.SyrupBlock;
@@ -63,6 +64,20 @@ import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeBloc
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 
 public class CDBlocks {
+    public static final BlockEntry<SmartHumidityRegulatorBlock> SMART_HUMIDITY_REGULATOR =
+            REGISTRATE.block("smart_humidity_regulator", SmartHumidityRegulatorBlock::new)
+                    .initialProperties(() -> Blocks.IRON_BLOCK)
+                    .properties(properties -> properties.strength(3.0F, 6.0F).noOcclusion())
+                    .blockstate((context, provider) -> provider.simpleBlock(context.get(),
+                            provider.models().getExistingFile(provider.modLoc("block/smart_humidity_regulator/block"))))
+                    .loot((provider, block) -> provider.dropSelf(block))
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                    .item()
+                    .model((context, provider) -> provider.withExistingParent(context.getName(),
+                            provider.modLoc("block/smart_humidity_regulator/item")))
+                    .tab(CDCreativeTabs.MISC.getKey())
+                    .build()
+                    .register();
     public static final BlockEntry<HumidityMachineBlock> SPRINKLER =
             humidityMachine("sprinkler", false);
     public static final BlockEntry<HumidityMachineBlock> DRYER =

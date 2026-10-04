@@ -18,6 +18,9 @@ base {
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+// Regression fixtures reference main registrations whose API dependencies are compile-only.
+configurations.testCompileOnly.extendsFrom(configurations.compileOnly)
+
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
@@ -103,6 +106,12 @@ minecraft {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             workingDirectory project.file('run/gametestserver')
+            source sourceSets.test
+            mods {
+                "${mod_id}" {
+                    source sourceSets.test
+                }
+            }
             property 'forge.enabledGameTestNamespaces', mod_id
         }
 
@@ -277,6 +286,8 @@ dependencies {
 
     // EclipticSeasons
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
+    // Load the optional integration only in the regression-test runtime, not the published mod.
+    testImplementation fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // quality foods
     implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 

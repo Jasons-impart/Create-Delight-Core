@@ -5,6 +5,11 @@
   "refmap": "mixins.createdelightcore.refmap.json",
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
+    "eclipticseason.SmartHumidityModificationMixin",
+    "eclipticseason.SmartHumidityGrowthDetectorMixin",
+    "eclipticseason.SmartHumidityCropMixin",
+    "eclipticseason.SmartHumidityHygrometerMixin",
+    "eclipticseason.SmartHumidityReadingMixin",
     "alexsmobs.WarpedToadPredationDamageMixin",
     "AbstractVillagerMixin",
     "VillagerMixin",
@@ -129,6 +134,8 @@
     "waystones.WaystoneButtonMixin"
   ],
   "client": [
+    "eclipticseason.SmartHumidityClientModificationMixin",
+    "eclipticseason.SmartHumidityClientReadingMixin",
     "create.BasinCategoryMixin",
     "create.BlazeBurnerGoggleTooltipMixin",
     "fluidlogistics.BlazeCoolerGoggleTooltipMixin",

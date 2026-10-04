@@ -39,6 +39,17 @@ public class ChineseLangHandler {
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
         replace(provider, "block.createdelightcore.sprinkler", "加湿器");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator", "智能湿度调节器");
+        replace(provider, "createdelightcore.humidity.regulator.target", "目标湿润度");
+        replace(provider, "createdelightcore.humidity.regulator.humidity", "湿润度");
+        replace(provider, "createdelightcore.humidity.regulator.operation", "右键任意侧面下方中央设置湿润度；侧面连接齿轮，应力消耗：16×RPM。");
+        replace(provider, "createdelightcore.humidity.regulator.water", "顶部进水，容量1000mB；需要供水和动力，工作时每刻消耗5mB水。");
+        replace(provider, "createdelightcore.humidity.regulator.priority", "以设备自身为中心强制设置9×9×9范围内的湿润度；交叠处采用最高目标等级，各设备独立工作。");
+        replace(provider, "createdelightcore.humidity.level.arid", "干旱");
+        replace(provider, "createdelightcore.humidity.level.dry", "干燥");
+        replace(provider, "createdelightcore.humidity.level.average", "一般");
+        replace(provider, "createdelightcore.humidity.level.moist", "湿润");
+        replace(provider, "createdelightcore.humidity.level.humid", "潮湿");
         replace(provider, "block.createdelightcore.dryer", "除湿器");
         replace(provider, "createdelightcore.humidity.sprinkler", "每 100 tick 消耗 500 mB 水，提高 1 级湿度；储水容量 1000 mB。");
         replace(provider, "createdelightcore.humidity.sprinkler_range", "以正下方 10 格内首个非空气方块为中心，作用半径 4 格。");

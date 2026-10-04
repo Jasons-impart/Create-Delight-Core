@@ -1,5 +1,20 @@
 # CDC Content Map
 
+## Smart Humidity Regulator / 智能湿度调节器
+
+- 注册名 `createdelightcore:smart_humidity_regulator`。单行 Create 数值界面包含干旱、干燥、一般、湿润、潮湿五档；四个侧面下方中央（Y=3/16）打开，里程碑为 0/30/60/90/120。
+- 以设备自身为中心固定管辖 9×9×9（各轴偏移 -4…4，包括角点），强制覆写该范围的湿度，不扫描或依赖温室、门墙或地面。交叠位置取正在工作的设备中最高目标；所有设备独立耗水及播放粒子，没有多设备停机或冲突提示。
+- 工作需非零转速、未过载及至少 5 mB 水；顶部仅进水，容量 1000 mB，每刻消耗 5 mB。最后一次付费刻仍提供湿度，下一刻无水即撤销；停转、拆除、区块卸载也撤销。工作粒子同时包含底面 `FALLING_WATER`（每 40 tick、20 个）和 `POOF`（每 60 tick、3 个），扩散 .4/.2/.4、速度 .02，与普通 CDC 设备一致。
+- 侧面水平齿轮、Y 轴转动，应力系数 16（16×|RPM|），顶底均无传动端口。方块不带朝向属性，与 Vintage Improvement 压缩机一致；Create 原版集成大小齿轮放置辅助默认采用 Y 轴，自然排除顶底预览，无需放置事件或传动拦截。六面原版预览计算及双向传动已通过 GameTest。
+- `SmartHumidityRegulatorSeasonCompat` 维护不可变的活动设备中心/绝对目标条目，按固定方盒查询并取最大值；没有逐格湿度、自然湿度差异或温室几何缓存。检测仪 Netty 线程只读这些条目，不能访问/删除方块实体：历史 owner 判定在 Netty 调用 `Level.getBlockEntity` 返回 null 后误删设备，是间歇失效的根因。
+- `SmartHumidityReadingMixin`、`SmartHumidityClientReadingMixin`、`SmartHumidityHygrometerMixin` 在读取入口直接返回绝对目标；不受自然/雨天基础值或原版温室过滤影响。壁挂读数仍按原版时序刷新，不新增放置定时循环。
+- `SmartHumidityCropMixin` / `SmartHumidityGrowthDetectorMixin` 将湿度参数输入替换为绝对目标，并按所选 `Humidity` 枚举查生长参数，避免原版 0…4 截断及相邻等级插值。仅限覆盖区，区域外继续原版湿度过渡；不强制标记温室成立，也不覆盖季节、光照和品质规则。
+- 旧 `SolarDataManager.calculateHumidityModification` 接口必须返回增量，所以服务端/客户端的 `SmartHumidityModificationMixin` 只在覆盖区将其转换成“目标 - 自然湿度”，且提前返回，避免遍历/叠加其他设施；直接读数和作物判定以绝对入口为准。普通节气/CDC设施继续运行，撤销智能覆盖后立即恢复。已移除此前的原版 +1 占位 provider，避免额外伪增量。
+- 每 20 tick 向附近玩家同步变化后的设备中心/目标条目，协议为 9；客户端变化清除节气 `GrowthInfoClientCache`，避免旧警告长期滞留。未测量实际 tick/FPS。
+- 实现：`content/humidity/SmartHumidityRegulator*.java`、`mixin/eclipticseason/SmartHumidity*.java`、`network/{SyncHumidityRoomsPacket,ClientHumidityRoomCache}.java`；翻译由 `data/lang/*LangHandler.java` 生成。
+- 画师入口为 `models/block/smart_humidity_regulator/{block,item,cog}.json` 和 `textures/block/smart_humidity_regulator/README.md`；高炉占位主体、物品和旋转齿轮可独立替换。
+- 验证：18 项服务端 GameTest，覆盖全部 729 坐标/六面边界、无有效温室仍覆盖、持续供电维持目标、交叠最大值/独立耗水/停机及拆除回退、真实湿度 API、±100 其他设施增量及不同基础值干扰、纯潮湿作物及检测仪参数、全五档读数、沃土青柠、后台线程、壁挂原版时序、端口/GUI/齿轮。测试入口为 `src/test/humidity-regression.gradle`；客户端粒子与整包显示仍需实际游戏复测。
+
 This file records implemented CDC features: what exists, how it behaves, where it lives, and its current status.
 
 | Area | Visible or runtime behavior | Implementation outline | Main locations | Related notes | Status |

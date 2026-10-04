@@ -1,0 +1,11 @@
+// Optional userdev dependencies whose client lambda validation prevents dedicated-server startup.
+// Apply only to the isolated regression launch:
+// gradle runGameTestServer --no-daemon -I src/test/humidity-regression.gradle
+gradle.beforeProject { project ->
+    project.configurations.configureEach {
+        if (name == 'runtimeClasspath' || name == 'testRuntimeClasspath') {
+            exclude group: 'curse.maven', module: 'lightmans-currency-472521'
+            exclude group: 'curse.maven', module: 'jadens-nether-expansion-1111833'
+        }
+    }
+}
