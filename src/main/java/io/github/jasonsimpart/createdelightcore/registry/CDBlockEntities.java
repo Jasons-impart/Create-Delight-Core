@@ -2,6 +2,9 @@ package io.github.jasonsimpart.createdelightcore.registry;
 
 import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineBlockEntity;
 import io.github.jasonsimpart.createdelightcore.content.humidity.HumidityMachineRenderer;
+import io.github.jasonsimpart.createdelightcore.content.humidity.SmartHumidityRegulatorBlockEntity;
+import io.github.jasonsimpart.createdelightcore.content.humidity.SmartHumidityRegulatorRenderer;
+import com.simibubi.create.content.kinetics.base.SingleAxisRotatingVisual;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import io.github.jasonsimpart.createdelightcore.content.order.board.OrderBoardBlockEntity;
@@ -13,6 +16,12 @@ import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityH
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 
 public class CDBlockEntities {
+    public static final BlockEntityEntry<SmartHumidityRegulatorBlockEntity> SMART_HUMIDITY_REGULATOR =
+            REGISTRATE.blockEntity("smart_humidity_regulator", SmartHumidityRegulatorBlockEntity::new)
+                    .visual(() -> SingleAxisRotatingVisual.of(SmartHumidityRegulatorRenderer.COG))
+                    .validBlock(CDBlocks.SMART_HUMIDITY_REGULATOR)
+                    .renderer(() -> SmartHumidityRegulatorRenderer::new)
+                    .register();
     public static final BlockEntityEntry<HumidityMachineBlockEntity> HUMIDITY_MACHINE =
             REGISTRATE.blockEntity("humidity_machine", HumidityMachineBlockEntity::new)
                     .validBlocks(CDBlocks.SPRINKLER, CDBlocks.DRYER)

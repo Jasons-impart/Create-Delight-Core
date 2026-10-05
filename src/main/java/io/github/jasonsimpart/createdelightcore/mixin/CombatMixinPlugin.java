@@ -37,6 +37,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".eclipticseason.SmartHumidity")) {
+            return decide(mixinClassName, "eclipticseasons");
+        }
         if (mixinClassName.contains(".alexsmobs.")) {
             return decide(mixinClassName, "alexsmobs");
         }

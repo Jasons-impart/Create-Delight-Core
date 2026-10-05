@@ -30,6 +30,17 @@ public class EnglishLangHandler {
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
         replace(provider, "block.createdelightcore.sprinkler", "Sprinkler");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator", "Smart Humidity Regulator");
+        replace(provider, "createdelightcore.humidity.regulator.target", "Target humidity");
+        replace(provider, "createdelightcore.humidity.regulator.humidity", "Humidity");
+        replace(provider, "createdelightcore.humidity.regulator.operation", "Right-click the lower center of any side to set humidity. Connect gears from the sides; stress impact: 16 x RPM.");
+        replace(provider, "createdelightcore.humidity.regulator.water", "Water enters from above; capacity: 1000 mB. Requires water and rotational power; consumes 5 mB per tick.");
+        replace(provider, "createdelightcore.humidity.regulator.priority", "Overrides humidity in a 9 x 9 x 9 area centered on the device. Overlaps use the highest target; each device operates independently.");
+        replace(provider, "createdelightcore.humidity.level.arid", "Arid");
+        replace(provider, "createdelightcore.humidity.level.dry", "Dry");
+        replace(provider, "createdelightcore.humidity.level.average", "Average");
+        replace(provider, "createdelightcore.humidity.level.moist", "Moist");
+        replace(provider, "createdelightcore.humidity.level.humid", "Humid");
         replace(provider, "block.createdelightcore.dryer", "Dehumidifier");
         replace(provider, "createdelightcore.humidity.sprinkler", "Consumes 500 mB water per 100 ticks to raise humidity by 1; capacity: 1000 mB.");
         replace(provider, "createdelightcore.humidity.sprinkler_range", "Affects a radius of 4 around the first non-air block within 10 blocks below.");

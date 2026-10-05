@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "createdelightcore:block/smart_humidity_regulator/block"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 {
   "values": [
+    "createdelightcore:smart_humidity_regulator",
     "createdelightcore:sprinkler",
     "createdelightcore:dryer",
     "createdelightcore:tin_ore",
