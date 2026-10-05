@@ -7,10 +7,13 @@ import com.jesz.createdieselgenerators.content.bulk_fermenter.BulkFermentingReci
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform.Sided;
+import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringRenderer;
 import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import dev.engine_room.flywheel.lib.transform.TransformStack;
 import io.github.jasonsimpart.createdelightcore.compat.createdieselgenerators.BulkFermenterFilteringAccess;
+import io.github.jasonsimpart.createdelightcore.compat.createdieselgenerators.BulkFermenterPartialModels;
 import net.createmod.catnip.data.Iterate;
 import net.createmod.catnip.render.CachedBuffers;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -18,7 +21,9 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -32,6 +37,7 @@ public abstract class BulkFermenterRendererMixin extends SafeBlockEntityRenderer
     )
     private void createdelightcore$renderNarrowGauge(BulkFermenterBlockEntity be, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay, CallbackInfo ci) {
         ci.cancel();
+        createdelightcore$renderFilterHolders(be, ms, buffer, light);
         if (!be.isController()) {
             FilteringRenderer.renderOnBlockEntity(be, partialTicks, ms, buffer, light, overlay);
             return;
@@ -85,5 +91,41 @@ public abstract class BulkFermenterRendererMixin extends SafeBlockEntityRenderer
 
         ms.popPose();
         FilteringRenderer.renderOnBlockEntity(be, partialTicks, ms, buffer, light, overlay);
+    }
+
+    @Unique
+    private void createdelightcore$renderFilterHolders(BulkFermenterBlockEntity be, PoseStack ms, MultiBufferSource buffer, int light) {
+        BulkFermenterFilteringAccess access = (BulkFermenterFilteringAccess) be;
+        FilteringBehaviour filtering = access.createdelightcore$getFilter();
+        if (filtering == null || !filtering.isActive() || !(filtering.getSlotPositioning() instanceof Sided slot)) {
+            return;
+        }
+
+        BlockState state = be.getBlockState();
+        VertexConsumer builder = buffer.getBuffer(RenderType.cutout());
+        Direction previousSide = slot.getSide();
+        try {
+            for (Direction direction : Iterate.directions) {
+                if (!access.createdelightcore$isFilterSideDisplayed(direction)) {
+                    continue;
+                }
+                slot.fromSide(direction);
+                if (!slot.shouldRender(be.getLevel(), be.getBlockPos(), state)) {
+                    continue;
+                }
+
+                Vec3 location = slot.getLocalOffset(be.getLevel(), be.getBlockPos(), state);
+                ms.pushPose();
+                ms.translate(location.x, location.y, location.z);
+                slot.rotate(be.getLevel(), be.getBlockPos(), state, ms);
+                CachedBuffers.partial(BulkFermenterPartialModels.FILTER_HOLDER, state)
+                        .translate(-.5f, -.5f, -.5f)
+                        .light(light)
+                        .renderInto(ms, builder);
+                ms.popPose();
+            }
+        } finally {
+            slot.fromSide(previousSide);
+        }
     }
 }

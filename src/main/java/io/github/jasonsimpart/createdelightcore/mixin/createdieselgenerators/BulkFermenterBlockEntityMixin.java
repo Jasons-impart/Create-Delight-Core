@@ -87,6 +87,11 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
     }
 
     @Override
+    public boolean createdelightcore$isFilterSideDisplayed(Direction direction) {
+        return createdelightcore$isFilterSideDisplayed((BulkFermenterBlockEntity) (Object) this, direction);
+    }
+
+    @Override
     public BulkFermentingRecipe createdelightcore$getCurrentRecipe() {
         return currentRecipe;
     }
@@ -223,6 +228,23 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
         }
 
         @Override
+        public Vec3 getLocalOffset(LevelAccessor level, BlockPos pos, BlockState state) {
+            BulkFermenterBlockEntity controllerBE = blockEntity.getControllerBE();
+            int height = controllerBE == null ? blockEntity.getHeight() : controllerBE.getHeight();
+            if (height != 1 || getSide() != Direction.UP) {
+                return super.getLocalOffset(level, pos, state);
+            }
+
+            BlockPos controller = blockEntity.getController();
+            if (controller == null) {
+                return null;
+            }
+            int width = controllerBE == null ? blockEntity.getWidth() : controllerBE.getWidth();
+            BlockPos local = blockEntity.getBlockPos().subtract(controller);
+            return new Vec3(width / 2.0D - local.getX(), 17.05D / 16.0D, width / 2.0D - local.getZ());
+        }
+
+        @Override
         protected Vec3 getSouthLocation() {
             BulkFermenterBlockEntity controllerBE = blockEntity.getControllerBE();
             int width = controllerBE == null ? blockEntity.getWidth() : controllerBE.getWidth();
@@ -235,19 +257,18 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
                     default -> 8.0D;
                 };
             }
-            return VecHelper.voxelSpace(sideCenter, 15.5D, 16.05D);
+            return VecHelper.voxelSpace(sideCenter, 15.5D, 17.05D);
         }
 
         @Override
         protected boolean isSideActive(BlockState state, Direction direction) {
-            return direction.getAxis().isHorizontal()
-                    && createdelightcore$isFilterSideInteractable(blockEntity, direction);
+            return createdelightcore$isFilterSideInteractable(blockEntity, direction);
         }
 
         @Override
         public boolean testHit(LevelAccessor level, BlockPos pos, BlockState state, Vec3 localHit) {
             Direction previousSide = getSide();
-            for (Direction direction : Direction.Plane.HORIZONTAL) {
+            for (Direction direction : Direction.values()) {
                 if (!createdelightcore$isFilterSideInteractable(blockEntity, direction)) {
                     continue;
                 }
@@ -264,7 +285,7 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
 
     @Unique
     private static boolean createdelightcore$hasDisplayedFilterSide(BulkFermenterBlockEntity blockEntity) {
-        for (Direction direction : Direction.Plane.HORIZONTAL) {
+        for (Direction direction : Direction.values()) {
             if (createdelightcore$isFilterSideDisplayed(blockEntity, direction)) {
                 return true;
             }
@@ -280,9 +301,6 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
 
     @Unique
     private static boolean createdelightcore$isFilterSideProxy(BulkFermenterBlockEntity blockEntity, Direction direction) {
-        if (!direction.getAxis().isHorizontal()) {
-            return false;
-        }
         BlockPos controller = blockEntity.getController();
         if (controller == null) {
             return false;
@@ -290,6 +308,7 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
 
         BulkFermenterBlockEntity controllerBE = blockEntity.getControllerBE();
         int width = controllerBE == null ? blockEntity.getWidth() : controllerBE.getWidth();
+        int height = controllerBE == null ? blockEntity.getHeight() : controllerBE.getHeight();
         if (width % 2 != 0) {
             return false;
         }
@@ -299,6 +318,13 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
             return false;
         }
         int otherCenter = width / 2;
+        if (height == 1) {
+            int center = otherCenter - 1;
+            return direction == Direction.UP
+                    && (local.getX() == center || local.getX() == otherCenter)
+                    && (local.getZ() == center || local.getZ() == otherCenter)
+                    && (local.getX() != center || local.getZ() != center);
+        }
         return switch (direction) {
             case NORTH -> local.getX() == otherCenter && local.getZ() == 0;
             case SOUTH -> local.getX() == otherCenter && local.getZ() == width - 1;
@@ -310,9 +336,6 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
 
     @Unique
     private static boolean createdelightcore$isFilterSideDisplayed(BulkFermenterBlockEntity blockEntity, Direction direction) {
-        if (!direction.getAxis().isHorizontal()) {
-            return false;
-        }
         BlockPos controller = blockEntity.getController();
         if (controller == null) {
             return false;
@@ -320,11 +343,15 @@ public abstract class BulkFermenterBlockEntityMixin implements BulkFermenterFilt
 
         BulkFermenterBlockEntity controllerBE = blockEntity.getControllerBE();
         int width = controllerBE == null ? blockEntity.getWidth() : controllerBE.getWidth();
+        int height = controllerBE == null ? blockEntity.getHeight() : controllerBE.getHeight();
         BlockPos local = blockEntity.getBlockPos().subtract(controller);
         if (local.getY() != 0) {
             return false;
         }
         int center = (width - 1) / 2;
+        if (height == 1) {
+            return direction == Direction.UP && local.getX() == center && local.getZ() == center;
+        }
         return switch (direction) {
             case NORTH -> local.getX() == center && local.getZ() == 0;
             case SOUTH -> local.getX() == center && local.getZ() == width - 1;

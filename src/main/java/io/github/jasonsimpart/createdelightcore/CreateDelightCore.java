@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore;
 
 import com.mojang.logging.LogUtils;
+import io.github.jasonsimpart.createdelightcore.compat.createdieselgenerators.BulkFermenterPartialModels;
 import io.github.jasonsimpart.createdelightcore.compat.createenchantmentindustry.TetraScrollPrinterCompat;
 import io.github.jasonsimpart.createdelightcore.compat.ftbranks.FTBRanksCompat;
 import io.github.jasonsimpart.createdelightcore.compat.ftbranks.SponsorRewardHandler;
@@ -16,6 +17,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -33,6 +35,9 @@ public class CreateDelightCore {
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        if (ModList.get().isLoaded("createdieselgenerators")) {
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> BulkFermenterPartialModels::init);
+        }
         CDNetwork.register();
         MinecraftForge.EVENT_BUS.register(ItemEntityEvent.class);
         MinecraftForge.EVENT_BUS.register(ForgeEventsHandler.class);
