@@ -33,9 +33,11 @@ public class EnglishLangHandler {
         replace(provider, "block.createdelightcore.smart_humidity_regulator", "Smart Humidity Regulator");
         replace(provider, "createdelightcore.humidity.regulator.target", "Target humidity");
         replace(provider, "createdelightcore.humidity.regulator.humidity", "Humidity");
-        replace(provider, "createdelightcore.humidity.regulator.operation", "Right-click the lower center of any side to set humidity. Connect gears from the sides; stress impact: 16 x RPM.");
-        replace(provider, "createdelightcore.humidity.regulator.water", "Water enters from above; capacity: 1000 mB. Requires water and rotational power; consumes 5 mB per tick.");
-        replace(provider, "createdelightcore.humidity.regulator.priority", "Overrides humidity in a 9 x 9 x 9 area centered on the device. Overlaps use the highest target; each device operates independently.");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator.tooltip.summary", "Sets humidity in a _9 x 9 x 9_ area centered on the device. Overlapping devices use the _highest target humidity_.");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator.tooltip.condition1", "When powered and supplied with water");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator.tooltip.behaviour1", "Requires an absolute speed _at least 16 RPM_. Connect gears from the sides and supply water from above. Holds _1000 mB_ and consumes _5 mB per tick_ while working. Each device operates independently.");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator.tooltip.condition2", "When right-clicking the bottom center");
+        replace(provider, "block.createdelightcore.smart_humidity_regulator.tooltip.behaviour2", "Opens the humidity setting bar. Select the desired humidity level.");
         replace(provider, "createdelightcore.humidity.level.arid", "Arid");
         replace(provider, "createdelightcore.humidity.level.dry", "Dry");
         replace(provider, "createdelightcore.humidity.level.average", "Average");
@@ -44,7 +46,7 @@ public class EnglishLangHandler {
         replace(provider, "block.createdelightcore.dryer", "Dehumidifier");
         replace(provider, "createdelightcore.humidity.sprinkler", "Consumes 500 mB water per 100 ticks to raise humidity by 1; capacity: 1000 mB.");
         replace(provider, "createdelightcore.humidity.sprinkler_range", "Affects a radius of 4 around the first non-air block within 10 blocks below.");
-        replace(provider, "createdelightcore.humidity.dryer", "Connect power above or below. Reduces humidity by 1 at an absolute speed greater than 8 RPM.");
+        replace(provider, "createdelightcore.humidity.dryer", "Connect power above or below. Reduces humidity by 1 at an absolute speed at least 16 RPM.");
         replace(provider, "createdelightcore.humidity.dryer_range", "Affects a radius of 4 around the machine; stress impact: 1.");
         replace(provider, "itemGroup.createdelightcore.coin", "Coins & Items");
         replace(provider, "item.createdelightcore.iron_coin", "§7Iron Coin");

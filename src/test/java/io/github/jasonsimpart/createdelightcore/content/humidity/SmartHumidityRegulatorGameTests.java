@@ -426,7 +426,7 @@ public class SmartHumidityRegulatorGameTests {
             var hit = new BlockHitResult(Vec3.atCenterOf(helper.absolutePos(MACHINE)), Direction.NORTH,
                     helper.absolutePos(MACHINE), false);
             var board = machine.targetHumidity.createBoard(player, hit);
-            helper.assertTrue(board.rows().size() == 1 && board.maxValue() == 120 && board.milestoneInterval() == 30,
+            helper.assertTrue(board.rows().size() == 1 && board.maxValue() == 64 && board.milestoneInterval() == 16,
                     "The GUI must contain one row with all five humidity levels");
             machine.targetHumidity.setValue(4);
             var saved = machine.saveWithFullMetadata();
@@ -489,7 +489,7 @@ public class SmartHumidityRegulatorGameTests {
 
 
     @GameTest(template = "humidity_regulator_empty", timeoutTicks = 60)
-    public static void fourLowerHotspotsAndCompressorCog(GameTestHelper helper) {
+    public static void singleBottomHotspotAndCompressorCog(GameTestHelper helper) {
         greenhouse(helper);
         helper.runAfterDelay(2, () -> {
             var player = helper.makeMockPlayer();
@@ -504,14 +504,14 @@ public class SmartHumidityRegulatorGameTests {
                 helper.assertTrue(block.getRotationAxis(state) == Direction.Axis.Y,
                     "The compressor-style side cog must rotate about Y for every block orientation");
                 for (Direction face : Direction.values()) {
-                    Vec3 center = new Vec3(.5, face.getAxis().isHorizontal() ? 3 / 16D : .5, .5)
+                    Vec3 center = new Vec3(.5, .5, .5)
                         .add(Vec3.atLowerCornerOf(face.getNormal()).scale(.5));
                     transform.fromSide(face);
-                    helper.assertTrue(transform.testHit(helper.getLevel(), pos, state, center) == face.getAxis().isHorizontal(),
-                        "All four vertical faces must expose a lower setting hotspot, but top/bottom must not");
+                    helper.assertTrue(transform.testHit(helper.getLevel(), pos, state, center) == (face == Direction.DOWN),
+                        "Only the bottom center must expose the setting hotspot");
                     Vec3 faceCenter = new Vec3(.5, .5, .5).add(Vec3.atLowerCornerOf(face.getNormal()).scale(.5));
-                    helper.assertTrue(!transform.testHit(helper.getLevel(), pos, state, faceCenter),
-                        "Ordinary face-center clicks must not open the lower setting hotspot");
+                    helper.assertTrue(transform.testHit(helper.getLevel(), pos, state, faceCenter) == (face == Direction.DOWN),
+                        "Only bottom face-center clicks may open the setting hotspot");
                     Vec3 corner = switch (face.getAxis()) {
                         case X -> new Vec3(center.x, .9, .9);
                         case Y -> new Vec3(.9, center.y, .9);
@@ -524,13 +524,13 @@ public class SmartHumidityRegulatorGameTests {
                 }
                 for (int humidity = 0; humidity < 5; humidity++) {
                     smart.targetHumidity.setValueSettings(player,
-                        new com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBehaviour.ValueSettings(0, humidity * 30), false);
+                        new com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBehaviour.ValueSettings(0, humidity * SmartHumidityRegulatorBlockEntity.GUI_LEVEL_SPACING), false);
                     helper.assertTrue(smart.getTargetHumidity() == humidity
-                        && smart.targetHumidity.getValueSettings().value() == humidity * 30,
+                        && smart.targetHumidity.getValueSettings().value() == humidity * SmartHumidityRegulatorBlockEntity.GUI_LEVEL_SPACING,
                         "The widened GUI must map its five milestones to exactly the five humidity levels");
                 }
                 smart.targetHumidity.setValueSettings(player,
-                    new com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBehaviour.ValueSettings(0, 44), false);
+                    new com.simibubi.create.foundation.blockEntity.behaviour.ValueSettingsBehaviour.ValueSettings(0, 23), false);
                 helper.assertTrue(smart.getTargetHumidity() == 1, "Intermediate bar positions must select the nearest level");
             }
             helper.succeed();
@@ -707,6 +707,28 @@ public class SmartHumidityRegulatorGameTests {
             smart.setSpeed(0); smart.tick();
             helper.assertTrue(manager.calculateHumidityModification(pos) == -100,
                     "Stopping the smart device must restore the other facility's unchanged modifier");
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 60)
+    public static void minimumSpeedIsSixteenRpm(GameTestHelper helper) {
+        greenhouse(helper);
+        helper.runAfterDelay(2, () -> {
+            var smart = machine(helper);
+            inlet(smart).fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.EXECUTE);
+            for (int speed : new int[]{15, 16, -15, -16, 0}) {
+                int before = inlet(smart).getFluidInTank(0).getAmount();
+                smart.setSpeed(speed);
+                smart.tick();
+                boolean active = Math.abs(speed) >= 16;
+                helper.assertTrue((smart.getOperatingMode() != 0) == active,
+                        "Regulator must require an absolute speed of at least 16 RPM");
+                helper.assertTrue(inlet(smart).getFluidInTank(0).getAmount() == before - (active ? 5 : 0),
+                        "Below-threshold devices must not consume water");
+                helper.assertTrue((SmartHumidityRegulatorSeasonCompat.target(helper.getLevel(), smart.getBlockPos()) != null) == active,
+                        "Below-threshold devices must not override humidity");
+            }
             helper.succeed();
         });
     }

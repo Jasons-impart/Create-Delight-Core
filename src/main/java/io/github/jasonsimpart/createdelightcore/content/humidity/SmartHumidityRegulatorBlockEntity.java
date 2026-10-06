@@ -35,7 +35,7 @@ import java.util.List;
 public class SmartHumidityRegulatorBlockEntity extends KineticBlockEntity {
     public static final int WATER_PER_TICK = 5;
     public static final int LEVEL_COUNT = 5;
-    public static final int GUI_LEVEL_SPACING = 30;
+    public static final int GUI_LEVEL_SPACING = 16;
     private final FluidTank tank = new FluidTank(1000, fluid -> fluid.getFluid() == Fluids.WATER) {
         @Override protected void onContentsChanged() { notifyUpdate(); }
     };
@@ -111,7 +111,7 @@ public class SmartHumidityRegulatorBlockEntity extends KineticBlockEntity {
     public void tick() {
         super.tick();
         if (!(level instanceof ServerLevel server) || !ModList.get().isLoaded("eclipticseasons")) return;
-        operatingMode = getSpeed() != 0 && !isOverStressed() && hasWater() ? 2 : 0;
+        operatingMode = Math.abs(getSpeed()) >= 16 && !isOverStressed() && hasWater() ? 2 : 0;
         if (operatingMode != 0) tank.drain(WATER_PER_TICK, IFluidHandler.FluidAction.EXECUTE);
         SmartHumidityRegulatorSeasonCompat.update(server, this, operatingMode != 0);
         if (operatingMode != 0) {
@@ -163,8 +163,23 @@ public class SmartHumidityRegulatorBlockEntity extends KineticBlockEntity {
     }
 
     private static class HumidityValueBox extends ValueBoxTransform.Sided {
-        @Override protected Vec3 getSouthLocation() { return new Vec3(.5, 3 / 16D, 15.5 / 16D); }
-        @Override protected boolean isSideActive(BlockState state, Direction side) { return side.getAxis().isHorizontal(); }
+        @Override protected Vec3 getSouthLocation() { return new Vec3(.5, .5, 1); }
+        @Override protected boolean isSideActive(BlockState state, Direction side) { return side == Direction.DOWN; }
+
+        @Override
+        public void rotate(net.minecraft.world.level.LevelAccessor level, BlockPos pos, BlockState state,
+                           com.mojang.blaze3d.vertex.PoseStack poseStack) {
+            if (getSide() == Direction.DOWN)
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                        () -> () -> SmartHumidityRegulatorClient.rotateBottomLabel(poseStack));
+            super.rotate(level, pos, state, poseStack);
+            // Create's TextValueBox leaves its fitted text centered at (1.5, 2.25)
+            // in font coordinates. Compensate in the rotated plane before scaling.
+            if (getSide() == Direction.DOWN) {
+                double fontScale = getScale() * getFontScale();
+                poseStack.translate(1.5 * fontScale, 2.25 * fontScale, 0);
+            }
+        }
 
     }
 }

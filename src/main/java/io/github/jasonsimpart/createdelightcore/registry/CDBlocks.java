@@ -68,11 +68,15 @@ public class CDBlocks {
             REGISTRATE.block("smart_humidity_regulator", SmartHumidityRegulatorBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)
                     .properties(properties -> properties.strength(3.0F, 6.0F).noOcclusion())
+                    .onRegister(block -> com.simibubi.create.api.stress.BlockStressValues.IMPACTS.register(block, () -> 16D))
                     .blockstate((context, provider) -> provider.simpleBlock(context.get(),
                             provider.models().getExistingFile(provider.modLoc("block/smart_humidity_regulator/block"))))
                     .loot((provider, block) -> provider.dropSelf(block))
                     .tag(BlockTags.MINEABLE_WITH_PICKAXE)
                     .item()
+                    .onRegister(item -> net.minecraftforge.fml.DistExecutor.unsafeRunWhenOn(
+                            net.minecraftforge.api.distmarker.Dist.CLIENT,
+                            () -> () -> io.github.jasonsimpart.createdelightcore.content.humidity.SmartHumidityRegulatorClient.registerTooltip(item)))
                     .model((context, provider) -> provider.withExistingParent(context.getName(),
                             provider.modLoc("block/smart_humidity_regulator/item")))
                     .tab(CDCreativeTabs.MISC.getKey())
