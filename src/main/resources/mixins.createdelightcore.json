@@ -65,6 +65,7 @@
     "farmersdelight.BuddingTomatoBlockMixin",
     "farmersdelight.MushroomColonyBlockMixin",
     "farmersdelight.TomatoVineBlockMixin",
+    "farmersrespite.TeaBushBlockMixin",
     "festival_delicacies.ModCreativeModeTabsMixin",
     "festival_delicacies.FruitingCropBlockQualityMixin",
     "festival_delicacies.ServerCookingTypeButtonPacketMixin",

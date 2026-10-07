@@ -39,6 +39,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".farmersrespite.")) {
+            return decide(mixinClassName, "farmersrespite") && decide(mixinClassName, "youkaishomecoming");
+        }
         if (mixinClassName.contains(EXTENDED_AE_MIXIN)) {
             return decideExtendedAe(mixinClassName);
         }

@@ -288,6 +288,10 @@ dependencies {
     compileOnly fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
     // Load the optional integration only in the regression-test runtime, not the published mod.
     testImplementation fg.deobf("curse.maven:ecliptic-seasons-1118306:8267149")
+    // Compile the optional harvest mixin; load the real crop mods only in the GameTest runtime.
+    compileOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
+    testRuntimeOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
+    testRuntimeOnly fg.deobf("curse.maven:youkais-homecoming-957437:8004757")
     // quality foods
     implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 
