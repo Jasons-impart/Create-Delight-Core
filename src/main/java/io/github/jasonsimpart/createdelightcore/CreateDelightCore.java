@@ -13,6 +13,8 @@ import io.github.jasonsimpart.createdelightcore.network.CDNetwork;
 import io.github.jasonsimpart.createdelightcore.registry.*;
 import io.github.jasonsimpart.createdelightcore.server.ItemEntityEvent;
 import io.github.jasonsimpart.createdelightcore.util.FancyMenuAssetExporter;
+import io.github.jasonsimpart.createdelightcore.util.ExtendedAePackageInitialization;
+import io.github.jasonsimpart.createdelightcore.util.ExtendedAeConfigurationRecovery;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,6 +26,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
 import org.slf4j.Logger;
 import plus.dragons.createcentralkitchen.dragonLibLegacy.init.SafeRegistrate;
 
@@ -35,6 +38,7 @@ public class CreateDelightCore {
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(this::verifyExtendedAeInitialization);
         if (ModList.get().isLoaded("createdieselgenerators")) {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> BulkFermenterPartialModels::init);
         }
@@ -68,6 +72,20 @@ public class CreateDelightCore {
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, CDConfig.SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, CDConfig.SERVER_SPEC);
+    }
+
+    private void verifyExtendedAeInitialization(FMLLoadCompleteEvent event) {
+        ModList.get().getModContainerById("expatternprovider")
+                .filter(mod -> ExtendedAePackageInitialization.SUPPORTED_VERSION
+                        .equals(mod.getModInfo().getVersion().toString()))
+                .ifPresent(mod -> {
+                    event.enqueueWork(() -> {
+                        ExtendedAePackageInitialization.STARTUP.recoverConfigurationIfMissing(
+                                ExtendedAeConfigurationRecovery::loadRegisteredConfig);
+                        ExtendedAePackageInitialization.STARTUP.verifyComplete();
+                        LOGGER.info("[CDCore][ExtendedAE] Packing tape whitelist initialized after config load");
+                    });
+                });
     }
 
     public static ResourceLocation id(String path) {

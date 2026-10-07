@@ -1,5 +1,6 @@
 package io.github.jasonsimpart.createdelightcore.mixin;
 
+import io.github.jasonsimpart.createdelightcore.util.ExtendedAePackageInitialization;
 import net.minecraftforge.fml.loading.LoadingModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +26,7 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String BUTCHERCRAFT_MIXIN = ".butchercraft.";
     private static final String MBD2_MIXIN = ".mbd2.";
     private static final String FLUIDLOGISTICS_MIXIN = ".fluidlogistics.";
+    private static final String EXTENDED_AE_MIXIN = ".extendedae.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -37,6 +39,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(EXTENDED_AE_MIXIN)) {
+            return decideExtendedAe(mixinClassName);
+        }
         if (mixinClassName.contains(".eclipticseason.SmartHumidity")) {
             return decide(mixinClassName, "eclipticseasons");
         }
@@ -88,12 +93,30 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         return loaded;
     }
 
+    private static boolean decideExtendedAe(String mixinClassName) {
+        LoadingModList modList = loadingModList();
+        String version = modList == null ? null : modList.getMods().stream()
+                .filter(mod -> "expatternprovider".equals(mod.getModId()))
+                .map(mod -> mod.getVersion().toString())
+                .findFirst().orElse(null);
+        boolean enabled = ExtendedAePackageInitialization.SUPPORTED_VERSION.equals(version);
+        LOGGER.info("{} ExtendedAE mixin {} (installed version {}, supported version {})",
+                enabled ? "Applying" : "Skipping", mixinClassName, version == null ? "absent" : version,
+                ExtendedAePackageInitialization.SUPPORTED_VERSION);
+        return enabled;
+    }
+
     private static boolean isLoaded(String modId) {
+        LoadingModList modList = loadingModList();
+        return modList != null && modList.getModFileById(modId) != null;
+    }
+
+    private static LoadingModList loadingModList() {
         LoadingModList modList = FMLLoader.getLoadingModList();
         if (modList == null) {
             modList = LoadingModList.get();
         }
-        return modList != null && modList.getModFileById(modId) != null;
+        return modList;
     }
 
     @Override
@@ -111,6 +134,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
+        if (mixinClassName.contains(EXTENDED_AE_MIXIN)) {
+            LOGGER.info("[CDCore][ExtendedAE] Applied {} to {}", mixinClassName, targetClassName);
+        }
         if (mixinClassName.endsWith(".alexsmobs.WarpedToadPredationDamageMixin")) {
             LOGGER.info("[CDCore][PredationDamage] Applied crimson-mosquito predation damage 10000 in {}", targetClassName);
         }
