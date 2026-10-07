@@ -461,3 +461,15 @@ publishing {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
+
+tasks.register('extendedAeStartupTest', JavaExec) {
+    group = 'verification'
+    description = 'Tests ExtendedAE startup event ordering without starting Minecraft.'
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'io.github.jasonsimpart.createdelightcore.util.ExtendedAePackageInitializationTest'
+}
+
+tasks.named('check').configure {
+    dependsOn tasks.named('extendedAeStartupTest')
+}
