@@ -10,6 +10,7 @@ import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinRecipe;
 import de.cadentem.quality_food.config.QualityConfig;
+import de.cadentem.quality_food.config.ServerConfig;
 import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import java.util.List;
@@ -17,6 +18,8 @@ import java.util.List;
 import de.cadentem.quality_food.util.Utils;
 import io.github.jasonsimpart.createdelightcore.content.recipe.BerrySyrupFluidMixingRecipe;
 import io.github.jasonsimpart.createdelightcore.content.util.QualityFoodUtil;
+import io.github.jasonsimpart.createdelightcore.content.util.StorageRecipeQuality;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -28,6 +31,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import java.util.ArrayList;
 
 @Mixin(
         value = {BasinRecipe.class},
@@ -65,8 +69,12 @@ public abstract class BasinRecipeMixin {
                     by = 2
             )
     )
-    private static ItemStack quality_food$storeInput(ItemStack stack, @Local Ingredient ingredient, @Share("count") LocalIntRef count, @Share("weight") LocalDoubleRef weight) {
+    private static ItemStack quality_food$storeInput(ItemStack stack, @Local Ingredient ingredient,
+            @Share("count") LocalIntRef count, @Share("weight") LocalDoubleRef weight,
+            @Share("storageInputs") LocalRef<List<ItemStack>> inputs) {
         if (Utils.isValidItem(stack) && ingredient.test(stack)) {
+            if (inputs.get() == null) inputs.set(new ArrayList<>());
+            inputs.get().add(stack.copyWithCount(1));
             count.set(count.get() + 1);
             weight.set(weight.get() + QualityConfig.getWeight(QualityUtils.getQuality(stack)));
         }
@@ -81,7 +89,20 @@ public abstract class BasinRecipeMixin {
             ),
             index = 0
     )
-    private static List<ItemStack> quality_food$applyQuality(List<ItemStack> stacks, @Share("count") LocalIntRef count, @Share("weight") LocalDoubleRef weight) {
+    private static List<ItemStack> quality_food$applyQuality(List<ItemStack> stacks,
+            @Share("count") LocalIntRef count, @Share("weight") LocalDoubleRef weight,
+            @Share("storageInputs") LocalRef<List<ItemStack>> inputs,
+            @Local(argsOnly = true) Recipe<?> recipe, @Local(argsOnly = true) BasinBlockEntity basin) {
+        List<ItemStack> consumed = inputs.get();
+        inputs.set(null); // Separate Create's simulation pass and each subsequent batch.
+        if (StorageRecipeQuality.isConversion(recipe, basin.getLevel())) {
+            SimpleContainer snapshot = new SimpleContainer(consumed == null ? new ItemStack[0]
+                    : consumed.toArray(ItemStack[]::new));
+            return stacks.stream().map(stack -> StorageRecipeQuality.convert(stack, snapshot,
+                    recipe, basin.getLevel())).collect(java.util.stream.Collectors.toCollection(ArrayList::new));
+        }
+        if (StorageRecipeQuality.isExplicitlyExcluded(recipe)) return stacks;
+        if (ServerConfig.isNoQualityRecipe(recipe, basin.getLevel())) return stacks;
         stacks.forEach((stack) -> QualityFoodUtil.applyQuality(stack, count.get(), weight.get(), null));
         return stacks;
     }

@@ -77,6 +77,28 @@ description='''${mod_description}'''
     ordering="AFTER"
     side="BOTH"
 
+# Storage quality compatibility uses Quality Food 2.4.3's conversion policy.
+[[dependencies.${mod_id}]]
+    modId="quality_food"
+    mandatory=true
+    versionRange="[2.4.3,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="quark"
+    mandatory=false
+    versionRange="[4.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="vintageimprovements"
+    mandatory=false
+    versionRange="[0.3.7.8,)"
+    ordering="AFTER"
+    side="BOTH"
+
 [[dependencies.${mod_id}]]
     modId="create_enchantment_industry"
     mandatory=false
