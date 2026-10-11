@@ -7,11 +7,11 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.tags.TagEntry;
 import net.minecraft.tags.TagLoader;
 import net.minecraftforge.fml.ModList;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.lang.reflect.Method;
@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @Mixin(TagLoader.class)
 public abstract class OEITagMirrorMixin {
@@ -27,14 +28,19 @@ public abstract class OEITagMirrorMixin {
     private static final String REPLACEMENT_LOADER = "com.mafuyu404.oneenoughitem.util.MixinUtils$ReplacementLoader";
     private static final String OEI_CONFIG = "com.mafuyu404.oneenoughitem.init.config.OEIConfig";
 
-    @Shadow
-    @Final
-    private String directory;
+    @Unique
+    private String createdelightcore$tagDirectory;
+
+    @Inject(method = "<init>(Ljava/util/function/Function;Ljava/lang/String;)V", at = @At("RETURN"))
+    private void createdelightcore$captureTagDirectory(Function<?, ?> idToValue, String directory, CallbackInfo ci) {
+        // Constructor arguments keep the same descriptor in development and reobfuscated jars.
+        this.createdelightcore$tagDirectory = directory;
+    }
 
     @Inject(method = "load(Lnet/minecraft/server/packs/resources/ResourceManager;)Ljava/util/Map;", at = @At("RETURN"))
     private void createdelightcore$mirrorOeiItemTags(ResourceManager resourceManager,
                                                       CallbackInfoReturnable<Map<ResourceLocation, List<TagLoader.EntryWithSource>>> cir) {
-        if (!ITEMS_TAG_DIR.equals(this.directory) || !isOeiDeeperReplaceEnabled()) {
+        if (!ITEMS_TAG_DIR.equals(this.createdelightcore$tagDirectory) || !isOeiDeeperReplaceEnabled()) {
             return;
         }
 
