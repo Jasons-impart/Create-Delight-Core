@@ -91,7 +91,13 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
             return decide(mixinClassName, "mbd2");
         }
         if (mixinClassName.contains(FLUIDLOGISTICS_MIXIN)) {
-            return decide(mixinClassName, "fluidlogistics");
+            boolean applied = decide(mixinClassName, "fluidlogistics");
+            // 铜工作盆品质补丁直接调用 Quality Food Fluids 的 BasinRecipeQualityContext，
+            // 缺少该模组时不能应用，否则会 NoClassDefFoundError。
+            if (applied && mixinClassName.contains("CopperBasinQualityMixin")) {
+                applied = decide(mixinClassName, "quality_food_fluids");
+            }
+            return applied;
         }
         return true;
     }
