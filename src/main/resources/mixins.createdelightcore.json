@@ -137,7 +137,8 @@
     "trailandtalesdelight.BuddingLanternFruitBlockMixin",
     "trueuuid.SkinRefreshHandlerMixin",
     "trader_fresh.RestockEventHandlerMixin",
-    "waystones.WaystoneButtonMixin"
+    "waystones.WaystoneButtonMixin",
+    "fluidlogistics.CopperBasinQualityMixin"
   ],
   "client": [
     "eclipticseason.SmartHumidityClientModificationMixin",
