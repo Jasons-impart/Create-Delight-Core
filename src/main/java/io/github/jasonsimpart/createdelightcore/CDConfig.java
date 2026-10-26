@@ -13,39 +13,49 @@ public class CDConfig
 {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     private static final ForgeConfigSpec.BooleanValue DISABLE_DROP_REPORT = BUILDER
-            .comment("Whether to enable the drop report")
+            .comment("Whether to disable the periodic dropped-item report.")
+            .translation("createdelightcore.config.disableDropReport")
             .define("disableDropReport", false);
 
     private static final ForgeConfigSpec.IntValue ITEM_THRESHOLD = BUILDER
             .comment("Threshold for drop reporting.")
+            .translation("createdelightcore.config.itemThreshold")
             .defineInRange("itemThreshold", 100, 0, Integer.MAX_VALUE);
     private static final ForgeConfigSpec.BooleanValue IGNORE_STACK_COUNT = BUILDER
             .comment("If this option is enabled, the drop report will be counted by a single drop entity, not by the number of items in it")
+            .translation("createdelightcore.config.ignoreStackCount")
             .define("ignoreStackCount", false);
     private static final ForgeConfigSpec.ConfigValue<String> MONEY_CAIN = BUILDER
             .comment("Money Chain used for money calculating")
+            .translation("createdelightcore.config.moneyChain")
             .define("moneyChain", "main");
     private static final ForgeConfigSpec.BooleanValue USE_MONEY_TELEPORT = BUILDER
             .comment("Whether to use money for teleporting")
+            .translation("createdelightcore.config.useMoneyTeleport")
             .define("useMoneyTeleport", true);
     private static final ForgeConfigSpec.IntValue TELEPORT_COST = BUILDER
             .comment("Coin used for waystone teleporting per unit.")
             .comment("It's the base value of the chain.")
+            .translation("createdelightcore.config.teleportCost")
             .defineInRange("teleportCost", 45, 1, Integer.MAX_VALUE);
 
     private static final ForgeConfigSpec.DoubleValue LUNA_SOIL_BOOST_CHANCE = BUILDER
             .comment("The chance for luna soil to boost crops grows.")
+            .translation("createdelightcore.config.lunaSoilBoostChance")
             .defineInRange("lunaSoilBoostChance", 0.5, 0, 1);
     private static final ForgeConfigSpec.BooleanValue LOG_MORE_MOD_TETRA_INDEPENDENT_DAMAGE_MULTIPLIERS = BUILDER
             .comment("Whether to log More Mod Tetra independent damage multipliers.")
             .comment("Useful for debugging MMT damage stacking; logs only when MMT reports at least one independent multiplier.")
+            .translation("createdelightcore.config.logMoreModTetraIndependentDamageMultipliers")
             .define("logMoreModTetraIndependentDamageMultipliers", false);
     private static final ForgeConfigSpec.BooleanValue ENABLE_ADDITIVE_MULTICRIT = BUILDER
             .comment("Backport the newer Apothic Attributes additive multicrit formula when Apothic Attributes is installed.")
+            .translation("createdelightcore.config.enableAdditiveMulticrit")
             .define("enableAdditiveMulticrit", true);
     private static final ForgeConfigSpec.BooleanValue ECHOING_STRIKES_USE_ORIGINAL_DAMAGE = BUILDER
             .comment("Make Iron's Spells Echoing Strikes record the LivingHurtEvent amount captured at event construction.")
             .comment("This prevents event-based damage multipliers from being sampled once by the hit and again by the echo.")
+            .translation("createdelightcore.config.echoingStrikesUseOriginalDamage")
             .define("echoingStrikesUseOriginalDamage", true);
     private static final ForgeConfigSpec.BooleanValue SHOW_DIFFICULTY_HUD = BUILDER
             .comment("Show the difficulty HUD on the left side of the screen. Changes take effect immediately.")
@@ -59,19 +69,23 @@ public class CDConfig
             .comment("Carving and noise cave generation will be restricted to this many blocks below the surface.")
             .comment("Set to 0 to disable this feature.")
             .comment("default: 16")
+            .translation("createdelightcore.config.surfaceDepthLimit")
             .defineInRange("surfaceDepthLimit", 16, 0, 256);
     private static final ForgeConfigSpec.ConfigValue<List<? extends String>> BELT_GRINDER_BLOCKED_SANDPAPER_RECIPES = SERVER_BUILDER
             .comment("Sandpaper polishing recipe IDs to block from the Belt Grinder.")
             .comment("Example: [\"createdelight:sandpaper_polishing/rose_quartz\"]")
+            .translation("createdelightcore.config.beltGrinderBlockedSandpaperRecipes")
             .defineList("beltGrinderBlockedSandpaperRecipes",
                     List.of("createdelight:sandpaper_polishing/rose_quartz"),
                     obj -> obj instanceof String);
     private static final ForgeConfigSpec.BooleanValue ENABLE_OPEN_ENDED_PIPE_LAVA_DRAIN_FIX = SERVER_BUILDER
             .comment("Whether Create open-ended pipes should safely drain lavalogged source blocks, such as Quark grates with lava.")
             .comment("Disable this only if a pack intentionally wants Create's original lava-draining behavior.")
+            .translation("createdelightcore.config.enableOpenEndedPipeLavaDrainFix")
             .define("enableOpenEndedPipeLavaDrainFix", true);
     private static final ForgeConfigSpec.BooleanValue ENABLE_SPONSOR_TITLES = SERVER_BUILDER
             .comment("Whether to enable sponsor titles, medals, and background synchronization of the built-in or remote sponsor list.")
+            .translation("createdelightcore.config.enableSponsorTitles")
             .define("enableSponsorTitles", true);
     static final ForgeConfigSpec SERVER_SPEC = SERVER_BUILDER.build();
 
