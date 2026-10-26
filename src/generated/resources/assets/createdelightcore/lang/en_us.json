@@ -70,6 +70,8 @@
   "block.createdelightcore.walnut_leaves": "Walnut Leaves",
   "block.createdelightcore.walnut_sapling": "Walnut Sapling",
   "config.jade.plugin_balm.jade": "Jade",
+  "createdelightcore.config.showDifficultyHud": "Show Difficulty HUD",
+  "createdelightcore.config.showDifficultyHud.tooltip": "Show the difficulty name and progress bar on the left side of the screen. Takes effect immediately after saving and does not change difficulty.",
   "createdelightcore.direction.down": "Down",
   "createdelightcore.direction.east": "East",
   "createdelightcore.direction.north": "North",

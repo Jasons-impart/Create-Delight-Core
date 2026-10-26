@@ -29,6 +29,8 @@ public class EnglishLangHandler {
     }
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "createdelightcore.config.showDifficultyHud", "Show Difficulty HUD");
+        replace(provider, "createdelightcore.config.showDifficultyHud.tooltip", "Show the difficulty name and progress bar on the left side of the screen. Takes effect immediately after saving and does not change difficulty.");
         replace(provider, "block.createdelightcore.sprinkler", "Sprinkler");
         replace(provider, "block.createdelightcore.smart_humidity_regulator", "Smart Humidity Regulator");
         replace(provider, "createdelightcore.humidity.regulator.target", "Target humidity");

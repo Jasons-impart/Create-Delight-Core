@@ -38,6 +38,8 @@ public class ChineseLangHandler {
     }
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "createdelightcore.config.showDifficultyHud", "显示难度 HUD");
+        replace(provider, "createdelightcore.config.showDifficultyHud.tooltip", "显示屏幕左侧的难度名称和进度条。保存后立即生效，不影响实际难度。");
         replace(provider, "block.createdelightcore.sprinkler", "加湿器");
         replace(provider, "block.createdelightcore.smart_humidity_regulator", "智能湿度调节器");
         replace(provider, "createdelightcore.humidity.regulator.target", "目标湿润度");

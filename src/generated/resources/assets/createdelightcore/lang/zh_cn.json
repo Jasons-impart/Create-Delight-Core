@@ -70,6 +70,8 @@
   "block.createdelightcore.walnut_leaves": "核桃树叶",
   "block.createdelightcore.walnut_sapling": "核桃树苗",
   "config.jade.plugin_balm.jade": "Jade",
+  "createdelightcore.config.showDifficultyHud": "显示难度 HUD",
+  "createdelightcore.config.showDifficultyHud.tooltip": "显示屏幕左侧的难度名称和进度条。保存后立即生效，不影响实际难度。",
   "createdelightcore.direction.down": "下",
   "createdelightcore.direction.east": "东",
   "createdelightcore.direction.north": "北",

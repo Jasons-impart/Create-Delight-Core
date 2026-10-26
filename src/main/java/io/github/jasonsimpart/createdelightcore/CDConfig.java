@@ -47,6 +47,10 @@ public class CDConfig
             .comment("Make Iron's Spells Echoing Strikes record the LivingHurtEvent amount captured at event construction.")
             .comment("This prevents event-based damage multipliers from being sampled once by the hit and again by the echo.")
             .define("echoingStrikesUseOriginalDamage", true);
+    private static final ForgeConfigSpec.BooleanValue SHOW_DIFFICULTY_HUD = BUILDER
+            .comment("Show the difficulty HUD on the left side of the screen. Changes take effect immediately.")
+            .translation("createdelightcore.config.showDifficultyHud")
+            .define("showDifficultyHud", true);
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -86,6 +90,10 @@ public class CDConfig
     public static List<String> beltGrinderBlockedSandpaperRecipes = new ArrayList<>();
     public static boolean enableOpenEndedPipeLavaDrainFix = true;
     public static boolean enableSponsorTitles = true;
+
+    public static boolean isDifficultyHudVisible() {
+        return SHOW_DIFFICULTY_HUD.get();
+    }
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
