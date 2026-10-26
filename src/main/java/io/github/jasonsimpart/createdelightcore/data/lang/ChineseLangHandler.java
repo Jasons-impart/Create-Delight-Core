@@ -38,6 +38,36 @@ public class ChineseLangHandler {
     }
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "createdelightcore.config.disableDropReport", "禁用掉落物报告");
+        replace(provider, "createdelightcore.config.disableDropReport.tooltip", "关闭每 5 分钟一次的掉落物数量报告；不删除或清理掉落物。");
+        replace(provider, "createdelightcore.config.itemThreshold", "掉落物报告阈值");
+        replace(provider, "createdelightcore.config.itemThreshold.tooltip", "维度或区块内的掉落物计数大于此值时才发送报告。计数方式由“掉落物报告按实体计数”决定。");
+        replace(provider, "createdelightcore.config.ignoreStackCount", "掉落物报告按实体计数");
+        replace(provider, "createdelightcore.config.ignoreStackCount.tooltip", "开启后，每个掉落物实体计为 1；关闭后，按其中的物品数量计数。");
+        replace(provider, "createdelightcore.config.moneyChain", "货币计算所用的货币链");
+        replace(provider, "createdelightcore.config.moneyChain.tooltip", "用于金额换算和传送计费的 Lightman's Currency 货币链标识，默认是 main。");
+        replace(provider, "createdelightcore.config.useMoneyTeleport", "传送使用货币付费");
+        replace(provider, "createdelightcore.config.useMoneyTeleport.tooltip", "使用货币代替 Waystones 的经验等级费用；关闭后使用原本的付费方式。");
+        replace(provider, "createdelightcore.config.teleportCost", "传送每级经验费用对应的基础币数量");
+        replace(provider, "createdelightcore.config.teleportCost.tooltip", "传送费用为此值乘以 Waystones 原本的经验等级费用，按所选货币链的基础币支付。");
+        replace(provider, "createdelightcore.config.lunaSoilBoostChance", "月壤促进作物生长概率");
+        replace(provider, "createdelightcore.config.lunaSoilBoostChance.tooltip", "月壤或月壤耕地湿度充足时促进作物生长的概率。范围为 0 到 1，设为 0 可禁用。");
+        replace(provider, "createdelightcore.config.logMoreModTetraIndependentDamageMultipliers", "记录 MMT 独立伤害倍率");
+        replace(provider, "createdelightcore.config.logMoreModTetraIndependentDamageMultipliers.tooltip", "启用后，在 More Mod Tetra 存在独立伤害倍率时输出调试日志。");
+        replace(provider, "createdelightcore.config.enableAdditiveMulticrit", "启用加法式多重暴击公式");
+        replace(provider, "createdelightcore.config.enableAdditiveMulticrit.tooltip", "安装 Apothic Attributes 时使用加法式多重暴击伤害公式；关闭后保留模组原有公式。");
+        replace(provider, "createdelightcore.config.echoingStrikesUseOriginalDamage", "回响打击使用初始伤害");
+        replace(provider, "createdelightcore.config.echoingStrikesUseOriginalDamage.tooltip", "回响打击按本次攻击的初始伤害计算，避免伤害倍率被重复叠加。");
+        replace(provider, "createdelightcore.config.surfaceDepthLimit", "地表下方洞穴生成限制深度");
+        replace(provider, "createdelightcore.config.surfaceDepthLimit.tooltip", "限制主世界地表下方指定深度内的噪声洞穴和洞穴雕刻。单位为方块，设为 0 可取消限制，仅影响新生成的区块。");
+        replace(provider, "createdelightcore.config.beltGrinderBlockedSandpaperRecipes", "砂带磨床禁用的抛光配方");
+        replace(provider, "createdelightcore.config.beltGrinderBlockedSandpaperRecipes.tooltip", "砂带磨床不会处理列表中的砂纸抛光配方。填写完整配方标识，例如 createdelight:sandpaper_polishing/rose_quartz。");
+        replace(provider, "createdelightcore.config.enableOpenEndedPipeLavaDrainFix", "开放式管道安全抽取岩浆");
+        replace(provider, "createdelightcore.config.enableOpenEndedPipeLavaDrainFix.tooltip", "使开放式管道安全抽取含岩浆的源方块，例如夸克的含岩浆栅格；关闭后采用机械动力原有的抽取行为。");
+        replace(provider, "createdelightcore.config.enableSponsorTitles", "启用赞助者称号、勋章及名单同步");
+        replace(provider, "createdelightcore.config.enableSponsorTitles.tooltip", "启用赞助者称号、赞助勋章及内置或远程赞助名单的后台同步。");
+        replace(provider, "createdelightcore.config.showDifficultyHud", "显示难度 HUD");
+        replace(provider, "createdelightcore.config.showDifficultyHud.tooltip", "显示屏幕左侧的难度名称和进度条。保存后立即生效，不影响实际难度。");
         replace(provider, "block.createdelightcore.sprinkler", "加湿器");
         replace(provider, "block.createdelightcore.smart_humidity_regulator", "智能湿度调节器");
         replace(provider, "createdelightcore.humidity.regulator.target", "目标湿润度");
