@@ -29,6 +29,36 @@ public class EnglishLangHandler {
     }
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "createdelightcore.config.disableDropReport", "Disable Dropped-item Reports");
+        replace(provider, "createdelightcore.config.disableDropReport.tooltip", "Disable the dropped-item count report sent every 5 minutes. Does not remove or clear dropped items.");
+        replace(provider, "createdelightcore.config.itemThreshold", "Dropped-item Report Threshold");
+        replace(provider, "createdelightcore.config.itemThreshold.tooltip", "Report a dimension or chunk only when its dropped-item count exceeds this value. The counting mode is controlled by Count Dropped-item Entities.");
+        replace(provider, "createdelightcore.config.ignoreStackCount", "Count Dropped-item Entities");
+        replace(provider, "createdelightcore.config.ignoreStackCount.tooltip", "Count each dropped-item entity as 1 when enabled. Otherwise, count the number of items in its stack.");
+        replace(provider, "createdelightcore.config.moneyChain", "Currency Chain");
+        replace(provider, "createdelightcore.config.moneyChain.tooltip", "Lightman's Currency chain identifier used for amount conversion and teleport charges. Defaults to main.");
+        replace(provider, "createdelightcore.config.useMoneyTeleport", "Pay for Teleportation with Currency");
+        replace(provider, "createdelightcore.config.useMoneyTeleport.tooltip", "Replace Waystones experience-level costs with currency. Disable to use its original payment method.");
+        replace(provider, "createdelightcore.config.teleportCost", "Base Coins per Teleport XP Level");
+        replace(provider, "createdelightcore.config.teleportCost.tooltip", "Multiply this value by the original Waystones experience-level cost. Pay the result in base coins from the selected currency chain.");
+        replace(provider, "createdelightcore.config.lunaSoilBoostChance", "Lunar Soil Growth Boost Chance");
+        replace(provider, "createdelightcore.config.lunaSoilBoostChance.tooltip", "Chance for lunar soil or lunar farmland to boost crops when fully hydrated. Ranges from 0 to 1; set to 0 to disable.");
+        replace(provider, "createdelightcore.config.logMoreModTetraIndependentDamageMultipliers", "Log MMT Independent Damage Multipliers");
+        replace(provider, "createdelightcore.config.logMoreModTetraIndependentDamageMultipliers.tooltip", "Log independent damage multipliers for debugging when More Mod Tetra reports at least one.");
+        replace(provider, "createdelightcore.config.enableAdditiveMulticrit", "Use Additive Multicrit");
+        replace(provider, "createdelightcore.config.enableAdditiveMulticrit.tooltip", "Use the additive multicrit damage formula when Apothic Attributes is installed. Disable to keep its original formula.");
+        replace(provider, "createdelightcore.config.echoingStrikesUseOriginalDamage", "Echoing Strikes Uses Initial Damage");
+        replace(provider, "createdelightcore.config.echoingStrikesUseOriginalDamage.tooltip", "Calculate Echoing Strikes from the initial damage of the hit to avoid applying damage multipliers more than once.");
+        replace(provider, "createdelightcore.config.surfaceDepthLimit", "Cave Generation Depth below Surface");
+        replace(provider, "createdelightcore.config.surfaceDepthLimit.tooltip", "Restrict noise caves and carving within this many blocks below the Overworld surface. Set to 0 to remove the limit. Only affects newly generated chunks.");
+        replace(provider, "createdelightcore.config.beltGrinderBlockedSandpaperRecipes", "Blocked Belt Grinder Polishing Recipes");
+        replace(provider, "createdelightcore.config.beltGrinderBlockedSandpaperRecipes.tooltip", "Prevent the Belt Grinder from processing the listed sandpaper polishing recipes. Use full recipe IDs, such as createdelight:sandpaper_polishing/rose_quartz.");
+        replace(provider, "createdelightcore.config.enableOpenEndedPipeLavaDrainFix", "Safe Open-ended Pipe Lava Draining");
+        replace(provider, "createdelightcore.config.enableOpenEndedPipeLavaDrainFix.tooltip", "Safely drain lavalogged source blocks, such as Quark grates, with Create open-ended pipes. Disable to use Create's original draining behavior.");
+        replace(provider, "createdelightcore.config.enableSponsorTitles", "Enable Sponsor Titles, Medals and List Sync");
+        replace(provider, "createdelightcore.config.enableSponsorTitles.tooltip", "Enable sponsor titles, medals, and background synchronization of the built-in or remote sponsor list.");
+        replace(provider, "createdelightcore.config.showDifficultyHud", "Show Difficulty HUD");
+        replace(provider, "createdelightcore.config.showDifficultyHud.tooltip", "Show the difficulty name and progress bar on the left side of the screen. Takes effect immediately after saving and does not change difficulty.");
         replace(provider, "block.createdelightcore.sprinkler", "Sprinkler");
         replace(provider, "block.createdelightcore.smart_humidity_regulator", "Smart Humidity Regulator");
         replace(provider, "createdelightcore.humidity.regulator.target", "Target humidity");
