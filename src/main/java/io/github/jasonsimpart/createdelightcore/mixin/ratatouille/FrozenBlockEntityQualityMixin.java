@@ -25,7 +25,8 @@ public abstract class FrozenBlockEntityQualityMixin {
             method = "tick",
             at = @At(
                     value = "INVOKE_ASSIGN",
-                    target = "Lorg/forsteri/ratatouille/content/frozen_block/FreezingRecipe;getResultItem(Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;"
+                    target = "Lorg/forsteri/ratatouille/content/frozen_block/FreezingRecipe;getResultItem(Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;",
+                    remap = true
             )
     )
     private static ItemStack createdelightcore$copyFreezeResultTemplate(ItemStack result) {
