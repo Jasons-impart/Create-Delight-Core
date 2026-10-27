@@ -98,7 +98,12 @@ public final class TetraScrollPrinterCompat {
             result.setCount(1);
             return result;
         }
-
+        
+        @Override
+        public void onFinished(Level level, BlockPos pos, PrinterBlockEntity printer) {
+            // Plays the printer completion sound through the normal CEI printer flow.
+        }
+        
         @Override
         public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
             tooltip.add(Component.translatable("create_enchantment_industry.gui.goggles.printing")
