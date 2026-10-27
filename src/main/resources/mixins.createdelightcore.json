@@ -123,6 +123,7 @@
     "quality_food.QualityFoodMixin",
     "quality_food.SweetBerryBushDropDataMixin",
     "ratatouille.BakeDataMixin",
+    "ratatouille.FrozenBlockEntityQualityMixin",
     "ratatouille.SqueezeBasinBlockEntityMixin",
     "ratatouille.SqueezingRecipeMixin",
     "ratatouille.ThresherBlockEntityMixin",
