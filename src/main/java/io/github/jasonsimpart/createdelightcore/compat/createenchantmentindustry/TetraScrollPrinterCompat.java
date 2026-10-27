@@ -30,8 +30,9 @@ public final class TetraScrollPrinterCompat {
     private static final DeferredRegister<PrintingBehaviourProvider> PRINTING_BEHAVIOURS =
             DeferredRegister.create(CEIRegistries.PRINTING_BEHAVIOUR_PROVIDER, "create_enchantment_industry");
     private static final ResourceLocation SCROLL_ID = ResourceLocation.fromNamespaceAndPath("tetra", "scroll_rolled");
-    private static final ResourceLocation INK_ID = ResourceLocation.fromNamespaceAndPath("create_enchantment_industry", "ink");
-    private static final int INK_COST = 250;
+    private static final String DYE_NAMESPACE = "create_dragons_plus";
+    private static final String DYE_SUFFIX = "_dye";
+    private static final int DYE_COST = 250;
 
     private TetraScrollPrinterCompat() {
     }
@@ -69,6 +70,14 @@ public final class TetraScrollPrinterCompat {
                     && blockEntityTag.contains("data", Tag.TAG_LIST)
                     && !blockEntityTag.getList("data", Tag.TAG_COMPOUND).isEmpty();
         }
+        /**判断输入流体是否为Create: Dragons Plus 的任意一种染料*/
+        private static boolean isCdpDyeFluid(Fluid fluid) {
+            ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid);
+            if (id == null) {
+                return false;
+            }
+            return DYE_NAMESPACE.equals(id.getNamespace()) && id.getPath().endsWith(DYE_SUFFIX);
+        }
 
         @Override
         public int getRequiredItemCount(Level level, ItemStack stack) {
@@ -77,8 +86,7 @@ public final class TetraScrollPrinterCompat {
 
         @Override
         public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-            Fluid ink = ForgeRegistries.FLUIDS.getValue(INK_ID);
-            return stack.is(Items.PAPER) && ink != null && fluidStack.getFluid() == ink ? INK_COST : 0;
+            return stack.is(Items.PAPER) && isCdpDyeFluid(fluidStack.getFluid()) ? DYE_COST : 0;
         }
 
         @Override
@@ -92,18 +100,13 @@ public final class TetraScrollPrinterCompat {
         }
 
         @Override
-        public void onFinished(Level level, BlockPos pos, PrinterBlockEntity printer) {
-            // Plays the printer completion sound through the normal CEI printer flow.
-        }
-
-        @Override
         public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
             tooltip.add(Component.translatable("create_enchantment_industry.gui.goggles.printing")
                     .withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.translatable(
-                    "create_enchantment_industry.gui.goggles.ink_consumption",
-                    INK_COST
-            ).withStyle(ChatFormatting.GREEN));
+                            "create_enchantment_industry.gui.goggles.printing.cost",
+                            Component.literal(DYE_COST + " mB"))
+                    .withStyle(ChatFormatting.GREEN));
             return true;
         }
     }
