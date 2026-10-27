@@ -1,11 +1,7 @@
-package com.ueperae.scrollrollfix;
-
-import java.util.List;
-import java.util.Optional;
+package io.github.jasonsimpart.createdelightcore.compat.createenchantmentindustry;
 
 import com.mojang.serialization.DataResult;
 import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -19,46 +15,32 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-
+import net.minecraftforge.registries.DeferredRegister;
 import plus.dragons.createenchantmentindustry.api.registry.CEIRegistries;
 import plus.dragons.createenchantmentindustry.common.fluids.printer.PrinterBlockEntity;
 import plus.dragons.createenchantmentindustry.common.fluids.printer.behaviour.PrintingBehaviour;
 import plus.dragons.createenchantmentindustry.common.fluids.printer.behaviour.PrintingBehaviourProvider;
 
-@Mod(ScrollRollFix.MOD_ID)
-public final class ScrollRollFix {
-    public static final String MOD_ID = "scrollrollfix";
+import java.util.List;
+import java.util.Optional;
 
+/** Adds Tetra's data-bearing rolled scrolls to Create: Enchantment Industry's printer. */
+public final class TetraScrollPrinterCompat {
     private static final DeferredRegister<PrintingBehaviourProvider> PRINTING_BEHAVIOURS =
-            DeferredRegister.create(CEIRegistries.PRINTING_BEHAVIOUR_PROVIDER, MOD_ID);
+            DeferredRegister.create(CEIRegistries.PRINTING_BEHAVIOUR_PROVIDER, "create_enchantment_industry");
     private static final ResourceLocation SCROLL_ID = ResourceLocation.fromNamespaceAndPath("tetra", "scroll_rolled");
-    private static final String DYE_NAMESPACE = "create_dragons_plus";
-    private static final String DYE_SUFFIX = "_dye";
-    private static final int FLUID_COST = 250;
-    private static final int PRIORITY = PrintingBehaviourProvider.DEFAULT_PRIORITY + 1;
+    private static final String DYE_FLUID_SUFFIX = "_dye";
+    private static final int DYE_COST = 250;
 
-    public ScrollRollFix() {
-        final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        PRINTING_BEHAVIOURS.register("tetra_scroll_dye", () -> new PrintingBehaviourProvider(
-                PRIORITY,
-                TetraScrollPrintingBehaviour::create));
-        PRINTING_BEHAVIOURS.register(modEventBus);
+    private TetraScrollPrinterCompat() {
     }
 
-    private static boolean isDye(FluidStack fluidStack) {
-        if (fluidStack.isEmpty()) {
-            return false;
-        }
-        final Fluid fluid = fluidStack.getFluid();
-        final ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid);
-        if (id == null) {
-            return false;
-        }
-        return DYE_NAMESPACE.equals(id.getNamespace()) && id.getPath().endsWith(DYE_SUFFIX);
+    public static void register(IEventBus modEventBus) {
+        PRINTING_BEHAVIOURS.register("tetra_scroll", () -> new PrintingBehaviourProvider(
+                PrintingBehaviourProvider.DEFAULT_PRIORITY,
+                TetraScrollPrintingBehaviour::create));
+        PRINTING_BEHAVIOURS.register(modEventBus);
     }
 
     private static final class TetraScrollPrintingBehaviour implements PrintingBehaviour {
@@ -77,15 +59,24 @@ public final class ScrollRollFix {
         }
 
         private static boolean isValidScroll(ItemStack stack) {
-            final Item scroll = ForgeRegistries.ITEMS.getValue(SCROLL_ID);
+            Item scroll = ForgeRegistries.ITEMS.getValue(SCROLL_ID);
             if (scroll == null || !stack.is(scroll)) {
                 return false;
             }
 
-            final CompoundTag blockEntityTag = stack.getTagElement("BlockEntityTag");
+            CompoundTag blockEntityTag = stack.getTagElement("BlockEntityTag");
             return blockEntityTag != null
                     && blockEntityTag.contains("data", Tag.TAG_LIST)
                     && !blockEntityTag.getList("data", Tag.TAG_COMPOUND).isEmpty();
+        }
+
+        /*判断给定流体是否为Create:Dragons_Plus的任意一种染料。*/
+        private static boolean isCdpDyeFluid(Fluid fluid) {
+            ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid);
+            if (id == null || !id.getNamespace().equals("create_dragons_plus")) {
+                return false;
+            }
+            return id.getPath().endsWith(DYE_FLUID_SUFFIX);
         }
 
         @Override
@@ -95,7 +86,7 @@ public final class ScrollRollFix {
 
         @Override
         public int getRequiredFluidAmount(Level level, ItemStack stack, FluidStack fluidStack) {
-            return stack.is(Items.PAPER) && isDye(fluidStack) ? FLUID_COST : 0;
+            return stack.is(Items.PAPER) && isCdpDyeFluid(fluidStack.getFluid()) ? DYE_COST : 0;
         }
 
         @Override
@@ -103,13 +94,14 @@ public final class ScrollRollFix {
             if (!stack.is(Items.PAPER)) {
                 return ItemStack.EMPTY;
             }
-            final ItemStack result = template.copy();
+            ItemStack result = template.copy();
             result.setCount(1);
             return result;
         }
 
         @Override
         public void onFinished(Level level, BlockPos pos, PrinterBlockEntity printer) {
+            // Plays the printer completion sound through the normal CEI printer flow.
         }
 
         @Override
@@ -118,9 +110,10 @@ public final class ScrollRollFix {
                     .withStyle(ChatFormatting.BLUE));
             tooltip.add(Component.translatable(
                             "create_enchantment_industry.gui.goggles.printing.cost",
-                            Component.literal(FLUID_COST + " mB"))
+                            Component.literal(DYE_COST + " mB"))
                     .withStyle(ChatFormatting.GREEN));
             return true;
+            /*直接显示成”正在打印“*/
         }
     }
 }
