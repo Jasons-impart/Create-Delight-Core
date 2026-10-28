@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
  * 换新堆叠，丢掉输入品质。鼓风机冷冻走 Create RecipeApplier（Quality Food 已覆盖）；
  * 本 mixin 只修方块实体 tick 路径。
  * {@code getResultItem} 返回共享配方模板，必须先 {@code copy()} 再 setCount / 写品质。
+ * {@code @ModifyVariable(ordinal = 1)} 对准 LVT {@code newStack}（slot 17）；0 是输入 {@code itemStack}。
  * 类级 {@code remap=false}（mod 方法名）；{@code ItemEntity#setItem} 的 {@code @At} 用
  * {@code remap=true} 以写入生产映射 {@code m_32045_}。
  */
@@ -27,7 +28,8 @@ public abstract class FrozenBlockEntityQualityMixin {
                     value = "INVOKE_ASSIGN",
                     target = "Lorg/forsteri/ratatouille/content/frozen_block/FreezingRecipe;getResultItem(Lnet/minecraft/core/RegistryAccess;)Lnet/minecraft/world/item/ItemStack;",
                     remap = true
-            )
+            ),
+            ordinal = 1 // newStack (output); 0 = itemStack (input)
     )
     private static ItemStack createdelightcore$copyFreezeResultTemplate(ItemStack result) {
         return result == null || result.isEmpty() ? result : result.copy();
