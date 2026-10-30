@@ -64,6 +64,32 @@ import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeBloc
 import static io.github.jasonsimpart.createdelightcore.registry.CDTags.forgeItemTag;
 
 public class CDBlocks {
+    public static final BlockEntry<io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerBlock> SNOWMAN_COOLER =
+            REGISTRATE.block("snowman_cooler", io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerBlock::new)
+                    .initialProperties(com.simibubi.create.foundation.data.SharedProperties::softMetal)
+                    .properties(properties -> properties.noOcclusion())
+                    .addLayer(() -> RenderType::cutoutMipped)
+                    .blockstate((context, provider) -> {})
+                    .loot((provider, block) -> provider.dropSelf(block))
+                    .tag(BlockTags.MINEABLE_WITH_PICKAXE, com.simibubi.create.AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+                    .onRegister(com.simibubi.create.api.behaviour.movement.MovementBehaviour.movementBehaviour(
+                            new io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerMovementBehaviour()))
+                    .item()
+                    .model((context, provider) -> provider.withExistingParent(context.getName(), provider.modLoc("block/snowman_cooler/block_with_blaze")))
+                    .tab(CDCreativeTabs.MISC.getKey())
+                    .build().register();
+    public static final BlockEntry<io.github.jasonsimpart.createdelightcore.content.cooler.EmptySnowmanCoolerBlock> EMPTY_SNOWMAN_COOLER =
+            REGISTRATE.block("empty_snowman_cooler", io.github.jasonsimpart.createdelightcore.content.cooler.EmptySnowmanCoolerBlock::new)
+            .initialProperties(com.simibubi.create.foundation.data.SharedProperties::softMetal)
+            .properties(properties -> properties.noOcclusion())
+            .addLayer(() -> RenderType::cutoutMipped)
+            .blockstate((context, provider) -> {})
+            .loot((provider, block) -> provider.dropSelf(block))
+            .tag(BlockTags.MINEABLE_WITH_PICKAXE, com.simibubi.create.AllTags.AllBlockTags.FAN_TRANSPARENT.tag)
+            .item(io.github.jasonsimpart.createdelightcore.content.cooler.EmptyCoolerBlockItem::new)
+            .model((context, provider) -> provider.withExistingParent(context.getName(), provider.modLoc("block/snowman_cooler/block")))
+            .tab(CDCreativeTabs.MISC.getKey())
+            .build().register();
     public static final BlockEntry<SmartHumidityRegulatorBlock> SMART_HUMIDITY_REGULATOR =
             REGISTRATE.block("smart_humidity_regulator", SmartHumidityRegulatorBlock::new)
                     .initialProperties(() -> Blocks.IRON_BLOCK)

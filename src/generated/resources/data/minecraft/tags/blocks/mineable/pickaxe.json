@@ -1,5 +1,7 @@
 {
   "values": [
+    "createdelightcore:snowman_cooler",
+    "createdelightcore:empty_snowman_cooler",
     "createdelightcore:smart_humidity_regulator",
     "createdelightcore:sprinkler",
     "createdelightcore:dryer",
