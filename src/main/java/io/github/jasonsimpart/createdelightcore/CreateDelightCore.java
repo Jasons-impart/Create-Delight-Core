@@ -38,6 +38,8 @@ public class CreateDelightCore {
 
     public CreateDelightCore() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
+                () -> io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerModels::init);
         modEventBus.addListener(this::verifyExtendedAeInitialization);
         if (ModList.get().isLoaded("createdieselgenerators")) {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> BulkFermenterPartialModels::init);
@@ -61,6 +63,7 @@ public class CreateDelightCore {
         CDFluids.init();
         CDBlocks.init();
         CDBlockEntities.init();
+        CDArmInteractionPointTypes.init();
         CDCreativeTabs.register(modEventBus);
         CDMenus.register(modEventBus);
         CDRecipeTypes.register(modEventBus);

@@ -1,8 +1,10 @@
 package io.github.jasonsimpart.createdelightcore.util;
 
+import io.github.jasonsimpart.createdelightcore.compat.createcybergoggles.CyberGogglesFluidTooltip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.List;
 
@@ -31,5 +33,13 @@ public final class GoggleTooltipStyle {
 
     public static void addLine(List<Component> tooltip, Component line) {
         tooltip.add(Component.literal(indent()).append(line));
+    }
+
+    public static void addFluidLine(List<Component> tooltip, FluidStack fluid, int capacity) {
+        if (CyberGogglesFluidTooltip.add(tooltip, fluid, capacity, DEFAULT_INDENTS - 4)) return;
+        var numberFormat = java.text.NumberFormat.getNumberInstance();
+        addLine(tooltip, fluid.getDisplayName().copy()
+                .append(" " + numberFormat.format(fluid.getAmount()) + "mB / "
+                        + numberFormat.format(capacity) + "mB"));
     }
 }
