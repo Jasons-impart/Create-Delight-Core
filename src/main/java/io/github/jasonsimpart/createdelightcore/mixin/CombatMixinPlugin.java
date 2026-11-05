@@ -27,6 +27,7 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     private static final String MBD2_MIXIN = ".mbd2.";
     private static final String FLUIDLOGISTICS_MIXIN = ".fluidlogistics.";
     private static final String EXTENDED_AE_MIXIN = ".extendedae.";
+    private static final String EXTENDED_AE_PLUS_MIXIN = ".extendedae_plus.";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -47,6 +48,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         }
         if (mixinClassName.contains(".farmersrespite.")) {
             return decide(mixinClassName, "farmersrespite") && decide(mixinClassName, "youkaishomecoming");
+        }
+        if (mixinClassName.contains(EXTENDED_AE_PLUS_MIXIN)) {
+            return decide(mixinClassName, "extendedae_plus");
         }
         if (mixinClassName.contains(EXTENDED_AE_MIXIN)) {
             return decideExtendedAe(mixinClassName);
@@ -151,6 +155,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
     public void postApply(String targetClassName, ClassNode targetClass, String mixinClassName, IMixinInfo mixinInfo) {
         if (mixinClassName.contains(EXTENDED_AE_MIXIN)) {
             LOGGER.info("[CDCore][ExtendedAE] Applied {} to {}", mixinClassName, targetClassName);
+        }
+        if (mixinClassName.contains(EXTENDED_AE_PLUS_MIXIN)) {
+            LOGGER.info("[CDCore][ExtendedAEPlus] Applied {} to {}", mixinClassName, targetClassName);
         }
         if (mixinClassName.endsWith(".alexsmobs.WarpedToadPredationDamageMixin")) {
             LOGGER.info("[CDCore][PredationDamage] Applied crimson-mosquito predation damage 10000 in {}", targetClassName);
