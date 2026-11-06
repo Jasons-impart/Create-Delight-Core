@@ -5,6 +5,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.simibubi.create.foundation.recipe.RecipeApplier;
 import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.Level;
@@ -17,9 +18,11 @@ import java.util.List;
 
 /**
  * 机械脱模器通过 {@link RecipeApplier#applyRecipeOn} 出货。Quality Food 的
- * {@code RecipeApplierMixin} 会直接改配方结果栈，上一份金星会留在共享模板上，
- * 下一份铁星/无星就会串品质（蛋糕模具：烤箱后仍是铁星，脱模却变成金星）。
- * 先 {@code copy()}，再按当前输入覆盖品质；无星输入则写成 {@link Quality#NONE}。
+ * {@code RecipeApplierMixin} 会：
+ * 1. 直接改配方共享结果栈（上一份金星会串到下一份）；
+ * 2. 按原料权重再随机掷一次品质（铁星也可能掷出金星）。
+ * {@link QualityUtils#applyQuality(ItemStack, Quality)} 默认不覆盖、不降档已有品质，
+ * 所以必须先去掉结果上的 {@code quality_food} 标签，再写成当前输入的品质。
  */
 @Mixin(value = MechanicalDemolderBlockEntity.class, remap = false)
 public abstract class MechanicalDemolderQualityMixin {
@@ -53,6 +56,13 @@ public abstract class MechanicalDemolderQualityMixin {
                 continue;
             }
             ItemStack stack = output.copy();
+            CompoundTag tag = stack.getTag();
+            if (tag != null) {
+                tag.remove(QualityUtils.QUALITY_TAG);
+                if (tag.isEmpty()) {
+                    stack.setTag(null);
+                }
+            }
             QualityUtils.applyQuality(stack, quality);
             copied.add(stack);
         }
