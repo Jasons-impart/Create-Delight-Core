@@ -57,3 +57,9 @@ CDC 的 `QualityFoodMixin.applyQualityFromIngredientsMixin` 会拦截上述掷�
 5. 需要输入快照时，在扣料或槽位被清空之前 `copy()`。
 6. 新 mixin 登记到 `src/main/resources/mixins.createdelightcore.json`；可选模组用 `CombatMixinPlugin` 按模组 ID 条件加载。
 7. 验证至少覆盖：单一品质连续产出仍是该品质；金星之后再出铁星或无星不串味；若加工分多步，确认品质是在哪一步被改掉的。
+
+## Bakeries 面胚制作台（#2497）
+
+`DoughCraftingRecipe.assemble(Container, RegistryAccess)` 仅复制配方结果，不经 Create RecipeApplier；菜单传入的配方容器只有输入槽 0。`DoughCraftingRecipeQualityMixin` 在 RETURN 复制结果、剥离旧 `quality_food`，再对有效有品质的槽 0 调用集合重载 `applyQuality(output, List.of(input), null)`。沿用品质合成的掷级语义，不保证原星级不变；无品质输入只清标签，不掷级。输入、数量和无关输出 NBT 不变。Mixin 按 Bakeries / Quality Food 是否安装加载，关键注入 `require=1`。
+
+非食物中间态仍须由整合包加入材料白名单，包括生派酥皮、蛋挞壳和生蛋挞；本 mixin 不替整合包注册这些标签。`DoughCraftingQualityGameTests` 覆盖 NONE/IRON/GOLD/DIAMOND、连续有星后无星、共享模板隔离、原料/数量和无关 NBT。完整 GameTest 需启动开发测试服，不能把独立 stub 测试视为游戏内验证。
