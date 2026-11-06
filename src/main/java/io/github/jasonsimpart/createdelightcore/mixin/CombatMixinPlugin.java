@@ -39,6 +39,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.endsWith(".bakeries.DoughCraftingRecipeQualityMixin")) {
+            return decide(mixinClassName, "bakeries") && decide(mixinClassName, "quality_food");
+        }
         if (mixinClassName.contains(".quark.")) {
             return decide(mixinClassName, "quark") && decide(mixinClassName, "quality_food");
         }
