@@ -22,6 +22,7 @@
     "alexscaves.SackOfSatingMixin",
     "bakeries.PizzaFlatbreadBlockMixin",
     "bakeries.PizzaBlockMixin",
+    "bakeries.DoughCraftingRecipeQualityMixin",
     "bakeries.StoneKilnBlockEntityMixin",
     "bakeries.StoneKilnShovelItemMixin",
     "bakeries.SnifferEventMixin",
