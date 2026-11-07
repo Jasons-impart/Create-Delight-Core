@@ -28,6 +28,22 @@ import java.util.List;
 
 @Mixin(value = BasinCategory.class, remap = false)
 public abstract class BasinCategoryMixin {
+    @org.spongepowered.asm.mixin.injection.Redirect(method = "setRecipe", at = @At(value = "INVOKE",
+            target = "Lcom/simibubi/create/content/processing/recipe/HeatCondition;testBlazeBurner(Lcom/simibubi/create/content/processing/burner/BlazeBurnerBlock$HeatLevel;)Z"))
+    private boolean createdelightcore$hideHeatingCatalysts(HeatCondition heat, HeatLevel level) {
+        return io.github.jasonsimpart.createdelightcore.content.cooler.CoolerHeat.isCooling(heat) || heat.testBlazeBurner(level);
+    }
+
+    @Inject(method = "setRecipe", at = @At("TAIL"))
+    private void createdelightcore$coolingCatalysts(IRecipeLayoutBuilder builder, BasinRecipe recipe,
+                                                    IFocusGroup focuses, CallbackInfo ci) {
+        if (!io.github.jasonsimpart.createdelightcore.content.cooler.CoolerHeat.isCooling(recipe.getRequiredHeat())) return;
+        builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 134, 81)
+                .addItemStack(io.github.jasonsimpart.createdelightcore.registry.CDBlocks.SNOWMAN_COOLER.asStack());
+        if (io.github.jasonsimpart.createdelightcore.content.cooler.CoolerHeat.isFreezing(recipe.getRequiredHeat()))
+            builder.addSlot(RecipeIngredientRole.CATALYST, 153, 81)
+                    .addItemStack(io.github.jasonsimpart.createdelightcore.registry.CDItems.FROZEN_CAKE.asStack());
+    }
 
     @Inject(method = "setRecipe", at = @At("HEAD"), cancellable = true)
     private void createdelightcore$setDynamicBerrySyrupRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe,

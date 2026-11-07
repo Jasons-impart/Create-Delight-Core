@@ -1,5 +1,7 @@
 {
   "values": [
+    "createdelightcore:snowman_cooler",
+    "createdelightcore:empty_snowman_cooler",
     "minecraft:powder_snow"
   ]
 }

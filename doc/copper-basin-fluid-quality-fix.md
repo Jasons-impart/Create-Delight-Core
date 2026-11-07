@@ -1,5 +1,7 @@
 # 铜工作盆产出流体品质修复
 
+品质写入总规则见 [Quality Food 品质机制](../docs/dev-knowledge/quality-food.md)。下文保留铜工作盆流体路径的调查。
+
 ## 1. 问题与目标
 
 FluidLogistics 的铜工作盆（Copper Basin）处理「产物为流体」的 Create 搅拌配方时，产物丢失 Quality Food 的品质；Create 原版工作盆不受影响。反馈单 MQSM7F（整合包 v0.5.0.15）。

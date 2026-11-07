@@ -8,6 +8,7 @@ import com.simibubi.create.foundation.gui.AllGuiTextures;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.jei.utils.AnimatedBlazeBurner;
+import io.github.jasonsimpart.createdelightcore.compat.jei.utils.FuelTimeFormatter;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -68,8 +69,10 @@ public class JeiCategoryBlazeBurnerFluid
             double mouseX,
             double mouseY) {
         // 新GUI 参考CC&A https://github.com/mrh0/createaddition
-        guiGraphics.drawString(ClientMinecraftWrapper.getFont(), formatTime(recipe.burnTime()),
-                getBackground().getWidth() / 2 + 48, 86 - 50, 4210752);
+        var font = ClientMinecraftWrapper.getFont();
+        String duration = formatTime(recipe.burnTime());
+        guiGraphics.drawString(font, duration,
+                getBackground().getWidth() - 8 - font.width(duration), 86 - 50, 4210752);
 
         HeatCondition requiredHeat = recipe.isSuperHeated() ? HeatCondition.SUPERHEATED : HeatCondition.HEATED;
 
@@ -91,10 +94,6 @@ public class JeiCategoryBlazeBurnerFluid
     }
 
     public static String formatTime(int ticks) {
-        if (ticks >= 20 * 60)
-            return (ticks / (20 * 60)) + " m";
-        if (ticks >= 20)
-            return (ticks / 20) + " s";
-        return (ticks) + " t";
+        return FuelTimeFormatter.format(ticks);
     }
 }

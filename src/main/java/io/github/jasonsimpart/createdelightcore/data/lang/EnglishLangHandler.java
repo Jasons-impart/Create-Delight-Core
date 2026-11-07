@@ -29,6 +29,20 @@ public class EnglishLangHandler {
     }
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "block.createdelightcore.snowman_cooler", "Snow Golem Cooler");
+        replace(provider, "block.createdelightcore.empty_snowman_cooler", "Empty Snow Golem Cooler");
+        replace(provider, "item.createdelightcore.frozen_cake", "Frozen Cake");
+        replace(provider, "item.createdelightcore.frozen_cake_base", "Frozen Cake Base");
+        replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "Snow Golem Cooler Fluid Coolants");
+        replace(provider, "createdelightcore.cooler.idle", "Idle");
+        replace(provider, "createdelightcore.cooler.fading", "Cooling");
+        replace(provider, "createdelightcore.cooler.cooling", "Cooling");
+        replace(provider, "createdelightcore.cooler.freezing", "Freezing");
+        replace(provider, "createdelightcore.cooler.creative", "Unlimited cooling");
+        replace(provider, "createdelightcore.cooler.remaining", "Remaining: %s s");
+        replace(provider, "create.recipe.heat_requirement.cooled", "Needs cooling");
+        replace(provider, "create.recipe.heat_requirement.frozen", "Needs freezing");
+
         replace(provider, "createdelightcore.config.disableDropReport", "Disable Dropped-item Reports");
         replace(provider, "createdelightcore.config.disableDropReport.tooltip", "Disable the dropped-item count report sent every 5 minutes. Does not remove or clear dropped items.");
         replace(provider, "createdelightcore.config.itemThreshold", "Dropped-item Report Threshold");
@@ -282,7 +296,6 @@ public class EnglishLangHandler {
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "Blaze Burner Fluid Recipe");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "Consumes %smB");
-        provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "Blaze Cooler Fluid Coolants");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "Consumes %smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "Phantom Composting");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "Transforms in outer planet dimensions");

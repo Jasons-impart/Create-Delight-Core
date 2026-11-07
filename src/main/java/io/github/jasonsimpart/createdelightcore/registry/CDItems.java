@@ -29,6 +29,15 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+    public static final ItemEntry<Item> FROZEN_CAKE_BASE = REGISTRATE.item("frozen_cake_base", Item::new)
+            .tag(com.simibubi.create.AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).tab(MISC_TAB).register();
+    public static final ItemEntry<io.github.jasonsimpart.createdelightcore.content.cooler.FrozenCakeItem> FROZEN_CAKE = REGISTRATE.item("frozen_cake", io.github.jasonsimpart.createdelightcore.content.cooler.FrozenCakeItem::new)
+            .properties(properties -> properties.food(new FoodProperties.Builder().nutrition(10).saturationMod(.7f)
+                    .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 2), 1)
+                    .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 600, 2), 1).build()))
+            .tag(com.simibubi.create.AllTags.AllItemTags.UPRIGHT_ON_BELT.tag,
+                    io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerFuelManager.SPECIAL_ITEMS)
+            .tab(MISC_TAB).register();
     // food
     public static final ItemEntry<Item> UNFRIED_SHRIMP = simpleRawFood("unfried_shrimp", 4, 0.3f);
     public static final ItemEntry<Item> UNFRIED_CHICKEN_CHIP = simpleRawFood("unfried_chicken_chip", 2, 0.3f);

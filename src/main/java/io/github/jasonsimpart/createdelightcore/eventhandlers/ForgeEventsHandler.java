@@ -56,6 +56,7 @@ public class ForgeEventsHandler {
 
     @SubscribeEvent
     public static void addReloadListeners(AddReloadListenerEvent event) {
+        event.addListener(io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerFuelManager.INSTANCE);
         event.addListener(OrderDataManager.INSTANCE);
         event.addListener(ConfigurationModuleManager.MODULE_RELOAD_LISTENER);
         event.addListener(ConfigurationModuleManager.MODE_RELOAD_LISTENER);

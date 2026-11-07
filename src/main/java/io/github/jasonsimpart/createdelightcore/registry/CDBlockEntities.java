@@ -16,6 +16,12 @@ import io.github.jasonsimpart.createdelightcore.content.quality.harvest.QualityH
 import static io.github.jasonsimpart.createdelightcore.CreateDelightCore.REGISTRATE;
 
 public class CDBlockEntities {
+    public static final BlockEntityEntry<io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerBlockEntity> SNOWMAN_COOLER =
+            REGISTRATE.blockEntity("snowman_cooler", io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerBlockEntity::new)
+                    .visual(() -> io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerVisual::new, false)
+                    .validBlocks(CDBlocks.SNOWMAN_COOLER)
+                    .renderer(() -> io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerRenderer::new)
+                    .register();
     public static final BlockEntityEntry<SmartHumidityRegulatorBlockEntity> SMART_HUMIDITY_REGULATOR =
             REGISTRATE.blockEntity("smart_humidity_regulator", SmartHumidityRegulatorBlockEntity::new)
                     .visual(() -> SingleAxisRotatingVisual.of(SmartHumidityRegulatorRenderer.COG))

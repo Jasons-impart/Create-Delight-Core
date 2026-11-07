@@ -1,0 +1,21 @@
+{
+	"parent": "block/block",
+	"loader": "forge:obj",
+	"flip_v": true,
+	"model": "createdelightcore:models/block/snowman_cooler/item.obj",
+	"textures": {
+		"0": "createdelightcore:block/snowman_cooler_brazier",
+		"1": "createdelightcore:block/snowman_idle",
+		"particle": "create:block/dark_metal_block"
+	},
+	"display": {
+		"gui": {
+			"rotation": [30, 315, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"fixed": {
+			"rotation": [0, 180, 0],
+			"scale": [0.5, 0.5, 0.5]
+		}
+	}
+}

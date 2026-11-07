@@ -2,7 +2,7 @@ package io.github.jasonsimpart.createdelightcore.network;
 
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.createliquidfuel.BlazeBurnerFuels;
-import io.github.jasonsimpart.createdelightcore.compat.fluidlogistics.BlazeCoolerFuels;
+import io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerFuelManager;
 import net.minecraftforge.fml.ModList;
 import io.github.jasonsimpart.createdelightcore.util.Triplet;
 import net.minecraft.network.FriendlyByteBuf;
@@ -17,28 +17,12 @@ import java.util.function.Supplier;
 public class SyncFuelMapsPacket {
 
     private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData;
-    private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> blazeCoolerData;
+    private final Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData;
 
     /** Server-side constructor: snapshot current server maps. */
     public SyncFuelMapsPacket() {
-        this.blazeCoolerData = snapshotBlazeCoolerFuels();
+        this.coolerData = SnowmanCoolerFuelManager.snapshot();
         this.burnerData = snapshotBurnerFuels();
-    }
-
-    /**
-     * Optional-mod compat must never break player login: a missing or partially
-     * loaded BlazeCooler class degrades to an empty map instead of killing the server.
-     */
-    private static Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> snapshotBlazeCoolerFuels() {
-        if (!ModList.get().isLoaded("fluidlogistics")) {
-            return Map.of();
-        }
-        try {
-            return BlazeCoolerFuels.snapshot();
-        } catch (Throwable t) {
-            CreateDelightCore.LOGGER.warn("Skipping BlazeCooler fuel sync because snapshot failed", t);
-            return Map.of();
-        }
     }
 
     private static Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> snapshotBurnerFuels() {
@@ -54,13 +38,13 @@ public class SyncFuelMapsPacket {
     }
 
     private SyncFuelMapsPacket(Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData,
-                              Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> blazeCoolerData) {
+                              Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData) {
         this.burnerData = burnerData;
-        this.blazeCoolerData = blazeCoolerData;
+        this.coolerData = coolerData;
     }
 
     public void encode(FriendlyByteBuf buf) {
-        buf.writeMap(blazeCoolerData, FriendlyByteBuf::writeResourceLocation, (buffer, fuel) -> {
+        buf.writeMap(coolerData, FriendlyByteBuf::writeResourceLocation, (buffer, fuel) -> {
             buffer.writeInt(fuel.getFirst());
             buffer.writeBoolean(fuel.getSecond());
             buffer.writeInt(fuel.getThird());
@@ -73,23 +57,23 @@ public class SyncFuelMapsPacket {
     }
 
     public static SyncFuelMapsPacket decode(FriendlyByteBuf buf) {
-        Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> blazeCoolerData = buf.readMap(
+        Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> coolerData = buf.readMap(
                 FriendlyByteBuf::readResourceLocation,
                 buffer -> Triplet.of(buffer.readInt(), buffer.readBoolean(), buffer.readInt()));
         Map<ResourceLocation, Triplet<Integer, Boolean, Integer>> burnerData = buf.readMap(
                 FriendlyByteBuf::readResourceLocation,
                 b -> Triplet.of(b.readInt(), b.readBoolean(), b.readInt())
         );
-        return new SyncFuelMapsPacket(burnerData, blazeCoolerData);
+        return new SyncFuelMapsPacket(burnerData, coolerData);
     }
 
     public void handle(Supplier<NetworkEvent.Context> ctx) {
         ctx.get().enqueueWork(() -> {
-            ClientFuelCache.BLAZE_COOLER_MAP.clear();
-            blazeCoolerData.forEach((id, fuel) -> {
+            ClientFuelCache.COOLER_MAP.clear();
+            coolerData.forEach((id, fuel) -> {
                 Fluid fluid = ForgeRegistries.FLUIDS.getValue(id);
                 if (fluid != null) {
-                    ClientFuelCache.BLAZE_COOLER_MAP.put(fluid, fuel);
+                    ClientFuelCache.COOLER_MAP.put(fluid, fuel);
                 }
             });
             ClientFuelCache.BURNER_MAP.clear();

@@ -6,7 +6,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public class CDNetwork {
-    private static final String PROTOCOL_VERSION = "9";
+    private static final String PROTOCOL_VERSION = "10";
 
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(CreateDelightCore.MODID, "main"),
@@ -25,7 +25,7 @@ public class CDNetwork {
                 SyncFuelMapsPacket.class,
                 SyncFuelMapsPacket::encode,
                 SyncFuelMapsPacket::decode,
-                SyncFuelMapsPacket::handle
+                SyncFuelMapsPacket::handle, java.util.Optional.of(net.minecraftforge.network.NetworkDirection.PLAY_TO_CLIENT)
         );
         CHANNEL.registerMessage(
                 id++,

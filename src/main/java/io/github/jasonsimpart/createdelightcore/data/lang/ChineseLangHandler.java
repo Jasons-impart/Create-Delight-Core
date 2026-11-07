@@ -38,6 +38,20 @@ public class ChineseLangHandler {
     }
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "block.createdelightcore.snowman_cooler", "雪傀儡冷却室");
+        replace(provider, "block.createdelightcore.empty_snowman_cooler", "空雪傀儡冷却室");
+        replace(provider, "item.createdelightcore.frozen_cake", "寒冰蛋糕");
+        replace(provider, "item.createdelightcore.frozen_cake_base", "寒冰蛋糕胚");
+        replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "雪傀儡冷却室液体冷却剂");
+        replace(provider, "createdelightcore.cooler.idle", "待机");
+        replace(provider, "createdelightcore.cooler.fading", "冷却");
+        replace(provider, "createdelightcore.cooler.cooling", "冷却");
+        replace(provider, "createdelightcore.cooler.freezing", "冰冻");
+        replace(provider, "createdelightcore.cooler.creative", "无限冷却");
+        replace(provider, "createdelightcore.cooler.remaining", "剩余时间：%s 秒");
+        replace(provider, "create.recipe.heat_requirement.cooled", "冷却");
+        replace(provider, "create.recipe.heat_requirement.frozen", "冰冻");
+
         replace(provider, "createdelightcore.config.disableDropReport", "禁用掉落物报告");
         replace(provider, "createdelightcore.config.disableDropReport.tooltip", "关闭每 5 分钟一次的掉落物数量报告；不删除或清理掉落物。");
         replace(provider, "createdelightcore.config.itemThreshold", "掉落物报告阈值");
@@ -405,7 +419,6 @@ public class ChineseLangHandler {
         //jei
         provider.add("jei." + CreateDelightCore.MODID + ".BlazeBurnerFluid", "烈焰人液体燃料配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsume", "消耗%smB");
-        provider.add("jei." + CreateDelightCore.MODID + ".BlazeCoolerFluid", "烈焰人冷却室液体冷却剂配方");
         provider.add("jei." + CreateDelightCore.MODID + ".amountConsumeCool", "消耗%smB");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting", "幻化");
         provider.add("jei." + CreateDelightCore.MODID + ".phantomComposting.dimension", "在外星球中幻化");

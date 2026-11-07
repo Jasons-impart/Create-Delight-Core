@@ -1,0 +1,32 @@
+Create More Recipes
+Author: iglee42
+Source: https://github.com/iglee42/create-more-recipes
+Reference commit: 4315a52394f591681f1eee5cdb9497b75748f393
+Upstream declares mod_license=MIT in gradle.properties and expands it in META-INF/mods.toml.
+
+Imported/adapted: snowman cooler blocks, block entity, rendering, movement,
+mechanical arm interaction, cooling heat conditions and basin/JEI integration;
+snowman cooler models/textures/blockstates, frozen cake/base textures and default recipes.
+CDC changes include native fluid storage/fuels, synchronization, tooltips and pack integration.
+
+MIT License
+
+Copyright (c) iglee42
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
