@@ -95,6 +95,7 @@
     "IAF.EntitySirenMixin",
     "IAF.IafWorldDataMixin",
     "IAF.TabulaModelHandlerHelperMixin",
+    "IAF.BlockElementalFlowerMixin",
     "Minecraft.CarverMixin",
     "Minecraft.HoneyBlockMixin",
     "Minecraft.OEITagMirrorMixin",

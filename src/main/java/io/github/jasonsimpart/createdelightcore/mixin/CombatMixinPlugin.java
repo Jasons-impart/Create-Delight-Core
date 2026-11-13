@@ -99,6 +99,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
             }
             return applied;
         }
+        if (mixinClassName.contains(".IAF.")) {
+            return decide(mixinClassName, "iceandfire");
+        }
         return true;
     }
 
