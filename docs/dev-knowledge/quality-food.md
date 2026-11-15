@@ -14,6 +14,10 @@ Quality Food 的 `QualityUtils.applyQuality(ItemStack, Quality)` 实际调用三
 
 配方的 `getResultItem` 和 Create 的 `RecipeApplier.applyRecipeOn` 可能返回或改写**共享结果模板**。必须先 `copy()`，禁止直接对模板 `setCount` 或写品质，否则上一份金星会串到下一份铁星或无星。
 
+在物品流体能力自身的 `getFluid/getFluidInTank` 内，不要调用 QFF 的 `applyEmptyingQuality`：该 helper 会再次读取物品的流体能力，导致递归溢出。此处直接用 `QualityUtils.getQuality(container)` 与 QFF `withQuality(fluid, quality)`；未满大酒瓶的 `SakeFluid` 已含品质，保留其原值。
+
+妖归使用的 L2Library 2.4.25 `BaseTank.fill(stack, EXECUTE)` 会 `shrink` 调用者传入的流体；测试或后续计算需要传副本，或在入罐后用 `getFluidInTank(0).copy()` 获取实际批次，不能继续把已耗空的变量当原料。
+
 Quality Food 的 `RecipeApplierMixin` 会在 `applyRecipeOn` 之后对每个结果调用 `applyQuality(result, List.of(input), player)`。这条路径会按原料品质权重再随机掷一次铁/金/钻石（各档独立判定，后面掷中的会盖住前面的），并且改的是共享模板。
 
 CDC 的 `QualityFoodMixin.applyQualityFromIngredientsMixin` 会拦截上述掷骰入口：任一有效原料没有有效品质时，清掉产物品质并取消掷骰；全部有效原料都已有品质时则放行上游掷骰，所以铁星原料有机会出金星。
@@ -47,6 +51,9 @@ CDC 的 `QualityFoodMixin.applyQualityFromIngredientsMixin` 会拦截上述掷�
 | 机械炸锅、油炸锅、煎锅 | 允许掷级 | `mixin/createbicbit/MechanicalFryerEntityMixin`、`mixin/casualness_delight/DeepFryingPanEntityMixin`、`mixin/refurbished_furniture/FryingPanBlockEntityMixin` | `applyQuality(产物, List.of(输入), null)`。炸锅类需在扣料前 `copy()` 输入，避免空输入。 |
 | MBD2 物品产出 | 允许掷级 | `mixin/mbd2/ItemRecipeHandlerQualityMixin`、`content/util/MBD2RecipeQualityContext` | IN 扣料前按机器缓存输入样本，OUT 插入前 `applyQuality(产物, 样本, null)`。 |
 | 铜工作盆流体 | 补写被跳过的流体品质 | `mixin/fluidlogistics/CopperBasinQualityMixin` | 铜盆覆写 `acceptOutputs` 后把流体从父类调用里剥掉，Quality Food Fluids 的注入拿到空列表会跳过。见兼容补丁台账。 |
+| 妖怪归家简单发酵 | 允许掷级 | `mixin/youkaishomecoming/{FermentationTankQualityMixin,SimpleFermentationRecipeAccessor}` | 扣料前保存实际物品与流体，调用一次 QFF `rollBasinQuality(items, fluids)`；本批物品与流体产物共用结果，复制后清除模板残留品质，无星批次不串星。 |
+| 妖怪归家原生酒瓶能力与装瓶 | 原样继承 | `mixin/youkaishomecoming/`；`compat/alcohol/YoukaiBottleQuality` | 原生装瓶在交互前保存流体快照，确认罐内减少后，在合并玩家库存前写品质，整罐排空后也能继承。大瓶未满时品质保存在 `SakeFluid` 内，满瓶重建物品时需把品质写到酒瓶；已删除的五款葡萄酒及对应大瓶不接入品质。 |
+| 魔法炼药锅酿造与装排液 | 酿造允许掷级；装排液原样继承 | `mixin/ironsspellbooks/AlchemistCauldronQualityMixin`、`AlchemistRecipeQualityMixin` | 酿造复用 QFF `rollBasinQuality(items, fluids)`，同时计入配料与流体；匹配只忽略品质，消耗实际批次 NBT；输出模板先复制，无品质输入清除模板残留品质。 |
 
 ## 给新机器补品质时
 

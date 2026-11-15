@@ -20,6 +20,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 // Regression fixtures reference main registrations whose API dependencies are compile-only.
 configurations.testCompileOnly.extendsFrom(configurations.compileOnly)
+// The cauldron regression runtime follows the pack's Curios version; main compile APIs stay unchanged.
+configurations.testRuntimeClasspath.exclude group: 'top.theillusivec4.curios', module: 'curios-forge'
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
@@ -127,6 +129,11 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    // Resolve and deobfuscate the pack's custom QFF jar for the named GameTest runtime.
+    flatDir {
+        dirs "${rootDir}/../mods"
+        content { includeGroup 'createdelight.local' }
+    }
     mavenCentral()
      flatDir {
          dir 'libs'
@@ -339,8 +346,15 @@ dependencies {
     // multiblocked2 / ldlib — compile only for MBD2 recipe quality-transfer mixins
     compileOnly fg.deobf("curse.maven:multiblocked2-1104057:7415529")
     compileOnly fg.deobf("curse.maven:ldlib-626676:7809449")
-    // quality food fluids — compile only for copper basin fluid quality mixin
+    // Alchemist cauldron recipes and quality transfer (optional at runtime).
+    compileOnly fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:8680180")
+    testRuntimeOnly fg.deobf("curse.maven:irons-spells-n-spellbooks-855414:8680180")
+    testRuntimeOnly fg.deobf("curse.maven:curios-309927:6418456")
+    testRuntimeOnly fg.deobf("curse.maven:irons-lib-1492763:8364892")
+    testRuntimeOnly fg.deobf("curse.maven:player-animation-lib-658587:4587214")
+    // quality food fluids — optional machine quality integrations
     compileOnly files("${rootDir}/../mods/quality_food_fluids-1.20.1-0.1.4.jar")
+    testRuntimeOnly fg.deobf("createdelight.local:quality_food_fluids-1.20.1:0.1.4")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
