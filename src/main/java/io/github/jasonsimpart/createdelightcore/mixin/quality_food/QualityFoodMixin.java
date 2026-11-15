@@ -34,7 +34,6 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.satisfy.vinery.core.block.GrapeBush;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -149,7 +148,7 @@ public abstract class QualityFoodMixin {
     /**
      * Quality Food 的 BlockMixin（popResource 掉落）与 SweetBerryBushBlockMixin（use 收获参数）
      * 直接调用 applyHarvestQuality，绕过 applyQuality 外壳，CDC 对自动化收割的限制
-     * （无生命质/校准器不产品质）因此失效：机械手收割甜浆果、葡萄等右键收获作物仍会摇出品质。
+     * （无生命质/校准器不产品质）因此失效：机械手收割甜浆果等右键收获作物仍会摇出品质。
      * 当存在自动化收割上下文时改为取消上游处理并走 QualityHarvestAutomationContext.applyQuality。
      * 玩家手动收获没有自动化上下文，保持上游行为（自然品质）。
      */
@@ -371,7 +370,7 @@ public abstract class QualityFoodMixin {
             cir.setReturnValue(mintBlock.isMaxAge(state));
         } else if (block instanceof FruitBushBlock || block instanceof DoubleFruitBushBlock) {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_4) == 4);
-        } else if (block instanceof GrapeBush || block instanceof SweetBerryBushBlock) {
+        } else if (block instanceof SweetBerryBushBlock) {
             cir.setReturnValue(state.getValue(BlockStateProperties.AGE_3) == 3);
         } else {
             Boolean myNethersDelightCropLit = create_Delight_Core$getMyNethersDelightCropLit(state, block);

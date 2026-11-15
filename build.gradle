@@ -295,9 +295,6 @@ dependencies {
     // quality foods
     implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 
-    // vinery
-    implementation fg.deobf("curse.maven:vinery-704465:6854288")
-    implementation fg.deobf("curse.maven:nethervinery-930072:6855728")
     // central kitchen
     // 在runData时需要改为compileOnly，然后gradle重载，然后runData。如果runData失败则多试几次
     // 不需要runData时改为implementation
