@@ -158,5 +158,8 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.endsWith(".alexsmobs.WarpedToadPredationDamageMixin")) {
             LOGGER.info("[CDCore][PredationDamage] Applied crimson-mosquito predation damage 10000 in {}", targetClassName);
         }
+        if (mixinClassName.endsWith(".alexsmobs.BaldEagleChunkTicketMixin")) {
+            LOGGER.info("[CDCore][BaldEagleTickets] Replaced persistent setChunkForced with temporary region tickets in {}", targetClassName);
+        }
     }
 }
