@@ -485,6 +485,37 @@ tasks.register('extendedAeStartupTest', JavaExec) {
     mainClass = 'io.github.jasonsimpart.createdelightcore.util.ExtendedAePackageInitializationTest'
 }
 
+// Mixin annotation-processor output can disappear while compileJava remains up-to-date.
+// Check the final production archive rather than accepting a successful Java compilation.
+tasks.register('verifyMixinRefmap') {
+    group = 'verification'
+    description = 'Verifies that the production jar includes its configured Mixin refmap.'
+    dependsOn tasks.named('jar'), 'reobfJar'
+    doLast {
+        def archiveFile = tasks.named('jar', Jar).get().archiveFile.get().asFile
+        new java.util.zip.ZipFile(archiveFile).withCloseable { archive ->
+            def configEntry = archive.getEntry('mixins.createdelightcore.json')
+            if (configEntry == null) {
+                throw new GradleException("Missing Mixin configuration in ${archiveFile.name}")
+            }
+            def config = archive.getInputStream(configEntry).withCloseable {
+                new groovy.json.JsonSlurper().parse(it, 'UTF-8')
+            }
+            def refmapEntry = config.refmap ? archive.getEntry(config.refmap as String) : null
+            if (refmapEntry == null) {
+                throw new GradleException("Missing Mixin refmap ${config.refmap} in ${archiveFile.name}; rebuild with clean build")
+            }
+            def refmap = archive.getInputStream(refmapEntry).withCloseable {
+                new groovy.json.JsonSlurper().parse(it, 'UTF-8')
+            }
+            if (!(refmap.mappings instanceof Map) || refmap.mappings.isEmpty()) {
+                throw new GradleException("Empty Mixin refmap ${config.refmap} in ${archiveFile.name}")
+            }
+            logger.lifecycle("Verified Mixin refmap ${config.refmap} in ${archiveFile.name}")
+        }
+    }
+}
+
 tasks.named('check').configure {
-    dependsOn tasks.named('extendedAeStartupTest')
+    dependsOn tasks.named('extendedAeStartupTest'), tasks.named('verifyMixinRefmap')
 }
