@@ -135,7 +135,7 @@ Create 路径依赖必需的 Quality Food，因此不需要额外的运行时跳
 - 混合输入遵循 Quality Food 的既有转换策略，不在 CDC 中重新定义权重或升级规则。
 - 输入物品栈、配方模板和上游返回的结果模板不会被修改。
 - 连续 Basin 批次不会串用上一批输入的快照。
-- Tetra、Quark、Vintage Improvements、Quality Food 源码以及 Hotai 补丁文件均未被修改。
+- Tetra、Quark、Vintage Improvements、Quality Food 源码以及 hotai 补丁文件均未被修改。
 
 ## 10. 验证记录
 
