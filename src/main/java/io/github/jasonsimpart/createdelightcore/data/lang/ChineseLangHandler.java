@@ -387,17 +387,6 @@ public class ChineseLangHandler {
         addVirtualFluid(provider, CDFluids.ENCHANTED_FRUIT, "附魔之果味奶昔");
         addVirtualFluid(provider, CDFluids.LUCUMA, "蛋黄果味奶昔");
         addVirtualFluid(provider, CDFluids.PINK_DRAGON_FRUIT, "火龙果味奶昔");
-        //grape juice
-        addVirtualFluid(provider, CDFluids.RED_GRAPE, "红葡萄汁");
-        addVirtualFluid(provider, CDFluids.JUNGLE_RED_GRAPE, "丛林红葡萄汁");
-        addVirtualFluid(provider, CDFluids.SAVANNA_RED_GRAPE, "热带草原红葡萄汁");
-        addVirtualFluid(provider, CDFluids.TAIGA_RED_GRAPE, "针叶林红葡萄汁");
-        addVirtualFluid(provider, CDFluids.WHITE_GRAPE, "白葡萄汁");
-        addVirtualFluid(provider, CDFluids.JUNGLE_WHITE_GRAPE, "丛林白葡萄汁");
-        addVirtualFluid(provider, CDFluids.SAVANNA_WHITE_GRAPE, "热带草原白葡萄汁");
-        addVirtualFluid(provider, CDFluids.TAIGA_WHITE_GRAPE, "针叶林白葡萄汁");
-        addVirtualFluid(provider, CDFluids.WARPED_GRAPE, "诡异葡萄汁");
-        addVirtualFluid(provider, CDFluids.CRIMSON_GRAPE, "绯红葡萄汁");
         //syrup
         addVirtualFluid(provider, CDFluids.BASE_SYRUP, "基础糖浆");
         addVirtualFluid(provider, CDFluids.STRAWBERRY_SYRUP, "草莓糖浆");
