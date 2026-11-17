@@ -474,6 +474,15 @@ tasks.register('extendedAeStartupTest', JavaExec) {
     mainClass = 'io.github.jasonsimpart.createdelightcore.util.ExtendedAePackageInitializationTest'
 }
 
+tasks.register('baldEagleChunkTicketsTest', JavaExec) {
+    group = 'verification'
+    description = 'Tests bald-eagle falconry 3x3 ticket geometry without starting Minecraft.'
+    dependsOn tasks.named('testClasses')
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'io.github.jasonsimpart.createdelightcore.compat.alexsmobs.BaldEagleChunkTicketsTest'
+}
+
 tasks.named('check').configure {
     dependsOn tasks.named('extendedAeStartupTest')
+    dependsOn tasks.named('baldEagleChunkTicketsTest')
 }

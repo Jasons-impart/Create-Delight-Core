@@ -11,6 +11,7 @@
     "eclipticseason.SmartHumidityHygrometerMixin",
     "eclipticseason.SmartHumidityReadingMixin",
     "alexsmobs.WarpedToadPredationDamageMixin",
+    "alexsmobs.BaldEagleChunkTicketMixin",
     "AbstractVillagerMixin",
     "VillagerMixin",
     "ae2.AEBaseMenuAccessor",
