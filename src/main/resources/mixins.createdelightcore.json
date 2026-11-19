@@ -102,6 +102,7 @@
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
     "mbd2.ItemRecipeHandlerQualityMixin",
+    "ldlib.ItemTransferHelperImplMixin",
     "mmt.EffectLevelEventMixin",
     "mmt.MMTDamageCalculateMixin",
     "mmt.MMTEffectRecursionGuardMixin",
