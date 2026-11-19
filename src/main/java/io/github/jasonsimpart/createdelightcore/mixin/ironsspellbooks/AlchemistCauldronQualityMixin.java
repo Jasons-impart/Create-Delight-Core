@@ -11,15 +11,39 @@ import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.BrewAlchemist
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.EmptyAlchemistCauldronRecipe;
 import io.redspace.ironsspellbooks.recipe_types.alchemist_cauldron.FillAlchemistCauldronRecipe;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 import java.util.List;
 
 @Mixin(value = AlchemistCauldronTile.class, remap = false)
 public abstract class AlchemistCauldronQualityMixin {
+    @ModifyConstant(method = "serverTick", constant = @Constant(intValue = 100))
+    private static int createdelightcore$wortPreparationTime(int original, Level level, BlockPos pos,
+                                                            BlockState state, AlchemistCauldronTile tile,
+                                                            @Local(index = 5) ItemStack item) {
+        if (item.isEmpty()) return original;
+        for (String drink : List.of("amethyst_tequila", "catacombs_wine", "ice_venom_wine")) {
+            var candidate = level.getRecipeManager().byKey(new ResourceLocation("farmers_spell", "alchemist_cauldron/" + drink));
+            if (candidate.isEmpty() || !(candidate.get() instanceof BrewAlchemistCauldronRecipe recipe)) continue;
+            // Retaining the upstream ID must not speed up its original, finished-drink recipe.
+            if (recipe.results().stream().noneMatch(output -> new ResourceLocation("createdelight", drink + "_wort")
+                    .equals(net.minecraftforge.registries.ForgeRegistries.FLUIDS.getKey(output.getFluid())))) continue;
+            for (FluidStack fluid : tile.fluidInventory.fluids()) {
+                if (recipe.matches(new BrewAlchemistCauldronRecipe.Input(fluid, item), level)) return 19;
+            }
+        }
+        return original;
+    }
+
     @WrapOperation(method = "tryMeltInput", at = @At(value = "INVOKE",
             target = "Lio/redspace/ironsspellbooks/recipe_types/alchemist_cauldron/BrewAlchemistCauldronRecipe;fluidIn()Lnet/minecraftforge/fluids/FluidStack;"))
     private FluidStack createdelightcore$consumeActualBatch(BrewAlchemistCauldronRecipe recipe,

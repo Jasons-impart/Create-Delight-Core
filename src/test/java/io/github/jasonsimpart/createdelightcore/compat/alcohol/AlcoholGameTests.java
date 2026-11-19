@@ -20,6 +20,29 @@ import net.minecraftforge.registries.ForgeRegistries;
 @PrefixGameTestTemplate(false)
 public class AlcoholGameTests {
     @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
+    public static void fireAleReturnsOneTankardForEachConsumedServing(GameTestHelper helper) {
+        var player = FakePlayerFactory.getMinecraft(helper.getLevel());
+        var tankard = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse("brewinandchewin:tankard"));
+        helper.assertTrue(tankard != null && tankard != Items.AIR, "B&C is present in the regression runtime");
+        player.getInventory().clearContent();
+        player.getAbilities().instabuild = false;
+        var drink = new ItemStack(ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse("irons_spellbooks:fire_ale")), 2);
+        try {
+            var remaining = drink.finishUsingItem(helper.getLevel(), player);
+            helper.assertTrue(remaining.getCount() == 1 && player.getInventory().countItem(tankard) == 1
+                            && player.getInventory().countItem(Items.GLASS_BOTTLE) == 0,
+                    "The first serving returns exactly one tankard to inventory and no glass bottle");
+            var last = remaining.finishUsingItem(helper.getLevel(), player);
+            helper.assertTrue(last.is(tankard) && last.getCount() == 1 && player.getInventory().countItem(tankard) == 1,
+                    "The last serving returns its tankard directly, without duplicating the previous one");
+        } finally {
+            player.getInventory().clearContent();
+            player.removeAllEffects();
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
     public static void fireAleTooltipsMatchItsNativeEffectsWithoutDoubleApplying(GameTestHelper helper) {
         String source = "irons_spellbooks:fire_ale";
         AlcoholDrinks.registerDrink(source, 2000, 0);
@@ -34,7 +57,9 @@ public class AlcoholGameTests {
         helper.assertTrue(shown.size() == 4 && AlcoholDrinks.effects(drink).size() == 1,
                 "Show the three native effects and drunk, but only apply one managed effect");
         var result = drink.finishUsingItem(helper.getLevel(), player);
-        helper.assertTrue(result.is(Items.GLASS_BOTTLE), "Fire Ale keeps its native glass container");
+        var tankard = ForgeRegistries.ITEMS.getValue(ResourceLocation.tryParse("brewinandchewin:tankard"));
+        helper.assertTrue(result.is(tankard != null && tankard != Items.AIR ? tankard : Items.GLASS_BOTTLE),
+                "Fire Ale returns the B&C tankard when available, otherwise its native glass container");
         for (var effect : shown) {
             var actual = player.getEffect(effect.getEffect());
             helper.assertTrue(actual != null && actual.getDuration() == effect.getDuration()

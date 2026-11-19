@@ -62,6 +62,21 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 | 森罗酒馆酒桶与基酒 | 先酿造，初始品质封顶金，之后单次陈酿升级 | `compat/kaleidoscopetavern/`；`mixin/kaleidoscopetavern/`；KJS `Kaleidoscope Tavern/tags.js` | 基础酿造等待配方的 `unit_time`，原生配方为 2400 tick；期间仅保存待产出记录，实际输出槽为空，物品与流体能力均无成品可取，完成时才一次性生成，完成后普通／铁／金再陈酿 30／60／90 分钟，仅升一级。两个阶段随原生存档及更新包同步，开盖暂停，Jade 显示相应剩余时间。基酒排除醋和西瓜汁，直接使用 QF 品质与基础酒效档；铁起可调酒。六果汁压榨在比较前继承水果品质并模拟接收，CGT 瓶液互转桥接 QF／QFF 根品质；莫洛托夫沿用原规则。 |
 | 森罗醋与鸡尾酒 | 按实际原料计算 QF 品质，药效统一经过 QF | 同上；`ShakerRecipeQualityMixin`、`ShakerFallbackQualityMixin`、`ShakerPourQualityMixin`、`CocktailDropsQualityMixin` | 无配方醋保留 16 瓶及原生扣料规则，2400 tick 酿造完成时才生成可取成品，不额外陈酿。鸡尾酒配方、摇动时长及无配方兜底分别仅掷级一次，保留签名杯颜色／效果；倒杯使用 QF 位置品质，普通档使用 `NONE_PLAYER_PLACED`。Mojito 倒杯及手动摆放补存实际成品，两条 `Block.getDrops` 最终入口在原生生成后统一补品质；摆放、取回与破坏沿用 QF 位置存储和清理；创造栏通过 `TavernCreativeTabs` 的 Forge 内容构建事件保序替换，基酒、醋及全部 14 种鸡尾酒统一钻品质。 |
 | 魔法炼药锅酿造与装排液 | 酿造允许掷级；装排液原样继承 | `mixin/ironsspellbooks/AlchemistCauldronQualityMixin`、`AlchemistRecipeQualityMixin` | 酿造复用 QFF `rollBasinQuality(items, fluids)`，同时计入配料与流体；匹配只忽略品质，消耗实际批次 NBT；输出模板先复制，无品质输入清除模板残留品质。 |
+| 恶魂酒醪桶 | 按实际食材允许掷级 | `mixin/dungeonsdelight/MonsterPotWortMixin` | 仅 `createdelight:alcohol_preparation/ghastly_spirits`：六槽各需并消耗 4 份，容器槽 7 必须有空桶，内部餐食槽 6 与输出槽 8 为空才开工；先复制结果模板、按扣料前输入掷级，避免缺桶或堵输出时损失原料。 |
+
+## 外部酒与酵母
+
+七款外部成品由 KJS 的 `createdelight:tavern_fermented_drinks` 标签明确接入 `TavernQuality.canAge/isBatchProduct`，复用已有待产出记录、初酿金品质上限、普通／铁／金 30／60／90 分钟单次陈酿和存档恢复；不扩大原生 `isBarrelProduct/isQualityWine`，因此外部物品不写 `BrewLevel`，仍使用原效果。标签不赋予外部酒调酒器支持。
+
+`TavernBrewing.awaitingYeast` 在未建立批次且基液满 4L 时，剔除 `createdelight:tavern_yeast` 后匹配声明酵母的酒桶配方，不以产物能否陈酿为条件；其余原料匹配且酵母不足 16 份时暂停原生 tick，防止直接落入醋兜底。酵母仍是普通配方原料，每瓶一份，不调整 assemble 产量；酒醪仅需酵母的配方和重复苹果原料槽同样匹配。醋和压榨不要求酵母，不增加槽位或存档字段；原生 JEI 已将酒桶各原料显示为 16 份。
+
+`MonsterPotWortJeiMixin` 仅对恶魂酒醪配方复制 JEI 候选物品并显示每槽 4 份，避免原生 `Ingredient.getItems()` 的单件预览低报成本；不修改配方模板或其他怪物锅配方，且仅在客户端与 JEI 存在时加载。
+
+三条 `farmers_spell:alchemist_cauldron/{amethyst_tequila,catacombs_wine,ice_venom_wine}` 仅在配方实际输出对应 `createdelight:*_wort` 且流体／配料匹配时，把 `serverTick` 的 `cooktimes > 100` 阈值改为 19（20 tick），其他配方保留 100；品质继续走上表炼药路径。恶魂酒醪每 1L 前置 80 tick，三魔法酒醪每 250mB 前置 20 tick；四款后续满 4L 初酿 2880 tick，与前置累计共 3200 tick。内容配方与颜色由父仓维护。
+
+`FireAleContainerMixin` 仅对 Iron's Spells 烈焰麦酒将 `finishUsingItem` 的原生 `returnItem` 替换为 B&C 酒杯，沿用原方法的单杯／堆叠余物处理；需两模组同时存在。
+
+2026-11-19：生产迁移新增的酵母缺料等待、外部酒 NBT／批次恢复、怪物锅四倍材料／空桶／堵输出／品质、烈焰麦酒堆叠余物测试已编译；Java 17 构建及 refmap 校验通过。两次 `runGameTestServer` 均在启动时无法读取 `mixins.createdelightcore.json`，新增断言未执行；主／测试资源已在 `MOD_CLASSES`，源文件与构建副本一致，正式 JAR 内配置和 refmap 静态校验正常，更具体的类加载原因尚未确定。真实游戏回归待补，不能沿用此前酒类测试的通过结果。
 
 森罗酒桶的 Jade 与交互提示首行剥除 QFF 的 `with_quality` 名称包装并保留自定义名，品质只在独立行显示；待产出模板在酿造完成前尚未赋品质，直接显示 `ItemStack.getHoverName()` 会被 QFF 自动冠以“普通”，与批次品质冲突。
 

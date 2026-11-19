@@ -147,3 +147,11 @@ Fruit Delight 内部部分 jelly / jello 逻辑按 `FruitType` enum ordinal 查�
 **问题**: Better Combat `1.9.0+1.20.1` 的 `ServerConfig.getUpswingMultiplier()` 会把 `upswing_multiplier` 强制夹到至少 `0.2F`，因此整合包配置写成 `0.0` 仍保留前摇。
 
 **正确做法**: 用按 `bettercombat` 模组存在性加载的 `@Pseudo` Mixin 将该常量下限改为 `0.0F`，并保留 `require = 1`；升级 Better Combat 后必须复核方法与常量是否仍匹配。
+
+## 本地 QFF 文件名失配会扩散成 mapped 依赖解析失败
+
+**日期**: 2026-11-19
+
+**问题**: 父包运行时已使用 `quality_food_fluids-1.20.1-0.1.4-cdr-vinegar-compat1.jar`，构建仍引用无后缀的 `0.1.4`；ForgeGradle 的 `__obfuscated` 解析失败继而表现为多个 mapped 依赖缺失，容易误判成远程 Maven 全部不可用。
+
+**正确做法**: 先核对本地文件，再让 `compileOnly files(...)` 与经 `fg.deobf` 的测试 flatDir 坐标使用同一个实际版本；本次对齐路径和坐标后编译、构建恢复，无需修改正式 JAR 或父包元数据。

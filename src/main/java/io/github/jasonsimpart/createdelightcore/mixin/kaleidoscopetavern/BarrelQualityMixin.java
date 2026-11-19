@@ -12,6 +12,7 @@ import io.github.createdelight.qualityfoodfluids.api.QualityFoodFluidsCreateRule
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelAccess;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelBatch;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernQuality;
+import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBrewing;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -58,9 +59,9 @@ public abstract class BarrelQualityMixin implements TavernBarrelAccess {
                                                   RegistryAccess registries, Operation<ItemStack> original) {
         ItemStack output = original.call(recipe, input, registries);
         createdelightcore$qualityBatch = null;
-        if (!TavernQuality.isBarrelProduct(output)) return output;
+        if (!TavernQuality.isBatchProduct(output)) return output;
         createdelightcore$qualityBatch = new TavernBarrelBatch(createdelightcore$rollInputs(),
-                Math.max(1, recipe.unitTime()), TavernQuality.isQualityWine(output));
+                Math.max(1, recipe.unitTime()), TavernQuality.canAge(output));
         return output;
     }
 
@@ -103,7 +104,11 @@ public abstract class BarrelQualityMixin implements TavernBarrelAccess {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void createdelightcore$tickQuality(Level level, CallbackInfo ci) {
         var batch = createdelightcore$qualityBatch;
-        if (batch == null) return;
+        if (batch == null) {
+            // A missing starter is an incomplete wine recipe, not the native vinegar fallback.
+            if (!level.isClientSide && TavernBrewing.awaitingYeast((BarrelBlockEntity) (Object) this, level)) ci.cancel();
+            return;
+        }
         ci.cancel(); // New batches never execute the native six-stage aging loop.
         if (level.isClientSide) return;
         if (getOutput().getStackInSlot(0).isEmpty() && !batch.hasPendingOutput()) {
