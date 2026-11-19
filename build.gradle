@@ -299,6 +299,13 @@ dependencies {
     compileOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
     testRuntimeOnly fg.deobf("curse.maven:farmers-respite-551453:5543547")
     testRuntimeOnly fg.deobf("curse.maven:youkais-homecoming-957437:8004757")
+    // Optional Tavern quality/aging integration; use the exact pack version in regression tests.
+    compileOnly fg.deobf("curse.maven:kaleidoscope-tavern-1475175:8350841")
+    testRuntimeOnly fg.deobf("curse.maven:kaleidoscope-tavern-1475175:8350841")
+    // Exercise the optional CGT bottle/fluid bridge when its local pack jar is available.
+    if (file("${rootDir}/../mods/creategearsandtavern-1.2.0-1.20.1.jar").isFile()) {
+        testRuntimeOnly fg.deobf("createdelight.local:creategearsandtavern:1.2.0-1.20.1")
+    }
     // quality foods
     implementation fg.deobf("curse.maven:quality-food-973932:8694434") // 2.4.3
 

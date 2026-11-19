@@ -59,7 +59,13 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 | 铜工作盆流体 | 补写被跳过的流体品质 | `mixin/fluidlogistics/CopperBasinQualityMixin` | 铜盆覆写 `acceptOutputs` 后把流体从父类调用里剥掉，Quality Food Fluids 的注入拿到空列表会跳过。见兼容补丁台账。 |
 | 妖怪归家简单发酵 | 允许掷级 | `mixin/youkaishomecoming/{FermentationTankQualityMixin,SimpleFermentationRecipeAccessor}` | 扣料前保存实际物品与流体，调用一次 QFF `rollBasinQuality(items, fluids)`；本批物品与流体产物共用结果，复制后清除模板残留品质，无星批次不串星。 |
 | 妖怪归家原生酒瓶能力与装瓶 | 原样继承 | `mixin/youkaishomecoming/`；`compat/alcohol/YoukaiBottleQuality` | 原生装瓶在交互前保存流体快照，确认罐内减少后，在合并玩家库存前写品质，整罐排空后也能继承。大瓶未满时品质保存在 `SakeFluid` 内，满瓶重建物品时需把品质写到酒瓶；已删除的五款葡萄酒及对应大瓶不接入品质。 |
+| 森罗酒馆酒桶与基酒 | 先酿造，初始品质封顶金，之后单次陈酿升级 | `compat/kaleidoscopetavern/`；`mixin/kaleidoscopetavern/`；KJS `Kaleidoscope Tavern/tags.js` | 基础酿造等待配方的 `unit_time`，原生配方为 2400 tick；期间仅保存待产出记录，实际输出槽为空，物品与流体能力均无成品可取，完成时才一次性生成，完成后普通／铁／金再陈酿 30／60／90 分钟，仅升一级。两个阶段随原生存档及更新包同步，开盖暂停，Jade 显示相应剩余时间。基酒排除醋和西瓜汁，直接使用 QF 品质与基础酒效档；铁起可调酒。六果汁压榨在比较前继承水果品质并模拟接收，CGT 瓶液互转桥接 QF／QFF 根品质；莫洛托夫沿用原规则。 |
+| 森罗醋与鸡尾酒 | 按实际原料计算 QF 品质，药效统一经过 QF | 同上；`ShakerRecipeQualityMixin`、`ShakerFallbackQualityMixin`、`ShakerPourQualityMixin`、`CocktailDropsQualityMixin` | 无配方醋保留 16 瓶及原生扣料规则，2400 tick 酿造完成时才生成可取成品，不额外陈酿。鸡尾酒配方、摇动时长及无配方兜底分别仅掷级一次，保留签名杯颜色／效果；倒杯使用 QF 位置品质，普通档使用 `NONE_PLAYER_PLACED`。Mojito 倒杯及手动摆放补存实际成品，两条 `Block.getDrops` 最终入口在原生生成后统一补品质；摆放、取回与破坏沿用 QF 位置存储和清理；创造栏通过 `TavernCreativeTabs` 的 Forge 内容构建事件保序替换，基酒、醋及全部 14 种鸡尾酒统一钻品质。 |
 | 魔法炼药锅酿造与装排液 | 酿造允许掷级；装排液原样继承 | `mixin/ironsspellbooks/AlchemistCauldronQualityMixin`、`AlchemistRecipeQualityMixin` | 酿造复用 QFF `rollBasinQuality(items, fluids)`，同时计入配料与流体；匹配只忽略品质，消耗实际批次 NBT；输出模板先复制，无品质输入清除模板残留品质。 |
+
+森罗酒桶的 Jade 与交互提示首行剥除 QFF 的 `with_quality` 名称包装并保留自定义名，品质只在独立行显示；待产出模板在酿造完成前尚未赋品质，直接显示 `ItemStack.getHoverName()` 会被 QFF 自动冠以“普通”，与批次品质冲突。
+
+森罗六种果汁及桶沿用原生注册，保留 QF／QFF 支持标签。Forge `FluidBucketWrapper` 通用品质往返由 QFF 负责修复；CDC 不注册替代桶、不添加果汁桶 OEI 映射或专用桶 Mixin。六果汁四档品质的原生桶往返已通过当前本地 QFF 构建回归，CDC 继续保留该回归测试。
 
 ## 给新机器补品质时
 

@@ -38,6 +38,17 @@ public class ChineseLangHandler {
     }
 
     private static void addManualOverrides(RegistrateCNLangProvider provider) {
+        replace(provider, "quality_type.quality_food.none", "普通");
+        replace(provider, "quality_type.quality_food.iron", "铁");
+        replace(provider, "quality_type.quality_food.gold", "金");
+        replace(provider, "quality_type.quality_food.diamond", "钻");
+        replace(provider, "tooltip.createdelightcore.tavern.quality", "品质：%s");
+        replace(provider, "tooltip.createdelightcore.tavern.brewing", "酿造中：剩余 %s");
+        replace(provider, "tooltip.createdelightcore.tavern.brewed", "酿造完成");
+        replace(provider, "tooltip.createdelightcore.tavern.aging", "陈酿至%s：剩余 %s");
+        replace(provider, "tooltip.createdelightcore.tavern.aged", "陈酿完成");
+        replace(provider, "tooltip.createdelightcore.tavern.shaker_requires_iron", "调酒需要铁品质或以上的基酒");
+
         replace(provider, "block.createdelightcore.snowman_cooler", "雪傀儡冷却室");
         replace(provider, "block.createdelightcore.empty_snowman_cooler", "空雪傀儡冷却室");
         replace(provider, "item.createdelightcore.frozen_cake", "寒冰蛋糕");

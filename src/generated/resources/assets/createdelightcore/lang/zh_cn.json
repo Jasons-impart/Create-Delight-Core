@@ -382,6 +382,10 @@
   "key.categories.createdelightcore": "齿轮盛宴",
   "menu.createdelightcore.configuration_module.release_to_select": "松开 %s 选择构形",
   "menu.createdelightcore.configuration_module.title": "选择构形",
+  "quality_type.quality_food.diamond": "钻",
+  "quality_type.quality_food.gold": "金",
+  "quality_type.quality_food.iron": "铁",
+  "quality_type.quality_food.none": "普通",
   "tooltip.createdelightcore.Cooled": "冷却",
   "tooltip.createdelightcore.Frozen": "速冻",
   "tooltip.createdelightcore.Heat": "加热",
@@ -396,5 +400,11 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8按住 [§r§7Shift§r§8] 查看烈焰人燃烧信息§r",
   "tooltip.createdelightcore.jello_block": "光滑，但是能和相同果酱/果冻方块粘黏",
   "tooltip.createdelightcore.jelly_block": "带有粘性，但是不和其他粘性方块粘黏",
-  "tooltip.createdelightcore.superHeat": "超级燃烧"
+  "tooltip.createdelightcore.superHeat": "超级燃烧",
+  "tooltip.createdelightcore.tavern.aged": "陈酿完成",
+  "tooltip.createdelightcore.tavern.aging": "陈酿至%s：剩余 %s",
+  "tooltip.createdelightcore.tavern.brewed": "酿造完成",
+  "tooltip.createdelightcore.tavern.brewing": "酿造中：剩余 %s",
+  "tooltip.createdelightcore.tavern.quality": "品质：%s",
+  "tooltip.createdelightcore.tavern.shaker_requires_iron": "调酒需要铁品质或以上的基酒"
 }
