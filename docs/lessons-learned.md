@@ -1,5 +1,13 @@
 # Lessons Learned
 
+## 增量打包后必须检查 Mixin 映射文件
+
+**日期**: 2026-11-19
+
+**问题**: GameTest 后再次增量 `build` 可能生成缺少 `mixins.createdelightcore.refmap.json` 的 JAR；`verifyMixinRefmap` 会阻止交付，不能只凭编译和 reobf 成功部署。
+
+**正确做法**: 执行 `./gradlew clean build --no-daemon`，确认映射校验通过后再替换测试 JAR。Windows 上将命令日志放到 `build/` 外，避免打开的日志文件阻止 `clean` 删除构建目录。
+
 ## ForgeGradle userdev 必须优先命中官方 Forge Maven
 
 **日期**: 2026-08-06

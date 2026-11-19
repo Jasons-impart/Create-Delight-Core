@@ -42,6 +42,15 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.endsWith(".quality_food.FoodEffectQualityMixin")) {
             return decide(mixinClassName, "quality_food");
         }
+        if (mixinClassName.contains(".mixin.kaleidoscopetavern.")) {
+            return decide(mixinClassName, "kaleidoscope_tavern")
+                    && decide(mixinClassName, "quality_food")
+                    && decide(mixinClassName, "quality_food_fluids")
+                    && (!mixinClassName.endsWith("BarrelJadeMixin") || decide(mixinClassName, "jade"))
+                    && ((!mixinClassName.endsWith("DrinkFluidNameMixin")
+                            && !mixinClassName.endsWith("DrinkFluidConversionsMixin"))
+                        || decide(mixinClassName, "creategearsandtavern"));
+        }
         if (mixinClassName.contains(".mixin.youkaishomecoming.")) {
             return decide(mixinClassName, "youkaishomecoming") && decide(mixinClassName, "quality_food_fluids");
         }

@@ -1,4 +1,323 @@
 {
   "replace": false,
-  "values": ["youkaishomecoming:mio", "youkaishomecoming:mead"]
+  "values": [
+    "youkaishomecoming:mio",
+    "youkaishomecoming:mead",
+    "kaleidoscope_tavern:grape_juice",
+    "kaleidoscope_tavern:flowing_grape_juice",
+    "kaleidoscope_tavern:ice_grape_juice",
+    "kaleidoscope_tavern:flowing_ice_grape_juice",
+    "kaleidoscope_tavern:gold_grape_juice",
+    "kaleidoscope_tavern:flowing_gold_grape_juice",
+    "kaleidoscope_tavern:green_grape_juice",
+    "kaleidoscope_tavern:flowing_green_grape_juice",
+    "kaleidoscope_tavern:sweet_berries_juice",
+    "kaleidoscope_tavern:flowing_sweet_berries_juice",
+    "kaleidoscope_tavern:glow_berries_juice",
+    "kaleidoscope_tavern:flowing_glow_berries_juice",
+    {
+      "id": "creategearsandtavern:brandy",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_brandy",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:carignan",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_carignan",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:champagne",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_champagne",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:glowflower_brew",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_glowflower_brew",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:honey_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_honey_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:ice_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_ice_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:luminous_bride",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_luminous_bride",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:madame_shexiang",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_madame_shexiang",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:miners_star",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_miners_star",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:mother_snow",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_mother_snow",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:plum_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_plum_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:polaris_sweet_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_polaris_sweet_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:red_queen",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_red_queen",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:riesling_dry_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_riesling_dry_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:rum",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_rum",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sakura_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sakura_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sauvignon_blanc_dry_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sauvignon_blanc_dry_white",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sherry",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sherry",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sunset_glow",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sunset_glow",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sweet_berry_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sweet_berry_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:vodka",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_vodka",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:whiskey",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_whiskey",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_wine",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:vinegar",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_vinegar",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:mojito",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_mojito",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:mystery_cocktail",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_mystery_cocktail",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:signature_cocktail",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_signature_cocktail",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:white_lady",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_white_lady",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:emerald",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_emerald",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:brass_heart",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_brass_heart",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:godfather",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_godfather",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:grasshopper",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_grasshopper",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:screwdriver",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_screwdriver",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:allium_garden",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_allium_garden",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:depth_charge",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_depth_charge",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:nether_special",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_nether_special",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:bloody_mary",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_bloody_mary",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:sculk_special",
+      "required": false
+    },
+    {
+      "id": "creategearsandtavern:flowing_sculk_special",
+      "required": false
+    }
+  ]
 }

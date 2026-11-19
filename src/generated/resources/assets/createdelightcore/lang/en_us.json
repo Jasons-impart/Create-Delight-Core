@@ -382,6 +382,10 @@
   "key.categories.createdelightcore": "Create Delight",
   "menu.createdelightcore.configuration_module.release_to_select": "Release %s to select a form",
   "menu.createdelightcore.configuration_module.title": "Select Configuration",
+  "quality_type.quality_food.diamond": "Diamond",
+  "quality_type.quality_food.gold": "Gold",
+  "quality_type.quality_food.iron": "Iron",
+  "quality_type.quality_food.none": "Normal",
   "tooltip.createdelightcore.Cooled": "Cooled",
   "tooltip.createdelightcore.Frozen": "Frozen",
   "tooltip.createdelightcore.Heat": "Heating",
@@ -396,5 +400,11 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "§r§8Hold [§r§7Shift§r§8] to view Blaze heating information§r",
   "tooltip.createdelightcore.jello_block": "Slippery. Sticks to sticky blocks and same jello/jelly blocks.",
   "tooltip.createdelightcore.jelly_block": "Sticky, but not connecting to other sticky blocks.",
-  "tooltip.createdelightcore.superHeat": "Super Heating"
+  "tooltip.createdelightcore.superHeat": "Super Heating",
+  "tooltip.createdelightcore.tavern.aged": "Aging complete",
+  "tooltip.createdelightcore.tavern.aging": "Aging to %s: %s remaining",
+  "tooltip.createdelightcore.tavern.brewed": "Brewing complete",
+  "tooltip.createdelightcore.tavern.brewing": "Brewing: %s remaining",
+  "tooltip.createdelightcore.tavern.quality": "Quality: %s",
+  "tooltip.createdelightcore.tavern.shaker_requires_iron": "Mixing requires an iron-quality or better base spirit"
 }

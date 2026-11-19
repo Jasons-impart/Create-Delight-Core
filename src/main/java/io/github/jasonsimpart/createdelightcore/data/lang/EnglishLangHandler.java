@@ -29,6 +29,17 @@ public class EnglishLangHandler {
     }
 
     private static void addManualOverrides(RegistrateLangProvider provider) {
+        replace(provider, "quality_type.quality_food.none", "Normal");
+        replace(provider, "quality_type.quality_food.iron", "Iron");
+        replace(provider, "quality_type.quality_food.gold", "Gold");
+        replace(provider, "quality_type.quality_food.diamond", "Diamond");
+        replace(provider, "tooltip.createdelightcore.tavern.quality", "Quality: %s");
+        replace(provider, "tooltip.createdelightcore.tavern.brewing", "Brewing: %s remaining");
+        replace(provider, "tooltip.createdelightcore.tavern.brewed", "Brewing complete");
+        replace(provider, "tooltip.createdelightcore.tavern.aging", "Aging to %s: %s remaining");
+        replace(provider, "tooltip.createdelightcore.tavern.aged", "Aging complete");
+        replace(provider, "tooltip.createdelightcore.tavern.shaker_requires_iron", "Mixing requires an iron-quality or better base spirit");
+
         replace(provider, "block.createdelightcore.snowman_cooler", "Snow Golem Cooler");
         replace(provider, "block.createdelightcore.empty_snowman_cooler", "Empty Snow Golem Cooler");
         replace(provider, "item.createdelightcore.frozen_cake", "Frozen Cake");

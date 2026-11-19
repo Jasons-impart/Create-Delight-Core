@@ -6,6 +6,19 @@
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
     "AlcoholConsumptionMixin",
+    "kaleidoscopetavern.BarrelQualityMixin",
+    "kaleidoscopetavern.BottleQualityMixin",
+    "kaleidoscopetavern.DrinkQualityMixin",
+    "kaleidoscopetavern.DrinkFluidNameMixin",
+    "kaleidoscopetavern.DrinkFluidConversionsMixin",
+    "kaleidoscopetavern.PressingTubQualityMixin",
+    "kaleidoscopetavern.ShakerQualityMixin",
+    "kaleidoscopetavern.ShakerRecipeQualityMixin",
+    "kaleidoscopetavern.ShakerPourQualityMixin",
+    "kaleidoscopetavern.ShakerFallbackQualityMixin",
+    "kaleidoscopetavern.CocktailQualityMixin",
+    "kaleidoscopetavern.CocktailDropsQualityMixin",
+    "kaleidoscopetavern.CocktailPlacementQualityMixin",
     "youkaishomecoming.FermentationTankQualityMixin",
     "youkaishomecoming.SimpleFermentationRecipeAccessor",
     "youkaishomecoming.SakeFluidQualityMixin",
@@ -155,6 +168,7 @@
     "fluidlogistics.CopperBasinQualityMixin"
   ],
   "client": [
+    "kaleidoscopetavern.BarrelJadeMixin",
     "eclipticseason.SmartHumidityClientModificationMixin",
     "eclipticseason.SmartHumidityClientReadingMixin",
     "create.BasinCategoryMixin",
