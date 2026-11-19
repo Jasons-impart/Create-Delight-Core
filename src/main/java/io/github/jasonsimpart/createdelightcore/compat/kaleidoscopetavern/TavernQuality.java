@@ -23,6 +23,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
@@ -32,6 +36,8 @@ import java.util.Locale;
 /** Tavern drinks use QF quality directly, including ordinary drinks without a quality tag. */
 public final class TavernQuality {
     public static final int NORMAL_BREW_LEVEL = 3;
+    public static final TagKey<Item> EXTERNAL_FERMENTED_DRINKS = TagKey.create(Registries.ITEM,
+            new ResourceLocation("createdelight", "tavern_fermented_drinks"));
     private static final String TEXT = "tooltip.createdelightcore.tavern.";
 
     private TavernQuality() {}
@@ -45,8 +51,17 @@ public final class TavernQuality {
         return isQualityWine(stack) || stack.is(ModItems.VINEGAR.get());
     }
 
+    /** External wine keeps its own effects and never receives Tavern's native BrewLevel. */
+    public static boolean canAge(ItemStack stack) {
+        return isQualityWine(stack) || stack.is(EXTERNAL_FERMENTED_DRINKS);
+    }
+
+    public static boolean isBatchProduct(ItemStack stack) {
+        return isBarrelProduct(stack) || stack.is(EXTERNAL_FERMENTED_DRINKS);
+    }
+
     public static boolean supportsQuality(ItemStack stack) {
-        return !stack.isEmpty() && (isBarrelProduct(stack) || isTavernItem(stack) && stack.getItem() instanceof CocktailBlockItem);
+        return !stack.isEmpty() && (isBatchProduct(stack) || isTavernItem(stack) && stack.getItem() instanceof CocktailBlockItem);
     }
 
     private static boolean isTavernItem(ItemStack stack) {

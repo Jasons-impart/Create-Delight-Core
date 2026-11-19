@@ -26,6 +26,8 @@
     "youkaishomecoming.BottleInventoryQualityMixin",
     "ironsspellbooks.AlchemistRecipeQualityMixin",
     "ironsspellbooks.AlchemistCauldronQualityMixin",
+    "ironsspellbooks.FireAleContainerMixin",
+    "dungeonsdelight.MonsterPotWortMixin",
     "eclipticseason.SmartHumidityModificationMixin",
     "eclipticseason.SmartHumidityGrowthDetectorMixin",
     "eclipticseason.SmartHumidityCropMixin",
@@ -168,6 +170,7 @@
     "fluidlogistics.CopperBasinQualityMixin"
   ],
   "client": [
+    "dungeonsdelight.MonsterPotWortJeiMixin",
     "kaleidoscopetavern.BarrelJadeMixin",
     "eclipticseason.SmartHumidityClientModificationMixin",
     "eclipticseason.SmartHumidityClientReadingMixin",

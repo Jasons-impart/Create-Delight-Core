@@ -54,6 +54,13 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains(".mixin.youkaishomecoming.")) {
             return decide(mixinClassName, "youkaishomecoming") && decide(mixinClassName, "quality_food_fluids");
         }
+        if (mixinClassName.contains(".mixin.dungeonsdelight.")) {
+            return decide(mixinClassName, "dungeonsdelight") && decide(mixinClassName, "quality_food_fluids")
+                    && (!mixinClassName.endsWith("MonsterPotWortJeiMixin") || decide(mixinClassName, "jei"));
+        }
+        if (mixinClassName.endsWith(".ironsspellbooks.FireAleContainerMixin")) {
+            return decide(mixinClassName, "irons_spellbooks") && decide(mixinClassName, "brewinandchewin");
+        }
         if (mixinClassName.contains(".mixin.ironsspellbooks.")) {
             return decide(mixinClassName, "irons_spellbooks") && decide(mixinClassName, "quality_food_fluids");
         }
