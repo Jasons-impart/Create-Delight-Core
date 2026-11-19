@@ -98,7 +98,6 @@
     "IAF.BlockElementalFlowerMixin",
     "Minecraft.CarverMixin",
     "Minecraft.HoneyBlockMixin",
-    "Minecraft.OEITagMirrorMixin",
     "Minecraft.PlayerMixin",
     "Minecraft.NoiseChunkMixin",
     "mbd2.ItemRecipeHandlerQualityMixin",
