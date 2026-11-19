@@ -129,6 +129,7 @@
     "quality_food.BlockUseContextMixin",
     "quality_food.BlockDataMixin",
     "quality_food.LevelDataMixin",
+    "quality_food.FoodEffectQualityMixin",
     "quality_food.QualityFoodMixin",
     "quality_food.SweetBerryBushDropDataMixin",
     "ratatouille.BakeDataMixin",
