@@ -6,7 +6,6 @@ import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelAccess;
-import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBrewing;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernQuality;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -30,57 +29,37 @@ import java.util.List;
 @GameTestHolder(CreateDelightCore.MODID)
 @PrefixGameTestTemplate(false)
 public class TavernProductionGameTests {
-    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
-    public static void nonAgingRecipeStillWaitsForItsDeclaredYeast(GameTestHelper helper) {
-        var recipe = new BarrelRecipe(id("createdelight:test/non_aging_yeast"),
-                NonNullList.of(Ingredient.EMPTY, Ingredient.of(Items.WHEAT)), Fluids.WATER,
-                Ingredient.of(Items.GLASS_BOTTLE), new ItemStack(Items.STONE), 2);
-        helper.assertTrue(!TavernQuality.canAge(recipe.result()), "Fixture does not participate in quality aging");
-        withRecipes(helper, recipe, () -> {
-            var barrel = barrel(helper);
-            barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
-            helper.assertTrue(TavernBrewing.awaitingYeast(barrel, helper.getLevel()),
-                    "Every recipe declaring yeast waits for starter, even when its product cannot age");
-            barrel.tick(helper.getLevel());
-            helper.assertTrue(barrel.getOutput().getStackInSlot(0).isEmpty()
-                            && barrel.getFluid().getFluidAmount() == 4000,
-                    "A non-aging recipe must not fall back to vinegar while waiting for yeast");
-        });
-        helper.succeed();
-    }
-
-    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
-    public static void incompleteYeastWaitsWithoutConsumingOrMakingVinegar(GameTestHelper helper) {
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 200)
+    public static void fullBarrelFermentsOrdinaryYeastIngredientsOnlyAfterClosing(GameTestHelper helper) {
         var recipe = new BarrelRecipe(id("createdelight:test/yeast"), NonNullList.of(Ingredient.EMPTY,
                 Ingredient.of(Items.APPLE), Ingredient.of(Items.APPLE), Ingredient.of(Items.SUGAR), Ingredient.of(Items.WHEAT)),
                 Fluids.WATER, Ingredient.of(Items.GLASS_BOTTLE), nativeWine(), 3);
-        withRecipes(helper, recipe, () -> {
-            for (int count : new int[]{0, 1, 15, 16}) {
-                var barrel = barrel(helper);
-                barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.APPLE, 16));
-                barrel.getIngredient().setStackInSlot(1, new ItemStack(Items.APPLE, 16));
-                barrel.getIngredient().setStackInSlot(2, new ItemStack(Items.SUGAR, 16));
-                barrel.getIngredient().setStackInSlot(3, count == 0 ? ItemStack.EMPTY : new ItemStack(Items.WHEAT, count));
-                barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
-                for (int tick = 0; tick < 5; tick++) barrel.tick(helper.getLevel());
-                var batch = ((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch();
-                if (count < 16) {
-                    helper.assertTrue(batch == null && barrel.getOutput().getStackInSlot(0).isEmpty()
-                                    && barrel.getFluid().getFluidAmount() == 4000
-                                    && barrel.getIngredient().getStackInSlot(0).getCount() == 16,
-                            "Correct wine ingredients wait intact for sixteen yeast; never fall back to vinegar at " + count);
-                } else {
-                    helper.assertTrue(batch != null && !batch.brewing() && batch.canAge()
-                                    && barrel.getOutput().getStackInSlot(0).getCount() == 16
-                                    && barrel.getOutput().getStackInSlot(0).is(nativeWine().getItem()),
-                            "Sixteen yeast and two full apple slots produce sixteen bottles after initial brewing");
-                }
-            }
-        });
-        helper.succeed();
+        var barrel = barrel(helper);
+        barrel.setOpen(true);
+        barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.APPLE, 16));
+        barrel.getIngredient().setStackInSlot(1, new ItemStack(Items.APPLE, 16));
+        barrel.getIngredient().setStackInSlot(2, new ItemStack(Items.SUGAR, 16));
+        barrel.getIngredient().setStackInSlot(3, new ItemStack(Items.WHEAT, 16));
+        barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
+        for (int tick = 0; tick < 5; tick++) barrel.tick(helper.getLevel());
+        helper.assertTrue(((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch() == null
+                        && barrel.getOutput().getStackInSlot(0).isEmpty()
+                        && barrel.getFluid().getFluidAmount() == 4000
+                        && barrel.getIngredient().getStackInSlot(3).getCount() == 16,
+                "An open barrel keeps all ingredients intact until the player closes it");
+        barrel.setOpen(false);
+        // Native recipes are checked once per 97 world ticks; retry on real ticks, not a tight loop.
+        helper.succeedWhen(() -> withRecipes(helper, recipe, () -> {
+            barrel.tick(helper.getLevel());
+            var batch = ((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch();
+            helper.assertTrue(batch != null && !batch.brewing() && batch.canAge()
+                            && barrel.getOutput().getStackInSlot(0).getCount() == 16
+                            && barrel.getOutput().getStackInSlot(0).is(nativeWine().getItem()),
+                    "Closing the full barrel produces sixteen bottles with yeast as an ordinary ingredient");
+        }));
     }
 
-    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 200)
     public static void externalWineUsesItsOwnNbtAndCanAgeFromFluidRecipes(GameTestHelper helper) {
         var cider = new ItemStack(ForgeRegistries.ITEMS.getValue(id("farmersdelight:apple_cider")));
         cider.getOrCreateTag().putString("CustomProducer", "test");
@@ -95,10 +74,10 @@ public class TavernProductionGameTests {
         var recipe = new BarrelRecipe(id("createdelight:test/external_yeast"),
                 NonNullList.of(Ingredient.EMPTY, Ingredient.of(Items.WHEAT)), Fluids.WATER,
                 Ingredient.of(Items.GLASS_BOTTLE), cider, 2);
-        withRecipes(helper, recipe, () -> {
-            var barrel = barrel(helper);
-            barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.WHEAT, 16));
-            barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
+        var barrel = barrel(helper);
+        barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.WHEAT, 16));
+        barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
+        helper.succeedWhen(() -> withRecipes(helper, recipe, () -> {
             barrel.tick(helper.getLevel());
             var batch = ((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch();
             helper.assertTrue(batch != null && batch.canAge() && batch.hasPendingOutput(),
@@ -111,8 +90,7 @@ public class TavernProductionGameTests {
                             && restored.getOutput().getStackInSlot(0).is(cider.getItem())
                             && !restored.getOutput().getStackInSlot(0).getOrCreateTag().contains("BrewLevel"),
                     "Saved external batches resume and finish without native bottle NBT");
-        });
-        helper.succeed();
+        }));
     }
 
     private static BarrelBlockEntity barrel(GameTestHelper helper) {

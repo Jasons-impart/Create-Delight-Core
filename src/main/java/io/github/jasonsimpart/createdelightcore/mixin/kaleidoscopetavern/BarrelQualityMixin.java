@@ -12,7 +12,6 @@ import io.github.createdelight.qualityfoodfluids.api.QualityFoodFluidsCreateRule
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelAccess;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelBatch;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernQuality;
-import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBrewing;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -104,11 +103,7 @@ public abstract class BarrelQualityMixin implements TavernBarrelAccess {
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void createdelightcore$tickQuality(Level level, CallbackInfo ci) {
         var batch = createdelightcore$qualityBatch;
-        if (batch == null) {
-            // A missing starter is an incomplete wine recipe, not the native vinegar fallback.
-            if (!level.isClientSide && TavernBrewing.awaitingYeast((BarrelBlockEntity) (Object) this, level)) ci.cancel();
-            return;
-        }
+        if (batch == null) return;
         ci.cancel(); // New batches never execute the native six-stage aging loop.
         if (level.isClientSide) return;
         if (getOutput().getStackInSlot(0).isEmpty() && !batch.hasPendingOutput()) {

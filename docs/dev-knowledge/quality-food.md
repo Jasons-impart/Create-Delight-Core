@@ -68,7 +68,9 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 七款外部成品由 KJS 的 `createdelight:tavern_fermented_drinks` 标签明确接入 `TavernQuality.canAge/isBatchProduct`，复用已有待产出记录、初酿金品质上限、普通／铁／金 30／60／90 分钟单次陈酿和存档恢复；不扩大原生 `isBarrelProduct/isQualityWine`，因此外部物品不写 `BrewLevel`，仍使用原效果。标签不赋予外部酒调酒器支持。
 
-`TavernBrewing.awaitingYeast` 在未建立批次且基液满 4L 时，剔除 `createdelight:tavern_yeast` 后匹配声明酵母的酒桶配方，不以产物能否陈酿为条件；其余原料匹配且酵母不足 16 份时暂停原生 tick，防止直接落入醋兜底。酵母仍是普通配方原料，每瓶一份，不调整 assemble 产量；酒醪仅需酵母的配方和重复苹果原料槽同样匹配。醋和压榨不要求酵母，不增加槽位或存档字段；原生 JEI 已将酒桶各原料显示为 16 份。
+父包在 `kubejs/server_scripts/Kaleidoscope Tavern/recipe.js` 逐条覆盖 24 条原生酒桶配方，保留原 ID、材料、基液、瓶器和 2400 tick 工时，显式加入干酵母。酵母沿用普通原料的产量计算，每瓶一份，满额 16 瓶需 16 份；不增加独立酵母标签、槽位、存档字段或 CDC 缺料等待。开盖时投料，盖盖子后沿用原生配方匹配、扣料与醋兜底；醋和压榨不要求酵母，原生 JEI 已将酒桶各原料显示为 16 份。
+
+原生酒桶按 `hashCode` 偏移每 97 个世界 tick 检查一次配方，手动连续调用 `tick` 不会推进世界时间；相关 GameTest 使用 `succeedWhen` 随真实 tick 重试，并在每次回调内安装／恢复临时配方，避免随机漏过检查窗口或跨 tick 污染其他用例。
 
 `MonsterPotWortJeiMixin` 仅对恶魂酒醪配方复制 JEI 候选物品并显示每槽 4 份，避免原生 `Ingredient.getItems()` 的单件预览低报成本；不修改配方模板或其他怪物锅配方，且仅在客户端与 JEI 存在时加载。
 
@@ -76,7 +78,7 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 `FireAleContainerMixin` 仅对 Iron's Spells 烈焰麦酒将 `finishUsingItem` 的原生 `returnItem` 替换为 B&C 酒杯，沿用原方法的单杯／堆叠余物处理；需两模组同时存在。
 
-2026-11-19：生产迁移新增的酵母缺料等待、外部酒 NBT／批次恢复、怪物锅四倍材料／空桶／堵输出／品质、烈焰麦酒堆叠余物测试已编译；Java 17 构建及 refmap 校验通过。两次 `runGameTestServer` 均在启动时无法读取 `mixins.createdelightcore.json`，新增断言未执行；主／测试资源已在 `MOD_CLASSES`，源文件与构建副本一致，正式 JAR 内配置和 refmap 静态校验正常，更具体的类加载原因尚未确定。真实游戏回归待补，不能沿用此前酒类测试的通过结果。
+2026-11-19：生产迁移的外部酒 NBT／批次恢复、怪物锅四倍材料／空桶／堵输出／品质、烈焰麦酒堆叠余物测试已编译；缺酵母等待已撤回，相关断言改为开盖不酿造、盖盖子后普通酵母原料满额产出。Java 17 构建及 refmap 校验通过。首轮迁移两次 `runGameTestServer` 均在启动时无法读取 `mixins.createdelightcore.json`，新增断言未执行；主／测试资源已在 `MOD_CLASSES`，源文件与构建副本一致，构建 JAR 内配置和 refmap 静态校验正常，更具体的类加载原因尚未确定。真实游戏回归待补，不能沿用此前酒类测试的通过结果。
 
 森罗酒桶的 Jade 与交互提示首行剥除 QFF 的 `with_quality` 名称包装并保留自定义名，品质只在独立行显示；待产出模板在酿造完成前尚未赋品质，直接显示 `ItemStack.getHoverName()` 会被 QFF 自动冠以“普通”，与批次品质冲突。
 
