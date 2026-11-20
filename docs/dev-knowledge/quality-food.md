@@ -66,7 +66,7 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 ## 外部酒与酵母
 
-七款外部成品由 KJS 的 `createdelight:tavern_fermented_drinks` 标签明确接入 `TavernQuality.canAge/isBatchProduct`，复用已有待产出记录、初酿金品质上限、普通／铁／金 30／60／90 分钟单次陈酿和存档恢复；不扩大原生 `isBarrelProduct/isQualityWine`，因此外部物品不写 `BrewLevel`，仍使用原效果。标签不赋予外部酒调酒器支持。
+六款外部成品由 KJS 的 `createdelight:tavern_fermented_drinks` 标签明确接入 `TavernQuality.canAge/isBatchProduct`，复用已有待产出记录、初酿金品质上限、普通／铁／金 30／60／90 分钟单次陈酿和存档恢复；不扩大原生 `isBarrelProduct/isQualityWine`，因此外部物品不写 `BrewLevel`，仍使用原效果。标签不赋予外部酒调酒器支持。
 
 父包在 `kubejs/server_scripts/Kaleidoscope Tavern/recipe.js` 逐条覆盖 24 条原生酒桶配方，保留原 ID、材料、基液、瓶器和 2400 tick 工时，显式加入干酵母。酵母沿用普通原料的产量计算，每瓶一份，满额 16 瓶需 16 份；不增加独立酵母标签、槽位、存档字段或 CDC 缺料等待。开盖时投料，盖盖子后沿用原生配方匹配、扣料与醋兜底；醋和压榨不要求酵母，原生 JEI 已将酒桶各原料显示为 16 份。
 
@@ -83,6 +83,14 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 森罗酒桶的 Jade 与交互提示首行剥除 QFF 的 `with_quality` 名称包装并保留自定义名，品质只在独立行显示；待产出模板在酿造完成前尚未赋品质，直接显示 `ItemStack.getHoverName()` 会被 QFF 自动冠以“普通”，与批次品质冲突。
 
 森罗六种果汁及桶沿用原生注册，保留 QF／QFF 支持标签。Forge `FluidBucketWrapper` 通用品质往返由 QFF 负责修复；CDC 不注册替代桶、不添加果汁桶 OEI 映射或专用桶 Mixin。六果汁四档品质的原生桶往返已通过当前本地 QFF 构建回归，CDC 继续保留该回归测试。
+
+## 龙头与 Create 置物台
+
+`BarrelTapDepotMixin` 在原生 `canTapExtract` 的酿造、成品及配方容器检查之后识别龙头正下方的 `create:depot`，并在 `transform` 中将一次出酒交给 `TavernTapDepot`。开阀和结束出酒的时机继续由森罗龙头控制，不增加 tick 轮询；只在森罗与 Create 同时加载时应用。
+
+置物台持物必须匹配当前酒桶配方的 `carrier`，一次消耗一个容器和一瓶酒。通过公开的 `TransportedItemStackHandlerBehaviour` 加工回调取得真实持物：单个容器原位变为成品，堆叠容器用 `convertToAndLeaveHeld` 留下余瓶，酒进入 Create 原有产物缓冲；其标脏、同步和存档由 Create 负责。只有 `DepotBehaviour.isOutputEmpty()` 时才能出酒，否则 Create 的加工溢出路径会把余物掉落到世界。开阀后到出酒前再次检查容器及缓冲，阻塞或空提取不扣容器；置物台分支无法接酒时仍允许原生地面容器检查。
+
+实际产出复用 `extractOneOutput`，继承现有初酿禁取、QF 品质和外部酒 NBT 规则；交付末瓶后才调用 `resetIfOutputEmpty`，避免清掉批次后丢失末瓶品质。`TavernTapDepotGameTests` 覆盖原生四档品质、外部酒与玻璃瓶、堆叠余瓶、缓冲阻塞及存档、容器中途变化、初酿开关盖和末瓶清理；运行结果见交付记录，编译不等同游戏测试通过。2026-11-20 的 Java 17 `clean build` 与 refmap 校验通过，`runGameTestServer` 仍在读取 Mixin 配置资源时失败，新增用例未执行，日志位于父包 `tmp-opencode/tap-depot/`；手动及红石开阀的实际游戏回归待补。
 
 ## 给新机器补品质时
 
