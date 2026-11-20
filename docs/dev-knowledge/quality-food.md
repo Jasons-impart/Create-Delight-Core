@@ -88,9 +88,9 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 `BarrelTapDepotMixin` 在原生 `canTapExtract` 的酿造、成品及配方容器检查之后识别龙头正下方的 `create:depot`，并在 `transform` 中将一次出酒交给 `TavernTapDepot`。开阀和结束出酒的时机继续由森罗龙头控制，不增加 tick 轮询；只在森罗与 Create 同时加载时应用。
 
-置物台持物必须匹配当前酒桶配方的 `carrier`，一次消耗一个容器和一瓶酒。通过公开的 `TransportedItemStackHandlerBehaviour` 加工回调取得真实持物：单个容器原位变为成品，堆叠容器用 `convertToAndLeaveHeld` 留下余瓶，酒进入 Create 原有产物缓冲；其标脏、同步和存档由 Create 负责。只有 `DepotBehaviour.isOutputEmpty()` 时才能出酒，否则 Create 的加工溢出路径会把余物掉落到世界。开阀后到出酒前再次检查容器及缓冲，阻塞或空提取不扣容器；置物台分支无法接酒时仍允许原生地面容器检查。
+置物台持物必须匹配当前酒桶配方的 `carrier`，一次消耗一个容器和一瓶酒。通过公开的 `TransportedItemStackHandlerBehaviour` 加工回调取得真实持物：单个容器原位变为成品，堆叠容器用 `convertToAndLeaveHeld` 留下余瓶，酒进入 Create 原有产物缓冲；其标脏、同步和存档由 Create 负责。通过 `create.DepotOutputBufferAccessor` 取得真实加工缓冲，调用 `ItemHandlerHelper.insertItemStacked(buffer, preview, true)` 模拟整瓶插入，计入槽位上限、酒品质及全部 NBT；缓冲已有产物仍可继续叠加或使用空槽，只有下一瓶放不下时暂停。单个容器原位转换，不要求加工缓冲腾出空间。Create 的加工溢出路径会把余物掉落到世界，不能仅按总数量余量判断容量。开阀后到出酒前再次检查容器及缓冲，阻塞或空提取不扣容器；置物台分支无法接酒时仍允许原生地面容器检查。
 
-实际产出复用 `extractOneOutput`，继承现有初酿禁取、QF 品质和外部酒 NBT 规则；交付末瓶后才调用 `resetIfOutputEmpty`，避免清掉批次后丢失末瓶品质。`TavernTapDepotGameTests` 覆盖原生四档品质、外部酒与玻璃瓶、堆叠余瓶、缓冲阻塞及存档、容器中途变化、初酿开关盖和末瓶清理；运行结果见交付记录，编译不等同游戏测试通过。2026-11-20 的 Java 17 `clean build` 与 refmap 校验通过，`runGameTestServer` 仍在读取 Mixin 配置资源时失败，新增用例未执行，日志位于父包 `tmp-opencode/tap-depot/`；手动及红石开阀的实际游戏回归待补。
+预览按原生配方／醋兜底选取模板，并复用原生瓶器重建及 `TavernBarrelAccess.createdelightcore$qualifyOutput` 品质处理，与 `extractOneOutput` 的实际成品保持一致；原生提取只把输出槽的一份库存作为门槛，实际商品来自传入模板，不能直接以输出槽的 NBT 代替预览。实际产出复用 `extractOneOutput`，继承现有初酿禁取、QF 品质和外部酒 NBT 规则；交付末瓶后才调用 `resetIfOutputEmpty`，避免清掉批次后丢失末瓶品质。`TavernTapDepotGameTests` 覆盖原生四档品质、外部酒与玻璃瓶、连续缓冲与堆叠余瓶、品质／NBT 容量匹配、满缓冲暂停及释放一格后恢复、单瓶原位转换、存档、容器中途变化、初酿开关盖和末瓶清理；运行结果见交付记录，编译不等同游戏测试通过。2026-11-20 的 Java 17 `clean build` 与 refmap 校验通过，`runGameTestServer` 仍在读取 Mixin 配置资源时失败，新增用例未执行，首轮日志位于父包 `tmp-opencode/tap-depot/`，连续缓冲修订日志位于 `tmp-opencode/tap-depot-buffer/`；手动及红石开阀的实际游戏回归待补。
 
 ## 给新机器补品质时
 

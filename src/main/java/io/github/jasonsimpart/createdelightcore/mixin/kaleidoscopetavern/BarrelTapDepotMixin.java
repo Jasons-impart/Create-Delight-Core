@@ -30,7 +30,8 @@ public abstract class BarrelTapDepotMixin {
     private void createdelightcore$recognizeDepot(Level level, BlockPos tapPos, LivingEntity entity,
                                                   CallbackInfoReturnable<Boolean> cir) {
         if (level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot
-                && TavernTapDepot.canFill(depot, getCurrentCarrier(level))) {
+                && TavernTapDepot.canFill(depot, getCurrentCarrier(level),
+                TavernTapDepot.previewOutput((BarrelBlockEntity) (Object) this, level))) {
             cir.setReturnValue(true);
         }
     }
@@ -38,11 +39,12 @@ public abstract class BarrelTapDepotMixin {
     @Inject(method = "transform", at = @At("HEAD"), cancellable = true)
     private void createdelightcore$fillDepot(Level level, BlockPos tapPos, Ingredient carrier, ItemStack result,
                                              CallbackInfo ci) {
-        if (!(level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot)
-                || !TavernTapDepot.canFill(depot, carrier)) return;
+        if (!(level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot)) return;
+        ItemStack preview = TavernTapDepot.previewOutput((BarrelBlockEntity) (Object) this, result);
+        if (!TavernTapDepot.canFill(depot, carrier, preview)) return;
         ci.cancel();
         if (level.isClientSide) return;
-        TavernTapDepot.fill(depot, carrier, () -> {
+        TavernTapDepot.fill(depot, carrier, preview, () -> {
             ItemStack filled = extractOneOutput(result);
             if (!filled.isEmpty()) resetIfOutputEmpty();
             return filled;

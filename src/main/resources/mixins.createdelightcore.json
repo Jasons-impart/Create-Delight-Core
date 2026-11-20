@@ -8,6 +8,7 @@
     "AlcoholConsumptionMixin",
     "kaleidoscopetavern.BarrelQualityMixin",
     "kaleidoscopetavern.BarrelTapDepotMixin",
+    "create.DepotOutputBufferAccessor",
     "kaleidoscopetavern.BottleQualityMixin",
     "kaleidoscopetavern.DrinkQualityMixin",
     "kaleidoscopetavern.DrinkFluidNameMixin",
