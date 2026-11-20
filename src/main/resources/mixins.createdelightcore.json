@@ -172,6 +172,9 @@
     "fluidlogistics.CopperBasinQualityMixin"
   ],
   "client": [
+    "creategearsandtavern.CgtJeiPluginMixin",
+    "creategearsandtavern.CgtJeiDrinkRecipesMixin",
+    "creategearsandtavern.CgtJeiFluidSubtypeMixin",
     "dungeonsdelight.MonsterPotWortJeiMixin",
     "kaleidoscopetavern.BarrelJadeMixin",
     "eclipticseason.SmartHumidityClientModificationMixin",

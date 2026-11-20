@@ -39,6 +39,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".mixin.creategearsandtavern.")) {
+            return decide(mixinClassName, "creategearsandtavern") && decide(mixinClassName, "jei");
+        }
         if (mixinClassName.endsWith(".quality_food.FoodEffectQualityMixin")) {
             return decide(mixinClassName, "quality_food");
         }
