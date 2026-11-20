@@ -107,6 +107,7 @@ minecraft {
         // By default, the server will crash when no gametests are provided.
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
+            args '--mixin.config=mixins.createdelightcore.cgt_jei_test.json'
             workingDirectory project.file('run/gametestserver')
             source sourceSets.test
             mods {
@@ -364,8 +365,8 @@ dependencies {
     testRuntimeOnly fg.deobf("curse.maven:irons-lib-1492763:8364892")
     testRuntimeOnly fg.deobf("curse.maven:player-animation-lib-658587:4587214")
     // quality food fluids — optional machine quality integrations
-    compileOnly files("${rootDir}/../mods/quality_food_fluids-1.20.1-0.1.4-cdr-vinegar-compat1.jar")
-    testRuntimeOnly fg.deobf("createdelight.local:quality_food_fluids-1.20.1:0.1.4-cdr-vinegar-compat1")
+    compileOnly files("${rootDir}/../mods/quality_food_fluids-1.20.1-0.1.4-cdr-vinegar-compat3.jar")
+    testRuntimeOnly fg.deobf("createdelight.local:quality_food_fluids-1.20.1:0.1.4-cdr-vinegar-compat3")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")
