@@ -12,6 +12,9 @@ import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.Tavern
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelBatch;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernQuality;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernTapDepot;
+import io.github.jasonsimpart.createdelightcore.mixin.create.DepotOutputBufferAccessor;
+import com.simibubi.create.content.logistics.depot.DepotBehaviour;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.gametest.framework.GameTest;
@@ -46,8 +49,10 @@ public class TavernTapDepotGameTests {
                 depot.setHeldItem(new ItemStack(ModItems.EMPTY_BOTTLE.get()));
                 helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
                         "A compatible depot carrier passes the native tap gates");
+                ItemStack preview = TavernTapDepot.previewOutput(barrel, helper.getLevel());
                 barrel.doTapExtract(helper.getLevel(), tapPos(depot));
                 ItemStack filled = depot.getHeldItem();
+                helper.assertTrue(ItemStack.matches(preview, filled), "Capacity preview matches the actual native bottle including quality NBT");
                 helper.assertTrue(filled.is(ModItems.WINE.get()) && filled.getCount() == 1
                                 && QualityUtils.getQuality(filled) == quality,
                         "A single native bottle is replaced by one wine of the batch quality: " + quality);
@@ -60,7 +65,7 @@ public class TavernTapDepotGameTests {
     }
 
     @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
-    public static void stackedExternalCarriersKeepRemaindersAndWaitForBufferedOutput(GameTestHelper helper) {
+    public static void stackedExternalCarriersAccumulateWineWithoutCollectingBetweenPours(GameTestHelper helper) {
         var depot = depot(helper);
         var product = new ItemStack(ForgeRegistries.ITEMS.getValue(id("farmersdelight:apple_cider")));
         product.getOrCreateTag().putString("Producer", "depot-test");
@@ -70,26 +75,17 @@ public class TavernTapDepotGameTests {
             depot.setHeldItem(new ItemStack(Items.GLASS_BOTTLE, 3));
             helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null), "Stacked glass bottles are accepted");
             barrel.doTapExtract(helper.getLevel(), tapPos(depot));
-            helper.assertTrue(depot.getHeldItem().is(Items.GLASS_BOTTLE) && depot.getHeldItem().getCount() == 2
-                            && barrel.getOutput().getStackInSlot(0).getCount() == 1,
-                    "Each native pour consumes exactly one bottle and one serving");
-            helper.assertTrue(!barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
-                    "Buffered output prevents another pour until collected");
-            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
             helper.assertTrue(depot.getHeldItem().getCount() == 2 && barrel.getOutput().getStackInSlot(0).getCount() == 1,
-                    "A completed pour also rechecks output space before extracting");
-
-            depot.load(depot.saveWithoutMetadata());
-            ItemStack first = takeBufferedOutput(depot);
-            assertExternalOutput(helper, first, product);
-            helper.assertTrue(depot.getHeldItem().getCount() == 2
-                            && barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
-                    "Depot persistence keeps both carriers and buffered wine; collection permits the next pour");
+                    "The first pour consumes exactly one bottle and one serving");
+            helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
+                    "Existing buffered wine with remaining capacity permits the next pour");
             barrel.doTapExtract(helper.getLevel(), tapPos(depot));
-            assertExternalOutput(helper, takeBufferedOutput(depot), product);
             helper.assertTrue(depot.getHeldItem().is(Items.GLASS_BOTTLE) && depot.getHeldItem().getCount() == 1
                             && barrel.getBrewLevel() == 0 && barrel.getRecipeId() == null,
-                    "Two pours leave the third carrier intact and clear the exhausted source");
+                    "Two consecutive pours preserve the spare carrier and reset the exhausted source");
+            depot.load(depot.saveWithoutMetadata());
+            assertExternalOutput(helper, takeBufferedOutput(depot), product, 2);
+            helper.assertTrue(depot.getHeldItem().getCount() == 1, "Persistence preserves the unused carrier and both buffered servings");
             barrel.doTapExtract(helper.getLevel(), tapPos(depot));
             helper.assertTrue(depot.getHeldItem().getCount() == 1 && takeBufferedOutput(depot).isEmpty(),
                     "An exhausted source neither duplicates wine nor consumes another carrier");
@@ -119,7 +115,7 @@ public class TavernTapDepotGameTests {
             helper.assertTrue(depot.getHeldItem().is(Items.APPLE) && barrel.getOutput().getStackInSlot(0).getCount() == 2,
                     "Changing the receiver while the tap is open cannot consume wine");
             depot.setHeldItem(new ItemStack(ModItems.EMPTY_BOTTLE.get(), 2));
-            TavernTapDepot.fill(depot, recipe.carrier(), () -> ItemStack.EMPTY);
+            TavernTapDepot.fill(depot, recipe.carrier(), TavernTapDepot.previewOutput(barrel, recipe.result()), () -> ItemStack.EMPTY);
             helper.assertTrue(depot.getHeldItem().getCount() == 2 && takeBufferedOutput(depot).isEmpty(),
                     "A failed native extraction never consumes the carrier");
         });
@@ -177,8 +173,81 @@ public class TavernTapDepotGameTests {
         helper.succeed();
     }
 
-    private static void assertExternalOutput(GameTestHelper helper, ItemStack result, ItemStack product) {
-        helper.assertTrue(result.is(product.getItem()) && result.getCount() == 1
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
+    public static void bufferCapacityIncludesQualityNbtAndResumesAsSoonAsOneServingFits(GameTestHelper helper) {
+        var depot = depot(helper);
+        var recipe = recipe(new ItemStack(ModItems.WINE.get()), Ingredient.of(ModItems.EMPTY_BOTTLE.get()));
+        var barrel = barrel(helper, recipe, 2, Quality.GOLD, 0);
+        var buffer = outputBuffer(depot);
+        ItemStack preview = TavernTapDepot.previewOutput(barrel, recipe.result());
+        int limit = preview.getMaxStackSize();
+        for (int slot = 0; slot < buffer.getSlots(); slot++) buffer.setStackInSlot(slot, preview.copyWithCount(limit));
+        depot.setHeldItem(new ItemStack(ModItems.EMPTY_BOTTLE.get(), 3));
+        withRecipe(helper, recipe, () -> {
+            buffer.setStackInSlot(0, TavernQuality.qualify(new ItemStack(ModItems.WINE.get(), limit - 1), Quality.IRON));
+            helper.assertTrue(!barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
+                    "Free count in a different-quality stack cannot receive the next serving");
+            ItemStack otherNbt = preview.copyWithCount(limit - 1);
+            otherNbt.getOrCreateTag().putString("Producer", "another-batch");
+            buffer.setStackInSlot(0, otherNbt);
+            helper.assertTrue(!barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
+                    "Free count in a stack with different non-quality NBT is not usable capacity");
+            buffer.setStackInSlot(0, preview.copyWithCount(limit - 1));
+            helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null)
+                            && buffer.getStackInSlot(0).getCount() == limit - 1
+                            && barrel.getOutput().getStackInSlot(0).getCount() == 2,
+                    "Capacity simulation accepts a matching partial stack without mutating either inventory");
+            buffer.setStackInSlot(0, preview.copyWithCount(limit));
+            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
+            helper.assertTrue(depot.getHeldItem().getCount() == 3 && barrel.getOutput().getStackInSlot(0).getCount() == 2
+                            && buffer.getStackInSlot(0).getCount() == limit,
+                    "Filling the buffer after the tap opens cancels extraction without consuming a carrier or wine");
+            buffer.setStackInSlot(0, preview.copyWithCount(limit - 1));
+            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
+            helper.assertTrue(buffer.getStackInSlot(0).getCount() == limit && depot.getHeldItem().getCount() == 2
+                            && barrel.getOutput().getStackInSlot(0).getCount() == 1,
+                    "One serving uses the last available space and one carrier");
+            helper.assertTrue(!barrel.canTapExtract(helper.getLevel(), tapPos(depot), null), "A fully occupied buffer pauses further pours");
+            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
+            helper.assertTrue(depot.getHeldItem().getCount() == 2 && barrel.getOutput().getStackInSlot(0).getCount() == 1,
+                    "Trying a full buffer cannot consume a carrier or wine");
+            var inventory = depot.getCapability(ForgeCapabilities.ITEM_HANDLER).orElseThrow(AssertionError::new);
+            inventory.extractItem(1, 1, false);
+            helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
+                    "Freeing one matching space resumes pours without clearing the rest of the buffer");
+            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
+            helper.assertTrue(buffer.getStackInSlot(0).getCount() == limit && depot.getHeldItem().getCount() == 1
+                            && barrel.getBrewLevel() == 0 && QualityUtils.getQuality(buffer.getStackInSlot(0)) == Quality.GOLD,
+                    "The resumed last serving preserves quality and leaves the remaining carrier");
+        });
+        helper.succeed();
+    }
+
+    @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
+    public static void aSingleCarrierCanBeReplacedEvenWhenTheOutputBufferIsFull(GameTestHelper helper) {
+        var depot = depot(helper);
+        var recipe = recipe(new ItemStack(ModItems.WINE.get()), Ingredient.of(ModItems.EMPTY_BOTTLE.get()));
+        var barrel = barrel(helper, recipe, 1, Quality.GOLD, 0);
+        var buffer = outputBuffer(depot);
+        for (int slot = 0; slot < buffer.getSlots(); slot++) buffer.setStackInSlot(slot, new ItemStack(Items.COBBLESTONE, 64));
+        depot.setHeldItem(new ItemStack(ModItems.EMPTY_BOTTLE.get()));
+        withRecipe(helper, recipe, () -> {
+            helper.assertTrue(barrel.canTapExtract(helper.getLevel(), tapPos(depot), null),
+                    "A single carrier has its own output position and needs no buffer space");
+            barrel.doTapExtract(helper.getLevel(), tapPos(depot));
+            helper.assertTrue(depot.getHeldItem().is(ModItems.WINE.get()) && QualityUtils.getQuality(depot.getHeldItem()) == Quality.GOLD
+                            && buffer.getStackInSlot(0).is(Items.COBBLESTONE) && buffer.getStackInSlot(0).getCount() == 64,
+                    "Replacing a single carrier leaves the full output buffer untouched");
+        });
+        helper.succeed();
+    }
+
+    private static ItemStackHandler outputBuffer(DepotBlockEntity depot) {
+        return ((DepotOutputBufferAccessor) depot.getBehaviour(DepotBehaviour.TYPE)).createdelightcore$getProcessingOutputBuffer();
+    }
+
+    private static void assertExternalOutput(GameTestHelper helper, ItemStack result, ItemStack product, int count) {
+        helper.assertTrue(result.is(product.getItem()) && result.getCount() == count
                         && QualityUtils.getQuality(result) == Quality.GOLD
                         && result.getOrCreateTag().getString("Producer").equals("depot-test")
                         && !result.getOrCreateTag().contains("BrewLevel"),

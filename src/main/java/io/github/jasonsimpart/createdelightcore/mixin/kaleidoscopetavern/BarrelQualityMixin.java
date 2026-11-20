@@ -151,8 +151,7 @@ public abstract class BarrelQualityMixin implements TavernBarrelAccess {
 
     @ModifyReturnValue(method = "extractOneOutput", at = @At("RETURN"))
     private ItemStack createdelightcore$qualifyBottle(ItemStack result) {
-        return createdelightcore$qualityBatch == null || result.isEmpty() ? result
-                : TavernQuality.qualify(result, createdelightcore$qualityBatch.quality());
+        return createdelightcore$qualifyOutput(result);
     }
 
     @WrapOperation(method = "placeBottleResult", at = @At(value = "INVOKE",
