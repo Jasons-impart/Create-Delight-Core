@@ -14,6 +14,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,12 @@ public final class AlcoholJeedClientRecipes {
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void recipesUpdated(RecipesUpdatedEvent event) {
-        var serializer = ForgeRegistries.RECIPE_SERIALIZERS.getValue(id("jeed:effect_provider"));
+        var serializerId = id("jeed:effect_provider");
+        var serializer = ForgeRegistries.RECIPE_SERIALIZERS.getValue(serializerId);
+        if (serializer == null) {
+            // Forge sync can omit a recipe serializer supplied only by the client.
+            serializer = RegistryManager.FROZEN.getRegistry(ForgeRegistries.Keys.RECIPE_SERIALIZERS).getValue(serializerId);
+        }
         if (serializer == null) return;
         var manager = event.getRecipeManager();
         List<Recipe<?>> recipes = new ArrayList<>(manager.getRecipes());
