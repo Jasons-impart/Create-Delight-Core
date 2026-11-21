@@ -175,6 +175,7 @@
     "creategearsandtavern.CgtJeiPluginMixin",
     "creategearsandtavern.CgtJeiDrinkRecipesMixin",
     "creategearsandtavern.CgtJeiFluidSubtypeMixin",
+    "creategearsandtavern.CgtJeiSubtypeRegistrationMixin",
     "dungeonsdelight.MonsterPotWortJeiMixin",
     "kaleidoscopetavern.BarrelJadeMixin",
     "eclipticseason.SmartHumidityClientModificationMixin",

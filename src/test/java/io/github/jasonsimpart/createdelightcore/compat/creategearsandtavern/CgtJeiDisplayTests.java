@@ -1,13 +1,17 @@
 package io.github.jasonsimpart.createdelightcore.compat.creategearsandtavern;
 
 import mezz.jei.api.forge.ForgeTypes;
+import mezz.jei.api.IModPlugin;
 import mezz.jei.api.ingredients.IIngredientTypeWithSubtypes;
+import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.gametest.GameTestHolder;
@@ -18,6 +22,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
+import java.util.IdentityHashMap;
+import java.util.Map;
 
 @GameTestHolder("createdelightcore")
 @PrefixGameTestTemplate(false)
@@ -81,6 +87,46 @@ public final class CgtJeiDisplayTests {
         FluidStack water = new FluidStack(net.minecraft.world.level.material.Fluids.WATER, 1000);
         water.getOrCreateTag().putString("DrinkVariant", "other mod data");
         check(CgtJeiFluidEntries.withoutBrewingVariant(water) == water, "CGT compatibility changed another namespace");
+        helper.succeed();
+    }
+
+    @GameTest(template = "humidity_regulator_empty")
+    public static void fluidSubtypeRegistrationUsesOnePluginInEitherOrder(GameTestHelper helper) throws Exception {
+        if (!ModList.get().isLoaded("creategearsandtavern") || !ModList.get().isLoaded("quality_food_fluids")) {
+            helper.succeed();
+            return;
+        }
+        var cgt = (IModPlugin) Class.forName("com.yision.creategearsandtavern.compat.jei.CGTJeiPlugin")
+                .getConstructor().newInstance();
+        var qff = (IModPlugin) Class.forName("io.github.createdelight.qualityfoodfluids.compat.jei.QualityFoodFluidsJeiPlugin")
+                .getConstructor().newInstance();
+        for (var order : List.of(List.of(cgt, qff), List.of(qff, cgt))) {
+            Map<Object, IModPlugin> owners = new IdentityHashMap<>();
+            for (var plugin : order) {
+                plugin.registerFluidSubtypes(new ISubtypeRegistration() {
+                    @Override
+                    public <B, I> void registerSubtypeInterpreter(IIngredientTypeWithSubtypes<B, I> type, B base,
+                                                                  IIngredientSubtypeInterpreter<I> interpreter) {
+                        check(owners.putIfAbsent(base, plugin) == null, "Fluid received two subtype interpreters: " + base);
+                    }
+
+                    @Override
+                    public void useNbtForSubtypes(Item... items) {
+                        throw new AssertionError("Expected explicit fluid subtype registration");
+                    }
+
+                    @Override
+                    public void useNbtForSubtypes(Fluid... fluids) {
+                        throw new AssertionError("Expected explicit fluid subtype registration");
+                    }
+                }, null);
+            }
+            for (String path : List.of("vinegar", "flowing_vinegar", "molotov", "flowing_molotov")) {
+                var fluid = ForgeRegistries.FLUIDS.getValue(ResourceLocation.fromNamespaceAndPath("creategearsandtavern", path));
+                var expected = path.endsWith("vinegar") ? qff : cgt;
+                check(owners.get(fluid) == expected, "Wrong subtype interpreter owner for " + path);
+            }
+        }
         helper.succeed();
     }
 

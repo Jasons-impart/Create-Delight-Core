@@ -41,7 +41,7 @@ public final class OrderGoodsQuality {
         }
 
         if ("western_wine".equals(orderType)) {
-            return getWesternWineQuality(stack);
+            return QualityUtils.getQuality(stack).level() > 0 ? 3 : 2;
         }
 
         Optional<OrderTypeProperties.Properties> properties = OrderTypeProperties.get(orderType);
@@ -83,13 +83,6 @@ public final class OrderGoodsQuality {
             level++;
         }
         return level;
-    }
-
-    private static int getWesternWineQuality(ItemStack stack) {
-        if (stack.hasTag() && stack.getOrCreateTag().contains("EffectAmplifier")) {
-            return Math.min(stack.getOrCreateTag().getInt("EffectAmplifier") + 2, 3);
-        }
-        return 2;
     }
 
     private static int clampQuality(int value) {
