@@ -3,8 +3,10 @@ package io.github.jasonsimpart.createdelightcore.compat.alcohol;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
+import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernJeedRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RecipesUpdatedEvent;
@@ -24,14 +26,21 @@ public final class AlcoholJeedClientRecipes {
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void recipesUpdated(RecipesUpdatedEvent event) {
         var serializer = ForgeRegistries.RECIPE_SERIALIZERS.getValue(id("jeed:effect_provider"));
-        if (serializer == null || !ForgeRegistries.MOB_EFFECTS.containsKey(id("youkaishomecoming:drunk"))) return;
+        if (serializer == null) return;
         var manager = event.getRecipeManager();
         List<Recipe<?>> recipes = new ArrayList<>(manager.getRecipes());
-        boolean changed = false;
+        int originalSize = recipes.size();
+        if (ForgeRegistries.MOB_EFFECTS.containsKey(id("youkaishomecoming:drunk"))) {
+            addAlcoholRecipes(serializer, manager, recipes);
+        }
+        TavernJeedRecipes.addRecipes(serializer, manager, recipes);
+        if (recipes.size() != originalSize) manager.replaceRecipes(recipes);
+    }
+
+    private static void addAlcoholRecipes(RecipeSerializer<?> serializer, RecipeManager manager, List<Recipe<?>> recipes) {
         var drunkRecipeId = id("createdelight:jeed/alcohol/drunk");
         if (manager.byKey(drunkRecipeId).isEmpty()) {
             recipes.add(provider(serializer, drunkRecipeId));
-            changed = true;
         }
         for (var entry : AlcoholDrinks.tooltipEffectSources().entrySet()) {
             var recipeId = id("createdelight:jeed/alcohol/native/" + entry.getKey().replace(':', '/'));
@@ -43,9 +52,7 @@ public final class AlcoholJeedClientRecipes {
             entry.getValue().forEach(item -> providers.add(source(item)));
             json.add("providers", providers);
             recipes.add(serializer.fromJson(recipeId, json));
-            changed = true;
         }
-        if (changed) manager.replaceRecipes(recipes);
     }
 
     private static Recipe<?> provider(RecipeSerializer<?> serializer, ResourceLocation id) {

@@ -6,7 +6,8 @@
   "mixins": [
     "CgtJeiPluginMixin",
     "CgtJeiDrinkRecipesMixin",
-    "CgtJeiFluidSubtypeMixin"
+    "CgtJeiFluidSubtypeMixin",
+    "CgtJeiSubtypeRegistrationMixin"
   ],
   "injectors": {
     "defaultRequire": 1
