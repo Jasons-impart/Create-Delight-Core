@@ -1,6 +1,7 @@
 package io.github.jasonsimpart.createdelightcore;
 
 import com.mojang.logging.LogUtils;
+import io.github.jasonsimpart.createdelightcore.compat.alcohol.ItemFluidContainers;
 import io.github.jasonsimpart.createdelightcore.compat.createdieselgenerators.BulkFermenterPartialModels;
 import io.github.jasonsimpart.createdelightcore.compat.createenchantmentindustry.TetraScrollPrinterCompat;
 import io.github.jasonsimpart.createdelightcore.compat.ftbranks.FTBRanksCompat;
@@ -41,6 +42,7 @@ public class CreateDelightCore {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
                 () -> io.github.jasonsimpart.createdelightcore.content.cooler.SnowmanCoolerModels::init);
         modEventBus.addListener(this::verifyExtendedAeInitialization);
+        modEventBus.addListener(ItemFluidContainers::onLoadComplete);
         if (ModList.get().isLoaded("createdieselgenerators")) {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> BulkFermenterPartialModels::init);
         }

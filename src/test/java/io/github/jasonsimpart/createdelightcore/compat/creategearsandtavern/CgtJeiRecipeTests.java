@@ -25,7 +25,7 @@ import java.util.Set;
 @GameTestHolder("createdelightcore")
 @PrefixGameTestTemplate(false)
 public final class CgtJeiRecipeTests {
-    @GameTest(template = "empty")
+    @GameTest(template = "humidity_regulator_empty")
     public static void actualCgtJeiRecipesUseOnePlainFluidPerDrink(GameTestHelper helper) throws Exception {
         if (!ModList.get().isLoaded("creategearsandtavern")) {
             helper.succeed();
@@ -50,7 +50,8 @@ public final class CgtJeiRecipeTests {
         List<?> fillings = recipes.get(fillingType);
         List<?> emptyings = recipes.get(emptyingType);
         long drinks = ForgeRegistries.FLUIDS.getKeys().stream()
-                .filter(id -> id.getNamespace().equals("creategearsandtavern") && !id.getPath().startsWith("flowing_")).count();
+                .filter(id -> id.getNamespace().equals("creategearsandtavern") && !id.getPath().startsWith("flowing_")
+                        && !id.getPath().equals("vinegar")).count();
         check(drinks > 0 && fillings.size() == drinks && emptyings.size() == drinks,
                 "CGT still registers multiple brewing recipes per drink: " + fillings.size() + "/" + emptyings.size() + "/" + drinks);
         Map<ResourceLocation, Integer> amounts = new HashMap<>();
@@ -61,6 +62,8 @@ public final class CgtJeiRecipeTests {
             FluidStack fluid = inputs.get(0);
             check(!fluid.hasTag() && fluid.getAmount() > 0, "filling fluid retained brewing, quality, or effect NBT");
             ResourceLocation id = ForgeRegistries.FLUIDS.getKey(fluid.getFluid());
+            check(!new ResourceLocation("creategearsandtavern", "vinegar").equals(id),
+                    "The legacy vinegar should not have a new JEI filling recipe");
             check(amounts.put(id, fluid.getAmount()) == null, "duplicate filling fluid " + id);
         }
         Set<ResourceLocation> emptied = new HashSet<>();

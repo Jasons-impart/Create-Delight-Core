@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -71,25 +72,31 @@ public class TavernProductionGameTests {
                             && result.getOrCreateTag().getString("CustomProducer").equals("test"),
                     "External wine retains unrelated NBT and receives only QF quality: " + quality);
         }
+        // Match the serializer's four slots and avoid the native wheat-and-water whiskey recipe.
         var recipe = new BarrelRecipe(id("createdelight:test/external_yeast"),
-                NonNullList.of(Ingredient.EMPTY, Ingredient.of(Items.WHEAT)), Fluids.WATER,
+                NonNullList.of(Ingredient.EMPTY, Ingredient.of(Items.NETHER_STAR),
+                        Ingredient.EMPTY, Ingredient.EMPTY, Ingredient.EMPTY), Fluids.WATER,
                 Ingredient.of(Items.GLASS_BOTTLE), cider, 2);
         var barrel = barrel(helper);
-        barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.WHEAT, 16));
+        barrel.getIngredient().setStackInSlot(0, new ItemStack(Items.NETHER_STAR, 16));
         barrel.getFluid().fill(new FluidStack(Fluids.WATER, 4000), IFluidHandler.FluidAction.EXECUTE);
         helper.succeedWhen(() -> withRecipes(helper, recipe, () -> {
             barrel.tick(helper.getLevel());
             var batch = ((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch();
-            helper.assertTrue(batch != null && batch.canAge() && batch.hasPendingOutput(),
-                    "A fluid-based external wine enters the persisted delayed batch");
+            helper.assertTrue(batch != null && batch.canAge() && batch.pendingOutput().is(cider.getItem()),
+                    "A fluid-based external wine enters the persisted delayed batch (recipe " + barrel.getRecipeId() + ")");
             var restored = barrel(helper);
             restored.load(barrel.saveWithoutMetadata());
             restored.tick(helper.getLevel());
             restored.tick(helper.getLevel());
-            helper.assertTrue(restored.getOutput().getStackInSlot(0).getCount() == 16
-                            && restored.getOutput().getStackInSlot(0).is(cider.getItem())
-                            && !restored.getOutput().getStackInSlot(0).getOrCreateTag().contains("BrewLevel"),
-                    "Saved external batches resume and finish without native bottle NBT");
+            var stock = ((TavernBarrelAccess) restored).createdelightcore$getFluidOutput();
+            helper.assertTrue(stock != null, "The saved external recipe keeps its fluid conversion");
+            helper.assertTrue(stock.amount() == 4000 && stock.servings() == 16 && restored.getOutput().getStackInSlot(0).isEmpty(),
+                    "Saved external batches produce one full tank, got " + stock.amount() + " mB");
+            ItemStack bottled = stock.previewBottle();
+            helper.assertTrue(bottled.is(cider.getItem()) && "test".equals(bottled.getOrCreateTag().getString("CustomProducer"))
+                            && !bottled.getOrCreateTag().contains("BrewLevel"),
+                    "Saved external batches keep their own bottle NBT, got " + bottled.save(new CompoundTag()));
         }));
     }
 

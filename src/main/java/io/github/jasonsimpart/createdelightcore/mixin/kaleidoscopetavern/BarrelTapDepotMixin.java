@@ -2,6 +2,7 @@ package io.github.jasonsimpart.createdelightcore.mixin.kaleidoscopetavern;
 
 import com.github.ysbbbbbb.kaleidoscopetavern.blockentity.brew.BarrelBlockEntity;
 import com.simibubi.create.content.logistics.depot.DepotBlockEntity;
+import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelAccess;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernTapDepot;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,10 +30,15 @@ public abstract class BarrelTapDepotMixin {
             cancellable = true)
     private void createdelightcore$recognizeDepot(Level level, BlockPos tapPos, LivingEntity entity,
                                                   CallbackInfoReturnable<Boolean> cir) {
-        if (level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot
-                && TavernTapDepot.canFill(depot, getCurrentCarrier(level),
-                TavernTapDepot.previewOutput((BarrelBlockEntity) (Object) this, level))) {
-            cir.setReturnValue(true);
+        if (level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot) {
+            var barrel = (BarrelBlockEntity) (Object) this;
+            Ingredient carrier = getCurrentCarrier(level);
+            if (TavernTapDepot.canFill(depot, carrier, TavernTapDepot.previewOutput(barrel, level))) {
+                cir.setReturnValue(true);
+            } else if (barrel instanceof TavernBarrelAccess access && access.createdelightcore$getFluidOutput() != null
+                    && TavernTapDepot.hasCarrier(depot, carrier)) {
+                cir.setReturnValue(false);
+            }
         }
     }
 
@@ -40,10 +46,24 @@ public abstract class BarrelTapDepotMixin {
     private void createdelightcore$fillDepot(Level level, BlockPos tapPos, Ingredient carrier, ItemStack result,
                                              CallbackInfo ci) {
         if (!(level.getBlockEntity(tapPos.below()) instanceof DepotBlockEntity depot)) return;
-        ItemStack preview = TavernTapDepot.previewOutput((BarrelBlockEntity) (Object) this, result);
-        if (!TavernTapDepot.canFill(depot, carrier, preview)) return;
+        var barrel = (BarrelBlockEntity) (Object) this;
+        ItemStack preview = TavernTapDepot.previewOutput(barrel, result);
+        if (!TavernTapDepot.canFill(depot, carrier, preview)) {
+            if (barrel instanceof TavernBarrelAccess access && access.createdelightcore$getFluidOutput() != null
+                    && TavernTapDepot.hasCarrier(depot, carrier)) ci.cancel();
+            return;
+        }
         ci.cancel();
         if (level.isClientSide) return;
+        if (barrel instanceof TavernBarrelAccess access) {
+            var output = access.createdelightcore$getFluidOutput();
+            if (output != null) {
+                if (!output.transferServing(filled -> TavernTapDepot.deliver(depot, carrier, filled)).isEmpty()) {
+                    access.createdelightcore$fluidDrained();
+                }
+                return;
+            }
+        }
         TavernTapDepot.fill(depot, carrier, preview, () -> {
             ItemStack filled = extractOneOutput(result);
             if (!filled.isEmpty()) resetIfOutputEmpty();

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    {"id": "creategearsandtavern:vinegar", "required": false},
+    {"id": "creategearsandtavern:flowing_vinegar", "required": false}
+  ]
+}

@@ -302,10 +302,18 @@ dependencies {
     testRuntimeOnly fg.deobf("curse.maven:youkais-homecoming-957437:8004757")
     // Optional Tavern quality/aging integration; use the exact pack version in regression tests.
     compileOnly fg.deobf("curse.maven:kaleidoscope-tavern-1475175:8350841")
+    // Optional Northeast China Delight vat and seasoning bottle integration (pack version 4.0.1).
+    compileOnly fg.deobf("curse.maven:northeast-china-delight-1733076:9495077")
+    testRuntimeOnly fg.deobf("curse.maven:northeast-china-delight-1733076:9495077")
     testRuntimeOnly fg.deobf("curse.maven:kaleidoscope-tavern-1475175:8350841")
     // Optional Monster Pot batch/quality integration, matching the pack's 1.3.0 jar.
     compileOnly fg.deobf("curse.maven:dungeons-delight-1258923:8150763")
     testRuntimeOnly fg.deobf("curse.maven:dungeons-delight-1258923:8150763")
+    if (file("${rootDir}/../mods/forge-runiclib-1.20.1-4.3.11.jar").isFile()) {
+        testRuntimeOnly fg.deobf("createdelight.local:forge-runiclib-1.20.1:4.3.11")
+    } else {
+        testRuntimeOnly fg.deobf("curse.maven:runiclib-880879:8188415")
+    }
     testRuntimeOnly fg.deobf("curse.maven:brewin-and-chewin-637808:6237884")
     // Exercise the optional CGT bottle/fluid bridge when its local pack jar is available.
     if (file("${rootDir}/../mods/creategearsandtavern-1.2.0-1.20.1.jar").isFile()) {

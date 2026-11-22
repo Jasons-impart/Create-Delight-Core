@@ -24,6 +24,9 @@ public final class TavernTapDepot {
 
     /** Mirrors the native recipe/fallback selection without extracting a serving. */
     public static ItemStack previewOutput(BarrelBlockEntity barrel, Level level) {
+        if (barrel instanceof TavernBarrelAccess access && access.createdelightcore$getFluidOutput() != null) {
+            return access.createdelightcore$getFluidOutput().previewBottle();
+        }
         var recipeId = barrel.getRecipeId();
         ItemStack template = recipeId == null || recipeId.equals(BarrelRecipeSerializer.EMPTY_RECIPE_ID)
                 ? new ItemStack(ModItems.VINEGAR.get()) : level.getRecipeManager().byKey(recipeId)
@@ -34,9 +37,24 @@ public final class TavernTapDepot {
 
     /** Uses the same bottle reconstruction and shared quality decorator as extractOneOutput. */
     public static ItemStack previewOutput(BarrelBlockEntity barrel, ItemStack template) {
+        if (barrel instanceof TavernBarrelAccess access && access.createdelightcore$getFluidOutput() != null) {
+            return access.createdelightcore$getFluidOutput().previewBottle();
+        }
         ItemStack result = template.copyWithCount(1);
         if (result.getItem() instanceof BottleBlockItem bottle) result = bottle.getFilledStack(barrel.getBrewLevel());
         return barrel instanceof TavernBarrelAccess access ? access.createdelightcore$qualifyOutput(result) : result;
+    }
+
+    public static boolean hasCarrier(DepotBlockEntity depot, Ingredient carrier) {
+        ItemStack held = depot.getHeldItem();
+        return !held.isEmpty() && carrier.test(held);
+    }
+
+    public static boolean deliver(DepotBlockEntity depot, Ingredient carrier, ItemStack serving) {
+        int carriers = depot.getHeldItem().getCount();
+        fill(depot, carrier, serving, () -> serving);
+        ItemStack after = depot.getHeldItem();
+        return carriers == 1 ? ItemStack.matches(after, serving) : carriers > 1 && after.getCount() == carriers - 1;
     }
 
     public static boolean canFill(DepotBlockEntity depot, Ingredient carrier, ItemStack preview) {

@@ -1,12 +1,15 @@
 package io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern;
 
 import de.cadentem.quality_food.core.Quality;
+import io.github.jasonsimpart.createdelightcore.CreateDelightCore;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 /** Brewing precedes the optional, single QF aging upgrade of a barrel batch. */
 public final class TavernBarrelBatch {
     public static final String NBT_KEY = "createdelightcore:barrel_quality";
+    public static final int NBT_VERSION = 4;
     public static final int BASE_AGING_TICKS = 30 * 60 * 20;
     private final int initialLevel;
     private final boolean canAge;
@@ -14,6 +17,7 @@ public final class TavernBarrelBatch {
     private int remainingTicks;
     private boolean aged;
     private ItemStack pendingOutput = ItemStack.EMPTY;
+    private TavernBarrelFluidOutput fluidOutput;
 
     public TavernBarrelBatch(Quality rolled) {
         this(rolled, 0, true);
@@ -46,9 +50,22 @@ public final class TavernBarrelBatch {
     public boolean aged() { return aged; }
 
     /** A recipe snapshot for persistence and display, never exposed as an inventory or fluid tank. */
-    public ItemStack pendingOutput() { return pendingOutput.copy(); }
-    public boolean hasPendingOutput() { return !pendingOutput.isEmpty(); }
+    public ItemStack pendingOutput() {
+        return fluidOutput != null && brewing() ? fluidOutput.assembledOutput() : pendingOutput.copy();
+    }
+    public boolean hasPendingOutput() { return !pendingOutput.isEmpty() || fluidOutput != null && brewing(); }
     public void deferOutput(ItemStack template) { pendingOutput = template.copy(); }
+    public TavernBarrelFluidOutput fluidOutput() { return fluidOutput; }
+
+    public void useFluidOutput(TavernBarrelFluidOutput output) {
+        fluidOutput = output;
+        pendingOutput = ItemStack.EMPTY;
+    }
+
+    public void fallBackToItems() {
+        pendingOutput = fluidOutput.assembledOutput();
+        fluidOutput = null;
+    }
 
     public ItemStack takeCompletedOutput() {
         if (brewing()) return ItemStack.EMPTY;
@@ -72,19 +89,20 @@ public final class TavernBarrelBatch {
 
     public CompoundTag save() {
         var tag = new CompoundTag();
-        tag.putInt("version", 3);
+        tag.putInt("version", NBT_VERSION);
         tag.putInt("initial_quality", initialLevel);
         tag.putInt("brewing_ticks", brewingTicks);
         tag.putBoolean("can_age", canAge);
         tag.putInt("remaining_ticks", remainingTicks);
         tag.putBoolean("aged", aged);
-        if (hasPendingOutput()) tag.put("pending_output", pendingOutput.save(new CompoundTag()));
+        if (fluidOutput != null) tag.put("fluid_output", fluidOutput.save());
+        if (!pendingOutput.isEmpty()) tag.put("pending_output", pendingOutput.save(new CompoundTag()));
         return tag;
     }
 
     public static TavernBarrelBatch load(CompoundTag tag) {
         int version = tag.getInt("version");
-        if (version < 1 || version > 3) return null;
+        if (version < 1 || version > NBT_VERSION) return null;
         boolean canAge = version == 1 || tag.getBoolean("can_age");
         int initial = tag.getInt("initial_quality");
         if (initial < 0 || initial > (canAge ? 2 : 3)) return null;
@@ -92,6 +110,23 @@ public final class TavernBarrelBatch {
         int remaining = canAge ? Math.max(0, Math.min(BASE_AGING_TICKS * (initial + 1), tag.getInt("remaining_ticks"))) : 0;
         var batch = new TavernBarrelBatch(initial, brewing, remaining, canAge, tag.getBoolean("aged"));
         if (version >= 3) batch.pendingOutput = ItemStack.of(tag.getCompound("pending_output"));
+        if (version >= 4 && tag.contains("fluid_output", Tag.TAG_COMPOUND)) {
+            CompoundTag output = tag.getCompound("fluid_output");
+            batch.fluidOutput = TavernBarrelFluidOutput.load(output, batch.brewing());
+            if (batch.fluidOutput == null) {
+                // A removed fluid cannot restore a fractional serving. Preserve each full serving that was saved.
+                int unit = output.getInt("serving_amount");
+                int count = batch.brewing() ? output.getInt("assembled_count")
+                        : unit > 0 ? output.getCompound("tank").getInt("Amount") / unit : 0;
+                var template = ItemStack.of(output.getCompound("template"));
+                batch.pendingOutput = template.copyWithCount(Math.max(0, Math.min(count, output.getInt("assembled_count"))));
+                CreateDelightCore.LOGGER.warn(
+                        "Could not restore fluid for Tavern barrel recipe {}; recovered {} full servings",
+                        output.getString("recipe"), batch.pendingOutput.getCount());
+            } else {
+                batch.pendingOutput = ItemStack.EMPTY;
+            }
+        }
         return batch;
     }
 }
