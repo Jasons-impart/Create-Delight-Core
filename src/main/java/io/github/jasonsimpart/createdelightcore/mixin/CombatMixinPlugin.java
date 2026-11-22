@@ -135,6 +135,9 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
         if (mixinClassName.contains(".IAF.")) {
             return decide(mixinClassName, "iceandfire");
         }
+        if (mixinClassName.contains(".ldlib.")) {
+            return decide(mixinClassName, "ldlib");
+        }
         return true;
     }
 
