@@ -60,7 +60,7 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 | 妖怪归家简单发酵 | 允许掷级 | `mixin/youkaishomecoming/{FermentationTankQualityMixin,SimpleFermentationRecipeAccessor}` | 扣料前保存实际物品与流体，调用一次 QFF `rollBasinQuality(items, fluids)`；本批物品与流体产物共用结果，复制后清除模板残留品质，无星批次不串星。 |
 | 妖怪归家原生酒瓶能力与装瓶 | 原样继承 | `mixin/youkaishomecoming/`；`compat/alcohol/YoukaiBottleQuality` | 原生装瓶在交互前保存流体快照，确认罐内减少后，在合并玩家库存前写品质，整罐排空后也能继承。大瓶未满时品质保存在 `SakeFluid` 内，满瓶重建物品时需把品质写到酒瓶；已删除的五款葡萄酒及对应大瓶不接入品质。 |
 | 森罗酒馆酒桶与基酒 | 先酿造，初始品质封顶金，之后单次陈酿升级 | `compat/kaleidoscopetavern/`；`mixin/kaleidoscopetavern/`；KJS `Kaleidoscope Tavern/tags.js` | 基础酿造等待配方的 `unit_time`，原生配方为 2400 tick；期间仅保存待产出记录，实际输出槽为空，物品与流体能力均无成品可取，完成时才一次性生成，完成后普通／铁／金再陈酿 30／60／90 分钟，仅升一级。两个阶段随原生存档及更新包同步，开盖暂停，Jade 显示相应剩余时间。基酒排除醋和西瓜汁，直接使用 QF 品质与基础酒效档；铁起可调酒。六果汁压榨在比较前继承水果品质并模拟接收，CGT 瓶液互转桥接 QF／QFF 根品质；莫洛托夫沿用原规则。 |
-| 森罗醋与鸡尾酒 | 按实际原料计算 QF 品质，药效统一经过 QF | 同上；`ShakerRecipeQualityMixin`、`ShakerFallbackQualityMixin`、`ShakerPourQualityMixin`、`CocktailDropsQualityMixin` | 无配方醋保留 16 瓶及原生扣料规则，2400 tick 酿造完成时才生成可取成品，不额外陈酿。鸡尾酒配方、摇动时长及无配方兜底分别仅掷级一次，保留签名杯颜色／效果；倒杯使用 QF 位置品质，普通档使用 `NONE_PLAYER_PLACED`。Mojito 倒杯及手动摆放补存实际成品，两条 `Block.getDrops` 最终入口在原生生成后统一补品质；摆放、取回与破坏沿用 QF 位置存储和清理；创造栏通过 `TavernCreativeTabs` 的 Forge 内容构建事件保序替换，基酒、醋及全部 14 种鸡尾酒统一钻品质。 |
+| 森罗醋与鸡尾酒 | 按实际原料计算 QF 品质，药效统一经过 QF | 同上；`ShakerRecipeQualityMixin`、`ShakerFallbackQualityMixin`、`ShakerPourQualityMixin`、`CocktailDropsQualityMixin` | 无匹配配方的酒桶保留投料。已存的旧森罗醋保留余量、瓶器、初酿进度和品质。鸡尾酒配方、摇动时长及无配方兜底分别仅掷级一次，保留签名杯颜色／效果；倒杯使用 QF 位置品质，普通档使用 `NONE_PLAYER_PLACED`。Mojito 倒杯及手动摆放补存实际成品，两条 `Block.getDrops` 最终入口在原生生成后统一补品质；摆放、取回与破坏沿用 QF 位置存储和清理。`TavernCreativeTabs` 保序替换基酒及全部 14 种鸡尾酒为钻品质，旧醋的创造栏和 JEI 隐藏由整合包脚本处理。 |
 | 魔法炼药锅酿造与装排液 | 酿造允许掷级；装排液原样继承 | `mixin/ironsspellbooks/AlchemistCauldronQualityMixin`、`AlchemistRecipeQualityMixin` | 酿造复用 QFF `rollBasinQuality(items, fluids)`，同时计入配料与流体；匹配只忽略品质，消耗实际批次 NBT；输出模板先复制，无品质输入清除模板残留品质。 |
 | 恶魂酒醪桶 | 按实际食材允许掷级 | `mixin/dungeonsdelight/MonsterPotWortMixin` | 仅 `createdelight:alcohol_preparation/ghastly_spirits`：六槽各需并消耗 4 份，容器槽 7 必须有空桶，内部餐食槽 6 与输出槽 8 为空才开工；先复制结果模板、按扣料前输入掷级，避免缺桶或堵输出时损失原料。 |
 
@@ -68,9 +68,9 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 六款外部成品由 KJS 的 `createdelight:tavern_fermented_drinks` 标签明确接入 `TavernQuality.canAge/isBatchProduct`，复用已有待产出记录、初酿金品质上限、普通／铁／金 30／60／90 分钟单次陈酿和存档恢复；不扩大原生 `isBarrelProduct/isQualityWine`，因此外部物品不写 `BrewLevel`，仍使用原效果。标签不赋予外部酒调酒器支持。
 
-父包在 `kubejs/server_scripts/Kaleidoscope Tavern/recipe.js` 逐条覆盖 24 条原生酒桶配方，保留原 ID、材料、基液、瓶器和 2400 tick 工时，显式加入干酵母。酵母沿用普通原料的产量计算，每瓶一份，满额 16 瓶需 16 份；不增加独立酵母标签、槽位、存档字段或 CDC 缺料等待。开盖时投料，盖盖子后沿用原生配方匹配、扣料与醋兜底；醋和压榨不要求酵母，原生 JEI 已将酒桶各原料显示为 16 份。
+父包在 `kubejs/server_scripts/Kaleidoscope Tavern/recipe.js` 逐条覆盖 24 条原生酒桶配方，保留原 ID、材料、基液、瓶器和 2400 tick 工时，显式加入干酵母。酵母沿用普通原料的产量计算，每瓶一份，满额 16 瓶需 16 份；不增加独立酵母标签、槽位、存档字段或 CDC 缺料等待。开盖时投料，盖上后沿用酒类配方原生匹配与扣料。压榨不要求酵母，酒类 JEI 各原料显示为 16 份。
 
-原生酒桶按 `hashCode` 偏移每 97 个世界 tick 检查一次配方，手动连续调用 `tick` 不会推进世界时间；相关 GameTest 使用 `succeedWhen` 随真实 tick 重试，并在每次回调内安装／恢复临时配方，避免随机漏过检查窗口或跨 tick 污染其他用例。
+原生酒桶按 `hashCode` 偏移每 97 个世界 tick 检查一次配方。GameTest 使用 `succeedWhen` 随真实 tick 重试，每次回调内安装和恢复临时配方。手工构造的 `BarrelRecipe` 要像原生 serializer 一样用 `Ingredient.EMPTY` 补齐四格，供 `RecipeMatcher` 匹配四个输入槽。
 
 `MonsterPotWortJeiMixin` 仅对恶魂酒醪配方复制 JEI 候选物品并显示每槽 4 份，避免原生 `Ingredient.getItems()` 的单件预览低报成本；不修改配方模板或其他怪物锅配方，且仅在客户端与 JEI 存在时加载。
 
@@ -90,7 +90,23 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 置物台持物必须匹配当前酒桶配方的 `carrier`，一次消耗一个容器和一瓶酒。通过公开的 `TransportedItemStackHandlerBehaviour` 加工回调取得真实持物：单个容器原位变为成品，堆叠容器用 `convertToAndLeaveHeld` 留下余瓶，酒进入 Create 原有产物缓冲；其标脏、同步和存档由 Create 负责。通过 `create.DepotOutputBufferAccessor` 取得真实加工缓冲，调用 `ItemHandlerHelper.insertItemStacked(buffer, preview, true)` 模拟整瓶插入，计入槽位上限、酒品质及全部 NBT；缓冲已有产物仍可继续叠加或使用空槽，只有下一瓶放不下时暂停。单个容器原位转换，不要求加工缓冲腾出空间。Create 的加工溢出路径会把余物掉落到世界，不能仅按总数量余量判断容量。开阀后到出酒前再次检查容器及缓冲，阻塞或空提取不扣容器；置物台分支无法接酒时仍允许原生地面容器检查。
 
-预览按原生配方／醋兜底选取模板，并复用原生瓶器重建及 `TavernBarrelAccess.createdelightcore$qualifyOutput` 品质处理，与 `extractOneOutput` 的实际成品保持一致；原生提取只把输出槽的一份库存作为门槛，实际商品来自传入模板，不能直接以输出槽的 NBT 代替预览。实际产出复用 `extractOneOutput`，继承现有初酿禁取、QF 品质和外部酒 NBT 规则；交付末瓶后才调用 `resetIfOutputEmpty`，避免清掉批次后丢失末瓶品质。`TavernTapDepotGameTests` 覆盖原生四档品质、外部酒与玻璃瓶、连续缓冲与堆叠余瓶、品质／NBT 容量匹配、满缓冲暂停及释放一格后恢复、单瓶原位转换、存档、容器中途变化、初酿开关盖和末瓶清理；运行结果见交付记录，编译不等同游戏测试通过。2026-11-20 的 Java 17 `clean build` 与 refmap 校验通过，`runGameTestServer` 仍在读取 Mixin 配置资源时失败，新增用例未执行，首轮日志位于父包 `tmp-opencode/tap-depot/`，连续缓冲修订日志位于 `tmp-opencode/tap-depot-buffer/`；手动及红石开阀的实际游戏回归待补。
+物品模式沿用原生配方及旧醋存档的成品模板，通过 `extractOneOutput` 取一份。流体模式用批次保存的成品模板、瓶器和当前 QFF 品质预览，置物台接收该瓶后扣除对应毫升数。首轮实现覆盖四档品质、连续缓冲、单瓶替换、容器变化和初酿禁取，测试入口为 `TavernTapDepotGameTests`。
+
+## 成品罐与固定酒瓶
+
+`TavernBarrelFluidOutput` 根据 `BarrelRecipe.assemble` 的实际结果、配方瓶器和单份量选择成品罐。CGT 1.2.0 原生饮品使用其目录与 `DrinkFluidConversions.fromItem`。固定外部成品通过 `ItemFluidContainers` 查表。转换失败或总量超过 4,000 mB 时使用物品输出，日志带配方 ID 和物品 ID。
+
+批次 NBT v4 保存初酿与陈酿、组装份数、每份毫升数、单件原成品、瓶器、流体及余量。初酿结束后写入成品罐，陈酿只更新剩余酒液品质。旧批次在服务端加载配方和标签后校验并迁移，已开始的批次使用保存的瓶器与模板。CGT 的 Forge/Create 入口由 `CgtBarrelVisibilityMixin` 和 `CgtBarrelDrainMixin` 接到成品罐，龙头、地面容器和置物台按整瓶扣同一份库存。Jade 与交互提示显示实际毫升和完整瓶数。
+
+父包 KJS 从 `CDAlcoholDrinks` 提交固定流体、液量和空容器 ID。CDC 在 `FMLLoadCompleteEvent.enqueueWork` 解析并冻结，已创建的物品栈在查询能力时获取规则。Forge 原生能力优先，首次冻结用独立栈诊断差异。妖怪归家的原生杯可能返碗或竹子。固定能力只排出完整一份，`EXECUTE` 后由 `getContainer()` 提供单件空容器。处理堆叠时先分出一件。
+
+## 通用醋
+
+KubeJS 使用现有 schema 定义酒桶配方 `createdelight:tavern_barrel/vinegar`，并通过 `TavernBarrelRecipes.registerFixedBatch` 登记原料数量及工时引用。配方使用 4 L 水、豆渣和谷物各 5 份、干酵母 16 份，生成 `createdelight:vinegar` 4 L。瓶液映射使用共用的 `ItemFluidContainers`，管道和龙头共用成品罐。初酿最高金，普通／铁／金继续按酒桶的时钟升一级。工时以东北乐事醋配方在相同群系的实际工时乘 16/10。
+
+普通醋大缸沿用 3 L 水、豆渣和谷物各 3 份，加入 10 份干酵母及布封。大缸原生按槽存单件，`VatYeastMixin` 读取原生投料规则，将干酵母按堆叠计数，在消费或取回时按件遍历快照和扣除。初酿完成时按实际消耗的物品掷一次品质，上限金星，完成后定档。品质跟随大缸库存的 NBT、管道提取和手动盛瓶。
+
+东北乐事普通醋瓶在 KubeJS 注册到现有的 `ItemFluidContainers`，其原生能力读取注册流体并保留 `Damage` 的用量计算。Create 分液、部分出料、补液和排空按实际毫升处理，补液匹配同品质。玻璃瓶到醋瓶的 Create 注液由 KubeJS 配方指定。初酿、陈酿、饮用及瓶液转换的配置和内容入口见父仓内容地图。
 
 ## 给新机器补品质时
 

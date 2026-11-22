@@ -88,7 +88,8 @@ public final class TavernQuality {
     public static List<Component> barrelTooltip(BarrelBlockEntity barrel) {
         var batch = ((TavernBarrelAccess) barrel).createdelightcore$getQualityBatch();
         if (batch == null) return List.of();
-        ItemStack output = barrel.getOutput().getStackInSlot(0);
+        var fluid = batch.fluidOutput();
+        ItemStack output = fluid == null ? barrel.getOutput().getStackInSlot(0) : fluid.assembledOutput();
         if (output.isEmpty()) output = batch.pendingOutput();
         if (output.isEmpty()) return List.of();
         // The recipe preview is unqualified; QFF's hover-name prefix would conflict with the batch quality below.
@@ -98,9 +99,14 @@ public final class TavernQuality {
                 && contents.getArgs().length == 2 && contents.getArgs()[1] instanceof Component baseName) {
             name = baseName.copy().withStyle(name.getStyle());
         }
-        return List.of(Component.translatable("jade.plugin_kaleidoscope_tavern.item_and_count",
-                        name, output.getCount()),
-                qualityLine(batch.quality()), agingLine(batch));
+        boolean fluidReady = fluid != null && !batch.brewing();
+        int count = fluidReady ? fluid.servings() : output.getCount();
+        var lines = new ArrayList<Component>();
+        lines.add(Component.translatable("jade.plugin_kaleidoscope_tavern.item_and_count", name, count));
+        if (fluidReady) lines.add(Component.literal(fluid.amount() + " mB"));
+        lines.add(qualityLine(batch.quality()));
+        lines.add(agingLine(batch));
+        return lines;
     }
 
     public static Component agingLine(TavernBarrelBatch batch) {

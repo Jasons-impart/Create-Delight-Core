@@ -1,5 +1,9 @@
 package io.github.jasonsimpart.createdelightcore.compat.creategearsandtavern;
 
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.item.Item;
@@ -14,6 +18,10 @@ import java.util.Map;
 import java.util.List;
 
 public final class CgtJeiFluidEntries {
+    private static final ResourceLocation HIDDEN_ID = new ResourceLocation("c", "hidden_from_recipe_viewers");
+    private static final TagKey<Item> HIDDEN_ITEMS = TagKey.create(Registries.ITEM, HIDDEN_ID);
+    private static final TagKey<Fluid> HIDDEN_FLUIDS = FluidTags.create(HIDDEN_ID);
+
     private CgtJeiFluidEntries() {
     }
 
@@ -36,7 +44,7 @@ public final class CgtJeiFluidEntries {
     public static List<ItemStack> baseBottleSamples(List<ItemStack> variants) {
         Map<Item, ItemStack> entries = new LinkedHashMap<>();
         for (ItemStack stack : variants) {
-            if (!stack.isEmpty()) {
+            if (!stack.isEmpty() && !stack.is(HIDDEN_ITEMS)) {
                 // These bottles only feed CGT's synthetic JEI recipes. Avoid
                 // copying brewing levels, stored effects, or quality into them.
                 entries.computeIfAbsent(stack.getItem(), ItemStack::new);
@@ -65,6 +73,7 @@ public final class CgtJeiFluidEntries {
             }
             Fluid fluid = stack.getFluid();
             Fluid source = fluid instanceof FlowingFluid flowing ? flowing.getSource() : fluid;
+            if (fluid.is(HIDDEN_FLUIDS) || source.is(HIDDEN_FLUIDS)) continue;
             // These are JEI list representatives, never the actual recipe or
             // stored stacks. The ingredient list only needs the ordinary fluid.
             entries.computeIfAbsent(source, key -> new FluidStack(key, 1000));

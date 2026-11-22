@@ -28,7 +28,7 @@ import java.util.Map;
 @GameTestHolder("createdelightcore")
 @PrefixGameTestTemplate(false)
 public final class CgtJeiDisplayTests {
-    @GameTest(template = "empty")
+    @GameTest(template = "humidity_regulator_empty")
     public static void listKeepsOneBaseFluidAndPreservesSamples(GameTestHelper helper) throws Exception {
         if (!ModList.get().isLoaded("creategearsandtavern")) {
             helper.succeed();
@@ -42,7 +42,11 @@ public final class CgtJeiDisplayTests {
         repeated.addAll(samples);
         repeated.add(FluidStack.EMPTY);
         var entries = CgtJeiFluidEntries.baseEntries(repeated);
-        check(!entries.isEmpty() && entries.size() == samples.size(), "CGT list did not collapse brewing variants");
+        ResourceLocation legacyVinegar = new ResourceLocation("creategearsandtavern", "vinegar");
+        long visible = samples.stream().filter(stack -> !legacyVinegar.equals(ForgeRegistries.FLUIDS.getKey(stack.getFluid()))).count();
+        check(!entries.isEmpty() && entries.size() == visible
+                        && entries.stream().noneMatch(stack -> legacyVinegar.equals(ForgeRegistries.FLUIDS.getKey(stack.getFluid()))),
+                "The JEI list should show one entry per visible fluid and omit legacy vinegar");
         for (FluidStack stack : entries) {
             check(!stack.hasTag() && stack.getAmount() == 1000, "CGT list retained NBT or changed representative volume");
         }
@@ -52,7 +56,7 @@ public final class CgtJeiDisplayTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty")
+    @GameTest(template = "humidity_regulator_empty")
     public static void subtypeIgnoresOnlyCgtBrewingNbt(GameTestHelper helper) throws Exception {
         if (!ModList.get().isLoaded("creategearsandtavern")) {
             helper.succeed();

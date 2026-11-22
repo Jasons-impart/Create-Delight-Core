@@ -7,6 +7,7 @@ import com.github.ysbbbbbb.kaleidoscopetavern.crafting.container.BarrelRecipeCon
 import com.github.ysbbbbbb.kaleidoscopetavern.crafting.recipe.BarrelRecipe;
 import com.github.ysbbbbbb.kaleidoscopetavern.crafting.recipe.ShakerRecipe;
 import com.github.ysbbbbbb.kaleidoscopetavern.crafting.recipe.PressingTubRecipe;
+import com.github.ysbbbbbb.kaleidoscopetavern.crafting.serializer.BarrelRecipeSerializer;
 import com.github.ysbbbbbb.kaleidoscopetavern.datamap.data.DrinkEffectData;
 import com.github.ysbbbbbb.kaleidoscopetavern.datamap.resources.DrinkEffectDataReloadListener;
 import com.github.ysbbbbbb.kaleidoscopetavern.init.ModCreativeTabs;
@@ -93,7 +94,7 @@ public class TavernQualityGameTests {
                 var recipe = new BarrelRecipe(id("createdelight:test/cgt_brewing_wait"),
                         NonNullList.of(Ingredient.EMPTY, Ingredient.of(Items.APPLE)),
                         ForgeRegistries.FLUIDS.getValue(id("kaleidoscope_tavern:grape_juice")),
-                        Ingredient.of(Items.GLASS_BOTTLE), wine(), 7);
+                        Ingredient.of(ModItems.EMPTY_BOTTLE.get()), wine(), 7);
                 barrel.getFluid().fill(new FluidStack(recipe.fluid(), 4000), IFluidHandler.FluidAction.EXECUTE);
                 start(barrel, recipe, helper.getLevel());
                 String wrapper = "com.yision.creategearsandtavern.compat.kaleidoscope.CGTKaleidoscopeBarrelFluids$";
@@ -114,17 +115,15 @@ public class TavernQualityGameTests {
                     barrel.tick(helper.getLevel());
                 }
                 helper.assertTrue(fluid.getFluidInTank(0).getAmount() == 500
-                                && items.getStackInSlot(0).getCount() == 2,
-                        "Only the deadline exposes the original two-bottle batch as 500 mB to CGT");
+                                && fluid.getTankCapacity(0) == 4000 && items.getStackInSlot(0).isEmpty(),
+                        "The deadline exposes both servings in the product tank and leaves the item slot empty");
                 var drained = fluid.drain(250, IFluidHandler.FluidAction.EXECUTE);
                 helper.assertTrue(drained.getAmount() == 250 && QualityFoodFluidsApi.getQuality(drained) == batch(barrel).quality()
                                 && fluid.getFluidInTank(0).getAmount() == 250,
                         "Completed CGT fluid extraction keeps QFF quality and consumes exactly one bottle");
-                var last = items.extractItem(0, 1, false);
-                helper.assertTrue(last.is(wine().getItem()) && QualityUtils.getQuality(last) == batch(barrel).quality()
-                                && barrel.getOutput().getStackInSlot(0).isEmpty(),
-                        "The actual CGT item wrapper extracts the last completed bottle without duplicating output");
-                barrel.tick(helper.getLevel());
+                helper.assertTrue(items.extractItem(0, 1, false).isEmpty()
+                                && fluid.drain(250, IFluidHandler.FluidAction.EXECUTE).getAmount() == 250,
+                        "The actual CGT item wrapper cannot extract a second inventory");
                 helper.assertTrue(batch(barrel) == null && fluid.getFluidInTank(0).isEmpty(),
                         "Draining a completed batch clears its state and cannot regenerate deferred output");
                 helper.succeed();
@@ -145,6 +144,7 @@ public class TavernQualityGameTests {
                 var fill = conversions.getMethod("toItem", FluidStack.class);
                 int wines = 0;
                 for (var item : ForgeRegistries.ITEMS.getValues()) {
+                    if (!ForgeRegistries.ITEMS.getKey(item).getNamespace().equals("kaleidoscope_tavern")) continue;
                     if (!TavernQuality.supportsQuality(new ItemStack(item))) continue;
                     wines++;
                     for (Quality quality : List.of(Quality.NONE, Quality.IRON, Quality.GOLD, Quality.DIAMOND)) {
@@ -277,7 +277,7 @@ public class TavernQualityGameTests {
                 "Creative base wines use the same diamond quality, effects and shaker rules as aged wine");
         helper.assertTrue(displayed.stream().anyMatch(stack -> stack.is(ModItems.VINEGAR.get())
                         && !TavernQuality.isQualityWine(stack) && QualityUtils.getQuality(stack) == Quality.DIAMOND
-                        && BottleBlockItem.getBrewLevel(stack) == 3), "Creative vinegar carries QF diamond without becoming aging wine");
+                        && BottleBlockItem.getBrewLevel(stack) == 3), "The standalone Tavern tab qualifies vinegar without aging it");
         helper.assertTrue(displayed.stream().anyMatch(stack -> stack.is(ModItems.SIGNATURE_COCKTAIL.get())
                         && !TavernQuality.isQualityWine(stack) && QualityUtils.getQuality(stack) == Quality.DIAMOND),
                 "Creative signature cocktail uses diamond quality");
@@ -644,45 +644,42 @@ public class TavernQualityGameTests {
     }
 
     @GameTest(template = "humidity_regulator_empty", timeoutTicks = 40)
-    public static void tavernFallbackVinegarUsesActualQualityAndBrewingTimeWithoutAging(GameTestHelper helper) throws Exception {
-        for (Quality quality : List.of(Quality.DIAMOND, Quality.GOLD, Quality.IRON, Quality.NONE)) {
-            var barrel = barrel(helper);
-            var ingredient = new ItemStack(Items.APPLE, 2);
-            if (quality != Quality.NONE) QualityUtils.applyQuality(ingredient, quality);
-            var fluid = QualityFoodFluidsApi.withQuality(new FluidStack(
-                    ForgeRegistries.FLUIDS.getValue(id("kaleidoscope_tavern:grape_juice")), 4000), quality);
-            barrel.getIngredient().setStackInSlot(0, ingredient.copy());
-            barrel.getFluid().fill(fluid.copy(), IFluidHandler.FluidAction.EXECUTE);
-            qffRandom().setSeed(104);
-            Quality expected = QualityFoodFluidsCreateRules.rollBasinQuality(List.of(ingredient.copy()), List.of(fluid.copy()));
-            qffRandom().setSeed(104);
-            invoke(barrel, "lambda$tick$1", new Class<?>[0]);
-            assertNoBrewedOutput(helper, barrel);
-            helper.assertTrue(batch(barrel).pendingOutput().is(ModItems.VINEGAR.get()) && batch(barrel).pendingOutput().getCount() == 16
-                            && batch(barrel).quality() == expected && !batch(barrel).canAge()
-                            && batch(barrel).brewingTicks() == 2400,
-                    "Fallback vinegar keeps the native batch count, actual input quality and one 2400-tick brewing period");
-            helper.assertTrue(barrel.getIngredient().getStackInSlot(0).isEmpty() && barrel.getFluid().isEmpty(),
-                    "Keep native fallback input consumption");
-            helper.assertTrue(((ItemStack) invoke(barrel, "extractOneOutput", new Class<?>[]{ItemStack.class}, wine())).isEmpty(),
-                    "Vinegar cannot be bottled before brewing finishes");
-            var saved = barrel.saveWithoutMetadata();
-            saved.getCompound(TavernBarrelBatch.NBT_KEY).putInt("brewing_ticks", 1);
-            barrel.load(saved);
-            assertNoBrewedOutput(helper, barrel);
-            barrel.tick(helper.getLevel());
-            helper.assertTrue(barrel.getOutput().getStackInSlot(0).getCount() == 16
-                            && QualityUtils.getQuality(barrel.getOutput().getStackInSlot(0)) == expected
-                            && !batch(barrel).hasPendingOutput(),
-                    "Vinegar is generated with the calculated quality only when brewing finishes");
-            for (int tick = 0; tick < 50; tick++) barrel.tick(helper.getLevel());
-            helper.assertTrue(batch(barrel).finished() && !batch(barrel).aged() && batch(barrel).quality() == expected
-                            && translation(TavernQuality.barrelTooltip(barrel).get(2)).endsWith(".brewed"),
-                    "Vinegar completion persists and never receives a wine aging upgrade");
-            var bottle = (ItemStack) invoke(barrel, "extractOneOutput", new Class<?>[]{ItemStack.class}, new ItemStack(ModItems.VINEGAR.get()));
-            helper.assertTrue(bottle.is(ModItems.VINEGAR.get()) && QualityUtils.getQuality(bottle) == expected,
-                    "Native vinegar bottling keeps the calculated QF quality");
-        }
+    public static void tavernKeepsUnmatchedInputsAndPreviouslySavedVinegar(GameTestHelper helper) throws Exception {
+        var barrel = barrel(helper);
+        var ingredient = new ItemStack(Items.COBBLESTONE, 2);
+        var fluid = new FluidStack(ForgeRegistries.FLUIDS.getValue(id("kaleidoscope_tavern:grape_juice")), 4000);
+        barrel.getIngredient().setStackInSlot(0, ingredient.copy());
+        barrel.getFluid().fill(fluid.copy(), IFluidHandler.FluidAction.EXECUTE);
+
+        invoke(barrel, "lambda$tick$1", new Class<?>[0]);
+        helper.assertTrue(batch(barrel) == null && barrel.getBrewLevel() == 0
+                        && barrel.getOutput().getStackInSlot(0).isEmpty()
+                        && ItemStack.matches(barrel.getIngredient().getStackInSlot(0), ingredient)
+                        && barrel.getFluid().getFluidAmount() == 4000,
+                "Closing a full barrel without a recipe preserves all materials and creates no batch");
+
+        var oldBarrel = barrel(helper);
+        var tag = oldBarrel.saveWithoutMetadata();
+        tag.putInt("brew_level", 1);
+        tag.putInt("brew_time", 1);
+        tag.putString("recipe_id", BarrelRecipeSerializer.EMPTY_RECIPE_ID.toString());
+        var previous = new TavernBarrelBatch(Quality.GOLD, 1, false);
+        previous.deferOutput(new ItemStack(ModItems.VINEGAR.get(), 16));
+        var previousTag = previous.save();
+        previousTag.putInt("version", 3);
+        tag.put(TavernBarrelBatch.NBT_KEY, previousTag);
+        oldBarrel.load(tag);
+        assertNoBrewedOutput(helper, oldBarrel);
+        oldBarrel.tick(helper.getLevel());
+
+        var tank = batch(oldBarrel).fluidOutput();
+        int servings = tank == null ? oldBarrel.getOutput().getStackInSlot(0).getCount() : tank.servings();
+        helper.assertTrue(servings == 16 && batch(oldBarrel).finished(),
+                "The saved legacy vinegar batch retains its original servings and quality state");
+        var bottle = (ItemStack) invoke(oldBarrel, "extractOneOutput", new Class<?>[]{ItemStack.class},
+                new ItemStack(ModItems.EMPTY_BOTTLE.get()));
+        helper.assertTrue(bottle.is(ModItems.VINEGAR.get()) && QualityUtils.getQuality(bottle) == Quality.GOLD,
+                "Legacy stored vinegar still bottles with its original quality");
         helper.succeed();
     }
 
