@@ -16,7 +16,6 @@ import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.Tavern
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelFluidOutput;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelServing;
 import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernQuality;
-import io.github.jasonsimpart.createdelightcore.compat.kaleidoscopetavern.TavernBarrelRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
@@ -82,14 +81,8 @@ public abstract class BarrelQualityMixin implements TavernBarrelAccess {
         createdelightcore$qualityBatch = null;
         var fluidOutput = TavernBarrelFluidOutput.select(recipe.getId(), output, recipe.carrier(), TavernQuality.NORMAL_BREW_LEVEL);
         if (fluidOutput != null || TavernQuality.isBatchProduct(output)) {
-            int ticks = recipe.unitTime();
-            var fixedBatch = TavernBarrelRecipes.fixedBatch(recipe);
-            if (fixedBatch != null) {
-                var barrel = (BarrelBlockEntity) (Object) this;
-                ticks = fixedBatch.brewingTicks(recipe, barrel.getLevel(), barrel.getBlockPos());
-            }
             createdelightcore$qualityBatch = new TavernBarrelBatch(createdelightcore$rollInputs(),
-                    Math.max(1, ticks), TavernQuality.canAge(output));
+                    Math.max(1, recipe.unitTime()), TavernQuality.canAge(output));
             if (fluidOutput != null) createdelightcore$qualityBatch.useFluidOutput(fluidOutput);
         }
         return output;

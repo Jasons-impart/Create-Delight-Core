@@ -102,7 +102,7 @@ QF 2.4.3 的 `FoodUtils.modifyEffect` 在品质调整后统一丢弃 `duration <
 
 ## 通用醋
 
-KubeJS 使用现有 schema 定义酒桶配方 `createdelight:tavern_barrel/vinegar`，并通过 `TavernBarrelRecipes.registerFixedBatch` 登记原料数量及工时引用。配方使用 4 L 水、豆渣和谷物各 5 份、干酵母 16 份，生成 `createdelight:vinegar` 4 L。瓶液映射使用共用的 `ItemFluidContainers`，管道和龙头共用成品罐。初酿最高金，普通／铁／金继续按酒桶的时钟升一级。工时以东北乐事醋配方在相同群系的实际工时乘 16/10。
+KubeJS 使用现有 schema 定义酒桶配方 `createdelight:tavern_barrel/vinegar`，并通过 `TavernBarrelRecipes.registerFixedBatch` 登记原料数量。配方使用 4 L 水、豆渣和谷物各 5 份、干酵母 16 份，生成 `createdelight:vinegar` 4 L。酒桶初酿直接使用配方的 `unit_time`，通用醋每批固定 11520 tick（576 秒）。瓶液映射使用共用的 `ItemFluidContainers`，管道和龙头共用成品罐。初酿最高金，普通／铁／金继续按酒桶的时钟升一级。
 
 普通醋大缸沿用 3 L 水、豆渣和谷物各 3 份，加入 10 份干酵母及布封。大缸原生按槽存单件，`VatYeastMixin` 读取原生投料规则，将干酵母按堆叠计数，在消费或取回时按件遍历快照和扣除。初酿完成时按实际消耗的物品掷一次品质，上限金星，完成后定档。品质跟随大缸库存的 NBT、管道提取和手动盛瓶。
 
