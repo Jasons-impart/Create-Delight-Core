@@ -180,6 +180,7 @@
   "item.createdelightcore.raw_tin": "uı⟘ ʍɐᴚ",
   "item.createdelightcore.ruby_chocolate_mold_filled": "pǝןןıℲ pןoW ǝʇɐןoɔoɥƆ ʎqnᴚ",
   "item.createdelightcore.ruby_chocolate_mold_solid": "pıןoS pןoW ǝʇɐןoɔoɥƆ ʎqnᴚ",
+  "item.createdelightcore.seasoning_bottle": "ǝןʇʇoᗺ buıuosɐǝS",
   "item.createdelightcore.slime_bucket": "ʇǝʞɔnᗺ ǝɯıןS",
   "item.createdelightcore.sponsor_medal": "ןɐpǝW ɹosuodS",
   "item.createdelightcore.sponsor_medal.desc": "ɯɐǝ⟘ ISſ ǝɥʇ buıʇɹoddns ɹoɟ noʎ ʞuɐɥ⟘",
@@ -226,5 +227,7 @@
   "tooltip.createdelightcore.holdShiftToSeeHeat": "ɹ§uoıʇɐɯɹoɟuı buıʇɐǝɥ ǝzɐןᗺ ʍǝıʌ oʇ ]8§ɹ§ʇɟıɥSㄥ§ɹ§[ pןoH8§ɹ§",
   "tooltip.createdelightcore.jello_block": "˙sʞɔoןq ʎןןǝظ/oןןǝظ ǝɯɐs puɐ sʞɔoןq ʎʞɔıʇs oʇ sʞɔıʇS ˙ʎɹǝddıןS",
   "tooltip.createdelightcore.jelly_block": "˙sʞɔoןq ʎʞɔıʇs ɹǝɥʇo oʇ buıʇɔǝuuoɔ ʇou ʇnq 'ʎʞɔıʇS",
+  "tooltip.createdelightcore.seasoning_bottle.contents": ")ᗺɯ %3$s / %2$s( %1$s",
+  "tooltip.createdelightcore.seasoning_bottle.empty": ")ᗺɯ %s / 0( ʎʇdɯƎ",
   "tooltip.createdelightcore.superHeat": "buıʇɐǝH ɹǝdnS"
 }

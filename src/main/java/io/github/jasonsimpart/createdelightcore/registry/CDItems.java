@@ -11,6 +11,7 @@ import io.github.jasonsimpart.createdelightcore.compat.fruitsdelight.LushConfitu
 import io.github.jasonsimpart.createdelightcore.content.configuration.ConfigurationModuleItem;
 import io.github.jasonsimpart.createdelightcore.content.item.CoinItem;
 import io.github.jasonsimpart.createdelightcore.content.item.IceCreamItem;
+import io.github.jasonsimpart.createdelightcore.content.item.SeasoningBottleItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,6 +30,14 @@ public class CDItems {
     public static final ResourceKey<CreativeModeTab> COIN_TAB = CDCreativeTabs.COIN.getKey();
     public static final ResourceKey<CreativeModeTab> RATATOUILLE_TAB = CRCreativeModeTabs.BASE_CREATIVE_TAB.getKey();
     public static final ResourceKey<CreativeModeTab> FOOD_TAB = CDCreativeTabs.FOOD.getKey();
+
+    public static final ItemEntry<SeasoningBottleItem> SEASONING_BOTTLE = REGISTRATE
+            .item("seasoning_bottle", SeasoningBottleItem::new)
+            .properties(properties -> properties.stacksTo(1))
+            .model((ctx, provider) -> provider.generated(ctx, provider.mcLoc("item/glass_bottle")))
+            .tag(com.simibubi.create.AllTags.AllItemTags.UPRIGHT_ON_BELT.tag)
+            .tab(FOOD_TAB)
+            .register();
     public static final ItemEntry<Item> FROZEN_CAKE_BASE = REGISTRATE.item("frozen_cake_base", Item::new)
             .tag(com.simibubi.create.AllTags.AllItemTags.UPRIGHT_ON_BELT.tag).tab(MISC_TAB).register();
     public static final ItemEntry<io.github.jasonsimpart.createdelightcore.content.cooler.FrozenCakeItem> FROZEN_CAKE = REGISTRATE.item("frozen_cake", io.github.jasonsimpart.createdelightcore.content.cooler.FrozenCakeItem::new)

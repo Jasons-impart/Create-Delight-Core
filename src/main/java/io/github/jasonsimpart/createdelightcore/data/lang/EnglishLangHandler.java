@@ -44,6 +44,8 @@ public class EnglishLangHandler {
         replace(provider, "block.createdelightcore.empty_snowman_cooler", "Empty Snow Golem Cooler");
         replace(provider, "item.createdelightcore.frozen_cake", "Frozen Cake");
         replace(provider, "item.createdelightcore.frozen_cake_base", "Frozen Cake Base");
+        provider.add("tooltip.createdelightcore.seasoning_bottle.empty", "Empty (0 / %s mB)");
+        provider.add("tooltip.createdelightcore.seasoning_bottle.contents", "%1$s (%2$s / %3$s mB)");
         replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "Snow Golem Cooler Fluid Coolants");
         replace(provider, "createdelightcore.cooler.idle", "Idle");
         replace(provider, "createdelightcore.cooler.fading", "Cooling");

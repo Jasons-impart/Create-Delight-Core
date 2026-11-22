@@ -53,6 +53,9 @@ public class ChineseLangHandler {
         replace(provider, "block.createdelightcore.empty_snowman_cooler", "空雪傀儡冷却室");
         replace(provider, "item.createdelightcore.frozen_cake", "寒冰蛋糕");
         replace(provider, "item.createdelightcore.frozen_cake_base", "寒冰蛋糕胚");
+        replace(provider, "item.createdelightcore.seasoning_bottle", "调料瓶");
+        replace(provider, "tooltip.createdelightcore.seasoning_bottle.empty", "空瓶（0 / %s mB）");
+        replace(provider, "tooltip.createdelightcore.seasoning_bottle.contents", "%s（%s / %s mB）");
         replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "雪傀儡冷却室液体冷却剂");
         replace(provider, "createdelightcore.cooler.idle", "待机");
         replace(provider, "createdelightcore.cooler.fading", "冷却");

@@ -21,6 +21,12 @@ public class CDCraftingRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> writer) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, CDItems.SEASONING_BOTTLE.get())
+                .requires(Items.GLASS_BOTTLE)
+                .requires(Items.COPPER_INGOT)
+                .unlockedBy("has_glass_bottle", has(Items.GLASS_BOTTLE))
+                .save(writer, CreateDelightCore.id("seasoning_bottle"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CDBlocks.SPRINKLER.get())
                 .pattern(" A ").pattern("ABA").pattern(" A ")
                 .define('A', AllBlocks.FLUID_PIPE.get())

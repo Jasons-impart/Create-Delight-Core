@@ -39,6 +39,11 @@ public final class CombatMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
+        if (mixinClassName.contains(".northeastchinadelight.")) {
+            LoadingModList mods = loadingModList();
+            return mods != null && mods.getMods().stream().anyMatch(mod ->
+                    mod.getModId().equals("northeast_china_delight") && mod.getVersion().toString().equals("4.1.0"));
+        }
         if (mixinClassName.contains(".mixin.creategearsandtavern.")) {
             return decide(mixinClassName, "creategearsandtavern") && decide(mixinClassName, "jei")
                     && (!mixinClassName.endsWith("CgtJeiSubtypeRegistrationMixin") || decide(mixinClassName, "quality_food_fluids"));

@@ -5,6 +5,11 @@
   "refmap": "mixins.createdelightcore.refmap.json",
   "plugin": "io.github.jasonsimpart.createdelightcore.mixin.CombatMixinPlugin",
   "mixins": [
+    "northeastchinadelight.BigPotCookingMixin",
+    "northeastchinadelight.CookingPotRecipeMixin",
+    "northeastchinadelight.CookingPotBlockEntityMixin",
+    "northeastchinadelight.GrillCampfireBlockMixin",
+    "northeastchinadelight.VatMixin",
     "AlcoholConsumptionMixin",
     "ItemStackFixedFluidMixin",
     "kaleidoscopetavern.BarrelQualityMixin",

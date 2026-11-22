@@ -130,7 +130,7 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    // Resolve and deobfuscate the pack's custom QFF jar for the named GameTest runtime.
+    // Resolve local pack mods used by the GameTest runtime.
     flatDir {
         dirs "${rootDir}/../mods"
         content { includeGroup 'createdelight.local' }
@@ -243,6 +243,8 @@ dependencies {
 
     // farmer's delight
     implementation fg.deobf("curse.maven:farmers-delight-398521:8083474")
+    // Optional cooking integration, pinned to the pack's Northeast China Delight version.
+    compileOnly fg.deobf("curse.maven:northeast-china-delight-1733076:9667368")
     // ratatouille
     implementation fg.deobf("curse.maven:create-ratatouille-983234:7488626")
 
@@ -373,8 +375,8 @@ dependencies {
     testRuntimeOnly fg.deobf("curse.maven:irons-lib-1492763:8364892")
     testRuntimeOnly fg.deobf("curse.maven:player-animation-lib-658587:4587214")
     // quality food fluids — optional machine quality integrations
-    compileOnly files("${rootDir}/../mods/quality_food_fluids-1.20.1-0.1.4-cdr-vinegar-compat3.jar")
-    testRuntimeOnly fg.deobf("createdelight.local:quality_food_fluids-1.20.1:0.1.4-cdr-vinegar-compat3")
+    compileOnly fg.deobf("curse.maven:quality-food-fluids-1601403:8812069")
+    testRuntimeOnly fg.deobf("curse.maven:quality-food-fluids-1601403:8812069")
     //sol
     implementation fg.deobf("curse.maven:solapplepie-704584:4596285")
     implementation fg.deobf("curse.maven:solcarrot-277616:4650707")

@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    { "id": "northeast_china_delight:soy_sauce", "required": false },
+    { "id": "northeast_china_delight:vinegar", "required": false },
+    { "id": "northeast_china_delight:white_vinegar", "required": false },
+    { "id": "northeast_china_delight:fish_sauce", "required": false },
+    { "id": "northeast_china_delight:shrimp_paste", "required": false },
+    { "id": "northeast_china_delight:sour_water", "required": false },
+    { "id": "northeast_china_delight:kvass", "required": false },
+    { "id": "northeast_china_delight:vegetable_oil", "required": false },
+    { "id": "northeast_china_delight:animal_oil", "required": false },
+    { "id": "northeast_china_delight:chili_oil", "required": false },
+    { "id": "northeast_china_delight:peanut_butter", "required": false },
+    { "id": "createdelight:vinegar", "required": false },
+    { "id": "createdieselgenerators:plant_oil", "required": false },
+    { "id": "youkaishomecoming:soy_sauce", "required": false }
+  ]
+}
