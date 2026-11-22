@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     { "id": "northeast_china_delight:soy_sauce", "required": false },
+    { "id": "northeast_china_delight:soy_paste", "required": false },
     { "id": "northeast_china_delight:vinegar", "required": false },
     { "id": "northeast_china_delight:white_vinegar", "required": false },
     { "id": "northeast_china_delight:fish_sauce", "required": false },
