@@ -56,11 +56,6 @@ public class ChineseLangHandler {
         replace(provider, "item.createdelightcore.seasoning_bottle", "调料瓶");
         replace(provider, "tooltip.createdelightcore.seasoning_bottle.empty", "空瓶（0 / %s mB）");
         replace(provider, "tooltip.createdelightcore.seasoning_bottle.contents", "%s（%s / %s mB）");
-        replace(provider, "tooltip.createdelightcore.seasoning_bottle.vat_mode", "仅对大缸生效（%s，潜行右键空气切换）");
-        replace(provider, "tooltip.createdelightcore.seasoning_bottle.vat_input", "投料");
-        replace(provider, "tooltip.createdelightcore.seasoning_bottle.vat_output", "取液");
-        replace(provider, "tooltip.createdelightcore.seasoning_bottle.vat_mode_changed", "大缸模式已切换为%s");
-        replace(provider, "tooltip.createdelightcore.seasoning_bottle.vat_input_amount", "投酸水需满瓶（%s mB）");
         replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "雪傀儡冷却室液体冷却剂");
         replace(provider, "createdelightcore.cooler.idle", "待机");
         replace(provider, "createdelightcore.cooler.fading", "冷却");

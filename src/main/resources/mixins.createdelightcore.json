@@ -9,7 +9,6 @@
     "northeastchinadelight.CookingPotRecipeMixin",
     "northeastchinadelight.CookingPotBlockEntityMixin",
     "northeastchinadelight.GrillCampfireBlockMixin",
-    "northeastchinadelight.VatMixin",
     "AlcoholConsumptionMixin",
     "ItemStackFixedFluidMixin",
     "kaleidoscopetavern.BarrelQualityMixin",

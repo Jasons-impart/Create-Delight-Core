@@ -46,11 +46,6 @@ public class EnglishLangHandler {
         replace(provider, "item.createdelightcore.frozen_cake_base", "Frozen Cake Base");
         provider.add("tooltip.createdelightcore.seasoning_bottle.empty", "Empty (0 / %s mB)");
         provider.add("tooltip.createdelightcore.seasoning_bottle.contents", "%1$s (%2$s / %3$s mB)");
-        provider.add("tooltip.createdelightcore.seasoning_bottle.vat_mode", "Vat only %s (sneak + right-click air)");
-        provider.add("tooltip.createdelightcore.seasoning_bottle.vat_input", "Deposit");
-        provider.add("tooltip.createdelightcore.seasoning_bottle.vat_output", "Draw");
-        provider.add("tooltip.createdelightcore.seasoning_bottle.vat_mode_changed", "Vat mode set to %s");
-        provider.add("tooltip.createdelightcore.seasoning_bottle.vat_input_amount", "Pour sour water from a full bottle (%s mB)");
         replace(provider, "jei.createdelightcore.SnowmanCoolerFluid", "Snow Golem Cooler Fluid Coolants");
         replace(provider, "createdelightcore.cooler.idle", "Idle");
         replace(provider, "createdelightcore.cooler.fading", "Cooling");
